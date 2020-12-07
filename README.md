@@ -5,4 +5,5 @@
 - 맥: https://flutter.dev/docs/get-started/install/macos
 
 ## 개발 에디터
-- 안드로이드 스튜디오 
+- 안드로이드 스튜디오
+- VS code
