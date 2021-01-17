@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -70,11 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
   // 하단 네비게이션 아이콘 세팅
   // TODO svg image 사용 고려
   Image _getIcon(String tabName) {
-    if (_iconMap == null) {
-      loadAsset('assets/icons/icons.json').then((value) {
-        _iconMap = json.decode(value);
-      });
-    }
     return _currentIndex == _iconMap[tabName]['currentIndex']
         ? Image.asset(_iconMap[tabName]['selectedImage'])
         : Image.asset(_iconMap[tabName]['image']);
@@ -95,33 +91,43 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body:
-        _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        onTap: _onTap,
-        currentIndex: _currentIndex,
-        items: [
-          new BottomNavigationBarItem(
-            icon: _getIcon('home'),
-            label: '홈',
-          ),
-          new BottomNavigationBarItem(
-            icon: _getIcon('board'),
-            label: '자유게시판',
-          ),
-          new BottomNavigationBarItem(
-            icon: _getIcon('find'),
-            label: '시설찾기',
-          ),
-          new BottomNavigationBarItem(
-            icon: _getIcon('info'),
-            label: '정보공유',
-          ),
-        ]),
+      _children[_currentIndex],
+      bottomNavigationBar: FutureBuilder(
+          future: loadAsset('assets/icons/icons.json'),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData == false || snapshot.hasError) {
+              return CircularProgressIndicator();
+            } else {
+              _iconMap = json.decode(snapshot.data);
+              return BottomNavigationBar(
+                  type: BottomNavigationBarType.fixed,
+                  onTap: _onTap,
+                  currentIndex: _currentIndex,
+                  items: [
+                    new BottomNavigationBarItem(
+                      icon: _getIcon('home'),
+                      label: '홈',
+                    ),
+                    new BottomNavigationBarItem(
+                      icon: _getIcon('board'),
+                      label: '자유게시판',
+                    ),
+                    new BottomNavigationBarItem(
+                      icon: _getIcon('find'),
+                      label: '시설찾기',
+                    ),
+                    new BottomNavigationBarItem(
+                      icon: _getIcon('info'),
+                      label: '정보공유',
+                    ),
+                  ]);
+            }
+          }),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
+  // TODO _memoizer 캐시 적용
   Future<String> loadAsset(String target) async {
     return await rootBundle.loadString(target);
   }
