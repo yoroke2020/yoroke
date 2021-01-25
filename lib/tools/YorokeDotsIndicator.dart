@@ -4,25 +4,32 @@ import 'package:flutter/material.dart';
 class DotsIndicator extends AnimatedWidget {
   DotsIndicator({
     this.controller,
-    this.itemCount,
+    this.itemCount = 1,
     this.onPageSelected,
-    this.color: const Color(0xff939597),
+    this.selectedIndicatorColor: const Color(0xff939597),
+    this.selectedBoarderColor: const Color(0xff939597),
+    this.unselectedIndicatorColor: const Color(0xffffffff),
+    this.unselectedBoarderColor: const Color(0xff939597),
   }) : super(listenable: controller);
 
   final PageController controller;
   final int itemCount;
   final ValueChanged<int> onPageSelected;
 
-  Color color;
-  Color boarder;
+  Color selectedIndicatorColor;
+  Color unselectedIndicatorColor;
+  Color selectedBoarderColor;
+  Color unselectedBoarderColor;
 
   Widget _buildDot(int index) {
-    color = (controller.page ?? controller.initialPage).round() == index
-        ? Color(0xfff5df4d)
-        : Color(0xffffffff);
-    boarder = (controller.page ?? controller.initialPage).round() == index
-        ? Color(0xfff5df4d)
-        : Color(0xff939597);
+    Color indicatorColor =
+        (controller.page ?? controller.initialPage).round() == index
+            ? selectedIndicatorColor
+            : unselectedIndicatorColor;
+    Color boarderColor =
+        (controller.page ?? controller.initialPage).round() == index
+            ? selectedBoarderColor
+            : unselectedBoarderColor;
     return new Container(
       padding: EdgeInsets.all(4.0),
       child: new Center(
@@ -30,8 +37,8 @@ class DotsIndicator extends AnimatedWidget {
             width: 8,
             height: 8,
             decoration: BoxDecoration(
-                color: color,
-                border: Border.all(color: boarder, width: 1),
+                color: indicatorColor,
+                border: Border.all(color: boarderColor, width: 1),
                 borderRadius: BorderRadius.all(Radius.circular(20)))
             // child: new InkWell(
             //    onTap: () => onPageSelected(index),

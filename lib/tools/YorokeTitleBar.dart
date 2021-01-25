@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class YorokePageBar extends StatelessWidget {
-  YorokePageBar({this.name});
+class YorokeTitleBar extends StatelessWidget {
+  YorokeTitleBar({this.titleName = "Default"});
 
-  final String name;
+  final String titleName;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class YorokePageBar extends StatelessWidget {
                   Expanded(flex: 16, child: Container()),
                   Expanded(
                     flex: 304,
-                    child: Text(name,
+                    child: Text(titleName,
                         style: const TextStyle(
                             color: const Color(0xe6000000),
                             fontWeight: FontWeight.w400,

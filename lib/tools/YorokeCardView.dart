@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 
 class YorokeCardView extends StatelessWidget {
   YorokeCardView(
-      {this.viewRatio, this.cardRatio, this.cardImageList, this.cardNameList});
+      {this.boxRatio = 1,
+      this.cardRatio = 1,
+      this.cardImageList,
+      this.cardNameList});
 
-  final double viewRatio;
+  final double boxRatio;
   final double cardRatio;
   final List<String> cardImageList;
   final List<String> cardNameList;
@@ -15,7 +18,7 @@ class YorokeCardView extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(color: const Color(0xffffffff)),
         child: new AspectRatio(
-            aspectRatio: viewRatio,
+            aspectRatio: boxRatio,
             child: ListView.builder(
               padding: const EdgeInsets.all(8),
               scrollDirection: Axis.horizontal,
