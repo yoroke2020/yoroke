@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DotsIndicator extends AnimatedWidget {
-  DotsIndicator({
+class YorokeDotsIndicator extends AnimatedWidget {
+  YorokeDotsIndicator({
     this.controller,
     this.itemCount = 1,
     this.onPageSelected,

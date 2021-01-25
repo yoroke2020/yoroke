@@ -31,7 +31,7 @@ class YorokePageView extends StatelessWidget {
         aspectRatio: 360 / 40,
         child: new Container(
             padding: const EdgeInsets.all(8.0),
-            child: new DotsIndicator(
+            child: new YorokeDotsIndicator(
               itemCount: page.length,
               controller: controller,
               onPageSelected: (int page) {
