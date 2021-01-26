@@ -32,5 +32,8 @@
   },
   "thumb_up": {
     "image": "assets/icons/thumb_up_16_px.png"
+  },
+  "card": {
+    "image": "assets/icons/card_sample_image.png"
   }
 }
