@@ -29,11 +29,11 @@ class _HomeState extends State<Home> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
+          padding: const EdgeInsets.all(8),
           children: <Widget>[
             Container(
+                margin: const EdgeInsets.only(bottom: 8),
                 width: double.maxFinite,
                 height: 48,
                 decoration: BoxDecoration(
@@ -76,38 +76,318 @@ class _HomeState extends State<Home> {
                   )
                 )
             ),
-            RaisedButton(
-              child: Text('Go Page A'),
-              onPressed: () {
-                _updatePageHistory('Page A');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PageA()));
-              },
+            Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                    color: const Color(0xffffffff)
+                ),
+                child: new AspectRatio(
+                  aspectRatio: 360 / 120,
+                  child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        Container(
+                          width: 360,
+                          height: 120,
+                          child: Card(
+                            child: Text("#FF0000"),
+                            margin: EdgeInsets.all(10),
+                            color: Colors.red,
+                          ),
+                        ),
+                        Container(
+                          width: 360,
+                          height: 120,
+                          child: Card(
+                            child: Text("#FF0000"),
+                            margin: EdgeInsets.all(10),
+                            color: Colors.blue,
+                          ),
+                        ),
+                        Container(
+                          width: 360,
+                          height: 120,
+                          child: Card(
+                            child: Text("#FF0000"),
+                            margin: EdgeInsets.all(10),
+                            color: Colors.black,
+                          ),
+                        ),
+                        Container(
+                          width: 360,
+                          height: 120,
+                          child: Card(
+                            child: Text("#FF0000"),
+                            margin: EdgeInsets.all(10),
+                            color: Colors.green,
+                          ),
+                        ),
+                      ]
+                  ),
+              ),
             ),
-            SizedBox(height: 50), // padding
-            RaisedButton(
-              child: Text('Go Page B'),
-              onPressed: () {
-                _updatePageHistory('Page B');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PageB()));
-              },
+            Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                width: double.maxFinite,
+                height: 48,
+                decoration: BoxDecoration(
+                    color: const Color(0xffffffff)
+                ),
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 7,
+                          child:
+                          Container( // search icon
+                            padding: const EdgeInsets.only(left: 20),
+                            alignment: Alignment.centerLeft,
+                            width: 32,
+                            height: 32,
+                            child: Text("인기 게시글",
+                                style: const TextStyle(
+                                    color: const Color(0xe6000000),
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: "NotoSansCJKkr",
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 16.0),
+                                textAlign: TextAlign.left),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+                          Container( // search icon
+                            width: 32,
+                            height: 32,
+                            child: Image.asset("assets/icons/create_24_px.png"),
+                          ),
+                        ),
+                        Expanded(
+                          child: Text("글 작성",
+                            style: const TextStyle(
+                              color: const Color(0xe6000000),
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "NotoSansCJKkr",
+                              fontStyle: FontStyle.normal,
+                              fontSize: 14.0),
+                              textAlign: TextAlign.left),
+                        ),
+                      ],
+                    )
+                )
             ),
-            SizedBox(height: 50), // padding
-            Text(
-              'You have pushed the button this many times:',
+            Container(
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                  color: const Color(0xffffffff)
+              ),
+              child: new AspectRatio(
+                aspectRatio: 360 / 56,
+                child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: <Widget>[
+                      Container(
+                          alignment: Alignment.center,
+                          width: 62,
+                          height: 32,
+                          margin: EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(32)
+                              ),
+                              color: const Color(0xfff5df4d)
+                          ),
+                          child: Text('PICK',
+                              style: const TextStyle(
+                                  color: const Color(0xe6000000),
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: "NotoSansCJKkr",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 16.0),
+                              textAlign: TextAlign.center),
+                      ),
+                      Container(
+                          alignment: Alignment.center,
+                          width: 93,
+                          height: 32,
+                          margin: EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(32)
+                              ),
+                              color: const Color(0xfff5df4d)
+                          ),
+                          child: Text('고민/질문',
+                              style: const TextStyle(
+                                  color: const Color(0xe6000000),
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: "NotoSansCJKkr",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 16.0),
+                              textAlign: TextAlign.center),
+                      ),
+                      Container(
+                          alignment: Alignment.center,
+                          width: 62,
+                          height: 32,
+                          margin: EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(32)
+                              ),
+                              color: const Color(0xfff5df4d)
+                          ),
+                          child: Text('후기',
+                              style: const TextStyle(
+                                  color: const Color(0xe6000000),
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: "NotoSansCJKkr",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 16.0),
+                              textAlign: TextAlign.center),
+                      ),
+                      Container(
+                          alignment: Alignment.center,
+                          width: 62,
+                          height: 32,
+                          margin: EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(32)
+                              ),
+                              color: const Color(0xfff5df4d)
+                          ),
+                          child: Text('구인',
+                              style: const TextStyle(
+                                  color: const Color(0xe6000000),
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: "NotoSansCJKkr",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 16.0),
+                              textAlign: TextAlign.center),
+                      ),
+                      Container(
+                          alignment: Alignment.center,
+                          width: 62,
+                          height: 32,
+                          margin: EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(32)
+                              ),
+                              color: const Color(0xfff5df4d)
+                          ),
+                          child: Text('구직',
+                              style: const TextStyle(
+                                  color: const Color(0xe6000000),
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: "NotoSansCJKkr",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 16.0),
+                              textAlign: TextAlign.center),
+                      ),
+                      Container(
+                          alignment: Alignment.center,
+                          width: 62,
+                          height: 32,
+                          margin: EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(32)
+                              ),
+                              color: const Color(0xfff5df4d)
+                          ),
+                          child: Text('키워드',
+                              style: const TextStyle(
+                                  color: const Color(0xe6000000),
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: "NotoSansCJKkr",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 16.0),
+                              textAlign: TextAlign.center),
+                      ),
+                    ]
+                ),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            SizedBox(height: 150), // padding
-            Text(
-              'Page access history:' + '$_pageHistory',
+            Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                  color: const Color(0xffffffff)
+              ),
+              child: new AspectRatio(
+                aspectRatio: 360 / 256,
+                child: Column(
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        width: double.maxFinite,
+                        height: 64,
+                        child: Card(
+                          margin: const EdgeInsets.only(bottom: 0),
+                          color: Colors.red,
+                          child: Text("#FF0000"),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        width: double.maxFinite,
+                        height: 64,
+                        child: Card(
+                          margin: const EdgeInsets.only(bottom: 0),
+                          color: Colors.blue,
+                          child: Text("#FF0000"),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        width: double.maxFinite,
+                        height: 64,
+                        child: Card(
+                          margin: const EdgeInsets.only(bottom: 0),
+                          color: Colors.black,
+                          child: Text("#FF0000"),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        width: double.maxFinite,
+                        height: 64,
+                        child: Card(
+                          margin: const EdgeInsets.only(bottom: 0),
+                          color: Colors.green,
+                          child: Text("#FF0000"),
+                        ),
+                      ),
+                    ]
+                ),
+              ),
             ),
           ],
         ),
-      ),
     );
   }
 }
