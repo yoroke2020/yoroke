@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:helloflutter/screens/BoardReview.dart';
+// import 'package:helloflutter/screens/BoardReview.dart';
 
 class DetailPage extends StatelessWidget {
   DetailPage({this.rootIndex, this.currentIndex});
