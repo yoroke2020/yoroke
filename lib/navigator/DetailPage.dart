@@ -10,8 +10,8 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<List<Widget>> detailPage = [[], [BoardReview(), BoardReview()], [], []];
-
+    // final List<List<Widget>> detailPage = [[], [BoardReview(), BoardReview()], [], []];
+    final List<List<Widget>> detailPage = [[], [], [], []];
     return detailPage[rootIndex][currentIndex];
   }
 }
