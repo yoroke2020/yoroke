@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Login.dart';
+import 'Signin.dart';
 
 class Info extends StatefulWidget {
   @override
@@ -21,12 +22,17 @@ class _InfoState extends State<Info> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             RaisedButton(
-              // Login page
               child: Text('Trigger Login'),
               onPressed: () {
-                // _updatePageHistory('Trigger Login');
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => Login()));
+              },
+            ),
+            RaisedButton(
+              child: Text('Trigger Signin'),
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Signin()));
               },
             ),
           ],
