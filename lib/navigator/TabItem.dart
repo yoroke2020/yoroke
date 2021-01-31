@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 
 enum TabItem { home, board, find, info }
 
+enum DetailItem { review, qna, jobFinding }
+
 const Map<TabItem, int> tabIndex = {
   TabItem.home: 0,
   TabItem.board: 1,

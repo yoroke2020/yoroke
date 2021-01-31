@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 class YorokeDotsIndicator extends AnimatedWidget {
   YorokeDotsIndicator({
-    this.controller,
+    @required this.controller,
     this.itemCount = 1,
     this.onPageSelected,
-    this.selectedIndicatorColor: const Color(0xff939597),
-    this.selectedBoarderColor: const Color(0xff939597),
+    this.selectedIndicatorColor: const Color(0xfff5df4d),
+    this.selectedBoarderColor: const Color(0xfff5df4d),
     this.unselectedIndicatorColor: const Color(0xffffffff),
     this.unselectedBoarderColor: const Color(0xff939597),
   }) : super(listenable: controller);
@@ -20,6 +20,16 @@ class YorokeDotsIndicator extends AnimatedWidget {
   Color unselectedIndicatorColor;
   Color selectedBoarderColor;
   Color unselectedBoarderColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return new AspectRatio(
+        aspectRatio: 360 / 40,
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: new List<Widget>.generate(itemCount, _buildDot),
+        ));
+  }
 
   Widget _buildDot(int index) {
     Color indicatorColor =
@@ -45,14 +55,6 @@ class YorokeDotsIndicator extends AnimatedWidget {
             // ),
             ),
       ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return new Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: new List<Widget>.generate(itemCount, _buildDot),
     );
   }
 }
