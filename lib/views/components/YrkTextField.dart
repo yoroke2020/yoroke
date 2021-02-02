@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'YorokeTextStyle.dart';
+import 'YrkTextStyle.dart';
 
 InputDecoration textFieldInputDecotation(String label) {
   return InputDecoration(

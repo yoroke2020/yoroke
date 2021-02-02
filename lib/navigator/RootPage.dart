@@ -4,13 +4,13 @@ import 'package:helloflutter/screens/Board.dart';
 import 'package:helloflutter/screens/Find.dart';
 import 'package:helloflutter/screens/Home.dart';
 import 'package:helloflutter/screens/Info.dart';
-import 'package:helloflutter/tools/Data.dart';
+import 'file:///C:/Users/Cho/Documents/GitHub/yoroke2020/yoroke/lib/models/YrkData.dart';
 
 class RootPage extends StatelessWidget {
   RootPage({this.currentIndex, this.onPushNavigator});
 
   final int currentIndex;
-  final ValueChanged<Data> onPushNavigator;
+  final ValueChanged<YrkData> onPushNavigator;
 
   @override
   Widget build(BuildContext context) {

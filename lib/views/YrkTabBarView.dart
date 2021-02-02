@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:helloflutter/tools/YorokeDotsIndicator.dart';
+import 'file:///C:/Users/Cho/Documents/GitHub/yoroke2020/yoroke/lib/views/components/YrkDotsIndicator.dart';
 
 class YorokeTabBarView extends StatelessWidget {
   YorokeTabBarView({
