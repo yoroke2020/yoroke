@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:helloflutter/themes/YorokeTextField.dart';
-import 'package:helloflutter/themes/YorokeTextStyle.dart';
-import 'package:helloflutter/themes/YorokeBtn.dart';
+import 'package:yoroke/views/widgets/YrkTextField.dart';
+import 'package:yoroke/views/widgets/YrkTextStyle.dart';
+import 'package:yoroke/views/widgets/YrkButton.dart';
 
-class Signin extends StatefulWidget {
+class SignIn extends StatefulWidget {
   @override
-  _SigninState createState() => _SigninState();
+  _SignInState createState() => _SignInState();
 }
 
-class _SigninState extends State<Signin> {
+class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +31,7 @@ class _SigninState extends State<Signin> {
                 aspectRatio: 360 / 48,
                 child: Container(
                   child: Text("회원가입",
-                      style: YorokeTextStyle(
+                      style: YrkTextStyle(
                         color: Color(0xe6000000),
                         fontSize: 22.0,
                       ),
@@ -45,19 +45,19 @@ class _SigninState extends State<Signin> {
                 child: Column(
                   children: <Widget>[
                     Expanded(
-                      child: YorokeTextField(
+                      child: YrkTextField(
                         label: '이메일',
                       ),
                     ),
                     SizedBox(height: 8),
                     Expanded(
-                      child: YorokeTextField(
+                      child: YrkTextField(
                         label: '아이디',
                       ),
                     ),
                     SizedBox(height: 8),
                     Expanded(
-                      child: YorokeTextField(
+                      child: YrkTextField(
                         label: '비밀번호',
                         obscureText: true,
                       ),
@@ -70,7 +70,7 @@ class _SigninState extends State<Signin> {
               child: new AspectRatio(
                 aspectRatio: 360 / 48,
                 child: Container(
-                  child: YorokeBtn(
+                  child: YrkButton(
                     label: "네이버",
                   ),
                 ),

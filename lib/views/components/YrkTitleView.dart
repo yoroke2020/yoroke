@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class YorokeTitleView extends StatelessWidget {
-  YorokeTitleView(
+class YrkTitleView extends StatelessWidget {
+  YrkTitleView(
       {@required this.titleText,
       @required this.subTitleText,
       @required this.buttonText,

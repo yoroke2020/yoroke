@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:helloflutter/tools/YorokeDotsIndicator.dart';
+import 'package:yoroke/views/widgets/YrkDotsIndicator.dart';
 
-class YorokePageView extends StatelessWidget {
-  YorokePageView({
+class YrkPageView extends StatelessWidget {
+  YrkPageView({
     @required this.page,
     @required this.controller,
     @required this.viewRatio,
@@ -34,7 +34,7 @@ class YorokePageView extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: const Color(0xffffffff),
                 ),
-                child: new YorokeDotsIndicator(
+                child: new YrkDotsIndicator(
                   itemCount: page.length,
                   controller: controller,
                   onPageSelected: (int page) {

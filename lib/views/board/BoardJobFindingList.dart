@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:helloflutter/navigator/DetailPage.dart';
-import 'package:helloflutter/navigator/TabItem.dart';
-import 'package:helloflutter/tools/Data.dart';
-import 'package:helloflutter/tools/YorokeWidgetList.dart';
+import 'package:yoroke/navigator/DetailPage.dart';
+import 'package:yoroke/navigator/TabItem.dart';
+import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/views/components/YrkListView.dart';
 
-class BoardJobFindingList extends YorokeWidgetList {
+class BoardJobFindingList extends YrkListView {
   BoardJobFindingList({
     @required this.items,
     @required this.widgetRatio,
@@ -30,9 +30,9 @@ class BoardJobFindingList extends YorokeWidgetList {
   @override
   final int itemLength;
   @override
-  final Data data;
+  final YrkData data;
   @override
-  final ValueChanged<Data> onPushNavigator;
+  final ValueChanged<YrkData> onPushNavigator;
 
   @override
   List<Widget> getWidgetList();
@@ -42,7 +42,7 @@ class BoardJobFindingList extends YorokeWidgetList {
     return AspectRatio(
         aspectRatio: widgetRatio,
         child: InkWell(
-            onTap: () => onPushNavigator(new Data(DetailItem.qna,
+            onTap: () => onPushNavigator(new YrkData(DetailItem.qna,
                 "This is # " + currentIndex.toString() + " in 구인구직")),
             child: Container(
                 padding: const EdgeInsets.all(8),

@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:helloflutter/navigator/TabItem.dart';
-import 'package:helloflutter/tools/Data.dart';
-import 'package:helloflutter/tools/YorokeWidgetList.dart';
+import 'package:yoroke/navigator/TabItem.dart';
+import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/views/components/YrkListView.dart';
 
-class BoardReviewTabViewList extends YorokeWidgetList {
+class BoardReviewTabViewList extends YrkListView {
   @override
   BoardReviewTabViewList(
       {@required this.items,
@@ -31,9 +31,9 @@ class BoardReviewTabViewList extends YorokeWidgetList {
   @override
   final int itemLength;
   @override
-  final Data data;
+  final YrkData data;
   @override
-  final ValueChanged<Data> onPushNavigator;
+  final ValueChanged<YrkData> onPushNavigator;
   final int ratings;
 
   @override
@@ -42,7 +42,7 @@ class BoardReviewTabViewList extends YorokeWidgetList {
   @override
   Widget createWidget(int currentIndex) {
     return InkWell(
-        onTap: () => onPushNavigator(new Data(DetailItem.qna,
+        onTap: () => onPushNavigator(new YrkData(DetailItem.qna,
             "This is # " + currentIndex.toString() + " in 요양병원 후기/질문")),
         child: Container(
             height: 65,

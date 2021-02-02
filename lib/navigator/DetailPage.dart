@@ -1,20 +1,20 @@
 import 'package:flutter/cupertino.dart';
-import 'package:helloflutter/screens/board/BoardReview.dart';
-import 'package:helloflutter/screens/board/Sample.dart';
-import 'package:helloflutter/tools/Data.dart';
+import 'package:yoroke/screens/board/BoardReview.dart';
+import 'package:yoroke/screens/TestPage.dart';
+import 'package:yoroke/models/YrkData.dart';
 
 class DetailPage extends StatelessWidget {
   DetailPage({this.rootIndex, this.data, this.onPushNavigator});
 
   final int rootIndex;
-  final Data data;
-  final ValueChanged<Data> onPushNavigator;
+  final YrkData data;
+  final ValueChanged<YrkData> onPushNavigator;
 
   @override
   Widget build(BuildContext context) {
     final List<List<Widget>> detailPage = [
       [],
-      [BoardReview(data, onPushNavigator), Sample(data)],
+      [BoardReview(data, onPushNavigator), TestPage(data)],
       [],
       []
     ];

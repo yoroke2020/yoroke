@@ -2,10 +2,10 @@ import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'Data.dart';
+import 'package:yoroke/models/YrkData.dart';
 
-abstract class YorokeWidgetList {
-  YorokeWidgetList(
+abstract class YrkListView {
+  YrkListView(
       {@required this.items,
       @required this.widgetRatio,
       this.listLength = 1,
@@ -17,8 +17,8 @@ abstract class YorokeWidgetList {
   final double widgetRatio;
   final int listLength;
   final int itemLength;
-  final Data data;
-  final ValueChanged<Data> onPushNavigator;
+  final YrkData data;
+  final ValueChanged<YrkData> onPushNavigator;
 
   List<Widget> widgetList;
 

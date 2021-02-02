@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:helloflutter/navigator/TabItem.dart';
+import 'package:yoroke/navigator/TabItem.dart';
+import 'package:yoroke/models/YrkData.dart';
 
-import 'Data.dart';
-
-class YorokeCardView extends StatelessWidget {
-  YorokeCardView(
+class YrkCardView extends StatelessWidget {
+  YrkCardView(
       {@required this.onPushNavigator,
       this.viewRatio = 1,
       this.cardRatio = 1,
@@ -13,7 +12,7 @@ class YorokeCardView extends StatelessWidget {
       @required this.cardNameList,
       this.onTapPageIndex});
 
-  final ValueChanged<Data> onPushNavigator;
+  final ValueChanged<YrkData> onPushNavigator;
   final double viewRatio;
   final double cardRatio;
   final List<String> cardImageList;
@@ -38,32 +37,35 @@ class YorokeCardView extends StatelessWidget {
                     margin: const EdgeInsets.only(right: 8),
                     child: InkWell(
                         borderRadius: BorderRadius.circular(16),
-                        onTap: () => onPushNavigator(
-                            new Data(DetailItem.review, "조문기의 리뷰 카드 번호 " + index.toString() + "번")),
+                        onTap: () => onPushNavigator(new YrkData(
+                            DetailItem.review,
+                            "조문기의 리뷰 카드 번호 " + index.toString() + "번")),
                         child: new AspectRatio(
                             aspectRatio: cardRatio,
                             child: Stack(children: <Widget>[
                               Container(
                                 decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(16)),
-                                    image: new DecorationImage(
-                                      image: new AssetImage(
-                                          cardImageList.elementAt(index)),
-                                      fit: BoxFit.fill,
-                                    ),),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  image: new DecorationImage(
+                                    image: new AssetImage(
+                                        cardImageList.elementAt(index)),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
                               ),
                               Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(16)
-                                      ),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(16)),
                                       gradient: LinearGradient(
-                                          begin: Alignment(0.5, -0.0739222913980484),
+                                          begin: Alignment(
+                                              0.5, -0.0739222913980484),
                                           end: Alignment(0.5, 1),
-                                          colors: [const Color(0x00ffffff), const Color(0x4d000000)])
-                                  )
-                              ),
+                                          colors: [
+                                            const Color(0x00ffffff),
+                                            const Color(0x4d000000)
+                                          ]))),
                               Container(
                                   padding: EdgeInsets.only(left: 12, bottom: 8),
                                   alignment: Alignment.bottomLeft,

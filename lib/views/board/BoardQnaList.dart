@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:helloflutter/navigator/TabItem.dart';
-import 'package:helloflutter/tools/Data.dart';
-import 'package:helloflutter/tools/YorokeWidgetList.dart';
+import 'package:yoroke/navigator/TabItem.dart';
+import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/views/components/YrkListView.dart';
 
-class BoardQnaList extends YorokeWidgetList {
+class BoardQnaList extends YrkListView {
   @override
   BoardQnaList({
     @required this.items,
@@ -30,9 +30,9 @@ class BoardQnaList extends YorokeWidgetList {
   @override
   final int itemLength;
   @override
-  final Data data;
+  final YrkData data;
   @override
-  final ValueChanged<Data> onPushNavigator;
+  final ValueChanged<YrkData> onPushNavigator;
 
   @override
   List<Widget> getWidgetList();
@@ -42,7 +42,7 @@ class BoardQnaList extends YorokeWidgetList {
     return AspectRatio(
         aspectRatio: widgetRatio,
         child: InkWell(
-            onTap: () => onPushNavigator(new Data(DetailItem.qna,
+            onTap: () => onPushNavigator(new YrkData(DetailItem.qna,
                 "This is # " + currentIndex.toString() + " in 고민/질문")),
             child: Container(
                 padding: const EdgeInsets.all(8),

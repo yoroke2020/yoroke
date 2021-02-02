@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:helloflutter/screens/board/BoardReviewTabViewList.dart';
-import 'package:helloflutter/tools/Data.dart';
-import 'package:helloflutter/tools/YorokeTabBarView.dart';
-import 'package:helloflutter/tools/YorokeTitleView.dart';
+import 'package:yoroke/views/Board/BoardReviewTabViewList.dart';
+import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/views/components/YrkTabBarView.dart';
+import 'package:yoroke/views/components/YrkTitleView.dart';
 
 class BoardReview extends StatefulWidget {
   BoardReview(this.data, this.onPushNavigator);
 
-  final Data data;
-  final ValueChanged<Data> onPushNavigator;
+  final YrkData data;
+  final ValueChanged<YrkData> onPushNavigator;
 
   @override
   _BoardReviewState createState() => _BoardReviewState();
@@ -20,12 +20,12 @@ class _BoardReviewState extends State<BoardReview> {
     return Scaffold(
       body: ListView(
         children: <Widget>[
-          YorokeTitleView(
+          YrkTitleView(
             buttonText: null,
             subTitleText: null,
             titleText: null,
           ),
-          YorokeTabBarView(
+          YrkTabBarView(
             viewRatio: 360 / 690,
             length: 2,
             tabTextList: ["최신글", "인기글"],

@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:helloflutter/screens/board/BoardQnaList.dart';
-import 'package:helloflutter/screens/board/BoardJobFindingList.dart';
-import 'package:helloflutter/tools/Data.dart';
-import 'package:helloflutter/tools/YorokeCardView.dart';
-import 'package:helloflutter/tools/YorokeTitleBar.dart';
-import 'package:helloflutter/tools/YorokePageView.dart';
+import 'package:yoroke/views/Board/BoardQnaList.dart';
+import 'package:yoroke/views/Board/BoardJobFindingList.dart';
+import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/views/components/YrkCardView.dart';
+import 'package:yoroke/views/components/YrkTabHeaderView.dart';
+import 'package:yoroke/views/components/YrkPageView.dart';
 
 class Board extends StatefulWidget {
   Board({@required this.onPushNavigator});
 
-  final ValueChanged<Data> onPushNavigator;
+  final ValueChanged<YrkData> onPushNavigator;
 
   @override
   _BoardState createState() => _BoardState();
@@ -78,8 +78,8 @@ class _BoardState extends State<Board> {
         body: ListView(
       padding: const EdgeInsets.only(top: 8, bottom: 8),
       children: <Widget>[
-        YorokeTitleBar(titleName: "후기"),
-        YorokeCardView(
+        YrkTabHeaderView(titleName: "후기"),
+        YrkCardView(
           viewRatio: 360 / 120,
           cardRatio: 136 / 120,
           cardImageList: reviewCardImageList,
@@ -87,8 +87,8 @@ class _BoardState extends State<Board> {
           onPushNavigator: widget.onPushNavigator,
           onTapPageIndex: 1,
         ),
-        YorokeTitleBar(titleName: "고민/질문"),
-        YorokePageView(
+        YrkTabHeaderView(titleName: "고민/질문"),
+        YrkPageView(
           page: BoardQnaList(
             items: qnaStringExamples,
             widgetRatio: qnaPageRatio * qnaListItemCount,
@@ -100,8 +100,8 @@ class _BoardState extends State<Board> {
           viewRatio: qnaPageRatio,
           isIndicatorEnabled: true,
         ),
-        YorokeTitleBar(titleName: "구인구직"),
-        YorokePageView(
+        YrkTabHeaderView(titleName: "구인구직"),
+        YrkPageView(
             page: BoardJobFindingList(
               items: findJobStringExamples,
               widgetRatio: findJobPageRatio * findJobListItemCount,
