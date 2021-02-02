@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class YorokeTextStyle extends TextStyle {
+class YrkTextStyle extends TextStyle {
   final Color color;
   final double height;
   final double letterSpacing;
@@ -10,7 +10,7 @@ class YorokeTextStyle extends TextStyle {
   final String fontFamily;
   final FontStyle fontStyle;
 
-  const YorokeTextStyle({
+  const YrkTextStyle({
     this.color = const Color(0xe6000000),
     this.fontSize = 14.0,
     this.height = 1.5,

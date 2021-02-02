@@ -30,7 +30,7 @@ class _LoginState extends State<Login> {
                 aspectRatio: 360 / 48,
                 child: Container(
                   child: Text("로그인",
-                      style: YorokeTextStyle(
+                      style: YrkTextStyle(
                         letterSpacing: -0.88 / 22,
                         height: 33 / 22,
                         fontWeight: FontWeight.bold, // diff
@@ -49,23 +49,23 @@ class _LoginState extends State<Login> {
                     children: <TextSpan>[
                       TextSpan(
                         text: '계속하시면 요양커뮤니티앱의 ',
-                        style: YorokeTextStyle(),
+                        style: YrkTextStyle(),
                       ),
                       TextSpan(
                         text: '사용자약관',
-                        style: YorokeTextStyle(fontWeight: FontWeight.bold),
+                        style: YrkTextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextSpan(
                         text: '과\n',
-                        style: YorokeTextStyle(),
+                        style: YrkTextStyle(),
                       ),
                       TextSpan(
                         text: '개인정보약관',
-                        style: YorokeTextStyle(fontWeight: FontWeight.bold),
+                        style: YrkTextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextSpan(
                         text: '에 동의하시는걸로 간주됩니다.',
-                        style: YorokeTextStyle(),
+                        style: YrkTextStyle(),
                       ),
                     ],
                   ),
@@ -79,13 +79,13 @@ class _LoginState extends State<Login> {
                 child: Column(
                   children: <Widget>[
                     Expanded(
-                      child: YorokeTextField(
+                      child: YrkTextField(
                         label: '아이디',
                       ),
                     ),
                     SizedBox(height: 8),
                     Expanded(
-                      child: YorokeTextField(
+                      child: YrkTextField(
                         label: '비밀번호',
                         obscureText: true,
                       ),
@@ -104,7 +104,7 @@ class _LoginState extends State<Login> {
                       children: <Widget>[
                         Container(
                           child: Text("회원가입",
-                              style: YorokeTextStyle(
+                              style: YrkTextStyle(
                                 color: const Color(0x99000000),
                                 height: 20 / 14,
                                 letterSpacing: -0.56 / 14,
@@ -121,7 +121,7 @@ class _LoginState extends State<Login> {
                       children: <Widget>[
                         Expanded(
                           child: Text("아이디 찾기",
-                              style: YorokeTextStyle(
+                              style: YrkTextStyle(
                                 color: const Color(0x99000000),
                                 height: 20 / 14,
                                 letterSpacing: -0.56 / 14,
@@ -130,7 +130,7 @@ class _LoginState extends State<Login> {
                         ),
                         Expanded(
                           child: Text("비밀번호 찾기",
-                              style: YorokeTextStyle(
+                              style: YrkTextStyle(
                                 color: const Color(0x99000000),
                                 height: 20 / 14,
                                 letterSpacing: -0.56 / 14,

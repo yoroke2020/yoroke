@@ -4,7 +4,7 @@ import 'package:helloflutter/navigator/TabItem.dart';
 import 'package:helloflutter/models/YrkData.dart';
 import 'package:helloflutter/views/YrkListView.dart';
 
-class BoardQnaList extends YorokeWidgetList {
+class BoardQnaList extends YrkListView {
   @override
   BoardQnaList({
     @required this.items,

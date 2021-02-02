@@ -2,10 +2,10 @@ import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../models/YrkData.dart';
+import 'package:helloflutter/models/YrkData.dart';
 
-abstract class YorokeWidgetList {
-  YorokeWidgetList(
+abstract class YrkListView {
+  YrkListView(
       {@required this.items,
       @required this.widgetRatio,
       this.listLength = 1,
