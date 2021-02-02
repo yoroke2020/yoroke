@@ -18,7 +18,7 @@ InputDecoration textFieldInputDecotation(String label) {
       ),
       border: OutlineInputBorder(
         borderSide: BorderSide(
-          color: const Color(0x4d000000),
+          color: const Color(0xff4d0000),
           width: 1,
         ),
         borderRadius: BorderRadius.all(

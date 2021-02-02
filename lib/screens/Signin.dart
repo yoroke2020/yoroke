@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:helloflutter/themes/YorokeTextField.dart';
 import 'package:helloflutter/themes/YorokeTextStyle.dart';
+import 'package:helloflutter/themes/YorokeBtn.dart';
 
 class Signin extends StatefulWidget {
   @override
@@ -62,6 +63,16 @@ class _SigninState extends State<Signin> {
                       ),
                     ),
                   ],
+                ),
+              ),
+            ),
+            Container(
+              child: new AspectRatio(
+                aspectRatio: 360 / 48,
+                child: Container(
+                  child: YorokeBtn(
+                    label: "네이버",
+                  ),
                 ),
               ),
             ),
