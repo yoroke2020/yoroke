@@ -4,7 +4,7 @@ import 'package:helloflutter/views/Board/BoardQnaList.dart';
 import 'package:helloflutter/views/Board/BoardJobFindingList.dart';
 import 'package:helloflutter/models/YrkData.dart';
 import 'package:helloflutter/views/components/YrkCardView.dart';
-import 'package:helloflutter/views/components/YrkWidgetHeaderView.dart';
+import 'package:helloflutter/views/components/YrkTabHeaderView.dart';
 import 'package:helloflutter/views/components/YrkPageView.dart';
 
 class Board extends StatefulWidget {
@@ -78,7 +78,7 @@ class _BoardState extends State<Board> {
         body: ListView(
       padding: const EdgeInsets.only(top: 8, bottom: 8),
       children: <Widget>[
-        YrkWidgetHeaderView(titleName: "후기"),
+        YrkTabHeaderView(titleName: "후기"),
         YrkCardView(
           viewRatio: 360 / 120,
           cardRatio: 136 / 120,
@@ -87,7 +87,7 @@ class _BoardState extends State<Board> {
           onPushNavigator: widget.onPushNavigator,
           onTapPageIndex: 1,
         ),
-        YrkWidgetHeaderView(titleName: "고민/질문"),
+        YrkTabHeaderView(titleName: "고민/질문"),
         YrkPageView(
           page: BoardQnaList(
             items: qnaStringExamples,
@@ -100,7 +100,7 @@ class _BoardState extends State<Board> {
           viewRatio: qnaPageRatio,
           isIndicatorEnabled: true,
         ),
-        YrkWidgetHeaderView(titleName: "구인구직"),
+        YrkTabHeaderView(titleName: "구인구직"),
         YrkPageView(
             page: BoardJobFindingList(
               items: findJobStringExamples,
