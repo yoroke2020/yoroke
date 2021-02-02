@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:helloflutter/models/YrkData.dart';
 
-class Sample extends StatelessWidget {
-  Sample(this.data);
+class TestPage extends StatelessWidget {
+  TestPage(this.data);
 
   final YrkData data;
 

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:helloflutter/screens/board/BoardReview.dart';
-import 'package:helloflutter/screens/board/Sample.dart';
+import 'package:helloflutter/screens/TestPage.dart';
 import 'package:helloflutter/models/YrkData.dart';
 
 class DetailPage extends StatelessWidget {
@@ -14,7 +14,7 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<List<Widget>> detailPage = [
       [],
-      [BoardReview(data, onPushNavigator), Sample(data)],
+      [BoardReview(data, onPushNavigator), TestPage(data)],
       [],
       []
     ];

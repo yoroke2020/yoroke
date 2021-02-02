@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'Login.dart';
-import 'Signin.dart';
+import 'LogIn.dart';
+import 'SignIn.dart';
 
 class Info extends StatefulWidget {
   @override
@@ -25,14 +25,14 @@ class _InfoState extends State<Info> {
               child: Text('Trigger Login'),
               onPressed: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Login()));
+                    context, MaterialPageRoute(builder: (context) => LogIn()));
               },
             ),
             RaisedButton(
               child: Text('Trigger Signin'),
               onPressed: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Signin()));
+                    context, MaterialPageRoute(builder: (context) => SignIn()));
               },
             ),
           ],

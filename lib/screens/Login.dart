@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:helloflutter/views/components/YrkTextField.dart';
 import 'package:helloflutter/views/components/YrkTextStyle.dart';
 
-class Login extends StatefulWidget {
+class LogIn extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _LogInState createState() => _LogInState();
 }
 
-class _LoginState extends State<Login> {
+class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

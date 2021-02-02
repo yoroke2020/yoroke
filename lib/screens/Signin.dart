@@ -5,12 +5,12 @@ import 'package:helloflutter/views/components/YrkTextField.dart';
 import 'package:helloflutter/views/components/YrkTextStyle.dart';
 import 'package:helloflutter/views/components/YrkButton.dart';
 
-class Signin extends StatefulWidget {
+class SignIn extends StatefulWidget {
   @override
-  _SigninState createState() => _SigninState();
+  _SignInState createState() => _SignInState();
 }
 
-class _SigninState extends State<Signin> {
+class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
