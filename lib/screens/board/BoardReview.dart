@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:helloflutter/screens/board/BoardReviewTabViewList.dart';
+import 'package:helloflutter/views/Board/BoardReviewTabViewList.dart';
 import 'package:helloflutter/models/YrkData.dart';
-import 'package:helloflutter/views/YrkTabBarView.dart';
-import 'package:helloflutter/views/YrkTitleView.dart';
+import 'package:helloflutter/views/components/YrkTabBarView.dart';
+import 'package:helloflutter/views/components/YrkTitleView.dart';
 
 class BoardReview extends StatefulWidget {
   BoardReview(this.data, this.onPushNavigator);
