@@ -57,7 +57,6 @@ class BoardReviewTabViewList extends YorokeWidgetList {
                     flex: 1,
                     child: Row(children: [
                       Container(
-                          width: 33,
                           padding: EdgeInsets.only(right: 8),
                           child: Text("후기",
                               style: const TextStyle(
