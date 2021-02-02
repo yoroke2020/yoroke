@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:helloflutter/tools/Data.dart';
 
 import 'DetailPage.dart';
 import 'RootPage.dart';
@@ -9,13 +10,15 @@ class TabNavigatorRoutes {
   static const String root = '/';
   static const String detail = '/detail';
 }
+
 class TabNavigator extends StatelessWidget {
   TabNavigator({this.navigatorKey, this.tabItem});
+
   final GlobalKey<NavigatorState> navigatorKey;
   final TabItem tabItem;
 
-  void _push(BuildContext context, {int materialIndex: 0}) {
-    var routeBuilders = _routeBuilders(context, materialIndex: materialIndex);
+  void _push(BuildContext context, {Data data}) {
+    var routeBuilders = _routeBuilders(context, data: data);
 
     Navigator.push(
       context,
@@ -25,17 +28,17 @@ class TabNavigator extends StatelessWidget {
     );
   }
 
-  Map<String, WidgetBuilder> _routeBuilders(BuildContext context, {int materialIndex: 0}) {
+  Map<String, WidgetBuilder> _routeBuilders(BuildContext context, {Data data}) {
     return {
       TabNavigatorRoutes.root: (context) => RootPage(
-          currentIndex: tabItem.index,
-        onPush: (materialIndex) =>
-            _push(context, materialIndex: materialIndex),
-      ),
+            currentIndex: tabItem.index,
+            onPushNavigator: (data) => _push(context, data: data),
+          ),
       TabNavigatorRoutes.detail: (context) => DetailPage(
-          rootIndex: tabItem.index,
-        currentIndex: materialIndex,
-      )
+            rootIndex: tabItem.index,
+            data: data,
+            onPushNavigator: (data) => _push(context, data: data),
+          )
     };
   }
 
@@ -47,10 +50,8 @@ class TabNavigator extends StatelessWidget {
       initialRoute: TabNavigatorRoutes.root,
       onGenerateRoute: (routeSettings) {
         return MaterialPageRoute(
-          builder: (context) => routeBuilders[routeSettings.name](context)
-        );
+            builder: (context) => routeBuilders[routeSettings.name](context));
       },
     );
   }
-
 }

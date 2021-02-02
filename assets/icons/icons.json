@@ -32,5 +32,20 @@
   },
   "thumb_up": {
     "image": "assets/icons/thumb_up_16_px.png"
+  },
+  "card": {
+    "image": "assets/icons/card_sample_image.png"
+  },
+  "back_color": {
+    "image": "assets/icons/icon_back_color_24_px.png"
+  },
+  "create_color": {
+    "image": "assets/icons/icon_create_color_24_px.png"
+  },
+  "notification_color": {
+    "image": "assets/icons/icon_notification_color_24_px.png"
+  },
+  "search_color": {
+    "image": "assets/icons/icon_search_color_24_px.png"
   }
 }
