@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:helloflutter/navigator/TabItem.dart';
-import 'file:///C:/Users/Cho/Documents/GitHub/yoroke2020/yoroke/lib/models/YrkData.dart';
+import 'package:helloflutter/models/YrkData.dart';
 import 'package:helloflutter/views/YrkListView.dart';
 
-class BoardReviewTabViewList extends YorokeWidgetList {
+class BoardReviewTabViewList extends YrkListView {
   @override
   BoardReviewTabViewList(
       {@required this.items,

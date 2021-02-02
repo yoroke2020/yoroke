@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/Cho/Documents/GitHub/yoroke2020/yoroke/lib/views/components/YrkDotsIndicator.dart';
+import 'package:helloflutter/views/components/YrkDotsIndicator.dart';
 
-class YorokeTabBarView extends StatelessWidget {
-  YorokeTabBarView({
+class YrkTabBarView extends StatelessWidget {
+  YrkTabBarView({
     this.tabViewList,
     this.controller,
     @required this.tabTextList,

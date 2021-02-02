@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helloflutter/screens/board/BoardReviewTabViewList.dart';
-import 'file:///C:/Users/Cho/Documents/GitHub/yoroke2020/yoroke/lib/models/YrkData.dart';
+import 'package:helloflutter/models/YrkData.dart';
 import 'package:helloflutter/views/YrkTabBarView.dart';
 import 'package:helloflutter/views/YrkTitleView.dart';
 
@@ -20,12 +20,12 @@ class _BoardReviewState extends State<BoardReview> {
     return Scaffold(
       body: ListView(
         children: <Widget>[
-          YorokeTitleView(
+          YrkTitleView(
             buttonText: null,
             subTitleText: null,
             titleText: null,
           ),
-          YorokeTabBarView(
+          YrkTabBarView(
             viewRatio: 360 / 690,
             length: 2,
             tabTextList: ["최신글", "인기글"],

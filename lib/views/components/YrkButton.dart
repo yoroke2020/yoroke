@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'YrkTextStyle.dart';
 
-class YorokeBtn extends StatelessWidget {
+class YrkButton extends StatelessWidget {
   final String label;
 
-  YorokeBtn({Key key, @required this.label}) : super(key: key);
+  YrkButton({Key key, @required this.label}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class YorokeBtn extends StatelessWidget {
         onPressed: () {},
         child: Text(
           this.label,
-          style: YorokeTextStyle(fontWeight: FontWeight.bold),
+          style: YrkTextStyle(fontWeight: FontWeight.bold),
         ),
         color: const Color(0xfff5df4d),
       ),

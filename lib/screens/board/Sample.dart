@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'file:///C:/Users/Cho/Documents/GitHub/yoroke2020/yoroke/lib/models/YrkData.dart';
+import 'package:helloflutter/models/YrkData.dart';
 
 class Sample extends StatelessWidget {
   Sample(this.data);

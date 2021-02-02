@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:helloflutter/navigator/TabItem.dart';
+import 'package:helloflutter/models/YrkData.dart';
 
-import '../models/YrkData.dart';
-
-class YorokeCardView extends StatelessWidget {
-  YorokeCardView(
+class YrkCardView extends StatelessWidget {
+  YrkCardView(
       {@required this.onPushNavigator,
       this.viewRatio = 1,
       this.cardRatio = 1,

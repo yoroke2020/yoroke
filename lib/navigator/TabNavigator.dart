@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/Cho/Documents/GitHub/yoroke2020/yoroke/lib/models/YrkData.dart';
+import 'package:helloflutter/models/YrkData.dart';
 
 import 'DetailPage.dart';
 import 'RootPage.dart';

@@ -78,8 +78,8 @@ class _BoardState extends State<Board> {
         body: ListView(
       padding: const EdgeInsets.only(top: 8, bottom: 8),
       children: <Widget>[
-        YorokeTitleBar(titleName: "후기"),
-        YorokeCardView(
+        YrkWidgetHeaderView(titleName: "후기"),
+        YrkCardView(
           viewRatio: 360 / 120,
           cardRatio: 136 / 120,
           cardImageList: reviewCardImageList,
@@ -87,8 +87,8 @@ class _BoardState extends State<Board> {
           onPushNavigator: widget.onPushNavigator,
           onTapPageIndex: 1,
         ),
-        YorokeTitleBar(titleName: "고민/질문"),
-        YorokePageView(
+        YrkWidgetHeaderView(titleName: "고민/질문"),
+        YrkPageView(
           page: BoardQnaList(
             items: qnaStringExamples,
             widgetRatio: qnaPageRatio * qnaListItemCount,
@@ -100,8 +100,8 @@ class _BoardState extends State<Board> {
           viewRatio: qnaPageRatio,
           isIndicatorEnabled: true,
         ),
-        YorokeTitleBar(titleName: "구인구직"),
-        YorokePageView(
+        YrkWidgetHeaderView(titleName: "구인구직"),
+        YrkPageView(
             page: BoardJobFindingList(
               items: findJobStringExamples,
               widgetRatio: findJobPageRatio * findJobListItemCount,
