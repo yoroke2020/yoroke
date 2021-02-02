@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class YrkWidgetHeaderView extends StatelessWidget {
-  YrkWidgetHeaderView({this.titleName = ""});
+class YrkTabHeaderView extends StatelessWidget {
+  YrkTabHeaderView({this.titleName = ""});
 
   final String titleName;
 
