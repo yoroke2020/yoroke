@@ -12,7 +12,7 @@ class BottomNavigation extends StatelessWidget {
   final TabItem currentTab;
   final ValueChanged<TabItem> onSelectTab;
 
-  Map _iconMap;
+  Map iconMap;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class BottomNavigation extends StatelessWidget {
           if (snapshot.hasData == false || snapshot.hasError) {
             return CircularProgressIndicator();
           } else {
-            _iconMap = json.decode(snapshot.data);
+            iconMap = json.decode(snapshot.data);
             return BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
               currentIndex: currentTab.index,
@@ -49,8 +49,8 @@ class BottomNavigation extends StatelessWidget {
 
   Image _getIcon(TabItem tabItem) {
     return currentTab == tabItem
-        ? Image.asset(_iconMap[tabIconInfo[tabItem]]['selectedImage'])
-        : Image.asset(_iconMap[tabIconInfo[tabItem]]['image']);
+        ? Image.asset(iconMap[tabIconInfo[tabItem]]['selectedImage'])
+        : Image.asset(iconMap[tabIconInfo[tabItem]]['image']);
   }
 
   // TODO _memorizer 캐시 적용
