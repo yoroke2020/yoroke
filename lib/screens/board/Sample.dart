@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:helloflutter/tools/Data.dart';
+import 'file:///C:/Users/Cho/Documents/GitHub/yoroke2020/yoroke/lib/models/YrkData.dart';
 
 class Sample extends StatelessWidget {
   Sample(this.data);
 
-  final Data data;
+  final YrkData data;
 
   @override
   Widget build(BuildContext context) {

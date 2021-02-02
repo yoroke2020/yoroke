@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:helloflutter/screens/board/BoardReviewTabViewList.dart';
-import 'package:helloflutter/tools/Data.dart';
-import 'package:helloflutter/tools/YorokeTabBarView.dart';
-import 'package:helloflutter/tools/YorokeTitleView.dart';
+import 'file:///C:/Users/Cho/Documents/GitHub/yoroke2020/yoroke/lib/models/YrkData.dart';
+import 'package:helloflutter/views/YrkTabBarView.dart';
+import 'package:helloflutter/views/YrkTitleView.dart';
 
 class BoardReview extends StatefulWidget {
   BoardReview(this.data, this.onPushNavigator);
 
-  final Data data;
-  final ValueChanged<Data> onPushNavigator;
+  final YrkData data;
+  final ValueChanged<YrkData> onPushNavigator;
 
   @override
   _BoardReviewState createState() => _BoardReviewState();

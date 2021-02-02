@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:helloflutter/screens/board/BoardQnaList.dart';
 import 'package:helloflutter/screens/board/BoardJobFindingList.dart';
-import 'package:helloflutter/tools/Data.dart';
-import 'package:helloflutter/tools/YorokeCardView.dart';
-import 'package:helloflutter/tools/YorokeTitleBar.dart';
-import 'package:helloflutter/tools/YorokePageView.dart';
+import 'package:helloflutter/models/YrkData.dart';
+import 'package:helloflutter/views/YrkCardView.dart';
+import 'package:helloflutter/views/YrkWidgetHeaderView.dart';
+import 'package:helloflutter/views/YrkPageView.dart';
 
 class Board extends StatefulWidget {
   Board({@required this.onPushNavigator});
 
-  final ValueChanged<Data> onPushNavigator;
+  final ValueChanged<YrkData> onPushNavigator;
 
   @override
   _BoardState createState() => _BoardState();

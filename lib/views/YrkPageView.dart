@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:helloflutter/tools/YorokeDotsIndicator.dart';
+import 'package:helloflutter/views/components/YrkDotsIndicator.dart';
 
 class YorokePageView extends StatelessWidget {
   YorokePageView({
