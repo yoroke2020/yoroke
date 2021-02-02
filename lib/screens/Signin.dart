@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:helloflutter/views/widgets/YrkTextField.dart';
-import 'package:helloflutter/views/widgets/YrkTextStyle.dart';
-import 'package:helloflutter/views/widgets/YrkButton.dart';
+import 'package:yoroke/views/widgets/YrkTextField.dart';
+import 'package:yoroke/views/widgets/YrkTextStyle.dart';
+import 'package:yoroke/views/widgets/YrkButton.dart';
 
 class SignIn extends StatefulWidget {
   @override

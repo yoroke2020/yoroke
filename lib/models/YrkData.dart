@@ -1,4 +1,4 @@
-import 'package:helloflutter/navigator/TabItem.dart';
+import 'package:yoroke/navigator/TabItem.dart';
 
 class YrkData {
   YrkData(this.currentIndex, this.data);

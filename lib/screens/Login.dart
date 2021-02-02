@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:helloflutter/views/widgets/YrkTextField.dart';
-import 'package:helloflutter/views/widgets/YrkTextStyle.dart';
+import 'package:yoroke/views/widgets/YrkTextField.dart';
+import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
 class LogIn extends StatefulWidget {
   @override

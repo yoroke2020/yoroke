@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:helloflutter/screens/board/BoardReview.dart';
-import 'package:helloflutter/screens/TestPage.dart';
-import 'package:helloflutter/models/YrkData.dart';
+import 'package:yoroke/screens/board/BoardReview.dart';
+import 'package:yoroke/screens/TestPage.dart';
+import 'package:yoroke/models/YrkData.dart';
 
 class DetailPage extends StatelessWidget {
   DetailPage({this.rootIndex, this.data, this.onPushNavigator});

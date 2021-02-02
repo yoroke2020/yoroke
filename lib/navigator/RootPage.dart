@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:helloflutter/screens/Board.dart';
-import 'package:helloflutter/screens/Find.dart';
-import 'package:helloflutter/screens/Home.dart';
-import 'package:helloflutter/screens/Info.dart';
-import 'package:helloflutter/models/YrkData.dart';
+import 'package:yoroke/screens/Board.dart';
+import 'package:yoroke/screens/Find.dart';
+import 'package:yoroke/screens/Home.dart';
+import 'package:yoroke/screens/Info.dart';
+import 'package:yoroke/models/YrkData.dart';
 
 class RootPage extends StatelessWidget {
   RootPage({this.currentIndex, this.onPushNavigator});

@@ -2,7 +2,7 @@ import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:helloflutter/models/YrkData.dart';
+import 'package:yoroke/models/YrkData.dart';
 
 abstract class YrkListView {
   YrkListView(

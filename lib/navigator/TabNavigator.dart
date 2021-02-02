@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:helloflutter/models/YrkData.dart';
+import 'package:yoroke/models/YrkData.dart';
 
 import 'DetailPage.dart';
 import 'RootPage.dart';
@@ -28,7 +28,8 @@ class TabNavigator extends StatelessWidget {
     );
   }
 
-  Map<String, WidgetBuilder> _routeBuilders(BuildContext context, {YrkData data}) {
+  Map<String, WidgetBuilder> _routeBuilders(BuildContext context,
+      {YrkData data}) {
     return {
       TabNavigatorRoutes.root: (context) => RootPage(
             currentIndex: tabItem.index,

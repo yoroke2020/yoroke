@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:helloflutter/views/Board/BoardQnaList.dart';
-import 'package:helloflutter/views/Board/BoardJobFindingList.dart';
-import 'package:helloflutter/models/YrkData.dart';
-import 'package:helloflutter/views/components/YrkCardView.dart';
-import 'package:helloflutter/views/components/YrkWidgetHeaderView.dart';
-import 'package:helloflutter/views/components/YrkPageView.dart';
+import 'package:yoroke/views/Board/BoardQnaList.dart';
+import 'package:yoroke/views/Board/BoardJobFindingList.dart';
+import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/views/components/YrkCardView.dart';
+import 'package:yoroke/views/components/YrkWidgetHeaderView.dart';
+import 'package:yoroke/views/components/YrkPageView.dart';
 
 class Board extends StatefulWidget {
   Board({@required this.onPushNavigator});

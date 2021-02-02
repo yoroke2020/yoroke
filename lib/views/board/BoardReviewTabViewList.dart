@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:helloflutter/navigator/TabItem.dart';
-import 'package:helloflutter/models/YrkData.dart';
-import 'package:helloflutter/views/components/YrkListView.dart';
+import 'package:yoroke/navigator/TabItem.dart';
+import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/views/components/YrkListView.dart';
 
 class BoardReviewTabViewList extends YrkListView {
   @override
