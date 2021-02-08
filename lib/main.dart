@@ -31,7 +31,9 @@ class MyMain extends StatefulWidget {
 }
 
 class _MyMainState extends State<MyMain> {
+  BottomNavigation bottomNavigation;
   var _currentTab = TabItem.home;
+  bool isFirst = true;
   final _navigatorKeys = {
     TabItem.home: GlobalKey<NavigatorState>(),
     TabItem.board: GlobalKey<NavigatorState>(),
@@ -51,6 +53,10 @@ class _MyMainState extends State<MyMain> {
 
   @override
   Widget build(BuildContext context) {
+    bottomNavigation = BottomNavigation.getInstance();
+    bottomNavigation.setCurrentTab(_currentTab, false);
+    bottomNavigation.setSelectTab(_selectTab);
+
     return WillPopScope(
         onWillPop: () async {
           final isFirstRoutInCurrentTab =
@@ -75,10 +81,7 @@ class _MyMainState extends State<MyMain> {
             _buildOffstageNavigator(TabItem.find),
             _buildOffstageNavigator(TabItem.info),
           ],),
-          bottomNavigationBar: BottomNavigation(
-            currentTab: _currentTab,
-            onSelectTab: _selectTab,
-          )
+            bottomNavigationBar: bottomNavigation,
         ));
   }
 

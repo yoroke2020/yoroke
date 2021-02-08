@@ -6,16 +6,46 @@ import 'package:flutter/services.dart';
 
 import 'package:yoroke/navigator/TabItem.dart';
 
-class BottomNavigation extends StatelessWidget {
-  BottomNavigation({@required this.currentTab, @required this.onSelectTab});
+class BottomNavigation extends StatefulWidget {
+  static BottomNavigation _instance;
 
-  final TabItem currentTab;
-  final ValueChanged<TabItem> onSelectTab;
+  BottomNavigation._internal();
 
+  static BottomNavigation getInstance() {
+    if (_instance == null)
+      _instance = BottomNavigation._internal();
+    return _instance;
+  }
+
+  void setCurrentTab(TabItem tabItem, bool onTap) {
+    this.currentTab = tabItem;
+  }
+
+  void setSelectTab(ValueChanged<TabItem> onSelectTab) {
+    this.onSelectTab = onSelectTab;
+  }
+
+  TabItem currentTab;
+  ValueChanged<TabItem> onSelectTab;
+  _BottomNavigationState state;
+
+  @override
+  State<StatefulWidget> createState() {
+    state = _BottomNavigationState();
+    return state;
+  }
+
+}
+
+class _BottomNavigationState extends State<BottomNavigation> {
+  TabItem currentTab;
   Map iconMap;
 
   @override
   Widget build(BuildContext context) {
+    if(currentTab == null)
+      currentTab = widget.currentTab;
+
     return FutureBuilder(
         future: loadAsset('assets/icons/icons.json'),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -44,7 +74,14 @@ class BottomNavigation extends StatelessWidget {
   }
 
   void _onTap(int index) {
-    onSelectTab(TabItem.values[index]);
+    widget.onSelectTab(TabItem.values[index]);
+    setState(() {
+      this.currentTab = TabItem.values[index];
+    });
+  }
+
+  void onValueChanged(int index) {
+    _onTap(index);
   }
 
   Image _getIcon(TabItem tabItem) {
