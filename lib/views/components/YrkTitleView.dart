@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/views/AppBarYellowTheme.dart';
 
 class YrkTitleView extends StatelessWidget {
   YrkTitleView(
@@ -50,59 +51,7 @@ class YrkTitleView extends StatelessWidget {
           )),
           Container(
               child: Column(children: [
-            Container(
-                height: 48,
-                child: Row(children: [
-                  IconButton(
-                    icon: Image.asset(
-                      "assets/icons/icon_back_color_24_px.png",
-                      height: 16,
-                      width: 16,
-                    ),
-                    padding: EdgeInsets.only(left: 16),
-                    constraints: BoxConstraints(),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Expanded(child: Container()),
-                  IconButton(
-                    icon: Image.asset(
-                      "assets/icons/icon_search_color_24_px.png",
-                      height: 16,
-                      width: 16,
-                    ),
-                    padding: EdgeInsets.only(right: 8),
-                    constraints: BoxConstraints(),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  IconButton(
-                    icon: Image.asset(
-                      "assets/icons/icon_create_color_24_px.png",
-                      height: 16,
-                      width: 16,
-                    ),
-                    padding: EdgeInsets.only(right: 8),
-                    constraints: BoxConstraints(),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  IconButton(
-                    icon: Image.asset(
-                      "assets/icons/icon_notification_color_24_px.png",
-                      height: 16,
-                      width: 16,
-                    ),
-                    padding: EdgeInsets.only(right: 16),
-                    constraints: BoxConstraints(),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ])),
+            AppBarYellowTheme.getInstance(),
             Expanded(child: Container()),
             Container(
                 height: 24,

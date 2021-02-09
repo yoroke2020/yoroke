@@ -4,57 +4,84 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:yoroke/navigator/TabItem.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 
-class BottomNavigation extends StatelessWidget {
-  BottomNavigation({@required this.currentTab, @required this.onSelectTab});
+class BottomNavigation extends StatefulWidget {
+  RootPageItem _currentRootPageTab;
+  ValueChanged<RootPageItem> _onSelectRootPageTab;
 
-  final TabItem currentTab;
-  final ValueChanged<TabItem> onSelectTab;
+  static BottomNavigation _instance;
 
-  Map iconMap;
+  BottomNavigation._internal();
+
+  static BottomNavigation getInstance() {
+    if (_instance == null) _instance = BottomNavigation._internal();
+    return _instance;
+  }
+
+  void setCurrentRootPageTab(RootPageItem rootPageItem) {
+    this._currentRootPageTab = rootPageItem;
+  }
+
+  void setOnSelectRootPageTab(ValueChanged<RootPageItem> onSelectPageTab) {
+    this._onSelectRootPageTab = onSelectPageTab;
+  }
+
+  @override
+  _BottomNavigationState createState() => _BottomNavigationState();
+}
+
+class _BottomNavigationState extends State<BottomNavigation> {
+  RootPageItem _currentRootPageTab;
+  Map _iconMap;
+
+  BottomNavigationBarItem _buildItem(RootPageItem rootPageItem) {
+    return BottomNavigationBarItem(
+        icon: _getIcon(rootPageItem), label: rootPageTabLabelInfo[rootPageItem]);
+  }
+
+  void _onTap(int index) {
+    widget._onSelectRootPageTab(RootPageItem.values[index]);
+  }
+
+  Image _getIcon(RootPageItem rootPageItem) {
+    return _currentRootPageTab == rootPageItem
+        ? Image.asset(_iconMap[rootPagetabIconInfo[rootPageItem]]['selectedImage'])
+        : Image.asset(_iconMap[rootPagetabIconInfo[rootPageItem]]['image']);
+  }
+
+  // TODO _memorizer 캐시 적용
+  Future<String> _loadAsset(String target) async {
+    return await rootBundle.loadString(target);
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (_currentRootPageTab == null) _currentRootPageTab = widget._currentRootPageTab;
+
     return FutureBuilder(
-        future: loadAsset('assets/icons/icons.json'),
+        future: _loadAsset('assets/icons/icons.json'),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData == false || snapshot.hasError) {
             return CircularProgressIndicator();
           } else {
-            iconMap = json.decode(snapshot.data);
+            _iconMap = json.decode(snapshot.data);
             return BottomNavigationBar(
+            backgroundColor: const Color(0xffffffff),
               type: BottomNavigationBarType.fixed,
-              currentIndex: currentTab.index,
+              currentIndex: _currentRootPageTab.index,
               items: [
-                _buildItem(TabItem.home),
-                _buildItem(TabItem.board),
-                _buildItem(TabItem.find),
-                _buildItem(TabItem.info),
+                _buildItem(RootPageItem.home),
+                _buildItem(RootPageItem.board),
+                _buildItem(RootPageItem.find),
+                _buildItem(RootPageItem.info),
               ],
               onTap: _onTap,
+              selectedItemColor: const Color(0xffe2bf00),
+              selectedFontSize: 12.0,
+              unselectedFontSize: 12.0,
             );
           }
         });
-  }
-
-  BottomNavigationBarItem _buildItem(TabItem tabItem) {
-    return BottomNavigationBarItem(
-        icon: _getIcon(tabItem), label: tabLabelInfo[tabItem]);
-  }
-
-  void _onTap(int index) {
-    onSelectTab(TabItem.values[index]);
-  }
-
-  Image _getIcon(TabItem tabItem) {
-    return currentTab == tabItem
-        ? Image.asset(iconMap[tabIconInfo[tabItem]]['selectedImage'])
-        : Image.asset(iconMap[tabIconInfo[tabItem]]['image']);
-  }
-
-  // TODO _memorizer 캐시 적용
-  Future<String> loadAsset(String target) async {
-    return await rootBundle.loadString(target);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/navigator/TabItem.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/models/YrkData.dart';
 
 class YrkCardView extends StatelessWidget {
@@ -38,8 +38,8 @@ class YrkCardView extends StatelessWidget {
                     child: InkWell(
                         borderRadius: BorderRadius.circular(16),
                         onTap: () => onPushNavigator(new YrkData(
-                            DetailItem.review,
-                            "조문기의 리뷰 카드 번호 " + index.toString() + "번")),
+                            SubItem.values[onTapPageIndex],
+                            "조문기의 리뷰 카드 번호 " + index.toString() + "번", appBarType: AppBarType.disable)),
                         child: new AspectRatio(
                             aspectRatio: cardRatio,
                             child: Stack(children: <Widget>[

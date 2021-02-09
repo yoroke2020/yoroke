@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'navigator/TabItem.dart';
+import 'navigator/PageItem.dart';
 import 'navigator/TabNavigator.dart';
 import 'views/BottomNavigation.dart';
 
@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        scaffoldBackgroundColor: const Color(0xffffffff),
       ),
       home: MyMain(),
     );
@@ -31,64 +32,61 @@ class MyMain extends StatefulWidget {
 }
 
 class _MyMainState extends State<MyMain> {
-  var _currentTab = TabItem.home;
+  BottomNavigation bottomNavigation;
+  var _currentPageTab = RootPageItem.home;
+  bool isFirst = true;
   final _navigatorKeys = {
-    TabItem.home: GlobalKey<NavigatorState>(),
-    TabItem.board: GlobalKey<NavigatorState>(),
-    TabItem.find: GlobalKey<NavigatorState>(),
-    TabItem.info: GlobalKey<NavigatorState>(),
+    RootPageItem.home: GlobalKey<NavigatorState>(),
+    RootPageItem.board: GlobalKey<NavigatorState>(),
+    RootPageItem.find: GlobalKey<NavigatorState>(),
+    RootPageItem.info: GlobalKey<NavigatorState>(),
   };
 
-  void _selectTab(TabItem tabItem) {
-    if (tabItem == _currentTab) {
-      _navigatorKeys[tabItem].currentState.popUntil((route) => route.isFirst);
+  void _onSelectPageTab(RootPageItem rootPageItem) {
+    if (rootPageItem == _currentPageTab) {
+      _navigatorKeys[rootPageItem].currentState.popUntil((route) => route.isFirst);
     } else {
       setState(() {
-        _currentTab = tabItem;
+        _currentPageTab = rootPageItem;
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    bottomNavigation = BottomNavigation.getInstance();
+    bottomNavigation.setCurrentRootPageTab(_currentPageTab);
+    bottomNavigation.setOnSelectRootPageTab(_onSelectPageTab);
+
     return WillPopScope(
-        onWillPop: () async {
-          final isFirstRoutInCurrentTab =
-              !await _navigatorKeys[_currentTab].currentState.maybePop();
-          if (isFirstRoutInCurrentTab) {
-            if (_currentTab != TabItem.home) {
-              _selectTab(TabItem.home);
-              return false;
-            }
+      onWillPop: () async {
+        final isFirstRoutInCurrentPageTab =
+            !await _navigatorKeys[_currentPageTab].currentState.maybePop();
+        if (isFirstRoutInCurrentPageTab) {
+          if (_currentPageTab != RootPageItem.home) {
+            _onSelectPageTab(RootPageItem.home);
+            return false;
           }
-          return isFirstRoutInCurrentTab;
-        },
-        child: Scaffold(
-          appBar: PreferredSize(
-              preferredSize: Size.fromHeight(10.0),
-              child: AppBar(
-                toolbarHeight: 10,
-              )),
-          body: Stack(children: <Widget>[
-            _buildOffstageNavigator(TabItem.home),
-            _buildOffstageNavigator(TabItem.board),
-            _buildOffstageNavigator(TabItem.find),
-            _buildOffstageNavigator(TabItem.info),
-          ],),
-          bottomNavigationBar: BottomNavigation(
-            currentTab: _currentTab,
-            onSelectTab: _selectTab,
-          )
-        ));
+        }
+        return isFirstRoutInCurrentPageTab;
+      },
+      child: Stack(
+        children: <Widget>[
+          _buildOffstageNavigator(RootPageItem.home),
+          _buildOffstageNavigator(RootPageItem.board),
+          _buildOffstageNavigator(RootPageItem.find),
+          _buildOffstageNavigator(RootPageItem.info),
+        ],
+      ),
+    );
   }
 
-  _buildOffstageNavigator(TabItem tabItem) {
+  _buildOffstageNavigator(RootPageItem rootPageItem) {
     return Offstage(
-      offstage: _currentTab != tabItem,
-      child: TabNavigator(
-          navigatorKey: _navigatorKeys[tabItem],
-        tabItem: tabItem,
-      )
-      );
+        offstage: _currentPageTab != rootPageItem,
+        child: TabNavigator(
+          navigatorKey: _navigatorKeys[rootPageItem],
+          rootPageItem: rootPageItem,
+        ));
   }
 }
