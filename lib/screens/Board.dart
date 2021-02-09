@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/navigator/DetailPage.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/views/Board/BoardQnaList.dart';
 import 'package:yoroke/views/Board/BoardJobFindingList.dart';
 import 'package:yoroke/models/YrkData.dart';
@@ -85,7 +87,7 @@ class _BoardState extends State<Board> {
           cardImageList: reviewCardImageList,
           cardNameList: reviewCardNameList,
           onPushNavigator: widget.onPushNavigator,
-          onTapPageIndex: 1,
+          onTapPageIndex: SubItem.boardReview.index,
         ),
         YrkTabHeaderView(titleName: "고민/질문"),
         YrkPageView(

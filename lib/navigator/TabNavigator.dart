@@ -4,7 +4,7 @@ import 'package:yoroke/models/YrkData.dart';
 
 import 'DetailPage.dart';
 import 'RootPage.dart';
-import 'TabItem.dart';
+import 'PageItem.dart';
 
 class TabNavigatorRoutes {
   static const String root = '/';
@@ -12,10 +12,10 @@ class TabNavigatorRoutes {
 }
 
 class TabNavigator extends StatelessWidget {
-  TabNavigator({this.navigatorKey, this.tabItem});
+  TabNavigator({this.navigatorKey, this.rootPageItem});
 
   final GlobalKey<NavigatorState> navigatorKey;
-  final TabItem tabItem;
+  final RootPageItem rootPageItem;
 
   void _push(BuildContext context, {YrkData data}) {
     var routeBuilders = _routeBuilders(context, data: data);
@@ -32,11 +32,11 @@ class TabNavigator extends StatelessWidget {
       {YrkData data}) {
     return {
       TabNavigatorRoutes.root: (context) => RootPage(
-            currentIndex: tabItem.index,
+            currentIndex: rootPageItem.index,
             onPushNavigator: (data) => _push(context, data: data),
           ),
       TabNavigatorRoutes.detail: (context) => DetailPage(
-            rootIndex: tabItem.index,
+            rootIndex: rootPageItem.index,
             data: data,
             onPushNavigator: (data) => _push(context, data: data),
           )

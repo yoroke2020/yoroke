@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/navigator/TabItem.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/Board.dart';
 import 'package:yoroke/screens/Find.dart';
 import 'package:yoroke/screens/Home.dart';
 import 'package:yoroke/screens/Info.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/views/AppBarNormalTheme.dart';
 import 'package:yoroke/views/BottomNavigation.dart';
 
 class RootPage extends StatelessWidget {
@@ -16,8 +17,10 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppBarNormalTheme appBarNormalTheme = AppBarNormalTheme.getInstance();
     BottomNavigation bottomNavigation = BottomNavigation.getInstance();
-    bottomNavigation.setCurrentTab(TabItem.values[currentIndex], true);
+    bottomNavigation.setCurrentRootPageTab(RootPageItem.values[currentIndex]);
+
     final List<Widget> children = [
       Home(),
       Board(onPushNavigator: onPushNavigator),
@@ -26,11 +29,8 @@ class RootPage extends StatelessWidget {
     ];
 
     return Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(10.0),
-            child: AppBar(
-              toolbarHeight: 10,
-            )),
+      backgroundColor: const Color(0xffffffff),
+        appBar: appBarNormalTheme,
         body: children[currentIndex],
         bottomNavigationBar: bottomNavigation
     ) ;
