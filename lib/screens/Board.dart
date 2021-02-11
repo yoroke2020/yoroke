@@ -78,12 +78,12 @@ class _BoardState extends State<Board> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-      padding: const EdgeInsets.only(top: 8, bottom: 8),
       children: <Widget>[
         YrkTabHeaderView(titleName: "후기"),
         YrkCardView(
-          viewRatio: 360 / 120,
-          cardRatio: 136 / 120,
+          viewHeight: 136,
+          cardWidth: 136,
+          cardHeight: 120,
           cardImageList: reviewCardImageList,
           cardNameList: reviewCardNameList,
           onPushNavigator: widget.onPushNavigator,

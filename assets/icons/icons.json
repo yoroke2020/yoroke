@@ -47,5 +47,10 @@
   },
   "search_color": {
     "image": "assets/icons/icon_search_color_24_px.png"
+  },
+  "icon_lock": {
+    "currentIndex": 4,
+    "image": "assets/icons/icon_lock_24_px.png",
+    "selectedImage": "assets/icons/icon_lock_open_24_px.png"
   }
 }

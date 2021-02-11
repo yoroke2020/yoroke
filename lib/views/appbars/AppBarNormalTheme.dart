@@ -25,7 +25,7 @@ class _AppBarNormalThemeState extends State<AppBarNormalTheme> {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
 
     return Padding(
-      padding: new EdgeInsets.only(top: statusBarHeight),
+      padding: EdgeInsets.only(top: statusBarHeight),
       child: Container(
         width: double.maxFinite,
         height: 48,

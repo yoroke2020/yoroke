@@ -6,8 +6,8 @@ import 'package:yoroke/screens/Find.dart';
 import 'package:yoroke/screens/Home.dart';
 import 'package:yoroke/screens/Info.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/views/AppBarNormalTheme.dart';
-import 'package:yoroke/views/BottomNavigation.dart';
+import 'package:yoroke/views/appbars/AppBarNormalTheme.dart';
+import 'package:yoroke/views/bottombars/BottomNavigation.dart';
 
 class RootPage extends StatelessWidget {
   RootPage({this.currentIndex, this.onPushNavigator});

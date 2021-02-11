@@ -43,7 +43,9 @@ class BoardReviewTabViewList extends YrkListView {
   Widget createWidget(int currentIndex) {
     return InkWell(
         onTap: () => onPushNavigator(new YrkData(SubItem.boardQna,
-            "This is # " + currentIndex.toString() + " in 요양병원 후기/질문")),
+            "This is # " + currentIndex.toString() + " in 요양병원 후기/질문",
+            appBarType: AppBarType.arrowBack,
+            bottomNavigationType: BottomNavigationType.comments)),
         child: Container(
             height: 65,
             padding: EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 9),
@@ -68,7 +70,10 @@ class BoardReviewTabViewList extends YrkListView {
                               textAlign: TextAlign.left)),
                       Container(
                           padding: EdgeInsets.only(right: 8),
-                          child: Text(data.data,
+                          child: Text(
+                              "조문기의 리뷰 카드 번호 " +
+                                  data.cardIndex.toString() +
+                                  "번",
                               style: const TextStyle(
                                   color: const Color(0xe6000000),
                                   fontWeight: FontWeight.w400,
