@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/screens/Board.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/TestPage.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/views/AppBarEmpty.dart';
-import 'package:yoroke/views/AppBarNormalTheme.dart';
-import 'package:yoroke/views/AppBarYellowTheme.dart';
-import 'package:yoroke/views/BottomNavigation.dart';
+import 'package:yoroke/views/appbars/AppBarEmpty.dart';
+import 'package:yoroke/views/appbars/AppBarLeftArrow.dart';
+import 'package:yoroke/views/appbars/AppBarNormalTheme.dart';
+import 'package:yoroke/views/appbars/AppBarYellowTheme.dart';
+import 'package:yoroke/views/bottombars/BottomComment.dart';
+import 'package:yoroke/views/bottombars/BottomNavigation.dart';
 
 import 'PageItem.dart';
 
@@ -20,10 +21,6 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppBarYellowTheme appBarYellowTheme = AppBarYellowTheme.getInstance();
-    BottomNavigation bottomNavigation = BottomNavigation.getInstance();
-    bottomNavigation.setCurrentRootPageTab(RootPageItem.values[rootIndex]);
-
     final List<List<Widget>> detailPage = [
       [],
       [
@@ -41,21 +38,34 @@ class DetailPage extends StatelessWidget {
           return AppBarNormalTheme.getInstance();
         case AppBarType.yellow:
           return AppBarYellowTheme.getInstance();
+        case AppBarType.arrowBack:
+          return AppBarLeftArrow.getInstance();
         case AppBarType.disable:
           return AppBarEmpty.getInstance();
       }
     }
 
     Widget _body() {
-
+      return detailPage[rootIndex][data.currentSubItemIndex.index];
     }
 
-    Widget _bottomNavigationBar() {
-
+    _bottomNavigationBar() {
+      switch (data.bottomNavigationType) {
+        case BottomNavigationType.normal:
+          BottomNavigation bottomNavigation = BottomNavigation.getInstance();
+          bottomNavigation
+              .setCurrentRootPageTab(RootPageItem.values[rootIndex]);
+          return bottomNavigation;
+        case BottomNavigationType.comments:
+          return BottomCommentBar.getInstance();
+        case BottomNavigationType.disable:
+          return Container();
+      }
     }
+
     return Scaffold(
         appBar: _appBar(),
-        body: detailPage[rootIndex][data.currentSubItemIndex.index],
-        bottomNavigationBar: bottomNavigation);
+        body: _body(),
+        bottomNavigationBar: _bottomNavigationBar());
   }
 }

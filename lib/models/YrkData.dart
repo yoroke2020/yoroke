@@ -2,11 +2,14 @@ import 'package:yoroke/navigator/PageItem.dart';
 
 class YrkData {
   YrkData(this.currentSubItemIndex, this.data,
-      {this.appBarType = AppBarType.normal,
+      {this.cardIndex = 0,
+      this.appBarType = AppBarType.arrowBack,
       this.bottomNavigationType = BottomNavigationType.normal});
 
   final SubItem currentSubItemIndex;
   final AppBarType appBarType;
   final BottomNavigationType bottomNavigationType;
-  final String data;
+
+  int cardIndex;
+  String data;
 }

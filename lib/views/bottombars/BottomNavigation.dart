@@ -46,8 +46,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   Image _getIcon(RootPageItem rootPageItem) {
     return _currentRootPageTab == rootPageItem
-        ? Image.asset(_iconMap[rootPagetabIconInfo[rootPageItem]]['selectedImage'])
-        : Image.asset(_iconMap[rootPagetabIconInfo[rootPageItem]]['image']);
+        ? Image.asset(_iconMap[rootPageTabIconInfo[rootPageItem]]['selectedImage'])
+        : Image.asset(_iconMap[rootPageTabIconInfo[rootPageItem]]['image']);
   }
 
   // TODO _memorizer 캐시 적용

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'navigator/PageItem.dart';
 import 'navigator/TabNavigator.dart';
-import 'views/BottomNavigation.dart';
+import 'views/bottombars/BottomNavigation.dart';
 
 void main() {
   runApp(MyApp());
