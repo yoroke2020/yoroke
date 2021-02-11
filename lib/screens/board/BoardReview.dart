@@ -4,7 +4,7 @@ import 'package:yoroke/views/Board/BoardReviewTabViewList.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/components/YrkCardView.dart';
 import 'package:yoroke/views/components/YrkTabBarView.dart';
-import 'package:yoroke/views/appbars/AppBarLargeTheme.dart';
+import 'package:yoroke/views/appbars/AppBarLargeImage.dart';
 
 class BoardReview extends StatefulWidget {
   BoardReview(this.data, this.onPushNavigator);
@@ -56,7 +56,7 @@ class _BoardReviewState extends State<BoardReview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarLargeTheme(
+      appBar: AppBarLargeImage(
         onButtonClicked: _onButtonClicked,
         widgetVisible: widgetVisible,
         titleText: titleList[widget.data.cardIndex],

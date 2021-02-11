@@ -2,21 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/views/widgets/YrkTextField.dart';
 
-class BottomCommentBar extends StatefulWidget {
-  static BottomCommentBar _instance;
+class BottomBarComment extends StatefulWidget {
+  static BottomBarComment _instance;
 
-  BottomCommentBar._internal();
+  BottomBarComment._internal();
 
-  static BottomCommentBar getInstance() {
-    if (_instance == null) _instance = BottomCommentBar._internal();
+  static BottomBarComment getInstance() {
+    if (_instance == null) _instance = BottomBarComment._internal();
     return _instance;
   }
 
   @override
-  _BottomCommentBarState createState() => _BottomCommentBarState();
+  _BottomBarCommentState createState() => _BottomBarCommentState();
 }
 
-class _BottomCommentBarState extends State<BottomCommentBar> {
+class _BottomBarCommentState extends State<BottomBarComment> {
   bool isLocked = false;
 
   @override

@@ -6,16 +6,16 @@ import 'package:flutter/services.dart';
 
 import 'package:yoroke/navigator/PageItem.dart';
 
-class BottomNavigation extends StatefulWidget {
+class BottomBarNavigation extends StatefulWidget {
   RootPageItem _currentRootPageTab;
   ValueChanged<RootPageItem> _onSelectRootPageTab;
 
-  static BottomNavigation _instance;
+  static BottomBarNavigation _instance;
 
-  BottomNavigation._internal();
+  BottomBarNavigation._internal();
 
-  static BottomNavigation getInstance() {
-    if (_instance == null) _instance = BottomNavigation._internal();
+  static BottomBarNavigation getInstance() {
+    if (_instance == null) _instance = BottomBarNavigation._internal();
     return _instance;
   }
 
@@ -28,10 +28,10 @@ class BottomNavigation extends StatefulWidget {
   }
 
   @override
-  _BottomNavigationState createState() => _BottomNavigationState();
+  _BottomBarNavigationState createState() => _BottomBarNavigationState();
 }
 
-class _BottomNavigationState extends State<BottomNavigation> {
+class _BottomBarNavigationState extends State<BottomBarNavigation> {
   RootPageItem _currentRootPageTab;
   Map _iconMap;
 

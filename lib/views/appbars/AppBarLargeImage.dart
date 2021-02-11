@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/views/appbars/AppBarYellowTheme.dart';
+import 'package:yoroke/views/appbars/AppBarYellow.dart';
 import 'package:yoroke/views/widgets/YrkChipButtonLong.dart';
 
-class AppBarLargeTheme extends StatefulWidget implements PreferredSizeWidget {
-  AppBarLargeTheme(
+class AppBarLargeImage extends StatefulWidget implements PreferredSizeWidget {
+  AppBarLargeImage(
       {@required this.titleText,
       @required this.subTitleText,
       this.buttonColor = const Color(0x00000000),
@@ -25,10 +25,10 @@ class AppBarLargeTheme extends StatefulWidget implements PreferredSizeWidget {
   final Size preferredSize = Size.fromHeight(168);
 
   @override
-  _AppBarLargeThemeState createState() => _AppBarLargeThemeState();
+  _AppBarLargeImageState createState() => _AppBarLargeImageState();
 }
 
-class _AppBarLargeThemeState extends State<AppBarLargeTheme> {
+class _AppBarLargeImageState extends State<AppBarLargeImage> {
   @override
   Widget build(BuildContext context) {
     return  PreferredSize(
@@ -56,7 +56,7 @@ class _AppBarLargeThemeState extends State<AppBarLargeTheme> {
               )),
               Container(
                   child: Column(children: [
-                AppBarYellowTheme.getInstance(),
+                AppBarYellow.getInstance(),
                 Expanded(child: Container()),
                 Container(
                     height: 24,

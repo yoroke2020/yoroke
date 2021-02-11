@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AppBarNormalTheme extends StatefulWidget implements PreferredSizeWidget {
-  static AppBarNormalTheme _instance;
+class AppBarNormal extends StatefulWidget implements PreferredSizeWidget {
+  static AppBarNormal _instance;
 
-  AppBarNormalTheme._internal(this.preferredSize);
+  AppBarNormal._internal(this.preferredSize);
 
-  static AppBarNormalTheme getInstance() {
+  static AppBarNormal getInstance() {
     if (_instance == null)
-      _instance = AppBarNormalTheme._internal(Size.fromHeight(kToolbarHeight));
+      _instance = AppBarNormal._internal(Size.fromHeight(kToolbarHeight));
     return _instance;
   }
 
@@ -16,10 +16,10 @@ class AppBarNormalTheme extends StatefulWidget implements PreferredSizeWidget {
   final Size preferredSize;
 
   @override
-  _AppBarNormalThemeState createState() => _AppBarNormalThemeState();
+  _AppBarNormalState createState() => _AppBarNormalState();
 }
 
-class _AppBarNormalThemeState extends State<AppBarNormalTheme> {
+class _AppBarNormalState extends State<AppBarNormal> {
   @override
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;

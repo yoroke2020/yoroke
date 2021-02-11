@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AppBarLeftArrow extends StatelessWidget implements PreferredSizeWidget {
-  static AppBarLeftArrow _instance;
+class AppBarArrowBack extends StatelessWidget implements PreferredSizeWidget {
+  static AppBarArrowBack _instance;
 
-  AppBarLeftArrow._internal(this.preferredSize);
+  AppBarArrowBack._internal(this.preferredSize);
 
-  static AppBarLeftArrow getInstance() {
+  static AppBarArrowBack getInstance() {
     if (_instance == null)
-      _instance = AppBarLeftArrow._internal(Size.fromHeight(kToolbarHeight));
+      _instance = AppBarArrowBack._internal(Size.fromHeight(kToolbarHeight));
     return _instance;
   }
 
