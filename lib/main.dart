@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'navigator/PageItem.dart';
 import 'navigator/TabNavigator.dart';
-import 'views/bottombars/BottomNavigation.dart';
+import 'views/bottombars/BottomBarNavigation.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,7 +32,7 @@ class MyMain extends StatefulWidget {
 }
 
 class _MyMainState extends State<MyMain> {
-  BottomNavigation bottomNavigation;
+  BottomBarNavigation bottomBarNavigation;
   var _currentPageTab = RootPageItem.home;
   bool isFirst = true;
   final _navigatorKeys = {
@@ -54,9 +54,9 @@ class _MyMainState extends State<MyMain> {
 
   @override
   Widget build(BuildContext context) {
-    bottomNavigation = BottomNavigation.getInstance();
-    bottomNavigation.setCurrentRootPageTab(_currentPageTab);
-    bottomNavigation.setOnSelectRootPageTab(_onSelectPageTab);
+    bottomBarNavigation = BottomBarNavigation.getInstance();
+    bottomBarNavigation.setCurrentRootPageTab(_currentPageTab);
+    bottomBarNavigation.setOnSelectRootPageTab(_onSelectPageTab);
 
     return WillPopScope(
       onWillPop: () async {

@@ -1,0 +1,83 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class AppBarYellow extends StatefulWidget implements PreferredSizeWidget {
+  static AppBarYellow _instance;
+
+  AppBarYellow._internal(this.preferredSize);
+
+  static AppBarYellow getInstance() {
+    if (_instance == null)
+      _instance = AppBarYellow._internal(Size.fromHeight(kToolbarHeight));
+    return _instance;
+  }
+
+  @override
+  final Size preferredSize;
+
+  @override
+  _AppBarYellowThemeState createState() => _AppBarYellowThemeState();
+}
+
+class _AppBarYellowThemeState extends State<AppBarYellow> {
+  @override
+  Widget build(BuildContext context) {
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+
+    return Padding(
+        padding: new EdgeInsets.only(top: statusBarHeight),
+        child: Container(
+            height: 48,
+            child: Row(children: [
+              IconButton(
+                icon: Image.asset(
+                  "assets/icons/icon_back_color_24_px.png",
+                  height: 24,
+                  width: 24,
+                ),
+                padding: EdgeInsets.only(left: 16),
+                constraints: BoxConstraints(),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              Expanded(child: Container()),
+              IconButton(
+                icon: Image.asset(
+                  "assets/icons/icon_search_color_24_px.png",
+                  height: 24,
+                  width: 24,
+                ),
+                padding: EdgeInsets.only(right: 8),
+                constraints: BoxConstraints(),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              IconButton(
+                icon: Image.asset(
+                  "assets/icons/icon_create_color_24_px.png",
+                  height: 24,
+                  width: 24,
+                ),
+                padding: EdgeInsets.only(right: 8),
+                constraints: BoxConstraints(),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              IconButton(
+                icon: Image.asset(
+                  "assets/icons/icon_notification_color_24_px.png",
+                  height: 24,
+                  width: 24,
+                ),
+                padding: EdgeInsets.only(right: 16),
+                constraints: BoxConstraints(),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ])));
+  }
+}

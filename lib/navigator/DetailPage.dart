@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/screens/Post.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/TestPage.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/appbars/AppBarEmpty.dart';
-import 'package:yoroke/views/appbars/AppBarLeftArrow.dart';
-import 'package:yoroke/views/appbars/AppBarNormalTheme.dart';
-import 'package:yoroke/views/appbars/AppBarYellowTheme.dart';
-import 'package:yoroke/views/bottombars/BottomComment.dart';
-import 'package:yoroke/views/bottombars/BottomNavigation.dart';
+import 'package:yoroke/views/appbars/AppBarArrowBack.dart';
+import 'package:yoroke/views/appbars/AppBarNormal.dart';
+import 'package:yoroke/views/appbars/AppBarYellow.dart';
+import 'package:yoroke/views/bottombars/BottomBarComment.dart';
+import 'package:yoroke/views/bottombars/BottomBarNavigation.dart';
 
 import 'PageItem.dart';
 
@@ -25,8 +26,8 @@ class DetailPage extends StatelessWidget {
       [],
       [
         BoardReview(data, onPushNavigator),
-        TestPage(data),
-        TestPage(data),
+        Post(),
+        Post(),
       ],
       [],
       []
@@ -35,11 +36,11 @@ class DetailPage extends StatelessWidget {
     PreferredSizeWidget _appBar() {
       switch (data.appBarType) {
         case AppBarType.normal:
-          return AppBarNormalTheme.getInstance();
+          return AppBarNormal.getInstance();
         case AppBarType.yellow:
-          return AppBarYellowTheme.getInstance();
+          return AppBarYellow.getInstance();
         case AppBarType.arrowBack:
-          return AppBarLeftArrow.getInstance();
+          return AppBarArrowBack.getInstance();
         case AppBarType.disable:
           return AppBarEmpty.getInstance();
       }
@@ -52,12 +53,12 @@ class DetailPage extends StatelessWidget {
     _bottomNavigationBar() {
       switch (data.bottomNavigationType) {
         case BottomNavigationType.normal:
-          BottomNavigation bottomNavigation = BottomNavigation.getInstance();
-          bottomNavigation
+          BottomBarNavigation bottomBarNavigation = BottomBarNavigation.getInstance();
+          bottomBarNavigation
               .setCurrentRootPageTab(RootPageItem.values[rootIndex]);
-          return bottomNavigation;
+          return bottomBarNavigation;
         case BottomNavigationType.comments:
-          return BottomCommentBar.getInstance();
+          return BottomBarComment.getInstance();
         case BottomNavigationType.disable:
           return Container();
       }

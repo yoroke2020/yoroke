@@ -6,8 +6,8 @@ import 'package:yoroke/screens/Find.dart';
 import 'package:yoroke/screens/Home.dart';
 import 'package:yoroke/screens/Info.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/views/appbars/AppBarNormalTheme.dart';
-import 'package:yoroke/views/bottombars/BottomNavigation.dart';
+import 'package:yoroke/views/appbars/AppBarNormal.dart';
+import 'package:yoroke/views/bottombars/BottomBarNavigation.dart';
 
 class RootPage extends StatelessWidget {
   RootPage({this.currentIndex, this.onPushNavigator});
@@ -17,9 +17,9 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppBarNormalTheme appBarNormalTheme = AppBarNormalTheme.getInstance();
-    BottomNavigation bottomNavigation = BottomNavigation.getInstance();
-    bottomNavigation.setCurrentRootPageTab(RootPageItem.values[currentIndex]);
+    AppBarNormal appBarNormal = AppBarNormal.getInstance();
+    BottomBarNavigation bottomBarNavigation = BottomBarNavigation.getInstance();
+    bottomBarNavigation.setCurrentRootPageTab(RootPageItem.values[currentIndex]);
 
     final List<Widget> children = [
       Home(),
@@ -30,9 +30,9 @@ class RootPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
-        appBar: appBarNormalTheme,
+        appBar: appBarNormal,
         body: children[currentIndex],
-        bottomNavigationBar: bottomNavigation
+        bottomNavigationBar: bottomBarNavigation
     ) ;
   }
 }
