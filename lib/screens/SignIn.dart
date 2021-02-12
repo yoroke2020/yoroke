@@ -67,13 +67,10 @@ class _SignInState extends State<SignIn> {
               ),
             ),
             Container(
-              child: new AspectRatio(
-                aspectRatio: 360 / 48,
-                child: Container(
-                  child: YrkButton(
-                    label: "네이버",
-                  ),
-                ),
+              child: YrkButton(
+                type: ButtonType.outlinechip,
+                label: "네이버",
+                onPress: () {},
               ),
             ),
           ],
