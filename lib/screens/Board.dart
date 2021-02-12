@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/navigator/DetailPage.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/views/Board/BoardQnaList.dart';
 import 'package:yoroke/views/Board/BoardJobFindingList.dart';
 import 'package:yoroke/models/YrkData.dart';
@@ -76,16 +78,16 @@ class _BoardState extends State<Board> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-      padding: const EdgeInsets.only(top: 8, bottom: 8),
       children: <Widget>[
         YrkTabHeaderView(titleName: "후기"),
         YrkCardView(
-          viewRatio: 360 / 120,
-          cardRatio: 136 / 120,
+          viewHeight: 136,
+          cardWidth: 136,
+          cardHeight: 120,
           cardImageList: reviewCardImageList,
           cardNameList: reviewCardNameList,
           onPushNavigator: widget.onPushNavigator,
-          onTapPageIndex: 1,
+          onTapPageIndex: SubItem.boardReview.index,
         ),
         YrkTabHeaderView(titleName: "고민/질문"),
         YrkPageView(

@@ -35,50 +35,6 @@ class _HomeState extends State<Home> {
             Container(
                 margin: const EdgeInsets.only(bottom: 8),
                 width: double.maxFinite,
-                height: 48,
-                decoration: BoxDecoration(
-                    color: const Color(0xffffffff)
-                ),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 7,
-                        child:
-                        Container( // search icon
-                          padding: const EdgeInsets.only(left: 20),
-                          alignment: Alignment.centerLeft,
-                          width: 32,
-                          height: 32,
-                          child: Image.asset(
-                              "assets/icons/account_circle_default_24_px.png"),
-                        ),
-                      ),
-                      Expanded(
-                        child:
-                        Container( // search icon
-                          width: 32,
-                          height: 32,
-                          child: Image.asset("assets/icons/search_24_px.png"),
-                        ),
-                      ),
-                      Expanded(
-                        child:
-                        Container( // search icon
-                          padding: const EdgeInsets.only(right: 20),
-                          width: 32,
-                          height: 32,
-                          child: Image.asset("assets/icons/notifications_none_24_px.png"),
-                        ),
-                      ),
-                    ],
-                  )
-                )
-            ),
-            Container(
-                margin: const EdgeInsets.only(bottom: 8),
-                width: double.maxFinite,
                 decoration: BoxDecoration(
                     color: const Color(0xffffffff)
                 ),

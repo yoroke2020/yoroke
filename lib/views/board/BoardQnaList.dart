@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/navigator/TabItem.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 
@@ -42,7 +42,7 @@ class BoardQnaList extends YrkListView {
     return AspectRatio(
         aspectRatio: widgetRatio,
         child: InkWell(
-            onTap: () => onPushNavigator(new YrkData(DetailItem.qna,
+            onTap: () => onPushNavigator(new YrkData(SubItem.boardQna,
                 "This is # " + currentIndex.toString() + " in 고민/질문")),
             child: Container(
                 padding: const EdgeInsets.all(8),
