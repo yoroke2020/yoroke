@@ -8,6 +8,7 @@ class YrkButton extends StatelessWidget {
   final double height;
   final String label;
   final bool disable;
+  final bool clickable;
   final double fontSize;
   final Function onPress;
 
@@ -25,6 +26,7 @@ class YrkButton extends StatelessWidget {
     this.height,
     this.label,
     this.disable = false,
+    this.clickable = true,
     this.fontSize = 14,
     this.onPress,
   }) : super(key: key);
@@ -64,6 +66,7 @@ class YrkButton extends StatelessWidget {
     Text text,
     Function onPress,
     bool disable,
+    bool clickable,
     double width,
     double height,
   ) {
@@ -72,38 +75,41 @@ class YrkButton extends StatelessWidget {
         return FlatButton(
           minWidth: width = 100,
           height: height = 48,
-          onPressed: disable ? null : onPress,
           child: text,
           shape: radius,
           color: btnColor,
-          disabledColor: disableColor,
+          onPressed: this.disable || !this.clickable ? null : onPress,
+          disabledColor: this.clickable ? disableColor : btnColor,
         );
 
       case ButtonType.outline:
         return OutlineButton(
-          onPressed: disable ? null : onPress,
           child: text,
           shape: radius,
           borderSide: BorderSide(
             width: 2.0,
             color: btnColor,
           ),
-          disabledBorderColor: disableColor,
+          onPressed: this.disable || !this.clickable ? null : onPress,
+          disabledBorderColor: this.clickable ? disableColor : btnColor,
         );
 
       case ButtonType.chip:
         return FlatButton(
-          minWidth: width = this.fontSize * 0,
+          padding: EdgeInsets.all(0),
+          minWidth: width = 60,
           height: height = 24,
-          onPressed: disable ? null : onPress,
           child: text,
           shape: radius,
           color: btnColor,
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          onPressed: this.disable || !this.clickable ? null : onPress,
+          disabledColor: this.clickable ? disableColor : btnColor,
         );
 
       case ButtonType.outlinechip:
         return OutlineButton(
-          onPressed: disable ? null : onPress,
+          padding: EdgeInsets.all(0),
           child: text,
           shape: radius,
           borderSide: BorderSide(
@@ -111,37 +117,43 @@ class YrkButton extends StatelessWidget {
             color: btnColor,
           ),
           color: btnColor,
+          onPressed: this.disable || !this.clickable ? null : onPress,
+          disabledBorderColor: this.clickable ? disableColor : btnColor,
         );
 
       case ButtonType.rect:
         return FlatButton(
           minWidth: width = 100,
           height: height = 48,
-          onPressed: disable ? null : onPress,
           child: text,
           color: btnColor,
+          onPressed: this.disable || !this.clickable ? null : onPress,
+          disabledColor: this.clickable ? disableColor : btnColor,
         );
 
       case ButtonType.text:
         return FlatButton(
           minWidth: width = 100,
           height: height = 48,
-          onPressed: disable ? null : onPress,
           child: text,
+          onPressed: this.disable || !this.clickable ? null : onPress,
+          disabledColor: this.clickable ? disableColor : btnColor,
         );
       // Todo: Image icon btn
       case ButtonType.image:
         return FlatButton(
-          onPressed: disable ? null : onPress,
           child: text,
+          onPressed: this.disable || !this.clickable ? null : onPress,
+          disabledColor: this.clickable ? disableColor : btnColor,
         );
       default:
         return FlatButton(
           minWidth: width = 100,
           height: height = 48,
-          onPressed: disable ? null : onPress,
           child: text,
           shape: radius,
+          onPressed: this.disable || !this.clickable ? null : onPress,
+          disabledColor: this.clickable ? disableColor : btnColor,
         );
     }
   }
@@ -149,15 +161,13 @@ class YrkButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: this.width,
-        height: this.height,
-        child: getButton(
-            this.type,
-            getText(this.type, this.label, this.fontSize),
-            this.onPress,
-            this.disable,
-            this.width,
-            this.height));
+      width: this.width,
+      height: this.height,
+      padding: EdgeInsets.all(0),
+      child: getButton(this.type, getText(this.type, this.label, this.fontSize),
+          this.onPress, this.disable, this.clickable, this.width, this.height),
+      alignment: AlignmentDirectional.center,
+    );
   }
 }
 
