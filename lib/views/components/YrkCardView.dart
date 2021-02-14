@@ -3,25 +3,84 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/models/YrkData.dart';
 
+enum TextType { title, title_desc }
+
+extension TextTypeExtension on TextType {
+  Container getTextContainer(cardNameList, cardDescList, index) {
+    switch (this) {
+      case TextType.title:
+        return Container(
+            padding: EdgeInsets.only(left: 12, bottom: 8),
+            alignment: Alignment.bottomLeft,
+            child: Text(
+              cardNameList.elementAt(index) + 'enum 테스트 입니다',
+              style: const TextStyle(
+                  color: const Color(0xffffffff),
+                  fontWeight: FontWeight.w500,
+                  fontFamily: "NotoSansCJKkr",
+                  fontStyle: FontStyle.normal,
+                  fontSize: 16.0),
+            ));
+      case TextType.title_desc:
+        return Container(
+            padding: EdgeInsets.only(left: 16, bottom: 16),
+            alignment: Alignment.bottomLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Text(
+                  cardNameList.elementAt(index),
+                  style: const TextStyle(
+                      color: const Color(0xe6000000),
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "NotoSansCJKkr",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 16.0),
+                ),
+                Text(
+                  (cardDescList == null ||
+                          cardDescList.elementAt(index) == null)
+                      ? ""
+                      : cardDescList.elementAt(index),
+                  style: const TextStyle(
+                      color: const Color(0xe6000000),
+                      fontWeight: FontWeight.w400,
+                      fontFamily: "NotoSansCJKKR",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 14.0),
+                ),
+              ],
+            ));
+      default:
+        return Container();
+    }
+  }
+}
+
 class YrkCardView extends StatelessWidget {
   YrkCardView(
       {@required this.onPushNavigator,
       @required this.cardImageList,
       @required this.cardNameList,
+      this.cardDescList,
       this.viewWidth = double.maxFinite,
       this.viewHeight = 120.0,
       this.cardWidth = 100.0,
       this.cardHeight = 100.0,
-      this.onTapPageIndex});
+      this.onTapPageIndex,
+      this.textType = TextType.title});
 
   final ValueChanged<YrkData> onPushNavigator;
   final List<String> cardImageList;
   final List<String> cardNameList;
+  final List<String> cardDescList;
   final double viewHeight;
   final double viewWidth;
   final double cardWidth;
   final double cardHeight;
   final int onTapPageIndex;
+  final TextType textType;
 
   @override
   Widget build(BuildContext context) {
@@ -76,19 +135,8 @@ class YrkCardView extends StatelessWidget {
                                                 const Color(0x00ffffff),
                                                 const Color(0x4d000000)
                                               ]))),
-                                  Container(
-                                      padding:
-                                          EdgeInsets.only(left: 12, bottom: 8),
-                                      alignment: Alignment.bottomLeft,
-                                      child: Text(
-                                        cardNameList.elementAt(index),
-                                        style: const TextStyle(
-                                            color: const Color(0xffffffff),
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "NotoSansCJKkr",
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 16.0),
-                                      )),
+                                  textType.getTextContainer(
+                                      cardNameList, cardDescList, index),
                                 ]))));
                   },
                 ))));
