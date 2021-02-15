@@ -5,6 +5,61 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/board/BoardCardList.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 
+enum TextType { title, title_desc }
+
+extension TextTypeExtension on TextType {
+  Container getTextContainer(cardNameList, cardDescList, index) {
+    switch (this) {
+      case TextType.title:
+        return Container(
+            padding: EdgeInsets.only(left: 12, bottom: 8),
+            alignment: Alignment.bottomLeft,
+            child: Text(
+              cardNameList.elementAt(index) + 'enum 테스트 입니다',
+              style: const TextStyle(
+                  color: const Color(0xffffffff),
+                  fontWeight: FontWeight.w500,
+                  fontFamily: "NotoSansCJKkr",
+                  fontStyle: FontStyle.normal,
+                  fontSize: 16.0),
+            ));
+      case TextType.title_desc:
+        return Container(
+            padding: EdgeInsets.only(left: 16, bottom: 16),
+            alignment: Alignment.bottomLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Text(
+                  cardNameList.elementAt(index),
+                  style: const TextStyle(
+                      color: const Color(0xe6000000),
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "NotoSansCJKkr",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 16.0),
+                ),
+                Text(
+                  (cardDescList == null ||
+                          cardDescList.elementAt(index) == null)
+                      ? ""
+                      : cardDescList.elementAt(index),
+                  style: const TextStyle(
+                      color: const Color(0xe6000000),
+                      fontWeight: FontWeight.w400,
+                      fontFamily: "NotoSansCJKKR",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 14.0),
+                ),
+              ],
+            ));
+      default:
+        return Container();
+    }
+  }
+}
+
 class YrkCardView extends StatelessWidget {
   YrkCardView({
     this.itemCount = 1,
@@ -25,6 +80,7 @@ class YrkCardView extends StatelessWidget {
   final double width;
   final double borderRadius;
   final int onTapPageIndex;
+  final TextType textType;
 
   YrkListItem item;
   int index;
