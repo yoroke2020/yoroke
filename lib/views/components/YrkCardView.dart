@@ -2,26 +2,36 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/views/board/BoardCardList.dart';
+import 'package:yoroke/views/components/YrkListView.dart';
 
 class YrkCardView extends StatelessWidget {
   YrkCardView(
       {@required this.onPushNavigator,
-      @required this.cardImageList,
-      @required this.cardNameList,
-      this.viewWidth = double.maxFinite,
-      this.viewHeight = 120.0,
-      this.cardWidth = 100.0,
-      this.cardHeight = 100.0,
-      this.onTapPageIndex});
+      @required this.item,
+      this.width = double.maxFinite,
+      this.height = 120.0,
+      this.onTapPageIndex,
+      this.index = 0,
+      this.clickable = true,
+      this.itemCount = 1});
 
   final ValueChanged<YrkData> onPushNavigator;
-  final List<String> cardImageList;
-  final List<String> cardNameList;
-  final double viewHeight;
-  final double viewWidth;
-  final double cardWidth;
-  final double cardHeight;
+  final double height;
+  final double width;
   final int onTapPageIndex;
+  final bool clickable;
+  final int itemCount;
+
+  YrkListItem item;
+  int index;
+
+  Widget _widget(int index) {
+    YrkListItem item = this.item.clone();
+    item.parentIndex = this.index;
+    item.index = index;
+    return item;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +39,14 @@ class YrkCardView extends StatelessWidget {
         decoration: BoxDecoration(color: const Color(0xffffffff)),
         child: new Container(
             width: double.maxFinite,
-            height: viewHeight,
+            height: height,
             child: Align(
                 alignment: Alignment.center,
                 child: ListView.builder(
                   padding: const EdgeInsets.all(8),
                   scrollDirection: Axis.horizontal,
                   physics: new AlwaysScrollableScrollPhysics(),
-                  itemCount: cardImageList.length,
+                  itemCount: itemCount,
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
                         shape: RoundedRectangleBorder(
@@ -49,47 +59,7 @@ class YrkCardView extends StatelessWidget {
                                 "조문기의 리뷰 카드 번호 " + index.toString() + "번",
                                 appBarType: AppBarType.disable,
                                 cardIndex: index)),
-                            child: new Container(
-                                width: cardWidth,
-                                height: cardHeight,
-                                child: Stack(children: <Widget>[
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(16)),
-                                      image: new DecorationImage(
-                                        image: new AssetImage(
-                                            cardImageList.elementAt(index)),
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(16)),
-                                          gradient: LinearGradient(
-                                              begin: Alignment(
-                                                  0.5, -0.0739222913980484),
-                                              end: Alignment(0.5, 1),
-                                              colors: [
-                                                const Color(0x00ffffff),
-                                                const Color(0x4d000000)
-                                              ]))),
-                                  Container(
-                                      padding:
-                                          EdgeInsets.only(left: 12, bottom: 8),
-                                      alignment: Alignment.bottomLeft,
-                                      child: Text(
-                                        cardNameList.elementAt(index),
-                                        style: const TextStyle(
-                                            color: const Color(0xffffffff),
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "NotoSansCJKkr",
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 16.0),
-                                      )),
-                                ]))));
+                            child: _widget(index)));
                   },
                 ))));
   }

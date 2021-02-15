@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/views/Board/BoardReviewTabViewList.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/views/board/BoardCardList.dart';
+import 'package:yoroke/views/board/BoardReviewTabViewList.dart';
 import 'package:yoroke/views/components/YrkCardView.dart';
+import 'package:yoroke/views/components/YrkListView.dart';
 import 'package:yoroke/views/components/YrkTabBarView.dart';
 import 'package:yoroke/views/appbars/AppBarLargeImage.dart';
 
 class BoardReview extends StatefulWidget {
-  BoardReview(this.data, this.onPushNavigator);
+  BoardReview({Key key, @required this.data, @required this.onPushNavigator})
+      : super(key: key);
 
   YrkData data;
   final ValueChanged<YrkData> onPushNavigator;
@@ -52,48 +55,43 @@ class _BoardReviewState extends State<BoardReview> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarLargeImage(
-        onButtonClicked: _onButtonClicked,
-        widgetVisible: widgetVisible,
-        titleText: titleList[widget.data.cardIndex],
-        subTitleText: subTitleList[widget.data.cardIndex],
-      ),
-      body: ListView(
-        children: <Widget>[
+        appBar: AppBarLargeImage(
+          onButtonClicked: _onButtonClicked,
+          widgetVisible: widgetVisible,
+          titleText: titleList[widget.data.cardIndex],
+          subTitleText: subTitleList[widget.data.cardIndex],
+        ),
+        body: ListView(children: <Widget>[
           AnimatedContainer(
               duration: Duration(milliseconds: 300),
               height: widgetVisible ? 120.0 : 0.0,
               child: YrkCardView(
-                viewHeight: 128,
-                cardHeight: 112,
-                cardWidth: 112,
-                cardNameList: reviewCardNameList,
-                cardImageList: reviewCardImageList,
+                height: 128,
                 onPushNavigator: _onPushNavigator,
                 onTapPageIndex: SubItem.boardReview.index,
+                item: BoardCardList(112.0, 112.0),
+                itemCount: 4,
               )),
           YrkTabBarView(
-            viewRatio: 360 / 690,
-            length: 2,
-            tabTextList: ["최신글", "인기글"],
-            tabSize: 72,
-            tabViewList: BoardReviewTabViewList(
-              // items: ,
-              widgetRatio: 360 / 65,
-              listLength: 2,
-              itemLength: 10,
-              ratings: 4,
-              onPushNavigator: widget.onPushNavigator,
-              items: [],
-              data: widget.data,
-            ).getWidgetList(),
-          ),
-        ],
-      ),
-    );
+              viewRatio: 360 / 690,
+              length: 2,
+              tabTextList: ["최신글", "인기글"],
+              tabSize: 72,
+              tabViewList: [
+                YrkListView(
+                    index: 0,
+                    itemCount: 8,
+                    onPushNavigator: widget.onPushNavigator,
+                    item: BoardReviewTabViewList(double.maxFinite, 65.0, data: widget.data)),
+                YrkListView(
+                    index: 1,
+                    itemCount: 8,
+                    onPushNavigator: widget.onPushNavigator,
+                    item: BoardReviewTabViewList(double.maxFinite, 65.0, data: widget.data)),
+              ]),
+        ]));
   }
 }
