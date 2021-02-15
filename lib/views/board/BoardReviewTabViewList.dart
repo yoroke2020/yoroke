@@ -1,54 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
+import 'package:yoroke/views/widgets/YrkButton.dart';
+import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
-class BoardReviewTabViewList extends YrkListView {
-  @override
-  BoardReviewTabViewList(
-      {@required this.items,
-      @required this.widgetRatio,
-      @required this.listLength,
-      @required this.itemLength,
-      @required this.data,
-      @required this.onPushNavigator,
-      this.ratings = -1})
-      : super(
-            items: items,
-            widgetRatio: widgetRatio,
-            listLength: listLength,
-            itemLength: itemLength,
-            data: data,
-            onPushNavigator: onPushNavigator);
+class BoardReviewTabViewList extends YrkListItem {
+  BoardReviewTabViewList(width, height,
+      {Key key, @required this.data})
+      : super(width, height);
 
-  @override
-  final List<String> items;
-  @override
-  final double widgetRatio;
-  @override
-  final int listLength;
-  @override
-  final int itemLength;
-  @override
   final YrkData data;
-  @override
-  final ValueChanged<YrkData> onPushNavigator;
-  final int ratings;
 
   @override
-  List<Widget> getWidgetList();
-
-  @override
-  Widget createWidget(int currentIndex) {
-    return InkWell(
-        onTap: () => onPushNavigator(new YrkData(SubItem.boardQna,
-            "This is # " + currentIndex.toString() + " in 요양병원 후기/질문",
-            appBarType: AppBarType.arrowBack,
-            bottomNavigationType: BottomNavigationType.comments)),
-        child: Container(
+  Widget build(BuildContext context) {
+    return Container(
+          width: double.maxFinite,
             height: 65,
-            padding: EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 9),
+            padding:
+                EdgeInsets.only(left: 16.0, right: 16.0, top: 7.0, bottom: 6.0),
             decoration: BoxDecoration(
                 color: const Color(0xffffffff),
                 border: Border(
@@ -59,128 +31,101 @@ class BoardReviewTabViewList extends YrkListView {
                     flex: 1,
                     child: Row(children: [
                       Container(
-                          padding: EdgeInsets.only(right: 8),
+                          padding: const EdgeInsets.only(top: 1.0, right: 8.0),
                           child: Text("후기",
-                              style: const TextStyle(
-                                  color: const Color(0x99000000),
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: "NotoSansCJKkr",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 14.0),
+                              style: const YrkTextStyle(fontSize: 16.0),
                               textAlign: TextAlign.left)),
                       Container(
-                          padding: EdgeInsets.only(right: 8),
+                          padding: const EdgeInsets.only(right: 8.0),
                           child: Text(
                               "조문기의 리뷰 카드 번호 " +
                                   data.cardIndex.toString() +
                                   "번",
-                              style: const TextStyle(
-                                  color: const Color(0xe6000000),
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: "NotoSansCJKkr",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 16.0),
+                              style: const YrkTextStyle(fontSize: 16.0),
                               textAlign: TextAlign.left)),
-                      Container(
-                          width: 27,
-                          height: 16,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(32)),
-                              border: Border.all(
-                                  color: const Color(0xfff5df4d), width: 1),
-                              color: const Color(0xfff5df4d)),
-                          child: Center(
-                              child: Text("BEST",
-                                  style: const TextStyle(
-                                      color: const Color(0xe6000000),
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: "NotoSansCJKkr",
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 8.0),
-                                  textAlign: TextAlign.center))),
+                      Visibility(
+                          visible: true,
+                          child: Container(
+                              padding: const EdgeInsets.only(top: 4.0),
+                              child: YrkButton(
+                                type: ButtonType.chip,
+                                width: 27,
+                                height: 16,
+                                label: "BEST",
+                                fontSize: 8.0,
+                                clickable: false,
+                              ))),
                     ])),
                 Expanded(
                   flex: 1,
                   child: Row(children: <Widget>[
                     Container(
-                      padding: EdgeInsets.only(right: 16),
+                      margin: const EdgeInsets.only(right: 16.0),
                       child: Text("사용자ID",
-                          style: const TextStyle(
-                              color: const Color(0x4d000000),
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "NotoSansCJKkr",
-                              fontStyle: FontStyle.normal,
-                              fontSize: 12.0),
+                          style: const YrkTextStyle(
+                              fontSize: 12.0, color: const Color(0x4d000000)),
                           textAlign: TextAlign.left),
                     ),
                     Container(
-                      padding: EdgeInsets.only(right: 19),
+                      margin: const EdgeInsets.only(right: 19.0),
                       child: Text("2020.10.21",
-                          style: const TextStyle(
-                              color: const Color(0x4d000000),
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "NotoSansCJKkr",
-                              fontStyle: FontStyle.normal,
-                              fontSize: 12.0),
+                          style: const YrkTextStyle(
+                              fontSize: 12.0, color: const Color(0x4d000000)),
                           textAlign: TextAlign.left),
                     ),
                     Container(
-                        width: 19,
+                        width: 14,
                         height: 12,
-                        padding: EdgeInsets.only(right: 5),
+                        margin: const EdgeInsets.only(right: 5.0, top: 2.0),
                         child: Image.asset("assets/icons/thumb_up_16_px.png")),
                     Container(
-                      padding: EdgeInsets.only(right: 19),
+                      margin: const EdgeInsets.only(right: 19.0),
                       child: Text("15k",
-                          style: const TextStyle(
-                              color: const Color(0x4d000000),
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "NotoSansCJKkr",
-                              fontStyle: FontStyle.normal,
-                              fontSize: 12.0),
+                          style: const YrkTextStyle(
+                              fontSize: 12.0, color: const Color(0x4d000000)),
                           textAlign: TextAlign.left),
                     ),
                     Container(
-                        width: 18,
+                        width: 12,
                         height: 12,
-                        padding: EdgeInsets.only(right: 8),
+                        margin: const EdgeInsets.only(right: 8.0, top: 3.0),
                         child:
                             Image.asset("assets/icons/mode_comment_16_px.png")),
                     Container(
                         child: Text("152",
-                            style: const TextStyle(
-                                color: const Color(0x4d000000),
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "NotoSansCJKkr",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 12.0),
+                            style: const YrkTextStyle(
+                                fontSize: 12.0, color: const Color(0x4d000000)),
                             textAlign: TextAlign.left)),
                     Expanded(child: Container()),
-                    Container(child: _buildRantingStarList())
+                    Container(child: _buildRantingStarList()),
                   ]),
                 ),
               ],
-            )));
+            ));
   }
 
   Widget _buildRantingStarList() {
     List<Widget> list = List<Widget>();
-    if (ratings == -1)
-      return Wrap(children: list);
+    if (testNumber[this.index] == -1)
+      return Container();
     else {
-      for (int i = 0; i < ratings; i++) {
+      for (int i = 0; i < testNumber[this.index]; i++) {
         list.add(Icon(
           Icons.star,
           color: const Color(0xfff5df4d),
           size: 12,
         ));
       }
-      for (int i = 0; i < 5 - ratings; i++) {
+      for (int i = 0; i < 5 - testNumber[this.index]; i++) {
         list.add(
             Icon(Icons.star_border, color: const Color(0xff939597), size: 12));
       }
       return Wrap(children: list);
     }
+  }
+
+  @override
+  clone() {
+    return BoardReviewTabViewList(width, height, data: data,);
   }
 }
