@@ -78,13 +78,13 @@ class _BoardReviewState extends State<BoardReview> {
               tabViewList: [
                 YrkListView(
                     index: 0,
-                    itemCount: 8,
+                    itemCount: 10,
                     onPushNavigator: widget.onPushNavigator,
                     nextSubPageItem: SubPageItem.boardQna,
                     item: BoardReviewTabViewList(double.maxFinite, 65.0, data: widget.data)),
                 YrkListView(
                     index: 1,
-                    itemCount: 8,
+                    itemCount: 10,
                     onPushNavigator: widget.onPushNavigator,
                     nextSubPageItem: SubPageItem.boardQna,
                     item: BoardReviewTabViewList(double.maxFinite, 65.0, data: widget.data)),
