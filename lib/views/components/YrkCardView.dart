@@ -80,7 +80,7 @@ class YrkCardView extends StatelessWidget {
   final double width;
   final double borderRadius;
   final int onTapPageIndex;
-  final TextType textType;
+  // final TextType textType;
 
   YrkListItem item;
   int index;
