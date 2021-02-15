@@ -39,7 +39,7 @@ class BoardReviewTabViewList extends YrkListItem {
                           padding: const EdgeInsets.only(right: 8.0),
                           child: Text(
                               "조문기의 리뷰 카드 번호 " +
-                                  data.cardIndex.toString() +
+                                  data.i1.toString() +
                                   "번",
                               style: const YrkTextStyle(fontSize: 16.0),
                               textAlign: TextAlign.left)),

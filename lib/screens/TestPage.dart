@@ -9,6 +9,6 @@ class TestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Text(data.data);
+    return Text(data.str0);
   }
 }
