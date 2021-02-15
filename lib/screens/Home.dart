@@ -62,17 +62,17 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(children: <Widget>[
-      YrkCardView(
-        viewHeight: 120,
-        cardWidth: 320,
-        cardHeight: 120,
-        cardImageList: reviewCardImageList,
-        cardNameList: reviewCardNameList,
-        cardDescList: reviewCardDescList,
-        onPushNavigator: widget.onPushNavigator,
-        onTapPageIndex: SubItem.boardReview.index,
-        textType: TextType.title_desc,
-      ),
+      // YrkCardView(
+      //   viewHeight: 120,
+      //   cardWidth: 320,
+      //   cardHeight: 120,
+      //   cardImageList: reviewCardImageList,
+      //   cardNameList: reviewCardNameList,
+      //   cardDescList: reviewCardDescList,
+      //   onPushNavigator: widget.onPushNavigator,
+      //   onTapPageIndex: SubItem.boardReview.index,
+      //   textType: TextType.title_desc,
+      // ),
       Container(
           decoration: BoxDecoration(color: const Color(0xffffffff)),
           child: new AspectRatio(
@@ -120,18 +120,18 @@ class _HomeState extends State<Home> {
                             textAlign: TextAlign.left)),
                     Expanded(flex: 16, child: Container())
                   ]))),
-      YrkPageView(
-        page: BoardQnaList(
-          items: qnaStringExamples,
-          widgetRatio: qnaPageRatio * qnaListItemCount,
-          listLength: qnaListPageCount,
-          itemLength: qnaListItemCount,
-          onPushNavigator: widget.onPushNavigator,
-        ).getWidgetList(),
-        controller: qnaPageController,
-        viewRatio: qnaPageRatio,
-        isIndicatorEnabled: true,
-      ),
+      // YrkPageView(
+      //   page: BoardQnaList(
+      //     items: qnaStringExamples,
+      //     widgetRatio: qnaPageRatio * qnaListItemCount,
+      //     listLength: qnaListPageCount,
+      //     itemLength: qnaListItemCount,
+      //     onPushNavigator: widget.onPushNavigator,
+      //   ).getWidgetList(),
+      //   controller: qnaPageController,
+      //   viewRatio: qnaPageRatio,
+      //   isIndicatorEnabled: true,
+      // ),
       Container(
           decoration: BoxDecoration(color: const Color(0xffffffff)),
           child: new AspectRatio(
