@@ -13,7 +13,7 @@ extension TextTypeExtension on TextType {
             padding: EdgeInsets.only(left: 12, bottom: 8),
             alignment: Alignment.bottomLeft,
             child: Text(
-              cardNameList.elementAt(index) + 'enum 테스트 입니다',
+              cardNameList.elementAt(index),
               style: const TextStyle(
                   color: const Color(0xffffffff),
                   fontWeight: FontWeight.w500,
