@@ -25,9 +25,9 @@ class DetailPage extends StatelessWidget {
     final List<List<Widget>> detailPage = [
       [],
       [
-        BoardReview(data, onPushNavigator),
-        Post(),
-        Post(),
+        BoardReview(data: data, onPushNavigator: onPushNavigator),
+        Post(data: data),
+        Post(data: data),
       ],
       [],
       []
@@ -53,7 +53,8 @@ class DetailPage extends StatelessWidget {
     _bottomNavigationBar() {
       switch (data.bottomNavigationType) {
         case BottomNavigationType.normal:
-          BottomBarNavigation bottomBarNavigation = BottomBarNavigation.getInstance();
+          BottomBarNavigation bottomBarNavigation =
+              BottomBarNavigation.getInstance();
           bottomBarNavigation
               .setCurrentRootPageTab(RootPageItem.values[rootIndex]);
           return bottomBarNavigation;

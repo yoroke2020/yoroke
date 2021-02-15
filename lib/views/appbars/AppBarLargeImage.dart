@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/views/appbars/AppBarYellow.dart';
+import 'package:yoroke/views/widgets/YrkButton.dart';
 import 'package:yoroke/views/widgets/YrkChipButtonLong.dart';
 
 class AppBarLargeImage extends StatefulWidget implements PreferredSizeWidget {
@@ -87,6 +88,15 @@ class _AppBarLargeImageState extends State<AppBarLargeImage> {
                     height: 48,
                     alignment: Alignment.bottomLeft,
                     padding: EdgeInsets.only(left: 16, bottom: 16),
+                    // child: new YrkButton(type: ButtonType.outlinechip,
+                    //   disable: false,
+                    //   clickable: true,
+                    //   onPress: _onTap,
+                    //   label: " 다른 후기 보기 ",
+                    //   fontSize: 13.0,
+                    //   width: 98.0,
+                    //   height: 24.0,
+                    // )
                     child: InkWell(
                         onTap: _onTap,
                         child: Stack(children: <Widget>[

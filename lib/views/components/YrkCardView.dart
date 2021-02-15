@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/views/board/BoardCardList.dart';
+import 'package:yoroke/views/components/YrkListView.dart';
 
 enum TextType { title, title_desc }
 
@@ -59,28 +61,36 @@ extension TextTypeExtension on TextType {
 }
 
 class YrkCardView extends StatelessWidget {
-  YrkCardView(
-      {@required this.onPushNavigator,
-      @required this.cardImageList,
-      @required this.cardNameList,
-      this.cardDescList,
-      this.viewWidth = double.maxFinite,
-      this.viewHeight = 120.0,
-      this.cardWidth = 100.0,
-      this.cardHeight = 100.0,
-      this.onTapPageIndex,
-      this.textType = TextType.title});
+  YrkCardView({
+    this.itemCount = 1,
+    this.onPushNavigator,
+    this.clickable = true,
+    this.width = double.maxFinite,
+    this.height = 120.0,
+    this.borderRadius = 16,
+    this.onTapPageIndex,
+    @required this.item,
+    this.index = 0,
+  });
 
+  final int itemCount;
   final ValueChanged<YrkData> onPushNavigator;
-  final List<String> cardImageList;
-  final List<String> cardNameList;
-  final List<String> cardDescList;
-  final double viewHeight;
-  final double viewWidth;
-  final double cardWidth;
-  final double cardHeight;
+  final bool clickable;
+  final double height;
+  final double width;
+  final double borderRadius;
   final int onTapPageIndex;
   // final TextType textType;
+
+  YrkListItem item;
+  int index;
+
+  Widget _widget(int index) {
+    YrkListItem item = this.item.clone();
+    item.parentIndex = this.index;
+    item.index = index;
+    return item;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,56 +98,27 @@ class YrkCardView extends StatelessWidget {
         decoration: BoxDecoration(color: const Color(0xffffffff)),
         child: new Container(
             width: double.maxFinite,
-            height: viewHeight,
+            height: height,
             child: Align(
                 alignment: Alignment.center,
                 child: ListView.builder(
                   padding: const EdgeInsets.all(8),
                   scrollDirection: Axis.horizontal,
                   physics: new AlwaysScrollableScrollPhysics(),
-                  itemCount: cardImageList.length,
+                  itemCount: itemCount,
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)),
+                            borderRadius: BorderRadius.circular(borderRadius)),
                         margin: const EdgeInsets.only(right: 8),
                         child: InkWell(
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(borderRadius),
                             onTap: () => onPushNavigator(new YrkData(
                                 SubItem.values[onTapPageIndex],
                                 "조문기의 리뷰 카드 번호 " + index.toString() + "번",
                                 appBarType: AppBarType.disable,
                                 cardIndex: index)),
-                            child: new Container(
-                                width: cardWidth,
-                                height: cardHeight,
-                                child: Stack(children: <Widget>[
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(16)),
-                                      image: new DecorationImage(
-                                        image: new AssetImage(
-                                            cardImageList.elementAt(index)),
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(16)),
-                                          gradient: LinearGradient(
-                                              begin: Alignment(
-                                                  0.5, -0.0739222913980484),
-                                              end: Alignment(0.5, 1),
-                                              colors: [
-                                                const Color(0x00ffffff),
-                                                const Color(0x4d000000)
-                                              ]))),
-                                  textType.getTextContainer(
-                                      cardNameList, cardDescList, index),
-                                ]))));
+                            child: _widget(index)));
                   },
                 ))));
   }
