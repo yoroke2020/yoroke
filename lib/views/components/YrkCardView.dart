@@ -6,22 +6,25 @@ import 'package:yoroke/views/board/BoardCardList.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 
 class YrkCardView extends StatelessWidget {
-  YrkCardView(
-      {@required this.onPushNavigator,
-      @required this.item,
-      this.width = double.maxFinite,
-      this.height = 120.0,
-      this.onTapPageIndex,
-      this.index = 0,
-      this.clickable = true,
-      this.itemCount = 1});
+  YrkCardView({
+    this.itemCount = 1,
+    this.onPushNavigator,
+    this.clickable = true,
+    this.width = double.maxFinite,
+    this.height = 120.0,
+    this.borderRadius = 16,
+    this.onTapPageIndex,
+    @required this.item,
+    this.index = 0,
+  });
 
+  final int itemCount;
   final ValueChanged<YrkData> onPushNavigator;
+  final bool clickable;
   final double height;
   final double width;
+  final double borderRadius;
   final int onTapPageIndex;
-  final bool clickable;
-  final int itemCount;
 
   YrkListItem item;
   int index;
@@ -50,10 +53,10 @@ class YrkCardView extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)),
+                            borderRadius: BorderRadius.circular(borderRadius)),
                         margin: const EdgeInsets.only(right: 8),
                         child: InkWell(
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(borderRadius),
                             onTap: () => onPushNavigator(new YrkData(
                                 SubItem.values[onTapPageIndex],
                                 "조문기의 리뷰 카드 번호 " + index.toString() + "번",
