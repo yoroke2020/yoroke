@@ -62,9 +62,10 @@ class _BoardReviewState extends State<BoardReview> {
               height: widgetVisible ? 120.0 : 0.0,
               child: YrkListView(
                 height: 128.0,
+                margin: EdgeInsets.only(left: 8, right: 8),
                 scrollable: true,
                 scrollDirection: Axis.horizontal,
-                margin: EdgeInsets.only(left: 8, right: 8),
+                clickable: true,
                 onPushNavigator: _onPushNavigator,
                 nextSubPageItem: SubPageItem.boardReview,
                 item: BoardCardList(112.0, 112.0),
@@ -79,12 +80,14 @@ class _BoardReviewState extends State<BoardReview> {
                 YrkListView(
                     index: 0,
                     itemCount: 10,
+                    clickable: true,
                     onPushNavigator: widget.onPushNavigator,
                     nextSubPageItem: SubPageItem.boardQna,
                     item: BoardReviewTabViewList(double.maxFinite, 65.0, data: widget.data)),
                 YrkListView(
                     index: 1,
                     itemCount: 10,
+                    clickable: true,
                     onPushNavigator: widget.onPushNavigator,
                     nextSubPageItem: SubPageItem.boardQna,
                     item: BoardReviewTabViewList(double.maxFinite, 65.0, data: widget.data)),

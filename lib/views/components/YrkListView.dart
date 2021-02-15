@@ -25,7 +25,7 @@ class YrkListView extends StatelessWidget {
     this.padding = const EdgeInsets.all(0),
     this.scrollable = false,
     this.scrollDirection = Axis.vertical,
-    this.clickable = true,
+    this.clickable = false,
     this.onPushNavigator,
     this.index = 0,
     this.nextSubPageItem,
