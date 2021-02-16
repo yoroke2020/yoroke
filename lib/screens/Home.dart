@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/views/board/BoardQnaList.dart';
-import 'package:yoroke/views/components/YrkCardView.dart';
-import 'package:yoroke/views/components/YrkPageView.dart';
 
 class Home extends StatefulWidget {
   Home({@required this.onPushNavigator});

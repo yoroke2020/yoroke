@@ -22,6 +22,9 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppBarType appBarType = AppBarType.disable;
+    BottomBarType bottomBarType = BottomBarType.disable;
+
     final List<List<Widget>> detailPage = [
       [],
       [
@@ -34,7 +37,7 @@ class DetailPage extends StatelessWidget {
     ];
 
     PreferredSizeWidget _appBar() {
-      switch (data.appBarType) {
+      switch (appBarType) {
         case AppBarType.normal:
           return AppBarNormal.getInstance();
         case AppBarType.yellow:
@@ -46,23 +49,48 @@ class DetailPage extends StatelessWidget {
       }
     }
 
-    Widget _body() {
-      return detailPage[rootIndex][data.currentSubItemIndex.index];
-    }
-
     _bottomNavigationBar() {
-      switch (data.bottomNavigationType) {
-        case BottomNavigationType.normal:
+      switch (bottomBarType) {
+        case BottomBarType.normal:
           BottomBarNavigation bottomBarNavigation =
               BottomBarNavigation.getInstance();
           bottomBarNavigation
               .setCurrentRootPageTab(RootPageItem.values[rootIndex]);
           return bottomBarNavigation;
-        case BottomNavigationType.comments:
+        case BottomBarType.comments:
           return BottomBarComment.getInstance();
-        case BottomNavigationType.disable:
+        case BottomBarType.disable:
           return Container();
       }
+    }
+
+    Widget _body() {
+      return detailPage[rootIndex][data.nextPageItem.index];
+    }
+
+    switch (rootIndex) {
+      case 0:
+        break;
+      case 1:
+        switch (data.nextPageItem) {
+          case SubPageItem.boardReview:
+            appBarType = AppBarType.disable;
+            bottomBarType = BottomBarType.normal;
+            break;
+          case SubPageItem.boardQna:
+            appBarType = AppBarType.arrowBack;
+            bottomBarType = BottomBarType.comments;
+            break;
+          case SubPageItem.boardJobFinding:
+            appBarType = AppBarType.arrowBack;
+            bottomBarType = BottomBarType.comments;
+            break;
+        }
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
     }
 
     return Scaffold(

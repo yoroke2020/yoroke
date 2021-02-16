@@ -3,7 +3,6 @@ import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/board/BoardCardList.dart';
 import 'package:yoroke/views/board/BoardReviewTabViewList.dart';
-import 'package:yoroke/views/components/YrkCardView.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 import 'package:yoroke/views/components/YrkTabBarView.dart';
 import 'package:yoroke/views/appbars/AppBarLargeImage.dart';
@@ -20,13 +19,6 @@ class BoardReview extends StatefulWidget {
 }
 
 class _BoardReviewState extends State<BoardReview> {
-  List<String> reviewCardImageList = [
-    "assets/icons/sample_image.png",
-    "assets/icons/sample_image.png",
-    "assets/icons/sample_image.png",
-    "assets/icons/sample_image.png"
-  ];
-  List<String> reviewCardNameList = ["요양병원", "요양원", "복지관", "간병인"];
   List<String> titleList = [
     "요양병원 후기/리뷰",
     "요양원 후기/리뷰",
@@ -51,7 +43,7 @@ class _BoardReviewState extends State<BoardReview> {
 
   void _onPushNavigator(YrkData data) {
     setState(() {
-      widget.data.cardIndex = data.cardIndex;
+      widget.data.i1 = data.i1;
     });
   }
 
@@ -61,17 +53,21 @@ class _BoardReviewState extends State<BoardReview> {
         appBar: AppBarLargeImage(
           onButtonClicked: _onButtonClicked,
           widgetVisible: widgetVisible,
-          titleText: titleList[widget.data.cardIndex],
-          subTitleText: subTitleList[widget.data.cardIndex],
+          titleText: titleList[widget.data.i1],
+          subTitleText: subTitleList[widget.data.i1],
         ),
         body: ListView(children: <Widget>[
           AnimatedContainer(
               duration: Duration(milliseconds: 300),
               height: widgetVisible ? 120.0 : 0.0,
-              child: YrkCardView(
-                height: 128,
+              child: YrkListView(
+                height: 128.0,
+                margin: EdgeInsets.only(left: 8, right: 8),
+                scrollable: true,
+                scrollDirection: Axis.horizontal,
+                clickable: true,
                 onPushNavigator: _onPushNavigator,
-                onTapPageIndex: SubItem.boardReview.index,
+                nextSubPageItem: SubPageItem.boardReview,
                 item: BoardCardList(112.0, 112.0),
                 itemCount: 4,
               )),
@@ -83,13 +79,17 @@ class _BoardReviewState extends State<BoardReview> {
               tabViewList: [
                 YrkListView(
                     index: 0,
-                    itemCount: 8,
+                    itemCount: 10,
+                    clickable: true,
                     onPushNavigator: widget.onPushNavigator,
+                    nextSubPageItem: SubPageItem.boardQna,
                     item: BoardReviewTabViewList(double.maxFinite, 65.0, data: widget.data)),
                 YrkListView(
                     index: 1,
-                    itemCount: 8,
+                    itemCount: 10,
+                    clickable: true,
                     onPushNavigator: widget.onPushNavigator,
+                    nextSubPageItem: SubPageItem.boardQna,
                     item: BoardReviewTabViewList(double.maxFinite, 65.0, data: widget.data)),
               ]),
         ]));

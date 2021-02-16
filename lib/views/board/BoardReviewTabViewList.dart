@@ -5,6 +5,7 @@ import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 import 'package:yoroke/views/widgets/YrkButton.dart';
+import 'package:yoroke/views/widgets/YrkRatingIcons.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
 class BoardReviewTabViewList extends YrkListItem {
@@ -39,7 +40,7 @@ class BoardReviewTabViewList extends YrkListItem {
                           padding: const EdgeInsets.only(right: 8.0),
                           child: Text(
                               "조문기의 리뷰 카드 번호 " +
-                                  data.cardIndex.toString() +
+                                  data.i1.toString() +
                                   "번",
                               style: const YrkTextStyle(fontSize: 16.0),
                               textAlign: TextAlign.left)),
@@ -97,31 +98,11 @@ class BoardReviewTabViewList extends YrkListItem {
                                 fontSize: 12.0, color: const Color(0x4d000000)),
                             textAlign: TextAlign.left)),
                     Expanded(child: Container()),
-                    Container(child: _buildRantingStarList()),
+                    Container(child: YrkRatingIcons(index: this.index)),
                   ]),
                 ),
               ],
             ));
-  }
-
-  Widget _buildRantingStarList() {
-    List<Widget> list = List<Widget>();
-    if (testNumber[this.index] == -1)
-      return Container();
-    else {
-      for (int i = 0; i < testNumber[this.index]; i++) {
-        list.add(Icon(
-          Icons.star,
-          color: const Color(0xfff5df4d),
-          size: 12,
-        ));
-      }
-      for (int i = 0; i < 5 - testNumber[this.index]; i++) {
-        list.add(
-            Icon(Icons.star_border, color: const Color(0xff939597), size: 12));
-      }
-      return Wrap(children: list);
-    }
   }
 
   @override
