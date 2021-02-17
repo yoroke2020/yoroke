@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/views/components/YrkListView.dart';
+import 'package:yoroke/views/post/PostCommentListItem.dart';
+import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
 class Post extends StatefulWidget {
   Post({Key key, @required this.data}) : super(key: key);
@@ -14,6 +17,25 @@ class _PostState extends State<Post> {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      children: <Widget>[
+        _header(),
+        _body(),
+        _navigator(),
+        _comments(),
+      ],
+    );
+  }
+
+  String _sampleText(String s) {
+    String str = widget.data.str0 + "\n";
+    for (int i = 0; i < 400; i++) {
+      str += s;
+    }
+    return str;
+  }
+
+  Widget _header() {
+    return Column(
       children: <Widget>[
         Container(
             padding: EdgeInsets.only(left: 16, right: 16),
@@ -116,8 +138,16 @@ class _PostState extends State<Post> {
                 ))
               ],
             )),
+      ],
+    );
+  }
+
+  Widget _body() {
+    return Column(
+      children: <Widget>[
         Container(
-            margin: EdgeInsets.all(16),
+            padding: EdgeInsets.only(
+                left: 16.0, right: 16.0, top: 16.0, bottom: 76.0),
             width: double.maxFinite,
             child: Text(_sampleText("요양병원 후기 "),
                 style: const TextStyle(
@@ -127,16 +157,57 @@ class _PostState extends State<Post> {
                     fontStyle: FontStyle.normal,
                     height: 1.5,
                     fontSize: 16.0),
-                textAlign: TextAlign.left))
+                textAlign: TextAlign.left)),
       ],
     );
   }
 
-  String _sampleText(String s) {
-    String str = widget.data.str0 + "\n";
-    for (int i = 0; i < 1000; i++) {
-      str += s;
-    }
-    return str;
+  Widget _navigator() {
+    return Column(children: <Widget>[
+      Container(
+          width: double.maxFinite,
+          height: 8.0,
+          decoration: BoxDecoration(color: const Color(0xffeaeaea))),
+      InkWell(
+          onTap: () => print("previous page tapped"),
+          child: Container(
+            width: double.maxFinite,
+            height: 48.0,
+          )),
+      Container(
+          width: double.maxFinite,
+          height: 1.0,
+          decoration: BoxDecoration(
+            border: Border.all(color: const Color(0xffe5e5e5), width: 1.0),
+          )),
+      InkWell(
+          onTap: () => print("next page tapped"),
+          child: Container(
+            width: double.maxFinite,
+            height: 48.0,
+          )),
+      Container(
+          width: double.maxFinite,
+          height: 8.0,
+          decoration: BoxDecoration(color: const Color(0xffeaeaea))),
+    ]);
+  }
+
+  Widget _comments() {
+    return Column(
+      children: [
+        Container(
+          width: double.maxFinite,
+          height: 56.0,
+        ),
+        YrkListView(item: [PostCommentListItem(index: 0)]),
+        Container(
+          width: double.maxFinite,
+          height: 52.0,
+        )
+      ],
+    );
   }
 }
+
+
