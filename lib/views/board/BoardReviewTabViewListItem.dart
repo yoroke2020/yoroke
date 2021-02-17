@@ -104,9 +104,4 @@ class BoardReviewTabViewListItem extends YrkListItem {
               ],
             ));
   }
-
-  @override
-  clone() {
-    return BoardReviewTabViewListItem(width, height, data: data,);
-  }
 }

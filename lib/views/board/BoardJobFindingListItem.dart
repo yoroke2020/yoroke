@@ -84,9 +84,4 @@ class BoardJobFindingListItem extends YrkListItem {
           ),
         ]));
   }
-
-  @override
-  clone() {
-    return BoardJobFindingListItem(width, height);
-  }
 }
