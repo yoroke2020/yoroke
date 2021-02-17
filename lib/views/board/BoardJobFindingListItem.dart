@@ -6,14 +6,12 @@ import 'package:yoroke/views/components/YrkListView.dart';
 import 'package:yoroke/views/widgets/YrkButton.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
-class BoardJobFindingList extends YrkListItem {
-  BoardJobFindingList(width, height, {Key key, @required this.data})
+class BoardJobFindingListItem extends YrkListItem {
+  BoardJobFindingListItem(width, height)
       : super(width, height);
 
-  final YrkData data;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(YrkData data) {
     return Container(
         width: width,
         height: height,
@@ -39,7 +37,7 @@ class BoardJobFindingList extends YrkListItem {
                 Expanded(
                     child: Container(
                         margin: const EdgeInsets.only(left: 8.0),
-                        child: Text(testLongString[this.index],
+                        child: Text(testLongString[data.i1],
                             style: const YrkTextStyle(fontSize: 16.0),
                             textAlign: TextAlign.left)))
               ])),
@@ -89,6 +87,6 @@ class BoardJobFindingList extends YrkListItem {
 
   @override
   clone() {
-    return BoardJobFindingList(width, height);
+    return BoardJobFindingListItem(width, height);
   }
 }

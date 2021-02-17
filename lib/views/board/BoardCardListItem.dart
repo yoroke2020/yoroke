@@ -4,14 +4,12 @@ import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 
-class BoardCardList extends YrkListItem {
-  BoardCardList(width, height, {Key key, @required this.data})
+class BoardCardListItem extends YrkListItem {
+  BoardCardListItem(width, height)
       : super(width, height);
 
-  final YrkData data;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(YrkData data) {
     return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: new Container(
@@ -22,7 +20,7 @@ class BoardCardList extends YrkListItem {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                   image: new DecorationImage(
-                    image: new AssetImage(testCardImage.elementAt(index)),
+                    image: new AssetImage(testCardImage.elementAt(data.i1)),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -41,7 +39,7 @@ class BoardCardList extends YrkListItem {
                   padding: EdgeInsets.only(left: 12, bottom: 8),
                   alignment: Alignment.bottomLeft,
                   child: Text(
-                    testShortString.elementAt(index),
+                    testShortString.elementAt(data.i1),
                     style: const TextStyle(
                         color: const Color(0xffffffff),
                         fontWeight: FontWeight.w500,
@@ -54,6 +52,6 @@ class BoardCardList extends YrkListItem {
 
   @override
   clone() {
-    return BoardCardList(width, height);
+    return BoardCardListItem(width, height);
   }
 }

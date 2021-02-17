@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/views/board/BoardCardList.dart';
-import 'package:yoroke/views/board/BoardReviewTabViewList.dart';
+import 'package:yoroke/views/board/BoardCardListItem.dart';
+import 'package:yoroke/views/board/BoardReviewTabViewListItem.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 import 'package:yoroke/views/components/YrkTabBarView.dart';
 import 'package:yoroke/views/appbars/AppBarLargeImage.dart';
@@ -68,7 +68,7 @@ class _BoardReviewState extends State<BoardReview> {
                 clickable: true,
                 onPushNavigator: _onPushNavigator,
                 nextSubPageItem: SubPageItem.boardReview,
-                item: BoardCardList(112.0, 112.0),
+                item: BoardCardListItem(112.0, 112.0),
                 itemCount: 4,
               )),
           YrkTabBarView(
@@ -83,14 +83,14 @@ class _BoardReviewState extends State<BoardReview> {
                     clickable: true,
                     onPushNavigator: widget.onPushNavigator,
                     nextSubPageItem: SubPageItem.boardQna,
-                    item: BoardReviewTabViewList(double.maxFinite, 65.0, data: widget.data)),
+                    item: BoardReviewTabViewListItem(double.maxFinite, 65.0, data: widget.data)),
                 YrkListView(
                     index: 1,
                     itemCount: 10,
                     clickable: true,
                     onPushNavigator: widget.onPushNavigator,
                     nextSubPageItem: SubPageItem.boardQna,
-                    item: BoardReviewTabViewList(double.maxFinite, 65.0, data: widget.data)),
+                    item: BoardReviewTabViewListItem(double.maxFinite, 65.0, data: widget.data)),
               ]),
         ]));
   }

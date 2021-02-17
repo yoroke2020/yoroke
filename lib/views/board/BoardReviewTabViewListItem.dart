@@ -8,15 +8,15 @@ import 'package:yoroke/views/widgets/YrkButton.dart';
 import 'package:yoroke/views/widgets/YrkRatingIcons.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
-class BoardReviewTabViewList extends YrkListItem {
-  BoardReviewTabViewList(width, height,
+class BoardReviewTabViewListItem extends YrkListItem {
+  BoardReviewTabViewListItem(width, height,
       {Key key, @required this.data})
       : super(width, height);
 
   final YrkData data;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(YrkData data) {
     return Container(
           width: double.maxFinite,
             height: 65,
@@ -98,7 +98,7 @@ class BoardReviewTabViewList extends YrkListItem {
                                 fontSize: 12.0, color: const Color(0x4d000000)),
                             textAlign: TextAlign.left)),
                     Expanded(child: Container()),
-                    Container(child: YrkRatingIcons(index: this.index)),
+                    Container(child: YrkRatingIcons(index: data.i1)),
                   ]),
                 ),
               ],
@@ -107,6 +107,6 @@ class BoardReviewTabViewList extends YrkListItem {
 
   @override
   clone() {
-    return BoardReviewTabViewList(width, height, data: data,);
+    return BoardReviewTabViewListItem(width, height, data: data,);
   }
 }

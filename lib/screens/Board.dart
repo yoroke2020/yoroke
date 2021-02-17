@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/views/board/BoardCardList.dart';
-import 'package:yoroke/views/board/BoardJobFindingList.dart';
-import 'package:yoroke/views/board/BoardQnaList.dart';
+import 'package:yoroke/views/board/BoardCardListItem.dart';
+import 'package:yoroke/views/board/BoardJobFindingListItem.dart';
+import 'package:yoroke/views/board/BoardQnaListItem.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 import 'package:yoroke/views/components/YrkPageView.dart';
 import 'package:yoroke/views/components/YrkTabHeaderView.dart';
@@ -36,7 +36,7 @@ class _BoardState extends State<Board> {
           clickable: true,
           onPushNavigator: widget.onPushNavigator,
           nextSubPageItem: SubPageItem.boardReview,
-          item: BoardCardList(136.0, 120.0),
+          item: BoardCardListItem(136.0, 120.0),
           itemCount: 4,
         ),
         YrkTabHeaderView(title: "고민/질문"),
@@ -49,7 +49,7 @@ class _BoardState extends State<Board> {
                 clickable: true,
                 onPushNavigator: widget.onPushNavigator,
                 nextSubPageItem: SubPageItem.boardQna,
-                item: BoardQnaList(
+                item: BoardQnaListItem(
                   double.maxFinite,
                   65.0,
                 )),
@@ -60,7 +60,7 @@ class _BoardState extends State<Board> {
                 clickable: true,
                 onPushNavigator: widget.onPushNavigator,
                 nextSubPageItem: SubPageItem.boardQna,
-                item: BoardQnaList(double.maxFinite, 65.0)),
+                item: BoardQnaListItem(double.maxFinite, 65.0)),
             YrkListView(
                 height: 260.0,
                 index: 2,
@@ -68,7 +68,7 @@ class _BoardState extends State<Board> {
                 clickable: true,
                 onPushNavigator: widget.onPushNavigator,
                 nextSubPageItem: SubPageItem.boardQna,
-                item: BoardQnaList(double.maxFinite, 65.0)),
+                item: BoardQnaListItem(double.maxFinite, 65.0)),
             YrkListView(
                 height: 260.0,
                 index: 3,
@@ -76,7 +76,7 @@ class _BoardState extends State<Board> {
                 clickable: true,
                 onPushNavigator: widget.onPushNavigator,
                 nextSubPageItem: SubPageItem.boardQna,
-                item: BoardQnaList(
+                item: BoardQnaListItem(
                   double.maxFinite,
                   65.0,
                 ))
@@ -92,7 +92,7 @@ class _BoardState extends State<Board> {
               clickable: true,
               onPushNavigator: widget.onPushNavigator,
               nextSubPageItem: SubPageItem.boardJobFinding,
-              item: BoardJobFindingList(
+              item: BoardJobFindingListItem(
                 double.maxFinite,
                 65.0,
               )),
@@ -102,21 +102,21 @@ class _BoardState extends State<Board> {
               clickable: true,
               onPushNavigator: widget.onPushNavigator,
               nextSubPageItem: SubPageItem.boardJobFinding,
-              item: BoardJobFindingList(double.maxFinite, 65.0)),
+              item: BoardJobFindingListItem(double.maxFinite, 65.0)),
           YrkListView(
               index: 2,
               itemCount: 4,
               clickable: true,
               onPushNavigator: widget.onPushNavigator,
               nextSubPageItem: SubPageItem.boardJobFinding,
-              item: BoardJobFindingList(double.maxFinite, 65.0)),
+              item: BoardJobFindingListItem(double.maxFinite, 65.0)),
           YrkListView(
               index: 3,
               itemCount: 4,
               clickable: true,
               onPushNavigator: widget.onPushNavigator,
               nextSubPageItem: SubPageItem.boardJobFinding,
-              item: BoardJobFindingList(
+              item: BoardJobFindingListItem(
                 double.maxFinite,
                 65.0,
               ))
