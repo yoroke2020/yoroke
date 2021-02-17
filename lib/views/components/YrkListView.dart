@@ -47,8 +47,8 @@ class YrkListView extends StatelessWidget {
   final bool clickable;
   final bool scrollable;
 
-  YrkListItem item;
-  int index;
+  final YrkListItem item;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
