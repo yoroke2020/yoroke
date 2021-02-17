@@ -22,6 +22,46 @@ class _BoardState extends State<Board> {
   final qnaPageController = PageController();
   final findJobPageController = PageController();
 
+  List<Widget> _reviewCardList() {
+    List<Widget> list = List<Widget>();
+    for (int i = 0; i < 4; i++) {
+      list.add(BoardCardListItem(width: 136.0, height: 120.0, index: i));
+    }
+
+    return list;
+  }
+
+  List<Widget> _boardQnaList() {
+    List<Widget> list = List<Widget>();
+    for (int i = 0; i < 4; i++) {
+      list.add(BoardQnaListItem(index: i));
+    }
+    return list;
+  }
+
+  List<Widget> _boardJobFindingList() {
+    List<Widget> list = List<Widget>();
+    for (int i = 0; i < 4; i++) {
+      list.add(BoardJobFindingListItem(index: i));
+    }
+    return list;
+  }
+
+  List<Widget> _YrkListView(bool isQna) {
+    List<Widget> list = List<Widget>();
+    for (int i = 0; i < 4; i++) {
+      list.add(YrkListView(
+          index: i,
+          itemCount: 4,
+          clickable: true,
+          onPushNavigator: widget.onPushNavigator,
+          nextSubPageItem:
+              isQna ? SubPageItem.boardQna : SubPageItem.boardJobFinding,
+          item: isQna ? _boardQnaList() : _boardJobFindingList()));
+    }
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,91 +76,20 @@ class _BoardState extends State<Board> {
           clickable: true,
           onPushNavigator: widget.onPushNavigator,
           nextSubPageItem: SubPageItem.boardReview,
-          item: BoardCardListItem(136.0, 120.0),
+          item: _reviewCardList(),
           itemCount: 4,
         ),
         YrkTabHeaderView(title: "고민/질문"),
         YrkPageView(
-          page: [
-            YrkListView(
-                height: 260.0,
-                index: 0,
-                itemCount: 4,
-                clickable: true,
-                onPushNavigator: widget.onPushNavigator,
-                nextSubPageItem: SubPageItem.boardQna,
-                item: BoardQnaListItem(
-                  double.maxFinite,
-                  65.0,
-                )),
-            YrkListView(
-                height: 260.0,
-                index: 1,
-                itemCount: 4,
-                clickable: true,
-                onPushNavigator: widget.onPushNavigator,
-                nextSubPageItem: SubPageItem.boardQna,
-                item: BoardQnaListItem(double.maxFinite, 65.0)),
-            YrkListView(
-                height: 260.0,
-                index: 2,
-                itemCount: 4,
-                clickable: true,
-                onPushNavigator: widget.onPushNavigator,
-                nextSubPageItem: SubPageItem.boardQna,
-                item: BoardQnaListItem(double.maxFinite, 65.0)),
-            YrkListView(
-                height: 260.0,
-                index: 3,
-                itemCount: 4,
-                clickable: true,
-                onPushNavigator: widget.onPushNavigator,
-                nextSubPageItem: SubPageItem.boardQna,
-                item: BoardQnaListItem(
-                  double.maxFinite,
-                  65.0,
-                ))
-          ],
+          page: _YrkListView(true),
           controller: qnaPageController,
           isIndicatorEnabled: true,
         ),
         YrkTabHeaderView(title: "구인구직"),
-        YrkPageView(page: [
-          YrkListView(
-              index: 0,
-              itemCount: 4,
-              clickable: true,
-              onPushNavigator: widget.onPushNavigator,
-              nextSubPageItem: SubPageItem.boardJobFinding,
-              item: BoardJobFindingListItem(
-                double.maxFinite,
-                65.0,
-              )),
-          YrkListView(
-              index: 1,
-              itemCount: 4,
-              clickable: true,
-              onPushNavigator: widget.onPushNavigator,
-              nextSubPageItem: SubPageItem.boardJobFinding,
-              item: BoardJobFindingListItem(double.maxFinite, 65.0)),
-          YrkListView(
-              index: 2,
-              itemCount: 4,
-              clickable: true,
-              onPushNavigator: widget.onPushNavigator,
-              nextSubPageItem: SubPageItem.boardJobFinding,
-              item: BoardJobFindingListItem(double.maxFinite, 65.0)),
-          YrkListView(
-              index: 3,
-              itemCount: 4,
-              clickable: true,
-              onPushNavigator: widget.onPushNavigator,
-              nextSubPageItem: SubPageItem.boardJobFinding,
-              item: BoardJobFindingListItem(
-                double.maxFinite,
-                65.0,
-              ))
-        ], controller: findJobPageController, isIndicatorEnabled: true)
+        YrkPageView(
+            page: _YrkListView(false),
+            controller: findJobPageController,
+            isIndicatorEnabled: true)
       ],
     ));
   }

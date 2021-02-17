@@ -5,14 +5,16 @@ import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 
-class BoardQnaListItem extends YrkListItem {
-  BoardQnaListItem(width, height) : super(width, height);
+class BoardQnaListItem extends StatelessWidget {
+  BoardQnaListItem({@required this.index});
+
+  final int index;
 
   @override
-  Widget build(YrkData data) {
+  Widget build(BuildContext context) {
     return Container(
-        width: width,
-        height: height,
+        width: double.maxFinite,
+        height: 65.0,
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
             color: const Color(0xffffffff),
@@ -43,7 +45,7 @@ class BoardQnaListItem extends YrkListItem {
                               ),
                               Expanded(
                                   flex: 258,
-                                  child: Text(testLongString[data.i1],
+                                  child: Text(testLongString[index],
                                       style: const TextStyle(
                                           color: const Color(0xe6000000),
                                           fontWeight: FontWeight.w400,
@@ -58,7 +60,7 @@ class BoardQnaListItem extends YrkListItem {
                           children: <Widget>[
                             Expanded(
                                 flex: 86,
-                                child: Text(testDate[data.i1],
+                                child: Text(testDate[index],
                                     style: const TextStyle(
                                         color: const Color(0x4d000000),
                                         fontWeight: FontWeight.w400,
@@ -73,7 +75,7 @@ class BoardQnaListItem extends YrkListItem {
                             Expanded(flex: 5, child: Container()),
                             Expanded(
                                 flex: 195,
-                                child: Text(testNumberString[data.i1],
+                                child: Text(testNumberString[index],
                                     style: const TextStyle(
                                         color: const Color(0x4d000000),
                                         fontWeight: FontWeight.w500,
@@ -98,7 +100,7 @@ class BoardQnaListItem extends YrkListItem {
                         flex: 51,
                         child: Container(
                             padding: EdgeInsets.only(left: 8),
-                            child: Text(testNumberString[data.i1],
+                            child: Text(testNumberString[index],
                                 style: const TextStyle(
                                     color: const Color(0xe6000000),
                                     fontWeight: FontWeight.w500,

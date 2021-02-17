@@ -5,15 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 
-abstract class YrkListItem {
-  YrkListItem(this.width, this.height);
-
-  final double width;
-  final double height;
-
-  Widget build(YrkData data);
-}
-
 class YrkListView extends StatelessWidget {
   YrkListView({
     this.width = double.maxFinite,
@@ -47,7 +38,7 @@ class YrkListView extends StatelessWidget {
   final bool clickable;
   final bool scrollable;
 
-  final YrkListItem item;
+  final List<Widget> item;
   final int index;
 
   @override
@@ -79,7 +70,7 @@ class YrkListView extends StatelessWidget {
                               i1: index,
                             ))
                         : null,
-                    child: item.build(_getData(index))));
+                    child: item[index]));
           },
         ));
   }
