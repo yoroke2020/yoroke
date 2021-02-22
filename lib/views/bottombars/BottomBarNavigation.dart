@@ -7,24 +7,21 @@ import 'package:flutter/services.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 
 class BottomBarNavigation extends StatefulWidget {
-  RootPageItem _currentRootPageTab;
-  ValueChanged<RootPageItem> _onSelectRootPageTab;
+  RootPageItem _curRootPageItem;
+  ValueChanged<RootPageItem> _onSelectRootPageItem;
 
   static BottomBarNavigation _instance;
 
   BottomBarNavigation._internal();
 
-  static BottomBarNavigation getInstance() {
+  static BottomBarNavigation getInstance(RootPageItem currentRootPageItem) {
     if (_instance == null) _instance = BottomBarNavigation._internal();
+    _instance._curRootPageItem = currentRootPageItem;
     return _instance;
   }
 
-  void setCurrentRootPageTab(RootPageItem rootPageItem) {
-    this._currentRootPageTab = rootPageItem;
-  }
-
-  void setOnSelectRootPageTab(ValueChanged<RootPageItem> onSelectPageTab) {
-    this._onSelectRootPageTab = onSelectPageTab;
+  void setOnSelectRootPageItem(ValueChanged<RootPageItem> onSelectPageTab) {
+    this._onSelectRootPageItem = onSelectPageTab;
   }
 
   @override
@@ -32,7 +29,7 @@ class BottomBarNavigation extends StatefulWidget {
 }
 
 class _BottomBarNavigationState extends State<BottomBarNavigation> {
-  RootPageItem _currentRootPageTab;
+  RootPageItem _curRootPageItem;
   Map _iconMap;
 
   BottomNavigationBarItem _buildItem(RootPageItem rootPageItem) {
@@ -41,11 +38,11 @@ class _BottomBarNavigationState extends State<BottomBarNavigation> {
   }
 
   void _onTap(int index) {
-    widget._onSelectRootPageTab(RootPageItem.values[index]);
+    widget._onSelectRootPageItem(RootPageItem.values[index]);
   }
 
   Image _getIcon(RootPageItem rootPageItem) {
-    return _currentRootPageTab == rootPageItem
+    return _curRootPageItem == rootPageItem
         ? Image.asset(_iconMap[rootPageTabIconInfo[rootPageItem]]['selectedImage'])
         : Image.asset(_iconMap[rootPageTabIconInfo[rootPageItem]]['image']);
   }
@@ -57,7 +54,7 @@ class _BottomBarNavigationState extends State<BottomBarNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    if (_currentRootPageTab == null) _currentRootPageTab = widget._currentRootPageTab;
+    if (_curRootPageItem == null) _curRootPageItem = widget._curRootPageItem;
 
     return FutureBuilder(
         future: _loadAsset('assets/icons/icons.json'),
@@ -69,7 +66,7 @@ class _BottomBarNavigationState extends State<BottomBarNavigation> {
             return BottomNavigationBar(
             backgroundColor: const Color(0xffffffff),
               type: BottomNavigationBarType.fixed,
-              currentIndex: _currentRootPageTab.index,
+              currentIndex: _curRootPageItem.index,
               items: [
                 _buildItem(RootPageItem.home),
                 _buildItem(RootPageItem.board),

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/views/appbars/AppBarArrowBack.dart';
+import 'package:yoroke/views/bottombars/BottomBarComment.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 import 'package:yoroke/views/post/PostCommentListItem.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
@@ -16,14 +18,17 @@ class Post extends StatefulWidget {
 class _PostState extends State<Post> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Scaffold(
+      appBar: AppBarArrowBack.getInstance(),
+        body: ListView(
       children: <Widget>[
         _header(),
         _body(),
         _navigator(),
         _comments(),
       ],
-    );
+    ),
+    bottomNavigationBar: BottomBarComment(),);
   }
 
   String _sampleText(String s) {
