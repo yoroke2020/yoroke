@@ -6,21 +6,24 @@ class YrkPageView extends StatelessWidget {
   YrkPageView({
     @required this.page,
     @required this.controller,
-    @required this.viewRatio,
+    this.viewWidth = double.maxFinite,
+    this.viewHeight = 260.0,
     this.isIndicatorEnabled = false,
   });
 
   final List<Widget> page;
   final PageController controller;
-  final double viewRatio;
+  final double viewWidth;
+  final double viewHeight;
   final bool isIndicatorEnabled;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AspectRatio(
-            aspectRatio: viewRatio,
+        Container(
+            width: viewWidth,
+            height: viewHeight,
             child: PageView.builder(
               physics: new AlwaysScrollableScrollPhysics(),
               itemCount: page.length,

@@ -68,9 +68,44 @@ class _SignInState extends State<SignIn> {
             ),
             Container(
               child: YrkButton(
+                type: ButtonType.chip,
+                label: "네이버",
+                onPress: () {},
+                clickable: true,
+              ),
+            ),
+            Container(
+              child: YrkButton(
+                type: ButtonType.solid,
+                label: "네이버",
+                onPress: () {},
+                clickable: true,
+                width: 200,
+                height: 42,
+              ),
+            ),
+            Container(
+              child: YrkButton(
+                type: ButtonType.outline,
+                label: "네이버",
+                onPress: () {},
+                clickable: true,
+              ),
+            ),
+            Container(
+              child: YrkButton(
                 type: ButtonType.outlinechip,
                 label: "네이버",
                 onPress: () {},
+                clickable: true,
+              ),
+            ),
+            Container(
+              child: YrkButton(
+                type: ButtonType.text,
+                label: "네이버",
+                onPress: () {},
+                clickable: true,
               ),
             ),
           ],

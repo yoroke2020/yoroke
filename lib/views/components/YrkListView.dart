@@ -3,38 +3,92 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 
-abstract class YrkListView {
-  YrkListView(
-      {@required this.items,
-      @required this.widgetRatio,
-      this.listLength = 1,
-      @required this.itemLength,
-      @required this.data,
-      @required this.onPushNavigator});
+abstract class YrkListItem extends StatelessWidget {
+  YrkListItem(this.width, this.height, {Key key}) : super(key: key);
 
-  final List<String> items;
-  final double widgetRatio;
-  final int listLength;
-  final int itemLength;
-  final YrkData data;
+  final double width;
+  final double height;
+
+  int parentIndex;
+  int index;
+
+  clone();
+}
+
+class YrkListView extends StatelessWidget {
+  YrkListView({
+    this.width = double.maxFinite,
+    this.height = 120.0,
+    this.margin = const EdgeInsets.all(0),
+    this.padding = const EdgeInsets.all(0),
+    this.scrollable = false,
+    this.scrollDirection = Axis.vertical,
+    this.clickable = false,
+    this.onPushNavigator,
+    this.index = 0,
+    this.nextSubPageItem,
+    @required this.item,
+    this.itemCount = 1,
+    this.itemMargin = const EdgeInsets.all(0),
+    this.itemPadding = const EdgeInsets.all(0),
+  });
+
+  final Axis scrollDirection;
+  final EdgeInsets margin;
+  final EdgeInsets padding;
+  final EdgeInsets itemMargin;
+  final EdgeInsets itemPadding;
   final ValueChanged<YrkData> onPushNavigator;
+  final SubPageItem nextSubPageItem;
+  final int itemCount;
+  final double width;
+  final double height;
+  final bool clickable;
+  final bool scrollable;
 
-  List<Widget> widgetList;
+  YrkListItem item;
+  int index;
 
-  Widget createWidget(int currentIndex);
+  Widget _widget(int index) {
+    YrkListItem item = this.item.clone();
+    item.parentIndex = this.index;
+    item.index = index;
+    return item;
+  }
 
-  List<Widget> getWidgetList() {
-    if (widgetList == null) {
-      widgetList = List<Widget>();
-      for (int i = 0; i < listLength; i++) {
-        List<Widget> list = List<Widget>();
-        for (int j = 0; j < itemLength; j++)
-          list.add(createWidget(i * itemLength + j));
-        widgetList.add(Wrap(children: list));
-      }
-    }
-
-    return widgetList;
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+        width: this.width,
+        height: this.height,
+        margin: this.margin,
+        padding: this.padding,
+        child: ListView.builder(
+          scrollDirection: this.scrollDirection,
+          physics: scrollable
+              ? new AlwaysScrollableScrollPhysics()
+              : new NeverScrollableScrollPhysics(),
+          itemCount: this.itemCount,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+                margin: this.itemMargin,
+                padding: this.itemPadding,
+                child: InkWell(
+                    onTap: clickable
+                        ? () => onPushNavigator(new YrkData(
+                              nextSubPageItem,
+                              str0: "This is # " +
+                                  this.index.toString() +
+                                  " - " +
+                                  index.toString(),
+                              i0: this.index,
+                              i1: index,
+                            ))
+                        : null,
+                    child: _widget(index)));
+          },
+        ));
   }
 }

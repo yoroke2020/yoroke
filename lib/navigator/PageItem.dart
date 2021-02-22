@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 
 enum RootPageItem { home, board, find, info }
 
-enum SubItem { boardReview, boardQna, boardJobFinding }
+enum SubPageItem { boardReview, boardQna, boardJobFinding }
 
 enum AppBarType { normal, yellow, arrowBack, disable }
 
-enum BottomNavigationType { normal, comments, disable }
+enum BottomBarType { normal, comments, disable }
 
 const Map<RootPageItem, String> rootPageTabIconInfo = {
   RootPageItem.home: 'home',
