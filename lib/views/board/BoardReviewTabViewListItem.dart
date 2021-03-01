@@ -8,12 +8,10 @@ import 'package:yoroke/views/widgets/YrkButton.dart';
 import 'package:yoroke/views/widgets/YrkRatingIcons.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
-class BoardReviewTabViewList extends YrkListItem {
-  BoardReviewTabViewList(width, height,
-      {Key key, @required this.data})
-      : super(width, height);
+class BoardReviewTabViewListItem extends StatelessWidget {
+  BoardReviewTabViewListItem({@required this.index});
 
-  final YrkData data;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +38,7 @@ class BoardReviewTabViewList extends YrkListItem {
                           padding: const EdgeInsets.only(right: 8.0),
                           child: Text(
                               "조문기의 리뷰 카드 번호 " +
-                                  data.i1.toString() +
+                                  index.toString() +
                                   "번",
                               style: const YrkTextStyle(fontSize: 16.0),
                               textAlign: TextAlign.left)),
@@ -98,15 +96,10 @@ class BoardReviewTabViewList extends YrkListItem {
                                 fontSize: 12.0, color: const Color(0x4d000000)),
                             textAlign: TextAlign.left)),
                     Expanded(child: Container()),
-                    Container(child: YrkRatingIcons(index: this.index)),
+                    Container(child: YrkRatingIcons(index:index)),
                   ]),
                 ),
               ],
             ));
-  }
-
-  @override
-  clone() {
-    return BoardReviewTabViewList(width, height, data: data,);
   }
 }

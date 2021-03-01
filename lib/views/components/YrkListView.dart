@@ -5,18 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 
-abstract class YrkListItem extends StatelessWidget {
-  YrkListItem(this.width, this.height, {Key key}) : super(key: key);
-
-  final double width;
-  final double height;
-
-  int parentIndex;
-  int index;
-
-  clone();
-}
-
 class YrkListView extends StatelessWidget {
   YrkListView({
     this.width = double.maxFinite,
@@ -26,6 +14,7 @@ class YrkListView extends StatelessWidget {
     this.scrollable = false,
     this.scrollDirection = Axis.vertical,
     this.clickable = false,
+    this.data,
     this.onPushNavigator,
     this.index = 0,
     this.nextSubPageItem,
@@ -40,6 +29,7 @@ class YrkListView extends StatelessWidget {
   final EdgeInsets padding;
   final EdgeInsets itemMargin;
   final EdgeInsets itemPadding;
+  final YrkData data;
   final ValueChanged<YrkData> onPushNavigator;
   final SubPageItem nextSubPageItem;
   final int itemCount;
@@ -48,15 +38,8 @@ class YrkListView extends StatelessWidget {
   final bool clickable;
   final bool scrollable;
 
-  YrkListItem item;
-  int index;
-
-  Widget _widget(int index) {
-    YrkListItem item = this.item.clone();
-    item.parentIndex = this.index;
-    item.index = index;
-    return item;
-  }
+  final List<Widget> item;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +70,15 @@ class YrkListView extends StatelessWidget {
                               i1: index,
                             ))
                         : null,
-                    child: _widget(index)));
+                    child: item[index]));
           },
         ));
+  }
+
+  YrkData _getData(int index) {
+    if (data != null)
+      return data;
+    else
+      return new YrkData(nextSubPageItem, i0: this.index, i1: index);
   }
 }

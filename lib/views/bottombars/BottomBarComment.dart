@@ -3,21 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/views/widgets/YrkTextField.dart';
 
 class BottomBarComment extends StatefulWidget {
-  static BottomBarComment _instance;
-
-  BottomBarComment._internal();
-
-  static BottomBarComment getInstance() {
-    if (_instance == null) _instance = BottomBarComment._internal();
-    return _instance;
-  }
-
+  
   @override
   _BottomBarCommentState createState() => _BottomBarCommentState();
 }
 
 class _BottomBarCommentState extends State<BottomBarComment> {
-  bool isLocked = false;
+  bool isPrivate = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,34 +27,27 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                   children: [
                     Expanded(
                       child: Container(
-                          height: 40.0,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(32.0)),
-                              border: Border.all(
-                                  color: const Color(0xff939597), width: 1),
-                              color: const Color(0xffffffff)),
-                          child: Center(
                               child: YrkTextField(
                             label: "댓글을 남겨보세요",
-                          ))),
+                          )),
                     ),
                     Container(width: 8.0),
-                    GestureDetector(
+                    InkWell(
                         onTap: _onTap,
                         child: Container(
                             width: 48,
                             height: 40,
                             decoration: BoxDecoration(
+                              color: const Color(0xffffffff),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(32)),
                                 border: Border.all(
-                                    color: const Color(0xfff5df4d), width: 1)),
+                                    color: const Color(0x4d000000), width: 1)),
                             child: Center(
                                 child: Container(
                                     width: 24,
                                     height: 24,
-                                    child: isLocked
+                                    child: isPrivate
                                         ? Image.asset(
                                             "assets/icons/icon_lock_24_px.png")
                                         : Image.asset(
@@ -73,7 +58,8 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                         height: 40,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(32)),
-                            color: const Color(0xfff5df4d)),
+                            color: const Color(0xffffffff),
+                        border: Border.all(color: const Color(0x4d000000))),
                         child: Center(
                             child: Text("등록",
                                 style: const TextStyle(
@@ -90,7 +76,7 @@ class _BottomBarCommentState extends State<BottomBarComment> {
   void _onTap() {
     print("BottomComment - Lock Button Clicked");
     setState(() {
-      isLocked = isLocked ? false : true;
+      isPrivate = isPrivate ? false : true;
     });
   }
 }

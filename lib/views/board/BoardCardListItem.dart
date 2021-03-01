@@ -4,11 +4,13 @@ import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 
-class BoardCardList extends YrkListItem {
-  BoardCardList(width, height, {Key key, @required this.data})
-      : super(width, height);
+class BoardCardListItem extends StatelessWidget {
+  BoardCardListItem(
+      {@required this.width, @required this.height, @required this.index});
 
-  final YrkData data;
+  final double width;
+  final double height;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +52,5 @@ class BoardCardList extends YrkListItem {
                         fontSize: 16.0),
                   )),
             ])));
-  }
-
-  @override
-  clone() {
-    return BoardCardList(width, height);
   }
 }

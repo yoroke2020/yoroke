@@ -33,7 +33,7 @@ class MyMain extends StatefulWidget {
 
 class _MyMainState extends State<MyMain> {
   BottomBarNavigation bottomBarNavigation;
-  var _currentPageTab = RootPageItem.home;
+  var _curPageItem = RootPageItem.home;
   bool isFirst = true;
   final _navigatorKeys = {
     RootPageItem.home: GlobalKey<NavigatorState>(),
@@ -42,29 +42,29 @@ class _MyMainState extends State<MyMain> {
     RootPageItem.info: GlobalKey<NavigatorState>(),
   };
 
-  void _onSelectPageTab(RootPageItem rootPageItem) {
-    if (rootPageItem == _currentPageTab) {
+  void _onSelectPageItem(RootPageItem rootPageItem) {
+    _navigatorKeys[_curPageItem].currentState.popUntil((route) => route.isFirst);
+    if (rootPageItem == _curPageItem) {
       _navigatorKeys[rootPageItem].currentState.popUntil((route) => route.isFirst);
     } else {
       setState(() {
-        _currentPageTab = rootPageItem;
+        _curPageItem = rootPageItem;
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    bottomBarNavigation = BottomBarNavigation.getInstance();
-    bottomBarNavigation.setCurrentRootPageTab(_currentPageTab);
-    bottomBarNavigation.setOnSelectRootPageTab(_onSelectPageTab);
+    bottomBarNavigation = BottomBarNavigation.getInstance(_curPageItem);
+    bottomBarNavigation.setOnSelectRootPageItem(_onSelectPageItem);
 
     return WillPopScope(
       onWillPop: () async {
         final isFirstRoutInCurrentPageTab =
-            !await _navigatorKeys[_currentPageTab].currentState.maybePop();
+            !await _navigatorKeys[_curPageItem].currentState.maybePop();
         if (isFirstRoutInCurrentPageTab) {
-          if (_currentPageTab != RootPageItem.home) {
-            _onSelectPageTab(RootPageItem.home);
+          if (_curPageItem != RootPageItem.home) {
+            _onSelectPageItem(RootPageItem.home);
             return false;
           }
         }
@@ -83,7 +83,7 @@ class _MyMainState extends State<MyMain> {
 
   _buildOffstageNavigator(RootPageItem rootPageItem) {
     return Offstage(
-        offstage: _currentPageTab != rootPageItem,
+        offstage: _curPageItem != rootPageItem,
         child: TabNavigator(
           navigatorKey: _navigatorKeys[rootPageItem],
           rootPageItem: rootPageItem,

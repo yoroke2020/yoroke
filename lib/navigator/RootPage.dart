@@ -18,8 +18,8 @@ class RootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppBarNormal appBarNormal = AppBarNormal.getInstance();
-    BottomBarNavigation bottomBarNavigation = BottomBarNavigation.getInstance();
-    bottomBarNavigation.setCurrentRootPageTab(RootPageItem.values[currentIndex]);
+    BottomBarNavigation bottomBarNavigation =
+        BottomBarNavigation.getInstance(RootPageItem.values[currentIndex]);
 
     final List<Widget> children = [
       Home(),
@@ -29,10 +29,9 @@ class RootPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: const Color(0xffffffff),
+        backgroundColor: const Color(0xffffffff),
         appBar: appBarNormal,
         body: children[currentIndex],
-        bottomNavigationBar: bottomBarNavigation
-    ) ;
+        bottomNavigationBar: bottomBarNavigation);
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 
-import 'DetailPage.dart';
+import 'SubPage.dart';
 import 'RootPage.dart';
 import 'PageItem.dart';
 
@@ -35,7 +35,7 @@ class TabNavigator extends StatelessWidget {
             currentIndex: rootPageItem.index,
             onPushNavigator: (data) => _push(context, data: data),
           ),
-      TabNavigatorRoutes.detail: (context) => DetailPage(
+      TabNavigatorRoutes.detail: (context) => SubPage(
             rootIndex: rootPageItem.index,
             data: data,
             onPushNavigator: (data) => _push(context, data: data),

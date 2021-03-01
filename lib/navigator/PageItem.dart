@@ -5,10 +5,6 @@ enum RootPageItem { home, board, find, info }
 
 enum SubPageItem { boardReview, boardQna, boardJobFinding }
 
-enum AppBarType { normal, yellow, arrowBack, disable }
-
-enum BottomBarType { normal, comments, disable }
-
 const Map<RootPageItem, String> rootPageTabIconInfo = {
   RootPageItem.home: 'home',
   RootPageItem.board: 'board',
