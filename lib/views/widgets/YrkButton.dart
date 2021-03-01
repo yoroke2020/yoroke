@@ -4,82 +4,102 @@ import 'package:flutter/material.dart';
 enum ButtonType { solid, outline, text, chip, outlinechip, rect, image }
 
 class YrkButton extends StatelessWidget {
-  final double width;
-  final double height;
+  double width;
+  double height;
   final String label;
-  final bool disable;
+  final bool enable;
   final bool clickable;
   final double fontSize;
   final Function onPress;
 
   final ButtonType type;
+  final Color btnColor;
+  final Color fontColor;
+  final Color outlineBtnColor;
+  Text text;
 
   final RoundedRectangleBorder radius =
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(32));
-  final Color btnColor = const Color(0xfff5df4d);
   final Color disableColor = const Color(0xffe8e8e8);
 
   YrkButton({
     Key key,
     @required this.type,
-    this.width,
-    this.height,
+    this.width = 100,
+    this.height = 48,
     this.label,
-    this.disable = false,
+    this.enable = true,
     this.clickable = true,
     this.fontSize = 14,
     this.onPress,
+    this.btnColor = const Color(0xfff5df4d),
+    this.fontColor,
+    this.outlineBtnColor = const Color(0xffffffff),
   }) : super(key: key);
 
-  Text getText(ButtonType type, String label, double fontSize) {
+  Text getText(
+    ButtonType type,
+    String label,
+    double fontSize,
+    Color fontColor,
+  ) {
     TextStyle textStyle;
 
     switch (type) {
       case ButtonType.solid:
-        textStyle = YrkBtnTxtStyle(fontSize: fontSize);
+        textStyle = YrkBtnTxtStyle(
+          fontSize: fontSize,
+          color: fontColor,
+        );
         break;
       case ButtonType.outline:
-        textStyle = YrkBtnTxtStyle(fontWeight: FontWeight.bold);
+        textStyle = YrkBtnTxtStyle(
+          fontSize: fontSize,
+          color: fontColor,
+          fontWeight: FontWeight.bold,
+        );
         break;
       case ButtonType.chip:
         textStyle = YrkBtnTxtStyle(
-            fontWeight: FontWeight.bold,
-            color: const Color(0x99000000),
-            fontSize: this.fontSize);
+          fontWeight: FontWeight.bold,
+          color: const Color(0x99000000),
+          fontSize: fontSize,
+        );
         break;
       case ButtonType.text:
-        textStyle = YrkBtnTxtStyle(fontWeight: FontWeight.bold);
+        textStyle = YrkBtnTxtStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: fontSize,
+          color: fontColor,
+        );
         break;
       case ButtonType.image:
-        textStyle = YrkBtnTxtStyle(fontWeight: FontWeight.bold);
+        textStyle = YrkBtnTxtStyle(
+          fontSize: fontSize,
+          color: fontColor,
+          fontWeight: FontWeight.bold,
+        );
         break;
       default:
-        textStyle = YrkBtnTxtStyle(fontSize: fontSize);
+        textStyle = YrkBtnTxtStyle(
+          fontSize: fontSize,
+          color: fontColor,
+        );
         break;
     }
 
     return Text(label, style: textStyle, textAlign: TextAlign.center);
   }
 
-  Widget getButton(
-    ButtonType type,
-    Text text,
-    Function onPress,
-    bool disable,
-    bool clickable,
-    double width,
-    double height,
-  ) {
+  Widget getButton() {
     switch (type) {
       case ButtonType.solid:
         return FlatButton(
-          minWidth: width = 100,
-          height: height = 48,
           child: text,
           shape: radius,
           color: btnColor,
-          onPressed: this.disable || !this.clickable ? null : onPress,
-          disabledColor: this.clickable ? disableColor : btnColor,
+          onPressed: !(enable && clickable) ? null : onPress,
+          disabledColor: clickable ? disableColor : btnColor,
         );
 
       case ButtonType.outline:
@@ -90,21 +110,22 @@ class YrkButton extends StatelessWidget {
             width: 2.0,
             color: btnColor,
           ),
-          onPressed: this.disable || !this.clickable ? null : onPress,
-          disabledBorderColor: this.clickable ? disableColor : btnColor,
+          color: outlineBtnColor,
+          onPressed: !(enable && clickable) ? null : onPress,
+          disabledBorderColor: clickable ? disableColor : btnColor,
         );
 
       case ButtonType.chip:
+        width = 60;
+        height = 24;
         return FlatButton(
           padding: EdgeInsets.all(0),
-          minWidth: width = 60,
-          height: height = 24,
           child: text,
           shape: radius,
           color: btnColor,
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          onPressed: this.disable || !this.clickable ? null : onPress,
-          disabledColor: this.clickable ? disableColor : btnColor,
+          onPressed: !(enable && clickable) ? null : onPress,
+          disabledColor: clickable ? disableColor : btnColor,
         );
 
       case ButtonType.outlinechip:
@@ -116,56 +137,59 @@ class YrkButton extends StatelessWidget {
             width: 2.0,
             color: btnColor,
           ),
-          color: btnColor,
-          onPressed: this.disable || !this.clickable ? null : onPress,
-          disabledBorderColor: this.clickable ? disableColor : btnColor,
+          color: outlineBtnColor,
+          onPressed: !(enable && clickable) ? null : onPress,
+          disabledBorderColor: clickable ? disableColor : btnColor,
         );
 
       case ButtonType.rect:
         return FlatButton(
-          minWidth: width = 100,
-          height: height = 48,
           child: text,
-          color: btnColor,
-          onPressed: this.disable || !this.clickable ? null : onPress,
-          disabledColor: this.clickable ? disableColor : btnColor,
+          shape: radius,
+          onPressed: !(enable && clickable) ? null : onPress,
+          disabledColor: clickable ? disableColor : btnColor,
         );
 
       case ButtonType.text:
         return FlatButton(
-          minWidth: width = 100,
-          height: height = 48,
           child: text,
-          onPressed: this.disable || !this.clickable ? null : onPress,
-          disabledColor: this.clickable ? disableColor : btnColor,
+          onPressed: !(enable && clickable) ? null : onPress,
+          disabledColor: clickable ? disableColor : btnColor,
         );
       // Todo: Image icon btn
       case ButtonType.image:
         return FlatButton(
           child: text,
-          onPressed: this.disable || !this.clickable ? null : onPress,
-          disabledColor: this.clickable ? disableColor : btnColor,
+          shape: radius,
+          onPressed: !(enable && clickable) ? null : onPress,
+          disabledColor: clickable ? disableColor : btnColor,
         );
       default:
         return FlatButton(
-          minWidth: width = 100,
-          height: height = 48,
           child: text,
           shape: radius,
-          onPressed: this.disable || !this.clickable ? null : onPress,
-          disabledColor: this.clickable ? disableColor : btnColor,
+          onPressed: !(enable && clickable) ? null : onPress,
+          disabledColor: clickable ? disableColor : btnColor,
         );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    text = getText(type, label, fontSize, fontColor);
+    if (type == ButtonType.chip || type == ButtonType.outlinechip) {
+      width = 60;
+      height = 24;
+    }
     return Container(
-      width: this.width,
-      height: this.height,
+      width: width,
+      height: height,
       padding: EdgeInsets.all(0),
-      child: getButton(this.type, getText(this.type, this.label, this.fontSize),
-          this.onPress, this.disable, this.clickable, this.width, this.height),
+      child: Container(
+        height: double.infinity,
+        width: double.infinity,
+        child: getButton(),
+      ),
       alignment: AlignmentDirectional.center,
     );
   }

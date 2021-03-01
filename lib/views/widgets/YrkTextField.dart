@@ -21,7 +21,6 @@ class _YrkTextFieldState extends State<YrkTextField> {
       return InputDecoration(
           filled: true,
           fillColor: const Color(0xfff0f0f0),
-          // diff
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: const Color(0xe6000000),
