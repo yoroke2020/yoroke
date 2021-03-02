@@ -47,9 +47,19 @@ class _YrkTextFieldState extends State<YrkTextField> {
           labelText: label);
     }
 
-    return TextField(
-      decoration: YrkTxtFieldInputDecoration(widget.label),
-      obscureText: widget.obscureText,
+    return Container(
+      // width: width,
+      // height: height,
+      padding: EdgeInsets.all(0),
+      alignment: AlignmentDirectional.center,
+      child: Container(
+        height: double.infinity,
+        width: double.infinity,
+        child: TextField(
+          decoration: YrkTxtFieldInputDecoration(widget.label),
+          obscureText: widget.obscureText,
+        ),
+      ),
     );
   }
 }
