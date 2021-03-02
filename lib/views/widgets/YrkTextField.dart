@@ -4,11 +4,18 @@ import 'package:flutter/material.dart';
 import 'YrkTextStyle.dart';
 
 class YrkTextField extends StatefulWidget {
+  final double width;
+  final double height;
   final String label;
   final bool obscureText;
 
-  YrkTextField({Key key, @required this.label, this.obscureText = false})
-      : super(key: key);
+  YrkTextField({
+    Key key,
+    @required this.label,
+    this.obscureText = false,
+    this.width = 100,
+    this.height = 48,
+  }) : super(key: key);
 
   @override
   _YrkTextFieldState createState() => _YrkTextFieldState();
@@ -48,9 +55,17 @@ class _YrkTextFieldState extends State<YrkTextField> {
     }
 
     return Container(
-      child: TextField(
-        decoration: YrkTxtFieldInputDecoration(widget.label),
-        obscureText: widget.obscureText,
+      width: widget.width,
+      height: widget.height,
+      padding: EdgeInsets.all(0),
+      alignment: AlignmentDirectional.center,
+      child: Container(
+        height: double.infinity,
+        width: double.infinity,
+        child: TextField(
+          decoration: YrkTxtFieldInputDecoration(widget.label),
+          obscureText: widget.obscureText,
+        ),
       ),
     );
   }
