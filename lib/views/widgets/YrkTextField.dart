@@ -9,12 +9,17 @@ class YrkTextField extends StatefulWidget {
   final String label;
   final bool obscureText;
 
+  final double fontSize;
+
+  final TextEditingController txtController = TextEditingController();
+
   YrkTextField({
     Key key,
     @required this.label,
     this.obscureText = false,
-    this.width = 100,
+    this.width = 300,
     this.height = 48,
+    this.fontSize = 16,
   }) : super(key: key);
 
   @override
@@ -22,38 +27,43 @@ class YrkTextField extends StatefulWidget {
 }
 
 class _YrkTextFieldState extends State<YrkTextField> {
+  InputDecoration YrkTxtFieldInputDecoration(String label) {
+    return InputDecoration(
+      contentPadding: EdgeInsets.all((widget.height - widget.fontSize) * 0.5),
+      filled: true,
+      fillColor: const Color(0xfff0f0f0),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: const Color(0xe6000000),
+          width: 1,
+        ),
+        borderRadius: BorderRadius.all(
+          Radius.circular(36),
+        ),
+      ),
+      border: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: const Color(0xff4d0000),
+          width: 1,
+        ),
+        borderRadius: BorderRadius.all(
+          Radius.circular(36),
+        ),
+      ),
+      hintStyle: YrkTextStyle(
+        color: Color(0x4d000000),
+        fontSize: 16,
+      ),
+      hintText: label,
+    );
+  }
+
+  void _handleSubmitted(String text) {
+    widget.txtController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
-    InputDecoration YrkTxtFieldInputDecoration(String label) {
-      return InputDecoration(
-          filled: true,
-          fillColor: const Color(0xfff0f0f0),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: const Color(0xe6000000),
-              width: 1,
-            ),
-            borderRadius: BorderRadius.all(
-              Radius.circular(36),
-            ),
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: const Color(0xff4d0000),
-              width: 1,
-            ),
-            borderRadius: BorderRadius.all(
-              Radius.circular(36),
-            ),
-          ),
-          labelStyle: YrkTextStyle(
-              color: Color(0x4d000000),
-              fontSize: 16,
-              height: 24 / 16,
-              letterSpacing: -0.32 / 16),
-          labelText: label);
-    }
-
     return Container(
       width: widget.width,
       height: widget.height,
@@ -63,8 +73,11 @@ class _YrkTextFieldState extends State<YrkTextField> {
         height: double.infinity,
         width: double.infinity,
         child: TextField(
+          // controller: widget.txtController,
+          // onSubmitted: _handleSubmitted,
           decoration: YrkTxtFieldInputDecoration(widget.label),
           obscureText: widget.obscureText,
+          // scrollPadding: EdgeInsets.only(bottom:bottomInsets + 40.0),
         ),
       ),
     );
