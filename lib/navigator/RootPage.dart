@@ -22,7 +22,7 @@ class RootPage extends StatelessWidget {
         BottomBarNavigation.getInstance(RootPageItem.values[currentIndex]);
 
     final List<Widget> children = [
-      Home(),
+      Home(onPushNavigator: onPushNavigator),
       Board(onPushNavigator: onPushNavigator),
       Find(),
       Info()
