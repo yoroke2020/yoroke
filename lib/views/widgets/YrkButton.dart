@@ -18,6 +18,8 @@ class YrkButton extends StatelessWidget {
   final Color outlineBtnColor;
   Text text;
 
+  final String img;
+
   final RoundedRectangleBorder radius =
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(32));
   final Color disableColor = const Color(0xffe8e8e8);
@@ -35,6 +37,7 @@ class YrkButton extends StatelessWidget {
     this.btnColor = const Color(0xfff5df4d),
     this.fontColor,
     this.outlineBtnColor = const Color(0xffffffff),
+    this.img = "assets/icons/thumb_up_16_px.png",
   }) : super(key: key);
 
   Text getText(
@@ -159,8 +162,28 @@ class YrkButton extends StatelessWidget {
       // Todo: Image icon btn
       case ButtonType.image:
         return FlatButton(
-          child: text,
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                  width: this.fontSize * 2,
+                  child: Image.asset(img),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16), //모서리를 둥글게
+                    // border: Border.all(color: Colors.black, width: 3),
+                  ),
+                ),
+                text,
+                Container(
+                  width: this.fontSize * 2,
+                ),
+              ],
+            ),
+          ),
           shape: radius,
+          color: btnColor,
           onPressed: !(enable && clickable) ? null : onPress,
           disabledColor: clickable ? disableColor : btnColor,
         );

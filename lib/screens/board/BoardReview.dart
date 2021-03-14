@@ -50,7 +50,7 @@ class _BoardReviewState extends State<BoardReview> {
 
   List<Widget> _reviewCardList() {
     List<Widget> list = List<Widget>();
-    for (int i = 0; i < 4; i++) {
+    for(int i = 0; i < 4; i++) {
       list.add(BoardCardListItem(width: 112.0, height: 112.0, index: i));
     }
 
@@ -59,7 +59,7 @@ class _BoardReviewState extends State<BoardReview> {
 
   List<Widget> _reviewTabViewListItem() {
     List<Widget> list = List<Widget>();
-    for (int i = 0; i < 10; i++) {
+    for(int i = 0; i < 10; i++) {
       list.add(BoardReviewTabViewListItem(index: i));
     }
 
@@ -109,10 +109,9 @@ class _BoardReviewState extends State<BoardReview> {
                     clickable: true,
                     onPushNavigator: widget.onPushNavigator,
                     nextSubPageItem: SubPageItem.boardQna,
-                    item: _reviewTabViewListItem()),
+                    item:_reviewTabViewListItem()),
               ]),
         ]),
-        bottomNavigationBar:
-            BottomBarNavigation.getInstance(RootPageItem.board));
+    bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.board));
   }
 }
