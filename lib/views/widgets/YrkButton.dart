@@ -27,8 +27,8 @@ class YrkButton extends StatelessWidget {
   YrkButton({
     Key key,
     @required this.type,
-    this.width = 100,
-    this.height = 48,
+    this.width = double.infinity,
+    this.height = double.infinity,
     this.label,
     this.enable = true,
     this.clickable = true,
@@ -168,7 +168,10 @@ class YrkButton extends StatelessWidget {
               children: <Widget>[
                 Container(
                   width: this.fontSize * 2,
-                  child: Image.asset(img),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(img),
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16), //모서리를 둥글게
