@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/screens/LogIn/SignInDone.dart';
 
 import 'package:yoroke/views/widgets/YrkTextField.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
@@ -26,35 +27,45 @@ class _NicknameState extends State<Nickname> {
       body: Container(
         padding: const EdgeInsets.all(24),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Container(
-              child: new AspectRatio(
-                aspectRatio: 360 / 48,
-                child: Container(
-                  child: Text("커뮤니티에서 사용할 닉네임을 지어주세요",
-                      style: YrkTextStyle(
-                        color: Color(0xe6000000),
-                        fontSize: 22.0,
-                      ),
-                      textAlign: TextAlign.left),
+              child: Container(
+                width: 360,
+                height: 96,
+                margin: EdgeInsets.only(bottom: 24),
+                child: Text(
+                  "커뮤니티에서 사용하실\n닉네임을 설정해 주세요.",
+                  style: YrkTextStyle(
+                    color: Color(0xe6000000),
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.left,
                 ),
               ),
             ),
-            AspectRatio(
-              aspectRatio: 360 / 120,
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    child: YrkTextField(label: '닉네임입력'),
-                  ),
-                  Spacer(),
-                  Expanded(
-                    child: YrkButton(
-                      type: ButtonType.solid,
-                      label: "다음",
-                    ),
-                  )
-                ],
+            Container(
+              child: YrkTextField(
+                label: '닉네임입력',
+                width: 328,
+                height: 48,
+              ),
+              margin: EdgeInsets.only(bottom: 24),
+            ),
+            Container(
+              width: 328,
+              height: 48,
+              child: YrkButton(
+                type: ButtonType.solid,
+                label: "다음",
+                clickable: true,
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignInDone()),
+                  );
+                },
               ),
             ),
           ],
