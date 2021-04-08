@@ -18,8 +18,8 @@ class _NicknameState extends State<Nickname> {
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         leading: new IconButton(
-          icon: new Icon(Icons.arrow_back),
-          onPressed: null,
+          icon: new Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,

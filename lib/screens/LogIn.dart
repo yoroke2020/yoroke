@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/screens/LogIn/SiginInDialog.dart';
 
 import 'LogIn/Nickname.dart';
 
@@ -31,12 +32,10 @@ class _LogInState extends State<LogIn> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading:
-              new IconButton(icon: new Icon(Icons.arrow_back), onPressed: null
-                  // () {
-                  //   // Navigator.pop(context);
-                  // },
-                  ),
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
           backgroundColor: Colors.transparent,
           elevation: 0.0,
         ),
@@ -64,7 +63,7 @@ class _LogInState extends State<LogIn> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Nickname()),
+                                          builder: (context) => SignInDialog()),
                                     );
                                   },
                                 )))
