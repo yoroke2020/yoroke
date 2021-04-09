@@ -21,7 +21,7 @@ class YrkButton extends StatelessWidget {
   final String img;
 
   final RoundedRectangleBorder radius =
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(32));
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(100));
   final Color disableColor = const Color(0xffe8e8e8);
 
   YrkButton({

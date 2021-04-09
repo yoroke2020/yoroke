@@ -111,12 +111,7 @@ class _SignInDialogState extends State<SignInDialog> {
                 type: ButtonType.text,
                 label: "취소",
                 clickable: true,
-                onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Nickname()),
-                  );
-                },
+                onPress: () => Navigator.of(context).pop(),
               ),
             ),
           ],

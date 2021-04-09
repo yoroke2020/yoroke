@@ -17,15 +17,6 @@ var btns = {
   {"text": "Apple로 계속하기", "icon": "assets/icons/icon_apple.png"},
 };
 
-Widget wrapElement(Widget _child) {
-  return Container(
-      padding: const EdgeInsets.only(top: 4, bottom: 4),
-      child: AspectRatio(
-        aspectRatio: 360 / 48,
-        child: Center(child: _child),
-      ));
-}
-
 class _LogInState extends State<LogIn> {
   final loginPageController = PageController();
   @override
@@ -40,35 +31,48 @@ class _LogInState extends State<LogIn> {
           elevation: 0.0,
         ),
         body: Container(
+            width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.all(16),
-            child: Column(children: <Widget>[
-              Container(
-                // Todo: logo
-                padding: const EdgeInsets.all(80),
-                child: Image.asset('assets/icons/icon_naver.png'),
-              ),
-              Spacer(),
-              Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(8),
-                  child: Column(children: <Widget>[
-                    wrapElement(Text("로그인 및 회원가입")),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    // Todo: logo
+                    padding: const EdgeInsets.all(80),
+                    child: Image.asset('assets/icons/icon_naver.png'),
+                  ),
+                  Spacer(),
+                  Container(
+                      //width: double.infinity,
+                      // padding: const EdgeInsets.all(8),
+                      child: Column(children: <Widget>[
+                    Container(
+                        padding: const EdgeInsets.only(top: 4, bottom: 4),
+                        child: Text("로그인 및 회원가입")),
                     Column(
                         children: btns
-                            .map((e) => wrapElement(YrkButton(
-                                  type: ButtonType.image,
-                                  label: e['text'],
-                                  img: e['icon'],
-                                  onPress: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => SignInDialog()),
-                                    );
-                                  },
-                                )))
+                            .map((e) => Container(
+                                  padding:
+                                      const EdgeInsets.only(top: 8, bottom: 8),
+                                  child: YrkButton(
+                                    type: ButtonType.image,
+                                    width: 328,
+                                    height: 48,
+                                    label: e['text'],
+                                    img: e['icon'],
+                                    onPress: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SignInDialog()),
+                                      );
+                                    },
+                                  ),
+                                ))
                             .toList())
                   ]))
-            ])));
+                ])));
   }
 }

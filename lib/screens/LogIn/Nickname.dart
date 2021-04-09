@@ -25,6 +25,7 @@ class _NicknameState extends State<Nickname> {
         elevation: 0.0,
       ),
       body: Container(
+        width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
