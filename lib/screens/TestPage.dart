@@ -1,14 +1,33 @@
 import 'package:flutter/cupertino.dart';
-import 'package:yoroke/models/YrkData.dart';
+import 'package:flutter/material.dart';
 
-class TestPage extends StatelessWidget {
-  TestPage(this.data);
+import 'package:yoroke/views/widgets/YrkTextField.dart';
+import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
-  final YrkData data;
+class TestPage extends StatefulWidget {
+  @override
+  _TestPageState createState() => _TestPageState();
+}
 
+class _TestPageState extends State<TestPage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Text(data.str0);
+    return Scaffold(
+      appBar: AppBar(
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back),
+          onPressed: null,
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(16),
+        child: YrkTextField(
+          label: '이메일',
+          errorText: '이미 사용중인 이메일입니다.',
+        ),
+      ),
+    );
   }
 }
