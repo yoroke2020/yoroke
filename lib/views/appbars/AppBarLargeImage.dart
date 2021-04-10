@@ -6,8 +6,8 @@ import 'package:yoroke/views/widgets/YrkChipButtonLong.dart';
 
 class AppBarLargeImage extends StatefulWidget implements PreferredSizeWidget {
   AppBarLargeImage(
-      {@required this.titleText,
-      @required this.subTitleText,
+      {required this.titleText,
+      required this.subTitleText,
       this.buttonColor = const Color(0x00000000),
       this.buttonBorderColor = const Color(0xfff5df4d),
       this.buttonTextColor = const Color(0xfff5df4d),
@@ -19,8 +19,8 @@ class AppBarLargeImage extends StatefulWidget implements PreferredSizeWidget {
   final Color buttonColor;
   final Color buttonBorderColor;
   final Color buttonTextColor;
-  final Function onButtonClicked;
-  final bool widgetVisible;
+  final Function? onButtonClicked;
+  final bool? widgetVisible;
 
   @override
   final Size preferredSize = Size.fromHeight(168);
@@ -57,7 +57,7 @@ class _AppBarLargeImageState extends State<AppBarLargeImage> {
               )),
               Container(
                   child: Column(children: [
-                AppBarYellow.getInstance(),
+                AppBarYellow.getInstance()!,
                 Expanded(child: Container()),
                 Container(
                     height: 24,
@@ -101,12 +101,12 @@ class _AppBarLargeImageState extends State<AppBarLargeImage> {
                         onTap: _onTap,
                         child: Stack(children: <Widget>[
                           Offstage(
-                            offstage: widget.widgetVisible,
+                            offstage: widget.widgetVisible!,
                               child: YrkChipButtonLong(
                             buttonStyle: YrkChipButtonLongStyle.outline,
                           )),
                           Offstage(
-                              offstage: !widget.widgetVisible,
+                              offstage: !widget.widgetVisible!,
                               child: YrkChipButtonLong(
                                 buttonStyle: YrkChipButtonLongStyle.solid,
                               )),
@@ -118,6 +118,6 @@ class _AppBarLargeImageState extends State<AppBarLargeImage> {
 
   void _onTap() {
     print("AppBarLargeTheme - onTap is called");
-    widget.onButtonClicked();
+    widget.onButtonClicked!();
   }
 }

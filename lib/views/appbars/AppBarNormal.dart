@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppBarNormal extends StatefulWidget implements PreferredSizeWidget {
-  static AppBarNormal _instance;
+  static AppBarNormal? _instance;
 
   AppBarNormal._internal(this.preferredSize);
 
-  static AppBarNormal getInstance() {
+  static AppBarNormal? getInstance() {
     if (_instance == null)
       _instance = AppBarNormal._internal(Size.fromHeight(kToolbarHeight));
     return _instance;

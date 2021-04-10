@@ -8,9 +8,9 @@ import 'package:yoroke/views/home/HomePopularCardListItem.dart';
 import 'package:yoroke/views/home/HomePopularListItem.dart';
 
 class Home extends StatefulWidget {
-  Home({@required this.onPushNavigator});
+  Home({required this.onPushNavigator});
 
-  final ValueChanged<YrkData> onPushNavigator;
+  final ValueChanged<YrkData>? onPushNavigator;
 
   @override
   _HomeState createState() => _HomeState();
@@ -18,7 +18,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Widget> _noticeCardList() {
-    List<Widget> list = List<Widget>();
+    List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(HomeCardListItem(width: 320.0, height: 120.0, index: i));
     }
@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
   }
 
   List<Widget> _popularCardList() {
-    List<Widget> list = List<Widget>();
+    List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(HomePopularCardListItem(width: 144.0, height: 106.0, index: i));
     }
@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
   }
 
   List<Widget> _YrkListView() {
-    List<Widget> list = List<Widget>();
+    List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkListView(
           index: i,
@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
   }
 
   List<Widget> _homePopularList() {
-    List<Widget> list = List<Widget>();
+    List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(HomePopularListItem(index: i));
     }

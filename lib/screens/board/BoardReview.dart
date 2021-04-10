@@ -9,11 +9,11 @@ import 'package:yoroke/views/components/YrkTabBarView.dart';
 import 'package:yoroke/views/appbars/AppBarLargeImage.dart';
 
 class BoardReview extends StatefulWidget {
-  BoardReview({Key key, @required this.data, @required this.onPushNavigator})
+  BoardReview({Key? key, required this.data, required this.onPushNavigator})
       : super(key: key);
 
-  YrkData data;
-  final ValueChanged<YrkData> onPushNavigator;
+  YrkData? data;
+  final ValueChanged<YrkData>? onPushNavigator;
 
   @override
   _BoardReviewState createState() => _BoardReviewState();
@@ -44,12 +44,12 @@ class _BoardReviewState extends State<BoardReview> {
 
   void _onPushNavigator(YrkData data) {
     setState(() {
-      widget.data.i1 = data.i1;
+      widget.data!.i1 = data.i1;
     });
   }
 
   List<Widget> _reviewCardList() {
-    List<Widget> list = List<Widget>();
+    List<Widget> list = <Widget>[];
     for(int i = 0; i < 4; i++) {
       list.add(BoardCardListItem(width: 112.0, height: 112.0, index: i));
     }
@@ -58,7 +58,7 @@ class _BoardReviewState extends State<BoardReview> {
   }
 
   List<Widget> _reviewTabViewListItem() {
-    List<Widget> list = List<Widget>();
+    List<Widget> list = <Widget>[];
     for(int i = 0; i < 10; i++) {
       list.add(BoardReviewTabViewListItem(index: i));
     }
@@ -72,8 +72,8 @@ class _BoardReviewState extends State<BoardReview> {
         appBar: AppBarLargeImage(
           onButtonClicked: _onButtonClicked,
           widgetVisible: widgetVisible,
-          titleText: titleList[widget.data.i1],
-          subTitleText: subTitleList[widget.data.i1],
+          titleText: titleList[widget.data!.i1!],
+          subTitleText: subTitleList[widget.data!.i1!],
         ),
         body: ListView(children: <Widget>[
           AnimatedContainer(

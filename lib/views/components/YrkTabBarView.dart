@@ -6,14 +6,14 @@ class YrkTabBarView extends StatelessWidget {
   YrkTabBarView({
     this.tabViewList,
     this.controller,
-    @required this.tabTextList,
-    @required this.viewRatio,
-    @required this.tabSize,
-    @required this.length,
+    required this.tabTextList,
+    required this.viewRatio,
+    required this.tabSize,
+    required this.length,
   });
 
-  final List<Widget> tabViewList;
-  final TabController controller;
+  final List<Widget>? tabViewList;
+  final TabController? controller;
   final List<String> tabTextList;
   final double viewRatio;
   final int tabSize;
@@ -22,7 +22,7 @@ class YrkTabBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Tab> _buildTabs() {
-      List<Tab> tabs = List<Tab>();
+      List<Tab> tabs = <Tab>[];
       for (int i = 0; i < length; i++) {
         tabs.add(Tab(
             child: Text(tabTextList.elementAt(i),
@@ -43,7 +43,7 @@ class YrkTabBarView extends StatelessWidget {
       // The Builder widget is used to have a different BuildContext to access
       // closest DefaultTabController.
       child: Builder(builder: (BuildContext context) {
-        final TabController tabController = DefaultTabController.of(context);
+        final TabController tabController = DefaultTabController.of(context)!;
         tabController.addListener(() {
           if (tabController.indexIsChanging) {}
         });
@@ -67,7 +67,7 @@ class YrkTabBarView extends StatelessWidget {
           Container(
               height: 650,
               child: TabBarView(
-                children: tabViewList,
+                children: tabViewList!,
               )),
         ]);
       }),
