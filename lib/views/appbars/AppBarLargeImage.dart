@@ -36,7 +36,6 @@ class _AppBarLargeImageState extends State<AppBarLargeImage> {
         preferredSize: widget.preferredSize,
         child: Container(
             width: double.maxFinite,
-            height: 168,
             child: Stack(children: <Widget>[
               Container(
                 decoration: BoxDecoration(

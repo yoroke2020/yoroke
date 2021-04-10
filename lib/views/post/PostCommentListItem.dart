@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/diagnostics.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
+import 'package:yoroke/views/widgets/YrkButton.dart';
+import 'package:yoroke/views/widgets/YrkModalBottomSheetListItem.dart';
+import 'package:yoroke/views/widgets/YrkModelBottomSheet.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
 class PostCommentListItem extends StatefulWidget {
@@ -76,7 +79,10 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
                       padding: EdgeInsets.all(0.0),
                       icon: Icon(Icons.more_vert,
                           color: const Color(0x4d000000), size: 24.0),
-                      onPressed: () => print("more button clicked"),
+                      onPressed: () {
+                        print("more button clicked");
+                        _modalBottomSheet(context);
+                      },
                     )
                   ],
                 )),
@@ -103,7 +109,7 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
                             height: 14.0,
                           ),
                         ),
-                        onTap: _updateLikeCount,
+                        onTap: _onTapLikeCount,
                       ),
                       Container(
                         margin: const EdgeInsets.only(right: 17.0),
@@ -123,7 +129,7 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
                             height: 14.0,
                           ),
                         ),
-                        onTap: _updateDislikeCount,
+                        onTap: _onTapDislikeCount,
                       ),
                       Container(
                         margin: const EdgeInsets.only(right: 16.0),
@@ -135,7 +141,7 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
                             textAlign: TextAlign.left),
                       ),
                       InkWell(
-                          onTap: () => print("add comment button clicked"),
+                          onTap: _onTapAddComment,
                           child: Text(
                             "댓글 달기",
                             style: const YrkTextStyle(
@@ -148,7 +154,7 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
         ]));
   }
 
-  _updateLikeCount() {
+  void _onTapLikeCount() {
     print("likeCount pressed");
     setState(() {
       this.likeCount = this.isLiked ? this.likeCount - 1 : this.likeCount + 1;
@@ -156,11 +162,62 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
     });
   }
 
-  _updateDislikeCount() {
+  void _onTapDislikeCount() {
     print("dislikeCount pressed");
     setState(() {
-      this.dislikeCount = this.isDisliked ? this.dislikeCount - 1 : this.dislikeCount + 1;
+      this.dislikeCount =
+          this.isDisliked ? this.dislikeCount - 1 : this.dislikeCount + 1;
       this.isDisliked = this.isDisliked ? false : true;
     });
+  }
+
+  void _onTapAddComment() {
+    print("add comment button clicked");
+    //TODO: TextField에 @사용자ID가 붙게 하면서 Keyboard가 나타나게 해야함 (ValueChanged 같은 callback 필요)
+  }
+
+  void _modalBottomSheet(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return YrkModelBottomSheet(
+            listItem: _modalBottomSheetList(),
+            listItemCount: 7,
+            listHeight: 356.0,
+          );
+        });
+  }
+
+  List<Widget> _modalBottomSheetList() {
+    final List<String> imageAssetList = [
+      "assets/icons/icon_clear_24_px.png",
+      "assets/icons/icon_clear_24_px.png",
+      "assets/icons/icon_clear_24_px.png",
+      "assets/icons/icon_clear_24_px.png",
+      "assets/icons/icon_clear_24_px.png",
+      "assets/icons/icon_clear_24_px.png",
+    ];
+
+    final List<String> titleList = [
+      "공유하기",
+      "저장하기",
+      "글 복사하기",
+      "게시물 숨기기",
+      "사용자 차단하기",
+      "신고하기"
+    ];
+
+    List<Widget> list = List<Widget>();
+    for (int i = 0; i < 6; i++) {
+      list.add(new YrkModalBottomSheetListItem(
+        imageAsset: imageAssetList[i],
+        title: titleList[i],
+      ));
+    }
+    
+    list.add(YrkButton(type: ButtonType.outline, width: 328.0, height: 48.0,));
+    
+    
+    return list;
   }
 }

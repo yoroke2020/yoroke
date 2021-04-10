@@ -29,6 +29,7 @@ class SubPage extends StatelessWidget {
         Post(data: data),
       ],
       [
+        Post(data: data),
         BoardReview(data: data, onPushNavigator: onPushNavigator),
         Post(data: data),
         Post(data: data),
