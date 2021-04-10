@@ -3,6 +3,7 @@ import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/board/BoardCardListItem.dart';
 import 'package:yoroke/views/board/BoardReviewTabViewListItem.dart';
+import 'package:yoroke/views/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 import 'package:yoroke/views/components/YrkTabBarView.dart';
 import 'package:yoroke/views/appbars/AppBarLargeImage.dart';
@@ -110,6 +111,7 @@ class _BoardReviewState extends State<BoardReview> {
                     nextSubPageItem: SubPageItem.boardQna,
                     item:_reviewTabViewListItem()),
               ]),
-        ]));
+        ]),
+    bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.board));
   }
 }

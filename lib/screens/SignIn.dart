@@ -14,6 +14,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back),
@@ -68,9 +69,11 @@ class _SignInState extends State<SignIn> {
             ),
             Container(
               child: YrkButton(
-                type: ButtonType.outlinechip,
+                type: ButtonType.image,
                 label: "네이버",
+                width: 230,
                 onPress: () {},
+                clickable: true,
               ),
             ),
           ],

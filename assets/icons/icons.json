@@ -52,5 +52,8 @@
     "currentIndex": 4,
     "image": "assets/icons/icon_lock_24_px.png",
     "selectedImage": "assets/icons/icon_lock_open_24_px.png"
+  },
+  "naver": {
+    "image": "assets/icons/icon_naver.png"
   }
 }
