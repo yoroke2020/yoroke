@@ -14,29 +14,29 @@ class TabNavigatorRoutes {
 class TabNavigator extends StatelessWidget {
   TabNavigator({this.navigatorKey, this.rootPageItem});
 
-  final GlobalKey<NavigatorState> navigatorKey;
-  final RootPageItem rootPageItem;
+  final GlobalKey<NavigatorState>? navigatorKey;
+  final RootPageItem? rootPageItem;
 
-  void _push(BuildContext context, {YrkData data}) {
+  void _push(BuildContext context, {YrkData? data}) {
     var routeBuilders = _routeBuilders(context, data: data);
 
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => routeBuilders[TabNavigatorRoutes.detail](context),
+        builder: (context) => routeBuilders[TabNavigatorRoutes.detail]!(context),
       ),
     );
   }
 
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context,
-      {YrkData data}) {
+      {YrkData? data}) {
     return {
       TabNavigatorRoutes.root: (context) => RootPage(
-            currentIndex: rootPageItem.index,
+            currentIndex: rootPageItem!.index,
             onPushNavigator: (data) => _push(context, data: data),
           ),
       TabNavigatorRoutes.detail: (context) => SubPage(
-            rootIndex: rootPageItem.index,
+            rootIndex: rootPageItem!.index,
             data: data,
             onPushNavigator: (data) => _push(context, data: data),
           )
@@ -51,7 +51,7 @@ class TabNavigator extends StatelessWidget {
       initialRoute: TabNavigatorRoutes.root,
       onGenerateRoute: (routeSettings) {
         return MaterialPageRoute(
-            builder: (context) => routeBuilders[routeSettings.name](context));
+            builder: (context) => routeBuilders[routeSettings.name]!(context));
       },
     );
   }

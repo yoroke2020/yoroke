@@ -9,7 +9,7 @@ import 'package:yoroke/views/widgets/YrkRatingIcons.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
 class BoardReviewTabViewListItem extends StatelessWidget {
-  BoardReviewTabViewListItem({@required this.index});
+  BoardReviewTabViewListItem({required this.index});
 
   final int index;
 

@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppBarYellow extends StatefulWidget implements PreferredSizeWidget {
-  static AppBarYellow _instance;
+  static AppBarYellow? _instance;
 
   AppBarYellow._internal(this.preferredSize);
 
-  static AppBarYellow getInstance() {
+  static AppBarYellow? getInstance() {
     if (_instance == null)
       _instance = AppBarYellow._internal(Size.fromHeight(kToolbarHeight));
     return _instance;

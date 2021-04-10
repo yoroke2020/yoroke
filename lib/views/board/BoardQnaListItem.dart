@@ -6,7 +6,7 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 
 class BoardQnaListItem extends StatelessWidget {
-  BoardQnaListItem({@required this.index});
+  BoardQnaListItem({required this.index});
 
   final int index;
 

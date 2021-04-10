@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppBarArrowBack extends StatelessWidget implements PreferredSizeWidget {
-  static AppBarArrowBack _instance;
+  static AppBarArrowBack? _instance;
 
   AppBarArrowBack._internal(this.preferredSize);
 
-  static AppBarArrowBack getInstance() {
+  static AppBarArrowBack? getInstance() {
     if (_instance == null)
       _instance = AppBarArrowBack._internal(Size.fromHeight(kToolbarHeight));
     return _instance;

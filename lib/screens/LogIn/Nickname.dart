@@ -15,7 +15,7 @@ class _NicknameState extends State<Nickname> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back, color: Colors.black),

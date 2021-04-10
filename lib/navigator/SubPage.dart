@@ -16,9 +16,9 @@ import 'PageItem.dart';
 class SubPage extends StatelessWidget {
   SubPage({this.rootIndex, this.data, this.onPushNavigator});
 
-  final int rootIndex;
-  final YrkData data;
-  final ValueChanged<YrkData> onPushNavigator;
+  final int? rootIndex;
+  final YrkData? data;
+  final ValueChanged<YrkData>? onPushNavigator;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +37,6 @@ class SubPage extends StatelessWidget {
       []
     ];
 
-    return pages[rootIndex][data.nextPageItem.index];
+    return pages[rootIndex!][data!.nextPageItem!.index];
   }
 }

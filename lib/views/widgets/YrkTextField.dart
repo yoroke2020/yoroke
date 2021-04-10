@@ -14,8 +14,8 @@ class YrkTextField extends StatefulWidget {
   final TextEditingController txtController = TextEditingController();
 
   YrkTextField({
-    Key key,
-    @required this.label,
+    Key? key,
+    required this.label,
     this.obscureText = false,
     this.width = double.infinity,
     this.height = double.infinity,

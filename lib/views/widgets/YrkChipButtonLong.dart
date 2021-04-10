@@ -5,7 +5,7 @@ enum YrkChipButtonLongStyle { outline, solid }
 
 class YrkChipButtonLong extends StatelessWidget {
   const YrkChipButtonLong(
-      {Key key, this.buttonStyle = YrkChipButtonLongStyle.outline})
+      {Key? key, this.buttonStyle = YrkChipButtonLongStyle.outline})
       : super(key: key);
   final YrkChipButtonLongStyle buttonStyle;
 
