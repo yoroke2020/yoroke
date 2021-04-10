@@ -17,8 +17,8 @@ class YrkTextField extends StatefulWidget {
     Key key,
     @required this.label,
     this.obscureText = false,
-    this.width = 300,
-    this.height = 48,
+    this.width = double.infinity,
+    this.height = double.infinity,
     this.fontSize = 16,
   }) : super(key: key);
 
