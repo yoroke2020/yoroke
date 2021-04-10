@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/views/components/YrkListView.dart';
+import 'package:yoroke/views/components/YrkPageView.dart';
+import 'package:yoroke/views/home/HomeCardListItem.dart';
+import 'package:yoroke/views/home/HomePopularCardListItem.dart';
+import 'package:yoroke/views/home/HomePopularListItem.dart';
 
 class Home extends StatefulWidget {
   Home({@required this.onPushNavigator});
@@ -11,6 +17,46 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<Widget> _noticeCardList() {
+    List<Widget> list = List<Widget>();
+    for (int i = 0; i < 4; i++) {
+      list.add(HomeCardListItem(width: 320.0, height: 120.0, index: i));
+    }
+
+    return list;
+  }
+
+  List<Widget> _popularCardList() {
+    List<Widget> list = List<Widget>();
+    for (int i = 0; i < 4; i++) {
+      list.add(HomePopularCardListItem(width: 144.0, height: 106.0, index: i));
+    }
+
+    return list;
+  }
+
+  List<Widget> _YrkListView() {
+    List<Widget> list = List<Widget>();
+    for (int i = 0; i < 4; i++) {
+      list.add(YrkListView(
+          index: i,
+          itemCount: 4,
+          clickable: true,
+          onPushNavigator: widget.onPushNavigator,
+          nextSubPageItem: SubPageItem.boardReview,
+          item: _homePopularList()));
+    }
+    return list;
+  }
+
+  List<Widget> _homePopularList() {
+    List<Widget> list = List<Widget>();
+    for (int i = 0; i < 4; i++) {
+      list.add(HomePopularListItem(index: i));
+    }
+    return list;
+  }
+
   List<String> reviewCardImageList = [
     "assets/icons/sample_image.png",
     "assets/icons/sample_image.png",
@@ -52,23 +98,24 @@ class _HomeState extends State<Home> {
   final int qnaListPageCount = 4;
   final int qnaListItemCount = 4;
   final double qnaPageRatio = 360 / 260;
-  final qnaPageController = PageController();
+  final popularPageController = PageController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(children: <Widget>[
-      // YrkCardView(
-      //   viewHeight: 120,
-      //   cardWidth: 320,
-      //   cardHeight: 120,
-      //   cardImageList: reviewCardImageList,
-      //   cardNameList: reviewCardNameList,
-      //   cardDescList: reviewCardDescList,
-      //   onPushNavigator: widget.onPushNavigator,
-      //   onTapPageIndex: SubItem.boardReview.index,
-      //   textType: TextType.title_desc,
-      // ),
+      YrkListView(
+        width: 320.0,
+        height: 120.0,
+        margin: EdgeInsets.only(left: 8, right: 8),
+        scrollable: true,
+        scrollDirection: Axis.horizontal,
+        clickable: true,
+        onPushNavigator: widget.onPushNavigator,
+        nextSubPageItem: SubPageItem.boardReview,
+        item: _noticeCardList(),
+        itemCount: 4,
+      ),
       Container(
           decoration: BoxDecoration(color: const Color(0xffffffff)),
           child: new AspectRatio(
@@ -116,18 +163,11 @@ class _HomeState extends State<Home> {
                             textAlign: TextAlign.left)),
                     Expanded(flex: 16, child: Container())
                   ]))),
-      // YrkPageView(
-      //   page: BoardQnaList(
-      //     items: qnaStringExamples,
-      //     widgetRatio: qnaPageRatio * qnaListItemCount,
-      //     listLength: qnaListPageCount,
-      //     itemLength: qnaListItemCount,
-      //     onPushNavigator: widget.onPushNavigator,
-      //   ).getWidgetList(),
-      //   controller: qnaPageController,
-      //   viewRatio: qnaPageRatio,
-      //   isIndicatorEnabled: true,
-      // ),
+      YrkPageView(
+        page: _YrkListView(),
+        controller: popularPageController,
+        isIndicatorEnabled: true,
+      ),
       Container(
           decoration: BoxDecoration(color: const Color(0xffffffff)),
           child: new AspectRatio(
@@ -159,169 +199,18 @@ class _HomeState extends State<Home> {
                             textAlign: TextAlign.left)),
                     Expanded(flex: 16, child: Container())
                   ]))),
-      Container(
-        decoration: BoxDecoration(color: const Color(0xffffffff)),
-        width: double.maxFinite,
-        height: 200,
-        child: new AspectRatio(
-          aspectRatio: 360 / 40,
-          child: new Container(
-              width: double.maxFinite,
-              height: 106,
-              child: Align(
-                  alignment: Alignment.center,
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    scrollDirection: Axis.horizontal,
-                    physics: new AlwaysScrollableScrollPhysics(),
-                    itemCount: reviewCardImageList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Card(
-                          // shape: RoundedRectangleBorder(
-                          //     borderRadius: BorderRadius.circular(16)),
-                          elevation: 0.0,
-                          margin: const EdgeInsets.only(right: 8),
-                          child: InkWell(
-                              borderRadius: BorderRadius.circular(16),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  // mainAxisAlignment: MainAxisAlignment.end,
-                                  children: <Widget>[
-                                    new Container(
-                                        width: 144,
-                                        height: 106,
-                                        child: Stack(children: <Widget>[
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(16)),
-                                              image: new DecorationImage(
-                                                image: new AssetImage(
-                                                    reviewCardImageList
-                                                        .elementAt(index)),
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(16)),
-                                                  gradient: LinearGradient(
-                                                      begin: Alignment(0.5,
-                                                          -0.0739222913980484),
-                                                      end: Alignment(0.5, 1),
-                                                      colors: [
-                                                        const Color(0x00ffffff),
-                                                        const Color(0x4d000000)
-                                                      ]))),
-                                        ])),
-                                    Container(
-                                        padding: const EdgeInsets.only(
-                                            left: 8, top: 8),
-                                        child: Text("조문기 요양병원",
-                                            style: const TextStyle(
-                                                color: const Color(0xe6000000),
-                                                fontWeight: FontWeight.w700,
-                                                fontFamily: "NotoSansCJKKR",
-                                                fontStyle: FontStyle.normal,
-                                                fontSize: 16.0),
-                                            textAlign: TextAlign.left)),
-                                    Container(
-                                        padding: const EdgeInsets.only(left: 8),
-                                        child: Text("서울시 마포구",
-                                            style: const TextStyle(
-                                                color: const Color(0xe6000000),
-                                                fontWeight: FontWeight.w400,
-                                                fontFamily: "NotoSansCJKKR",
-                                                fontStyle: FontStyle.normal,
-                                                fontSize: 14.0),
-                                            textAlign: TextAlign.left)),
-                                    Container(
-                                        width: 144,
-                                        height: 30,
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: <Widget>[
-                                              Expanded(
-                                                  flex: 4, child: Container()),
-                                              Expanded(
-                                                  flex: 95,
-                                                  child: Row(
-                                                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                      children: <Widget>[
-                                                        Container(
-                                                          width: 16,
-                                                          height: 16,
-                                                          decoration: BoxDecoration(
-                                                              color: const Color(
-                                                                  0x00000000)),
-                                                          child: Image.asset(
-                                                              "assets/icons/icon_grade_fill_24_px.png"),
-                                                        ),
-                                                        Container(
-                                                          width: 16,
-                                                          height: 16,
-                                                          decoration: BoxDecoration(
-                                                              color: const Color(
-                                                                  0x00000000)),
-                                                          child: Image.asset(
-                                                              "assets/icons/icon_grade_fill_24_px.png"),
-                                                        ),
-                                                        Container(
-                                                          width: 16,
-                                                          height: 16,
-                                                          decoration: BoxDecoration(
-                                                              color: const Color(
-                                                                  0x00000000)),
-                                                          child: Image.asset(
-                                                              "assets/icons/icon_grade_fill_24_px.png"),
-                                                        ),
-                                                        Container(
-                                                          width: 16,
-                                                          height: 16,
-                                                          decoration: BoxDecoration(
-                                                              color: const Color(
-                                                                  0x00000000)),
-                                                          child: Image.asset(
-                                                              "assets/icons/icon_grade_fill_24_px.png"),
-                                                        ),
-                                                        Container(
-                                                            width: 16,
-                                                            height: 16,
-                                                            decoration: BoxDecoration(
-                                                                color: const Color(
-                                                                    0x00000000)),
-                                                            child: Image.asset(
-                                                                "assets/icons/icon_grade_24_px.png"))
-                                                      ])),
-                                              Expanded(
-                                                  flex: 16,
-                                                  child: Image.asset(
-                                                      "assets/icons/icon_save_black_24_px.png")),
-                                              Expanded(
-                                                  flex: 23,
-                                                  child: Text("246",
-                                                      style: const TextStyle(
-                                                          color: const Color(
-                                                              0x4d000000),
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontFamily:
-                                                              "Helvetica",
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize: 14.0),
-                                                      textAlign:
-                                                          TextAlign.left)),
-                                            ])),
-                                  ])));
-                    },
-                  ))),
-        ),
-      )
+      YrkListView(
+        width: 320.0,
+        height: 200.0,
+        margin: EdgeInsets.only(left: 8, right: 8),
+        scrollable: true,
+        scrollDirection: Axis.horizontal,
+        clickable: true,
+        onPushNavigator: widget.onPushNavigator,
+        nextSubPageItem: SubPageItem.boardReview,
+        item: _popularCardList(),
+        itemCount: 4,
+      ),
     ]));
   }
 }

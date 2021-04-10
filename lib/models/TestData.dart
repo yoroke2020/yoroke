@@ -36,6 +36,20 @@ List<String> testCardImage = [
   "assets/icons/sample_image.png",
 ];
 
+List<String> testHomeTitleString = [
+  "요로케 요양병원",
+  "코로나 프리 요양병원",
+  "요로나 요양병원",
+  "코로케 요양병원",
+];
+
+List<String> testHomeDescString = [
+  "지금 이용하실수 있는 혜택 3가지",
+  "지금 이용하실수 있는 혜택 4가지",
+  "지금 이용하실수 있는 혜택 5가지",
+  "지금 이용하실수 있는 혜택 6가지",
+];
+
 List<String> testShortString = [
   "요양병원",
   "요양원",

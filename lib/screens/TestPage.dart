@@ -10,6 +10,10 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> {
+  String data = "";
+
+  final _emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,9 +27,18 @@ class _TestPageState extends State<TestPage> {
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
-        child: YrkTextField(
-          label: '이메일',
-          errorText: '이미 사용중인 이메일입니다.',
+        child: Column(
+          children: [
+            YrkTextField(
+              // width: 300,
+              // height: 200,
+              // o
+              label: '이메일',
+              errorText: '이미 사용중인 메일입니다.',
+              // data: data,
+            ),
+            Text(data),
+          ],
         ),
       ),
     );

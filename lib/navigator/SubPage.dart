@@ -23,7 +23,11 @@ class SubPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<List<Widget>> pages = [
-      [],
+      [
+        Post(data: data),
+        Post(data: data),
+        Post(data: data),
+      ],
       [
         BoardReview(data: data, onPushNavigator: onPushNavigator),
         Post(data: data),
