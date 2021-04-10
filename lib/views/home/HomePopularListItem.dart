@@ -6,7 +6,7 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 
 class HomePopularListItem extends StatelessWidget {
-  HomePopularListItem({@required this.index});
+  HomePopularListItem({required this.index});
 
   final int index;
 

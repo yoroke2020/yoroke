@@ -6,9 +6,9 @@ import 'YrkTextStyle.dart';
 const BorderRadius borderRadius = const BorderRadius.all(Radius.circular(100));
 
 class YrkTextFieldInputDecoration extends InputDecoration {
-  final bool filled;
-  final String hintText;
-  final String errorText;
+  final bool? filled;
+  final String? hintText;
+  final String? errorText;
 
   const YrkTextFieldInputDecoration({
     this.filled,
@@ -48,11 +48,11 @@ class YrkTextFieldInputDecoration extends InputDecoration {
 
 class YrkTextField extends TextField {
   final bool obscureText;
-  final String label;
-  final String errorText;
+  final String? label;
+  final String? errorText;
 
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
 
   YrkTextField({
     this.obscureText = false,

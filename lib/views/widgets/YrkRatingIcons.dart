@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 
 class YrkRatingIcons extends StatelessWidget {
-  YrkRatingIcons({@required this.index});
+  YrkRatingIcons({required this.index});
 
   final int index;
 
@@ -13,10 +13,10 @@ class YrkRatingIcons extends StatelessWidget {
   }
 
   Widget _widget() {
-    List<Widget> list = List<Widget>();
     if (testNumber[this.index] == -1)
       return Container();
     else {
+      List<Widget> list = <Widget>[];
       for (int i = 0; i < testNumber[this.index]; i++) {
         list.add(Icon(
           Icons.star,

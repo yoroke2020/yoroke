@@ -6,7 +6,7 @@ import 'package:yoroke/views/components/YrkListView.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
 class PostCommentListItem extends StatefulWidget {
-  PostCommentListItem({@required this.index});
+  PostCommentListItem({required this.index});
 
   final int index;
 

@@ -6,27 +6,27 @@ enum ButtonType { solid, outline, text, chip, outlinechip, rect, image }
 class YrkButton extends StatelessWidget {
   double width;
   double height;
-  final String label;
+  final String? label;
   final bool enable;
   final bool clickable;
   final double fontSize;
-  final Function onPress;
+  final Function? onPress;
 
   final ButtonType type;
   final Color btnColor;
-  final Color fontColor;
+  final Color? fontColor;
   final Color outlineBtnColor;
-  Text text;
+  Text? text;
 
-  final String img;
+  final String? img;
 
   final RoundedRectangleBorder radius =
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(100));
   final Color disableColor = const Color(0xffe8e8e8);
 
   YrkButton({
-    Key key,
-    @required this.type,
+    Key? key,
+    required this.type,
     this.width = double.infinity,
     this.height = double.infinity,
     this.label,
@@ -42,9 +42,9 @@ class YrkButton extends StatelessWidget {
 
   Text getText(
     ButtonType type,
-    String label,
+    String? label,
     double fontSize,
-    Color fontColor,
+    Color? fontColor,
   ) {
     TextStyle textStyle;
 
@@ -91,17 +91,18 @@ class YrkButton extends StatelessWidget {
         break;
     }
 
-    return Text(label, style: textStyle, textAlign: TextAlign.center);
+    return Text(label!, style: textStyle, textAlign: TextAlign.center);
   }
 
   Widget getButton() {
     switch (type) {
       case ButtonType.solid:
         return FlatButton(
-          child: text,
+          child: text!,
           shape: radius,
           color: btnColor,
-          onPressed: !(enable && clickable) ? null : onPress,
+          onPressed:
+              !(enable && clickable) ? null : onPress as void Function()?,
           disabledColor: clickable ? disableColor : btnColor,
         );
 
@@ -114,7 +115,8 @@ class YrkButton extends StatelessWidget {
             color: btnColor,
           ),
           color: outlineBtnColor,
-          onPressed: !(enable && clickable) ? null : onPress,
+          onPressed:
+              !(enable && clickable) ? null : onPress as void Function()?,
           disabledBorderColor: clickable ? disableColor : btnColor,
         );
 
@@ -123,11 +125,12 @@ class YrkButton extends StatelessWidget {
         height = 24;
         return FlatButton(
           padding: EdgeInsets.all(0),
-          child: text,
+          child: text!,
           shape: radius,
           color: btnColor,
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          onPressed: !(enable && clickable) ? null : onPress,
+          onPressed:
+              !(enable && clickable) ? null : onPress as void Function()?,
           disabledColor: clickable ? disableColor : btnColor,
         );
 
@@ -141,22 +144,25 @@ class YrkButton extends StatelessWidget {
             color: btnColor,
           ),
           color: outlineBtnColor,
-          onPressed: !(enable && clickable) ? null : onPress,
+          onPressed:
+              !(enable && clickable) ? null : onPress as void Function()?,
           disabledBorderColor: clickable ? disableColor : btnColor,
         );
 
       case ButtonType.rect:
         return FlatButton(
-          child: text,
+          child: text!,
           shape: radius,
-          onPressed: !(enable && clickable) ? null : onPress,
+          onPressed:
+              !(enable && clickable) ? null : onPress as void Function()?,
           disabledColor: clickable ? disableColor : btnColor,
         );
 
       case ButtonType.text:
         return FlatButton(
-          child: text,
-          onPressed: !(enable && clickable) ? null : onPress,
+          child: text!,
+          onPressed:
+              !(enable && clickable) ? null : onPress as void Function()?,
           disabledColor: clickable ? disableColor : btnColor,
         );
       // Todo: Image icon btn
@@ -165,12 +171,12 @@ class YrkButton extends StatelessWidget {
           child: Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
+              children: (<Widget?>[
                 Container(
                   width: this.fontSize * 2,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(img),
+                    child: Image.asset(img!),
                   ),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -182,19 +188,21 @@ class YrkButton extends StatelessWidget {
                 Container(
                   width: this.fontSize * 2,
                 ),
-              ],
+              ]) as List<Widget>,
             ),
           ),
           shape: radius,
           color: btnColor,
-          onPressed: !(enable && clickable) ? null : onPress,
+          onPressed:
+              !(enable && clickable) ? null : onPress as void Function()?,
           disabledColor: clickable ? disableColor : btnColor,
         );
       default:
         return FlatButton(
-          child: text,
+          child: text!,
           shape: radius,
-          onPressed: !(enable && clickable) ? null : onPress,
+          onPressed:
+              !(enable && clickable) ? null : onPress as void Function()?,
           disabledColor: clickable ? disableColor : btnColor,
         );
     }
@@ -222,7 +230,7 @@ class YrkButton extends StatelessWidget {
 }
 
 class YrkBtnTxtStyle extends TextStyle {
-  final Color color;
+  final Color? color;
   final double height;
   final double letterSpacing;
   final double fontSize;

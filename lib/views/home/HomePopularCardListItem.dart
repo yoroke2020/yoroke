@@ -6,7 +6,7 @@ import 'package:yoroke/views/components/YrkListView.dart';
 
 class HomePopularCardListItem extends StatelessWidget {
   HomePopularCardListItem(
-      {@required this.width, @required this.height, @required this.index});
+      {required this.width, required this.height, required this.index});
 
   final double width;
   final double height;

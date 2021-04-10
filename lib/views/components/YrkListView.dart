@@ -18,7 +18,7 @@ class YrkListView extends StatelessWidget {
     this.onPushNavigator,
     this.index = 0,
     this.nextSubPageItem,
-    @required this.item,
+    required this.item,
     this.itemCount = 1,
     this.itemMargin = const EdgeInsets.all(0),
     this.itemPadding = const EdgeInsets.all(0),
@@ -29,9 +29,9 @@ class YrkListView extends StatelessWidget {
   final EdgeInsets padding;
   final EdgeInsets itemMargin;
   final EdgeInsets itemPadding;
-  final YrkData data;
-  final ValueChanged<YrkData> onPushNavigator;
-  final SubPageItem nextSubPageItem;
+  final YrkData? data;
+  final ValueChanged<YrkData>? onPushNavigator;
+  final SubPageItem? nextSubPageItem;
   final int itemCount;
   final double width;
   final double height;
@@ -60,7 +60,7 @@ class YrkListView extends StatelessWidget {
                 padding: this.itemPadding,
                 child: InkWell(
                     onTap: clickable
-                        ? () => onPushNavigator(new YrkData(
+                        ? () => onPushNavigator!(new YrkData(
                               nextSubPageItem,
                               str0: "This is # " +
                                   this.index.toString() +
@@ -75,7 +75,7 @@ class YrkListView extends StatelessWidget {
         ));
   }
 
-  YrkData _getData(int index) {
+  YrkData? _getData(int index) {
     if (data != null)
       return data;
     else

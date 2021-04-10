@@ -6,7 +6,7 @@ import 'package:yoroke/views/components/YrkListView.dart';
 
 class BoardCardListItem extends StatelessWidget {
   BoardCardListItem(
-      {@required this.width, @required this.height, @required this.index});
+      {required this.width, required this.height, required this.index});
 
   final double width;
   final double height;

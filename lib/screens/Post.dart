@@ -8,9 +8,9 @@ import 'package:yoroke/views/post/PostCommentListItem.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
 class Post extends StatefulWidget {
-  Post({Key key, @required this.data}) : super(key: key);
+  Post({Key? key, required this.data}) : super(key: key);
 
-  final YrkData data;
+  final YrkData? data;
 
   _PostState createState() => _PostState();
 }
@@ -32,7 +32,7 @@ class _PostState extends State<Post> {
   }
 
   String _sampleText(String s) {
-    String str = widget.data.str0 + "\n";
+    String str = widget.data!.str0! + "\n";
     for (int i = 0; i < 400; i++) {
       str += s;
     }

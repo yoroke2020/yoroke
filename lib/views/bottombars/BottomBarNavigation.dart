@@ -7,16 +7,16 @@ import 'package:flutter/services.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 
 class BottomBarNavigation extends StatefulWidget {
-  RootPageItem _curRootPageItem;
-  ValueChanged<RootPageItem> _onSelectRootPageItem;
+  RootPageItem? _curRootPageItem;
+  late ValueChanged<RootPageItem> _onSelectRootPageItem;
 
-  static BottomBarNavigation _instance;
+  static BottomBarNavigation? _instance;
 
   BottomBarNavigation._internal();
 
-  static BottomBarNavigation getInstance(RootPageItem currentRootPageItem) {
+  static BottomBarNavigation? getInstance(RootPageItem currentRootPageItem) {
     if (_instance == null) _instance = BottomBarNavigation._internal();
-    _instance._curRootPageItem = currentRootPageItem;
+    _instance!._curRootPageItem = currentRootPageItem;
     return _instance;
   }
 
@@ -29,8 +29,8 @@ class BottomBarNavigation extends StatefulWidget {
 }
 
 class _BottomBarNavigationState extends State<BottomBarNavigation> {
-  RootPageItem _curRootPageItem;
-  Map _iconMap;
+  RootPageItem? _curRootPageItem;
+  Map? _iconMap;
 
   BottomNavigationBarItem _buildItem(RootPageItem rootPageItem) {
     return BottomNavigationBarItem(
@@ -43,8 +43,8 @@ class _BottomBarNavigationState extends State<BottomBarNavigation> {
 
   Image _getIcon(RootPageItem rootPageItem) {
     return _curRootPageItem == rootPageItem
-        ? Image.asset(_iconMap[rootPageTabIconInfo[rootPageItem]]['selectedImage'])
-        : Image.asset(_iconMap[rootPageTabIconInfo[rootPageItem]]['image']);
+        ? Image.asset(_iconMap![rootPageTabIconInfo[rootPageItem]]['selectedImage'])
+        : Image.asset(_iconMap![rootPageTabIconInfo[rootPageItem]]['image']);
   }
 
   // TODO _memorizer 캐시 적용
@@ -66,7 +66,7 @@ class _BottomBarNavigationState extends State<BottomBarNavigation> {
             return BottomNavigationBar(
             backgroundColor: const Color(0xffffffff),
               type: BottomNavigationBarType.fixed,
-              currentIndex: _curRootPageItem.index,
+              currentIndex: _curRootPageItem!.index,
               items: [
                 _buildItem(RootPageItem.home),
                 _buildItem(RootPageItem.board),

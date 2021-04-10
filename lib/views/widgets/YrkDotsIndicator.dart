@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class YrkDotsIndicator extends AnimatedWidget {
   YrkDotsIndicator({
-    @required this.controller,
+    required this.controller,
     this.itemCount = 1,
     this.onPageSelected,
     this.selectedIndicatorColor: const Color(0xfff5df4d),
@@ -14,7 +14,7 @@ class YrkDotsIndicator extends AnimatedWidget {
 
   final PageController controller;
   final int itemCount;
-  final ValueChanged<int> onPageSelected;
+  final ValueChanged<int>? onPageSelected;
 
   Color selectedIndicatorColor;
   Color unselectedIndicatorColor;

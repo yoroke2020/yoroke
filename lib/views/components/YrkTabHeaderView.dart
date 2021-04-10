@@ -12,22 +12,21 @@ class YrkTabHeaderView extends StatelessWidget {
       this.onPushNavigator,
       this.nextSubPageItem,
       this.title = "",
-      this.widget});
+      });
 
   final double width;
   final double height;
   final EdgeInsets margin;
   final bool clickable;
-  final ValueChanged<YrkData> onPushNavigator;
-  final SubPageItem nextSubPageItem;
+  final ValueChanged<YrkData>? onPushNavigator;
+  final SubPageItem? nextSubPageItem;
   final String title;
-  final Widget widget;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
         onTap: clickable
-            ? () => onPushNavigator(new YrkData(nextSubPageItem))
+            ? () => onPushNavigator!(new YrkData(nextSubPageItem))
             : null,
         child: Container(
             width: this.width,
@@ -36,7 +35,7 @@ class YrkTabHeaderView extends StatelessWidget {
             decoration: BoxDecoration(color: const Color(0xffffffff)),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
+                children: (<Widget>[
                   Container(
                     child: Text(this.title,
                         style: const TextStyle(
@@ -48,14 +47,12 @@ class YrkTabHeaderView extends StatelessWidget {
                         textAlign: TextAlign.left),
                   ),
                   Expanded(child: Container()),
-                  this.widget != null
-                      ? widget
-                      : Container(
+                      Container(
                           width: 24.0,
                           height: 24.0,
                           child: Image.asset(
                               "assets/icons/navigate_next_24_px.png"),
                         ),
-                ])));
+                ]))));
   }
 }
