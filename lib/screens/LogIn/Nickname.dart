@@ -58,10 +58,10 @@ class _NicknameState extends State<Nickname> {
               width: 328,
               height: 48,
               child: YrkButton(
-                type: ButtonType.solid,
+                buttonType: ButtonType.solid,
                 label: "다음",
                 clickable: true,
-                onPress: () {
+                onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SignInDone()),

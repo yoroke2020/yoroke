@@ -68,14 +68,14 @@ class _SignInState extends State<SignIn> {
               ),
             ),
             Container(
-              child: YrkButton(
-                type: ButtonType.image,
-                label: "네이버",
-                width: 230,
-                onPress: () {},
-                clickable: true,
-              ),
-            ),
+                // child: YrkButton(
+                //   type: ButtonType.image,
+                //   label: "네이버",
+                //   width: 230,
+                //   onPress: () {},
+                //   clickable: true,
+                // ),
+                ),
           ],
         ),
       ),

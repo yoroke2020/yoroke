@@ -43,3 +43,7 @@ app.*.map.json
 pubspec.lock
 
 .vscode
+android/
+ios/
+web/
+.metadata
