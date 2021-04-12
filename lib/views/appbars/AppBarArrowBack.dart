@@ -25,14 +25,15 @@ class AppBarArrowBack extends StatelessWidget implements PreferredSizeWidget {
             width: double.maxFinite,
             height: 48,
             decoration: BoxDecoration(color: const Color(0xffffffff)),
-            child: Align(
-                alignment: Alignment.center,
-                child: Row(children: [
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
                   IconButton(
                     icon: Image.asset(
                       "assets/icons/icon_arrow_back_24_px.png",
-                      width: 24,
-                      height: 24,
+                      width: 24.0,
+                      height: 24.0,
                     ),
                     padding: const EdgeInsets.only(left: 18),
                     constraints: BoxConstraints(),
@@ -41,6 +42,6 @@ class AppBarArrowBack extends StatelessWidget implements PreferredSizeWidget {
                     },
                   ),
                   Expanded(child: Container()),
-                ]))));
+                ])));
   }
 }

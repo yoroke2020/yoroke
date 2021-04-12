@@ -11,11 +11,15 @@ class YrkTextFieldInputDecoration extends InputDecoration {
   final String? errorText;
   //
   final int? type;
+  final Color? fillColor;
+  final Color? borderColor;
 
   const YrkTextFieldInputDecoration({
     this.type,
     this.hintText,
     this.errorText,
+    this.fillColor = const Color(0xfff0f0f0),
+    this.borderColor = const Color(0xe6000000),
   }) : super(
           contentPadding: const EdgeInsets.only(
             left: 16,
@@ -23,7 +27,7 @@ class YrkTextFieldInputDecoration extends InputDecoration {
             bottom: 12,
           ),
           filled: true,
-          fillColor: const Color(0xfff0f0f0),
+          fillColor: fillColor,
           border: const OutlineInputBorder(
             borderSide: BorderSide(
               color: const Color(0x4d000000),
@@ -56,17 +60,24 @@ class YrkTextField extends TextField {
   final double? width;
   final double? height;
 
+  final Color? fillColor;
+  final Color? borderColor;
+
   YrkTextField({
     this.obscureText = false,
     this.label,
     this.errorText,
     this.height,
     this.width,
+    this.fillColor,
+    this.borderColor,
   }) : super(
           obscureText: obscureText,
           decoration: YrkTextFieldInputDecoration(
             hintText: label,
             errorText: errorText,
+            fillColor: fillColor,
+            borderColor: borderColor
           ),
         );
 }
