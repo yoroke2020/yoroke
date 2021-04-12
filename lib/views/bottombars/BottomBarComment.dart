@@ -33,6 +33,8 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                           child: Container(
                               child: YrkTextField(
                             label: "댓글을 남겨보세요",
+                                fillColor: const Color(0xffffffff),
+                                borderColor: const Color(0xffffffff),
                           )),
                         ),
                         Container(width: 8.0),
