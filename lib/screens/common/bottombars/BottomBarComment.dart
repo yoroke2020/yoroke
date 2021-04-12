@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../YrkTextField.dart';
 
+
 class BottomBarComment extends StatefulWidget {
   @override
   _BottomBarCommentState createState() => _BottomBarCommentState();
@@ -31,10 +32,10 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                         Expanded(
                           child: Container(
                               child: YrkTextField(
-                            label: "댓글을 남겨보세요",
+                                label: "댓글을 남겨보세요",
                                 fillColor: const Color(0xffffffff),
                                 borderColor: const Color(0xffffffff),
-                          )),
+                              )),
                         ),
                         Container(width: 8.0),
                         InkWell(
@@ -45,7 +46,7 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                                 decoration: BoxDecoration(
                                     color: const Color(0xffffffff),
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(32)),
+                                    BorderRadius.all(Radius.circular(32)),
                                     border: Border.all(
                                         color: const Color(0x4d000000),
                                         width: 1)),
@@ -55,9 +56,9 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                                         height: 24,
                                         child: isPrivate
                                             ? Image.asset(
-                                                "assets/icons/icon_lock_24_px.png")
+                                            "assets/icons/icon_lock_24_px.png")
                                             : Image.asset(
-                                                "assets/icons/icon_lock_open_24_px.png"))))),
+                                            "assets/icons/icon_lock_open_24_px.png"))))),
                         Container(width: 8.0),
                         Container(
                             width: 72,
@@ -65,9 +66,9 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                             decoration: BoxDecoration(
                                 color: const Color(0xffffffff),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(32)),
+                                BorderRadius.all(Radius.circular(32)),
                                 border:
-                                    Border.all(color: const Color(0x4d000000))),
+                                Border.all(color: const Color(0x4d000000))),
                             child: Center(
                                 child: Text("등록",
                                     style: const TextStyle(
