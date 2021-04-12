@@ -6,8 +6,7 @@ import 'YrkModalBottomSheetListItem.dart';
 
 class YrkModelBottomSheet extends StatelessWidget {
   const YrkModelBottomSheet(
-      {Key key, this.listItem, this.listHeight = 120, this.listItemCount = 0})
-      : super(key: key);
+      {required this.listItem, this.listHeight = 120, this.listItemCount = 0});
 
   final List<Widget> listItem;
   final int listItemCount;

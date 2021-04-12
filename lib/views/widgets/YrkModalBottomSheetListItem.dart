@@ -5,7 +5,7 @@ import 'YrkTextStyle.dart';
 
 class YrkModalBottomSheetListItem extends StatelessWidget {
   YrkModalBottomSheetListItem(
-      {@required this.imageAsset, @required this.title, this.isBorder = true});
+      {required this.imageAsset, required this.title, this.isBorder = true});
 
   final String imageAsset;
   final String title;

@@ -25,14 +25,14 @@ class MyApp extends StatelessWidget {
 }
 
 class MyMain extends StatefulWidget {
-  MyMain({Key key}) : super(key: key);
+  MyMain({Key? key}) : super(key: key);
 
   @override
   _MyMainState createState() => _MyMainState();
 }
 
 class _MyMainState extends State<MyMain> {
-  BottomBarNavigation bottomBarNavigation;
+  BottomBarNavigation? bottomBarNavigation;
   var _curPageItem = RootPageItem.home;
   bool isFirst = true;
   final _navigatorKeys = {
@@ -43,9 +43,9 @@ class _MyMainState extends State<MyMain> {
   };
 
   void _onSelectPageItem(RootPageItem rootPageItem) {
-    _navigatorKeys[_curPageItem].currentState.popUntil((route) => route.isFirst);
+    _navigatorKeys[_curPageItem]!.currentState!.popUntil((route) => route.isFirst);
     if (rootPageItem == _curPageItem) {
-      _navigatorKeys[rootPageItem].currentState.popUntil((route) => route.isFirst);
+      _navigatorKeys[rootPageItem]!.currentState!.popUntil((route) => route.isFirst);
     } else {
       setState(() {
         _curPageItem = rootPageItem;
@@ -56,12 +56,12 @@ class _MyMainState extends State<MyMain> {
   @override
   Widget build(BuildContext context) {
     bottomBarNavigation = BottomBarNavigation.getInstance(_curPageItem);
-    bottomBarNavigation.setOnSelectRootPageItem(_onSelectPageItem);
+    bottomBarNavigation!.setOnSelectRootPageItem(_onSelectPageItem);
 
     return WillPopScope(
       onWillPop: () async {
         final isFirstRoutInCurrentPageTab =
-            !await _navigatorKeys[_curPageItem].currentState.maybePop();
+            !await _navigatorKeys[_curPageItem]!.currentState!.maybePop();
         if (isFirstRoutInCurrentPageTab) {
           if (_curPageItem != RootPageItem.home) {
             _onSelectPageItem(RootPageItem.home);

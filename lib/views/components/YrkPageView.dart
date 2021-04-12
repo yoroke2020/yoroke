@@ -4,8 +4,8 @@ import 'package:yoroke/views/widgets/YrkDotsIndicator.dart';
 
 class YrkPageView extends StatelessWidget {
   YrkPageView({
-    @required this.page,
-    @required this.controller,
+    required this.page,
+    required this.controller,
     this.viewWidth = double.maxFinite,
     this.viewHeight = 260.0,
     this.isIndicatorEnabled = false,

@@ -7,7 +7,7 @@ import 'package:yoroke/views/widgets/YrkButton.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
 class BoardJobFindingListItem extends StatelessWidget {
-  BoardJobFindingListItem({@required this.index});
+  BoardJobFindingListItem({required this.index});
 
   final int index;
 
@@ -29,11 +29,12 @@ class BoardJobFindingListItem extends StatelessWidget {
                 Container(
                     padding: const EdgeInsets.only(top: 3.0),
                     child: YrkButton(
-                      type: ButtonType.chip,
+                      buttonType: ButtonType.chip,
                       width: 60,
                       label: "구인중",
                       fontSize: 12,
                       clickable: false,
+                      onPressed: () {},
                     )),
                 Expanded(
                     child: Container(

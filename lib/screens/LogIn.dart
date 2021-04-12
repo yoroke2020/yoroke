@@ -19,8 +19,28 @@ var btns = {
 
 class _LogInState extends State<LogIn> {
   final loginPageController = PageController();
+
   @override
   Widget build(BuildContext context) {
+    List<Widget> buttons = btns.map((e) {
+      return Container(
+        padding: const EdgeInsets.only(top: 8, bottom: 8),
+        child: YrkButton(
+          buttonType: ButtonType.image,
+          width: 328,
+          height: 48,
+          label: e['text'],
+          img: e['icon'],
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SignInDialog()),
+            );
+          },
+        ),
+      );
+    }).toList();
+
     return Scaffold(
         appBar: AppBar(
           leading: new IconButton(
@@ -39,7 +59,7 @@ class _LogInState extends State<LogIn> {
                 children: <Widget>[
                   Container(
                     // Todo: logo
-                    padding: const EdgeInsets.all(80),
+                    // padding: const EdgeInsets.all(80),
                     child: Image.asset('assets/icons/icon_naver.png'),
                   ),
                   Spacer(),
@@ -51,27 +71,25 @@ class _LogInState extends State<LogIn> {
                         padding: const EdgeInsets.only(top: 4, bottom: 4),
                         child: Text("로그인 및 회원가입")),
                     Column(
-                        children: btns
-                            .map((e) => Container(
-                                  padding:
-                                      const EdgeInsets.only(top: 8, bottom: 8),
-                                  child: YrkButton(
-                                    type: ButtonType.image,
-                                    width: 328,
-                                    height: 48,
-                                    label: e['text'],
-                                    img: e['icon'],
-                                    onPress: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                SignInDialog()),
-                                      );
-                                    },
-                                  ),
-                                ))
-                            .toList())
+                        children: btns.map((e) {
+                      return Container(
+                        padding: const EdgeInsets.only(top: 8, bottom: 8),
+                        child: YrkButton(
+                          buttonType: ButtonType.image,
+                          width: 328,
+                          height: 48,
+                          label: e['text'],
+                          img: e['icon'],
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignInDialog()),
+                            );
+                          },
+                        ),
+                      );
+                    }).toList())
                   ]))
                 ])));
   }

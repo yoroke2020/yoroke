@@ -1,250 +1,274 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
 enum ButtonType { solid, outline, text, chip, outlinechip, rect, image }
 
-class YrkButton extends StatelessWidget {
-  double width;
-  double height;
-  final String label;
-  final bool enable;
-  final bool clickable;
-  final double fontSize;
-  final Function onPress;
+class YrkElevatedButton extends ElevatedButton {
+  YrkElevatedButton({
+    Key? key,
+    required VoidCallback? onPressed,
+    // VoidCallback? onLongPress,
+    // ButtonStyle? style,
+    // FocusNode? focusNode,
+    // bool autofocus = false,
+    // Clip clipBehavior = Clip.none,
+    required Widget? child,
+    // required this.label,
+  }) : super(
+          key: key,
+          onPressed: onPressed,
+          // onLongPress: onLongPress,
+          // style: style,
+          // focusNode: focusNode,
+          // autofocus: autofocus,
+          clipBehavior: Clip.none,
+          child: child,
+          //Custom
+          style: ElevatedButton.styleFrom(
+            primary: const Color(0xfff5df4d),
+            alignment: Alignment.center,
+            elevation: 0,
+          ),
+        );
+}
 
-  final ButtonType type;
-  final Color btnColor;
-  final Color fontColor;
-  final Color outlineBtnColor;
-  Text text;
+class YrkButton extends StatefulWidget {
+  double? width;
+  double? height;
+  final ButtonType buttonType;
+  final String? label;
 
-  final String img;
+  VoidCallback? onPressed;
 
-  final RoundedRectangleBorder radius =
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(100));
-  final Color disableColor = const Color(0xffe8e8e8);
+  // TextStyle
+  final Color? fontColor;
+  final double? fontHeight;
+  final double? fontSize;
+  final FontWeight? fontWeight;
+  final String? fontFamily;
+  final FontStyle? fontStyle;
+  final double? letterSpacing;
+
+  final Color? btnColor;
+  final Color? outlineBackgroundColor;
+  final String? img;
+
+  bool? clickable;
 
   YrkButton({
-    Key key,
-    @required this.type,
-    this.width = double.infinity,
-    this.height = double.infinity,
-    this.label,
-    this.enable = true,
-    this.clickable = true,
-    this.fontSize = 14,
-    this.onPress,
-    this.btnColor = const Color(0xfff5df4d),
+    Key? key,
+    required this.buttonType,
+    this.width,
+    this.height,
+    required this.label,
+
+    // Default
+    required this.onPressed,
+
+    // TextStyle
     this.fontColor,
-    this.outlineBtnColor = const Color(0xffffffff),
+    this.fontHeight,
+    this.fontSize = 14,
+    this.fontWeight,
+    this.fontFamily,
+    this.fontStyle,
+    this.letterSpacing,
+
+    // ButtonStyle
+    this.btnColor,
+    this.outlineBackgroundColor,
     this.img = "assets/icons/thumb_up_16_px.png",
+
+    // Button Status
+    this.clickable,
   }) : super(key: key);
 
-  Text getText(
-    ButtonType type,
-    String label,
-    double fontSize,
-    Color fontColor,
-  ) {
-    TextStyle textStyle;
+  @override
+  _YrkButtonState createState() => _YrkButtonState();
+}
 
-    switch (type) {
+class _YrkButtonState extends State<YrkButton> {
+  Widget getChild() {
+    Color? _fontColor = widget.fontColor ?? const Color(0xe6000000);
+    double? _fontHeight = widget.fontHeight ?? 1;
+    double? _fontSize = widget.fontSize ?? 14.0;
+    FontWeight? _fontWeight = widget.fontWeight ?? FontWeight.w400;
+    String? _fontFamily = widget.fontFamily ?? 'NotoSansCJKkr';
+    FontStyle? _fontStyle = widget.fontStyle ?? FontStyle.normal;
+    double? _letterSpacing = widget.letterSpacing ?? -0.28;
+
+    switch (widget.buttonType) {
       case ButtonType.solid:
-        textStyle = YrkBtnTxtStyle(
-          fontSize: fontSize,
-          color: fontColor,
-        );
         break;
       case ButtonType.outline:
-        textStyle = YrkBtnTxtStyle(
-          fontSize: fontSize,
-          color: fontColor,
-          fontWeight: FontWeight.bold,
-        );
+      case ButtonType.text:
+      case ButtonType.image:
+        _fontWeight = FontWeight.bold;
         break;
       case ButtonType.chip:
-        textStyle = YrkBtnTxtStyle(
-          fontWeight: FontWeight.bold,
-          color: const Color(0x99000000),
-          fontSize: fontSize,
-        );
-        break;
-      case ButtonType.text:
-        textStyle = YrkBtnTxtStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: fontSize,
-          color: fontColor,
-        );
-        break;
-      case ButtonType.image:
-        textStyle = YrkBtnTxtStyle(
-          fontSize: fontSize,
-          color: fontColor,
-          fontWeight: FontWeight.bold,
-        );
+        _fontWeight = FontWeight.bold;
+        _fontColor = const Color(0x99000000);
         break;
       default:
-        textStyle = YrkBtnTxtStyle(
-          fontSize: fontSize,
-          color: fontColor,
-        );
         break;
     }
 
-    return Text(label, style: textStyle, textAlign: TextAlign.center);
+    Text ret = Text(widget.label!,
+        style: TextStyle(
+          color: _fontColor,
+          height: _fontHeight,
+          letterSpacing: _letterSpacing,
+          fontSize: _fontSize,
+          fontWeight: _fontWeight,
+          fontFamily: _fontFamily,
+          fontStyle: _fontStyle,
+        ),
+        textAlign: TextAlign.center);
+    if (widget.buttonType != ButtonType.image) {
+      return ret;
+    } else
+      return (Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Image.asset(widget.img!,width: ,),
+          Container(
+            width: widget.fontSize! * 2,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.asset(widget.img!),
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+          ret,
+          Container(width: widget.fontSize! * 2),
+        ],
+      ));
+  }
+
+  ButtonStyle getButtonStyle() {
+    double _radius = widget.buttonType == ButtonType.rect ? 0 : 100;
+    Color _btnColor = widget.btnColor ?? const Color(0xfff5df4d);
+    Color _outlineBackgroundColor = widget.btnColor ?? const Color(0xffffffff);
+
+    switch (widget.buttonType) {
+      case ButtonType.solid:
+      case ButtonType.chip:
+      case ButtonType.rect:
+        return ElevatedButton.styleFrom(
+          primary: _btnColor,
+          alignment: Alignment.center,
+          elevation: 0,
+          padding: EdgeInsets.all(0),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(_radius)),
+        );
+      case ButtonType.outline:
+      case ButtonType.outlinechip:
+        return OutlinedButton.styleFrom(
+          primary: _btnColor,
+          alignment: Alignment.center,
+          elevation: 0,
+          padding: EdgeInsets.all(0),
+          backgroundColor: _outlineBackgroundColor,
+          side: BorderSide(color: _btnColor, width: 2),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(_radius),
+          ),
+        );
+      case ButtonType.text:
+        return OutlinedButton.styleFrom(
+          primary: _btnColor,
+          alignment: Alignment.center,
+          elevation: 0,
+          padding: EdgeInsets.all(0),
+        );
+      case ButtonType.image:
+        return ElevatedButton.styleFrom(
+          primary: _btnColor,
+          alignment: Alignment.center,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(_radius)),
+        );
+      default:
+        return ElevatedButton.styleFrom(
+          primary: _btnColor,
+          alignment: Alignment.center,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(_radius)),
+        );
+    }
   }
 
   Widget getButton() {
-    switch (type) {
+    switch (widget.buttonType) {
       case ButtonType.solid:
-        return FlatButton(
-          child: text,
-          shape: radius,
-          color: btnColor,
-          onPressed: !(enable && clickable) ? null : onPress,
-          disabledColor: clickable ? disableColor : btnColor,
+      case ButtonType.chip:
+      case ButtonType.rect:
+        return ElevatedButton(
+          onPressed: widget.onPressed,
+          child: getChild(),
+          style: getButtonStyle(),
         );
 
       case ButtonType.outline:
-        return OutlineButton(
-          child: text,
-          shape: radius,
-          borderSide: BorderSide(
-            width: 2.0,
-            color: btnColor,
-          ),
-          color: outlineBtnColor,
-          onPressed: !(enable && clickable) ? null : onPress,
-          disabledBorderColor: clickable ? disableColor : btnColor,
-        );
-
-      case ButtonType.chip:
-        width = 60;
-        height = 24;
-        return FlatButton(
-          padding: EdgeInsets.all(0),
-          child: text,
-          shape: radius,
-          color: btnColor,
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          onPressed: !(enable && clickable) ? null : onPress,
-          disabledColor: clickable ? disableColor : btnColor,
-        );
-
       case ButtonType.outlinechip:
-        return OutlineButton(
-          padding: EdgeInsets.all(0),
-          child: text,
-          shape: radius,
-          borderSide: BorderSide(
-            width: 2.0,
-            color: btnColor,
-          ),
-          color: outlineBtnColor,
-          onPressed: !(enable && clickable) ? null : onPress,
-          disabledBorderColor: clickable ? disableColor : btnColor,
-        );
-
-      case ButtonType.rect:
-        return FlatButton(
-          child: text,
-          shape: radius,
-          onPressed: !(enable && clickable) ? null : onPress,
-          disabledColor: clickable ? disableColor : btnColor,
+        return OutlinedButton(
+          onPressed: widget.onPressed,
+          child: getChild(),
+          style: getButtonStyle(),
         );
 
       case ButtonType.text:
-        return FlatButton(
-          child: text,
-          onPressed: !(enable && clickable) ? null : onPress,
-          disabledColor: clickable ? disableColor : btnColor,
+        return TextButton(
+          onPressed: widget.onPressed,
+          child: getChild(),
+          style: getButtonStyle(),
         );
-      // Todo: Image icon btn
       case ButtonType.image:
-        return FlatButton(
-          child: Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  width: this.fontSize * 2,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(img),
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16), //모서리를 둥글게
-                    // border: Border.all(color: Colors.black, width: 3),
-                  ),
-                ),
-                text,
-                Container(
-                  width: this.fontSize * 2,
-                ),
-              ],
-            ),
-          ),
-          shape: radius,
-          color: btnColor,
-          onPressed: !(enable && clickable) ? null : onPress,
-          disabledColor: clickable ? disableColor : btnColor,
+        return ElevatedButton(
+          onPressed: widget.onPressed,
+          child: getChild(),
+          // icon: Image.asset(widget.img!),
+          style: getButtonStyle(),
         );
+
       default:
-        return FlatButton(
-          child: text,
-          shape: radius,
-          onPressed: !(enable && clickable) ? null : onPress,
-          disabledColor: clickable ? disableColor : btnColor,
+        return YrkElevatedButton(
+          key: widget.key,
+          child: getChild(),
+          onPressed: widget.onPressed,
         );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    text = getText(type, label, fontSize, fontColor);
-    if (type == ButtonType.chip || type == ButtonType.outlinechip) {
-      width = 60;
-      height = 24;
+    double _width = 328;
+    double _height = 48;
+
+    if (widget.buttonType == ButtonType.chip ||
+        widget.buttonType == ButtonType.outlinechip ||
+        widget.buttonType == ButtonType.text) {
+      _width = widget.label!.length * widget.fontSize!;
+      _height = widget.fontSize! + 4;
     }
+
     return Container(
-      width: width,
-      height: height,
-      padding: EdgeInsets.all(0),
+      width: _width,
+      height: _height,
+      alignment: AlignmentDirectional.center,
       child: Container(
-        height: double.infinity,
+        padding: EdgeInsets.zero,
         width: double.infinity,
+        height: double.infinity,
         child: getButton(),
       ),
-      alignment: AlignmentDirectional.center,
     );
   }
-}
-
-class YrkBtnTxtStyle extends TextStyle {
-  final Color color;
-  final double height;
-  final double letterSpacing;
-  final double fontSize;
-  final FontWeight fontWeight;
-  final String fontFamily;
-  final FontStyle fontStyle;
-
-  const YrkBtnTxtStyle({
-    this.color = const Color(0xe6000000),
-    this.fontSize = 14.0,
-    this.height = 1,
-    this.letterSpacing = 0,
-    this.fontWeight = FontWeight.w400,
-    this.fontFamily = 'NotoSansCJKkr',
-    this.fontStyle = FontStyle.normal,
-  }) : super(
-          color: color,
-          height: height,
-          letterSpacing: letterSpacing,
-          fontSize: fontSize,
-          fontWeight: fontWeight,
-          fontFamily: fontFamily,
-          fontStyle: FontStyle.normal,
-        );
 }

@@ -15,7 +15,7 @@ class _NicknameState extends State<Nickname> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back, color: Colors.black),
@@ -58,10 +58,10 @@ class _NicknameState extends State<Nickname> {
               width: 328,
               height: 48,
               child: YrkButton(
-                type: ButtonType.solid,
+                buttonType: ButtonType.solid,
                 label: "다음",
                 clickable: true,
-                onPress: () {
+                onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SignInDone()),

@@ -16,7 +16,7 @@ class _SignInDialogState extends State<SignInDialog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back),
@@ -89,10 +89,10 @@ class _SignInDialogState extends State<SignInDialog> {
                     Container(
                       height: 56,
                       child: YrkButton(
-                        type: ButtonType.text,
+                        buttonType: ButtonType.text,
                         label: "동의하고 계속하기",
                         clickable: true,
-                        onPress: () {
+                        onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => Nickname()),
@@ -108,10 +108,10 @@ class _SignInDialogState extends State<SignInDialog> {
               width: 328,
               height: 48,
               child: YrkButton(
-                type: ButtonType.text,
+                buttonType: ButtonType.text,
                 label: "취소",
                 clickable: true,
-                onPress: () => Navigator.of(context).pop(),
+                onPressed: () => Navigator.of(context).pop(),
               ),
             ),
           ],

@@ -9,7 +9,7 @@ import 'package:yoroke/views/widgets/YrkModelBottomSheet.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
 class PostCommentListItem extends StatefulWidget {
-  PostCommentListItem({@required this.index});
+  PostCommentListItem({required this.index});
 
   final int index;
 
@@ -212,7 +212,7 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
       "신고하기"
     ];
 
-    List<Widget> list = List<Widget>();
+    List<Widget> list = [];
     for (int i = 0; i < 6; i++) {
       list.add(new YrkModalBottomSheetListItem(
         imageAsset: imageAssetList[i],
@@ -226,9 +226,9 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
         height: 48.0,
         margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 4.0),
         child: YrkButton(
-          type: ButtonType.chip,
+          buttonType: ButtonType.chip,
           label: "닫기",
-          onPress: () => Navigator.of(context).pop(),
+            onPressed: () => Navigator.of(context).pop(),
         )));
 
     return list;

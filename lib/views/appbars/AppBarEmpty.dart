@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppBarEmpty extends StatelessWidget implements PreferredSizeWidget {
-  static AppBarEmpty _instance;
+  static AppBarEmpty? _instance;
 
   AppBarEmpty._internal(this.preferredSize);
 
-  static AppBarEmpty getInstance() {
+  static AppBarEmpty? getInstance() {
     if (_instance == null)
       _instance = AppBarEmpty._internal(Size.fromHeight(0));
     return _instance;

@@ -10,9 +10,9 @@ import 'package:yoroke/views/components/YrkPageView.dart';
 import 'package:yoroke/views/components/YrkTabHeaderView.dart';
 
 class Board extends StatefulWidget {
-  Board({@required this.onPushNavigator});
+  Board({required this.onPushNavigator});
 
-  final ValueChanged<YrkData> onPushNavigator;
+  final ValueChanged<YrkData>? onPushNavigator;
 
   @override
   _BoardState createState() => _BoardState();
@@ -23,7 +23,7 @@ class _BoardState extends State<Board> {
   final findJobPageController = PageController();
 
   List<Widget> _reviewCardList() {
-    List<Widget> list = List<Widget>();
+    List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(BoardCardListItem(width: 136.0, height: 120.0, index: i));
     }
@@ -32,7 +32,7 @@ class _BoardState extends State<Board> {
   }
 
   List<Widget> _boardQnaList() {
-    List<Widget> list = List<Widget>();
+    List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(BoardQnaListItem(index: i));
     }
@@ -40,7 +40,7 @@ class _BoardState extends State<Board> {
   }
 
   List<Widget> _boardJobFindingList() {
-    List<Widget> list = List<Widget>();
+    List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(BoardJobFindingListItem(index: i));
     }
@@ -48,7 +48,7 @@ class _BoardState extends State<Board> {
   }
 
   List<Widget> _YrkListView(bool isQna) {
-    List<Widget> list = List<Widget>();
+    List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkListView(
           index: i,
