@@ -5,12 +5,12 @@ import 'package:yoroke/views/widgets/YrkTextField.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 import 'package:yoroke/views/widgets/YrkButton.dart';
 
-class SignIn extends StatefulWidget {
+class TestPage extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _TestPageState createState() => _TestPageState();
 }
 
-class _SignInState extends State<SignIn> {
+class _TestPageState extends State<TestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,35 +47,29 @@ class _SignInState extends State<SignIn> {
                   children: <Widget>[
                     Expanded(
                       child: YrkTextField(
-                        label: '이메일',
+                        label: 'Solid, default',
+                        // errorText: 'h',
                       ),
                     ),
                     SizedBox(height: 8),
                     Expanded(
                       child: YrkTextField(
-                        label: '아이디',
+                        label: 'Search',
+                        textFieldType: TextFieldType.search,
                       ),
                     ),
                     SizedBox(height: 8),
                     Expanded(
                       child: YrkTextField(
-                        label: '비밀번호',
+                        label: 'Rect',
                         obscureText: true,
+                        textFieldType: TextFieldType.rect,
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            Container(
-                // child: YrkButton(
-                //   type: ButtonType.image,
-                //   label: "네이버",
-                //   width: 230,
-                //   onPress: () {},
-                //   clickable: true,
-                // ),
-                ),
           ],
         ),
       ),

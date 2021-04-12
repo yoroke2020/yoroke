@@ -150,7 +150,7 @@ class _YrkButtonState extends State<YrkButton> {
   }
 
   ButtonStyle getButtonStyle() {
-    double _radius = widget.buttonType == ButtonType.rect ? 0 : 100;
+    double _radius = widget.buttonType == ButtonType.rect ? 8 : 100;
     Color _btnColor = widget.btnColor ?? const Color(0xfff5df4d);
     Color _outlineBackgroundColor = widget.btnColor ?? const Color(0xffffffff);
 

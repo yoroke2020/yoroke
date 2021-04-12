@@ -3,81 +3,152 @@ import 'package:flutter/material.dart';
 
 import 'YrkTextStyle.dart';
 
-const BorderRadius borderRadius = const BorderRadius.all(Radius.circular(100));
+enum TextFieldType { solid, search, comment, rect, board }
 
-class YrkTextFieldInputDecoration extends InputDecoration {
-  // final bool? filled;
-  final String? hintText;
-  final String? errorText;
-  //
-  final int? type;
-  final Color? fillColor;
-  final Color? borderColor;
+const BorderRadius borderRound = const BorderRadius.all(Radius.circular(100));
+const BorderRadius borderRect = const BorderRadius.all(Radius.circular(8));
 
-  const YrkTextFieldInputDecoration({
-    this.type,
-    this.hintText,
-    this.errorText,
-    this.fillColor = const Color(0xfff0f0f0),
-    this.borderColor = const Color(0xe6000000),
-  }) : super(
-          contentPadding: const EdgeInsets.only(
-            left: 16,
-            top: 12,
-            bottom: 12,
-          ),
-          filled: true,
-          fillColor: fillColor,
-          border: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: const Color(0x4d000000),
-              width: 1,
-            ),
-            borderRadius: borderRadius,
-          ),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: const Color(0xe6000000),
-              width: 1,
-            ),
-            borderRadius: borderRadius,
-          ),
-          hintStyle: const YrkTextStyle(
-            color: Color(0x4d000000),
-            fontSize: 16,
-          ),
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          // hintText: labelText,
-          // errorText: errorText,
-        );
-}
-
-class YrkTextField extends TextField {
-  final bool obscureText;
-  final String? label;
-  final String? errorText;
+class YrkTextField extends StatefulWidget {
+  final TextFieldType textFieldType;
 
   final double? width;
   final double? height;
+
+  final String? label;
+  final String? errorText;
+  final bool? obscureText;
 
   final Color? fillColor;
   final Color? borderColor;
 
   YrkTextField({
-    this.obscureText = false,
+    Key? key,
+    this.textFieldType = TextFieldType.solid,
+    this.width,
+    this.height,
     this.label,
     this.errorText,
-    this.height,
-    this.width,
+    this.obscureText,
     this.fillColor,
     this.borderColor,
-  }) : super(
-          obscureText: obscureText,
-          decoration: YrkTextFieldInputDecoration(
-            hintText: label,
-            errorText: errorText,
-            fillColor: fillColor,
-            borderColor: borderColor
+  }) : super(key: key);
+
+  @override
+  _YrkTextFieldState createState() => _YrkTextFieldState();
+}
+
+class _YrkTextFieldState extends State<YrkTextField> {
+  Widget getChild() {
+    return TextField(
+      key: widget.key,
+      obscureText: widget.obscureText ?? false,
+      decoration: getDeco(),
+    );
+  }
+
+  InputDecoration getDeco() {
+    Icon _suffixIconClear = Icon(Icons.cancel, color: Colors.grey);
+    switch (widget.textFieldType) {
+      case TextFieldType.solid:
+        return InputDecoration(
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          filled: true,
+          // fillColor: fillColor,
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0x4d000000), width: 1),
+            borderRadius: borderRound,
           ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xe6000000), width: 1),
+            borderRadius: borderRound,
+          ),
+          hintStyle: const YrkTextStyle(
+            color: Color(0x4d000000),
+            fontSize: 16,
+          ),
+          hintText: widget.label,
+          errorText: widget.errorText,
+          fillColor: const Color(0xfff0f0f0),
+
+          suffixIcon: _suffixIconClear,
         );
+
+      case TextFieldType.rect:
+        return InputDecoration(
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          filled: true,
+          // fillColor: fillColor,
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0x4d000000), width: 1),
+            borderRadius: borderRect,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xe6000000), width: 1),
+            borderRadius: borderRect,
+          ),
+          hintStyle: const YrkTextStyle(
+            color: Color(0x4d000000),
+            fontSize: 16,
+          ),
+          hintText: widget.label,
+          errorText: widget.errorText,
+          fillColor: const Color(0xfff0f0f0),
+          suffixIcon: _suffixIconClear,
+        );
+      case TextFieldType.search:
+        return InputDecoration(
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          filled: true,
+          fillColor: widget.fillColor,
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0x00000000), width: 0),
+            borderRadius: borderRound,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0x00000000), width: 0),
+            borderRadius: borderRound,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0x00000000), width: 0),
+            borderRadius: borderRound,
+          ),
+          hintStyle: const YrkTextStyle(
+            color: Color(0x4d000000),
+            fontSize: 16,
+          ),
+          hintText: widget.label,
+          prefixIcon: Icon(Icons.search, color: Colors.black),
+          suffixIcon: _suffixIconClear,
+        );
+      default:
+        return InputDecoration(
+          filled: true,
+          // fillColor: fillColor,
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0x4d000000), width: 1),
+            borderRadius: borderRound,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xe6000000), width: 1),
+            borderRadius: borderRound,
+          ),
+          hintStyle: const YrkTextStyle(
+            color: Color(0x4d000000),
+            fontSize: 16,
+          ),
+          hintText: widget.label,
+          errorText: widget.errorText,
+          fillColor: const Color(0xfff0f0f0),
+          suffixIcon: Icon(Icons.cancel, color: Colors.black),
+        );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(child: getChild());
+  }
 }
