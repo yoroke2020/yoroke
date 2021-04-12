@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/board/Board.dart';
+import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
+import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/find/Find.dart';
 import 'package:yoroke/screens/home/Home.dart';
 import 'package:yoroke/screens/info/Info.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/views/appbars/AppBarNormal.dart';
-import 'package:yoroke/views/bottombars/BottomBarNavigation.dart';
 
 class RootPage extends StatelessWidget {
   RootPage({this.currentIndex, this.onPushNavigator});

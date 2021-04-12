@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/common/YrkChipButtonLong.dart';
-import 'package:yoroke/views/appbars/AppBarYellow.dart';
+
+import 'AppBarYellow.dart';
 
 class AppBarLargeImage extends StatefulWidget implements PreferredSizeWidget {
   AppBarLargeImage(

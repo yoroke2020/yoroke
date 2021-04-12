@@ -4,8 +4,8 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
-import 'package:yoroke/views/appbars/AppBarLargeImage.dart';
-import 'package:yoroke/views/bottombars/BottomBarNavigation.dart';
+import 'package:yoroke/screens/common/appbars/AppBarLargeImage.dart';
+import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'BoardCardListItem.dart';
 import 'BoardReviewTabViewListItem.dart';
