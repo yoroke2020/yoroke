@@ -188,15 +188,21 @@ class _HomeState extends State<Home> {
                           textAlign: TextAlign.left),
                     ),
                     Expanded(
-                        flex: 51,
-                        child: Text("전체보기",
-                            style: const TextStyle(
-                                color: const Color(0x99000000),
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "NotoSansCJKKR",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 14.0),
-                            textAlign: TextAlign.left)),
+                      flex: 51,
+                      child: TextButton(
+                          child: Text("전체보기",
+                              style: const TextStyle(
+                                  color: const Color(0x99000000),
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: "NotoSansCJKKR",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 14.0),
+                              textAlign: TextAlign.left),
+                          onPressed: () {
+                            widget.onPushNavigator!(
+                                new YrkData(SubPageItem.homeHistory));
+                          }),
+                    ),
                     Expanded(flex: 16, child: Container())
                   ]))),
       YrkListView(
