@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/screens/TestPage.dart';
 import 'LogIn.dart';
 
 class Info extends StatefulWidget {
@@ -32,7 +31,7 @@ class _InfoState extends State<Info> {
               child: Text('Trigger Signin'),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TestPage()));
+                    MaterialPageRoute(builder: (context) => LogIn()));
               },
             ),
           ],

@@ -20,15 +20,16 @@ class _PostState extends State<Post> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarArrowBack.getInstance(),
-        body: ListView(
-      children: <Widget>[
-        _header(),
-        _body(),
-        _navigator(),
-        _comments(),
-      ],
-    ),
-    bottomNavigationBar: BottomBarComment(),);
+      body: ListView(
+        children: <Widget>[
+          _header(),
+          _body(),
+          _navigator(),
+          _comments(),
+        ],
+      ),
+      bottomNavigationBar: BottomBarComment(),
+    );
   }
 
   String _sampleText(String s) {
@@ -130,7 +131,7 @@ class _PostState extends State<Post> {
                         margin: EdgeInsets.only(bottom: 12),
                         height: 20.0,
                         child: Center(
-                          child: Text("20.10.22",
+                          child: Text("20.10.22 17:04",
                               style: const TextStyle(
                                   color: const Color(0x4d000000),
                                   fontWeight: FontWeight.w400,
@@ -163,6 +164,75 @@ class _PostState extends State<Post> {
                     height: 1.5,
                     fontSize: 16.0),
                 textAlign: TextAlign.left)),
+        Container(
+            width: double.maxFinite,
+            height: 1.0,
+            decoration: BoxDecoration(
+                border: Border.all(color: const Color(0xffe5e5e5), width: 1),
+                color: const Color(0xffffffff))),
+        Container(
+            width: double.maxFinite,
+            height: 32.0,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                    flex: 1,
+                    child: InkWell(
+                        onTap: _onTapBodyLike,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                  margin: EdgeInsets.only(right: 5.0),
+                                  child: Image.asset(
+                                    "assets/icons/thumb_up_16_px.png",
+                                    width: 14.0,
+                                    height: 12.0,
+                                  )),
+                              Container(
+                                child: Text("154",
+                                    style: const YrkTextStyle(
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w400,
+                                        color: const Color(0x99000000)),
+                                    textAlign: TextAlign.left),
+                              ),
+                            ]))),
+                Expanded(
+                    flex: 1,
+                    child: InkWell(
+                        onTap: _onTapBodyDislike,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                  margin: EdgeInsets.only(right: 5.0),
+                                  child: Image.asset(
+                                    "assets/icons/thumb_up_16_px.png",
+                                    width: 12.0,
+                                    height: 14.0,
+                                  )),
+                              Container(
+                                child: Text("12",
+                                    style: const YrkTextStyle(
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w400,
+                                        color: const Color(0x99000000)),
+                                    textAlign: TextAlign.left),
+                              ),
+                            ]))),
+                Expanded(
+                    flex: 1,
+                    child: InkWell(
+                        onTap: _onTapBodyMore,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(Icons.more_horiz,
+                                  color: const Color(0x4d000000), size: 24.0),
+                            ])))
+              ],
+            ))
       ],
     );
   }
@@ -174,11 +244,32 @@ class _PostState extends State<Post> {
           height: 8.0,
           decoration: BoxDecoration(color: const Color(0xffeaeaea))),
       InkWell(
-          onTap: () => print("previous page tapped"),
+          onTap: _onTapNavigatorPrev,
           child: Container(
-            width: double.maxFinite,
-            height: 48.0,
-          )),
+              width: double.maxFinite,
+              height: 48.0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                      margin: EdgeInsets.only(left: 16.0, right: 12.0),
+                      child: Text("이전",
+                          style: const YrkTextStyle(
+                              color: const Color(0x99000000)),
+                          textAlign: TextAlign.left)),
+                  Expanded(
+                      child: Text("제목",
+                          style: const YrkTextStyle(fontSize: 16.0),
+                          textAlign: TextAlign.left)),
+                  Container(
+                      margin: EdgeInsets.only(right: 16.0),
+                      child: Image.asset(
+                        "assets/icons/icon_arrow_back_24_px.png",
+                        width: 24.0,
+                        height: 24.0,
+                      )),
+                ],
+              ))),
       Container(
           width: double.maxFinite,
           height: 1.0,
@@ -186,11 +277,32 @@ class _PostState extends State<Post> {
             border: Border.all(color: const Color(0xffe5e5e5), width: 1.0),
           )),
       InkWell(
-          onTap: () => print("next page tapped"),
+          onTap: _onTapNavigatorNext,
           child: Container(
-            width: double.maxFinite,
-            height: 48.0,
-          )),
+              width: double.maxFinite,
+              height: 48.0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                      margin: EdgeInsets.only(left: 16.0, right: 12.0),
+                      child: Text("다음",
+                          style: const YrkTextStyle(
+                              color: const Color(0x99000000)),
+                          textAlign: TextAlign.left)),
+                  Expanded(
+                      child: Text("정홍규의 요양병원",
+                          style: const YrkTextStyle(fontSize: 16.0),
+                          textAlign: TextAlign.left)),
+                  Container(
+                      margin: EdgeInsets.only(right: 16.0),
+                      child: Image.asset(
+                        "assets/icons/icon_arrow_back_24_px.png",
+                        width: 24.0,
+                        height: 24.0,
+                      )),
+                ],
+              ))),
       Container(
           width: double.maxFinite,
           height: 8.0,
@@ -202,9 +314,28 @@ class _PostState extends State<Post> {
     return Column(
       children: [
         Container(
-          width: double.maxFinite,
-          height: 56.0,
-        ),
+            width: double.maxFinite,
+            height: 40.0,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                    margin: EdgeInsets.only(left: 16.0, right: 4.0),
+                    child: Text("댓글",
+                        style: const YrkTextStyle(
+                          height: 1.0,
+                          color: const Color(0x99000000),
+                        ),
+                        textAlign: TextAlign.left)),
+                Container(
+                    child: Text("43",
+                        style: const YrkTextStyle(
+                          fontFamily: "Helvetica",
+                          color: const Color(0x99000000),
+                        ),
+                        textAlign: TextAlign.left))
+              ],
+            )),
         YrkListView(item: [PostCommentListItem(index: 0)]),
         Container(
           width: double.maxFinite,
@@ -213,6 +344,24 @@ class _PostState extends State<Post> {
       ],
     );
   }
+
+  void _onTapBodyLike() {
+    print("_onTapBodyLike clicked");
+  }
+
+  void _onTapBodyDislike() {
+    print("_onTapBodyDislike clicked");
+  }
+
+  void _onTapBodyMore() {
+    print("_onTapBodyMore clicked");
+  }
+
+  void _onTapNavigatorPrev() {
+    print("previous page tapped");
+  }
+
+  void _onTapNavigatorNext() {
+    print("next page tapped");
+  }
 }
-
-

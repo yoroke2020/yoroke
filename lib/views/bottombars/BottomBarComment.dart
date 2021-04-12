@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/views/widgets/YrkTextField.dart';
 
 class BottomBarComment extends StatefulWidget {
@@ -9,6 +11,7 @@ class BottomBarComment extends StatefulWidget {
 
 class _BottomBarCommentState extends State<BottomBarComment> {
   bool isPrivate = false;
+  final textFieldController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,7 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                         ),
                         Container(width: 8.0),
                         InkWell(
-                            onTap: _onTap,
+                            onTap: _onTapPrivate,
                             child: Container(
                                 width: 48,
                                 height: 40,
@@ -59,9 +62,9 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                             width: 72,
                             height: 40,
                             decoration: BoxDecoration(
+                                color: const Color(0xffffffff),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(32)),
-                                color: const Color(0xffffffff),
                                 border:
                                     Border.all(color: const Color(0x4d000000))),
                             child: Center(
@@ -77,8 +80,8 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                     )))));
   }
 
-  void _onTap() {
-    print("BottomComment - Lock Button Clicked");
+  void _onTapPrivate() {
+    print("BottomComment - Private button clicked");
     setState(() {
       isPrivate = isPrivate ? false : true;
     });
