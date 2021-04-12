@@ -1,12 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/views/board/BoardCardListItem.dart';
-import 'package:yoroke/views/board/BoardReviewTabViewListItem.dart';
-import 'package:yoroke/views/bottombars/BottomBarNavigation.dart';
-import 'package:yoroke/views/components/YrkListView.dart';
-import 'package:yoroke/views/components/YrkTabBarView.dart';
-import 'package:yoroke/views/appbars/AppBarLargeImage.dart';
+import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/YrkListView.dart';
+import 'package:yoroke/screens/common/YrkTabBarView.dart';
+import 'package:yoroke/screens/common/appbars/AppBarLargeImage.dart';
+import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
+
+import 'BoardCardListItem.dart';
+import 'BoardReviewTabViewListItem.dart';
 
 class BoardReview extends StatefulWidget {
   BoardReview({Key? key, required this.data, required this.onPushNavigator})
@@ -50,7 +52,7 @@ class _BoardReviewState extends State<BoardReview> {
 
   List<Widget> _reviewCardList() {
     List<Widget> list = <Widget>[];
-    for(int i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++) {
       list.add(BoardCardListItem(width: 112.0, height: 112.0, index: i));
     }
 
@@ -59,7 +61,7 @@ class _BoardReviewState extends State<BoardReview> {
 
   List<Widget> _reviewTabViewListItem() {
     List<Widget> list = <Widget>[];
-    for(int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) {
       list.add(BoardReviewTabViewListItem(index: i));
     }
 
@@ -109,9 +111,10 @@ class _BoardReviewState extends State<BoardReview> {
                     clickable: true,
                     onPushNavigator: widget.onPushNavigator,
                     nextSubPageItem: SubPageItem.boardQna,
-                    item:_reviewTabViewListItem()),
+                    item: _reviewTabViewListItem()),
               ]),
         ]),
-    bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.board));
+        bottomNavigationBar:
+            BottomBarNavigation.getInstance(RootPageItem.board));
   }
 }

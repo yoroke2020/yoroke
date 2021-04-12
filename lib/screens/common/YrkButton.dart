@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
 enum ButtonType { solid, outline, text, chip, outlinechip, rect, image }
 

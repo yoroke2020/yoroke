@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/screens/Post.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/models/YrkData.dart';
-
-import 'PageItem.dart';
+import 'package:yoroke/screens/post/Post.dart';
 
 class SubPage extends StatelessWidget {
   SubPage({this.rootIndex, this.data, this.onPushNavigator});

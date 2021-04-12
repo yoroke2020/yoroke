@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/LogIn/SignInDone.dart';
+import 'package:yoroke/screens/common/YrkButton.dart';
+import 'package:yoroke/screens/common/YrkTextField.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
-import 'package:yoroke/views/widgets/YrkTextField.dart';
-import 'package:yoroke/views/widgets/YrkTextStyle.dart';
-import 'package:yoroke/views/widgets/YrkButton.dart';
-
-class Nickname extends StatefulWidget {
+class SignInNickname extends StatefulWidget {
   @override
-  _NicknameState createState() => _NicknameState();
+  _SignInNicknameState createState() => _SignInNicknameState();
 }
 
-class _NicknameState extends State<Nickname> {
+class _SignInNicknameState extends State<SignInNickname> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
