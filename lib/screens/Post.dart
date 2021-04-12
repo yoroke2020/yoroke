@@ -16,8 +16,6 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
-  _onRegisterComment() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

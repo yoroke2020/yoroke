@@ -88,11 +88,16 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
                 )),
           ),
           Container(
-              margin: EdgeInsets.only(left: 38.0, right: 40.0),
-              child: Text("좋은 정보 감사합니다. 좋은 정보 감사합니다. 좋은 정보 감사합니다.",
-                  style: YrkTextStyle(
-                    height: 1.0,
-                  ))),
+            margin: EdgeInsets.only(left: 38.0, right: 40.0),
+            child: Text(
+              "좋은 정보 감사합니다. 좋은 정보 감사합니다. 좋은 정보 감사합니다.",
+              style: YrkTextStyle(
+                height: 1.0,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            alignment: Alignment.topLeft,
+          ),
           Container(
               height: 32.0,
               child: Align(
@@ -212,12 +217,20 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
       list.add(new YrkModalBottomSheetListItem(
         imageAsset: imageAssetList[i],
         title: titleList[i],
+        isBorder: i < 5 ? true : false,
       ));
     }
-    
-    list.add(YrkButton(type: ButtonType.outline, width: 328.0, height: 48.0,));
-    
-    
+
+    list.add(Container(
+        width: double.maxFinite,
+        height: 48.0,
+        margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 4.0),
+        child: YrkButton(
+          type: ButtonType.chip,
+          label: "닫기",
+          onPress: () => Navigator.of(context).pop(),
+        )));
+
     return list;
   }
 }
