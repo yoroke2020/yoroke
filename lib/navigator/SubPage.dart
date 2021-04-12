@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/screens/Post.dart';
-import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/models/YrkData.dart';
 
 import 'PageItem.dart';
@@ -15,23 +13,6 @@ class SubPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<List<Widget>> pages = [
-      [
-        Post(data: data),
-        Post(data: data),
-        Post(data: data),
-      ],
-      [
-        Post(data: data),
-        Post(data: data),
-        BoardReview(data: data, onPushNavigator: onPushNavigator),
-        Post(data: data),
-        Post(data: data),
-      ],
-      [],
-      []
-    ];
-
-    return pages[rootIndex!][data!.nextPageItem!.index];
+    return data!.nextPageItem!.widget(data, onPushNavigator);
   }
 }
