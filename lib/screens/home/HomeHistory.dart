@@ -10,6 +10,7 @@ class HomeHistory extends StatefulWidget {
   HomeHistory({Key? key, required this.data}) : super(key: key);
 
   final YrkData? data;
+
   @override
   _HomeHistoryState createState() => _HomeHistoryState();
 }
@@ -19,6 +20,7 @@ class _HomeHistoryState extends State<HomeHistory> {
   bool widgetVisible = false;
   String titleText = "타이틀";
   String subTitleText = "서브 타이틀";
+
   void _onButtonClicked() {
     setState(() {
       widgetVisible = widgetVisible ? false : true;

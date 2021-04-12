@@ -15,14 +15,13 @@ class HomePopularCardListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      // shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.circular(16)),
+        // shape: RoundedRectangleBorder(
+        //     borderRadius: BorderRadius.circular(16)),
         elevation: 0.0,
         margin: const EdgeInsets.only(right: 8),
         child: InkWell(
             borderRadius: BorderRadius.circular(16),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                 // mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   new Container(
@@ -31,8 +30,7 @@ class HomePopularCardListItem extends StatelessWidget {
                       child: Stack(children: <Widget>[
                         Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(16)),
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
                             image: new DecorationImage(
                               image: new AssetImage(
                                   testCardImage.elementAt(index)),
@@ -43,11 +41,9 @@ class HomePopularCardListItem extends StatelessWidget {
                         Container(
                             decoration: BoxDecoration(
                                 borderRadius:
-                                BorderRadius.all(
-                                    Radius.circular(16)),
+                                    BorderRadius.all(Radius.circular(16)),
                                 gradient: LinearGradient(
-                                    begin: Alignment(0.5,
-                                        -0.0739222913980484),
+                                    begin: Alignment(0.5, -0.0739222913980484),
                                     end: Alignment(0.5, 1),
                                     colors: [
                                       const Color(0x00ffffff),
@@ -55,8 +51,7 @@ class HomePopularCardListItem extends StatelessWidget {
                                     ]))),
                       ])),
                   Container(
-                      padding: const EdgeInsets.only(
-                          left: 8, top: 8),
+                      padding: const EdgeInsets.only(left: 8, top: 8),
                       child: Text("조문기 요양병원",
                           style: const TextStyle(
                               color: const Color(0xe6000000),
@@ -79,22 +74,19 @@ class HomePopularCardListItem extends StatelessWidget {
                       width: 144,
                       height: 30,
                       child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            Expanded(
-                                flex: 4, child: Container()),
+                            Expanded(flex: 4, child: Container()),
                             Expanded(
                                 flex: 95,
                                 child: Row(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: <Widget>[
                                       Container(
                                         width: 16,
                                         height: 16,
                                         decoration: BoxDecoration(
-                                            color: const Color(
-                                                0x00000000)),
+                                            color: const Color(0x00000000)),
                                         child: Image.asset(
                                             "assets/icons/icon_grade_fill_24_px.png"),
                                       ),
@@ -102,8 +94,7 @@ class HomePopularCardListItem extends StatelessWidget {
                                         width: 16,
                                         height: 16,
                                         decoration: BoxDecoration(
-                                            color: const Color(
-                                                0x00000000)),
+                                            color: const Color(0x00000000)),
                                         child: Image.asset(
                                             "assets/icons/icon_grade_fill_24_px.png"),
                                       ),
@@ -111,8 +102,7 @@ class HomePopularCardListItem extends StatelessWidget {
                                         width: 16,
                                         height: 16,
                                         decoration: BoxDecoration(
-                                            color: const Color(
-                                                0x00000000)),
+                                            color: const Color(0x00000000)),
                                         child: Image.asset(
                                             "assets/icons/icon_grade_fill_24_px.png"),
                                       ),
@@ -120,8 +110,7 @@ class HomePopularCardListItem extends StatelessWidget {
                                         width: 16,
                                         height: 16,
                                         decoration: BoxDecoration(
-                                            color: const Color(
-                                                0x00000000)),
+                                            color: const Color(0x00000000)),
                                         child: Image.asset(
                                             "assets/icons/icon_grade_fill_24_px.png"),
                                       ),
@@ -129,8 +118,7 @@ class HomePopularCardListItem extends StatelessWidget {
                                           width: 16,
                                           height: 16,
                                           decoration: BoxDecoration(
-                                              color: const Color(
-                                                  0x00000000)),
+                                              color: const Color(0x00000000)),
                                           child: Image.asset(
                                               "assets/icons/icon_grade_24_px.png"))
                                     ])),
@@ -142,17 +130,12 @@ class HomePopularCardListItem extends StatelessWidget {
                                 flex: 23,
                                 child: Text("246",
                                     style: const TextStyle(
-                                        color: const Color(
-                                            0x4d000000),
-                                        fontWeight:
-                                        FontWeight.w400,
-                                        fontFamily:
-                                        "Helvetica",
-                                        fontStyle:
-                                        FontStyle.normal,
+                                        color: const Color(0x4d000000),
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "Helvetica",
+                                        fontStyle: FontStyle.normal,
                                         fontSize: 14.0),
-                                    textAlign:
-                                    TextAlign.left)),
+                                    textAlign: TextAlign.left)),
                           ])),
                 ])));
   }

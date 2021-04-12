@@ -3,9 +3,10 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
 import 'package:yoroke/views/components/YrkPageView.dart';
-import 'package:yoroke/views/home/HomeCardListItem.dart';
-import 'package:yoroke/views/home/HomePopularCardListItem.dart';
-import 'package:yoroke/views/home/HomePopularListItem.dart';
+
+import 'HomeCardListItem.dart';
+import 'HomePopularCardListItem.dart';
+import 'HomePopularListItem.dart';
 
 class Home extends StatefulWidget {
   Home({required this.onPushNavigator});

@@ -59,18 +59,15 @@ class HomePopularListItem extends StatelessWidget {
                         child: Row(
                           children: <Widget>[
                             Expanded(
-                              flex: 64,
-                              child: Text("사용자ID",
-                                  style: const TextStyle(
-                                        color:  const Color(0x4d000000),
+                                flex: 64,
+                                child: Text("사용자ID",
+                                    style: const TextStyle(
+                                        color: const Color(0x4d000000),
                                         fontWeight: FontWeight.w500,
                                         fontFamily: "NotoSansCJKKR",
-                                        fontStyle:  FontStyle.normal,
-                                        fontSize: 12.0
-                                    ),
-                                    textAlign: TextAlign.left
-                                )
-                            ),
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 12.0),
+                                    textAlign: TextAlign.left)),
                             Expanded(
                                 flex: 86,
                                 child: Text(testDate[index],

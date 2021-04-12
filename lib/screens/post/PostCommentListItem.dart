@@ -228,7 +228,7 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
         child: YrkButton(
           buttonType: ButtonType.chip,
           label: "닫기",
-            onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.of(context).pop(),
         )));
 
     return list;
