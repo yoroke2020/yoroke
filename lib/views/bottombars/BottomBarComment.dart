@@ -62,9 +62,9 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                             width: 72,
                             height: 40,
                             decoration: BoxDecoration(
+                                color: const Color(0xffffffff),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(32)),
-                                color: const Color(0xffffffff),
                                 border:
                                     Border.all(color: const Color(0x4d000000))),
                             child: Center(
