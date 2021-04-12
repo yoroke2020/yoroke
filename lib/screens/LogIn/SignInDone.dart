@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:yoroke/views/widgets/YrkTextStyle.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class SignInDone extends StatefulWidget {
   @override

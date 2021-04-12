@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/screens/common/YrkListView.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/views/appbars/AppBarArrowBack.dart';
 import 'package:yoroke/views/bottombars/BottomBarComment.dart';
-import 'package:yoroke/views/components/YrkListView.dart';
-import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
 import 'PostCommentListItem.dart';
 

@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/views/widgets/YrkTextField.dart';
+import 'package:yoroke/screens/common/YrkTextField.dart';
 
 class BottomBarComment extends StatefulWidget {
   @override

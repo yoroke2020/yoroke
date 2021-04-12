@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/YrkListView.dart';
+import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/views/appbars/AppBarLargeImage.dart';
 import 'package:yoroke/views/bottombars/BottomBarNavigation.dart';
-import 'package:yoroke/views/components/YrkListView.dart';
-import 'package:yoroke/views/components/YrkTabBarView.dart';
 
 import 'BoardCardListItem.dart';
 import 'BoardReviewTabViewListItem.dart';

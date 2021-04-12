@@ -9,6 +9,7 @@ class YrkTextFieldInputDecoration extends InputDecoration {
   // final bool? filled;
   final String? hintText;
   final String? errorText;
+
   //
   final int? type;
   final Color? fillColor;
@@ -74,10 +75,9 @@ class YrkTextField extends TextField {
   }) : super(
           obscureText: obscureText,
           decoration: YrkTextFieldInputDecoration(
-            hintText: label,
-            errorText: errorText,
-            fillColor: fillColor,
-            borderColor: borderColor
-          ),
+              hintText: label,
+              errorText: errorText,
+              fillColor: fillColor,
+              borderColor: borderColor),
         );
 }

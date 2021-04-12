@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/views/components/YrkListView.dart';
 
 class BoardQnaListItem extends StatelessWidget {
   BoardQnaListItem({required this.index});

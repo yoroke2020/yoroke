@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/views/appbars/AppBarArrowBack.dart';
-import 'package:yoroke/views/components/YrkListView.dart';
 
 import 'HomeHistoryCardListItem.dart';
 
