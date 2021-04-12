@@ -4,8 +4,9 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/appbars/AppBarArrowBack.dart';
 import 'package:yoroke/views/bottombars/BottomBarComment.dart';
 import 'package:yoroke/views/components/YrkListView.dart';
-import 'package:yoroke/views/post/PostCommentListItem.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
+
+import 'PostCommentListItem.dart';
 
 class Post extends StatefulWidget {
   Post({Key? key, required this.data}) : super(key: key);

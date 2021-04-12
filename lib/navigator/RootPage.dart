@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/Board.dart';
-import 'package:yoroke/screens/Find.dart';
-import 'package:yoroke/screens/Home.dart';
-import 'package:yoroke/screens/Info.dart';
+import 'package:yoroke/screens/board/Board.dart';
+import 'package:yoroke/screens/find/Find.dart';
+import 'package:yoroke/screens/home/Home.dart';
+import 'package:yoroke/screens/info/Info.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/views/appbars/AppBarNormal.dart';
 import 'package:yoroke/views/bottombars/BottomBarNavigation.dart';
