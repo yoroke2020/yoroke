@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'navigator/PageItem.dart';
 import 'navigator/TabNavigator.dart';
-import 'views/bottombars/BottomBarNavigation.dart';
 
 void main() {
   runApp(MyApp());

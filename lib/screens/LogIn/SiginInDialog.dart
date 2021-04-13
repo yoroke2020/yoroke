@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/screens/LogIn/Nickname.dart';
-import 'package:yoroke/views/widgets/YrkTextStyle.dart';
-import 'package:yoroke/views/widgets/YrkButton.dart';
+import 'package:yoroke/screens/common/YrkButton.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
+import 'package:yoroke/screens/login/SingInNickname.dart';
 
 class SignInDialog extends StatefulWidget {
   @override
@@ -92,7 +92,8 @@ class _SignInDialogState extends State<SignInDialog> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Nickname()),
+                            MaterialPageRoute(
+                                builder: (context) => SignInNickname()),
                           );
                         },
                       ),

@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/views/components/YrkListView.dart';
 
 class HomeCardListItem extends StatelessWidget {
   HomeCardListItem(
@@ -46,30 +44,23 @@ class HomeCardListItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        Text(
-                          testHomeTitleString.elementAt(index),
-                          style: const TextStyle(
-                              color:  const Color(0xe6000000),
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "NotoSansCJKKR",
-                              fontStyle:  FontStyle.normal,
-                              fontSize: 16.0
-                          ),
-                          textAlign: TextAlign.left
-                        ),
-                        Text(
-                            testHomeDescString.elementAt(index),
+                        Text(testHomeTitleString.elementAt(index),
                             style: const TextStyle(
-                                color:  const Color(0xe6000000),
+                                color: const Color(0xe6000000),
+                                fontWeight: FontWeight.w700,
+                                fontFamily: "NotoSansCJKKR",
+                                fontStyle: FontStyle.normal,
+                                fontSize: 16.0),
+                            textAlign: TextAlign.left),
+                        Text(testHomeDescString.elementAt(index),
+                            style: const TextStyle(
+                                color: const Color(0xe6000000),
                                 fontWeight: FontWeight.w400,
                                 fontFamily: "NotoSansCJKKR",
-                                fontStyle:  FontStyle.normal,
-                                fontSize: 14.0
-                            ),
-                            textAlign: TextAlign.left
-                        ),
-                      ]
-                  )),
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.0),
+                            textAlign: TextAlign.left),
+                      ])),
             ])));
   }
 }

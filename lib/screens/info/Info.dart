@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/TestPage.dart';
-import 'LogIn.dart';
+import 'package:yoroke/screens/LogIn/LogIn.dart';
 
 class Info extends StatefulWidget {
   @override
