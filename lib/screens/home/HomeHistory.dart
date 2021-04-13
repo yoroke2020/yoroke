@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/views/appbars/AppBarArrowBack.dart';
-import 'package:yoroke/views/components/YrkListView.dart';
-import 'package:yoroke/views/home/HomeHistoryCardListItem.dart';
+import 'package:yoroke/screens/common/YrkListView.dart';
+import 'package:yoroke/screens/common/appbars/AppBarArrowBack.dart';
+
+import 'HomeHistoryCardListItem.dart';
 
 class HomeHistory extends StatefulWidget {
   HomeHistory({Key? key, required this.data}) : super(key: key);
 
   final YrkData? data;
+
   @override
   _HomeHistoryState createState() => _HomeHistoryState();
 }
@@ -18,6 +20,7 @@ class _HomeHistoryState extends State<HomeHistory> {
   bool widgetVisible = false;
   String titleText = "타이틀";
   String subTitleText = "서브 타이틀";
+
   void _onButtonClicked() {
     setState(() {
       widgetVisible = widgetVisible ? false : true;

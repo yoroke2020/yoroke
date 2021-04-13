@@ -1,12 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/views/components/YrkListView.dart';
 
-class BoardQnaListItem extends StatelessWidget {
-  BoardQnaListItem({required this.index});
+class HomePopularListItem extends StatelessWidget {
+  HomePopularListItem({required this.index});
 
   final int index;
 
@@ -59,6 +56,16 @@ class BoardQnaListItem extends StatelessWidget {
                         child: Row(
                           children: <Widget>[
                             Expanded(
+                                flex: 64,
+                                child: Text("사용자ID",
+                                    style: const TextStyle(
+                                        color: const Color(0x4d000000),
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "NotoSansCJKKR",
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 12.0),
+                                    textAlign: TextAlign.left)),
+                            Expanded(
                                 flex: 86,
                                 child: Text(testDate[index],
                                     style: const TextStyle(
@@ -74,7 +81,22 @@ class BoardQnaListItem extends StatelessWidget {
                                     "assets/icons/thumb_up_16_px.png")),
                             Expanded(flex: 5, child: Container()),
                             Expanded(
-                                flex: 195,
+                                flex: 21,
+                                child: Text(testNumberString[index],
+                                    style: const TextStyle(
+                                        color: const Color(0x4d000000),
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "NotoSansCJKkr",
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 12.0),
+                                    textAlign: TextAlign.left)),
+                            Expanded(
+                                flex: 14,
+                                child: Image.asset(
+                                    "assets/icons/icon_mode_comment_16_px.png")),
+                            Expanded(flex: 5, child: Container()),
+                            Expanded(
+                                flex: 120,
                                 child: Text(testNumberString[index],
                                     style: const TextStyle(
                                         color: const Color(0x4d000000),

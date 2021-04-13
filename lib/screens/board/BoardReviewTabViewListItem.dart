@@ -1,12 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:yoroke/models/TestData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/views/components/YrkListView.dart';
-import 'package:yoroke/views/widgets/YrkButton.dart';
-import 'package:yoroke/views/widgets/YrkRatingIcons.dart';
-import 'package:yoroke/views/widgets/YrkTextStyle.dart';
+import 'package:yoroke/screens/common/YrkButton.dart';
+import 'package:yoroke/screens/common/YrkRatingIcons.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class BoardReviewTabViewListItem extends StatelessWidget {
   BoardReviewTabViewListItem({required this.index});

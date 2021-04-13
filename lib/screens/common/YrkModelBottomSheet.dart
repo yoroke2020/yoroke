@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/views/components/YrkListView.dart';
 
-import 'YrkModalBottomSheetListItem.dart';
+import 'YrkListView.dart';
 
 class YrkModelBottomSheet extends StatelessWidget {
   const YrkModelBottomSheet(
