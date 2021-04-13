@@ -223,6 +223,8 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
         height: 48.0,
         margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 4.0),
         child: YrkButton(
+          width: 328.0,
+          height: 48.0,
           buttonType: ButtonType.chip,
           label: "닫기",
           onPressed: () => Navigator.of(context).pop(),
