@@ -248,8 +248,8 @@ class _YrkButtonState extends State<YrkButton> {
 
   @override
   Widget build(BuildContext context) {
-    double _width = 328;
-    double _height = 48;
+    double _width = widget.width!;
+    double _height = widget.height!;
 
     if (widget.buttonType == ButtonType.chip ||
         widget.buttonType == ButtonType.outlinechip ||
