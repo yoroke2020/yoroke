@@ -6,24 +6,44 @@ import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
+enum YrkPageListItemType {
+  boardQna,
+  boardJobFind,
+  boardReview
+}
+
 class YrkPageListItem extends StatelessWidget {
   YrkPageListItem({
     required this.pageIndex,
     required this.listIndex,
-    this.isText = true,
+    required this.yrkPageListItemType,
     this.onPushNavigator,
   });
 
   final int pageIndex;
   final int listIndex;
-  final bool isText;
+  final YrkPageListItemType yrkPageListItemType;
   final ValueChanged<YrkData>? onPushNavigator;
 
   @override
   Widget build(BuildContext context) {
+    bool isText = true;
+    switch (yrkPageListItemType) {
+      case YrkPageListItemType.boardQna:
+        isText = true;
+        break;
+      case YrkPageListItemType.boardJobFind:
+        isText = false;
+        break;
+      case YrkPageListItemType.boardReview:
+        isText = true;
+        break;
+    }
     return InkWell(
-      onTap: () => onPushNavigator!(
-          new YrkData(SubPageItem.boardQna, i1: listIndex + pageIndex * 10)),
+      onTap: () =>
+          onPushNavigator!(
+              new YrkData(
+                  SubPageItem.boardQna, i1: listIndex + pageIndex * 10)),
       //TODO: YrkData -> API Call
       child: Container(
           width: double.maxFinite,
@@ -44,20 +64,20 @@ class YrkPageListItem extends StatelessWidget {
                         margin: EdgeInsets.only(right: 8.0),
                         child: isText
                             ? Text(testShortString[listIndex],
-                                style: const YrkTextStyle(
-                                    color: const Color(0x99000000),
-                                    fontSize: 14.0),
-                                textAlign: TextAlign.left)
+                            style: const YrkTextStyle(
+                                color: const Color(0x99000000),
+                                fontSize: 14.0),
+                            textAlign: TextAlign.left)
                             : YrkButton(
-                                buttonType: ButtonType.solid,
-                                label: "구인중",
-                                onPressed: () {},
-                                width: 60.0,
-                                height: 24.0,
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "NotoSansCJKKR",
-                                fontStyle: FontStyle.normal),
+                            buttonType: ButtonType.solid,
+                            label: "구인중",
+                            onPressed: () {},
+                            width: 60.0,
+                            height: 24.0,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "NotoSansCJKKR",
+                            fontStyle: FontStyle.normal),
                       ),
                       Container(
                           child: Text(testLongString[listIndex],
