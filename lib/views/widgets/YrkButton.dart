@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 
 enum ButtonType { solid, outline, text, chip, outlinechip, rect, image }
 
+// ignore: must_be_immutable
 class YrkElevatedButton extends ElevatedButton {
   YrkElevatedButton({
     Key? key,
@@ -33,6 +33,7 @@ class YrkElevatedButton extends ElevatedButton {
         );
 }
 
+// ignore: must_be_immutable
 class YrkButton extends StatefulWidget {
   double? width;
   double? height;
@@ -249,8 +250,8 @@ class _YrkButtonState extends State<YrkButton> {
 
   @override
   Widget build(BuildContext context) {
-    double _width = 328;
-    double _height = 48;
+    double _width = widget.width ?? 328;
+    double _height = widget.height ?? 48;
 
     if (widget.buttonType == ButtonType.chip ||
         widget.buttonType == ButtonType.outlinechip ||

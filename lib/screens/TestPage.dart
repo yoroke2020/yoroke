@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:yoroke/views/widgets/YrkTextField.dart';
-import 'package:yoroke/views/widgets/YrkTextStyle.dart';
-import 'package:yoroke/views/widgets/YrkButton.dart';
 
 class TestPage extends StatefulWidget {
   @override
@@ -27,48 +25,28 @@ class _TestPageState extends State<TestPage> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: <Widget>[
-            Container(
-              child: new AspectRatio(
-                aspectRatio: 360 / 48,
-                child: Container(
-                  child: Text("회원가입",
-                      style: YrkTextStyle(
-                        color: Color(0xe6000000),
-                        fontSize: 22.0,
-                      ),
-                      textAlign: TextAlign.left),
-                ),
-              ),
+            YrkTextField(
+              label: 'Solid, default',
             ),
-            Container(
-              child: new AspectRatio(
-                aspectRatio: 328 / 160,
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: YrkTextField(
-                        label: 'Solid, default',
-                        // errorText: 'h',
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Expanded(
-                      child: YrkTextField(
-                        label: 'Search',
-                        textFieldType: TextFieldType.search,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Expanded(
-                      child: YrkTextField(
-                        label: 'Rect',
-                        obscureText: true,
-                        textFieldType: TextFieldType.rect,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            SizedBox(height: 8),
+            YrkTextField(
+              label: 'Search',
+              textFieldType: TextFieldType.search,
+            ),
+            SizedBox(height: 8),
+            YrkTextField(
+              label: 'Rect',
+              textFieldType: TextFieldType.rect,
+            ),
+            SizedBox(height: 8),
+            YrkTextField(
+              label: 'comment',
+              textFieldType: TextFieldType.comment,
+            ),
+            SizedBox(height: 8),
+            YrkTextField(
+              label: 'board(writing)',
+              textFieldType: TextFieldType.board,
             ),
           ],
         ),

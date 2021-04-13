@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/LogIn/Nickname.dart';
-import 'package:yoroke/screens/LogIn/SignInDone.dart';
-
-import 'package:yoroke/views/widgets/YrkTextField.dart';
 import 'package:yoroke/views/widgets/YrkTextStyle.dart';
 import 'package:yoroke/views/widgets/YrkButton.dart';
 
