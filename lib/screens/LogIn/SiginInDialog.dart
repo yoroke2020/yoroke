@@ -92,7 +92,8 @@ class _SignInDialogState extends State<SignInDialog> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => SignInNickname()),
+                            MaterialPageRoute(
+                                builder: (context) => SignInNickname()),
                           );
                         },
                       ),
