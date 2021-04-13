@@ -102,8 +102,6 @@ class _BoardReviewState extends State<BoardReview> {
                     index: 0,
                     itemCount: 10,
                     clickable: true,
-                    onPushNavigator: widget.onPushNavigator,
-                    nextSubPageItem: SubPageItem.boardQna,
                     item: _reviewTabViewListItem()),
                 YrkListView(
                     index: 1,

@@ -13,10 +13,14 @@ class YrkListView extends StatelessWidget {
     this.padding = const EdgeInsets.all(0),
     this.scrollable = false,
     this.scrollDirection = Axis.vertical,
+    @Deprecated("deprecated")
     this.clickable = false,
+    @Deprecated("deprecated")
     this.data,
+    @Deprecated("deprecated")
     this.onPushNavigator,
     this.index = 0,
+    @Deprecated("deprecated")
     this.nextSubPageItem,
     required this.item,
     this.itemCount = 1,
@@ -73,12 +77,5 @@ class YrkListView extends StatelessWidget {
                     child: item[index]));
           },
         ));
-  }
-
-  YrkData? _getData(int index) {
-    if (data != null)
-      return data;
-    else
-      return new YrkData(nextSubPageItem, i0: this.index, i1: index);
   }
 }

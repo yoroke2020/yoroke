@@ -34,7 +34,7 @@ class _PostState extends State<Post> {
   }
 
   String _sampleText(String s) {
-    String str = widget.data!.str0! + "\n";
+    String str = widget.data!.i1!.toString() + "\n";
     for (int i = 0; i < 400; i++) {
       str += s;
     }
