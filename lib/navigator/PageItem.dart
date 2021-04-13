@@ -11,6 +11,7 @@ enum SubPageItem {
   homePopular,
   homeHistory,
   boardReview,
+  boardReviewFeed,
   boardQna,
   boardJobFinding
 }
@@ -41,6 +42,8 @@ extension SubPageItemExt on SubPageItem {
       case SubPageItem.boardQna:
         return Post(data: data);
       case SubPageItem.boardJobFinding:
+        return Post(data: data);
+      case SubPageItem.boardReviewFeed:
         return Post(data: data);
     }
   }

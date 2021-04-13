@@ -13,15 +13,11 @@ class YrkListView extends StatelessWidget {
     this.padding = const EdgeInsets.all(0),
     this.scrollable = false,
     this.scrollDirection = Axis.vertical,
-    @Deprecated("deprecated")
-    this.clickable = false,
-    @Deprecated("deprecated")
-    this.data,
-    @Deprecated("deprecated")
-    this.onPushNavigator,
+    @Deprecated("deprecated") this.clickable = false,
+    @Deprecated("deprecated") this.data,
+    @Deprecated("deprecated") this.onPushNavigator,
     this.index = 0,
-    @Deprecated("deprecated")
-    this.nextSubPageItem,
+    @Deprecated("deprecated") this.nextSubPageItem,
     required this.item,
     this.itemCount = 1,
     this.itemMargin = const EdgeInsets.all(0),
@@ -62,19 +58,7 @@ class YrkListView extends StatelessWidget {
             return Container(
                 margin: this.itemMargin,
                 padding: this.itemPadding,
-                child: InkWell(
-                    onTap: clickable
-                        ? () => onPushNavigator!(new YrkData(
-                              nextSubPageItem,
-                              str0: "This is # " +
-                                  this.index.toString() +
-                                  " - " +
-                                  index.toString(),
-                              i0: this.index,
-                              i1: index,
-                            ))
-                        : null,
-                    child: item[index]));
+                child: item[index]);
           },
         ));
   }

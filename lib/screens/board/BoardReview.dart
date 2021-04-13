@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
+import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/screens/common/appbars/AppBarLargeImage.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
@@ -50,7 +51,7 @@ class _BoardReviewState extends State<BoardReview> {
     });
   }
 
-  List<Widget> _reviewCardList() {
+  List<Widget> _buildReviewCardList() {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(BoardCardListItem(width: 112.0, height: 112.0, index: i));
@@ -59,10 +60,15 @@ class _BoardReviewState extends State<BoardReview> {
     return list;
   }
 
-  List<Widget> _reviewTabViewListItem() {
+  List<Widget> _buildReviewTabViewListItem(int pageIndex) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 10; i++) {
-      list.add(BoardReviewTabViewListItem(index: i));
+      list.add(YrkPageListItem(
+        pageIndex: pageIndex,
+        listIndex: i,
+        subPageItem: SubPageItem.boardReviewFeed,
+        onPushNavigator: widget.onPushNavigator,
+      ));
     }
 
     return list;
@@ -89,7 +95,7 @@ class _BoardReviewState extends State<BoardReview> {
                 clickable: true,
                 onPushNavigator: _onPushNavigator,
                 nextSubPageItem: SubPageItem.boardReview,
-                item: _reviewCardList(),
+                item: _buildReviewCardList(),
                 itemCount: 4,
               )),
           YrkTabBarView(
@@ -102,14 +108,14 @@ class _BoardReviewState extends State<BoardReview> {
                     index: 0,
                     itemCount: 10,
                     clickable: true,
-                    item: _reviewTabViewListItem()),
+                    item: _buildReviewTabViewListItem(0)),
                 YrkListView(
                     index: 1,
                     itemCount: 10,
                     clickable: true,
                     onPushNavigator: widget.onPushNavigator,
                     nextSubPageItem: SubPageItem.boardQna,
-                    item: _reviewTabViewListItem()),
+                    item: _buildReviewTabViewListItem(1)),
               ]),
         ]),
         bottomNavigationBar:

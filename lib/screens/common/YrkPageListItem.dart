@@ -6,44 +6,49 @@ import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
-enum YrkPageListItemType {
-  boardQna,
-  boardJobFind,
-  boardReview
-}
-
 class YrkPageListItem extends StatelessWidget {
   YrkPageListItem({
     required this.pageIndex,
     required this.listIndex,
-    required this.yrkPageListItemType,
+    required this.subPageItem,
     this.onPushNavigator,
   });
 
   final int pageIndex;
   final int listIndex;
-  final YrkPageListItemType yrkPageListItemType;
+  final SubPageItem subPageItem;
   final ValueChanged<YrkData>? onPushNavigator;
 
   @override
   Widget build(BuildContext context) {
-    bool isText = true;
-    switch (yrkPageListItemType) {
-      case YrkPageListItemType.boardQna:
-        isText = true;
+    bool isText =
+        true; // Text or Button appears before a title. If it is true, a text appears. If it is false, a button appears
+    bool isBestIcon = false; // Best Icon appears next to a title
+    bool isRating =
+        false; // Rating appears next to a comment icon on the second line
+    switch (subPageItem) {
+      // Add case here when new kinds of pageListItem is defined
+      case SubPageItem.homePopular:
+        // TODO: Handle this case.
         break;
-      case YrkPageListItemType.boardJobFind:
+      case SubPageItem.homeHistory:
+        // TODO: Handle this case.
+        break;
+      case SubPageItem.boardQna:
+        break;
+      case SubPageItem.boardJobFinding:
         isText = false;
         break;
-      case YrkPageListItemType.boardReview:
-        isText = true;
+      case SubPageItem.boardReview:
+        break;
+      case SubPageItem.boardReviewFeed:
+        isRating = true;
+        isBestIcon = true;
         break;
     }
     return InkWell(
-      onTap: () =>
-          onPushNavigator!(
-              new YrkData(
-                  SubPageItem.boardQna, i1: listIndex + pageIndex * 10)),
+      onTap: () => onPushNavigator!(
+          new YrkData(subPageItem, i1: listIndex + pageIndex * 10)),
       //TODO: YrkData -> API Call
       child: Container(
           width: double.maxFinite,
@@ -64,25 +69,41 @@ class YrkPageListItem extends StatelessWidget {
                         margin: EdgeInsets.only(right: 8.0),
                         child: isText
                             ? Text(testShortString[listIndex],
-                            style: const YrkTextStyle(
-                                color: const Color(0x99000000),
-                                fontSize: 14.0),
-                            textAlign: TextAlign.left)
+                                style: const YrkTextStyle(
+                                    color: const Color(0x99000000),
+                                    fontSize: 14.0),
+                                textAlign: TextAlign.left)
                             : YrkButton(
-                            buttonType: ButtonType.solid,
-                            label: "구인중",
-                            onPressed: () {},
-                            width: 60.0,
-                            height: 24.0,
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: "NotoSansCJKKR",
-                            fontStyle: FontStyle.normal),
+                                buttonType: ButtonType.solid,
+                                label: "구인중",
+                                onPressed: () {},
+                                width: 60.0,
+                                height: 24.0,
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: "NotoSansCJKKR",
+                                fontStyle: FontStyle.normal),
                       ),
                       Container(
+                          margin: EdgeInsets.only(right: 4.0),
                           child: Text(testLongString[listIndex],
                               style: const YrkTextStyle(fontSize: 16.0),
-                              textAlign: TextAlign.left))
+                              textAlign: TextAlign.left)),
+                      isBestIcon
+                          ? Container(
+                              padding: const EdgeInsets.only(top: 4.0),
+                              child: YrkButton(
+                                buttonType: ButtonType.chip,
+                                width: 32,
+                                height: 16,
+                                label: "BEST",
+                                fontSize: 8.0,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: "OpenSans",
+                                clickable: false,
+                                onPressed: () {},
+                              ))
+                          : Container()
                     ]),
                 Container(width: double.maxFinite, height: 6.0),
                 Row(
@@ -130,6 +151,7 @@ class YrkPageListItem extends StatelessWidget {
                             child: Image.asset(
                                 "assets/icons/mode_comment_16_px.png"))),
                     Container(
+                        margin: EdgeInsets.only(right: 8.0),
                         child: Text(testNumberString[listIndex],
                             style: const TextStyle(
                               color: const Color(0x4d000000),
@@ -137,7 +159,30 @@ class YrkPageListItem extends StatelessWidget {
                               fontSize: 12.0,
                               fontFamily: "OpenSans",
                             ),
-                            textAlign: TextAlign.left))
+                            textAlign: TextAlign.left)),
+                    isRating
+                        ? Container(
+                            child: Row(children: <Widget>[
+                            Container(
+                                margin: EdgeInsets.only(right: 3.0),
+                                width: 12.0,
+                                height: 12.0,
+                                child: Icon(
+                                  Icons.star,
+                                  color: const Color(0xfff5df4d),
+                                  size: 12,
+                                )),
+                            Container(
+                                child: Text("4.8",
+                                    style: const TextStyle(
+                                      color: const Color(0x4d000000),
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12.0,
+                                      fontFamily: "OpenSans",
+                                    ),
+                                    textAlign: TextAlign.left))
+                          ]))
+                        : Container(),
                   ],
                 )
               ])),
