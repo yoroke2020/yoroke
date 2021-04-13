@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 enum ButtonType { solid, outline, text, chip, outlinechip, rect, image }
 
+// ignore: must_be_immutable
 class YrkElevatedButton extends ElevatedButton {
   YrkElevatedButton({
     Key? key,
@@ -32,6 +33,7 @@ class YrkElevatedButton extends ElevatedButton {
         );
 }
 
+// ignore: must_be_immutable
 class YrkButton extends StatefulWidget {
   double? width;
   double? height;
@@ -149,7 +151,7 @@ class _YrkButtonState extends State<YrkButton> {
   }
 
   ButtonStyle getButtonStyle() {
-    double _radius = widget.buttonType == ButtonType.rect ? 0 : 100;
+    double _radius = widget.buttonType == ButtonType.rect ? 8 : 100;
     Color _btnColor = widget.btnColor ?? const Color(0xfff5df4d);
     Color _outlineBackgroundColor = widget.btnColor ?? const Color(0xffffffff);
 
@@ -248,8 +250,8 @@ class _YrkButtonState extends State<YrkButton> {
 
   @override
   Widget build(BuildContext context) {
-    double _width = widget.width!;
-    double _height = widget.height!;
+    double _width = widget.width ?? 328;
+    double _height = widget.height ?? 48;
 
     if (widget.buttonType == ButtonType.chip ||
         widget.buttonType == ButtonType.outlinechip ||

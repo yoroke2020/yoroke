@@ -19,25 +19,6 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> buttons = btns.map((e) {
-      return Container(
-        padding: const EdgeInsets.only(top: 8, bottom: 8),
-        child: YrkButton(
-          buttonType: ButtonType.image,
-          width: 328,
-          height: 48,
-          label: e['text'],
-          img: e['icon'],
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SignInDialog()),
-            );
-          },
-        ),
-      );
-    }).toList();
-
     return Scaffold(
         appBar: AppBar(
           leading: new IconButton(
