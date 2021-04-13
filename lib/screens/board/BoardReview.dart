@@ -9,7 +9,6 @@ import 'package:yoroke/screens/common/appbars/AppBarLargeImage.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'BoardCardListItem.dart';
-import 'BoardReviewTabViewListItem.dart';
 
 class BoardReview extends StatefulWidget {
   BoardReview({Key? key, required this.data, required this.onPushNavigator})
