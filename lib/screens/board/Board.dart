@@ -37,31 +37,28 @@ class _BoardState extends State<Board> {
     return list;
   }
 
-  List<Widget> _buildBoardYrkListView(YrkPageListItemType yrkPageListItemType) {
+  List<Widget> _buildBoardYrkListView(SubPageItem subPageItem) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkListView(
           itemCount: 4,
-          item: buildList(
+          item: _buildList(
               i,
-              yrkPageListItemType,
-              widget.onPushNavigator!,
-              yrkPageListItemType == YrkPageListItemType.boardQna
-                  ? SubPageItem.boardQna
-                  : SubPageItem.boardJobFinding)));
+              subPageItem,
+              widget.onPushNavigator!)));
     }
     return list;
   }
 
-  List<Widget> buildList(int pageIndex, YrkPageListItemType yrkPageListItemType,
-      ValueChanged<YrkData> onPushNavigator, SubPageItem nextPageItem) {
+  List<Widget> _buildList(int pageIndex, SubPageItem subPageItem,
+      ValueChanged<YrkData> onPushNavigator) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
         onPushNavigator: onPushNavigator,
-        yrkPageListItemType: yrkPageListItemType,
+        subPageItem: subPageItem,
       ));
     }
     return list;
@@ -84,13 +81,13 @@ class _BoardState extends State<Board> {
         ),
         YrkTabHeaderView(title: "고민/질문"),
         YrkPageView(
-          page: _buildBoardYrkListView(YrkPageListItemType.boardQna),
+          page: _buildBoardYrkListView(SubPageItem.boardQna),
           controller: qnaPageController,
           isIndicatorEnabled: true,
         ),
         YrkTabHeaderView(title: "구인구직"),
         YrkPageView(
-            page: _buildBoardYrkListView(YrkPageListItemType.boardJobFind),
+            page: _buildBoardYrkListView(SubPageItem.boardJobFinding),
             controller: findJobPageController,
             isIndicatorEnabled: true)
       ],
