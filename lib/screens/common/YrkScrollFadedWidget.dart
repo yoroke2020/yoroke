@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 class YrkScrollFadedWidget extends StatefulWidget {
   YrkScrollFadedWidget(
-      {Key? key,
-        required this.scrollController,
-        required this.child})
+      {Key? key, required this.scrollController, required this.child})
       : super(key: key);
 
   final ScrollController scrollController;

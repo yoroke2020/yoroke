@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class YrkTabBarView extends StatelessWidget {
-  YrkTabBarView({
-    this.tabViewList,
-    this.controller,
-    required this.tabTextList,
-    required this.tabSize,
-    required this.length,
-    this.height = 650,
-    this.onTap
-  });
+  YrkTabBarView(
+      {this.tabViewList,
+      this.controller,
+      required this.tabTextList,
+      required this.tabSize,
+      required this.length,
+      this.height = 650,
+      this.onTap,
+      this.tabController});
 
   final List<Widget>? tabViewList;
   final TabController? controller;
@@ -19,6 +19,7 @@ class YrkTabBarView extends StatelessWidget {
   final int length;
   final double? height;
   final ValueChanged<int>? onTap;
+  final TabController? tabController;
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +42,7 @@ class YrkTabBarView extends StatelessWidget {
 
     return DefaultTabController(
       length: length,
-      // The Builder widget is used to have a different BuildContext to access
-      // closest DefaultTabController.
+      initialIndex: 0,
       child: Builder(builder: (BuildContext context) {
         return Column(children: <Widget>[
           Container(
@@ -52,9 +52,9 @@ class YrkTabBarView extends StatelessWidget {
                 Expanded(
                     flex: tabSize * length,
                     child: TabBar(
+                      controller: tabController,
                       onTap: (index) {
-                        if(onTap != null)
-                          onTap!(index);
+                        if (onTap != null) onTap!(index);
                       },
                       tabs: tabs,
                       indicatorColor: const Color(0xfff5df4d),

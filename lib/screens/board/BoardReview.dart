@@ -23,30 +23,46 @@ class BoardReview extends StatefulWidget {
   _BoardReviewState createState() => _BoardReviewState();
 }
 
-class _BoardReviewState extends State<BoardReview> {
-  final ScrollController _scrollController = ScrollController();
-  final int bardCardListItemCount = 12;
-
+class _BoardReviewState extends State<BoardReview>
+    with TickerProviderStateMixin {
   static final int loadPageCount = 20;
+  static final int bardCardListItemCount = 12;
+
+  late final ScrollController _scrollController;
+  late final TabController _tabController;
+
   late List<Widget> _popularReviewFeedList;
   late List<Widget> _newReviewFeedList;
-  int _popularReviewFeedListItemCount = loadPageCount;
-  int _newReviewFeedListItemCount = loadPageCount;
-  int _curTabIndex = 0;
+  late int _popularReviewFeedListItemCount;
+  late int _newReviewFeedListItemCount;
+  late int _curTabIndex;
+  late int _curCardIndex;
 
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
+    _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
     _popularReviewFeedList = <Widget>[];
     _newReviewFeedList = <Widget>[];
-    _buildReviewTabViewListItem(_popularReviewFeedList, 0, 0, loadPageCount);
-    _buildReviewTabViewListItem(_newReviewFeedList, 1, 0, loadPageCount);
+    _initBoardReviewState();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         _loadMoreData();
       }
     });
+  }
+
+  void _initBoardReviewState() {
+    _popularReviewFeedList.removeRange(0, _popularReviewFeedList.length);
+    _newReviewFeedList.removeRange(0, _newReviewFeedList.length);
+    _buildReviewTabViewListItem(_popularReviewFeedList, 0, 0, loadPageCount);
+    _buildReviewTabViewListItem(_newReviewFeedList, 1, 0, loadPageCount);
+    _popularReviewFeedListItemCount = loadPageCount;
+    _newReviewFeedListItemCount = loadPageCount;
+    _curTabIndex = 0;
+    _curCardIndex = 0;
   }
 
   void _loadMoreData() {
@@ -60,7 +76,8 @@ class _BoardReviewState extends State<BoardReview> {
           //TODO: 추후 API 갯수 카운트 후 몇개씩 로드할 것인지 정해야 함
           // _buildReviewTabViewListItem(_popularReviewFeedList, 0,
           //     _popularReviewFeedListItemCount, _newReviewFeedListItemCount + loadPageCount);
-          _buildReviewTabViewListItem(_popularReviewFeedList, 0, 0, loadPageCount);
+          _buildReviewTabViewListItem(
+              _popularReviewFeedList, 0, 0, loadPageCount);
         _popularReviewFeedListItemCount += loadPageCount;
       } else {
         if (_newReviewFeedListItemCount >= _newReviewFeedList.length)
@@ -93,10 +110,19 @@ class _BoardReviewState extends State<BoardReview> {
         width: 64.0,
         height: 76.0,
         index: i,
-        onPushNavigator: widget.onPushNavigator,
+        isBorder: i == _curCardIndex ? true : false,
+        onPushNavigator: (data) => _onPushChangeReviewCard(data),
       ));
     }
     return list;
+  }
+
+  void _onPushChangeReviewCard(YrkData data) {
+    setState(() {
+      _initBoardReviewState();
+      _curCardIndex = data.i1!;
+      _tabController.animateTo(0);
+    });
   }
 
   void onTapSetCurTabIndex(int index) {
@@ -167,6 +193,7 @@ class _BoardReviewState extends State<BoardReview> {
               length: 2,
               tabTextList: ["최신글", "인기글"],
               tabSize: 72,
+              tabController: _tabController,
               height: _curTabIndex == 0
                   ? 65.0 * _popularReviewFeedListItemCount
                   : 65.0 * _newReviewFeedListItemCount,

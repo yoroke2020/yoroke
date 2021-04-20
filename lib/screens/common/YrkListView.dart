@@ -53,17 +53,14 @@ class YrkListView extends StatelessWidget {
           physics: scrollable
               ? new AlwaysScrollableScrollPhysics()
               : new NeverScrollableScrollPhysics(),
-          itemCount:
-              isIndicator! ? itemCount + 1 : itemCount,
+          itemCount: isIndicator! ? itemCount + 1 : itemCount,
           itemBuilder: (BuildContext context, int index) {
             if (isIndicator! && index == itemCount) {
               print("CircularProgressIndicator appears");
               return CircularProgressIndicator();
             }
             return Container(
-                margin: itemMargin,
-                padding: itemPadding,
-                child: item[index]);
+                margin: itemMargin, padding: itemPadding, child: item[index]);
           },
         ));
   }
