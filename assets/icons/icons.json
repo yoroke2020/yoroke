@@ -55,5 +55,11 @@
   },
   "naver": {
     "image": "assets/icons/icon_naver.png"
+  },
+  "bookmark": {
+    "image": "assets/icons/icon_bookmark_24_px.png"
+  },
+  "bookmarked": {
+    "image": "assets/icons/icon_bookmarked_24_px.png"
   }
 }
