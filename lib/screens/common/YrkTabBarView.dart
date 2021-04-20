@@ -9,6 +9,7 @@ class YrkTabBarView extends StatelessWidget {
     required this.viewRatio,
     required this.tabSize,
     required this.length,
+    this.following,
   });
 
   final List<Widget>? tabViewList;
@@ -17,6 +18,7 @@ class YrkTabBarView extends StatelessWidget {
   final double viewRatio;
   final int tabSize;
   final int length;
+  final Widget? following;
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +63,13 @@ class YrkTabBarView extends StatelessWidget {
                       unselectedLabelStyle: TextStyle(
                           fontSize: 16.0, fontWeight: FontWeight.w400),
                     )),
-                Expanded(flex: 360 - tabSize * length, child: Container())
+                Expanded(
+                    flex: 360 - tabSize * length,
+                    child:
+                        this.following != null ? this.following! : Container())
               ])),
           Container(
+              // padding: EdgeInsets.all(16),
               height: 650,
               child: TabBarView(
                 children: tabViewList!,
