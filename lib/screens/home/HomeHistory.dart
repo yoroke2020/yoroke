@@ -39,7 +39,7 @@ class _HomeHistoryState extends State<HomeHistory> {
         appBar: AppBarArrowBack.getInstance(),
         body: (ListView(children: <Widget>[
           YrkListView(
-            width: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             margin: EdgeInsets.only(left: 16),
             scrollable: true,
