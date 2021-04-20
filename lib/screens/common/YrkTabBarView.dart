@@ -6,17 +6,19 @@ class YrkTabBarView extends StatelessWidget {
     this.tabViewList,
     this.controller,
     required this.tabTextList,
-    required this.viewRatio,
     required this.tabSize,
     required this.length,
+    this.height = 650,
+    this.onTap
   });
 
   final List<Widget>? tabViewList;
   final TabController? controller;
   final List<String> tabTextList;
-  final double viewRatio;
   final int tabSize;
   final int length;
+  final double? height;
+  final ValueChanged<int>? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +44,6 @@ class YrkTabBarView extends StatelessWidget {
       // The Builder widget is used to have a different BuildContext to access
       // closest DefaultTabController.
       child: Builder(builder: (BuildContext context) {
-        final TabController tabController = DefaultTabController.of(context)!;
-        tabController.addListener(() {
-          if (tabController.indexIsChanging) {}
-        });
         return Column(children: <Widget>[
           Container(
               height: 40,
@@ -54,6 +52,10 @@ class YrkTabBarView extends StatelessWidget {
                 Expanded(
                     flex: tabSize * length,
                     child: TabBar(
+                      onTap: (index) {
+                        if(onTap != null)
+                          onTap!(index);
+                      },
                       tabs: tabs,
                       indicatorColor: const Color(0xfff5df4d),
                       labelStyle: TextStyle(
@@ -64,7 +66,7 @@ class YrkTabBarView extends StatelessWidget {
                 Expanded(flex: 360 - tabSize * length, child: Container())
               ])),
           Container(
-              height: 650,
+              height: height,
               child: TabBarView(
                 children: tabViewList!,
               )),
