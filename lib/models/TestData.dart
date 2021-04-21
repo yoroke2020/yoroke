@@ -36,6 +36,21 @@ List<String> testCardImage = [
   "assets/icons/sample_image.png",
 ];
 
+List<String> testInfoShareImage = [
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg"
+];
+
 List<String> testHomeTitleString = [
   "요로케 요양병원",
   "코로나 프리 요양병원",

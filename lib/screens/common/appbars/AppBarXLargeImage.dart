@@ -1,173 +1,130 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
-import 'package:yoroke/screens/common/YrkChipButtonLong.dart';
 
 import 'package:yoroke/models/TestData.dart';
-import 'AppBarYellow.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class AppBarXLargeImage extends StatefulWidget implements PreferredSizeWidget {
-  AppBarXLargeImage(
-      {required this.titleText,
-      required this.subTitleText,
-      this.buttonColor = const Color(0x00000000),
-      this.buttonBorderColor = const Color(0xfff5df4d),
-      this.buttonTextColor = const Color(0xfff5df4d),
-      this.onButtonClicked,
-      this.widgetVisible});
+  AppBarXLargeImage({
+    required this.titleText,
+    required this.date,
+    this.height,
+  });
 
   final String titleText;
-  final String subTitleText;
-  final Color buttonColor;
-  final Color buttonBorderColor;
-  final Color buttonTextColor;
-  final Function? onButtonClicked;
-  final bool? widgetVisible;
+  final String date;
+  final double? height;
 
-  @override
-  final Size preferredSize = Size.fromHeight(168);
+  bool _isBookmarked = false;
 
   @override
   _AppBarXLargeImageState createState() => _AppBarXLargeImageState();
+
+  double trimHeight(double? _h) {
+    _h ??= 0;
+    double _maxH = 480, _minH = 48, ret = _maxH - _h;
+
+    if (ret < _minH)
+      return 48;
+    else if (ret > _maxH)
+      return _maxH;
+    else
+      return ret;
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(trimHeight(this.height));
 }
 
 class _AppBarXLargeImageState extends State<AppBarXLargeImage> {
+  double _bottomHeight() =>
+      widget.preferredSize.height < 100 ? 0 : widget.preferredSize.height - 100;
+  double _opacity() => widget.preferredSize.height > 250 ? 1.0 : 0.0;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: new IconButton(
-        icon: new Icon(Icons.arrow_back, color: Colors.black),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
-      actions: [
-        IconButton(
-          icon: Image.asset(
-            "assets/icons/icon_bookmark_24_px.png",
-            width: 18,
-            height: 18,
-            color: Colors.black,
-          ),
+        elevation: 0,
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
-      ],
-      flexibleSpace: Image(
-        image: AssetImage(testCardImage.elementAt(0)),
-        fit: BoxFit.cover,
-      ),
-      bottom: PreferredSize(
-          preferredSize: widget.preferredSize,
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                    height: 24,
-                    width: 88,
-                    child: new YrkButton(
-                      buttonType: ButtonType.chip,
-                      clickable: true,
-                      onPressed: () {},
-                      label: "복지시설",
-                      fontSize: 14.0,
-                      width: 88,
-                    )),
-                Container(
-                    // height: 24,
-                    child: Text(widget.titleText,
-                        style: const TextStyle(
-                            color: const Color(0xffffffff),
-                            fontWeight: FontWeight.w500,
-                            fontFamily: "NotoSansCJKkr",
-                            fontStyle: FontStyle.normal,
-                            fontSize: 32.0),
-                        textAlign: TextAlign.left)),
-                Container(
-                  // height: 20,
-                  child: Text(widget.subTitleText,
-                      style: const TextStyle(
-                          color: const Color(0xffffffff),
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "NotoSansCJKkr",
-                          fontStyle: FontStyle.normal,
-                          fontSize: 14.0),
-                      textAlign: TextAlign.left),
-                ),
-              ],
+        backgroundColor: Colors.transparent,
+        actions: [
+          IconButton(
+            splashColor: Colors.transparent,
+            icon: Image.asset(
+              widget._isBookmarked
+                  ? "assets/icons/icon_bookmarked_24_px.png"
+                  : "assets/icons/icon_bookmark_24_px.png",
+              width: 24,
+              height: 24,
+              color: Colors.black,
             ),
-          )),
-    );
-    // return PreferredSize(
-    //     preferredSize: widget.preferredSize,
-    //     child: Container(
-    //         width: double.maxFinite,
-    //         child: Stack(children: <Widget>[
-    //           Container(
-    //             decoration: BoxDecoration(
-    //                 color: Colors.transparent,
-    //                 image: DecorationImage(
-    //                   fit: BoxFit.fill,
-    //                   image: AssetImage(
-    //                     "assets/icons/sample_image.png",
-    //                   ),
-    //                 )),
-    //           ),
-    //           Container(
-    //               decoration: BoxDecoration(
-    //             gradient: LinearGradient(
-    //                 begin: Alignment(0.5385274291038513, 1),
-    //                 end: Alignment(0.5381971597671509, 0),
-    //                 colors: [const Color(0xe6000000), const Color(0x4d000000)]),
-    //           )),
-    //           Container(
-    //               padding: EdgeInsets.all(16),
-    //               child: Column(children: [
-    //                 AppBarYellow.getInstance()!,
-    //                 Expanded(child: Container()),
-    //                 Container(
-    //                     height: 24,
-    //                     width: 88,
-    //                     alignment: Alignment.bottomLeft,
-    //                     child: new YrkButton(
-    //                       buttonType: ButtonType.chip,
-    //                       clickable: true,
-    //                       onPressed: () {},
-    //                       label: "복지시설",
-    //                       fontSize: 14.0,
-    //                       width: 18,
-    //                     )),
-    //                 Container(
-    //                     height: 24,
-    //                     alignment: Alignment.centerLeft,
-    //                     padding: EdgeInsets.only(left: 16),
-    //                     child: Text(widget.titleText,
-    //                         style: const TextStyle(
-    //                             color: const Color(0xffffffff),
-    //                             fontWeight: FontWeight.w500,
-    //                             fontFamily: "NotoSansCJKkr",
-    //                             fontStyle: FontStyle.normal,
-    //                             fontSize: 16.0),
-    //                         textAlign: TextAlign.left)),
-    //                 Container(
-    //                   height: 20,
-    //                   alignment: Alignment.centerLeft,
-    //                   padding: EdgeInsets.only(left: 16),
-    //                   child: Text(widget.subTitleText,
-    //                       style: const TextStyle(
-    //                           color: const Color(0xffffffff),
-    //                           fontWeight: FontWeight.w400,
-    //                           fontFamily: "NotoSansCJKkr",
-    //                           fontStyle: FontStyle.normal,
-    //                           fontSize: 14.0),
-    //                       textAlign: TextAlign.left),
-    //                 ),
-    //               ]))
-    //         ])));
-  }
-
-  void _onTap() {
-    print("AppBarLargeTheme - onTap is called");
-    widget.onButtonClicked!();
+            onPressed: () {
+              setState(() {
+                widget._isBookmarked = !widget._isBookmarked;
+              });
+            },
+          ),
+        ],
+        flexibleSpace: AnimatedOpacity(
+          duration: Duration(milliseconds: 200),
+          opacity: _opacity(),
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(testInfoShareImage.elementAt(0)),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+        bottom: PreferredSize(
+            preferredSize: widget.preferredSize,
+            child: AnimatedOpacity(
+              duration: Duration(milliseconds: 200),
+              opacity: _opacity(),
+              child: Container(
+                width: double.infinity,
+                height: _bottomHeight(),
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: new YrkButton(
+                        buttonType: ButtonType.chip,
+                        clickable: true,
+                        onPressed: () {},
+                        label: "복지시설",
+                        fontSize: 14.0,
+                        width: 88,
+                        height: 24,
+                      ),
+                    ),
+                    Container(
+                        // height: 24,
+                        child: Text(widget.titleText,
+                            style: YrkTextStyle(
+                                color: const Color(0xffffffff),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 32.0),
+                            textAlign: TextAlign.left)),
+                    Container(
+                      // height: 20,
+                      child: Text(widget.date,
+                          style: YrkTextStyle(
+                              color: const Color(0xffffffff),
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14.0),
+                          textAlign: TextAlign.left),
+                    ),
+                  ],
+                ),
+              ),
+            )));
   }
 }

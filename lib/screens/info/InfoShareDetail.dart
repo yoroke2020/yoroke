@@ -1,15 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/board/BoardCardListItem.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
-import 'package:yoroke/screens/common/YrkPageListItem.dart';
-import 'package:yoroke/screens/common/YrkTabBarView.dart';
-import 'package:yoroke/screens/common/appbars/AppBarLargeImage.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/AppBarXLargeImage.dart';
-import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
+import 'package:yoroke/screens/info/InfoShareCardListItem.dart';
 
+// ignore: must_be_immutable
 class InfoShareDetail extends StatefulWidget {
   InfoShareDetail({Key? key, required this.data, required this.onPushNavigator})
       : super(key: key);
@@ -33,45 +30,89 @@ class _InfoShareDetailState extends State<InfoShareDetail> {
     "2020.04.21",
   ];
 
-  bool widgetVisible = false;
+  bool isScrolled = false;
+  double? appbarHeight;
 
-  void _onButtonClicked() {
-    setState(() {
-      widgetVisible = widgetVisible ? false : true;
-    });
+  String _sampleText(String s) {
+    String str = "";
+    for (int i = 0; i < 100; i++) {
+      str += s;
+    }
+    return str;
   }
 
-  void _onPushNavigator(YrkData data) {
-    setState(() {
-      widget.data!.i0 = data.i0;
-    });
+  List<Widget> _infoShareCardListItem(int pageIndex) {
+    double _expandWidth = MediaQuery.of(context).size.width - 32 - 16;
+
+    List<Widget> list = <Widget>[];
+    for (int i = 0; i < 6; i += 2) {
+      list.add(Container(
+          width: _expandWidth,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              InfoShareCardListItem(
+                width: (_expandWidth - 24) / 2,
+                height: 172,
+                index: i,
+                onPushNavigator: widget.onPushNavigator,
+              ),
+              InfoShareCardListItem(
+                width: (_expandWidth - 24) / 2,
+                height: 172,
+                index: i + 1,
+                onPushNavigator: widget.onPushNavigator,
+              ),
+            ],
+          )));
+    }
+
+    return list;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarXLargeImage(
-        onButtonClicked: _onButtonClicked,
-        widgetVisible: widgetVisible,
         titleText: widget.data!.str0!,
-        subTitleText: date[widget.data!.i0!],
+        date: widget.data!.str1!,
+        height: appbarHeight,
       ),
-      body: Container(),
-      // ListView(children: <Widget>[
-      //   AnimatedContainer(
-      //       duration: Duration(milliseconds: 300),
-      //       height: widgetVisible ? 120.0 : 0.0,
-      //       child: YrkListView(
-      //         height: 128.0,
-      //         margin: EdgeInsets.only(left: 8, right: 8),
-      //         scrollable: true,
-      //         scrollDirection: Axis.horizontal,
-      //         // item: _buildReviewCardList(),
-      //         itemCount: 4,
-      //       )),
-      // ]),
-      // bottomNavigationBar:
-      //     BottomBarNavigation.getInstance(RootPageItem.board));
+      body: NotificationListener<ScrollNotification>(
+        onNotification: (_scrollNotification) {
+          WidgetsBinding.instance!.addPostFrameCallback((_) {
+            setState(() {
+              appbarHeight = _scrollNotification.metrics.pixels;
+            });
+          });
+          return true;
+        },
+        child: ListView(
+          children: [
+            Container(
+                padding: EdgeInsets.all(16),
+                child: Text(_sampleText("요양병원 후기 "),
+                    style: YrkTextStyle(height: 1.5, fontSize: 16.0),
+                    textAlign: TextAlign.left)),
+            Container(
+                padding: EdgeInsets.all(16),
+                // width: double.maxFinite,
+                child: Text("연관정보",
+                    style: YrkTextStyle(
+                        height: 1.5,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w700),
+                    textAlign: TextAlign.left)),
+            YrkListView(
+              height: MediaQuery.of(context).size.height - 200,
+              index: 0,
+              itemCount: 3,
+              item: _infoShareCardListItem(2),
+              itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

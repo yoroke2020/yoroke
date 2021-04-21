@@ -68,23 +68,32 @@ class _InfoState extends State<Info> {
           tabTextList: ["의료시설", "복지시설", "돌봄서비스"],
           viewRatio: 360 / 690,
           tabViewList: [
-            YrkListView(
-              index: 0,
-              itemCount: 4,
-              item: _infoShareCardListItem(0),
-              itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            SingleChildScrollView(
+              child: YrkListView(
+                height: MediaQuery.of(context).size.height,
+                index: 0,
+                itemCount: 4,
+                item: _infoShareCardListItem(0),
+                itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              ),
             ),
-            YrkListView(
-              index: 1,
-              itemCount: 4,
-              item: _infoShareCardListItem(1),
-              itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            SingleChildScrollView(
+              child: YrkListView(
+                height: MediaQuery.of(context).size.height,
+                index: 1,
+                itemCount: 4,
+                item: _infoShareCardListItem(1),
+                itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              ),
             ),
-            YrkListView(
-              index: 2,
-              itemCount: 4,
-              item: _infoShareCardListItem(2),
-              itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            SingleChildScrollView(
+              child: YrkListView(
+                height: MediaQuery.of(context).size.height,
+                index: 2,
+                itemCount: 4,
+                item: _infoShareCardListItem(2),
+                itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              ),
             ),
           ],
           following: Center(

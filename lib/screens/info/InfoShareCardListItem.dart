@@ -4,7 +4,7 @@ import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 
-class InfoShareCardListItem extends StatelessWidget {
+class InfoShareCardListItem extends StatefulWidget {
   InfoShareCardListItem(
       {required this.width,
       required this.height,
@@ -16,26 +16,34 @@ class InfoShareCardListItem extends StatelessWidget {
   final int index;
   final ValueChanged<YrkData>? onPushNavigator;
 
+  bool _isBookmarked = false;
+
+  @override
+  _InfoShareCardListItemState createState() => _InfoShareCardListItemState();
+}
+
+class _InfoShareCardListItemState extends State<InfoShareCardListItem> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onPushNavigator!(new YrkData(
+      onTap: () => widget.onPushNavigator!(new YrkData(
         SubPageItem.infoShareDetail,
-        str0: infoShareHospitalTitle.elementAt(index),
-        i0: index,
+        str0: infoShareHospitalTitle.elementAt(widget.index),
+        str1: testDate.elementAt(widget.index),
       )),
       child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           child: new Container(
-              width: width ?? 328,
-              height: height ?? 014,
+              width: widget.width ?? 328,
+              height: widget.height ?? 014,
               child: Stack(children: <Widget>[
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(16)),
                     image: new DecorationImage(
-                      image: new AssetImage(testCardImage.elementAt(index)),
+                      image: new AssetImage(
+                          testInfoShareImage.elementAt(widget.index)),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -51,7 +59,6 @@ class InfoShareCardListItem extends StatelessWidget {
                               const Color(0x4d000000)
                             ]))),
                 Container(
-                    padding: EdgeInsets.all(12),
                     alignment: Alignment.bottomLeft,
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,20 +69,37 @@ class InfoShareCardListItem extends StatelessWidget {
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Image.asset(
-                                      "assets/icons/icon_bookmark_24_px.png",
-                                      width: 33,
-                                      height: 33),
+                                  IconButton(
+                                    splashColor: Colors.transparent,
+                                    icon: Image.asset(
+                                      widget._isBookmarked
+                                          ? "assets/icons/icon_bookmarked_24_px.png"
+                                          : "assets/icons/icon_bookmark_24_px.png",
+                                      width: 24,
+                                      height: 24,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        widget._isBookmarked =
+                                            !widget._isBookmarked;
+                                      });
+                                    },
+                                  ),
                                 ]),
                           ),
-                          Text(infoShareHospitalTitle.elementAt(index),
-                              style: const TextStyle(
-                                  color: const Color(0xffffffff),
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "NotoSansCJKKR",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 22.0),
-                              textAlign: TextAlign.left),
+                          Container(
+                            padding: EdgeInsets.all(12),
+                            child: Text(
+                                infoShareHospitalTitle.elementAt(widget.index),
+                                style: const TextStyle(
+                                    color: const Color(0xffffffff),
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "NotoSansCJKKR",
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 22.0),
+                                textAlign: TextAlign.left),
+                          ),
                         ])),
               ]))),
     );
