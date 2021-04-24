@@ -1,24 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'YrkTextStyle.dart';
+
 class YrkTabBarView extends StatelessWidget {
-  YrkTabBarView({
-    this.tabViewList,
-    this.controller,
-    required this.tabTextList,
-    required this.viewRatio,
-    required this.tabSize,
-    required this.length,
-    this.following,
-  });
+  YrkTabBarView(
+      {this.tabViewList,
+      required this.tabTextList,
+      required this.tabWidth,
+      required this.length,
+      this.tabBarHeight = 40.0,
+      this.tabBarViewHeight = 100.0,
+      this.onChanged,
+      this.following,
+      });
+
 
   final List<Widget>? tabViewList;
-  final TabController? controller;
   final List<String> tabTextList;
-  final double viewRatio;
-  final int tabSize;
+  final int tabWidth;
   final int length;
+  final double? tabBarHeight;
+  final double? tabBarViewHeight;
+  final ValueChanged<int>? onChanged;
   final Widget? following;
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,56 +32,50 @@ class YrkTabBarView extends StatelessWidget {
       List<Tab> tabs = <Tab>[];
       for (int i = 0; i < length; i++) {
         tabs.add(Tab(
-            child: Text(tabTextList.elementAt(i),
-                style: const TextStyle(
-                  color: const Color(0xe6000000),
-                  fontFamily: "NotoSansCJKkr",
-                  fontStyle: FontStyle.normal,
-                ),
-                textAlign: TextAlign.center)));
+            child: Text(
+          tabTextList.elementAt(i),
+          style: TextStyle(
+            color: const Color(0xe6000000),
+          ),
+        )));
       }
       return tabs;
     }
 
-    List<Tab> tabs = _buildTabs();
-
     return DefaultTabController(
-      length: length,
-      // The Builder widget is used to have a different BuildContext to access
-      // closest DefaultTabController.
-      child: Builder(builder: (BuildContext context) {
-        final TabController tabController = DefaultTabController.of(context)!;
-        tabController.addListener(() {
-          if (tabController.indexIsChanging) {}
-        });
-        return Column(children: <Widget>[
-          Container(
-              height: 40,
-              alignment: Alignment.centerLeft,
-              child: Row(children: <Widget>[
-                Expanded(
-                    flex: tabSize * length,
-                    child: TabBar(
-                      tabs: tabs,
-                      indicatorColor: const Color(0xfff5df4d),
-                      labelStyle: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.w700),
-                      unselectedLabelStyle: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.w400),
-                    )),
-                Expanded(
-                    flex: 360 - tabSize * length,
-                    child:
-                        this.following != null ? this.following! : Container())
-              ])),
-          Container(
-              // padding: EdgeInsets.all(16),
-              height: 650,
-              child: TabBarView(
-                children: tabViewList!,
-              )),
-        ]);
-      }),
-    );
+        length: length,
+        child: Builder(builder: (BuildContext context) {
+          DefaultTabController.of(context)!.addListener(() {
+            print("current tab index = " +
+                DefaultTabController.of(context)!.index.toString());
+            if (onChanged != null)
+              onChanged!(DefaultTabController.of(context)!.index);
+          });
+          return Column(children: <Widget>[
+            Container(
+                height: tabBarHeight,
+                alignment: Alignment.centerLeft,
+                child: Row(children: <Widget>[
+                  Expanded(
+                      flex: tabWidth * length,
+                      child: TabBar(
+                        tabs: _buildTabs(),
+                        indicatorColor: const Color(0xfff5df4d),
+                        labelStyle: YrkTextStyle(
+                            fontSize: 16.0, fontWeight: FontWeight.w700),
+                        unselectedLabelStyle: YrkTextStyle(
+                            fontSize: 16.0, fontWeight: FontWeight.w400),
+                      )),
+                  Expanded(flex: 360 - tabWidth * length,  child:
+                      this.following != null ? this.following! : Container())
+                ])),
+            Container(
+                height: tabBarViewHeight,
+                child: TabBarView(
+                  // physics: NeverScrollableScrollPhysics(),
+                  children: tabViewList!,
+                )),
+          ]);
+        }));
   }
 }
