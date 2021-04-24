@@ -59,60 +59,54 @@ class _InfoState extends State<Info> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(children: <Widget>[
-      Container(
-        // padding: EdgeInsets.all(16),
-        child: YrkTabBarView(
-          length: 3,
-          tabSize: 99,
-          tabTextList: ["의료시설", "복지시설", "돌봄서비스"],
-          viewRatio: 360 / 690,
-          tabViewList: [
-            SingleChildScrollView(
-              child: YrkListView(
-                height: MediaQuery.of(context).size.height,
-                index: 0,
-                itemCount: 4,
-                item: _infoShareCardListItem(0),
-                itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              ),
-            ),
-            SingleChildScrollView(
-              child: YrkListView(
-                height: MediaQuery.of(context).size.height,
-                index: 1,
-                itemCount: 4,
-                item: _infoShareCardListItem(1),
-                itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              ),
-            ),
-            SingleChildScrollView(
-              child: YrkListView(
-                height: MediaQuery.of(context).size.height,
-                index: 2,
-                itemCount: 4,
-                item: _infoShareCardListItem(2),
-                itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              ),
-            ),
-          ],
-          following: Center(
-            child: IconButton(
-              splashColor: Colors.transparent,
-              icon: widget.isGrid
-                  ? Image.asset("assets/icons/icon_widgets_24_px.png",
-                      width: 19, height: 19, color: Color(0xff939597))
-                  : Image.asset("assets/icons/icon_view_agenda_24_px.png",
-                      width: 19, height: 19, color: Color(0xff939597)),
-              onPressed: () {
-                setState(() {
-                  widget.isGrid = !widget.isGrid;
-                });
-              },
-            ),
+      body: YrkTabBarView(
+        length: 3,
+        tabWidth: 99,
+        tabBarViewHeight:
+            MediaQuery.of(context).size.height - kToolbarHeight - 40.0 - 48.0,
+        tabTextList: ["의료시설", "복지시설", "돌봄서비스"],
+        tabViewList: [
+          YrkListView(
+            height: MediaQuery.of(context).size.height,
+            pageIndex: 0,
+            itemCount: 4,
+            scrollable: true,
+            item: _infoShareCardListItem(0),
+            itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          ),
+          YrkListView(
+            height: MediaQuery.of(context).size.height,
+            pageIndex: 1,
+            itemCount: 4,
+            item: _infoShareCardListItem(1),
+            scrollable: true,
+            itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          ),
+          YrkListView(
+            height: MediaQuery.of(context).size.height,
+            pageIndex: 2,
+            itemCount: 4,
+            item: _infoShareCardListItem(2),
+            scrollable: true,
+            itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          ),
+        ],
+        following: Center(
+          child: IconButton(
+            splashColor: Colors.transparent,
+            icon: widget.isGrid
+                ? Image.asset("assets/icons/icon_widgets_24_px.png",
+                    width: 19, height: 19, color: Color(0xff939597))
+                : Image.asset("assets/icons/icon_view_agenda_24_px.png",
+                    width: 19, height: 19, color: Color(0xff939597)),
+            onPressed: () {
+              setState(() {
+                widget.isGrid = !widget.isGrid;
+              });
+            },
           ),
         ),
       ),
-    ]));
+    );
   }
 }
