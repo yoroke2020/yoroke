@@ -4,17 +4,16 @@ import 'package:flutter/material.dart';
 import 'YrkTextStyle.dart';
 
 class YrkTabBarView extends StatelessWidget {
-  YrkTabBarView(
-      {this.tabViewList,
-      required this.tabTextList,
-      required this.tabWidth,
-      required this.length,
-      this.tabBarHeight = 40.0,
-      this.tabBarViewHeight = 100.0,
-      this.onChanged,
-      this.following,
-      });
-
+  YrkTabBarView({
+    this.tabViewList,
+    required this.tabTextList,
+    required this.tabWidth,
+    required this.length,
+    this.tabBarHeight = 40.0,
+    this.tabBarViewHeight = 100.0,
+    this.onChanged,
+    this.following,
+  });
 
   final List<Widget>? tabViewList;
   final List<String> tabTextList;
@@ -24,7 +23,6 @@ class YrkTabBarView extends StatelessWidget {
   final double? tabBarViewHeight;
   final ValueChanged<int>? onChanged;
   final Widget? following;
-
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +64,10 @@ class YrkTabBarView extends StatelessWidget {
                         unselectedLabelStyle: YrkTextStyle(
                             fontSize: 16.0, fontWeight: FontWeight.w400),
                       )),
-                  Expanded(flex: 360 - tabWidth * length,  child:
-                      this.following != null ? this.following! : Container())
+                  Expanded(flex: 360 - tabWidth * length, child: Container()),
+                  Container(
+                      margin: EdgeInsets.only(right: 16.0),
+                      child: this.following != null ? this.following! : null)
                 ])),
             Container(
                 height: tabBarViewHeight,

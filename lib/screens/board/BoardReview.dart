@@ -39,7 +39,7 @@ class _BoardReviewState extends State<BoardReview>
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    _reviewFeedList = [<Widget>[],<Widget>[]];
+    _reviewFeedList = [<Widget>[], <Widget>[]];
     _reviewFeedListItemCount = [loadPageCount, loadPageCount];
     _initBoardReviewState();
     _scrollController.addListener(() {
@@ -164,28 +164,25 @@ class _BoardReviewState extends State<BoardReview>
             ),
           ],
         )),
-        SliverList(
-            delegate:
-                SliverChildBuilderDelegate((BuildContext context, int index) {
-          return YrkTabBarView(
-              length: 2,
-              tabTextList: ["최신글", "인기글"],
-              tabWidth: 72,
-              tabBarViewHeight: 65.0 * _reviewFeedListItemCount[_curTabIndex],
-              onChanged: (index) => onChangedCurTabIndex(index),
-              tabViewList: [
-                YrkListView(
-                    pageIndex: 0,
-                    itemCount: _reviewFeedListItemCount[0],
-                    isIndicator: true,
-                    item: _reviewFeedList[0]),
-                YrkListView(
-                  pageIndex: 1,
-                    itemCount: _reviewFeedListItemCount[1],
-                    isIndicator: true,
-                    item: _reviewFeedList[1]),
-              ]);
-        }, childCount: 1))
+        SliverToBoxAdapter(
+            child: YrkTabBarView(
+                length: 2,
+                tabTextList: ["최신글", "인기글"],
+                tabWidth: 72,
+                tabBarViewHeight: 65.0 * _reviewFeedListItemCount[_curTabIndex],
+                onChanged: (index) => onChangedCurTabIndex(index),
+                tabViewList: [
+                  YrkListView(
+                      pageIndex: 0,
+                      itemCount: _reviewFeedListItemCount[0],
+                      isIndicator: true,
+                      item: _reviewFeedList[0]),
+                  YrkListView(
+                      pageIndex: 1,
+                      itemCount: _reviewFeedListItemCount[1],
+                      isIndicator: true,
+                      item: _reviewFeedList[1]),
+                ]))
       ]),
       bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.board),
     );
