@@ -51,11 +51,9 @@ class _BoardReviewState extends State<BoardReview>
   }
 
   void _initBoardReviewState() {
-    print("listLength: " + _reviewFeedList[0].length.toString() + " " + _reviewFeedList[1].length.toString());
     for (int i = 0; i < 2; i++) {
       _buildReviewTabViewListItem(i, 0, loadPageCount);
       _reviewFeedListItemCount[i] = loadPageCount;
-      print("listLength: " + _reviewFeedList[0].length.toString() + " " + _reviewFeedList[1].length.toString());
     }
     _curTabIndex = 0;
     _curCardIndex = 0;
@@ -65,11 +63,9 @@ class _BoardReviewState extends State<BoardReview>
     print("loadMoreData at curTabIndex = " + _curTabIndex.toString());
     setState(() {
       if (_reviewFeedListItemCount[_curTabIndex] >= _reviewFeedList.length) {
-        print("loadMore");
         //TODO: 추후 API 갯수 카운트 후 몇개씩 로드할 것인지 정해야 함
         _buildReviewTabViewListItem(_curTabIndex, 0, loadPageCount);
         _reviewFeedListItemCount[_curTabIndex] += loadPageCount;
-        print("listLength: " + _reviewFeedList[0].length.toString() + " " + _reviewFeedList[1].length.toString());
       }
     });
   }
@@ -110,10 +106,10 @@ class _BoardReviewState extends State<BoardReview>
   }
 
   void onChangedCurTabIndex(int index) {
+    print("onChangedCurTabIndex");
     setState(() {
       _curTabIndex = index;
       _reviewFeedListItemCount[_curTabIndex] = loadPageCount;
-      print("curTabIndex = " + _curTabIndex.toString());
     });
   }
 
