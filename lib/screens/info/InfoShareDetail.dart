@@ -105,7 +105,7 @@ class _InfoShareDetailState extends State<InfoShareDetail> {
                     textAlign: TextAlign.left)),
             YrkListView(
               height: MediaQuery.of(context).size.height - 200,
-              index: 0,
+              pageIndex: 0,
               itemCount: 3,
               item: _infoShareCardListItem(2),
               itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
