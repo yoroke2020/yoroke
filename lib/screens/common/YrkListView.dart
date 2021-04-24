@@ -16,7 +16,7 @@ class YrkListView extends StatelessWidget {
       @Deprecated("deprecated") this.clickable = false,
       @Deprecated("deprecated") this.data,
       @Deprecated("deprecated") this.onPushNavigator,
-      this.index = 0,
+      this.pageIndex = 0,
       @Deprecated("deprecated") this.nextSubPageItem,
       required this.item,
       this.itemCount = 1,
@@ -39,7 +39,7 @@ class YrkListView extends StatelessWidget {
   final bool scrollable;
   final bool? isIndicator;
   final List<Widget> item;
-  final int index;
+  final int pageIndex;
 
   @override
   Widget build(BuildContext context) {

@@ -1,25 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'YrkTextStyle.dart';
+
 class YrkTabBarView extends StatelessWidget {
   YrkTabBarView(
       {this.tabViewList,
-      this.controller,
       required this.tabTextList,
-      required this.tabSize,
+      required this.tabWidth,
       required this.length,
-      this.height = 650,
-      this.onTap,
-      this.tabController});
+      this.tabBarHeight = 40.0,
+      this.tabBarViewHeight = 100.0,
+      this.onChanged});
 
   final List<Widget>? tabViewList;
-  final TabController? controller;
   final List<String> tabTextList;
-  final int tabSize;
+  final int tabWidth;
   final int length;
-  final double? height;
-  final ValueChanged<int>? onTap;
-  final TabController? tabController;
+  final double? tabBarHeight;
+  final double? tabBarViewHeight;
+  final ValueChanged<int>? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -27,51 +27,49 @@ class YrkTabBarView extends StatelessWidget {
       List<Tab> tabs = <Tab>[];
       for (int i = 0; i < length; i++) {
         tabs.add(Tab(
-            child: Text(tabTextList.elementAt(i),
-                style: const TextStyle(
-                  color: const Color(0xe6000000),
-                  fontFamily: "NotoSansCJKkr",
-                  fontStyle: FontStyle.normal,
-                ),
-                textAlign: TextAlign.center)));
+            child: Text(
+          tabTextList.elementAt(i),
+          style: TextStyle(
+            color: const Color(0xe6000000),
+          ),
+        )));
       }
       return tabs;
     }
 
-    List<Tab> tabs = _buildTabs();
-
     return DefaultTabController(
-      length: length,
-      initialIndex: 0,
-      child: Builder(builder: (BuildContext context) {
-        return Column(children: <Widget>[
-          Container(
-              height: 40,
-              alignment: Alignment.centerLeft,
-              child: Row(children: <Widget>[
-                Expanded(
-                    flex: tabSize * length,
-                    child: TabBar(
-                      controller: tabController,
-                      onTap: (index) {
-                        if (onTap != null) onTap!(index);
-                      },
-                      tabs: tabs,
-                      indicatorColor: const Color(0xfff5df4d),
-                      labelStyle: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.w700),
-                      unselectedLabelStyle: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.w400),
-                    )),
-                Expanded(flex: 360 - tabSize * length, child: Container())
-              ])),
-          Container(
-              height: height,
-              child: TabBarView(
-                children: tabViewList!,
-              )),
-        ]);
-      }),
-    );
+        length: length,
+        child: Builder(builder: (BuildContext context) {
+          DefaultTabController.of(context)!.addListener(() {
+            print("current tab index = " +
+                DefaultTabController.of(context)!.index.toString());
+            if (onChanged != null)
+              onChanged!(DefaultTabController.of(context)!.index);
+          });
+          return Column(children: <Widget>[
+            Container(
+                height: tabBarHeight,
+                alignment: Alignment.centerLeft,
+                child: Row(children: <Widget>[
+                  Expanded(
+                      flex: tabWidth * length,
+                      child: TabBar(
+                        tabs: _buildTabs(),
+                        indicatorColor: const Color(0xfff5df4d),
+                        labelStyle: YrkTextStyle(
+                            fontSize: 16.0, fontWeight: FontWeight.w700),
+                        unselectedLabelStyle: YrkTextStyle(
+                            fontSize: 16.0, fontWeight: FontWeight.w400),
+                      )),
+                  Expanded(flex: 360 - tabWidth * length, child: Container())
+                ])),
+            Container(
+                height: tabBarViewHeight,
+                child: TabBarView(
+                  // physics: NeverScrollableScrollPhysics(),
+                  children: tabViewList!,
+                )),
+          ]);
+        }));
   }
 }
