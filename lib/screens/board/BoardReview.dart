@@ -29,12 +29,9 @@ class _BoardReviewState extends State<BoardReview>
   static final int bardCardListItemCount = 12;
 
   late final ScrollController _scrollController;
-  late final TabController _tabController;
 
-  late List<Widget> _popularReviewFeedList;
-  late List<Widget> _newReviewFeedList;
-  late int _popularReviewFeedListItemCount;
-  late int _newReviewFeedListItemCount;
+  late var _reviewFeedList;
+  late List<int> _reviewFeedListItemCount;
   late int _curTabIndex;
   late int _curCardIndex;
 
@@ -42,9 +39,8 @@ class _BoardReviewState extends State<BoardReview>
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
-    _popularReviewFeedList = <Widget>[];
-    _newReviewFeedList = <Widget>[];
+    _reviewFeedList = [<Widget>[],<Widget>[]];
+    _reviewFeedListItemCount = [loadPageCount, loadPageCount];
     _initBoardReviewState();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
@@ -55,52 +51,38 @@ class _BoardReviewState extends State<BoardReview>
   }
 
   void _initBoardReviewState() {
-    _popularReviewFeedList.removeRange(0, _popularReviewFeedList.length);
-    _newReviewFeedList.removeRange(0, _newReviewFeedList.length);
-    _buildReviewTabViewListItem(_popularReviewFeedList, 0, 0, loadPageCount);
-    _buildReviewTabViewListItem(_newReviewFeedList, 1, 0, loadPageCount);
-    _popularReviewFeedListItemCount = loadPageCount;
-    _newReviewFeedListItemCount = loadPageCount;
+    print("listLength: " + _reviewFeedList[0].length.toString() + " " + _reviewFeedList[1].length.toString());
+    for (int i = 0; i < 2; i++) {
+      _buildReviewTabViewListItem(i, 0, loadPageCount);
+      _reviewFeedListItemCount[i] = loadPageCount;
+      print("listLength: " + _reviewFeedList[0].length.toString() + " " + _reviewFeedList[1].length.toString());
+    }
     _curTabIndex = 0;
     _curCardIndex = 0;
   }
 
   void _loadMoreData() {
+    print("loadMoreData at curTabIndex = " + _curTabIndex.toString());
     setState(() {
-      if (_curTabIndex == 0) {
-        print("length = " +
-            _popularReviewFeedList.length.toString() +
-            " itemCount = " +
-            _popularReviewFeedListItemCount.toString());
-        if (_popularReviewFeedListItemCount >= _popularReviewFeedList.length)
-          //TODO: 추후 API 갯수 카운트 후 몇개씩 로드할 것인지 정해야 함
-          // _buildReviewTabViewListItem(_popularReviewFeedList, 0,
-          //     _popularReviewFeedListItemCount, _newReviewFeedListItemCount + loadPageCount);
-          _buildReviewTabViewListItem(
-              _popularReviewFeedList, 0, 0, loadPageCount);
-        _popularReviewFeedListItemCount += loadPageCount;
-      } else {
-        if (_newReviewFeedListItemCount >= _newReviewFeedList.length)
-          //TODO: 추후 API 갯수 카운트 후 몇개씩 로드할 것인지 정해야 함
-          // _buildReviewTabViewListItem(_newReviewFeedList, 1,
-          //     _newReviewFeedListItemCount, _newReviewFeedListItemCount + loadPageCount);
-          _buildReviewTabViewListItem(_newReviewFeedList, 1, 0, loadPageCount);
-        _newReviewFeedListItemCount += loadPageCount;
+      if (_reviewFeedListItemCount[_curTabIndex] >= _reviewFeedList.length) {
+        print("loadMore");
+        //TODO: 추후 API 갯수 카운트 후 몇개씩 로드할 것인지 정해야 함
+        _buildReviewTabViewListItem(_curTabIndex, 0, loadPageCount);
+        _reviewFeedListItemCount[_curTabIndex] += loadPageCount;
+        print("listLength: " + _reviewFeedList[0].length.toString() + " " + _reviewFeedList[1].length.toString());
       }
     });
   }
 
-  List<Widget> _buildReviewTabViewListItem(
-      List<Widget> list, int pageIndex, int start, int end) {
+  void _buildReviewTabViewListItem(int pageIndex, int start, int end) {
     for (int i = start; i < end; i++) {
-      list.add(YrkPageListItem(
+      _reviewFeedList[pageIndex].add(new YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
         subPageItem: SubPageItem.boardReviewFeed,
         onPushNavigator: widget.onPushNavigator,
       ));
     }
-    return list;
   }
 
   List<Widget> _buildBoardReviewCardList() {
@@ -118,20 +100,20 @@ class _BoardReviewState extends State<BoardReview>
   }
 
   void _onPushChangeReviewCard(YrkData data) {
+    print("onPushChangeReviewCard");
     setState(() {
+      for (int i = 0; i < 2; i++)
+        _reviewFeedList[i].removeRange(0, _reviewFeedList[i].length);
       _initBoardReviewState();
       _curCardIndex = data.i1!;
-      _tabController.animateTo(0);
     });
   }
 
-  void onTapSetCurTabIndex(int index) {
+  void onChangedCurTabIndex(int index) {
     setState(() {
       _curTabIndex = index;
-      if (_curTabIndex == 0)
-        _popularReviewFeedListItemCount = loadPageCount;
-      else
-        _newReviewFeedListItemCount = loadPageCount;
+      _reviewFeedListItemCount[_curTabIndex] = loadPageCount;
+      print("curTabIndex = " + _curTabIndex.toString());
     });
   }
 
@@ -192,23 +174,20 @@ class _BoardReviewState extends State<BoardReview>
           return YrkTabBarView(
               length: 2,
               tabTextList: ["최신글", "인기글"],
-              tabSize: 72,
-              tabController: _tabController,
-              height: _curTabIndex == 0
-                  ? 65.0 * _popularReviewFeedListItemCount
-                  : 65.0 * _newReviewFeedListItemCount,
-              onTap: (index) => onTapSetCurTabIndex(index),
+              tabWidth: 72,
+              tabBarViewHeight: 65.0 * _reviewFeedListItemCount[_curTabIndex],
+              onChanged: (index) => onChangedCurTabIndex(index),
               tabViewList: [
                 YrkListView(
-                    index: 0,
-                    itemCount: _popularReviewFeedListItemCount,
+                    pageIndex: 0,
+                    itemCount: _reviewFeedListItemCount[0],
                     isIndicator: true,
-                    item: _popularReviewFeedList),
+                    item: _reviewFeedList[0]),
                 YrkListView(
-                    index: 1,
-                    itemCount: _newReviewFeedListItemCount,
+                  pageIndex: 1,
+                    itemCount: _reviewFeedListItemCount[1],
                     isIndicator: true,
-                    item: _newReviewFeedList),
+                    item: _reviewFeedList[1]),
               ]);
         }, childCount: 1))
       ]),

@@ -36,6 +36,21 @@ List<String> testCardImage = [
   "assets/icons/sample_image.png",
 ];
 
+List<String> testInfoShareImage = [
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg",
+  "assets/images/InfoShareSampleImage.jpg"
+];
+
 List<String> testHomeTitleString = [
   "요로케 요양병원",
   "코로나 프리 요양병원",
@@ -190,4 +205,46 @@ List<String> testNumberString = [
   "32k",
 ];
 
-List<int> testNumber = [1, 2, 3, 4, 3, 5, 0, 3, 2, 5, 2, 3, 1, 4, 4, 1, 2, 3, 4, 3, 5, 0, 3, 2, 5, 2, 3, 1, 4, 4];
+List<int> testNumber = [
+  1,
+  2,
+  3,
+  4,
+  3,
+  5,
+  0,
+  3,
+  2,
+  5,
+  2,
+  3,
+  1,
+  4,
+  4,
+  1,
+  2,
+  3,
+  4,
+  3,
+  5,
+  0,
+  3,
+  2,
+  5,
+  2,
+  3,
+  1,
+  4,
+  4
+];
+
+List<String> infoShareHospitalTitle = [
+  "병원1",
+  "병원2",
+  "병원3",
+  "병원4",
+  "병원5",
+  "병원6",
+  "병원7",
+  "병원8",
+];
