@@ -250,14 +250,22 @@ class _YrkButtonState extends State<YrkButton> {
 
   @override
   Widget build(BuildContext context) {
-    double _width = widget.width ?? 328;
-    double _height = widget.height ?? 48;
+    double? _width;
+    double? _height;
 
-    if (widget.buttonType == ButtonType.chip ||
-        widget.buttonType == ButtonType.outlinechip ||
-        widget.buttonType == ButtonType.text) {
-      _width = widget.label!.length * widget.fontSize!;
-      _height = widget.fontSize! + 4;
+    if (widget.width == null) {
+      if (widget.buttonType == ButtonType.chip ||
+          widget.buttonType == ButtonType.outlinechip ||
+          widget.buttonType == ButtonType.text) {
+        _width = widget.label!.length * widget.fontSize!;
+        _height = widget.fontSize! + 4;
+      } else {
+        _width = widget.width ?? 328;
+        _height = widget.height ?? 48;
+      }
+    } else {
+      _width = widget.width ?? 328;
+      _height = widget.height ?? 48;
     }
 
     return Container(

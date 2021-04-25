@@ -10,12 +10,14 @@ class BoardCardListItem extends StatelessWidget {
       {required this.width,
       required this.height,
       required this.index,
-      this.onPushNavigator});
+      this.onPushNavigator,
+      this.isBorder = false});
 
   final double width;
   final double height;
   final int index;
   final ValueChanged<YrkData>? onPushNavigator;
+  final bool isBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +37,15 @@ class BoardCardListItem extends StatelessWidget {
                     width: 48.0,
                     height: 48.0,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(16)),
-                      image: new DecorationImage(
-                        image: new AssetImage(testCardImage.elementAt(index)),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                        image: new DecorationImage(
+                          image: new AssetImage(testCardImage.elementAt(index)),
+                          fit: BoxFit.fill,
+                        ),
+                        border: isBorder
+                            ? Border.all(
+                                color: const Color(0xfff5df4d), width: 2)
+                            : null),
                   ),
                   Container(
                     height: 20.0,

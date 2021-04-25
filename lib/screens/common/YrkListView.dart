@@ -6,23 +6,23 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 
 class YrkListView extends StatelessWidget {
-  YrkListView({
-    this.width = double.maxFinite,
-    this.height = 120.0,
-    this.margin = const EdgeInsets.all(0),
-    this.padding = const EdgeInsets.all(0),
-    this.scrollable = false,
-    this.scrollDirection = Axis.vertical,
-    @Deprecated("deprecated") this.clickable = false,
-    @Deprecated("deprecated") this.data,
-    @Deprecated("deprecated") this.onPushNavigator,
-    this.index = 0,
-    @Deprecated("deprecated") this.nextSubPageItem,
-    required this.item,
-    this.itemCount = 1,
-    this.itemMargin = const EdgeInsets.all(0),
-    this.itemPadding = const EdgeInsets.all(0),
-  });
+  YrkListView(
+      {this.width = double.maxFinite,
+      this.height = 120.0,
+      this.margin = const EdgeInsets.all(0),
+      this.padding = const EdgeInsets.all(0),
+      this.scrollable = false,
+      this.scrollDirection = Axis.vertical,
+      @Deprecated("deprecated") this.clickable = false,
+      @Deprecated("deprecated") this.data,
+      @Deprecated("deprecated") this.onPushNavigator,
+      this.pageIndex = 0,
+      @Deprecated("deprecated") this.nextSubPageItem,
+      required this.item,
+      this.itemCount = 1,
+      this.itemMargin = const EdgeInsets.all(0),
+      this.itemPadding = const EdgeInsets.all(0),
+      this.isIndicator = false});
 
   final Axis scrollDirection;
   final EdgeInsets margin;
@@ -37,28 +37,30 @@ class YrkListView extends StatelessWidget {
   final double height;
   final bool clickable;
   final bool scrollable;
-
+  final bool? isIndicator;
   final List<Widget> item;
-  final int index;
+  final int pageIndex;
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-        width: this.width,
-        height: this.height,
-        margin: this.margin,
-        padding: this.padding,
+    return Container(
+        width: width,
+        height: height,
+        margin: margin,
+        padding: padding,
         child: ListView.builder(
-          scrollDirection: this.scrollDirection,
+          scrollDirection: scrollDirection,
           physics: scrollable
               ? new AlwaysScrollableScrollPhysics()
               : new NeverScrollableScrollPhysics(),
-          itemCount: this.itemCount,
+          itemCount: isIndicator! ? itemCount + 1 : itemCount,
           itemBuilder: (BuildContext context, int index) {
+            if (isIndicator! && index == itemCount) {
+              print("CircularProgressIndicator appears");
+              return CircularProgressIndicator();
+            }
             return Container(
-                margin: this.itemMargin,
-                padding: this.itemPadding,
-                child: item[index]);
+                margin: itemMargin, padding: itemPadding, child: item[index]);
           },
         ));
   }

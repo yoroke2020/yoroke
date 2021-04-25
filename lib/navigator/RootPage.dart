@@ -24,7 +24,7 @@ class RootPage extends StatelessWidget {
       Home(onPushNavigator: onPushNavigator),
       Board(onPushNavigator: onPushNavigator),
       Find(),
-      Info()
+      Info(onPushNavigator: onPushNavigator)
     ];
     return Scaffold(
         backgroundColor: const Color(0xffffffff),

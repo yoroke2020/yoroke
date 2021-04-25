@@ -4,8 +4,10 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageListItem.dart';
+import 'package:yoroke/screens/common/YrkScrollFadedWidget.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
-import 'package:yoroke/screens/common/appbars/AppBarLargeImage.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
+import 'package:yoroke/screens/common/appbars/AppBarNormalArrowBack.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'BoardCardListItem.dart';
@@ -21,103 +23,171 @@ class BoardReview extends StatefulWidget {
   _BoardReviewState createState() => _BoardReviewState();
 }
 
-class _BoardReviewState extends State<BoardReview> {
-  List<String> titleList = [
-    "요양병원 후기/리뷰",
-    "요양원 후기/리뷰",
-    "복지관 후기/리뷰",
-    "간병인 후기/리뷰"
-  ];
+class _BoardReviewState extends State<BoardReview>
+    with TickerProviderStateMixin {
+  static final int loadPageCount = 20;
+  static final int bardCardListItemCount = 12;
 
-  List<String> subTitleList = [
-    "요양병원 위주의 후기와 리뷰를 알아보세요",
-    "요양원 위주의 후기와 리뷰를 알아보세요",
-    "복지관 위주의 후기와 리뷰를 알아보세요",
-    "간병인 위주의 후기와 리뷰를 알아보세요",
-  ];
+  late final ScrollController _scrollController;
 
-  bool widgetVisible = false;
+  late var _reviewFeedList;
+  late List<int> _reviewFeedListItemCount;
+  late int _curTabIndex;
+  late int _curCardIndex;
 
-  void _onButtonClicked() {
-    setState(() {
-      widgetVisible = widgetVisible ? false : true;
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _reviewFeedList = [<Widget>[],<Widget>[]];
+    _reviewFeedListItemCount = [loadPageCount, loadPageCount];
+    _initBoardReviewState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _loadMoreData();
+      }
     });
   }
 
-  void _onPushNavigator(YrkData data) {
-    setState(() {
-      widget.data!.i1 = data.i1;
-    });
-  }
-
-  List<Widget> _buildReviewCardList() {
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < 4; i++) {
-      list.add(BoardCardListItem(width: 112.0, height: 112.0, index: i));
+  void _initBoardReviewState() {
+    for (int i = 0; i < 2; i++) {
+      _buildReviewTabViewListItem(i, 0, loadPageCount);
+      _reviewFeedListItemCount[i] = loadPageCount;
     }
-
-    return list;
+    _curTabIndex = 0;
+    _curCardIndex = 0;
   }
 
-  List<Widget> _buildReviewTabViewListItem(int pageIndex) {
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < 10; i++) {
-      list.add(YrkPageListItem(
+  void _loadMoreData() {
+    print("loadMoreData at curTabIndex = " + _curTabIndex.toString());
+    setState(() {
+      if (_reviewFeedListItemCount[_curTabIndex] >= _reviewFeedList.length) {
+        //TODO: 추후 API 갯수 카운트 후 몇개씩 로드할 것인지 정해야 함
+        _buildReviewTabViewListItem(_curTabIndex, 0, loadPageCount);
+        _reviewFeedListItemCount[_curTabIndex] += loadPageCount;
+      }
+    });
+  }
+
+  void _buildReviewTabViewListItem(int pageIndex, int start, int end) {
+    for (int i = start; i < end; i++) {
+      _reviewFeedList[pageIndex].add(new YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
         subPageItem: SubPageItem.boardReviewFeed,
         onPushNavigator: widget.onPushNavigator,
       ));
     }
+  }
 
+  List<Widget> _buildBoardReviewCardList() {
+    List<Widget> list = <Widget>[];
+    for (int i = 0; i < bardCardListItemCount; i++) {
+      list.add(BoardCardListItem(
+        width: 64.0,
+        height: 76.0,
+        index: i,
+        isBorder: i == _curCardIndex ? true : false,
+        onPushNavigator: (data) => _onPushChangeReviewCard(data),
+      ));
+    }
     return list;
+  }
+
+  void _onPushChangeReviewCard(YrkData data) {
+    print("onPushChangeReviewCard");
+    setState(() {
+      for (int i = 0; i < 2; i++)
+        _reviewFeedList[i].removeRange(0, _reviewFeedList[i].length);
+      _initBoardReviewState();
+      _curCardIndex = data.i1!;
+    });
+  }
+
+  void onChangedCurTabIndex(int index) {
+    print("onChangedCurTabIndex");
+    setState(() {
+      _curTabIndex = index;
+      _reviewFeedListItemCount[_curTabIndex] = loadPageCount;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarLargeImage(
-          onButtonClicked: _onButtonClicked,
-          widgetVisible: widgetVisible,
-          titleText: titleList[widget.data!.i1!],
-          subTitleText: subTitleList[widget.data!.i1!],
-        ),
-        body: ListView(children: <Widget>[
-          AnimatedContainer(
-              duration: Duration(milliseconds: 300),
-              height: widgetVisible ? 120.0 : 0.0,
-              child: YrkListView(
-                height: 128.0,
-                margin: EdgeInsets.only(left: 8, right: 8),
-                scrollable: true,
-                scrollDirection: Axis.horizontal,
-                clickable: true,
-                onPushNavigator: _onPushNavigator,
-                nextSubPageItem: SubPageItem.boardReview,
-                item: _buildReviewCardList(),
-                itemCount: 4,
+      body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
+        SliverAppBar(
+          automaticallyImplyLeading: false,
+          snap: false,
+          pinned: true,
+          floating: false,
+          centerTitle: false,
+          titleSpacing: 0.0,
+          toolbarHeight: 48.0,
+          title: PreferredSize(
+              preferredSize: Size.fromHeight(48.0),
+              child: Stack(
+                children: <Widget>[
+                  AppBarNormalArrowBack(),
+                  YrkScrollFadedWidget(
+                      scrollController: _scrollController,
+                      child: Container(
+                          alignment: Alignment.centerLeft,
+                          margin: EdgeInsets.only(left: 48.0),
+                          height: 48.0,
+                          child: Text("요양병원 후기",
+                              style: const YrkTextStyle(
+                                  fontWeight: FontWeight.w700),
+                              textAlign: TextAlign.left)))
+                ],
               )),
-          YrkTabBarView(
-              viewRatio: 360 / 690,
+        ),
+        SliverToBoxAdapter(
+            child: Column(
+          children: <Widget>[
+            Container(
+                width: double.maxFinite,
+                height: 48.0,
+                margin: EdgeInsets.only(left: 16.0),
+                child: Text("후기",
+                    style: const YrkTextStyle(
+                        fontWeight: FontWeight.w700, fontSize: 22.0),
+                    textAlign: TextAlign.left)),
+            YrkListView(
+              height: 100.0,
+              padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
+              scrollable: true,
+              scrollDirection: Axis.horizontal,
+              item: _buildBoardReviewCardList(),
+              itemCount: bardCardListItemCount,
+            ),
+          ],
+        )),
+        SliverList(
+            delegate:
+                SliverChildBuilderDelegate((BuildContext context, int index) {
+          return YrkTabBarView(
               length: 2,
               tabTextList: ["최신글", "인기글"],
-              tabSize: 72,
+              tabWidth: 72,
+              tabBarViewHeight: 65.0 * _reviewFeedListItemCount[_curTabIndex],
+              onChanged: (index) => onChangedCurTabIndex(index),
               tabViewList: [
                 YrkListView(
-                    index: 0,
-                    itemCount: 10,
-                    clickable: true,
-                    item: _buildReviewTabViewListItem(0)),
+                    pageIndex: 0,
+                    itemCount: _reviewFeedListItemCount[0],
+                    isIndicator: true,
+                    item: _reviewFeedList[0]),
                 YrkListView(
-                    index: 1,
-                    itemCount: 10,
-                    clickable: true,
-                    onPushNavigator: widget.onPushNavigator,
-                    nextSubPageItem: SubPageItem.boardQna,
-                    item: _buildReviewTabViewListItem(1)),
-              ]),
-        ]),
-        bottomNavigationBar:
-            BottomBarNavigation.getInstance(RootPageItem.board));
+                  pageIndex: 1,
+                    itemCount: _reviewFeedListItemCount[1],
+                    isIndicator: true,
+                    item: _reviewFeedList[1]),
+              ]);
+        }, childCount: 1))
+      ]),
+      bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.board),
+    );
   }
 }
