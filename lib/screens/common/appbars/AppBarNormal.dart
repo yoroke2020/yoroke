@@ -51,8 +51,7 @@ class _AppBarNormalState extends State<AppBarNormal> {
                     Center(
                       child: InkWell(
                           onTap: () {
-                            widget.onPushNavigator!(
-                                new YrkData(SubPageItem.search));
+                            onPushNavigator!(new YrkData(SubPageItem.notice));
                           },
                           child: Container(
                             padding: const EdgeInsets.only(right: 8),
