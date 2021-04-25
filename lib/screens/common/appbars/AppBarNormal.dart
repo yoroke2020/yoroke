@@ -49,12 +49,17 @@ class _AppBarNormalState extends State<AppBarNormal> {
                     ),
                     Expanded(child: Container()),
                     Center(
-                      child: Container(
-                        padding: const EdgeInsets.only(right: 8),
-                        width: 32,
-                        height: 24,
-                        child: Image.asset("assets/icons/search_24_px.png"),
-                      ),
+                      child: InkWell(
+                          onTap: () {
+                            widget.onPushNavigator!(
+                                new YrkData(SubPageItem.search));
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.only(right: 8),
+                            width: 32,
+                            height: 24,
+                            child: Image.asset("assets/icons/search_24_px.png"),
+                          )),
                     ),
                     Center(
                       child: Container(
