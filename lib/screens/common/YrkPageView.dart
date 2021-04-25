@@ -34,19 +34,15 @@ class YrkPageView extends StatelessWidget {
               },
             )),
         isIndicatorEnabled
-            ? Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xffffffff),
-                ),
-                child: new YrkDotsIndicator(
-                  itemCount: page.length,
-                  controller: controller,
-                  onPageSelected: (int page) {
-                    controller.animateToPage(page,
-                        duration: Duration(milliseconds: 100),
-                        curve: Curves.ease);
-                  },
-                ))
+            ? YrkDotsIndicator(
+                itemCount: page.length,
+                controller: controller,
+                onPageSelected: (int page) {
+                  controller.animateToPage(page,
+                      duration: Duration(milliseconds: 100),
+                      curve: Curves.ease);
+                },
+              )
             : Container()
       ],
     );
