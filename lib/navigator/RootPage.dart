@@ -11,26 +11,27 @@ import 'package:yoroke/screens/info/Info.dart';
 
 class RootPage extends StatelessWidget {
   RootPage({this.currentIndex, this.onPushNavigator});
-
   final int? currentIndex;
   final ValueChanged<YrkData>? onPushNavigator;
-
   @override
   Widget build(BuildContext context) {
-    AppBarNormal? appBarNormal = AppBarNormal.getInstance(onPushNavigator);
+    AppBarNormal? appBarNormal = AppBarNormal(
+      onPushNavigator: this.onPushNavigator,
+    );
     BottomBarNavigation? bottomBarNavigation =
         BottomBarNavigation.getInstance(RootPageItem.values[currentIndex!]);
-
     final List<Widget> children = [
       Home(onPushNavigator: onPushNavigator),
       Board(onPushNavigator: onPushNavigator),
       Find(),
       Info(onPushNavigator: onPushNavigator)
     ];
-
     return Scaffold(
         backgroundColor: const Color(0xffffffff),
-        appBar: appBarNormal,
+        appBar: PreferredSize(
+          child: appBarNormal,
+          preferredSize: Size.fromHeight(56.0),
+        ),
         body: children[currentIndex!],
         bottomNavigationBar: bottomBarNavigation);
   }
