@@ -166,7 +166,7 @@ class _BoardReviewState extends State<BoardReview>
                 children: <Widget>[
                   Container(
                     width: double.maxFinite,
-                    height: 48.0,
+                    height: 48.0 + MediaQuery.of(context).padding.top,
                   ),
                   Container(
                       width: double.maxFinite,
