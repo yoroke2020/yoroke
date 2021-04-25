@@ -56,9 +56,11 @@ class _BoardReviewState extends State<BoardReview>
 
     _tabController.addListener(() {
       setState(() {
-        if (_tabController.indexIsChanging && _scrollController.offset >= 148.0) {
+        if (_tabController.indexIsChanging &&
+            _scrollController.offset >= 148.0) {
           _scrollController.animateTo(148.0,
-              duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOut);
         }
         _curTabIndex = _tabController.index;
       });
@@ -74,7 +76,8 @@ class _BoardReviewState extends State<BoardReview>
 
   void _initBoardReviewState() {
     for (int i = 0; i < tabLength; i++) {
-      _reviewFeedList[i].removeRange(0, _reviewFeedList[i].length);   //TODO: 좀 더 좋은 방법의 메모리 클리어 방법 고안 필요
+      _reviewFeedList[i].removeRange(
+          0, _reviewFeedList[i].length); //TODO: 좀 더 좋은 방법의 메모리 클리어 방법 고안 필요
       _buildReviewTabViewListItem(i, 0, loadPageCount);
       _reviewFeedListItemCount[i] = loadPageCount;
     }
