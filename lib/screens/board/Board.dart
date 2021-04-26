@@ -6,6 +6,7 @@ import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkPageView.dart';
 import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
+import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
 
 import 'BoardCardListItem.dart';
 
@@ -42,10 +43,7 @@ class _BoardState extends State<Board> {
     for (int i = 0; i < 4; i++) {
       list.add(YrkListView(
           itemCount: 4,
-          item: _buildList(
-              i,
-              subPageItem,
-              widget.onPushNavigator!)));
+          item: _buildList(i, subPageItem, widget.onPushNavigator!)));
     }
     return list;
   }
@@ -67,30 +65,33 @@ class _BoardState extends State<Board> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBarNormal(
+          onPushNavigator: widget.onPushNavigator,
+        ),
         body: ListView(
-      children: <Widget>[
-        YrkTabHeaderView(title: "후기"),
-        YrkListView(
-          height: 100.0,
-          padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
-          scrollable: true,
-          scrollDirection: Axis.horizontal,
-          clickable: false,
-          item: _buildBoardReviewCardList(),
-          itemCount: bardCardListItemCount,
-        ),
-        YrkTabHeaderView(title: "고민/질문"),
-        YrkPageView(
-          page: _buildBoardYrkListView(SubPageItem.boardQna),
-          controller: qnaPageController,
-          isIndicatorEnabled: true,
-        ),
-        YrkTabHeaderView(title: "구인구직"),
-        YrkPageView(
-            page: _buildBoardYrkListView(SubPageItem.boardJobFinding),
-            controller: findJobPageController,
-            isIndicatorEnabled: true)
-      ],
-    ));
+          children: <Widget>[
+            YrkTabHeaderView(title: "후기"),
+            YrkListView(
+              height: 100.0,
+              padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
+              scrollable: true,
+              scrollDirection: Axis.horizontal,
+              clickable: false,
+              item: _buildBoardReviewCardList(),
+              itemCount: bardCardListItemCount,
+            ),
+            YrkTabHeaderView(title: "고민/질문"),
+            YrkPageView(
+              page: _buildBoardYrkListView(SubPageItem.boardQna),
+              controller: qnaPageController,
+              isIndicatorEnabled: true,
+            ),
+            YrkTabHeaderView(title: "구인구직"),
+            YrkPageView(
+                page: _buildBoardYrkListView(SubPageItem.boardJobFinding),
+                controller: findJobPageController,
+                isIndicatorEnabled: true)
+          ],
+        ));
   }
 }

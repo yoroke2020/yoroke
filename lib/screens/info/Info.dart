@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
+import 'package:yoroke/screens/common/appbars/AppBarArrowBack.dart';
+import 'package:yoroke/screens/common/appbars/AppBarFindNoti.dart';
+import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
 import 'package:yoroke/screens/info/InfoShareCardListItem.dart';
 
 class Info extends StatefulWidget {
@@ -59,6 +62,10 @@ class _InfoState extends State<Info> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBarFindNoti(
+        label: "정보공유",
+        onPushNavigator: widget.onPushNavigator,
+      ),
       body: YrkTabBarView(
         length: 3,
         tabWidth: 99,
