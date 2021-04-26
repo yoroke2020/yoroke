@@ -25,10 +25,10 @@ class YrkListView extends StatelessWidget {
       this.isIndicator = false});
 
   final Axis scrollDirection;
-  final EdgeInsets margin;
-  final EdgeInsets padding;
-  final EdgeInsets itemMargin;
-  final EdgeInsets itemPadding;
+  final EdgeInsets? margin;
+  final EdgeInsets? padding;
+  final EdgeInsets? itemMargin;
+  final EdgeInsets? itemPadding;
   final YrkData? data;
   final ValueChanged<YrkData>? onPushNavigator;
   final SubPageItem? nextSubPageItem;
@@ -43,25 +43,33 @@ class YrkListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: width,
-        height: height,
-        margin: margin,
-        padding: padding,
-        child: ListView.builder(
-          scrollDirection: scrollDirection,
-          physics: scrollable
-              ? new AlwaysScrollableScrollPhysics()
-              : new NeverScrollableScrollPhysics(),
-          itemCount: isIndicator! ? itemCount + 1 : itemCount,
-          itemBuilder: (BuildContext context, int index) {
-            if (isIndicator! && index == itemCount) {
-              print("CircularProgressIndicator appears");
-              return CircularProgressIndicator();
-            }
-            return Container(
-                margin: itemMargin, padding: itemPadding, child: item[index]);
-          },
-        ));
+    return MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        removeBottom: true,
+        removeLeft: true,
+        removeRight: true,
+        child: Container(
+            width: width,
+            height: height,
+            margin: margin,
+            padding: padding,
+            child: ListView.builder(
+              scrollDirection: scrollDirection,
+              physics: scrollable
+                  ? new AlwaysScrollableScrollPhysics()
+                  : new NeverScrollableScrollPhysics(),
+              itemCount: isIndicator! ? itemCount + 1 : itemCount,
+              itemBuilder: (BuildContext context, int index) {
+                if (isIndicator! && index == itemCount) {
+                  print("CircularProgressIndicator appears");
+                  return CircularProgressIndicator();
+                }
+                return Container(
+                    margin: itemMargin,
+                    padding: itemPadding,
+                    child: item[index]);
+              },
+            )));
   }
 }

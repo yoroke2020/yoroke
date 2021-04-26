@@ -23,8 +23,9 @@ class YrkDotsIndicator extends AnimatedWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new AspectRatio(
-        aspectRatio: 360 / 40,
+    return Container(
+        width: double.maxFinite,
+        height: 40.0,
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: new List<Widget>.generate(itemCount, _buildDot),
