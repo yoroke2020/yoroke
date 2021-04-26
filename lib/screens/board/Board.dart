@@ -10,16 +10,11 @@ import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
 
 import 'BoardCardListItem.dart';
 
-class Board extends StatefulWidget {
+class Board extends StatelessWidget {
   Board({required this.onPushNavigator});
 
   final ValueChanged<YrkData>? onPushNavigator;
 
-  @override
-  _BoardState createState() => _BoardState();
-}
-
-class _BoardState extends State<Board> {
   final bardCardListItemCount = 12;
 
   final qnaPageController = PageController();
@@ -32,7 +27,7 @@ class _BoardState extends State<Board> {
         width: 64.0,
         height: 76.0,
         index: i,
-        onPushNavigator: widget.onPushNavigator,
+        onPushNavigator: onPushNavigator,
       ));
     }
     return list;
@@ -42,8 +37,7 @@ class _BoardState extends State<Board> {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkListView(
-          itemCount: 4,
-          item: _buildList(i, subPageItem, widget.onPushNavigator!)));
+          itemCount: 4, item: _buildList(i, subPageItem, onPushNavigator!)));
     }
     return list;
   }
@@ -66,7 +60,7 @@ class _BoardState extends State<Board> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBarNormal(
-          onPushNavigator: widget.onPushNavigator,
+          onPushNavigator: onPushNavigator,
         ),
         body: ListView(
           children: <Widget>[
