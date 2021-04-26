@@ -3,27 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 
-class AppBarNormal extends StatefulWidget implements PreferredSizeWidget {
-  static AppBarNormal? _instance;
+class AppBarNormal extends StatelessWidget {
+  AppBarNormal({this.onPushNavigator});
 
-  AppBarNormal._internal(this.preferredSize, this.onPushNavigator);
-
-  static AppBarNormal? getInstance(onPushNavigator) {
-    if (_instance == null)
-      _instance = AppBarNormal._internal(
-          Size.fromHeight(kToolbarHeight), onPushNavigator);
-    return _instance;
-  }
-
-  @override
-  final Size preferredSize;
   final ValueChanged<YrkData>? onPushNavigator;
-
-  @override
-  _AppBarNormalState createState() => _AppBarNormalState();
-}
-
-class _AppBarNormalState extends State<AppBarNormal> {
   @override
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
@@ -67,8 +50,7 @@ class _AppBarNormalState extends State<AppBarNormal> {
                     Center(
                       child: InkWell(
                           onTap: () {
-                            widget.onPushNavigator!(
-                                new YrkData(SubPageItem.notice));
+                            onPushNavigator!(new YrkData(SubPageItem.notice));
                           },
                           child: Container(
                             padding: const EdgeInsets.only(right: 18),

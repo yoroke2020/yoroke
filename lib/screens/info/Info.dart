@@ -15,7 +15,21 @@ class Info extends StatefulWidget {
   _InfoState createState() => _InfoState();
 }
 
-class _InfoState extends State<Info> {
+class _InfoState extends State<Info> with TickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = new TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   List<Widget> _infoShareCardListItem(int pageIndex) {
     double _expandWidth = MediaQuery.of(context).size.width - 32 - 16;
 
@@ -58,16 +72,15 @@ class _InfoState extends State<Info> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: YrkTabBarView(
-        length: 3,
+    return SingleChildScrollView(
+      child: YrkTabBarView(
+        controller: _tabController,
         tabWidth: 99,
-        tabBarViewHeight:
+        tabViewHeight:
             MediaQuery.of(context).size.height - kToolbarHeight - 40.0 - 48.0,
         tabTextList: ["의료시설", "복지시설", "돌봄서비스"],
         tabViewList: [
           YrkListView(
-            height: MediaQuery.of(context).size.height,
             pageIndex: 0,
             itemCount: 4,
             scrollable: true,
@@ -75,7 +88,6 @@ class _InfoState extends State<Info> {
             itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           ),
           YrkListView(
-            height: MediaQuery.of(context).size.height,
             pageIndex: 1,
             itemCount: 4,
             item: _infoShareCardListItem(1),
@@ -83,7 +95,6 @@ class _InfoState extends State<Info> {
             itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           ),
           YrkListView(
-            height: MediaQuery.of(context).size.height,
             pageIndex: 2,
             itemCount: 4,
             item: _infoShareCardListItem(2),
@@ -91,7 +102,7 @@ class _InfoState extends State<Info> {
             itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           ),
         ],
-        following: Center(
+        tabBarFollowing: Center(
           child: IconButton(
             splashColor: Colors.transparent,
             icon: widget.isGrid
