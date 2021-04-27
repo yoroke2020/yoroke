@@ -36,7 +36,7 @@ class _HomeHistoryState extends State<HomeHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarArrowBack.getInstance(),
+        appBar: AppBarArrowBack(),
         body: (ListView(children: <Widget>[
           YrkListView(
             width: MediaQuery.of(context).size.width,

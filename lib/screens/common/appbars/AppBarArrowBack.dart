@@ -1,47 +1,39 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
-class AppBarArrowBack extends StatelessWidget implements PreferredSizeWidget {
-  static AppBarArrowBack? _instance;
-
-  AppBarArrowBack._internal(this.preferredSize);
-
-  static AppBarArrowBack? getInstance() {
-    if (_instance == null)
-      _instance = AppBarArrowBack._internal(Size.fromHeight(kToolbarHeight));
-    return _instance;
-  }
+// ignore: must_be_immutable
+class AppBarArrowBack extends StatefulWidget implements PreferredSizeWidget {
+  String? label;
+  AppBarArrowBack({
+    Key? key,
+    this.label,
+  }) : super(key: key);
 
   @override
-  final Size preferredSize;
+  _AppBarArrowBackState createState() => _AppBarArrowBackState();
 
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+}
+
+class _AppBarArrowBackState extends State<AppBarArrowBack> {
   @override
   Widget build(BuildContext context) {
-    final double statusBarHeight = MediaQuery.of(context).padding.top;
-    print(MediaQuery.of(context).size.width);
-    return Padding(
-        padding: EdgeInsets.only(top: statusBarHeight),
-        child: Container(
-            width: double.maxFinite,
-            height: 48,
-            decoration: BoxDecoration(color: const Color(0xffffffff)),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: Image.asset(
-                      "assets/icons/icon_arrow_back_24_px.png",
-                      width: 24.0,
-                      height: 24.0,
-                    ),
-                    padding: const EdgeInsets.only(left: 18),
-                    constraints: BoxConstraints(),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Expanded(child: Container()),
-                ])));
+    return AppBar(
+        backgroundColor: const Color(0xffffffff),
+        elevation: 0,
+        leading: IconButton(
+          icon: Image.asset(
+            "assets/icons/icon_arrow_back_24_px.png",
+            width: 24.0,
+            height: 24.0,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          widget.label ?? "",
+          // style: YrkTextStyle(),
+        ));
   }
 }

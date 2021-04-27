@@ -7,7 +7,7 @@ import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkScrollFadedWidget.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
-import 'package:yoroke/screens/common/appbars/AppBarNormalArrowBack.dart';
+import 'package:yoroke/screens/common/appbars/AppBarArrowBack.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'BoardCardListItem.dart';
@@ -129,6 +129,7 @@ class _BoardReviewState extends State<BoardReview>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBarArrowBack(),
       body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
         SliverAppBar(
           automaticallyImplyLeading: false,
@@ -144,7 +145,6 @@ class _BoardReviewState extends State<BoardReview>
               preferredSize: const Size.fromHeight(48.0),
               child: Stack(
                 children: <Widget>[
-                  AppBarNormalArrowBack(),
                   YrkScrollFadedWidget(
                       scrollController: _scrollController,
                       child: Container(
