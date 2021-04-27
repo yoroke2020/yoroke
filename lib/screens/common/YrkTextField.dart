@@ -116,52 +116,6 @@ class _YrkTextFieldState extends State<YrkTextField> {
         _border = _noBorder;
         _focusedBorder = _noBorder;
         _enabledBorder = _noBorder;
-        _suffixIcon = Container(
-            width: 104,
-            padding: EdgeInsets.zero,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  width: 32,
-                  height: 32,
-                  // padding: EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                      color: const Color(0xffffffff),
-                      borderRadius: BorderRadius.all(Radius.circular(32)),
-                      border: Border.all(
-                        color: widget.isPrivate!
-                            ? Color(0x4d000000)
-                            : Color(0xfff5df4d),
-                        width: 1,
-                      )),
-                  child: IconButton(
-                      padding: EdgeInsets.all(6),
-                      splashColor: Colors.transparent,
-                      icon: widget.isPrivate!
-                          ? Image.asset(
-                              "assets/icons/icon_lock_24_px.png",
-                              color: Color(0x4d000000),
-                            )
-                          : Image.asset("assets/icons/icon_lock_open_24_px.png",
-                              color: Color(0xfff5df4d)),
-                      color: Colors.green,
-                      onPressed: () {
-                        setState(() {
-                          widget.isPrivate = !widget.isPrivate!;
-                        });
-                      }),
-                ),
-                SizedBox(width: 6),
-                YrkButton(
-                  buttonType: ButtonType.solid,
-                  label: '등록',
-                  onPressed: () {},
-                  width: 64,
-                  height: 32,
-                ),
-              ],
-            ));
         break;
 
       case TextFieldType.board:
