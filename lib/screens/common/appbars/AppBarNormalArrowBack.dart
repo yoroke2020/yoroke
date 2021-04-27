@@ -56,7 +56,7 @@ class AppBarNormalArrowBack extends StatelessWidget
                   ),
                 ),
                 onTap: () => onPushNavigator(
-                    new YrkData(SubPageItem.createPost, str0: "후기"))),
+                    new YrkData(SubPageItem.postCreate, str0: "후기"))),
             InkWell(
                 child: Padding(
                   padding: EdgeInsets.only(left: 4.0),
