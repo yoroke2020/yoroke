@@ -1,5 +1,5 @@
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/post/CreatePost.dart';
+import 'package:yoroke/screens/post/PostCreate.dart';
 
 class YrkData {
   YrkData(this.nextPageItem, {
@@ -18,7 +18,7 @@ class YrkData {
     this.d2,
     this.d3,
     this.d4,
-    this.createPostType
+    this.postCreateType
   });
 
   final SubPageItem? nextPageItem; //SubItem
@@ -41,5 +41,5 @@ class YrkData {
   double? d3;
   double? d4;
 
-  CreatePostType? createPostType;
+  PostCreateType? postCreateType;
 }
