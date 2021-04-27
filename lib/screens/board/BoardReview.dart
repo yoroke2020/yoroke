@@ -145,6 +145,9 @@ class _BoardReviewState extends State<BoardReview>
               preferredSize: const Size.fromHeight(48.0),
               child: Stack(
                 children: <Widget>[
+                  AppBarNormalArrowBack(
+                    onPushNavigator: widget.onPushNavigator!,
+                  ),
                   YrkScrollFadedWidget(
                       scrollController: _scrollController,
                       child: Container(

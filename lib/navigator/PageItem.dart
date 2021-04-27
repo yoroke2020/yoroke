@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/info/InfoShareDetail.dart';
+import 'package:yoroke/screens/post/CreatePost.dart';
 import 'package:yoroke/screens/post/Post.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/home/HomeHistory.dart';
@@ -18,7 +19,8 @@ enum SubPageItem {
   boardReviewFeed,
   boardQna,
   boardJobFinding,
-  infoShareDetail
+  infoShareDetail,
+  createPost,
 }
 
 const Map<RootPageItem, String> rootPageTabIconInfo = {
@@ -54,6 +56,8 @@ extension SubPageItemExt on SubPageItem {
         return Post(data: data);
       case SubPageItem.infoShareDetail:
         return InfoShareDetail(data: data, onPushNavigator: onPushNavigator);
+      case SubPageItem.createPost:
+        return CreatePost(data: data);
     }
   }
 }

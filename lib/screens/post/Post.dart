@@ -6,7 +6,7 @@ import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/AppBarArrowBack.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarComment.dart';
 
-import 'PostCommentListItem.dart';
+import 'PostComment.dart';
 
 class Post extends StatefulWidget {
   Post({Key? key, required this.data}) : super(key: key);
@@ -337,7 +337,7 @@ class _PostState extends State<Post> {
                         textAlign: TextAlign.left))
               ],
             )),
-        YrkListView(item: [PostCommentListItem(index: 0)]),
+        YrkListView(item: [PostComment(index: 0)]),
         Container(
           width: double.maxFinite,
           height: 52.0,

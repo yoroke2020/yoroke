@@ -1,8 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/navigator/SubPage.dart';
 
 class AppBarNormalArrowBack extends StatelessWidget
     implements PreferredSizeWidget {
+  AppBarNormalArrowBack({required this.onPushNavigator});
+
+  final ValueChanged<YrkData> onPushNavigator;
+
   @override
   Size get preferredSize => Size.fromHeight(48.0);
 
@@ -48,7 +55,8 @@ class AppBarNormalArrowBack extends StatelessWidget
                     height: 24.0,
                   ),
                 ),
-                onTap: () => print("AppBarNormalArrowBack create pressed")),
+                onTap: () => onPushNavigator(
+                    new YrkData(SubPageItem.createPost, str0: "후기"))),
             InkWell(
                 child: Padding(
                   padding: EdgeInsets.only(left: 4.0),

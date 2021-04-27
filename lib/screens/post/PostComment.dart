@@ -5,16 +5,16 @@ import 'package:yoroke/screens/common/YrkModalBottomSheetListItem.dart';
 import 'package:yoroke/screens/common/YrkModelBottomSheet.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
-class PostCommentListItem extends StatefulWidget {
-  PostCommentListItem({required this.index});
+class PostComment extends StatefulWidget {
+  PostComment({required this.index});
 
   final int index;
 
   @override
-  _PostCommentListItemState createState() => _PostCommentListItemState();
+  _PostCommentState createState() => _PostCommentState();
 }
 
-class _PostCommentListItemState extends State<PostCommentListItem> {
+class _PostCommentState extends State<PostComment> {
   int likeCount = 0;
   int dislikeCount = 0;
 
