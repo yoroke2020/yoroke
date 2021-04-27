@@ -129,7 +129,7 @@ class _BoardReviewState extends State<BoardReview>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarArrowBack(),
+      // appBar: AppBarArrowBack(),
       body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
         SliverAppBar(
           automaticallyImplyLeading: false,
