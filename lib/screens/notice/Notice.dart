@@ -37,7 +37,7 @@ class _NoticeState extends State<Notice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarArrowBack.getInstance(),
+        appBar: AppBarArrowBack(),
         body: ListView(children: <Widget>[
           Container(
               width: MediaQuery.of(context).size.width,

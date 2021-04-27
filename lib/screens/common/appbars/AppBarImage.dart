@@ -5,8 +5,8 @@ import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
-class AppBarXLargeImage extends StatefulWidget implements PreferredSizeWidget {
-  AppBarXLargeImage({
+class AppBarImage extends StatefulWidget implements PreferredSizeWidget {
+  AppBarImage({
     required this.titleText,
     required this.date,
     this.height,
@@ -19,7 +19,7 @@ class AppBarXLargeImage extends StatefulWidget implements PreferredSizeWidget {
   bool _isBookmarked = false;
 
   @override
-  _AppBarXLargeImageState createState() => _AppBarXLargeImageState();
+  _AppBarImageState createState() => _AppBarImageState();
 
   double trimHeight(double? _h) {
     _h ??= 0;
@@ -37,7 +37,7 @@ class AppBarXLargeImage extends StatefulWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(trimHeight(this.height));
 }
 
-class _AppBarXLargeImageState extends State<AppBarXLargeImage> {
+class _AppBarImageState extends State<AppBarImage> {
   double _bottomHeight() =>
       widget.preferredSize.height < 100 ? 0 : widget.preferredSize.height - 100;
   double _opacity() => widget.preferredSize.height > 250 ? 1.0 : 0.0;
