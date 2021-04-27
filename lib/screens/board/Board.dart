@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/YrkDrawer.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkPageView.dart';
@@ -62,6 +63,7 @@ class Board extends StatelessWidget {
         appBar: AppBarNormal(
           onPushNavigator: onPushNavigator,
         ),
+        drawer: YrkDrawer(),
         body: ListView(
           children: <Widget>[
             YrkTabHeaderView(title: "후기"),

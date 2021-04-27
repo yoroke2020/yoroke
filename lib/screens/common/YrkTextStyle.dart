@@ -13,7 +13,7 @@ class YrkTextStyle extends TextStyle {
   const YrkTextStyle({
     this.color = const Color(0xe6000000),
     this.fontSize = 14.0,
-    this.height = 1.5,
+    this.height = 1.0,
     this.letterSpacing = -0.002,
     this.fontWeight = FontWeight.w400,
     this.fontFamily = 'NotoSansCJKkr',

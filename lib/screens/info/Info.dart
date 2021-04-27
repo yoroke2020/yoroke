@@ -124,7 +124,6 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
                 });
               },
             ),
-
           ),
         ),
       ),

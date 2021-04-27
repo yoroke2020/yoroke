@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:yoroke/screens/common/YrkDrawer.dart';
+import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
 
 class Find extends StatefulWidget {
   @override
@@ -8,8 +11,10 @@ class Find extends StatefulWidget {
 class _FindState extends State<Find> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('find page'),
-    );
+    return Scaffold(
+        appBar: AppBarNormal(
+            // onPushNavigator: widget.onPushNavigator,
+            ),
+        drawer: YrkDrawer());
   }
 }
