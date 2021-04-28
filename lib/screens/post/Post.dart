@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
-import 'package:yoroke/screens/common/appbars/AppBarArrowBack.dart';
 import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarComment.dart';
 

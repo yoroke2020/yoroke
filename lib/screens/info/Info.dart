@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
-import 'package:yoroke/screens/common/appbars/AppBarArrowBack.dart';
-import 'package:yoroke/screens/common/appbars/AppBarFindNoti.dart';
 import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
 import 'package:yoroke/screens/info/InfoShareCardListItem.dart';
 
