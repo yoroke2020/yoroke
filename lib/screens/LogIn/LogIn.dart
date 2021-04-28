@@ -22,8 +22,7 @@ class _LogInState extends State<LogIn> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: YrkAppBar(
-          appBarType: AppBarType.back,
-          context: context,
+          type: YrkAppBarType.arrowBackOnly,
         ),
         body: Container(
             width: MediaQuery.of(context).size.width,

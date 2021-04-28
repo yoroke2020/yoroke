@@ -17,8 +17,7 @@ class _SignInNicknameState extends State<SignInNickname> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: YrkAppBar(
-        appBarType: AppBarType.back,
-        context: context,
+        type: YrkAppBarType.arrowBackOnly,
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
