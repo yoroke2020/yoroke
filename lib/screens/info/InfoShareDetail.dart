@@ -73,7 +73,7 @@ class _InfoShareDetailState extends State<InfoShareDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarImage(
+      appBar: YrkAppBarImage(
         titleText: widget.data!.str0!,
         date: widget.data!.str1!,
         height: appbarHeight,
