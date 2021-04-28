@@ -33,12 +33,16 @@ class _AppBarNormalState extends State<AppBarNormal> {
           onPressed: () {},
         ),
         actions: [
-          Container(
-            padding: const EdgeInsets.only(right: 8),
-            width: 32,
-            height: 32,
-            child: Image.asset("assets/icons/search_24_px.png"),
-          ),
+          InkWell(
+            onTap: () {
+              onPushNavigator!(new YrkData(SubPageItem.notice));
+            },
+            child: Container(
+              padding: const EdgeInsets.only(right: 8),
+              width: 32,
+              height: 24,
+              child: Image.asset("assets/icons/search_24_px.png"),
+            )),
           Container(
             padding: const EdgeInsets.only(right: 8),
             width: 32,
