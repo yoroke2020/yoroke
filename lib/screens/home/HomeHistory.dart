@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
-import 'package:yoroke/screens/common/appbars/AppBarArrowBack.dart';
+import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
 import 'HomeHistoryCardListItem.dart';
 
@@ -36,7 +36,10 @@ class _HomeHistoryState extends State<HomeHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarArrowBack(),
+        appBar: YrkAppBar(
+          appBarType: AppBarType.back,
+          context: context,
+        ),
         body: (ListView(children: <Widget>[
           YrkListView(
             width: MediaQuery.of(context).size.width,

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="icon_arrow_back_24px" width="24" height="24" viewBox="0 0 24 24">
+    <path id="패스_34" d="M0 0h24v24H0z" fill="none"/>
+    <g id="그룹_648" transform="translate(-228 -412)">
+        <path id="사각형_16755" d="M0 0H24V24H0z" fill="none" transform="rotate(180 126 218)"/>
+        <path id="패스_197" d="M235.646 424.354l8 8a.5.5 0 0 0 .708-.708L236.707 424l7.647-7.646a.5.5 0 0 0-.708-.708l-8 8a.5.5 0 0 0 0 .708z" transform="translate(-7.5)"/>
+    </g>
+</svg>

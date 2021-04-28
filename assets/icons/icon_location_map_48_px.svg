@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="icon_location_map_48px" width="48" height="48" viewBox="0 0 48 48">
+    <defs>
+        <linearGradient id="linear-gradient" x1=".5" x2=".5" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+            <stop offset="1" stop-opacity=".6"/>
+        </linearGradient>
+        <style>
+            .cls-2{fill:none}
+        </style>
+    </defs>
+    <path id="패스_164" fill="url(#linear-gradient)" d="M24 42.01s12.23-2.586 17.457-9.5-3.7-10.872-3.7-10.872L25.029 35.061z"/>
+    <g id="place-24px" transform="translate(4 4)">
+        <path id="패스_12" d="M0 0h40v40H0z" class="cls-2"/>
+        <path id="패스_13" fill="#f5df4d" d="M20 2c8.4 0 16 5.8 16 14.76Q36 25.724 20 38 4.01 25.715 4 16.76C4 7.8 11.6 2 20 2z"/>
+        <path id="패스_163" fill="#fff" d="M21 22.8a5 5 0 1 1 5-5 5.015 5.015 0 0 1-5 5z" transform="translate(-1 -.8)"/>
+    </g>
+    <path id="사각형_729" d="M0 0H48V48H0z" class="cls-2"/>
+</svg>

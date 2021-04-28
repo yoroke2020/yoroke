@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="16" viewBox="0 0 36 16">
+    <g fill="#fff" stroke="#f5df4d">
+        <rect width="36" height="16" stroke="none" rx="8"/>
+        <rect width="35" height="15" x=".5" y=".5" fill="none" rx="7.5"/>
+    </g>
+    <text fill="rgba(0,0,0,0.6)" font-family="NotoSansCJKkr-Medium, Noto Sans CJK KR" font-size="8px" font-weight="500" letter-spacing="-0.02em" transform="translate(7 11)">
+        <tspan x="0" y="0">작성자</tspan>
+    </text>
+</svg>

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/common/appbars/AppBarArrowBack.dart';
+import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'NoticeListItem.dart';
@@ -37,7 +37,10 @@ class _NoticeState extends State<Notice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarArrowBack(),
+        appBar: YrkAppBar(
+          appBarType: AppBarType.back,
+          context: context,
+        ),
         body: ListView(children: <Widget>[
           Container(
               width: MediaQuery.of(context).size.width,
