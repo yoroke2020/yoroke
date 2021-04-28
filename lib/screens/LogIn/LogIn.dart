@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/LogIn/SiginInDialog.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
-import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
+import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
 class LogIn extends StatefulWidget {
   @override

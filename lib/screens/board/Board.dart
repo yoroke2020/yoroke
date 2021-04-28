@@ -6,7 +6,7 @@ import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkPageView.dart';
 import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
-import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
+import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
 import 'BoardCardListItem.dart';
 

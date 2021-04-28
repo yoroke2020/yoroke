@@ -4,7 +4,7 @@ import 'package:yoroke/screens/LogIn/SignInDone.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkTextField.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
-import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
+import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
 class SignInNickname extends StatefulWidget {
   @override
