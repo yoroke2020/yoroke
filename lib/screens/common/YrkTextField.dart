@@ -22,6 +22,11 @@ class YrkTextField extends StatefulWidget {
 
   bool? isPrivate;
 
+  final TextInputAction? textInputAction;
+  final void Function(String)? handleSubmission;
+  final void Function(String)? handleChange;
+  final TextEditingController? textEditingController;
+
   YrkTextField({
     Key? key,
     this.textFieldType = TextFieldType.solid,
@@ -32,6 +37,10 @@ class YrkTextField extends StatefulWidget {
     this.obscureText,
     this.fillColor,
     this.borderColor,
+    this.textInputAction,
+    this.handleSubmission,
+    this.handleChange,
+    this.textEditingController,
 
     // Comment
     this.isPrivate = false,
@@ -49,6 +58,10 @@ class _YrkTextFieldState extends State<YrkTextField> {
       cursorColor: Color(0xfff5df4d),
       cursorWidth: 2,
       decoration: getDeco(),
+      textInputAction: widget.textInputAction,
+      onSubmitted: widget.handleSubmission,
+      onChanged: widget.handleChange,
+      controller: widget.textEditingController,
     );
   }
 

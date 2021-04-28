@@ -7,12 +7,15 @@ import 'package:yoroke/screens/post/PostCreate.dart';
 import 'package:yoroke/screens/post/Post.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/home/HomeHistory.dart';
+import 'package:yoroke/screens/info/InfoShareDetail.dart';
 import 'package:yoroke/screens/notice/Notice.dart';
 import 'package:yoroke/screens/post/Post.dart';
+import 'package:yoroke/screens/search/Search.dart';
 
 enum RootPageItem { home, board, find, info }
 
 enum SubPageItem {
+  search,
   notice,
   homePopular,
   homeHistory,
@@ -42,6 +45,8 @@ const Map<RootPageItem, String> rootPageTabLabelInfo = {
 extension SubPageItemExt on SubPageItem {
   Widget widget(YrkData? data, ValueChanged<YrkData>? onPushNavigator) {
     switch (this) {
+      case SubPageItem.search:
+        return Search(data: data);
       case SubPageItem.notice:
         return Notice(data: data);
       case SubPageItem.homePopular:

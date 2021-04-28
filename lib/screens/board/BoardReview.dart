@@ -7,7 +7,6 @@ import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkScrollFadedWidget.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
-import 'package:yoroke/screens/common/appbars/AppBarNormalArrowBack.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'BoardCardListItem.dart';

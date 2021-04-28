@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="icon_photo_library_24px" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <style>
+            .cls-1{fill:none}
+        </style>
+    </defs>
+    <path id="패스_142" d="M0 0h24v24H0z" class="cls-1"/>
+    <g id="그룹_691" transform="translate(-141.125 -323)">
+        <path id="사각형_16766" d="M0 0H24V24H0z" class="cls-1" transform="translate(141.125 323)"/>
+        <g id="그룹_690">
+            <g id="그룹_689">
+                <path id="패스_232" d="M158.625 344h-14.5v-14.5a.5.5 0 0 1 1 0V343h13.5a.5.5 0 0 1 0 1z"/>
+            </g>
+            <path id="패스_233" d="M147.125 326v15h15v-15zm8 14h-6l3-3.75 1.5 1.875 2.5-3.125 4 5z"/>
+        </g>
+    </g>
+</svg>

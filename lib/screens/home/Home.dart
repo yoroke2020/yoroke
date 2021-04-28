@@ -3,7 +3,7 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageView.dart';
-import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
+import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
 import 'HomeCardListItem.dart';
 import 'HomePopularCardListItem.dart';
@@ -105,8 +105,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarNormal(
+        appBar: YrkAppBar(
+          appBarType: AppBarType.normal,
           onPushNavigator: widget.onPushNavigator,
+          context: context,
         ),
         body: ListView(children: <Widget>[
           YrkListView(
