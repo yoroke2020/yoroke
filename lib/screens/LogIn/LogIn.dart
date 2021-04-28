@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/LogIn/SiginInDialog.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
+import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -20,13 +21,9 @@ class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: new IconButton(
-            icon: new Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
+        appBar: YrkAppBar(
+          appBarType: AppBarType.back,
+          context: context,
         ),
         body: Container(
             width: MediaQuery.of(context).size.width,

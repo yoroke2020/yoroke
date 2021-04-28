@@ -105,8 +105,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarNormal(
+        appBar: YrkAppBar(
+          appBarType: AppBarType.normal,
           onPushNavigator: widget.onPushNavigator,
+          context: context,
         ),
         body: ListView(children: <Widget>[
           YrkListView(

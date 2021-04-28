@@ -59,8 +59,10 @@ class Board extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarNormal(
+        appBar: YrkAppBar(
+          appBarType: AppBarType.normal,
           onPushNavigator: onPushNavigator,
+          context: context,
         ),
         body: ListView(
           children: <Widget>[

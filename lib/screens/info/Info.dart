@@ -76,7 +76,8 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarFindNoti(
+      appBar: YrkAppBar(
+        appBarType: AppBarType.searchNoti,
         label: "정보공유",
         onPushNavigator: widget.onPushNavigator,
       ),
@@ -124,7 +125,6 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
                 });
               },
             ),
-
           ),
         ),
       ),

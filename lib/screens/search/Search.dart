@@ -4,6 +4,7 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkTextField.dart';
 import 'package:yoroke/screens/common/appbars/AppBarArrowBack.dart';
+import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'SearchListItem.dart';
@@ -54,7 +55,10 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarArrowBack.getInstance(),
+        appBar: YrkAppBar(
+          appBarType: AppBarType.back,
+          context: context,
+        ),
         body: ListView(children: <Widget>[
           Container(
             width: MediaQuery.of(context).size.width,
