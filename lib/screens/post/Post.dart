@@ -20,7 +20,7 @@ class _PostState extends State<Post> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarArrowBack.getInstance(),
+      appBar: AppBarArrowBack(),
       body: ListView(
         children: <Widget>[
           _header(),

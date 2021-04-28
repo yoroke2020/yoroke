@@ -3,6 +3,7 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageView.dart';
+import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
 
 import 'HomeCardListItem.dart';
 import 'HomePopularCardListItem.dart';
@@ -104,120 +105,123 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBarNormal(
+          onPushNavigator: widget.onPushNavigator,
+        ),
         body: ListView(children: <Widget>[
-      YrkListView(
-        width: 320.0,
-        height: 120.0,
-        margin: EdgeInsets.only(left: 8, right: 8),
-        scrollable: true,
-        scrollDirection: Axis.horizontal,
-        clickable: true,
-        // onPushNavigator: widget.onPushNavigator,
-        // nextSubPageItem: SubPageItem.boardReview,
-        item: _noticeCardList(),
-        itemCount: 4,
-      ),
-      Container(
-          decoration: BoxDecoration(color: const Color(0xffffffff)),
-          child: new AspectRatio(
-              aspectRatio: 360 / 40,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Expanded(flex: 16, child: Container()),
-                    Expanded(
-                      flex: 272,
-                      child: Text("인기 게시글",
-                          style: const TextStyle(
-                              color: const Color(0xe6000000),
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "NotoSansCJKKR",
-                              fontStyle: FontStyle.normal,
-                              fontSize: 16.0),
-                          textAlign: TextAlign.left),
-                    ),
-                    Expanded(
-                      flex: 16,
-                      child: Container(
-                          width: 16,
-                          height: 16,
-                          decoration:
-                              BoxDecoration(color: const Color(0x00000000)),
-                          child: Container(
-                            width: 10.0029296875,
-                            height: 10,
-                            decoration:
-                                BoxDecoration(color: const Color(0x00000000)),
-                            child: Image.asset(
-                                "assets/icons/icon_create_24_px.png"),
-                          )),
-                    ),
-                    Expanded(
-                        flex: 40,
-                        child: Text("글 작성",
-                            style: const TextStyle(
-                                color: const Color(0x99000000),
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "NotoSansCJKKR",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 14.0),
-                            textAlign: TextAlign.left)),
-                    Expanded(flex: 16, child: Container())
-                  ]))),
-      YrkPageView(
-        page: _YrkListView(),
-        controller: popularPageController,
-        isIndicatorEnabled: true,
-      ),
-      Container(
-          decoration: BoxDecoration(color: const Color(0xffffffff)),
-          child: new AspectRatio(
-              aspectRatio: 360 / 40,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Expanded(flex: 16, child: Container()),
-                    Expanded(
-                      flex: 277,
-                      child: Text("인기 의료시설",
-                          style: const TextStyle(
-                              color: const Color(0xe6000000),
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "NotoSansCJKKR",
-                              fontStyle: FontStyle.normal,
-                              fontSize: 16.0),
-                          textAlign: TextAlign.left),
-                    ),
-                    Expanded(
-                      flex: 51,
-                      child: TextButton(
-                          child: Text("전체보기",
+          YrkListView(
+            width: 320.0,
+            height: 120.0,
+            margin: EdgeInsets.only(left: 8, right: 8),
+            scrollable: true,
+            scrollDirection: Axis.horizontal,
+            clickable: true,
+            // onPushNavigator: widget.onPushNavigator,
+            // nextSubPageItem: SubPageItem.boardReview,
+            item: _noticeCardList(),
+            itemCount: 4,
+          ),
+          Container(
+              decoration: BoxDecoration(color: const Color(0xffffffff)),
+              child: new AspectRatio(
+                  aspectRatio: 360 / 40,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Expanded(flex: 16, child: Container()),
+                        Expanded(
+                          flex: 272,
+                          child: Text("인기 게시글",
                               style: const TextStyle(
-                                  color: const Color(0x99000000),
-                                  fontWeight: FontWeight.w500,
+                                  color: const Color(0xe6000000),
+                                  fontWeight: FontWeight.w700,
                                   fontFamily: "NotoSansCJKKR",
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14.0),
+                                  fontSize: 16.0),
                               textAlign: TextAlign.left),
-                          onPressed: () {
-                            widget.onPushNavigator!(
-                                new YrkData(SubPageItem.homeHistory));
-                          }),
-                    ),
-                    Expanded(flex: 16, child: Container())
-                  ]))),
-      YrkListView(
-        width: 320.0,
-        height: 200.0,
-        margin: EdgeInsets.only(left: 8, right: 8),
-        scrollable: true,
-        scrollDirection: Axis.horizontal,
-        clickable: true,
-        // onPushNavigator: widget.onPushNavigator,
-        // nextSubPageItem: SubPageItem.boardReview,
-        item: _popularCardList(),
-        itemCount: 4,
-      ),
-    ]));
+                        ),
+                        Expanded(
+                          flex: 16,
+                          child: Container(
+                              width: 16,
+                              height: 16,
+                              decoration:
+                                  BoxDecoration(color: const Color(0x00000000)),
+                              child: Container(
+                                width: 10.0029296875,
+                                height: 10,
+                                decoration: BoxDecoration(
+                                    color: const Color(0x00000000)),
+                                child: Image.asset(
+                                    "assets/icons/icon_create_24_px.png"),
+                              )),
+                        ),
+                        Expanded(
+                            flex: 40,
+                            child: Text("글 작성",
+                                style: const TextStyle(
+                                    color: const Color(0x99000000),
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: "NotoSansCJKKR",
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 14.0),
+                                textAlign: TextAlign.left)),
+                        Expanded(flex: 16, child: Container())
+                      ]))),
+          YrkPageView(
+            page: _YrkListView(),
+            controller: popularPageController,
+            isIndicatorEnabled: true,
+          ),
+          Container(
+              decoration: BoxDecoration(color: const Color(0xffffffff)),
+              child: new AspectRatio(
+                  aspectRatio: 360 / 40,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Expanded(flex: 16, child: Container()),
+                        Expanded(
+                          flex: 277,
+                          child: Text("인기 의료시설",
+                              style: const TextStyle(
+                                  color: const Color(0xe6000000),
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: "NotoSansCJKKR",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 16.0),
+                              textAlign: TextAlign.left),
+                        ),
+                        Expanded(
+                          flex: 51,
+                          child: TextButton(
+                              child: Text("전체보기",
+                                  style: const TextStyle(
+                                      color: const Color(0x99000000),
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: "NotoSansCJKKR",
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 14.0),
+                                  textAlign: TextAlign.left),
+                              onPressed: () {
+                                widget.onPushNavigator!(
+                                    new YrkData(SubPageItem.homeHistory));
+                              }),
+                        ),
+                        Expanded(flex: 16, child: Container())
+                      ]))),
+          YrkListView(
+            width: 320.0,
+            height: 200.0,
+            margin: EdgeInsets.only(left: 8, right: 8),
+            scrollable: true,
+            scrollDirection: Axis.horizontal,
+            clickable: true,
+            // onPushNavigator: widget.onPushNavigator,
+            // nextSubPageItem: SubPageItem.boardReview,
+            item: _popularCardList(),
+            itemCount: 4,
+          ),
+        ]));
   }
 }

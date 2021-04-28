@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
+import 'package:yoroke/screens/common/appbars/AppBarArrowBack.dart';
+import 'package:yoroke/screens/common/appbars/AppBarFindNoti.dart';
+import 'package:yoroke/screens/common/appbars/AppBarNormal.dart';
 import 'package:yoroke/screens/info/InfoShareCardListItem.dart';
 
 class Info extends StatefulWidget {
@@ -15,7 +18,21 @@ class Info extends StatefulWidget {
   _InfoState createState() => _InfoState();
 }
 
-class _InfoState extends State<Info> {
+class _InfoState extends State<Info> with TickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = new TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   List<Widget> _infoShareCardListItem(int pageIndex) {
     double _expandWidth = MediaQuery.of(context).size.width - 32 - 16;
 
@@ -59,51 +76,55 @@ class _InfoState extends State<Info> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: YrkTabBarView(
-        length: 3,
-        tabWidth: 99,
-        tabBarViewHeight:
-            MediaQuery.of(context).size.height - kToolbarHeight - 40.0 - 48.0,
-        tabTextList: ["의료시설", "복지시설", "돌봄서비스"],
-        tabViewList: [
-          YrkListView(
-            height: MediaQuery.of(context).size.height,
-            pageIndex: 0,
-            itemCount: 4,
-            scrollable: true,
-            item: _infoShareCardListItem(0),
-            itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          ),
-          YrkListView(
-            height: MediaQuery.of(context).size.height,
-            pageIndex: 1,
-            itemCount: 4,
-            item: _infoShareCardListItem(1),
-            scrollable: true,
-            itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          ),
-          YrkListView(
-            height: MediaQuery.of(context).size.height,
-            pageIndex: 2,
-            itemCount: 4,
-            item: _infoShareCardListItem(2),
-            scrollable: true,
-            itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          ),
-        ],
-        following: Center(
-          child: IconButton(
-            splashColor: Colors.transparent,
-            icon: widget.isGrid
-                ? Image.asset("assets/icons/icon_widgets_24_px.png",
-                    width: 19, height: 19, color: Color(0xff939597))
-                : Image.asset("assets/icons/icon_view_agenda_24_px.png",
-                    width: 19, height: 19, color: Color(0xff939597)),
-            onPressed: () {
-              setState(() {
-                widget.isGrid = !widget.isGrid;
-              });
-            },
+      appBar: AppBarFindNoti(
+        label: "정보공유",
+        onPushNavigator: widget.onPushNavigator,
+      ),
+      body: SingleChildScrollView(
+        child: YrkTabBarView(
+          controller: _tabController,
+          tabWidth: 99,
+          tabViewHeight:
+              MediaQuery.of(context).size.height - kToolbarHeight - 40.0 - 48.0,
+          tabTextList: ["의료시설", "복지시설", "돌봄서비스"],
+          tabViewList: [
+            YrkListView(
+              pageIndex: 0,
+              itemCount: 4,
+              scrollable: true,
+              item: _infoShareCardListItem(0),
+              itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            ),
+            YrkListView(
+              pageIndex: 1,
+              itemCount: 4,
+              item: _infoShareCardListItem(1),
+              scrollable: true,
+              itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            ),
+            YrkListView(
+              pageIndex: 2,
+              itemCount: 4,
+              item: _infoShareCardListItem(2),
+              scrollable: true,
+              itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            ),
+          ],
+          tabBarFollowing: Center(
+            child: IconButton(
+              splashColor: Colors.transparent,
+              icon: widget.isGrid
+                  ? Image.asset("assets/icons/icon_widgets_24_px.png",
+                      width: 19, height: 19, color: Color(0xff939597))
+                  : Image.asset("assets/icons/icon_view_agenda_24_px.png",
+                      width: 19, height: 19, color: Color(0xff939597)),
+              onPressed: () {
+                setState(() {
+                  widget.isGrid = !widget.isGrid;
+                });
+              },
+            ),
+
           ),
         ),
       ),
