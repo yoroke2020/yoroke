@@ -60,9 +60,8 @@ class Board extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: YrkAppBar(
-          appBarType: AppBarType.normal,
+          type: YrkAppBarType.accountCircleAll,
           onPushNavigator: onPushNavigator,
-          context: context,
         ),
         body: ListView(
           children: <Widget>[

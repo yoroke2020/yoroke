@@ -16,8 +16,7 @@ class _SignInDialogState extends State<SignInDialog> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: YrkAppBar(
-        appBarType: AppBarType.back,
-        context: context,
+        type: YrkAppBarType.arrowBackOnly,
       ),
       body: Container(
         padding: const EdgeInsets.all(24),

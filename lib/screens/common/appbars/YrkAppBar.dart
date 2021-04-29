@@ -4,59 +4,79 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkIconButton.dart';
 
-enum AppBarType { normal, back, searchNoti }
+import '../YrkTextStyle.dart';
+
+enum YrkAppBarType {
+  accountCircleAll,
+  arrowBackAll,
+  arrowBackOnly,
+  TextSearchNotification
+}
 
 class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final ValueChanged<YrkData>? onPushNavigator;
-  final String? label;
-
-  final AppBarType appBarType;
-
-  var context;
-
   YrkAppBar({
     Key? key,
     this.onPushNavigator,
-    this.label,
-    this.appBarType = AppBarType.normal,
-    this.context,
+    this.label = "",
+    this.type = YrkAppBarType.accountCircleAll,
+    this.isStatusBar = true
   }) : super(
           key: key,
         );
 
-  Widget? getLeading() {
-    switch (appBarType) {
-      case AppBarType.normal:
+  final ValueChanged<YrkData>? onPushNavigator;
+  final String? label;
+  final YrkAppBarType type;
+  final bool isStatusBar;
+
+  Widget getLeading(BuildContext context) {
+    switch (type) {
+      case YrkAppBarType.accountCircleAll:
         return YrkIconButton(
-          iconFile: "assets/icons/account_circle_default_36_px.svg",
-          iconSize: 32,
-          onPressed: () {},
+          icon: "assets/icons/account_circle_default_36_px.svg",
+          width: 32.0,
+          height: 32.0,
+          padding: EdgeInsets.all(0),
+          onTap: () {},
         );
-      case AppBarType.back:
+      case YrkAppBarType.arrowBackAll:
+      case YrkAppBarType.arrowBackOnly:
         return YrkIconButton(
-          iconFile: "assets/icons/icon_arrow_back_24_px.svg",
-          iconSize: 32,
-          onPressed: () => Navigator.of(context).pop(),
+          icon: "assets/icons/icon_arrow_back_24_px.svg",
+          width: 24.0,
+          height: 24.0,
+          onTap: Navigator.of(context).pop,
         );
       default:
-        break;
+        return Container();
     }
   }
 
-  List<Widget> getActions() {
+  get getTitle {
+    if (label != "")
+      return Text(label!,
+          style:
+              const YrkTextStyle(fontWeight: FontWeight.w700, fontSize: 22.0),
+          textAlign: TextAlign.left);
+    else
+      return Spacer();
+  }
+
+  get getActions {
     bool searchButton = false;
     bool createButton = false;
-    bool notiButton = false;
+    bool notificationButton = false;
 
-    switch (appBarType) {
-      case AppBarType.normal:
+    switch (type) {
+      case YrkAppBarType.accountCircleAll:
+      case YrkAppBarType.arrowBackAll:
         searchButton = true;
         createButton = true;
-        notiButton = true;
+        notificationButton = true;
         break;
-      case AppBarType.searchNoti:
+      case YrkAppBarType.TextSearchNotification:
         searchButton = true;
-        notiButton = true;
+        notificationButton = true;
         break;
       default:
         break;
@@ -66,62 +86,51 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
     if (searchButton)
       ret.add(
         YrkIconButton(
-          iconFile: "assets/icons/icon_search_24_px.svg",
-          iconSize: 32,
-          onPressed: () {},
+          icon: "assets/icons/icon_search_24_px.svg",
+          onTap: () {},
         ),
       );
     if (createButton)
       ret.add(YrkIconButton(
-        iconFile: "assets/icons/icon_create_24_px.svg",
-        iconSize: 32,
-        onPressed: () {},
+        icon: "assets/icons/icon_create_24_px.svg",
+        onTap: () {},
         // color: Colors.yellow,
       ));
-    if (notiButton)
+    if (notificationButton)
       ret.add(
         YrkIconButton(
-          iconFile: "assets/icons/icon_notifications_none_24_px.svg",
-          iconSize: 32,
-          onPressed: () {
+          icon: "assets/icons/icon_notifications_none_24_px.svg",
+          padding: EdgeInsets.only(left: 4.0),
+          onTap: () {
             onPushNavigator!(new YrkData(SubPageItem.notice));
           },
         ),
       );
-    return ret;
+    return Wrap(children: ret);
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(48.0);
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: const Color(0xffffffff),
-      elevation: 0,
-      leading: getLeading(),
-      actions: getActions(),
-      // [
-      // YrkIconButton(
-      //   iconFile: "assets/icons/icon_search_24_px.svg",
-      //   iconSize: 32,
-      //   onPressed: () {},
-      // ),
-      // YrkIconButton(
-      //   iconFile: "assets/icons/icon_create_24_px.svg",
-      //   iconSize: 32,
-      //   onPressed: () {},
-      //   // color: Colors.yellow,
-      // ),
-      // YrkIconButton(
-      //   iconFile: "assets/icons/icon_notifications_none_24_px.svg",
-      //   iconSize: 32,
-      //   onPressed: () {
-      //     onPushNavigator!(new YrkData(SubPageItem.notice));
-      //   },
-      // ),
-      // ],
-      title: Text(label ?? ""),
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+    return PreferredSize(
+      preferredSize: preferredSize,
+      child: Container(
+          height: isStatusBar ? 48.0 + statusBarHeight : 48.0,
+          padding: isStatusBar ? EdgeInsets.only(top: statusBarHeight) : EdgeInsets.all(0),
+          margin: EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              getLeading(context),
+              getTitle,
+              Spacer(),
+              getActions,
+            ],
+          )),
     );
   }
 }

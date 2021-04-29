@@ -106,9 +106,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: YrkAppBar(
-          appBarType: AppBarType.normal,
+          type: YrkAppBarType.accountCircleAll,
           onPushNavigator: widget.onPushNavigator,
-          context: context,
         ),
         body: ListView(children: <Widget>[
           YrkListView(

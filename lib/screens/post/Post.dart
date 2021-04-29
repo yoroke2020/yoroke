@@ -21,8 +21,7 @@ class _PostState extends State<Post> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: YrkAppBar(
-        appBarType: AppBarType.back,
-        context: context,
+        type: YrkAppBarType.arrowBackOnly,
       ),
       body: ListView(
         children: <Widget>[

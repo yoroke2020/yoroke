@@ -4,26 +4,24 @@ import 'package:flutter_svg/svg.dart';
 class YrkIconButton extends InkWell {
   YrkIconButton({
     Key? key,
-    required String iconFile,
-    required Function() onPressed,
-    double iconSize = double.infinity,
-    EdgeInsets padding = EdgeInsets.zero,
+    required String icon,
+    required Function() onTap,
+    double width = 24.0,
+    double height = 24.0,
+    EdgeInsets padding = const EdgeInsets.symmetric(horizontal: 4.0),
     Color? color,
   }) : super(
             key: key,
-            onTap: onPressed,
             child: Center(
-              child: Container(
+              child: Padding(
                 padding: padding,
-                width: iconSize,
-                height: iconSize,
-                decoration: BoxDecoration(color: Colors.white),
                 child: SvgPicture.asset(
-                  iconFile,
-                  width: iconSize,
-                  height: iconSize,
+                  icon,
+                  width: width,
+                  height: height,
                   color: color,
                 ),
               ),
-            ));
+            ),
+            onTap: onTap);
 }
