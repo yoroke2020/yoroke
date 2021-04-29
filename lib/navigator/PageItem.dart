@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/screens/TestPage.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/home/HomeHistory.dart';
 import 'package:yoroke/screens/info/InfoShareDetail.dart';
 import 'package:yoroke/screens/notice/Notice.dart';
 import 'package:yoroke/screens/post/Post.dart';
+import 'package:yoroke/screens/post/PostCreate.dart';
 import 'package:yoroke/screens/search/Search.dart';
 
 enum RootPageItem { home, board, find, info }
