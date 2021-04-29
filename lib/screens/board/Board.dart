@@ -71,7 +71,6 @@ class Board extends StatelessWidget {
               padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
               scrollable: true,
               scrollDirection: Axis.horizontal,
-              clickable: false,
               item: _buildBoardReviewCardList(),
               itemCount: bardCardListItemCount,
             ),
