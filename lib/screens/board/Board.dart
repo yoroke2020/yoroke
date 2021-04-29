@@ -83,13 +83,18 @@ class Board extends StatelessWidget {
               nextSubPageItem: SubPageItem.boardQna,
             ),
             YrkPageView(
-              page: _buildBoardYrkListView(SubPageItem.boardQna),
+              page: _buildBoardYrkListView(SubPageItem.post),
               controller: qnaPageController,
               isIndicatorEnabled: true,
             ),
-            YrkTabHeaderView(title: "구인구직"),
+            YrkTabHeaderView(
+              title: "구인구직",
+              clickable: true,
+              onPushNavigator: onPushNavigator,
+              nextSubPageItem: SubPageItem.boardJobFinding,
+            ),
             YrkPageView(
-                page: _buildBoardYrkListView(SubPageItem.boardJobFinding),
+                page: _buildBoardYrkListView(SubPageItem.post),
                 controller: findJobPageController,
                 isIndicatorEnabled: true)
           ],

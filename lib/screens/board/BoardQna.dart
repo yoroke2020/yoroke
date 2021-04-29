@@ -7,6 +7,7 @@ import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
+import 'package:yoroke/screens/common/YrkCustomScrollView.dart';
 
 import 'BoardQnaCardListItem.dart';
 
@@ -59,60 +60,63 @@ class _BoardQnaState extends State<BoardQna> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return YrkCustomScrollView(
+      controller: _scrollController,
+      appBarHeight: 48.0,
+      isFadedTitle: true,
+      fadedTitle: "고민/질문",
       appBar: YrkAppBar(
         type: YrkAppBarType.arrowBackAll,
+        onPushNavigator: widget.onPushNavigator!,
+        isStatusBar: false,
       ),
-      body: SingleChildScrollView(
-        controller: _scrollController,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              width: double.maxFinite,
-              height: 48.0,
-              margin: EdgeInsets.symmetric(horizontal: 16.0),
-              color: const Color(0xffffffff),
-              child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text("고민/질문",
-                      style: const YrkTextStyle(
-                          fontWeight: FontWeight.w700, fontSize: 22.0))),
-            ),
-            Container(
-              width: double.maxFinite,
-              height: 32.0,
-              margin: EdgeInsets.symmetric(horizontal: 16.0),
-              color: const Color(0xffffffff),
-              child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: // 고민/질문
-                      Text(
-                    "최신 인기글",
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            width: double.maxFinite,
+            height: 48.0,
+            margin: EdgeInsets.symmetric(horizontal: 16.0),
+            color: const Color(0xffffffff),
+            child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text("고민/질문",
                     style: const YrkTextStyle(
-                      color: const Color(0x99000000),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  )),
-            ),
-            YrkListView(
-                height: 232.0,
-                padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
-                scrollable: true,
-                scrollDirection: Axis.horizontal,
-                item: _buildBoardQnaCardList,
-                itemCount: _boardQnaCardListItemCount),
-            YrkListView(
-              item: _boardQnaItemList,
-              itemCount: _boardQnaItemListCount,
-              isIndicator: true,
-              height: 65.0 * _boardQnaItemListCount,
-            )
-          ],
-        ),
+                        fontWeight: FontWeight.w700, fontSize: 22.0))),
+          ),
+          Container(
+            width: double.maxFinite,
+            height: 32.0,
+            margin: EdgeInsets.symmetric(horizontal: 16.0),
+            color: const Color(0xffffffff),
+            child: Align(
+                alignment: Alignment.centerLeft,
+                child: // 고민/질문
+                    Text(
+                  "최신 인기글",
+                  style: const YrkTextStyle(
+                    color: const Color(0x99000000),
+                    fontWeight: FontWeight.w500,
+                  ),
+                )),
+          ),
+          YrkListView(
+              height: 232.0,
+              padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
+              scrollable: true,
+              scrollDirection: Axis.horizontal,
+              item: _buildBoardQnaCardList,
+              itemCount: _boardQnaCardListItemCount),
+          YrkListView(
+            item: _boardQnaItemList,
+            itemCount: _boardQnaItemListCount,
+            isIndicator: true,
+            height: 65.0 * _boardQnaItemListCount,
+          )
+        ],
       ),
-      bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.board),
+      bottomNavigatorBar: BottomBarNavigation.getInstance(RootPageItem.board),
     );
   }
 

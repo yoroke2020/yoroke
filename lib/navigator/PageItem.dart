@@ -10,6 +10,7 @@ import 'package:yoroke/screens/post/Post.dart';
 import 'package:yoroke/screens/post/PostCreate.dart';
 import 'package:yoroke/screens/search/Search.dart';
 import 'package:yoroke/screens/board/BoardQna.dart';
+import 'package:yoroke/screens/board/BoardJobFinding.dart';
 
 enum RootPageItem { home, board, find, info }
 
@@ -55,9 +56,11 @@ extension SubPageItemExt on SubPageItem {
       case SubPageItem.boardReview:
         return BoardReview(data: data, onPushNavigator: onPushNavigator);
       case SubPageItem.boardQna:
-        return BoardQna(onPushNavigator: onPushNavigator,);
+        return BoardQna(
+          onPushNavigator: onPushNavigator,
+        );
       case SubPageItem.boardJobFinding:
-        return Post(data: data);
+        return BoardJobFinding(onPushNavigator: onPushNavigator);
       case SubPageItem.infoShareDetail:
         return InfoShareDetail(data: data, onPushNavigator: onPushNavigator);
       case SubPageItem.postCreate:
