@@ -37,8 +37,7 @@ class _HomeHistoryState extends State<HomeHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: YrkAppBar(
-          appBarType: AppBarType.back,
-          context: context,
+          type: YrkAppBarType.arrowBackOnly,
         ),
         body: (ListView(children: <Widget>[
           YrkListView(
