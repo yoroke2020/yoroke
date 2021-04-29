@@ -67,6 +67,7 @@ class _PostCreateState extends State<PostCreate> {
   }
 
   void _getBoardModalBottomSheet(BuildContext context) {
+    FocusScope.of(context).unfocus();
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
