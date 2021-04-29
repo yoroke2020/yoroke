@@ -11,7 +11,7 @@ class YrkPageListItem extends StatelessWidget {
     required this.pageIndex,
     required this.listIndex,
     required this.subPageItem,
-    this.onPushNavigator,
+    required this.onPushNavigator,
   });
 
   final int pageIndex;
@@ -41,7 +41,7 @@ class YrkPageListItem extends StatelessWidget {
         break;
       case SubPageItem.boardReview:
         break;
-      case SubPageItem.boardReviewFeed:
+      case SubPageItem.post:
         isRating = true;
         isBestIcon = true;
         break;

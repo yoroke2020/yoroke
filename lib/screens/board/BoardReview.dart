@@ -26,7 +26,7 @@ class BoardReview extends StatefulWidget {
 class _BoardReviewState extends State<BoardReview>
     with TickerProviderStateMixin {
   static final int loadPageCount = 20;
-  static final int bardCardListItemCount = 12;
+  static final int boardCardListItemCount = 12;
   static final int tabLength = 2;
 
   late var _reviewFeedList;
@@ -97,7 +97,7 @@ class _BoardReviewState extends State<BoardReview>
       _reviewFeedList[pageIndex].add(new YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
-        subPageItem: SubPageItem.boardReviewFeed,
+        subPageItem: SubPageItem.post,
         onPushNavigator: widget.onPushNavigator,
       ));
     }
@@ -105,7 +105,7 @@ class _BoardReviewState extends State<BoardReview>
 
   List<Widget> _buildBoardReviewCardList() {
     List<Widget> list = <Widget>[];
-    for (int i = 0; i < bardCardListItemCount; i++) {
+    for (int i = 0; i < boardCardListItemCount; i++) {
       list.add(BoardCardListItem(
         width: 64.0,
         height: 76.0,
@@ -187,7 +187,7 @@ class _BoardReviewState extends State<BoardReview>
                     scrollable: true,
                     scrollDirection: Axis.horizontal,
                     item: _buildBoardReviewCardList(),
-                    itemCount: bardCardListItemCount,
+                    itemCount: boardCardListItemCount,
                   ),
                 ],
               ),

@@ -65,7 +65,9 @@ class Board extends StatelessWidget {
         ),
         body: ListView(
           children: <Widget>[
-            YrkTabHeaderView(title: "후기"),
+            YrkTabHeaderView(
+              title: "후기",
+            ),
             YrkListView(
               height: 100.0,
               padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
@@ -74,7 +76,12 @@ class Board extends StatelessWidget {
               item: _buildBoardReviewCardList(),
               itemCount: bardCardListItemCount,
             ),
-            YrkTabHeaderView(title: "고민/질문"),
+            YrkTabHeaderView(
+              title: "고민/질문",
+              clickable: true,
+              onPushNavigator: onPushNavigator,
+              nextSubPageItem: SubPageItem.boardQna,
+            ),
             YrkPageView(
               page: _buildBoardYrkListView(SubPageItem.boardQna),
               controller: qnaPageController,
