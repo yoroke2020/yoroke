@@ -4,6 +4,7 @@ import 'package:yoroke/screens/LogIn/SignInDone.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkTextField.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
+import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
 class SignInNickname extends StatefulWidget {
   @override
@@ -15,13 +16,8 @@ class _SignInNicknameState extends State<SignInNickname> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        leading: new IconButton(
-          icon: new Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
+      appBar: YrkAppBar(
+        type: YrkAppBarType.arrowBackOnly,
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,

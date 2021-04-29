@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="icon_share_16px" width="16" height="16" viewBox="0 0 16 16">
+    <defs>
+        <style>
+            .cls-2{fill:#b2b2b2}
+        </style>
+    </defs>
+    <g id="save_alt-24px">
+        <path id="패스_84" fill="none" d="M0 0h16v16H0z"/>
+    </g>
+    <g id="그룹_675" transform="translate(-161 -334)">
+        <g id="그룹_674">
+            <path id="패스_216" d="M174 348h-10v-6a.5.5 0 0 1 1 0v5h8v-5a.5.5 0 0 1 1 0z" class="cls-2"/>
+        </g>
+        <path id="패스_217" d="M172.354 339.146l-3-3a.486.486 0 0 0-.163-.109.5.5 0 0 0-.382 0 .486.486 0 0 0-.163.109l-3 3a.5.5 0 0 0 .708.707l2.146-2.147v6.794a.5.5 0 0 0 1 0v-6.793l2.146 2.147a.5.5 0 0 0 .708-.707z" class="cls-2"/>
+    </g>
+</svg>

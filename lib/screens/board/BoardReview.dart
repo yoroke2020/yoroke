@@ -7,7 +7,7 @@ import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkScrollFadedWidget.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
-import 'package:yoroke/screens/common/appbars/AppBarNormalArrowBack.dart';
+import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'BoardCardListItem.dart';
@@ -145,8 +145,10 @@ class _BoardReviewState extends State<BoardReview>
               preferredSize: const Size.fromHeight(48.0),
               child: Stack(
                 children: <Widget>[
-                  AppBarNormalArrowBack(
+                  YrkAppBar(
+                    type: YrkAppBarType.arrowBackAll,
                     onPushNavigator: widget.onPushNavigator!,
+                    isStatusBar: false,
                   ),
                   YrkScrollFadedWidget(
                       scrollController: _scrollController,

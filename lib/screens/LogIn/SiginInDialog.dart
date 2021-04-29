@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
+import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/login/SingInNickname.dart';
 
 class SignInDialog extends StatefulWidget {
@@ -14,13 +15,8 @@ class _SignInDialogState extends State<SignInDialog> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        leading: new IconButton(
-          icon: new Icon(Icons.arrow_back),
-          onPressed: null,
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
+      appBar: YrkAppBar(
+        type: YrkAppBarType.arrowBackOnly,
       ),
       body: Container(
         padding: const EdgeInsets.all(24),

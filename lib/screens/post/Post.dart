@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
-import 'package:yoroke/screens/common/appbars/AppBarArrowBack.dart';
+import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarComment.dart';
 
 import 'PostComment.dart';
@@ -20,7 +20,9 @@ class _PostState extends State<Post> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarArrowBack(),
+      appBar: YrkAppBar(
+        type: YrkAppBarType.arrowBackOnly,
+      ),
       body: ListView(
         children: <Widget>[
           _header(),

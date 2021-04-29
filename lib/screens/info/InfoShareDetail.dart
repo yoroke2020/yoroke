@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
-import 'package:yoroke/screens/common/appbars/AppBarImage.dart';
+import 'package:yoroke/screens/common/appbars/YrkAppBarImage.dart';
 import 'package:yoroke/screens/info/InfoShareCardListItem.dart';
 
 // ignore: must_be_immutable
@@ -73,7 +73,7 @@ class _InfoShareDetailState extends State<InfoShareDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarImage(
+      appBar: YrkAppBarImage(
         titleText: widget.data!.str0!,
         date: widget.data!.str1!,
         height: appbarHeight,
