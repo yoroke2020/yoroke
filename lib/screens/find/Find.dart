@@ -1,6 +1,15 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/navigator/PageItem.dart';
+
+import '../TestPage.dart';
 
 class Find extends StatefulWidget {
+  Find({required this.onPushNavigator});
+
+  final ValueChanged<YrkData>? onPushNavigator;
+
   @override
   _FindState createState() => _FindState();
 }
@@ -8,8 +17,11 @@ class Find extends StatefulWidget {
 class _FindState extends State<Find> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('find page'),
-    );
+    return Scaffold(
+        body: Text('find page'),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () =>
+              widget.onPushNavigator!(new YrkData(SubPageItem.testPage)),
+        ));
   }
 }

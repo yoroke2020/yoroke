@@ -1,8 +1,8 @@
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/post/PostCreate.dart';
 
 class YrkData {
-  YrkData(
-    this.nextPageItem, {
+  YrkData(this.nextPageItem, {
     this.str0,
     this.str1,
     this.str2,
@@ -18,13 +18,14 @@ class YrkData {
     this.d2,
     this.d3,
     this.d4,
+    this.postCreateType
   });
 
-  final SubPageItem? nextPageItem;  //SubItem
+  final SubPageItem? nextPageItem; //SubItem
 
   //TODO: 추후 API 관련 parameter로 변경
   String?
-      str0; // String to be printed whether the correct item is selected/tapped
+  str0; // String to be printed whether the correct item is selected/tapped
   String? str1;
   String? str2;
   String? str3;
@@ -39,4 +40,6 @@ class YrkData {
   double? d2;
   double? d3;
   double? d4;
+
+  PostCreateType? postCreateType;
 }

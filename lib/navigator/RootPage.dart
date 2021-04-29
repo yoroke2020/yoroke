@@ -19,7 +19,7 @@ class RootPage extends StatelessWidget {
     final List<Widget> children = [
       Home(onPushNavigator: onPushNavigator),
       Board(onPushNavigator: onPushNavigator),
-      Find(),
+      Find(onPushNavigator: onPushNavigator),
       Info(onPushNavigator: onPushNavigator)
     ];
     return Scaffold(

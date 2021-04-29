@@ -1,20 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/screens/common/YrkButton.dart';
-import 'package:yoroke/screens/common/YrkModalBottomSheetListItem.dart';
-import 'package:yoroke/screens/common/YrkModelBottomSheet.dart';
+import 'package:yoroke/screens/common/mbs/YrkModelBottomSheet.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
-class PostCommentListItem extends StatefulWidget {
-  PostCommentListItem({required this.index});
+class PostComment extends StatefulWidget {
+  PostComment({required this.index});
 
   final int index;
 
   @override
-  _PostCommentListItemState createState() => _PostCommentListItemState();
+  _PostCommentState createState() => _PostCommentState();
 }
 
-class _PostCommentListItemState extends State<PostCommentListItem> {
+class _PostCommentState extends State<PostComment> {
   int likeCount = 0;
   int dislikeCount = 0;
 
@@ -78,7 +76,7 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
                           color: const Color(0x4d000000), size: 24.0),
                       onPressed: () {
                         print("more button clicked");
-                        _modalBottomSheet(context);
+                        _getModalBottomSheet(context);
                       },
                     )
                   ],
@@ -178,19 +176,7 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
     //TODO: TextField에 @사용자ID가 붙게 하면서 Keyboard가 나타나게 해야함 (ValueChanged 같은 callback 필요)
   }
 
-  void _modalBottomSheet(context) {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return YrkModelBottomSheet(
-            listItem: _modalBottomSheetList(),
-            listItemCount: 7,
-            listHeight: 356.0,
-          );
-        });
-  }
-
-  List<Widget> _modalBottomSheetList() {
+  void _getModalBottomSheet(context) {
     final List<String> imageAssetList = [
       "assets/icons/icon_clear_24_px.png",
       "assets/icons/icon_clear_24_px.png",
@@ -209,27 +195,19 @@ class _PostCommentListItemState extends State<PostCommentListItem> {
       "신고하기"
     ];
 
-    List<Widget> list = [];
-    for (int i = 0; i < 6; i++) {
-      list.add(new YrkModalBottomSheetListItem(
-        imageAsset: imageAssetList[i],
-        title: titleList[i],
-        isBorder: i < 5 ? true : false,
-      ));
-    }
-
-    list.add(Container(
-        width: double.maxFinite,
-        height: 48.0,
-        margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 4.0),
-        child: YrkButton(
-          width: 328.0,
-          height: 48.0,
-          buttonType: ButtonType.chip,
-          label: "닫기",
-          onPressed: () => Navigator.of(context).pop(),
-        )));
-
-    return list;
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return YrkModelBottomSheet(
+            type: YrkModelBottomSheetType.post,
+            labelList: titleList,
+            imageList: imageAssetList,
+            listHeight: 356.0,
+            onTap: (index) {
+              print(index);
+              Navigator.of(context).pop();
+            },
+          );
+        });
   }
 }
