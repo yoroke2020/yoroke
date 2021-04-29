@@ -93,7 +93,9 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
     if (createButton)
       ret.add(YrkIconButton(
         icon: "assets/icons/icon_create_24_px.svg",
-        onTap: () {},
+        onTap: () {
+          onPushNavigator!(new YrkData(SubPageItem.postCreate));
+        },
         // color: Colors.yellow,
       ));
     if (notificationButton)
