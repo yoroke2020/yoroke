@@ -16,7 +16,7 @@ class BoardReview extends StatefulWidget {
   BoardReview({Key? key, required this.data, required this.onPushNavigator})
       : super(key: key);
 
-  YrkData? data;
+  final YrkData? data;
   final ValueChanged<YrkData>? onPushNavigator;
 
   @override
