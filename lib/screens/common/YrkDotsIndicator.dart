@@ -16,10 +16,10 @@ class YrkDotsIndicator extends AnimatedWidget {
   final int itemCount;
   final ValueChanged<int>? onPageSelected;
 
-  Color selectedIndicatorColor;
-  Color unselectedIndicatorColor;
-  Color selectedBoarderColor;
-  Color unselectedBoarderColor;
+  final Color selectedIndicatorColor;
+  final Color unselectedIndicatorColor;
+  final Color selectedBoarderColor;
+  final Color unselectedBoarderColor;
 
   @override
   Widget build(BuildContext context) {

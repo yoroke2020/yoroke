@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 
 import 'package:yoroke/navigator/PageItem.dart';
 
+// ignore: must_be_immutable
 class BottomBarNavigation extends StatefulWidget {
   RootPageItem? _curRootPageItem;
   late ValueChanged<RootPageItem> _onSelectRootPageItem;

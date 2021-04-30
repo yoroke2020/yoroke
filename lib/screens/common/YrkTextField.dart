@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/screens/common/YrkButton.dart';
 
 import 'YrkTextStyle.dart';
 

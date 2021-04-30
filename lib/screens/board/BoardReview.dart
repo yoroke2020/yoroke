@@ -4,11 +4,11 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageListItem.dart';
-import 'package:yoroke/screens/common/YrkScrollFadedWidget.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
+import 'package:yoroke/screens/common/YrkCustomScrollView.dart';
 
 import 'BoardCardListItem.dart';
 
@@ -16,7 +16,7 @@ class BoardReview extends StatefulWidget {
   BoardReview({Key? key, required this.data, required this.onPushNavigator})
       : super(key: key);
 
-  YrkData? data;
+  final YrkData? data;
   final ValueChanged<YrkData>? onPushNavigator;
 
   @override
@@ -26,16 +26,30 @@ class BoardReview extends StatefulWidget {
 class _BoardReviewState extends State<BoardReview>
     with TickerProviderStateMixin {
   static final int loadPageCount = 20;
-  static final int bardCardListItemCount = 12;
+  static final int boardCardListItemCount = 12;
   static final int tabLength = 2;
 
-  late var _reviewFeedList;
+  late List<List<Widget>> _reviewFeedList;
   late List<int> _reviewFeedListItemCount;
   late int _curTabIndex;
   late int _curCardIndex;
 
   late final ScrollController _scrollController;
   late final TabController _tabController;
+
+  get _getBoardReviewCardList {
+    List<Widget> list = <Widget>[];
+    for (int i = 0; i < boardCardListItemCount; i++) {
+      list.add(BoardCardListItem(
+        width: 64.0,
+        height: 76.0,
+        index: i,
+        isBorder: i == _curCardIndex ? true : false,
+        onPushNavigator: (data) => _onPushChangeReviewCard(data),
+      ));
+    }
+    return list;
+  }
 
   @override
   void initState() {
@@ -74,6 +88,74 @@ class _BoardReviewState extends State<BoardReview>
     super.dispose();
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return YrkCustomScrollView(
+      controller: _scrollController,
+      appBarHeight: 48.0,
+      expandedHeight: 236.0,
+      isFadedTitle: true,
+      fadedTitle: "요양병원 후기",
+      appBar: YrkAppBar(
+        type: YrkAppBarType.arrowBackAll,
+        onPushNavigator: widget.onPushNavigator!,
+        isStatusBar: false,
+      ),
+      flexibleSpaceHeight: 196.0,
+      flexibleSpace: Container(
+            color: const Color(0xffffffff),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  width: double.maxFinite,
+                  height: 48.0 + MediaQuery.of(context).padding.top,
+                ),
+                Container(
+                    width: double.maxFinite,
+                    height: 48.0,
+                    margin: EdgeInsets.only(left: 16.0),
+                    child: Text("후기",
+                        style: const YrkTextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 22.0),
+                        textAlign: TextAlign.left)),
+                YrkListView(
+                  height: 100.0,
+                  padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
+                  scrollable: true,
+                  scrollDirection: Axis.horizontal,
+                  item: _getBoardReviewCardList,
+                  itemCount: boardCardListItemCount,
+                ),
+              ],
+            ),
+          ),
+      bottomHeight: 40.0,
+      bottom: YrkTabBar(
+              textList: ["최신글", "인기글"],
+              tabWidth: 72,
+              height: 40.0,
+              controller: _tabController),
+      body: YrkTabView(
+        height: 65.0 * _reviewFeedListItemCount[_curTabIndex],
+        controller: _tabController,
+        swipeable: true,
+        viewList: [
+          YrkListView(
+              pageIndex: 0,
+              itemCount: _reviewFeedListItemCount[0],
+              isIndicator: true,
+              item: _reviewFeedList[0]),
+          YrkListView(
+              pageIndex: 1,
+              itemCount: _reviewFeedListItemCount[1],
+              isIndicator: true,
+              item: _reviewFeedList[1]),
+        ],
+      ),
+      bottomNavigatorBar: BottomBarNavigation.getInstance(RootPageItem.board),
+    );
+  }
+
   void _initBoardReviewState() {
     for (int i = 0; i < tabLength; i++) {
       _reviewFeedList[i].removeRange(
@@ -97,24 +179,10 @@ class _BoardReviewState extends State<BoardReview>
       _reviewFeedList[pageIndex].add(new YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
-        subPageItem: SubPageItem.boardReviewFeed,
+        subPageItem: SubPageItem.post,
         onPushNavigator: widget.onPushNavigator,
       ));
     }
-  }
-
-  List<Widget> _buildBoardReviewCardList() {
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < bardCardListItemCount; i++) {
-      list.add(BoardCardListItem(
-        width: 64.0,
-        height: 76.0,
-        index: i,
-        isBorder: i == _curCardIndex ? true : false,
-        onPushNavigator: (data) => _onPushChangeReviewCard(data),
-      ));
-    }
-    return list;
   }
 
   void _onPushChangeReviewCard(YrkData data) {
@@ -124,103 +192,5 @@ class _BoardReviewState extends State<BoardReview>
       _initBoardReviewState();
       _curCardIndex = data.i1!;
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBarArrowBack(),
-      body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
-        SliverAppBar(
-          automaticallyImplyLeading: false,
-          snap: false,
-          pinned: true,
-          floating: false,
-          centerTitle: false,
-          titleSpacing: 0.0,
-          toolbarHeight: 48.0,
-          expandedHeight: 236.0,
-          backgroundColor: const Color(0xffffffff),
-          title: PreferredSize(
-              preferredSize: const Size.fromHeight(48.0),
-              child: Stack(
-                children: <Widget>[
-                  YrkAppBar(
-                    type: YrkAppBarType.arrowBackAll,
-                    onPushNavigator: widget.onPushNavigator!,
-                    isStatusBar: false,
-                  ),
-                  YrkScrollFadedWidget(
-                      scrollController: _scrollController,
-                      child: Container(
-                          alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.only(left: 48.0),
-                          height: 48.0,
-                          child: Text("요양병원 후기",
-                              style: const YrkTextStyle(
-                                  fontWeight: FontWeight.w700),
-                              textAlign: TextAlign.left)))
-                ],
-              )),
-          flexibleSpace: FlexibleSpaceBar(
-              background: PreferredSize(
-            preferredSize: Size.fromHeight(196.0),
-            child: Container(
-              color: const Color(0xffffffff),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    width: double.maxFinite,
-                    height: 48.0 + MediaQuery.of(context).padding.top,
-                  ),
-                  Container(
-                      width: double.maxFinite,
-                      height: 48.0,
-                      margin: EdgeInsets.only(left: 16.0),
-                      child: Text("후기",
-                          style: const YrkTextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 22.0),
-                          textAlign: TextAlign.left)),
-                  YrkListView(
-                    height: 100.0,
-                    padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
-                    scrollable: true,
-                    scrollDirection: Axis.horizontal,
-                    item: _buildBoardReviewCardList(),
-                    itemCount: bardCardListItemCount,
-                  ),
-                ],
-              ),
-            ),
-          )),
-          bottom: PreferredSize(
-              preferredSize: Size.fromHeight(40.0),
-              child: YrkTabBar(
-                  textList: ["최신글", "인기글"],
-                  tabWidth: 72,
-                  height: 40.0,
-                  controller: _tabController)),
-        ),
-        SliverToBoxAdapter(
-            child: YrkTabView(
-          height: 65.0 * _reviewFeedListItemCount[_curTabIndex],
-          controller: _tabController,
-          swipeable: true,
-          viewList: [
-            YrkListView(
-                pageIndex: 0,
-                itemCount: _reviewFeedListItemCount[0],
-                isIndicator: true,
-                item: _reviewFeedList[0]),
-            YrkListView(
-                pageIndex: 1,
-                itemCount: _reviewFeedListItemCount[1],
-                isIndicator: true,
-                item: _reviewFeedList[1]),
-          ],
-        ))
-      ]),
-      bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.board),
-    );
   }
 }

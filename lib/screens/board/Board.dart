@@ -20,7 +20,7 @@ class Board extends StatelessWidget {
   final qnaPageController = PageController();
   final findJobPageController = PageController();
 
-  List<Widget> _buildBoardReviewCardList() {
+  get _getBoardReviewCardList {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < bardCardListItemCount; i++) {
       list.add(BoardCardListItem(
@@ -65,25 +65,39 @@ class Board extends StatelessWidget {
         ),
         body: ListView(
           children: <Widget>[
-            YrkTabHeaderView(title: "후기"),
+            YrkTabHeaderView(
+              title: "후기",
+              clickable: true,
+              onPushNavigator: onPushNavigator,
+              nextSubPageItem: SubPageItem.boardReview,
+            ),
             YrkListView(
               height: 100.0,
               padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
               scrollable: true,
               scrollDirection: Axis.horizontal,
-              clickable: false,
-              item: _buildBoardReviewCardList(),
+              item: _getBoardReviewCardList,
               itemCount: bardCardListItemCount,
             ),
-            YrkTabHeaderView(title: "고민/질문"),
+            YrkTabHeaderView(
+              title: "고민/질문",
+              clickable: true,
+              onPushNavigator: onPushNavigator,
+              nextSubPageItem: SubPageItem.boardQna,
+            ),
             YrkPageView(
-              page: _buildBoardYrkListView(SubPageItem.boardQna),
+              page: _buildBoardYrkListView(SubPageItem.post),
               controller: qnaPageController,
               isIndicatorEnabled: true,
             ),
-            YrkTabHeaderView(title: "구인구직"),
+            YrkTabHeaderView(
+              title: "구인구직",
+              clickable: true,
+              onPushNavigator: onPushNavigator,
+              nextSubPageItem: SubPageItem.boardJobFinding,
+            ),
             YrkPageView(
-                page: _buildBoardYrkListView(SubPageItem.boardJobFinding),
+                page: _buildBoardYrkListView(SubPageItem.post),
                 controller: findJobPageController,
                 isIndicatorEnabled: true)
           ],
