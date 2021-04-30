@@ -20,7 +20,7 @@ class Board extends StatelessWidget {
   final qnaPageController = PageController();
   final findJobPageController = PageController();
 
-  get _buildBoardReviewCardList {
+  get _getBoardReviewCardList {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < bardCardListItemCount; i++) {
       list.add(BoardCardListItem(
@@ -76,7 +76,7 @@ class Board extends StatelessWidget {
               padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
               scrollable: true,
               scrollDirection: Axis.horizontal,
-              item: _buildBoardReviewCardList,
+              item: _getBoardReviewCardList,
               itemCount: bardCardListItemCount,
             ),
             YrkTabHeaderView(
