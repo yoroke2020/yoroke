@@ -35,6 +35,7 @@ class YrkCustomScrollView extends StatelessWidget {
   final bool? isFadedTitle;
   final String? fadedTitle;
 
+  @override
   Widget build(BuildContext context) {
     bool isAvailable = controller != null ? isFadedTitle! : false;
 

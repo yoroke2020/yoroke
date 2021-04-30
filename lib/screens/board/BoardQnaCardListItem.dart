@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class BoardQnaCardListItem extends StatelessWidget {

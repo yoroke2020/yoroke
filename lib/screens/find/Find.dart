@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 
-import '../TestPage.dart';
-
 class Find extends StatefulWidget {
   Find({required this.onPushNavigator});
 
