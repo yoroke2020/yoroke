@@ -31,7 +31,7 @@ class BoardCardListItem extends StatelessWidget {
             height: height,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Container(
                     width: 48.0,
@@ -47,19 +47,13 @@ class BoardCardListItem extends StatelessWidget {
                                 color: const Color(0xfff5df4d), width: 2)
                             : null),
                   ),
-                  Container(
-                    height: 20.0,
-                    margin: EdgeInsets.only(top: 8.0),
-                    alignment: Alignment.bottomLeft,
-                    child: Center(
-                        child: Text(
+                  Text(
                       testShortString.elementAt(index),
                       style: const YrkTextStyle(
                           color: const Color(0x99000000),
                           fontWeight: FontWeight.w500,
                           fontSize: 14.0),
-                    )),
-                  )
+                    ),
                 ])));
   }
 }
