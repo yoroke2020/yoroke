@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../YrkIconButton.dart';
 import 'YrkMbsImageList.dart';
 import 'YrkMbsRadioButtonList.dart';
 
@@ -28,19 +29,21 @@ class YrkModelBottomSheet extends StatelessWidget {
   Widget getModalWidget(BuildContext context) {
     switch (type) {
       case YrkModelBottomSheetType.post:
-        return YrkMbsImageList(labelList: labelList, imageList: imageList!, onTap: onTap!);
+        return YrkMbsImageList(
+            labelList: labelList, imageList: imageList!, onTap: onTap!);
       case YrkModelBottomSheetType.createPost:
-        return YrkMbsRadioButtonList(title: title!, labelList: labelList, onTap: onTap!);
+        return YrkMbsRadioButtonList(
+            title: title!, labelList: labelList, onTap: onTap!);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: listHeight + 44.0,
         width: double.maxFinite,
         color: const Color(0xFF737373),
         child: new Container(
+          padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0, bottom: 8.0),
             decoration: new BoxDecoration(
                 color: const Color(0xffffffff),
                 borderRadius: BorderRadius.only(
@@ -50,16 +53,10 @@ class YrkModelBottomSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                    height: 44.0,
-                    width: double.maxFinite,
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: IconButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          icon: Image.asset("assets/icons/icon_clear_24_px.png",
-                              width: 14.0, height: 14.0),
-                        ))),
+                 YrkIconButton(
+                          onTap: () => Navigator.of(context).pop(),
+                          icon: "assets/icons/icon_clear_24_px.svg",
+                              width: 24.0, height: 24.0),
                 getModalWidget(context)
               ],
             )));

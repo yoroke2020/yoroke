@@ -5,6 +5,10 @@ import '../YrkButton.dart';
 import '../YrkTextField.dart';
 
 class BottomBarComment extends StatefulWidget {
+  BottomBarComment({this.focusNode});
+
+  final FocusNode? focusNode;
+
   @override
   _BottomBarCommentState createState() => _BottomBarCommentState();
 }
@@ -33,6 +37,7 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                     child: YrkTextField(
                       label: "댓글을 남겨보세요",
                       textFieldType: TextFieldType.comment,
+                      focusNode: widget.focusNode,
                     ),
                   ),
                   InkWell(

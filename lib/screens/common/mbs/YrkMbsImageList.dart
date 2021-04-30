@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../YrkButton.dart';
 import '../YrkTextStyle.dart';
@@ -33,23 +34,25 @@ class YrkMbsImageList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          yrkMbsImageList,
-          Container(
-              width: double.maxFinite,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        yrkMbsImageList,
+        Container(
+            width: double.maxFinite,
+            height: 48.0,
+            child: YrkButton(
+              width: 328.0,
               height: 48.0,
-              margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 4.0),
-              child: YrkButton(
-                width: 328.0,
-                height: 48.0,
-                buttonType: ButtonType.chip,
-                label: "닫기",
-                onPressed: () => Navigator.of(context).pop(),
-              ))
-        ],
-      );
+              buttonType: ButtonType.outline,
+              outlineBackgroundColor: const Color(0xffffffff),
+              btnColor: const Color(0xfff5df4d),
+              label: "닫기",
+              fontColor: const Color(0xe6000000),
+              onPressed: () => Navigator.of(context).pop(),
+            ))
+      ],
+    );
   }
 }
 
@@ -65,17 +68,15 @@ class _YrkMbsImageListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        margin: EdgeInsets.only(left: 16.0, right: 16.0),
         height: 49.0,
         width: double.maxFinite,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(right: 8.0),
-              width: 24.0,
-              height: 24.0,
-              child: Image.asset(imageAsset),
+            Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: SvgPicture.asset(imageAsset, width: 24.0, height: 24.0),
             ),
             Expanded(
                 child: Container(

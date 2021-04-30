@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarComment.dart';
+import 'package:yoroke/screens/common/mbs/YrkModelBottomSheet.dart';
 
 import 'PostComment.dart';
 
@@ -17,347 +20,304 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
+  FocusNode _focusNode = new FocusNode();
+  List<Widget> _commentList = <Widget>[];
+  int _likeCount = 154;
+  int _dislikeCount = 64;
+  bool _isLiked = false;
+  bool _isDisliked = false;
+
+  @override
+  void initState() {
+    _commentList.add(PostComment(focusNode: _focusNode, index: 0));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: YrkAppBar(
-        type: YrkAppBarType.arrowBackOnly,
-      ),
-      body: ListView(
-        children: <Widget>[
-          _header(),
-          _body(),
-          _navigator(),
-          _comments(),
-        ],
-      ),
-      bottomNavigationBar: BottomBarComment(),
-    );
-  }
-
-  String _sampleText(String s) {
-    String str = widget.data!.i1!.toString() + "\n";
-    for (int i = 0; i < 400; i++) {
-      str += s;
-    }
-    return str;
-  }
-
-  Widget _header() {
-    return Column(
-      children: <Widget>[
-        Container(
-            padding: EdgeInsets.only(left: 16, right: 16),
-            width: double.maxFinite,
-            height: 32.0,
-            child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text("요양병원 후기",
-                    style: const TextStyle(
-                        color: const Color(0x99000000),
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "NotoSansCJKkr",
-                        fontStyle: FontStyle.normal,
-                        fontSize: 14.0),
-                    textAlign: TextAlign.left))),
-        Container(
-            padding: EdgeInsets.only(left: 16, right: 16),
-            width: double.maxFinite,
-            height: 32.0,
-            child: Row(
-              children: [
-                Visibility(
-                    visible: true,
-                    child: Container(
-                        margin: EdgeInsets.only(right: 5.0),
-                        width: 27.0,
-                        height: 16.0,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(32)),
-                            border: Border.all(
-                                color: const Color(0xfff5df4d), width: 1),
-                            color: const Color(0xfff5df4d)),
-                        child: Center(
-                            child: Text("BEST",
-                                style: const TextStyle(
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if(!currentFocus.hasPrimaryFocus)
+          currentFocus.unfocus();
+      },
+      child: Scaffold(
+        appBar: YrkAppBar(
+          type: YrkAppBarType.arrowBackOnly,
+        ),
+        body: SingleChildScrollView(
+            child: Column(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom:
+                          BorderSide(color: const Color(0xffe5e5e5), width: 1)),
+                  color: const Color(0xffffffff)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                      width: double.maxFinite,
+                      height: 32.0,
+                      child: Text("요양병원 후기",
+                          style: const YrkTextStyle(
+                              color: const Color(0x99000000)))),
+                  Container(
+                      width: double.maxFinite,
+                      height: 32.0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Visibility(
+                              visible: true,
+                              child: Container(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: YrkButton(
+                                    buttonType: ButtonType.chip,
+                                    width: 27.0,
+                                    height: 16.0,
+                                    label: "BEST",
+                                    fontSize: 8.0,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "OpenSans",
+                                    clickable: false,
+                                    onPressed: () {},
+                                  ))),
+                          Padding(
+                            padding: EdgeInsets.only(left: 4.0),
+                            child: Text("조문기의 요양병원",
+                                style: const YrkTextStyle(
                                     color: const Color(0xe6000000),
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: "NotoSansCJKkr",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 8.0),
-                                textAlign: TextAlign.left)))),
-                Text("조문기의 요양병원",
-                    style: const TextStyle(
-                        color: const Color(0xe6000000),
-                        fontWeight: FontWeight.w700,
-                        fontFamily: "NotoSansCJKkr",
-                        fontStyle: FontStyle.normal,
-                        fontSize: 16.0),
-                    textAlign: TextAlign.left)
-              ],
-            )),
-        Container(
-            padding: const EdgeInsets.only(left: 16.0, right: 16),
-            width: double.maxFinite,
-            height: 65.0,
-            decoration: BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(width: 1, color: const Color(0x14000000))),
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16.0)),
+                          )
+                        ],
+                      )),
+                  Container(
+                      width: double.maxFinite,
+                      height: 65.0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.only(right: 6.0),
+                              child: SvgPicture.asset(
+                                  "assets/icons/account_circle_default_36_px.svg",
+                                  width: 32.0,
+                                  height: 32.0)),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text("유저에용",
+                                  style: const TextStyle(
+                                      color: const Color(0x4d000000))),
+                              Row(children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(right: 8.0),
+                                  child: Text("20.10.22",
+                                      style: const YrkTextStyle(
+                                          color: const Color(0x4d000000))),
+                                ),
+                                Text("17:04",
+                                    style: const YrkTextStyle(
+                                        color: const Color(0x4d000000)))
+                              ]),
+                            ],
+                          )
+                        ],
+                      )),
+                ],
+              ),
             ),
-            child: Row(
-              children: [
-                Container(
-                    margin: EdgeInsets.only(right: 5.0, top: 16, bottom: 16),
-                    width: 32,
-                    height: 32,
-                    child: Center(
-                      child: Image.asset(
-                          "assets/icons/account_circle_default_24_px.png"),
-                    )),
-                Container(
-                    child: Column(
+            Container(
+                // Post Main
+                padding: EdgeInsets.only(
+                    left: 16.0, right: 16.0, top: 16.0, bottom: 48.0),
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom:
+                            BorderSide(color: const Color(0xffe5e5e5), width: 1)),
+                    color: const Color(0xffffffff)),
+                width: double.maxFinite,
+                child: Text(widget.data!.i1!.toString(),
+                    style: const YrkTextStyle(fontSize: 16.0))),
+            Container(
+                // Bottom Like/UnLike Widget Bar
+                width: double.maxFinite,
+                height: 32.0,
+                child: Row(
+                  children: <Widget>[
+                    _getLikeWidgetButton(true),
+                    _getLikeWidgetButton(false),
+                    Expanded(
+                      flex: 1,
+                      child: InkWell(
+                        onTap: _onTapBodyMore,
+                        child: Center(
+                          child: Icon(Icons.more_horiz,
+                              color: const Color(0x4d000000), size: 24.0),
+                        ),
+                      ),
+                    )
+                  ],
+                )),
+            Container(
+              // Post Navigator
+              width: double.maxFinite,
+              height: 97.0,
+              decoration: BoxDecoration(
+                  border: Border.symmetric(
+                      horizontal:
+                          BorderSide(color: const Color(0xffeaeaea), width: 8)),
+                  color: const Color(0xffffffff)),
+              child: Column(children: <Widget>[
+                _getPostNavigatorWidget(false),
+                _getPostNavigatorWidget(true),
+              ]),
+            ),
+            Padding(
+                // Comments
+                padding: EdgeInsets.only(bottom: 68.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                        margin: EdgeInsets.only(top: 12.0),
-                        height: 20.0,
-                        child: Center(
-                          child: Text("유저에용",
-                              style: const TextStyle(
-                                  color: const Color(0x4d000000),
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: "NotoSansCJKkr",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 14.0),
-                              textAlign: TextAlign.left),
+                        width: double.maxFinite,
+                        height: 41.0,
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        decoration: BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(
+                                    color: const Color(0xffe5e5e5), width: 1))),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(right: 4.0),
+                              child: Text("댓글",
+                                  style: const YrkTextStyle(
+                                    color: const Color(0x99000000),
+                                    height: 1.2,
+                                  )),
+                            ),
+                            Text("43",
+                                style: const YrkTextStyle(
+                                  fontFamily: "Helvetica",
+                                  color: const Color(0x99000000),
+                                ))
+                          ],
                         )),
-                    Container(
-                        margin: EdgeInsets.only(bottom: 12),
-                        height: 20.0,
-                        child: Center(
-                          child: Text("20.10.22 17:04",
+                    _commentList.isEmpty
+                        ? Padding(
+                            padding: EdgeInsets.only(top: 48.0),
+                            child: Text(
+                              "등록된 댓글이 없습니다. 댓글을 남겨보세요.",
                               style: const TextStyle(
-                                  color: const Color(0x4d000000),
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: "NotoSansCJKkr",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 14.0),
-                              textAlign: TextAlign.left),
-                        )),
+                                color: const Color(0x99000000),
+                              ),
+                              textAlign: TextAlign.center,
+                            ))
+                        : YrkListView(item: _commentList),
                   ],
-                ))
-              ],
-            )),
-      ],
+                )),
+          ],
+        )),
+        bottomNavigationBar: BottomBarComment(focusNode: _focusNode),
+      ),
     );
   }
 
-  Widget _body() {
-    return Column(
-      children: <Widget>[
-        Container(
-            padding: EdgeInsets.only(
-                left: 16.0, right: 16.0, top: 16.0, bottom: 76.0),
-            width: double.maxFinite,
-            child: Text(_sampleText("요양병원 후기 "),
-                style: const TextStyle(
-                    color: const Color(0xe6000000),
-                    fontWeight: FontWeight.w400,
-                    fontFamily: "NotoSansCJKkr",
-                    fontStyle: FontStyle.normal,
-                    height: 1.5,
-                    fontSize: 16.0),
-                textAlign: TextAlign.left)),
-        Container(
-            width: double.maxFinite,
-            height: 1.0,
-            decoration: BoxDecoration(
-                border: Border.all(color: const Color(0xffe5e5e5), width: 1),
-                color: const Color(0xffffffff))),
-        Container(
-            width: double.maxFinite,
-            height: 32.0,
+  Widget _getLikeWidgetButton(bool isLike) {
+    return Expanded(
+        flex: 1,
+        child: InkWell(
+            onTap: isLike ? _onTapBodyLike : _onTapBodyDislike,
             child: Row(
-              children: <Widget>[
-                Expanded(
-                    flex: 1,
-                    child: InkWell(
-                        onTap: _onTapBodyLike,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                  margin: EdgeInsets.only(right: 5.0),
-                                  child: Image.asset(
-                                    "assets/icons/thumb_up_16_px.png",
-                                    width: 14.0,
-                                    height: 12.0,
-                                  )),
-                              Container(
-                                child: Text("154",
-                                    style: const YrkTextStyle(
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.w400,
-                                        color: const Color(0x99000000)),
-                                    textAlign: TextAlign.left),
-                              ),
-                            ]))),
-                Expanded(
-                    flex: 1,
-                    child: InkWell(
-                        onTap: _onTapBodyDislike,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                  margin: EdgeInsets.only(right: 5.0),
-                                  child: Image.asset(
-                                    "assets/icons/thumb_up_16_px.png",
-                                    width: 12.0,
-                                    height: 14.0,
-                                  )),
-                              Container(
-                                child: Text("12",
-                                    style: const YrkTextStyle(
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.w400,
-                                        color: const Color(0x99000000)),
-                                    textAlign: TextAlign.left),
-                              ),
-                            ]))),
-                Expanded(
-                    flex: 1,
-                    child: InkWell(
-                        onTap: _onTapBodyMore,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(Icons.more_horiz,
-                                  color: const Color(0x4d000000), size: 24.0),
-                            ])))
-              ],
-            ))
-      ],
-    );
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(right: 5.0),
+                    child: SvgPicture.asset(
+                      isLike
+                          ? "assets/icons/icon_tumbs_up_60_16_px.svg"
+                          : "assets/icons/icon_thumbs_down_60_16_px.svg",
+                      width: 14.0,
+                      height: 12.0,
+                      color: const Color(0x4d000000),
+                    ),
+                  ),
+                  Text(
+                      isLike ? _likeCount.toString() : _dislikeCount.toString(),
+                      style:
+                          const YrkTextStyle(color: const Color(0x99000000))),
+                ])));
   }
 
-  Widget _navigator() {
-    return Column(children: <Widget>[
-      Container(
-          width: double.maxFinite,
-          height: 8.0,
-          decoration: BoxDecoration(color: const Color(0xffeaeaea))),
-      InkWell(
-          onTap: _onTapNavigatorPrev,
-          child: Container(
-              width: double.maxFinite,
-              height: 48.0,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                      margin: EdgeInsets.only(left: 16.0, right: 12.0),
-                      child: Text("이전",
-                          style: const YrkTextStyle(
-                              color: const Color(0x99000000)),
-                          textAlign: TextAlign.left)),
-                  Expanded(
-                      child: Text("제목",
-                          style: const YrkTextStyle(fontSize: 16.0),
-                          textAlign: TextAlign.left)),
-                  Container(
-                      margin: EdgeInsets.only(right: 16.0),
-                      child: Image.asset(
-                        "assets/icons/icon_arrow_back_24_px.png",
-                        width: 24.0,
-                        height: 24.0,
-                      )),
-                ],
-              ))),
-      Container(
-          width: double.maxFinite,
-          height: 1.0,
-          decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xffe5e5e5), width: 1.0),
-          )),
-      InkWell(
-          onTap: _onTapNavigatorNext,
-          child: Container(
-              width: double.maxFinite,
-              height: 48.0,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                      margin: EdgeInsets.only(left: 16.0, right: 12.0),
-                      child: Text("다음",
-                          style: const YrkTextStyle(
-                              color: const Color(0x99000000)),
-                          textAlign: TextAlign.left)),
-                  Expanded(
-                      child: Text("정홍규의 요양병원",
-                          style: const YrkTextStyle(fontSize: 16.0),
-                          textAlign: TextAlign.left)),
-                  Container(
-                      margin: EdgeInsets.only(right: 16.0),
-                      child: Image.asset(
-                        "assets/icons/icon_arrow_back_24_px.png",
-                        width: 24.0,
-                        height: 24.0,
-                      )),
-                ],
-              ))),
-      Container(
-          width: double.maxFinite,
-          height: 8.0,
-          decoration: BoxDecoration(color: const Color(0xffeaeaea))),
-    ]);
-  }
-
-  Widget _comments() {
-    return Column(
-      children: [
-        Container(
+  Widget _getPostNavigatorWidget(bool isNext) {
+    return InkWell(
+        onTap: isNext ? _onTapNavigatorNext : _onTapNavigatorPrev,
+        child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
             width: double.maxFinite,
             height: 40.0,
+            decoration: isNext
+                ? null
+                : BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                            color: const Color(0xffeaeaea), width: 1))),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
-                    margin: EdgeInsets.only(left: 16.0, right: 4.0),
-                    child: Text("댓글",
+                    margin: EdgeInsets.only(right: 12.0),
+                    child: Text(isNext ? "다음" : "이전",
                         style: const YrkTextStyle(
-                          height: 1.0,
-                          color: const Color(0x99000000),
-                        ),
-                        textAlign: TextAlign.left)),
-                Container(
-                    child: Text("43",
-                        style: const YrkTextStyle(
-                          fontFamily: "Helvetica",
-                          color: const Color(0x99000000),
-                        ),
-                        textAlign: TextAlign.left))
+                            color: const Color(0x99000000)))),
+                Text(isNext ? "정홍규의 요양병원" : "제목",
+                    style: const YrkTextStyle(fontSize: 16.0)),
+                Spacer(),
+                SvgPicture.asset(
+                  isNext
+                      ? "assets/icons/icon_navigate_next_24px.svg"
+                      : "assets/icons/icon_navigate_next_24px.svg",
+                  width: 24.0,
+                  height: 24.0,
+                ),
               ],
-            )),
-        YrkListView(item: [PostComment(index: 0)]),
-        Container(
-          width: double.maxFinite,
-          height: 52.0,
-        )
-      ],
-    );
+            )));
   }
 
   void _onTapBodyLike() {
     print("_onTapBodyLike clicked");
+    setState(() {
+      this._likeCount =
+          this._isLiked ? this._likeCount - 1 : this._likeCount + 1;
+      this._isLiked = this._isLiked ? false : true;
+    });
   }
 
   void _onTapBodyDislike() {
     print("_onTapBodyDislike clicked");
+    setState(() {
+      this._dislikeCount =
+          this._isDisliked ? this._dislikeCount - 1 : this._dislikeCount + 1;
+      this._isDisliked = this._isDisliked ? false : true;
+    });
   }
 
   void _onTapBodyMore() {
     print("_onTapBodyMore clicked");
+    _getModalBottomSheet(context);
   }
 
   void _onTapNavigatorPrev() {
@@ -366,5 +326,40 @@ class _PostState extends State<Post> {
 
   void _onTapNavigatorNext() {
     print("next page tapped");
+  }
+
+  void _getModalBottomSheet(BuildContext context) {
+    final List<String> imageAssetList = [
+      "assets/icons/icon_share_24_px.svg",
+      "assets/icons/icon_save_black_24_px.svg",
+      "assets/icons/icon_share_24_px.svg",
+      "assets/icons/icon_save_black_24_px.svg",
+      "assets/icons/icon_share_24_px.svg",
+      "assets/icons/icon_save_black_24_px.svg",
+    ];
+
+    final List<String> titleList = [
+      "공유하기",
+      "저장하기",
+      "글 복사하기",
+      "게시물 숨기기",
+      "사용자 차단하기",
+      "신고하기"
+    ];
+
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return YrkModelBottomSheet(
+            type: YrkModelBottomSheetType.post,
+            labelList: titleList,
+            imageList: imageAssetList,
+            listHeight: 356.0,
+            onTap: (index) {
+              print(index);
+              Navigator.of(context).pop();
+            },
+          );
+        });
   }
 }
