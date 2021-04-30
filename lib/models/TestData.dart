@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-
 List<String> testCardImage = [
   "assets/icons/sample_image.png",
   "assets/icons/sample_image.png",

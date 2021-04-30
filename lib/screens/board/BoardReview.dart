@@ -4,7 +4,6 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageListItem.dart';
-import 'package:yoroke/screens/common/YrkScrollFadedWidget.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';

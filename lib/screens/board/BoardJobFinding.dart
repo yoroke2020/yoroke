@@ -10,8 +10,6 @@ import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/common/YrkCustomScrollView.dart';
 
-import 'BoardQnaCardListItem.dart';
-
 class BoardJobFinding extends StatefulWidget {
   BoardJobFinding({required this.onPushNavigator});
 
