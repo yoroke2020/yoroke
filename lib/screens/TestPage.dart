@@ -10,9 +10,7 @@ class TestPage extends StatefulWidget {
 }
 
 var btns = {
-  {"text": "네이버로 계속하기", "icon": "assets/icons/icon_naver_logo.svg"},
-  {"text": "카카오로 계속하기", "icon": "assets/icons/icon_kakao_logo.svg"},
-  {"text": "Apple로 계속하기", "icon": "assets/icons/icon_apple_logo.svg"},
+  {"text": "image", "icon": "assets/icons/icon_naver_logo.svg"},
 };
 
 class _TestPageState extends State<TestPage> {
@@ -61,6 +59,11 @@ class _TestPageState extends State<TestPage> {
               onPressed: () {},
             ),
             YrkButton(
+              buttonType: ButtonType.rect,
+              label: 'rect',
+              onPressed: () {},
+            ),
+            YrkButton(
               buttonType: ButtonType.outline,
               label: 'outline',
               onPressed: () {},
@@ -83,7 +86,6 @@ class _TestPageState extends State<TestPage> {
             Column(
                 children: btns.map((e) {
               return Container(
-                padding: const EdgeInsets.only(top: 8, bottom: 8),
                 child: YrkButton(
                   buttonType: ButtonType.image,
                   width: 328,

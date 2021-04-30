@@ -48,31 +48,31 @@ class YrkButton extends StatefulWidget {
 }
 
 class _YrkButtonState extends State<YrkButton> {
-  bool isRect = false;
-  bool isChip = false;
-  bool isBordered = false;
-  bool isText = false;
+  bool _isRect = false;
+  bool _isChip = false;
+  bool _isBordered = false;
+  bool _isText = false;
 
   void setProp() {
     switch (widget.buttonType) {
       case ButtonType.solid:
         break;
       case ButtonType.rect:
-        isRect = true;
+        _isRect = true;
         break;
       case ButtonType.outline:
-        isBordered = true;
+        _isBordered = true;
         break;
       case ButtonType.chip:
-        isChip = false;
+        _isChip = true;
         break;
       case ButtonType.outlinechip:
-        isBordered = true;
-        isChip = false;
+        _isChip = true;
+        _isBordered = true;
         break;
       case ButtonType.text:
-        isChip = true;
-        isText = true;
+        _isChip = true;
+        _isText = true;
         break;
       case ButtonType.image:
         break;
@@ -82,27 +82,19 @@ class _YrkButtonState extends State<YrkButton> {
   }
 
   void setHeight() {
-    double? _width;
-    double? _height;
+    if (widget.width != null && widget.height != null) return;
 
-    if (widget.width == null) {
-      if (widget.buttonType == ButtonType.chip ||
-          widget.buttonType == ButtonType.outlinechip ||
-          widget.buttonType == ButtonType.text) {
-        _width = widget.label!.length * 9.0;
-        print(MediaQuery.of(context).textScaleFactor);
-        _height = widget.textStyle!.fontSize! + 4;
-      } else {
-        _width = widget.width ?? 328;
-        _height = widget.height ?? 48;
-      }
-    } else {
-      _width = widget.width ?? 328;
-      _height = widget.height ?? 48;
+    if (_isChip || _isText) {
+      TextPainter textSize = TextPainter(
+          text: TextSpan(text: widget.label, style: widget.textStyle),
+          maxLines: 1,
+          textDirection: TextDirection.ltr)
+        ..layout(minWidth: 0, maxWidth: double.infinity);
+      if (widget.width == null) widget.width = textSize.size.width + 30;
+      if (widget.height == null) widget.height = textSize.size.height + 4;
     }
-
-    widget.width = _width;
-    widget.height = _height;
+    widget.width = widget.width ?? 320;
+    widget.height = widget.height ?? 48;
   }
 
   void setTextStyle() {
@@ -139,8 +131,8 @@ class _YrkButtonState extends State<YrkButton> {
       widget.label ?? "",
       style: widget.textStyle,
       textAlign: TextAlign.center,
+      softWrap: false,
     );
-
     if (widget.buttonType != ButtonType.image) {
       return ret;
     }
@@ -172,11 +164,11 @@ class _YrkButtonState extends State<YrkButton> {
   }
 
   ButtonStyle getButtonStyle() {
-    double _radius = isRect ? 8 : 100;
+    double _radius = _isRect ? 8 : 100;
     Color _fillColor = widget.fillColor ??
-        (isBordered || isText ? Colors.transparent : Color(0xfff5df4d));
+        (_isBordered || _isText ? Colors.transparent : Color(0xfff5df4d));
     Color _borderColor = widget.borderColor ??
-        (isBordered ? Color(0xfff5df4d) : Colors.transparent);
+        (_isBordered ? Color(0xfff5df4d) : Colors.transparent);
 
     return OutlinedButton.styleFrom(
       primary: _fillColor,
@@ -200,15 +192,10 @@ class _YrkButtonState extends State<YrkButton> {
     return SizedBox(
       width: widget.width,
       height: widget.height,
-      child: Container(
-        padding: EdgeInsets.zero,
-        width: double.infinity,
-        height: double.infinity,
-        child: OutlinedButton(
-          onPressed: widget.onPressed,
-          child: getChild(),
-          style: getButtonStyle(),
-        ),
+      child: OutlinedButton(
+        onPressed: widget.onPressed,
+        child: getChild(),
+        style: getButtonStyle(),
       ),
     );
   }
