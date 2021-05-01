@@ -10,9 +10,9 @@ class LogIn extends StatefulWidget {
 }
 
 var btns = {
-  {"text": "네이버로 계속하기", "icon": "assets/icons/icon_naver.png"},
-  {"text": "카카오로 계속하기", "icon": "assets/icons/icon_kakao.png"},
-  {"text": "Apple로 계속하기", "icon": "assets/icons/icon_apple.png"},
+  {"text": "네이버로 계속하기", "icon": "assets/icons/icon_naver_logo.svg"},
+  {"text": "카카오로 계속하기", "icon": "assets/icons/icon_kakao_logo.svg"},
+  {"text": "Apple로 계속하기", "icon": "assets/icons/icon_apple_logo.svg"},
 };
 
 class _LogInState extends State<LogIn> {
@@ -47,22 +47,20 @@ class _LogInState extends State<LogIn> {
                     Column(
                         children: btns.map((e) {
                       return Container(
-                        padding: const EdgeInsets.only(top: 8, bottom: 8),
-                        child: YrkButton(
-                          buttonType: ButtonType.image,
-                          width: 328,
-                          height: 48,
-                          label: e['text'],
-                          img: e['icon'],
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignInDialog()),
-                            );
-                          },
-                        ),
-                      );
+                          padding: const EdgeInsets.only(top: 8, bottom: 8),
+                          child: YrkButton(
+                              buttonType: ButtonType.image,
+                              width: 328,
+                              height: 48,
+                              label: e['text'],
+                              image: e['icon'],
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignInDialog()),
+                                );
+                              }));
                     }).toList())
                   ]))
                 ])));
