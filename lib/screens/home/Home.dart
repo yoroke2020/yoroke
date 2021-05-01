@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/YrkDrawer.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageView.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
@@ -109,6 +110,7 @@ class _HomeState extends State<Home> {
           type: YrkAppBarType.accountCircleAll,
           onPushNavigator: widget.onPushNavigator,
         ),
+        drawer: YrkDrawer(),
         body: ListView(children: <Widget>[
           YrkListView(
             width: 320.0,
