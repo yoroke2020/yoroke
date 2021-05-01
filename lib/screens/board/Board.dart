@@ -64,7 +64,7 @@ class Board extends StatelessWidget {
           type: YrkAppBarType.accountCircleAll,
           onPushNavigator: onPushNavigator,
         ),
-        drawer: YrkDrawer(),
+        drawer: YrkDrawer(onPushNavigator: onPushNavigator),
         body: ListView(
           children: <Widget>[
             YrkTabHeaderView(

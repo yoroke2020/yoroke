@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
+import 'package:yoroke/screens/mypage/BookmarkList.dart';
 import 'package:yoroke/screens/mypage/EditProfile.dart';
 
 var tiles = [
@@ -31,7 +32,7 @@ class YrkDrawer extends Drawer {
   final ValueChanged<YrkData>? onPushNavigator;
   YrkDrawer({
     Key? key,
-    this.onPushNavigator,
+    required this.onPushNavigator,
   }) : super(
             key: key,
             child: ListView.separated(
@@ -128,6 +129,18 @@ class YrkDrawer extends Drawer {
                           style: YrkTextStyle(fontSize: 16, height: 1),
                           textAlign: TextAlign.left,
                         )),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        var tablist = [
+                          EditProfile(),
+                          BookmarkList(onPushNavigator: onPushNavigator),
+                          EditProfile(),
+                          EditProfile(),
+                        ];
+                        return tablist[index];
+                      }));
+                    },
                   );
                 }));
 }
