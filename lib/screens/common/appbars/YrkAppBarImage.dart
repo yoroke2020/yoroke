@@ -100,7 +100,6 @@ class _YrkAppBarImageState extends State<YrkAppBarImage> {
                         clickable: true,
                         onPressed: () {},
                         label: "복지시설",
-                        fontSize: 14.0,
                         width: 88,
                         height: 24,
                       ),

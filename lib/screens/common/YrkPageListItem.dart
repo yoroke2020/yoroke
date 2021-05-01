@@ -71,10 +71,11 @@ class YrkPageListItem extends StatelessWidget {
                                 onPressed: () {},
                                 width: 60.0,
                                 height: 24.0,
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "NotoSansCJKKR",
-                                fontStyle: FontStyle.normal),
+                                textStyle: YrkTextStyle(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                       ),
                       Container(
                           margin: EdgeInsets.only(right: 4.0),
@@ -89,9 +90,11 @@ class YrkPageListItem extends StatelessWidget {
                                 width: 32,
                                 height: 16,
                                 label: "BEST",
-                                fontSize: 8.0,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "OpenSans",
+                                textStyle: YrkTextStyle(
+                                  fontSize: 8.0,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: "OpenSans",
+                                ),
                                 clickable: false,
                                 onPressed: () {},
                               ))

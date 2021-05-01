@@ -2,10 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/common/YrkTextField.dart';
 
+import 'common/YrkButton.dart';
+
 class TestPage extends StatefulWidget {
   @override
   _TestPageState createState() => _TestPageState();
 }
+
+var btns = {
+  {"text": "image", "icon": "assets/icons/icon_naver_logo.svg"},
+};
 
 class _TestPageState extends State<TestPage> {
   @override
@@ -47,6 +53,49 @@ class _TestPageState extends State<TestPage> {
               label: 'board(writing)',
               textFieldType: TextFieldType.board,
             ),
+            YrkButton(
+              buttonType: ButtonType.solid,
+              label: 'solid',
+              onPressed: () {},
+            ),
+            YrkButton(
+              buttonType: ButtonType.rect,
+              label: 'rect',
+              onPressed: () {},
+            ),
+            YrkButton(
+              buttonType: ButtonType.outline,
+              label: 'outline',
+              onPressed: () {},
+            ),
+            YrkButton(
+              buttonType: ButtonType.chip,
+              label: 'chip',
+              onPressed: () {},
+            ),
+            YrkButton(
+              buttonType: ButtonType.outlinechip,
+              label: 'outlinechip',
+              onPressed: () {},
+            ),
+            YrkButton(
+              buttonType: ButtonType.text,
+              label: 'text',
+              onPressed: () {},
+            ),
+            Column(
+                children: btns.map((e) {
+              return Container(
+                child: YrkButton(
+                  buttonType: ButtonType.image,
+                  width: 328,
+                  height: 48,
+                  label: e['text'],
+                  image: e['icon'],
+                  onPressed: () {},
+                ),
+              );
+            }).toList())
           ],
         ),
       ),
