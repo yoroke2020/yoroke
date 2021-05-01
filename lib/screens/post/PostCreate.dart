@@ -124,12 +124,11 @@ class _PostCreateState extends State<PostCreate> {
                         onPressed: _onPressedRegister,
                         width: 48.0,
                         height: 24.0,
-                        btnColor: const Color(0xfff4f4f4),
-                        fontSize: 14.0,
-                        fontFamily: "NotoSansCJKKR",
-                        fontWeight: FontWeight.w500,
-                        fontColor: const Color(0xffaaaaaa),
-                        fontStyle: FontStyle.normal,
+                        fillColor: const Color(0xfff4f4f4),
+                        textStyle: YrkTextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xffaaaaaa),
+                        ),
                       )
                     ],
                   ),
@@ -191,11 +190,9 @@ class _PostCreateState extends State<PostCreate> {
                     buttonType: ButtonType.text,
                     label: "임시저장",
                     onPressed: _onPressedTempSave,
-                    fontColor: const Color(0xe6000000),
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "NotoSansCJKKR",
-                    fontStyle: FontStyle.normal,
-                    fontSize: 14.0,
+                    textStyle: YrkTextStyle(
+                      fontWeight: FontWeight.w500,
+                    ),
                   )
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 import '../YrkButton.dart';
 import '../YrkTextField.dart';
@@ -67,8 +68,8 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                   YrkButton(
                     buttonType: ButtonType.outlinechip,
                     label: '등록',
-                    btnColor: const Color(0x4d000000),
-                    fontColor: const Color(0x4d000000),
+                    fillColor: const Color(0x4d000000),
+                    textStyle: YrkTextStyle(color: const Color(0x4d000000)),
                     onPressed: () => print("register button clicked"),
                     width: 64.0,
                     height: 32.0,
