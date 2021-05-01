@@ -87,7 +87,9 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       ret.add(
         YrkIconButton(
           icon: "assets/icons/icon_search_24_px.svg",
-          onTap: () {},
+          onTap: () {
+            onPushNavigator!(new YrkData(SubPageItem.search));
+          },
         ),
       );
     if (createButton)
