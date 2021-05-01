@@ -2,29 +2,41 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class YrkTextStyle extends TextStyle {
-  final Color color;
-  final double height;
-  final double letterSpacing;
-  final double fontSize;
-  final FontWeight fontWeight;
-  final String fontFamily;
-  final FontStyle fontStyle;
-
   const YrkTextStyle({
-    this.color = const Color(0xe6000000),
-    this.fontSize = 14.0,
-    this.height = 1.5,
-    this.letterSpacing = -0.002,
-    this.fontWeight = FontWeight.w400,
-    this.fontFamily = 'NotoSansCJKkr',
-    this.fontStyle = FontStyle.normal,
+    Color? color = const Color(0xe6000000),
+    Color? backgroundColor,
+    String? fontFamily = 'NotoSansCJKkr',
+    double? fontSize = 14.0,
+    FontWeight? fontWeight = FontWeight.w400,
+    FontStyle? fontStyle = FontStyle.normal,
+    double? letterSpacing = -0.002,
+    double? wordSpacing,
+    TextBaseline? textBaseline,
+    double? height = 1,
+    Locale? locale,
+    Paint? foreground,
+    Paint? background,
+    TextDecoration? decoration,
+    Color? decorationColor,
+    TextDecorationStyle? decorationStyle,
+    double? decorationThickness,
   }) : super(
           color: color,
-          height: height,
-          letterSpacing: letterSpacing,
+          backgroundColor: backgroundColor,
+          fontFamily: fontFamily,
           fontSize: fontSize,
           fontWeight: fontWeight,
-          fontFamily: fontFamily,
-          fontStyle: FontStyle.normal,
+          fontStyle: fontStyle,
+          letterSpacing: letterSpacing,
+          wordSpacing: wordSpacing,
+          textBaseline: textBaseline,
+          height: height,
+          locale: locale,
+          foreground: foreground,
+          background: background,
+          decoration: decoration,
+          decorationColor: decorationColor,
+          decorationStyle: decorationStyle,
+          decorationThickness: decorationThickness,
         );
 }
