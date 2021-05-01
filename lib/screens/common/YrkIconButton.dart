@@ -12,14 +12,18 @@ class YrkIconButton extends InkWell {
     Color? color,
   }) : super(
             key: key,
-            child: Center(
-              child: Padding(
-                padding: padding,
-                child: SvgPicture.asset(
-                  icon,
-                  width: width,
-                  height: height,
-                  color: color,
+            child: Container(
+              width: width + padding.left + padding.right,
+              height: height + padding.top + padding.bottom,
+              child: Center(
+                child: Padding(
+                  padding: padding,
+                  child: SvgPicture.asset(
+                    icon,
+                    width: width,
+                    height: height,
+                    color: color,
+                  ),
                 ),
               ),
             ),

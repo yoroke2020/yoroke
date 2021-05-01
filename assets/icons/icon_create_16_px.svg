@@ -4,9 +4,9 @@
             .cls-1{fill:none}.cls-2{fill:#939597}
         </style>
     </defs>
-    <path id="패스_36" d="M0 0h16v16H0z" class="cls-1"/>
+    <path id="패스_36" d="M0 0h16v16H0z" fill="none"/>
     <g id="그룹_700" transform="translate(-58 -99)">
-        <path id="사각형_16771" d="M0 0H16V16H0z" class="cls-1" transform="translate(58 99)"/>
+        <path id="사각형_16771" d="M0 0H16V16H0z" fill="none" transform="translate(58 99)"/>
         <g id="그룹_699">
             <path id="패스_244" d="M70.963 102.744l-.707.707-.707-.707.707-.707.707.707m1.414 0l-2.121-2.121-2.121 2.121 2.121 2.121 2.121-2.121z" class="cls-2"/>
             <path id="패스_245" d="M66.721 107.694a.5.5 0 0 0 .707 0l2.121-2.122-2.121-2.121L60 110.879V113h2.118l3.94-3.94a.5.5 0 0 0-.707-.707L61.708 112H61v-.706l6.427-6.427.707.707-1.414 1.415a.5.5 0 0 0 .001.705z" class="cls-2"/>
