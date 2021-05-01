@@ -29,7 +29,11 @@ class _SearchState extends State<Search> {
 
   List<Widget> _recentSearchItem(String searchKeyword) {
     List<Widget> list = <Widget>[];
+    List<String> testNames = <String>["조문기", "최진호", "최승규", "최민기", "정홍규", "최병옥"];
     List<String> tempText = ["", " 요양원", " 요양시설", " 복지사"];
+    if (!testNames.contains(searchKeyword)) {
+      searchKeyword = '';
+    }
     for (int i = 0; i < 4; i++) {
       list.add(SearchListItem(
           width: MediaQuery.of(context).size.width,
@@ -45,10 +49,7 @@ class _SearchState extends State<Search> {
   }
 
   void _handleChange(String? value) {
-    List<String> testNames = <String>["조문기", "최진호", "최승규", "최민기", "정홍규", "최병옥"];
-    if (testNames.contains(searchController.text)) {
-      setState(() {});
-    }
+    setState(() {});
   }
 
   @override
@@ -75,22 +76,23 @@ class _SearchState extends State<Search> {
                   textEditingController: searchController,
                 )),
           ),
-          Container(
-            width: 360,
-            height: 40,
-            decoration: BoxDecoration(color: const Color(0xffffffff)),
-            child: Container(
-                height: 20,
-                margin: EdgeInsets.only(left: 16, top: 10, bottom: 10),
-                child: Text("최근 검색어",
-                    style: const TextStyle(
-                        color: const Color(0xe6000000),
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "NotoSansCJKKR",
-                        fontStyle: FontStyle.normal,
-                        fontSize: 14.0),
-                    textAlign: TextAlign.left)),
-          ),
+          if (searchController.text == '')
+            new Container(
+              width: 360,
+              height: 40,
+              decoration: BoxDecoration(color: const Color(0xffffffff)),
+              child: Container(
+                  height: 20,
+                  margin: EdgeInsets.only(left: 16, top: 10, bottom: 10),
+                  child: Text("최근 검색어",
+                      style: const TextStyle(
+                          color: const Color(0xe6000000),
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "NotoSansCJKKR",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 14.0),
+                      textAlign: TextAlign.left)),
+            ),
           Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(color: const Color(0xffffffff)),
