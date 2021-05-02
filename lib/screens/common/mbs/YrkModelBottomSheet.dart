@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'YrkMbsImageList.dart';
 import 'YrkMbsRadioButtonList.dart';
+import 'YrkMbsTextList.dart';
 
 enum YrkModelBottomSheetType {
   post,
   createPost,
+  search,
 }
 
 class YrkModelBottomSheet extends StatelessWidget {
@@ -28,9 +30,13 @@ class YrkModelBottomSheet extends StatelessWidget {
   Widget getModalWidget(BuildContext context) {
     switch (type) {
       case YrkModelBottomSheetType.post:
-        return YrkMbsImageList(labelList: labelList, imageList: imageList!, onTap: onTap!);
+        return YrkMbsImageList(
+            labelList: labelList, imageList: imageList!, onTap: onTap!);
       case YrkModelBottomSheetType.createPost:
-        return YrkMbsRadioButtonList(title: title!, labelList: labelList, onTap: onTap!);
+        return YrkMbsRadioButtonList(
+            title: title!, labelList: labelList, onTap: onTap!);
+      case YrkModelBottomSheetType.search:
+        return YrkMbsTextList(labelList: labelList, onTap: onTap!);
     }
   }
 
