@@ -16,13 +16,14 @@ class InfoShareCardListItem extends StatefulWidget {
   final int index;
   final ValueChanged<YrkData>? onPushNavigator;
 
-  bool _isBookmarked = false;
 
   @override
   _InfoShareCardListItemState createState() => _InfoShareCardListItemState();
 }
 
 class _InfoShareCardListItemState extends State<InfoShareCardListItem> {
+  bool _isBookmarked = false;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -72,7 +73,7 @@ class _InfoShareCardListItemState extends State<InfoShareCardListItem> {
                                   IconButton(
                                     splashColor: Colors.transparent,
                                     icon: Image.asset(
-                                      widget._isBookmarked
+                                      _isBookmarked
                                           ? "assets/icons/icon_bookmarked_24_px.png"
                                           : "assets/icons/icon_bookmark_24_px.png",
                                       width: 24,
@@ -81,8 +82,8 @@ class _InfoShareCardListItemState extends State<InfoShareCardListItem> {
                                     ),
                                     onPressed: () {
                                       setState(() {
-                                        widget._isBookmarked =
-                                            !widget._isBookmarked;
+                                        _isBookmarked =
+                                            !_isBookmarked;
                                       });
                                     },
                                   ),

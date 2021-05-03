@@ -5,8 +5,6 @@ import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkDrawer.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
-import '../TestPage.dart';
-
 class Find extends StatefulWidget {
   Find({required this.onPushNavigator});
 

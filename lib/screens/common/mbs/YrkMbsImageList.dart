@@ -45,10 +45,12 @@ class YrkMbsImageList extends StatelessWidget {
               width: 328.0,
               height: 48.0,
               buttonType: ButtonType.outline,
-              outlineBackgroundColor: const Color(0xffffffff),
-              btnColor: const Color(0xfff5df4d),
+              fillColor: const Color(0xffffffff),
+              borderColor: const Color(0xfff5df4d),
               label: "닫기",
-              fontColor: const Color(0xe6000000),
+              textStyle: YrkTextStyle(
+                color: const Color(0xe6000000),
+              ),
               onPressed: () => Navigator.of(context).pop(),
             ))
       ],

@@ -16,7 +16,6 @@ class YrkAppBarImage extends StatefulWidget implements PreferredSizeWidget {
   final String date;
   final double? height;
 
-  bool _isBookmarked = false;
 
   @override
   _YrkAppBarImageState createState() => _YrkAppBarImageState();
@@ -38,6 +37,8 @@ class YrkAppBarImage extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _YrkAppBarImageState extends State<YrkAppBarImage> {
+  bool _isBookmarked = false;
+
   double _bottomHeight() =>
       widget.preferredSize.height < 100 ? 0 : widget.preferredSize.height - 100;
   double _opacity() => widget.preferredSize.height > 250 ? 1.0 : 0.0;
@@ -55,7 +56,7 @@ class _YrkAppBarImageState extends State<YrkAppBarImage> {
           IconButton(
             splashColor: Colors.transparent,
             icon: Image.asset(
-              widget._isBookmarked
+              _isBookmarked
                   ? "assets/icons/icon_bookmarked_24_px.png"
                   : "assets/icons/icon_bookmark_24_px.png",
               width: 24,
@@ -64,7 +65,7 @@ class _YrkAppBarImageState extends State<YrkAppBarImage> {
             ),
             onPressed: () {
               setState(() {
-                widget._isBookmarked = !widget._isBookmarked;
+                _isBookmarked = !_isBookmarked;
               });
             },
           ),

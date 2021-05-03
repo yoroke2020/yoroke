@@ -10,13 +10,14 @@ class Info extends StatefulWidget {
   Info({required this.onPushNavigator});
 
   final ValueChanged<YrkData>? onPushNavigator;
-  bool isGrid = false;
 
   @override
   _InfoState createState() => _InfoState();
 }
 
 class _InfoState extends State<Info> with TickerProviderStateMixin {
+  bool isGrid = false;
+
   late TabController _tabController;
 
   @override
@@ -35,7 +36,7 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
     double _expandWidth = MediaQuery.of(context).size.width - 32 - 16;
 
     List<Widget> list = <Widget>[];
-    if (widget.isGrid) {
+    if (isGrid) {
       for (int i = 0; i < 10; i++) {
         list.add(InfoShareCardListItem(
           width: _expandWidth,
@@ -112,14 +113,14 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
           tabBarFollowing: Center(
             child: IconButton(
               splashColor: Colors.transparent,
-              icon: widget.isGrid
+              icon: isGrid
                   ? Image.asset("assets/icons/icon_widgets_24_px.png",
                       width: 19, height: 19, color: Color(0xff939597))
                   : Image.asset("assets/icons/icon_view_agenda_24_px.png",
                       width: 19, height: 19, color: Color(0xff939597)),
               onPressed: () {
                 setState(() {
-                  widget.isGrid = !widget.isGrid;
+                  isGrid = !isGrid;
                 });
               },
             ),

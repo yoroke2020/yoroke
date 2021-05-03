@@ -38,8 +38,7 @@ class _PostState extends State<Post> {
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
-        if(!currentFocus.hasPrimaryFocus)
-          currentFocus.unfocus();
+        if (!currentFocus.hasPrimaryFocus) currentFocus.unfocus();
       },
       child: Scaffold(
         appBar: YrkAppBar(
@@ -81,9 +80,11 @@ class _PostState extends State<Post> {
                                     width: 27.0,
                                     height: 16.0,
                                     label: "BEST",
-                                    fontSize: 8.0,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: "OpenSans",
+                                    textStyle: YrkTextStyle(
+                                      fontSize: 8.0,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: "OpenSans",
+                                    ),
                                     clickable: false,
                                     onPressed: () {},
                                   ))),
@@ -141,8 +142,8 @@ class _PostState extends State<Post> {
                     left: 16.0, right: 16.0, top: 16.0, bottom: 48.0),
                 decoration: BoxDecoration(
                     border: Border(
-                        bottom:
-                            BorderSide(color: const Color(0xffe5e5e5), width: 1)),
+                        bottom: BorderSide(
+                            color: const Color(0xffe5e5e5), width: 1)),
                     color: const Color(0xffffffff)),
                 width: double.maxFinite,
                 child: Text(widget.data!.i1!.toString(),

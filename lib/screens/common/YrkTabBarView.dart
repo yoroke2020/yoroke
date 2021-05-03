@@ -17,7 +17,7 @@ class YrkTabBar extends StatelessWidget {
   final TabController controller;
   final double? width;
   final double? height;
-  final int? tabWidth;
+  final double? tabWidth;
   final Widget? following;
 
   get _tabList {
@@ -41,8 +41,9 @@ class YrkTabBar extends StatelessWidget {
         width: width,
         alignment: Alignment.centerLeft,
         child: Row(children: <Widget>[
-          Expanded(
-              flex: tabWidth! * textList.length,
+          Container(
+              width: tabWidth! * textList.length.toDouble(),
+              height: height,
               child: TabBar(
                 controller: controller,
                 tabs: _tabList,
@@ -52,9 +53,9 @@ class YrkTabBar extends StatelessWidget {
                 unselectedLabelStyle:
                     YrkTextStyle(fontSize: 16.0, fontWeight: FontWeight.w400),
               )),
-          Expanded(flex: 360 - tabWidth! * textList.length, child: Container()),
+          Spacer(),
           Container(
-              margin: EdgeInsets.only(right: 16.0),
+              margin: this.following != null ? EdgeInsets.all(0) : EdgeInsets.only(right: 16.0),
               child: this.following != null ? this.following! : null)
         ]));
   }
@@ -110,7 +111,7 @@ class YrkTabBarView extends StatelessWidget {
   final TabController? controller;
   final double? tabBarWidth;
   final double? tabBarHeight;
-  final int? tabWidth;
+  final double? tabWidth;
   final double? tabViewWidth;
   final double? tabViewHeight;
   final Widget? tabBarFollowing;

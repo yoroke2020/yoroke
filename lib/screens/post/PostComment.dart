@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:yoroke/screens/common/YrkIconButton.dart';
-import 'package:yoroke/screens/common/mbs/YrkModelBottomSheet.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class PostComment extends StatefulWidget {
