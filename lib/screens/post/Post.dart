@@ -74,7 +74,6 @@ class _PostState extends State<Post> {
                           Visibility(
                               visible: true,
                               child: Container(
-                                  padding: const EdgeInsets.only(top: 4.0),
                                   child: YrkButton(
                                     buttonType: ButtonType.chip,
                                     width: 27.0,
