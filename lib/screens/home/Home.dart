@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/YrkDrawer.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageView.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
@@ -19,10 +20,22 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  ValueChanged<YrkData>? onPushNavigator;
+
+  @override
+  initState() {
+    onPushNavigator = widget.onPushNavigator;
+    super.initState();
+  }
+
   List<Widget> _noticeCardList() {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
-      list.add(HomeCardListItem(width: 320.0, height: 120.0, index: i));
+      list.add(HomeCardListItem(
+          width: 320.0,
+          height: 120.0,
+          index: i,
+          onPushNavigator: onPushNavigator));
     }
 
     return list;
@@ -31,22 +44,21 @@ class _HomeState extends State<Home> {
   List<Widget> _popularCardList() {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
-      list.add(HomePopularCardListItem(width: 144.0, height: 106.0, index: i));
+      list.add(HomePopularCardListItem(
+          width: 144.0,
+          height: 106.0,
+          index: i,
+          onPushNavigator: onPushNavigator));
     }
 
     return list;
   }
 
-  List<Widget> _YrkListView() {
+  List<Widget> _yrkListView() {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
-      list.add(YrkListView(
-          pageIndex: i,
-          itemCount: 4,
-          clickable: true,
-          onPushNavigator: widget.onPushNavigator,
-          nextSubPageItem: SubPageItem.boardReview,
-          item: _homePopularList()));
+      list.add(
+          YrkListView(pageIndex: i, itemCount: 4, item: _homePopularList()));
     }
     return list;
   }
@@ -54,7 +66,7 @@ class _HomeState extends State<Home> {
   List<Widget> _homePopularList() {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
-      list.add(HomePopularListItem(index: i));
+      list.add(HomePopularListItem(index: i, onPushNavigator: onPushNavigator));
     }
     return list;
   }
@@ -109,16 +121,13 @@ class _HomeState extends State<Home> {
           type: YrkAppBarType.accountCircleAll,
           onPushNavigator: widget.onPushNavigator,
         ),
+        drawer: YrkDrawer(),
         body: ListView(children: <Widget>[
           YrkListView(
-            width: 320.0,
             height: 120.0,
-            margin: EdgeInsets.only(left: 8, right: 8),
+            margin: EdgeInsets.only(top: 8.0, right: 8.0),
             scrollable: true,
             scrollDirection: Axis.horizontal,
-            clickable: true,
-            // onPushNavigator: widget.onPushNavigator,
-            // nextSubPageItem: SubPageItem.boardReview,
             item: _noticeCardList(),
             itemCount: 4,
           ),
@@ -170,7 +179,7 @@ class _HomeState extends State<Home> {
                         Expanded(flex: 16, child: Container())
                       ]))),
           YrkPageView(
-            page: _YrkListView(),
+            page: _yrkListView(),
             controller: popularPageController,
             isIndicatorEnabled: true,
           ),
@@ -212,14 +221,10 @@ class _HomeState extends State<Home> {
                         Expanded(flex: 16, child: Container())
                       ]))),
           YrkListView(
-            width: 320.0,
             height: 200.0,
-            margin: EdgeInsets.only(left: 8, right: 8),
+            margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
             scrollable: true,
             scrollDirection: Axis.horizontal,
-            clickable: true,
-            // onPushNavigator: widget.onPushNavigator,
-            // nextSubPageItem: SubPageItem.boardReview,
             item: _popularCardList(),
             itemCount: 4,
           ),

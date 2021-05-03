@@ -1,12 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="icon_save_alt_24px" width="24" height="24" viewBox="0 0 24 24">
-    <defs>
-        <style>
-            .cls-1{fill:none}
-        </style>
-    </defs>
-    <path id="패스_93" d="M0 0h24v24H0z" class="cls-1"/>
+
+    <path id="패스_93" d="M0 0h24v24H0z" fill="none"/>
     <g id="그룹_667" transform="translate(-110 -297)">
-        <path id="사각형_16760" d="M0 0H24V24H0z" class="cls-1" transform="translate(110 297)"/>
+        <path id="사각형_16760" d="M0 0H24V24H0z" fill="none" transform="translate(110 297)"/>
         <g id="그룹_666">
             <g id="그룹_665">
                 <path id="패스_210" d="M130 317h-16v-8.5a.5.5 0 0 1 1 0v7.5h14v-7.5a.5.5 0 0 1 1 0z"/>

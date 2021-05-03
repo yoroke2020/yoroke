@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/YrkDrawer.dart';
+import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
 import '../TestPage.dart';
 
@@ -22,6 +24,10 @@ class _FindState extends State<Find> {
         floatingActionButton: FloatingActionButton(
           onPressed: () =>
               widget.onPushNavigator!(new YrkData(SubPageItem.testPage)),
-        ));
+        ),
+        appBar: YrkAppBar(
+            // onPushNavigator: widget.onPushNavigator,
+            ),
+        drawer: YrkDrawer());
   }
 }

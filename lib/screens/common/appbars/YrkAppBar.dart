@@ -14,13 +14,13 @@ enum YrkAppBarType {
 }
 
 class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
-  YrkAppBar({
-    Key? key,
-    this.onPushNavigator,
-    this.label = "",
-    this.type = YrkAppBarType.accountCircleAll,
-    this.isStatusBar = true
-  }) : super(
+  YrkAppBar(
+      {Key? key,
+      this.onPushNavigator,
+      this.label = "",
+      this.type = YrkAppBarType.accountCircleAll,
+      this.isStatusBar = true})
+      : super(
           key: key,
         );
 
@@ -37,7 +37,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
           width: 32.0,
           height: 32.0,
           padding: EdgeInsets.all(0),
-          onTap: () {},
+          onTap: Scaffold.of(context).openDrawer,
         );
       case YrkAppBarType.arrowBackAll:
       case YrkAppBarType.arrowBackOnly:
@@ -87,7 +87,9 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       ret.add(
         YrkIconButton(
           icon: "assets/icons/icon_search_24_px.svg",
-          onTap: () {},
+          onTap: () {
+            onPushNavigator!(new YrkData(SubPageItem.search));
+          },
         ),
       );
     if (createButton)
@@ -121,7 +123,9 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       preferredSize: preferredSize,
       child: Container(
           height: isStatusBar ? 48.0 + statusBarHeight : 48.0,
-          padding: isStatusBar ? EdgeInsets.only(top: statusBarHeight) : EdgeInsets.all(0),
+          padding: isStatusBar
+              ? EdgeInsets.only(top: statusBarHeight)
+              : EdgeInsets.all(0),
           margin: EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
