@@ -5,10 +5,16 @@ import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class PostComment extends StatefulWidget {
-  PostComment({required this.focusNode, required this.index});
+  PostComment(
+      {required this.focusNode,
+      required this.index,
+      required this.comment,
+      required this.controller});
 
   final FocusNode focusNode;
   final int index;
+  final String comment;
+  final TextEditingController controller;
 
   @override
   _PostCommentState createState() => _PostCommentState();
@@ -83,7 +89,7 @@ class _PostCommentState extends State<PostComment> {
                 padding: EdgeInsets.only(
                     top: 1.0, bottom: 8.0, left: 38.0, right: 40.0),
                 child: Text(
-                  "좋은 정보 감사합니다. 좋은 정보 감사합니다. 좋은 정보 감사합니다.",
+                  widget.comment,
                   style: YrkTextStyle(
                     height: 1.0,
                   ),
@@ -160,7 +166,9 @@ class _PostCommentState extends State<PostComment> {
 
   void _onTapAddComment() {
     print("add comment button clicked");
-    //TODO: TextField에 @사용자ID가 붙게 하면서 Keyboard가 나타나게 해야함 (ValueChanged 같은 callback 필요)
-    FocusScope.of(context).requestFocus(widget.focusNode);
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus) currentFocus.unfocus();
+    currentFocus.requestFocus(widget.focusNode);
+    widget.controller.text = "@사용자ID ";
   }
 }

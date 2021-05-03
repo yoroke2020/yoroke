@@ -24,7 +24,7 @@ class YrkTextField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final void Function(String)? handleSubmission;
   final void Function(String)? handleChange;
-  final TextEditingController? textEditingController;
+  final TextEditingController? controller;
   final FocusNode? focusNode;
 
   YrkTextField({
@@ -40,7 +40,7 @@ class YrkTextField extends StatelessWidget {
     this.textInputAction,
     this.handleSubmission,
     this.handleChange,
-    this.textEditingController,
+    this.controller,
     this.focusNode,
     // Comment
     this.isPrivate = false,
@@ -57,7 +57,8 @@ class YrkTextField extends StatelessWidget {
       textInputAction: textInputAction,
       onSubmitted: handleSubmission,
       onChanged: handleChange,
-      controller: textEditingController,
+      controller: controller,
+      keyboardType: TextInputType.multiline,
     );
   }
 

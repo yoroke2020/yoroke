@@ -430,7 +430,7 @@ class _SearchState extends State<Search> {
                   textInputAction: TextInputAction.search,
                   handleSubmission: _handleSubmission,
                   handleChange: _handleChange,
-                  textEditingController: searchTextController,
+                  controller: searchTextController,
                 )),
           ),
           ..._buildSearchBody(),

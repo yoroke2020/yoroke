@@ -61,6 +61,7 @@ class YrkModelBottomSheet extends StatelessWidget {
                           onTap: () => Navigator.of(context).pop(),
                           icon: "assets/icons/icon_clear_24_px.svg",
                               width: 24.0, height: 24.0),
+                Spacer(),
                 getModalWidget(context)
               ],
             )));
