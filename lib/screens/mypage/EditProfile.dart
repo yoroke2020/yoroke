@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextField.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
@@ -14,7 +15,7 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: YrkAppBar(label: "프로필 편집", type: YrkAppBarType.arrowBackOnly),
+      appBar: YrkAppBar(label: "프로필 편집", type: YrkAppBarType.arrowBackMidTitle),
       body: Container(
         padding: const EdgeInsets.all(16),
         width: MediaQuery.of(context).size.width,
@@ -30,14 +31,12 @@ class _EditProfileState extends State<EditProfile> {
                   children: <Widget>[
                     InkWell(
                         onTap: () {},
-                        child: Container(
+                        child: YrkIconButton(
                           padding: EdgeInsets.zero,
                           width: 188,
                           height: 188,
-                          child: Image.asset(
-                            "assets/icons/account_circle_default_24_px.png",
-                            fit: BoxFit.fill,
-                          ),
+                          icon: "assets/icons/account_circle_default_36_px.svg",
+                          onTap: () {},
                         )),
                     YrkButton(
                       width: 98,

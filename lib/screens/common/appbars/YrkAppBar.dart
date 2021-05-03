@@ -10,6 +10,7 @@ enum YrkAppBarType {
   accountCircleAll,
   arrowBackAll,
   arrowBackOnly,
+  arrowBackMidTitle,
   TextSearchNotification
 }
 
@@ -41,6 +42,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
         );
       case YrkAppBarType.arrowBackAll:
       case YrkAppBarType.arrowBackOnly:
+      case YrkAppBarType.arrowBackMidTitle:
         return YrkIconButton(
           icon: "assets/icons/icon_arrow_back_24_px.svg",
           width: 24.0,
@@ -53,7 +55,11 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   get getTitle {
-    if (label != "")
+    if (label != "") if (type == YrkAppBarType.arrowBackMidTitle)
+      return Text(label!,
+          style: const YrkTextStyle(fontWeight: FontWeight.w700),
+          textAlign: TextAlign.left);
+    else
       return Text(label!,
           style:
               const YrkTextStyle(fontWeight: FontWeight.w700, fontSize: 22.0),
@@ -110,6 +116,9 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
         ),
       );
+    if (ret.length == 0) {
+      ret.add(SizedBox(width: 32));
+    }
     return Wrap(children: ret);
   }
 
@@ -128,10 +137,11 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
               : EdgeInsets.all(0),
           margin: EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               getLeading(context),
+              if (type == YrkAppBarType.arrowBackMidTitle) Spacer(),
               getTitle,
               Spacer(),
               getActions,

@@ -5,18 +5,17 @@ import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
-import 'package:yoroke/screens/info/InfoShareCardListItem.dart';
 
-class BookmarkList extends StatefulWidget {
-  BookmarkList({Key? key, required this.onPushNavigator}) : super(key: key);
+class HistoryList extends StatefulWidget {
+  HistoryList({Key? key, required this.onPushNavigator}) : super(key: key);
 
   final ValueChanged<YrkData>? onPushNavigator;
 
   @override
-  _BookmarkListState createState() => _BookmarkListState();
+  _HistoryListState createState() => _HistoryListState();
 }
 
-class _BookmarkListState extends State<BookmarkList>
+class _HistoryListState extends State<HistoryList>
     with TickerProviderStateMixin {
   static final int tabLength = 3;
 
@@ -34,7 +33,7 @@ class _BookmarkListState extends State<BookmarkList>
     super.dispose();
   }
 
-  List<Widget> _postListItem(int pageIndex) {
+  List<Widget> _infoShareCardListItem(int pageIndex) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 8; i++) {
       list.add(new YrkPageListItem(
@@ -43,49 +42,6 @@ class _BookmarkListState extends State<BookmarkList>
         subPageItem: SubPageItem.post,
         onPushNavigator: widget.onPushNavigator,
       ));
-    }
-    return list;
-  }
-
-  List<Widget> _findCardListItem(int pageIndex) {
-    double _expandWidth = MediaQuery.of(context).size.width - 32 - 16;
-
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < 8; i++) {
-      list.add(new InfoShareCardListItem(
-        width: _expandWidth,
-        height: 104,
-        index: i,
-        onPushNavigator: widget.onPushNavigator,
-      ));
-    }
-    return list;
-  }
-
-  List<Widget> _infoShareCardListItem(int pageIndex) {
-    double _expandWidth = MediaQuery.of(context).size.width - 32 - 16;
-
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < 8; i++) {
-      list.add(Container(
-          width: _expandWidth,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InfoShareCardListItem(
-                width: (_expandWidth - 24) / 2,
-                height: (_expandWidth - 24) / 2,
-                index: i,
-                onPushNavigator: widget.onPushNavigator,
-              ),
-              InfoShareCardListItem(
-                width: (_expandWidth - 24) / 2,
-                height: (_expandWidth - 24) / 2,
-                index: i + 1,
-                onPushNavigator: widget.onPushNavigator,
-              ),
-            ],
-          )));
     }
 
     return list;
@@ -104,19 +60,19 @@ class _BookmarkListState extends State<BookmarkList>
           tabWidth: 99,
           tabViewHeight:
               MediaQuery.of(context).size.height - kToolbarHeight - 40.0 - 48.0,
-          tabTextList: ["게시물", "시설", "정보"],
+          tabTextList: ["후기", "고민/질문", "구인구직"],
           tabViewList: [
             YrkListView(
               pageIndex: 0,
               itemCount: 8,
               scrollable: true,
-              item: _postListItem(0),
+              item: _infoShareCardListItem(0),
             ),
             YrkListView(
               pageIndex: 1,
               itemCount: 8,
               scrollable: true,
-              item: _findCardListItem(1),
+              item: _infoShareCardListItem(1),
             ),
             YrkListView(
               pageIndex: 2,

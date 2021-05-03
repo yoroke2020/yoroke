@@ -4,6 +4,8 @@ import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/mypage/BookmarkList.dart';
 import 'package:yoroke/screens/mypage/EditProfile.dart';
+import 'package:yoroke/screens/mypage/HistoryList.dart';
+import 'package:yoroke/screens/mypage/SettingList.dart';
 
 var tiles = [
   {"text": "프로필 편집", "icon": "assets/icons/icon_naver.png"},
@@ -31,91 +33,89 @@ class YrkDrawer extends Drawer {
   YrkDrawer({
     Key? key,
     required this.onPushNavigator,
+    required BuildContext context,
   }) : super(
             key: key,
-            child: ListView.separated(
-                itemCount: textlist.length + 2,
-                separatorBuilder: (_, __) => const Divider(
-                      color: Color(0xffe5e5e5),
-                      thickness: 1,
-                      indent: 60,
-                      height: 1,
-                    ),
-                itemBuilder: (context, index) {
-                  // header
-                  if (index == 0) {
-                    return DrawerHeader(
-                      child: InkWell(
+            child: Container(
+              // height: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      DrawerHeader(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             YrkIconButton(
-                              icon:
-                                  "assets/icons/account_circle_default_36_px.svg",
-                              width: 44,
-                              height: 44,
-                              padding: EdgeInsets.all(0),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => EditProfile()),
-                                );
-                              },
-                            ),
-                            InkWell(
-                              child: Text(
-                                "비회원",
+                                icon:
+                                    "assets/icons/account_circle_default_36_px.svg",
+                                width: 44,
+                                height: 44,
+                                padding: EdgeInsets.all(0),
+                                onTap: () {}),
+                            Text("비회원",
                                 style: YrkTextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                ),
-                                softWrap: true,
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => EditProfile()),
-                                );
-                              },
-                            )
+                                )),
                           ],
                         ),
                       ),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.white)),
-                    );
-                  }
-                  index -= 1;
-
-                  // tail
-                  if (index == textlist.length) {
-                    return ListTile(
-                      leading: Container(
-                          padding: EdgeInsets.zero,
-                          child: YrkIconButton(
-                            icon: "assets/icons/icon_save_black_24_px.svg",
-                            width: 22,
-                            height: 22,
-                            onTap: () {},
-                          )),
-                      title: Container(
-                          padding: EdgeInsets.zero,
-                          child: Text(
-                            "d",
-                            style: YrkTextStyle(fontSize: 16, height: 1),
-                            textAlign: TextAlign.left,
-                          )),
-                    );
-                  }
-                  // index -= 1;
-                  return ListTile(
+                      Container(
+                          height: 200,
+                          child: ListView.separated(
+                              itemCount: textlist.length,
+                              separatorBuilder: (_, index) {
+                                return const Divider(
+                                  color: Color(0xffe5e5e5),
+                                  thickness: 1,
+                                  indent: 60,
+                                  height: 1,
+                                );
+                              },
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  leading: Container(
+                                      padding: EdgeInsets.zero,
+                                      child: YrkIconButton(
+                                        icon: imagelist[index],
+                                        width: 22,
+                                        height: 22,
+                                        onTap: () {},
+                                      )),
+                                  title: Container(
+                                      padding: EdgeInsets.zero,
+                                      child: Text(
+                                        textlist[index],
+                                        style: YrkTextStyle(
+                                            fontSize: 16, height: 1),
+                                        textAlign: TextAlign.left,
+                                      )),
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      var tablist = [
+                                        EditProfile(),
+                                        BookmarkList(
+                                            onPushNavigator: onPushNavigator),
+                                        HistoryList(
+                                            onPushNavigator: onPushNavigator),
+                                        SettingList(
+                                            onPushNavigator: onPushNavigator),
+                                      ];
+                                      return tablist[index];
+                                    }));
+                                  },
+                                );
+                              })),
+                    ],
+                  ),
+                  ListTile(
                     leading: Container(
                         padding: EdgeInsets.zero,
                         child: YrkIconButton(
-                          icon: imagelist[index],
+                          icon: "assets/icons/icon_settings_24_px.svg",
                           width: 22,
                           height: 22,
                           onTap: () {},
@@ -123,22 +123,21 @@ class YrkDrawer extends Drawer {
                     title: Container(
                         padding: EdgeInsets.zero,
                         child: Text(
-                          textlist[index],
+                          "설정",
                           style: YrkTextStyle(fontSize: 16, height: 1),
                           textAlign: TextAlign.left,
                         )),
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        var tablist = [
-                          EditProfile(),
-                          BookmarkList(onPushNavigator: onPushNavigator),
-                          EditProfile(),
-                          EditProfile(),
-                        ];
-                        return tablist[index];
-                      }));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SettingList(
+                                  onPushNavigator: onPushNavigator)));
                     },
-                  );
-                }));
+                  ),
+                ],
+              ),
+            )
+            //
+            );
 }
