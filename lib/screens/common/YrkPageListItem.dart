@@ -28,22 +28,14 @@ class YrkPageListItem extends StatelessWidget {
         false; // Rating appears next to a comment icon on the second line
     switch (subPageItem) {
       // Add case here when new kinds of pageListItem is defined
-      case SubPageItem.homePopular:
-        // TODO: Handle this case.
-        break;
-      case SubPageItem.homeHistory:
-        // TODO: Handle this case.
-        break;
-      case SubPageItem.boardQna:
-        break;
       case SubPageItem.boardJobFinding:
         isText = false;
-        break;
-      case SubPageItem.boardReview:
         break;
       case SubPageItem.post:
         isRating = true;
         isBestIcon = true;
+        break;
+      default:
         break;
     }
     return InkWell(

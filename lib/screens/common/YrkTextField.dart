@@ -6,7 +6,7 @@ import 'YrkTextStyle.dart';
 enum TextFieldType { solid, search, comment, rect, board }
 
 // ignore: must_be_immutable
-class YrkTextField extends StatefulWidget {
+class YrkTextField extends StatelessWidget {
   final TextFieldType textFieldType;
 
   final double? width;
@@ -25,6 +25,7 @@ class YrkTextField extends StatefulWidget {
   final void Function(String)? handleSubmission;
   final void Function(String)? handleChange;
   final TextEditingController? textEditingController;
+  final FocusNode? focusNode;
 
   YrkTextField({
     Key? key,
@@ -40,27 +41,23 @@ class YrkTextField extends StatefulWidget {
     this.handleSubmission,
     this.handleChange,
     this.textEditingController,
-
+    this.focusNode,
     // Comment
     this.isPrivate = false,
   }) : super(key: key);
 
-  @override
-  _YrkTextFieldState createState() => _YrkTextFieldState();
-}
-
-class _YrkTextFieldState extends State<YrkTextField> {
   Widget getChild() {
     return TextField(
-      key: widget.key,
-      obscureText: widget.obscureText ?? false,
+      focusNode: focusNode,
+      key: key,
+      obscureText: obscureText ?? false,
       cursorColor: Color(0xfff5df4d),
       cursorWidth: 2,
       decoration: getDeco(),
-      textInputAction: widget.textInputAction,
-      onSubmitted: widget.handleSubmission,
-      onChanged: widget.handleChange,
-      controller: widget.textEditingController,
+      textInputAction: textInputAction,
+      onSubmitted: handleSubmission,
+      onChanged: handleChange,
+      controller: textEditingController,
     );
   }
 
@@ -85,7 +82,7 @@ class _YrkTextFieldState extends State<YrkTextField> {
     Widget? _suffixIcon;
     Color? _fillColor;
 
-    switch (widget.textFieldType) {
+    switch (textFieldType) {
       case TextFieldType.solid:
         _border = OutlineInputBorder(
           borderSide: BorderSide(color: Color(0x4d000000), width: 1),
@@ -96,7 +93,7 @@ class _YrkTextFieldState extends State<YrkTextField> {
           borderRadius: _borderRound,
         );
         _suffixIcon = _suffixIconClear;
-        _fillColor = widget.fillColor ?? Color(0xfff0f0f0);
+        _fillColor = fillColor ?? Color(0xfff0f0f0);
         break;
 
       case TextFieldType.rect:
@@ -109,13 +106,13 @@ class _YrkTextFieldState extends State<YrkTextField> {
           borderRadius: _borderRect,
         );
 
-        _fillColor = widget.fillColor ?? Color(0xfff0f0f0);
+        _fillColor = fillColor ?? Color(0xfff0f0f0);
         _suffixIcon = _suffixIconClear;
 
         break;
 
       case TextFieldType.search:
-        _fillColor = widget.fillColor ?? Color(0xfff0f0f0);
+        _fillColor = fillColor ?? Color(0xfff0f0f0);
         _border = _noBorder;
         _focusedBorder = _noBorder;
         _enabledBorder = _noBorder;
@@ -124,14 +121,14 @@ class _YrkTextFieldState extends State<YrkTextField> {
         break;
 
       case TextFieldType.comment:
-        _fillColor = widget.fillColor ?? Color(0x000000);
+        _fillColor = fillColor ?? Color(0x000000);
         _border = _noBorder;
         _focusedBorder = _noBorder;
         _enabledBorder = _noBorder;
         break;
 
       case TextFieldType.board:
-        _fillColor = widget.fillColor ?? Color(0x000000);
+        _fillColor = fillColor ?? Color(0x000000);
         _border = _noBorder;
         _focusedBorder = _noBorder;
         _enabledBorder = _noBorder;
@@ -139,8 +136,8 @@ class _YrkTextFieldState extends State<YrkTextField> {
 
       default:
         return InputDecoration(
-          hintText: widget.label,
-          errorText: widget.errorText,
+          hintText: label,
+          errorText: errorText,
           suffixIcon: Icon(Icons.cancel, color: Colors.black),
         );
     }
@@ -154,16 +151,16 @@ class _YrkTextFieldState extends State<YrkTextField> {
       suffixIcon: _suffixIcon,
       fillColor: _fillColor,
       hintStyle: _hintStyle,
-      hintText: widget.label,
-      errorText: widget.errorText,
+      hintText: label,
+      errorText: errorText,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width,
-      height: widget.height,
+      width: width,
+      height: height,
       child: getChild(),
     );
   }

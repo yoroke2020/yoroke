@@ -21,12 +21,6 @@ class _HomeHistoryState extends State<HomeHistory> {
   String titleText = "타이틀";
   String subTitleText = "서브 타이틀";
 
-  void _onButtonClicked() {
-    setState(() {
-      widgetVisible = widgetVisible ? false : true;
-    });
-  }
-
   @override
   initState() {
     data = widget.data;
