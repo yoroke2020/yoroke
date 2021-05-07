@@ -35,24 +35,53 @@ class _PostState extends State<Post> {
   bool _isLiked = false;
   bool _isDisliked = false;
 
-  late int _itemIndex = 0;
+  late int _itemIndex;
+  late String _postTitle;
+
   ScrollController _scrollController = ScrollController();
   TextEditingController _textEditingController = TextEditingController();
   late QuillController _quillController;
   late Document _document;
 
+  final List<String> imageAssetList = [
+    "assets/icons/icon_share_24_px.svg",
+    "assets/icons/icon_save_black_24_px.svg",
+    "assets/icons/icon_share_24_px.svg",
+    "assets/icons/icon_save_black_24_px.svg",
+    "assets/icons/icon_share_24_px.svg",
+    "assets/icons/icon_save_black_24_px.svg",
+  ];
+
+  final List<String> titleList = [
+    "공유하기",
+    "저장하기",
+    "글 복사하기",
+    "게시물 숨기기",
+    "사용자 차단하기",
+    "신고하기"
+  ];
+
   @override
   void initState() {
     super.initState();
+    _itemIndex = widget.data!.i1!;
     _loadFromAssets();
-    print("quill " + jsonEncode(_quillController.document.toDelta().toJson()));
   }
 
   Future<void> _loadFromAssets() async {
-    if (testPostData[0].body != "")
-      _document = Document.fromJson(jsonDecode(testPostData[0].body));
-    else
+    if (testPostData.length - 1 >= _itemIndex) {
+      if (testPostData[_itemIndex].body != "") {
+        _postTitle = testPostData[_itemIndex].title;
+        _document =
+            Document.fromJson(jsonDecode(testPostData[_itemIndex].body));
+      } else {
+        _postTitle = "샘플 제목 #" + _itemIndex.toString();
+        _document = Document();
+      }
+    } else {
+      _postTitle = "샘플 제목 #" + _itemIndex.toString();
       _document = Document();
+    }
 
     setState(() {
       _quillController = QuillController(
@@ -98,7 +127,7 @@ class _PostState extends State<Post> {
                       Container(
                           width: double.maxFinite,
                           height: 32.0,
-                          child: Text(testPostData[0].title,
+                          child: Text("요양병원 후기",
                               style: const YrkTextStyle(
                                   color: const Color(0x99000000)))),
                       Container(
@@ -129,7 +158,7 @@ class _PostState extends State<Post> {
                                   ))),
                               Padding(
                                 padding: EdgeInsets.only(left: 4.0),
-                                child: Text(testLongString[_itemIndex],
+                                child: Text(_postTitle,
                                     style: const YrkTextStyle(
                                         color: const Color(0xe6000000),
                                         fontWeight: FontWeight.w700,
@@ -207,7 +236,14 @@ class _PostState extends State<Post> {
                         Expanded(
                           flex: 1,
                           child: InkWell(
-                            onTap: _onTapBodyMore,
+                            onTap: () => showYrkModalBottomSheet(
+                              context: context,
+                              type: YrkModelBottomSheetType.post,
+                              labelList: titleList,
+                              imageList: imageAssetList,
+                              listHeight: 400.0,
+                              onTap: (index) => Navigator.of(context).pop(),
+                            ),
                             child: Center(
                               child: Icon(Icons.more_horiz,
                                   color: const Color(0x4d000000), size: 24.0),
@@ -378,17 +414,13 @@ class _PostState extends State<Post> {
     });
   }
 
-  void _onTapBodyMore() {
-    print("_onTapBodyMore clicked");
-    _getModalBottomSheet(context);
-  }
-
   void _onTapNavigatorPrev() {
     print("previous page tapped");
     //TODO: When Min hits, not to navigate
     if (_itemIndex > 0) {
       setState(() {
         _itemIndex--;
+        _loadFromAssets();
       });
     } else {}
   }
@@ -398,42 +430,8 @@ class _PostState extends State<Post> {
     //TODO: When Max hits, not to navigate
     setState(() {
       _itemIndex++;
+      _loadFromAssets();
     });
-  }
-
-  void _getModalBottomSheet(BuildContext context) {
-    final List<String> imageAssetList = [
-      "assets/icons/icon_share_24_px.svg",
-      "assets/icons/icon_save_black_24_px.svg",
-      "assets/icons/icon_share_24_px.svg",
-      "assets/icons/icon_save_black_24_px.svg",
-      "assets/icons/icon_share_24_px.svg",
-      "assets/icons/icon_save_black_24_px.svg",
-    ];
-
-    final List<String> titleList = [
-      "공유하기",
-      "저장하기",
-      "글 복사하기",
-      "게시물 숨기기",
-      "사용자 차단하기",
-      "신고하기"
-    ];
-
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return YrkModelBottomSheet(
-            type: YrkModelBottomSheetType.post,
-            labelList: titleList,
-            imageList: imageAssetList,
-            listHeight: 356.0,
-            onTap: (index) {
-              print(index);
-              Navigator.of(context).pop();
-            },
-          );
-        });
   }
 
   void _onTapRegisterButton(String comment) {

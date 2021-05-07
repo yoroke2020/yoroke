@@ -31,15 +31,10 @@ class _YrkMbsRadioButtonListState extends State<YrkMbsRadioButtonList> {
           groupValue: groupValue,
           onSelected: (index) => setState(() {
                 groupValue = index;
+                widget.onTap(groupValue);
               })));
     }
     return Wrap(children: list);
-  }
-
-  void _onTapSelectCategory(BuildContext context) {
-    print("onTapSelectCategory");
-    widget.onTap(groupValue);
-    Navigator.of(context).pop();
   }
 
   @override
@@ -48,21 +43,18 @@ class _YrkMbsRadioButtonListState extends State<YrkMbsRadioButtonList> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        InkWell(
-          onTap: () => _onTapSelectCategory(context),
-          child: Container(
-              margin: EdgeInsets.only(left: 8.0, bottom: 4.0),
-              width: double.maxFinite,
-              height: 40,
-              child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Text("게시글 카테고리 선택",
-                      style: const YrkTextStyle(
-                        color: const Color(0x99000000),
-                        fontWeight: FontWeight.w500,
-                      ),
-                      textAlign: TextAlign.left))),
-        ),
+        Container(
+            margin: EdgeInsets.only(left: 8.0, bottom: 4.0),
+            width: double.maxFinite,
+            height: 40,
+            child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Text("게시글 카테고리 선택",
+                    style: const YrkTextStyle(
+                      color: const Color(0x99000000),
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.left))),
         Container(
             margin: EdgeInsets.only(left: 8.0, bottom: 11.0),
             width: double.maxFinite,

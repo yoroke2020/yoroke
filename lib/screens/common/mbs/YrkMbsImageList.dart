@@ -42,7 +42,7 @@ class YrkMbsImageList extends StatelessWidget {
             width: double.maxFinite,
             height: 48.0,
             child: YrkButton(
-              width: 328.0,
+              width: 328.0 / 360 * MediaQuery.of(context).size.width,
               height: 48.0,
               buttonType: ButtonType.outline,
               fillColor: const Color(0xffffffff),

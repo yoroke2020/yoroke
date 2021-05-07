@@ -249,7 +249,14 @@ class _PostCreateState extends State<PostCreate> {
         return Container();
     }
     return InkWell(
-      onTap: () => _getBoardModalBottomSheet(context),
+      onTap: () => showYrkModalBottomSheet(
+          context: context,
+          type: YrkModelBottomSheetType.createPost,
+          title: "후기게시판",
+          labelList: labelList,
+          listHeight: 452.0,
+          defaultRadioGroupIndex: selectedCategoryIndex,
+          onTap: (index) => _onTapModelBottomSheetRadioButton(index)),
       child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: selectedCategoryIndex == -1
@@ -277,22 +284,6 @@ class _PostCreateState extends State<PostCreate> {
     );
   }
 
-  void _getBoardModalBottomSheet(BuildContext context) {
-    FocusScope.of(context).unfocus();
-    showModalBottomSheet<dynamic>(
-        context: context,
-        isScrollControlled: true,
-        builder: (BuildContext context) {
-          return YrkModelBottomSheet(
-              type: YrkModelBottomSheetType.createPost,
-              title: "후기게시판",
-              labelList: labelList,
-              listHeight: 452.0,
-              defaultRadioGroupIndex: selectedCategoryIndex,
-              onTap: (index) => _onTapModelBottomSheetRadioButton(index));
-        });
-  }
-
   void _onTapModelBottomSheetRadioButton(int index) {
     _isCategorySelected = true;
     selectedCategoryIndex = index;
@@ -307,9 +298,8 @@ class _PostCreateState extends State<PostCreate> {
   }
 
   void _onPressedRegister(BuildContext context) {
-    print("onRegisterPressed");
-
-    PostData data = PostData(_titleController.text, jsonEncode(_bodyController.document.toDelta().toJson()));
+    PostData data = PostData(_titleController.text,
+        jsonEncode(_bodyController.document.toDelta().toJson()));
     testPostData.add(data);
     Navigator.pop(context);
   }

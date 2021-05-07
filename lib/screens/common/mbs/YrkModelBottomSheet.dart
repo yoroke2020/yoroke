@@ -12,8 +12,35 @@ enum YrkModelBottomSheetType {
   search,
 }
 
-class YrkModelBottomSheet extends StatelessWidget {
-  const YrkModelBottomSheet(
+Future<T?> showYrkModalBottomSheet<T>({
+  required BuildContext context,
+  required YrkModelBottomSheetType type,
+  String? title,
+  required List<String> labelList,
+  List<String>? imageList,
+  double? listHeight,
+  ValueChanged<int>? onTap,
+  int? defaultRadioGroupIndex,
+}) async {
+  FocusScope.of(context).unfocus();
+  showModalBottomSheet<dynamic>(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return _YrkModelBottomSheet(
+          type: type,
+          title: title,
+          labelList: labelList,
+          imageList: imageList,
+          listHeight: listHeight,
+          onTap: onTap,
+          defaultRadioGroupIndex: defaultRadioGroupIndex,
+        );
+      });
+}
+
+class _YrkModelBottomSheet extends StatelessWidget {
+  const _YrkModelBottomSheet(
       {required this.type,
       this.title = "Default",
       required this.labelList,
@@ -31,7 +58,7 @@ class YrkModelBottomSheet extends StatelessWidget {
 
   final int? defaultRadioGroupIndex;
 
-  Widget getModalWidget(BuildContext context) {
+  get _getModalWidget {
     switch (type) {
       case YrkModelBottomSheetType.post:
         return YrkMbsImageList(
@@ -49,9 +76,12 @@ class YrkModelBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(listHeight);
     double heightFactor = listHeight != null
         ? listHeight! / MediaQuery.of(context).size.height
         : 1;
+
+    print("heightFactor = " + heightFactor.toString());
 
     return FractionallySizedBox(
       heightFactor: heightFactor,
@@ -76,7 +106,7 @@ class YrkModelBottomSheet extends StatelessWidget {
                       width: 24.0,
                       height: 24.0),
                   Spacer(),
-                  getModalWidget(context)
+                  _getModalWidget
                 ],
               ))),
     );
