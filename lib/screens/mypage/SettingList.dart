@@ -2,15 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkIconButton.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
-
-var textlist = [
-  "로그인 정보",
-  "알림 설정",
-  "이용약관",
-  "개인정보처리방침",
-  "버전 정보",
-];
+import 'package:yoroke/screens/mypage/NotiSetting.dart';
+import 'package:yoroke/screens/mypage/Rule.dart';
 
 class SettingList extends StatefulWidget {
   SettingList({Key? key, required this.onPushNavigator}) : super(key: key);
@@ -46,13 +41,14 @@ class _SettingListState extends State<SettingList>
         type: YrkAppBarType.arrowBackMidTitle,
         label: "설정",
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(4),
+      body: Container(
+        height: double.infinity,
+        padding: EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              height: 500,
+              height: 400,
               child: ListView.separated(
                 itemCount: 5,
                 separatorBuilder: (_, index) {
@@ -63,35 +59,79 @@ class _SettingListState extends State<SettingList>
                   );
                 },
                 itemBuilder: (context, index) {
+                  var textlist = [
+                    "로그인 정보",
+                    "알림 설정",
+                    "이용약관",
+                    "개인정보처리방침",
+                    "버전 정보",
+                  ];
+
+                  var traillist = [
+                    YrkIconButton(
+                      icon: 'assets/icons/icon_naver_logo.svg',
+                      onTap: () {},
+                    ),
+                    YrkIconButton(
+                      icon: 'assets/icons/icon_arrow_back_24_px.svg',
+                      onTap: () {},
+                    ),
+                    YrkIconButton(
+                      icon: 'assets/icons/icon_arrow_back_24_px.svg',
+                      onTap: () {},
+                    ),
+                    YrkIconButton(
+                      icon: 'assets/icons/icon_arrow_back_24_px.svg',
+                      onTap: () {},
+                    ),
+                    Text("v.0.0.0")
+                  ];
+
                   return ListTile(
                     title: Text(textlist[index]),
-                    // TODO: trailing
-                    // trailing: Container(
-                    //     padding: EdgeInsets.zero,
-                    //     child: YrkIconButton(
-                    //       icon: imagelist[index],
-                    //       width: 22,
-                    //       height: 22,
-                    //       onTap: () {},
-                    //     )),
+                    trailing: Container(
+                        padding: EdgeInsets.zero, child: traillist[index]),
+                    onTap: () {
+                      if (index == 0 || index == 4)
+                        return null;
+                      else
+                        index -= 1;
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        var tablist = [
+                          NotiSetting(onPushNavigator: widget.onPushNavigator),
+                          Rule(type: 0),
+                          Rule(type: 1),
+                        ];
+                        return tablist[index];
+                      }));
+                    },
                   );
                 },
               ),
             ),
             Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  padding: EdgeInsets.all(4),
+                  padding: EdgeInsets.all(8),
                   child: YrkButton(
                     buttonType: ButtonType.text,
                     label: "회원탈퇴",
+                    textStyle: YrkTextStyle(
+                        fontWeight: FontWeight.normal,
+                        color: Color(0x4d000000)),
                     onPressed: () {},
                   ),
                 ),
-                YrkButton(
-                    buttonType: ButtonType.outline,
-                    label: "로그아웃",
-                    onPressed: () {}),
+                Container(
+                  padding: EdgeInsets.all(8),
+                  child: YrkButton(
+                      buttonType: ButtonType.outline,
+                      label: "로그아웃",
+                      textStyle: YrkTextStyle(fontWeight: FontWeight.bold),
+                      onPressed: () {}),
+                ),
               ],
             ),
           ],

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextField.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
 class EditProfile extends StatefulWidget {
@@ -39,14 +40,19 @@ class _EditProfileState extends State<EditProfile> {
                           onTap: () {},
                         )),
                     YrkButton(
-                      width: 98,
-                      height: 24,
-                      buttonType: ButtonType.solid,
+                      buttonType: ButtonType.chip,
                       label: '사진 변경하기',
+                      textStyle: YrkTextStyle(fontWeight: FontWeight.bold),
                       onPressed: () {},
                     ),
-                    YrkTextField(
-                      textFieldType: TextFieldType.board,
+                    Container(
+                      padding: EdgeInsets.all(16),
+                      child: YrkTextField(
+                        textFieldType: TextFieldType.board,
+                        style: YrkTextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 32),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     Container(
                       child: Text("요로케에 표시되는 사용자 이름입니다."),
@@ -56,7 +62,11 @@ class _EditProfileState extends State<EditProfile> {
                 ),
               ),
               YrkButton(
-                  buttonType: ButtonType.solid, label: "저장", onPressed: () {}),
+                textStyle: YrkTextStyle(fontWeight: FontWeight.bold),
+                buttonType: ButtonType.solid,
+                label: "저장",
+                onPressed: () {},
+              ),
             ],
           ),
         ),

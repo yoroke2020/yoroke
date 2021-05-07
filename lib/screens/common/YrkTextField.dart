@@ -12,6 +12,9 @@ class YrkTextField extends StatefulWidget {
   final double? width;
   final double? height;
 
+  final TextStyle? style;
+  final TextAlign textAlign;
+
   final String? label;
   final String? errorText;
   final bool? obscureText;
@@ -40,6 +43,8 @@ class YrkTextField extends StatefulWidget {
     this.handleSubmission,
     this.handleChange,
     this.textEditingController,
+    this.style,
+    this.textAlign = TextAlign.start,
 
     // Comment
     this.isPrivate = false,
@@ -57,6 +62,8 @@ class _YrkTextFieldState extends State<YrkTextField> {
       cursorColor: Color(0xfff5df4d),
       cursorWidth: 2,
       decoration: getDeco(),
+      style: widget.style,
+      textAlign: widget.textAlign,
       textInputAction: widget.textInputAction,
       onSubmitted: widget.handleSubmission,
       onChanged: widget.handleChange,
