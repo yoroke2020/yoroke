@@ -22,7 +22,7 @@ class YrkButton extends StatefulWidget {
 
   final double? borderWidth;
 
-  bool? clickable;
+  final bool? clickable;
 
   YrkButton({
     Key? key,
@@ -39,7 +39,7 @@ class YrkButton extends StatefulWidget {
     this.image = "",
 
     // Button Status
-    this.clickable,
+    this.clickable = true,
     this.borderWidth,
   }) : super(key: key);
 
@@ -193,7 +193,7 @@ class _YrkButtonState extends State<YrkButton> {
       width: widget.width,
       height: widget.height,
       child: OutlinedButton(
-        onPressed: widget.onPressed,
+        onPressed: widget.clickable! ? widget.onPressed : null,
         child: getChild(),
         style: getButtonStyle(),
       ),

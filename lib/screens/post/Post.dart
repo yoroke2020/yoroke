@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/models/documents/document.dart';
+import 'package:flutter_quill/widgets/controller.dart';
+import 'package:flutter_quill/widgets/editor.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
@@ -22,15 +28,74 @@ class Post extends StatefulWidget {
 class _PostState extends State<Post> {
   FocusNode _focusNode = new FocusNode();
   List<Widget> _commentList = <Widget>[];
+  int _commentCount = 0;
+
   int _likeCount = 154;
   int _dislikeCount = 64;
   bool _isLiked = false;
   bool _isDisliked = false;
 
+  late int _itemIndex;
+  late String _postTitle;
+
+  ScrollController _scrollController = ScrollController();
+  TextEditingController _textEditingController = TextEditingController();
+  late QuillController _quillController;
+  late Document _document;
+
+  final List<String> imageAssetList = [
+    "assets/icons/icon_share_24_px.svg",
+    "assets/icons/icon_save_black_24_px.svg",
+    "assets/icons/icon_share_24_px.svg",
+    "assets/icons/icon_save_black_24_px.svg",
+    "assets/icons/icon_share_24_px.svg",
+    "assets/icons/icon_save_black_24_px.svg",
+  ];
+
+  final List<String> titleList = [
+    "공유하기",
+    "저장하기",
+    "글 복사하기",
+    "게시물 숨기기",
+    "사용자 차단하기",
+    "신고하기"
+  ];
+
   @override
   void initState() {
-    _commentList.add(PostComment(focusNode: _focusNode, index: 0));
     super.initState();
+    _itemIndex = widget.data!.i1!;
+    _loadFromAssets();
+  }
+
+  Future<void> _loadFromAssets() async {
+    if (testPostData.length - 1 >= _itemIndex) {
+      if (testPostData[_itemIndex].body != "") {
+        _postTitle = testPostData[_itemIndex].title;
+        _document =
+            Document.fromJson(jsonDecode(testPostData[_itemIndex].body));
+      } else {
+        _postTitle = "샘플 제목 #" + _itemIndex.toString();
+        _document = Document();
+      }
+    } else {
+      _postTitle = "샘플 제목 #" + _itemIndex.toString();
+      _document = Document();
+    }
+
+    setState(() {
+      _quillController = QuillController(
+          document: _document,
+          selection: const TextSelection.collapsed(offset: 0));
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _textEditingController.dispose();
+    _quillController.dispose();
+    super.dispose();
   }
 
   @override
@@ -45,36 +110,40 @@ class _PostState extends State<Post> {
           type: YrkAppBarType.arrowBackOnly,
         ),
         body: SingleChildScrollView(
+            controller: _scrollController,
             child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom:
-                          BorderSide(color: const Color(0xffe5e5e5), width: 1)),
-                  color: const Color(0xffffffff)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                      width: double.maxFinite,
-                      height: 32.0,
-                      child: Text("요양병원 후기",
-                          style: const YrkTextStyle(
-                              color: const Color(0x99000000)))),
-                  Container(
-                      width: double.maxFinite,
-                      height: 32.0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Visibility(
-                              visible: true,
-                              child: Container(
-                                  child: YrkButton(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                              color: const Color(0xffe5e5e5), width: 1)),
+                      color: const Color(0xffffffff)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                          width: double.maxFinite,
+                          height: 32.0,
+                          child: Text("요양병원 후기",
+                              style: const YrkTextStyle(
+                                  color: const Color(0x99000000)))),
+                      Container(
+                          width: double.maxFinite,
+                          height: 32.0,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Visibility(
+                                  //TODO: change it when the best appears
+                                  visible: testShortString[_itemIndex] == "요양병원"
+                                      ? true
+                                      : false,
+                                  child: Container(
+                                      child: YrkButton(
                                     buttonType: ButtonType.chip,
                                     width: 27.0,
                                     height: 16.0,
@@ -87,150 +156,177 @@ class _PostState extends State<Post> {
                                     clickable: false,
                                     onPressed: () {},
                                   ))),
-                          Padding(
-                            padding: EdgeInsets.only(left: 4.0),
-                            child: Text("조문기의 요양병원",
-                                style: const YrkTextStyle(
-                                    color: const Color(0xe6000000),
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 16.0)),
-                          )
-                        ],
-                      )),
-                  Container(
-                      width: double.maxFinite,
-                      height: 65.0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.only(right: 6.0),
-                              child: SvgPicture.asset(
-                                  "assets/icons/account_circle_default_36_px.svg",
-                                  width: 32.0,
-                                  height: 32.0)),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text("유저에용",
-                                  style: const TextStyle(
-                                      color: const Color(0x4d000000))),
-                              Row(children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.only(right: 8.0),
-                                  child: Text("20.10.22",
-                                      style: const YrkTextStyle(
-                                          color: const Color(0x4d000000))),
-                                ),
-                                Text("17:04",
+                              Padding(
+                                padding: EdgeInsets.only(left: 4.0),
+                                child: Text(_postTitle,
                                     style: const YrkTextStyle(
-                                        color: const Color(0x4d000000)))
-                              ]),
+                                        color: const Color(0xe6000000),
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16.0)),
+                              )
                             ],
-                          )
-                        ],
-                      )),
-                ],
-              ),
-            ),
-            Container(
-                // Post Main
-                padding: EdgeInsets.only(
-                    left: 16.0, right: 16.0, top: 16.0, bottom: 48.0),
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                            color: const Color(0xffe5e5e5), width: 1)),
-                    color: const Color(0xffffffff)),
-                width: double.maxFinite,
-                child: Text(widget.data!.i1!.toString(),
-                    style: const YrkTextStyle(fontSize: 16.0))),
-            Container(
-                // Bottom Like/UnLike Widget Bar
-                width: double.maxFinite,
-                height: 32.0,
-                child: Row(
-                  children: <Widget>[
-                    _getLikeWidgetButton(true),
-                    _getLikeWidgetButton(false),
-                    Expanded(
-                      flex: 1,
-                      child: InkWell(
-                        onTap: _onTapBodyMore,
-                        child: Center(
-                          child: Icon(Icons.more_horiz,
-                              color: const Color(0x4d000000), size: 24.0),
-                        ),
-                      ),
-                    )
-                  ],
-                )),
-            Container(
-              // Post Navigator
-              width: double.maxFinite,
-              height: 97.0,
-              decoration: BoxDecoration(
-                  border: Border.symmetric(
-                      horizontal:
-                          BorderSide(color: const Color(0xffeaeaea), width: 8)),
-                  color: const Color(0xffffffff)),
-              child: Column(children: <Widget>[
-                _getPostNavigatorWidget(false),
-                _getPostNavigatorWidget(true),
-              ]),
-            ),
-            Padding(
-                // Comments
-                padding: EdgeInsets.only(bottom: 68.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                        width: double.maxFinite,
-                        height: 41.0,
-                        padding: EdgeInsets.symmetric(horizontal: 16.0),
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                                    color: const Color(0xffe5e5e5), width: 1))),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(right: 4.0),
-                              child: Text("댓글",
-                                  style: const YrkTextStyle(
-                                    color: const Color(0x99000000),
-                                    height: 1.2,
-                                  )),
+                          )),
+                      Container(
+                          width: double.maxFinite,
+                          height: 65.0,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                  padding: EdgeInsets.only(right: 6.0),
+                                  child: SvgPicture.asset(
+                                      "assets/icons/account_circle_default_36_px.svg",
+                                      width: 32.0,
+                                      height: 32.0)),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text("유저에용",
+                                      style: const TextStyle(
+                                          color: const Color(0x4d000000))),
+                                  Row(children: <Widget>[
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 8.0),
+                                      child: Text("20.10.22",
+                                          style: const YrkTextStyle(
+                                              color: const Color(0x4d000000))),
+                                    ),
+                                    Text("17:04",
+                                        style: const YrkTextStyle(
+                                            color: const Color(0x4d000000)))
+                                  ]),
+                                ],
+                              )
+                            ],
+                          )),
+                    ],
+                  ),
+                ),
+                Container(
+                    // Post Main
+                    padding: EdgeInsets.only(
+                        left: 16.0, right: 16.0, top: 16.0, bottom: 48.0),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(
+                                color: const Color(0xffe5e5e5), width: 1)),
+                        color: const Color(0xffffffff)),
+                    width: double.maxFinite,
+                    child: QuillEditor(
+                      focusNode: FocusNode(),
+                      scrollable: true,
+                      readOnly: true,
+                      autoFocus: false,
+                      expands: false,
+                      showCursor: false,
+                      scrollController: ScrollController(),
+                      padding: EdgeInsets.all(0),
+                      controller: _quillController,
+                    )),
+                Container(
+                    // Bottom Like/UnLike Widget Bar
+                    width: double.maxFinite,
+                    height: 32.0,
+                    child: Row(
+                      children: <Widget>[
+                        _getLikeWidgetButton(true),
+                        _getLikeWidgetButton(false),
+                        Expanded(
+                          flex: 1,
+                          child: InkWell(
+                            onTap: () => showYrkModalBottomSheet(
+                              context: context,
+                              type: YrkModelBottomSheetType.post,
+                              labelList: titleList,
+                              imageList: imageAssetList,
+                              listHeight: 400.0,
+                              onTap: (index) => Navigator.of(context).pop(),
                             ),
-                            Text("43",
-                                style: const YrkTextStyle(
-                                  fontFamily: "Helvetica",
-                                  color: const Color(0x99000000),
+                            child: Center(
+                              child: Icon(Icons.more_horiz,
+                                  color: const Color(0x4d000000), size: 24.0),
+                            ),
+                          ),
+                        )
+                      ],
+                    )),
+                Container(
+                  // Post Navigator
+                  width: double.maxFinite,
+                  height: _itemIndex > 0 ? 97.0 : 56.0,
+                  decoration: BoxDecoration(
+                      border: Border.symmetric(
+                          horizontal: BorderSide(
+                              color: const Color(0xffeaeaea), width: 8)),
+                      color: const Color(0xffffffff)),
+                  child: Column(children: <Widget>[
+                    _itemIndex > 0
+                        ? _getPostNavigatorWidget(false)
+                        : Container(),
+                    _getPostNavigatorWidget(true),
+                  ]),
+                ),
+                Padding(
+                    // Comments
+                    padding: EdgeInsets.only(bottom: 68.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                            width: double.maxFinite,
+                            height: 41.0,
+                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
+                                        color: const Color(0xffe5e5e5),
+                                        width: 1))),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(right: 4.0),
+                                  child: Text("댓글",
+                                      style: const YrkTextStyle(
+                                        color: const Color(0x99000000),
+                                        height: 1.2,
+                                      )),
+                                ),
+                                Text(_commentCount.toString(),
+                                    style: const YrkTextStyle(
+                                      fontFamily: "Helvetica",
+                                      color: const Color(0x99000000),
+                                    ))
+                              ],
+                            )),
+                        _commentList.isEmpty
+                            ? Padding(
+                                padding: EdgeInsets.only(top: 48.0),
+                                child: Text(
+                                  "등록된 댓글이 없습니다. 댓글을 남겨보세요.",
+                                  style: const TextStyle(
+                                    color: const Color(0x99000000),
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ))
-                          ],
-                        )),
-                    _commentList.isEmpty
-                        ? Padding(
-                            padding: EdgeInsets.only(top: 48.0),
-                            child: Text(
-                              "등록된 댓글이 없습니다. 댓글을 남겨보세요.",
-                              style: const TextStyle(
-                                color: const Color(0x99000000),
+                            : YrkListView(
+                                height: 120 * _commentCount.toDouble(),
+                                item: _commentList,
+                                itemCount: _commentCount,
                               ),
-                              textAlign: TextAlign.center,
-                            ))
-                        : YrkListView(item: _commentList),
-                  ],
-                )),
-          ],
-        )),
-        bottomNavigationBar: BottomBarComment(focusNode: _focusNode),
+                      ],
+                    )),
+              ],
+            )),
+        bottomNavigationBar: BottomBarComment(
+          focusNode: _focusNode,
+          controller: _textEditingController,
+          onTapRegister: (comment) => _onTapRegisterButton(comment),
+        ),
       ),
     );
   }
@@ -283,7 +379,10 @@ class _PostState extends State<Post> {
                     child: Text(isNext ? "다음" : "이전",
                         style: const YrkTextStyle(
                             color: const Color(0x99000000)))),
-                Text(isNext ? "정홍규의 요양병원" : "제목",
+                Text(
+                    isNext
+                        ? testLongString[_itemIndex + 1]
+                        : testLongString[_itemIndex - 1],
                     style: const YrkTextStyle(fontSize: 16.0)),
                 Spacer(),
                 SvgPicture.asset(
@@ -315,51 +414,36 @@ class _PostState extends State<Post> {
     });
   }
 
-  void _onTapBodyMore() {
-    print("_onTapBodyMore clicked");
-    _getModalBottomSheet(context);
-  }
-
   void _onTapNavigatorPrev() {
     print("previous page tapped");
+    //TODO: When Min hits, not to navigate
+    if (_itemIndex > 0) {
+      setState(() {
+        _itemIndex--;
+        _loadFromAssets();
+      });
+    } else {}
   }
 
   void _onTapNavigatorNext() {
     print("next page tapped");
+    //TODO: When Max hits, not to navigate
+    setState(() {
+      _itemIndex++;
+      _loadFromAssets();
+    });
   }
 
-  void _getModalBottomSheet(BuildContext context) {
-    final List<String> imageAssetList = [
-      "assets/icons/icon_share_24_px.svg",
-      "assets/icons/icon_save_black_24_px.svg",
-      "assets/icons/icon_share_24_px.svg",
-      "assets/icons/icon_save_black_24_px.svg",
-      "assets/icons/icon_share_24_px.svg",
-      "assets/icons/icon_save_black_24_px.svg",
-    ];
-
-    final List<String> titleList = [
-      "공유하기",
-      "저장하기",
-      "글 복사하기",
-      "게시물 숨기기",
-      "사용자 차단하기",
-      "신고하기"
-    ];
-
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return YrkModelBottomSheet(
-            type: YrkModelBottomSheetType.post,
-            labelList: titleList,
-            imageList: imageAssetList,
-            listHeight: 356.0,
-            onTap: (index) {
-              print(index);
-              Navigator.of(context).pop();
-            },
-          );
-        });
+  void _onTapRegisterButton(String comment) {
+    setState(() {
+      _commentList.add(PostComment(
+          focusNode: _focusNode,
+          index: _commentCount,
+          comment: comment,
+          controller: _textEditingController));
+      _commentCount++;
+      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 1000), curve: Curves.easeOut);
+    });
   }
 }

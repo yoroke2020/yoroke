@@ -6,9 +6,13 @@ import '../YrkButton.dart';
 import '../YrkTextField.dart';
 
 class BottomBarComment extends StatefulWidget {
-  BottomBarComment({this.focusNode});
+  BottomBarComment({required this.focusNode,
+    required this.controller,
+    required this.onTapRegister});
 
-  final FocusNode? focusNode;
+  final FocusNode focusNode;
+  final TextEditingController controller;
+  final ValueChanged<String> onTapRegister;
 
   @override
   _BottomBarCommentState createState() => _BottomBarCommentState();
@@ -16,14 +20,40 @@ class BottomBarComment extends StatefulWidget {
 
 class _BottomBarCommentState extends State<BottomBarComment> {
   bool isPrivate = false;
-  final textFieldController = TextEditingController();
+  bool isClickable = false;
+  late String initCommentText;
+
+  @override
+  void initState() {
+    super.initState();
+    initCommentText = widget.controller.text;
+    widget.controller.addListener(() {
+      setState(() {
+        _onTextChanged();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(() {
+      _onTextChanged();
+    });
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.height);
+    print(MediaQuery
+        .of(context)
+        .size
+        .height);
 
     return Transform.translate(
-        offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
+        offset: Offset(0.0, -1 * MediaQuery
+            .of(context)
+            .viewInsets
+            .bottom),
         child: BottomAppBar(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -39,12 +69,14 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                       label: "댓글을 남겨보세요",
                       textFieldType: TextFieldType.comment,
                       focusNode: widget.focusNode,
+                      controller: widget.controller,
                     ),
                   ),
                   InkWell(
-                    onTap: () => setState(() {
-                      isPrivate = isPrivate ? false : true;
-                    }),
+                    onTap: () =>
+                        setState(() {
+                          isPrivate = isPrivate ? false : true;
+                        }),
                     child: Container(
                       width: 32.0,
                       height: 32.0,
@@ -59,28 +91,54 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                       child: Center(
                         child: isPrivate
                             ? Image.asset("assets/icons/icon_lock_24_px.png",
-                                color: const Color(0x4d000000),
-                                width: 20.0,
-                                height: 20.0)
+                            color: const Color(0x4d000000),
+                            width: 20.0,
+                            height: 20.0)
                             : Image.asset(
-                                "assets/icons/icon_lock_open_24_px.png",
-                                color: const Color(0x4d000000),
-                                width: 20.0,
-                                height: 20.0),
+                            "assets/icons/icon_lock_open_24_px.png",
+                            color: const Color(0x4d000000),
+                            width: 20.0,
+                            height: 20.0),
                       ),
                     ),
                   ),
                   YrkButton(
                     buttonType: ButtonType.outlinechip,
                     label: '등록',
-                    fillColor: const Color(0x4d000000),
-                    textStyle: YrkTextStyle(color: const Color(0x4d000000)),
-                    onPressed: () => print("register button clicked"),
+                    fillColor: isClickable
+                        ? const Color(0xfff5df4d)
+                        : const Color(0xffffffff),
+                    borderColor: isClickable
+                        ? const Color(0xfff5df4d)
+                        : const Color(0x4d000000),
+                    borderWidth: 1.0,
+                    textStyle: YrkTextStyle(
+                        color: isClickable
+                            ? const Color(0x99000000)
+                            : const Color(0x4d000000)),
+                    onPressed: () => _onPressedRegisterComment(),
                     width: 64.0,
                     height: 32.0,
+                    clickable: isClickable ? true : false,
                   ),
                 ]),
           ),
         ));
+  }
+
+  void _onPressedRegisterComment() {
+    String comment = widget.controller.text;
+    print(comment);
+    if (comment != "") {
+      widget.onTapRegister(comment);
+      widget.controller.text = "";
+      isClickable = false;
+      FocusScope.of(context).unfocus();
+    }
+  }
+
+  void _onTextChanged() {
+    isClickable =
+    widget.controller.text.length > initCommentText.length ? true : false;
   }
 }

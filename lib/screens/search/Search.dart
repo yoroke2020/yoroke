@@ -113,7 +113,15 @@ class _SearchState extends State<Search> {
       // search result
       // [0] select category
       widgetList.add(InkWell(
-          onTap: () => _getSearchModalBottomSheet(context),
+          onTap: () => showYrkModalBottomSheet(
+              context: context,
+              type: YrkModelBottomSheetType.search,
+              labelList: categoryList,
+              listHeight: 284.0,
+              onTap: (index) {
+                Navigator.of(context).pop();
+                _handleCategorySelection(index);
+              }),
           child: Container(
               height: 48,
               decoration: BoxDecoration(
@@ -387,23 +395,6 @@ class _SearchState extends State<Search> {
     );
   }
 
-  void _getSearchModalBottomSheet(BuildContext context) {
-    FocusScope.of(context).unfocus();
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return YrkModelBottomSheet(
-            type: YrkModelBottomSheetType.search,
-            labelList: categoryList,
-            listHeight: 284.0,
-            onTap: (index) {
-              Navigator.of(context).pop();
-              _handleCategorySelection(index);
-            },
-          );
-        });
-  }
-
   void _handleCategorySelection(int index) {
     this.selectedCategoryIndex = index;
     setState(() {});
@@ -430,7 +421,7 @@ class _SearchState extends State<Search> {
                   textInputAction: TextInputAction.search,
                   handleSubmission: _handleSubmission,
                   handleChange: _handleChange,
-                  textEditingController: searchTextController,
+                  controller: searchTextController,
                 )),
           ),
           ..._buildSearchBody(),
