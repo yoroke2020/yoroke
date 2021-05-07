@@ -5,18 +5,22 @@ import '../YrkTextStyle.dart';
 
 class YrkMbsRadioButtonList extends StatefulWidget {
   YrkMbsRadioButtonList(
-      {required this.title, required this.labelList, required this.onTap});
+      {required this.title,
+      required this.labelList,
+      required this.onTap,
+      this.defaultRadioGroupIndex = -1});
 
   final String title;
   final List<String> labelList;
   final ValueChanged<int> onTap;
+  final int defaultRadioGroupIndex;
 
   @override
   _YrkMbsRadioButtonListState createState() => _YrkMbsRadioButtonListState();
 }
 
 class _YrkMbsRadioButtonListState extends State<YrkMbsRadioButtonList> {
-  int groupValue = -1;
+  late int groupValue = widget.defaultRadioGroupIndex;
 
   get yrkMbsRadioButtonList {
     List<Widget> list = <Widget>[];
@@ -47,7 +51,7 @@ class _YrkMbsRadioButtonListState extends State<YrkMbsRadioButtonList> {
         InkWell(
           onTap: () => _onTapSelectCategory(context),
           child: Container(
-              margin: EdgeInsets.only(left: 24.0, bottom: 4.0),
+              margin: EdgeInsets.only(left: 8.0, bottom: 4.0),
               width: double.maxFinite,
               height: 40,
               child: Align(
@@ -60,7 +64,7 @@ class _YrkMbsRadioButtonListState extends State<YrkMbsRadioButtonList> {
                       textAlign: TextAlign.left))),
         ),
         Container(
-            margin: EdgeInsets.only(left: 24.0, bottom: 11.0),
+            margin: EdgeInsets.only(left: 8.0, bottom: 11.0),
             width: double.maxFinite,
             height: 48.0,
             child: Align(
@@ -89,7 +93,6 @@ class _YrkMbsRadioButtonListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.0),
       width: double.maxFinite,
       height: 49.0,
       decoration: BoxDecoration(

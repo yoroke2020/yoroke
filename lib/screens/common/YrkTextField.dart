@@ -5,7 +5,6 @@ import 'YrkTextStyle.dart';
 
 enum TextFieldType { solid, search, comment, rect, board }
 
-// ignore: must_be_immutable
 class YrkTextField extends StatelessWidget {
   final TextFieldType textFieldType;
 
@@ -19,7 +18,8 @@ class YrkTextField extends StatelessWidget {
   final Color? fillColor;
   final Color? borderColor;
 
-  bool? isPrivate;
+  final bool? isPrivate;
+  final bool? isMultiline;
 
   final TextInputAction? textInputAction;
   final void Function(String)? handleSubmission;
@@ -27,42 +27,27 @@ class YrkTextField extends StatelessWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;
 
-  YrkTextField({
-    Key? key,
-    this.textFieldType = TextFieldType.solid,
-    this.width,
-    this.height,
-    this.label,
-    this.errorText,
-    this.obscureText,
-    this.fillColor,
-    this.borderColor,
-    this.textInputAction,
-    this.handleSubmission,
-    this.handleChange,
-    this.controller,
-    this.focusNode,
-    // Comment
-    this.isPrivate = false,
-  }) : super(key: key);
+  YrkTextField(
+      {Key? key,
+      this.textFieldType = TextFieldType.solid,
+      this.width,
+      this.height,
+      this.label,
+      this.errorText,
+      this.obscureText,
+      this.fillColor,
+      this.borderColor,
+      this.textInputAction,
+      this.handleSubmission,
+      this.handleChange,
+      this.controller,
+      this.focusNode,
+      // Comment
+      this.isPrivate = false,
+      this.isMultiline = false})
+      : super(key: key);
 
-  Widget getChild() {
-    return TextField(
-      focusNode: focusNode,
-      key: key,
-      obscureText: obscureText ?? false,
-      cursorColor: Color(0xfff5df4d),
-      cursorWidth: 2,
-      decoration: getDeco(),
-      textInputAction: textInputAction,
-      onSubmitted: handleSubmission,
-      onChanged: handleChange,
-      controller: controller,
-      keyboardType: TextInputType.multiline,
-    );
-  }
-
-  InputDecoration getDeco() {
+  get getInputDecoration {
     Icon _suffixIconClear = Icon(Icons.cancel, color: Colors.grey);
     BorderRadius _borderRound = const BorderRadius.all(Radius.circular(100));
     BorderRadius _borderRect = const BorderRadius.all(Radius.circular(8));
@@ -159,10 +144,26 @@ class YrkTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selectionTheme = TextSelectionTheme.of(context);
+
     return Container(
       width: width,
       height: height,
-      child: getChild(),
+      child: TextField(
+      focusNode: focusNode,
+      key: key,
+      obscureText: obscureText ?? false,
+      cursorColor: selectionTheme.cursorColor,
+      cursorRadius: const Radius.circular(2),
+      decoration: getInputDecoration,
+      textInputAction: textInputAction,
+      onSubmitted: handleSubmission,
+      onChanged: handleChange,
+      controller: controller,
+      keyboardType: isMultiline! ? TextInputType.multiline : TextInputType.text,
+      minLines: 1,
+      maxLines: isMultiline! ? null : 1,
+    ),
     );
   }
 }

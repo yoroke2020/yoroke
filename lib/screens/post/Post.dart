@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/models/documents/document.dart';
+import 'package:flutter_quill/widgets/controller.dart';
+import 'package:flutter_quill/widgets/editor.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
@@ -30,14 +35,38 @@ class _PostState extends State<Post> {
   bool _isLiked = false;
   bool _isDisliked = false;
 
-  late int _itemIndex;
+  late int _itemIndex = 0;
   ScrollController _scrollController = ScrollController();
   TextEditingController _textEditingController = TextEditingController();
+  late QuillController _quillController;
+  late Document _document;
 
   @override
   void initState() {
     super.initState();
-    _itemIndex = widget.data!.i1!;
+    _loadFromAssets();
+    print("quill " + jsonEncode(_quillController.document.toDelta().toJson()));
+  }
+
+  Future<void> _loadFromAssets() async {
+    if (testPostData[0].body != "")
+      _document = Document.fromJson(jsonDecode(testPostData[0].body));
+    else
+      _document = Document();
+
+    setState(() {
+      _quillController = QuillController(
+          document: _document,
+          selection: const TextSelection.collapsed(offset: 0));
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _textEditingController.dispose();
+    _quillController.dispose();
+    super.dispose();
   }
 
   @override
@@ -69,7 +98,7 @@ class _PostState extends State<Post> {
                       Container(
                           width: double.maxFinite,
                           height: 32.0,
-                          child: Text("요양병원 후기",
+                          child: Text(testPostData[0].title,
                               style: const YrkTextStyle(
                                   color: const Color(0x99000000)))),
                       Container(
@@ -80,7 +109,7 @@ class _PostState extends State<Post> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Visibility(
-                                //TODO: change it when the best appears
+                                  //TODO: change it when the best appears
                                   visible: testShortString[_itemIndex] == "요양병원"
                                       ? true
                                       : false,
@@ -156,8 +185,17 @@ class _PostState extends State<Post> {
                                 color: const Color(0xffe5e5e5), width: 1)),
                         color: const Color(0xffffffff)),
                     width: double.maxFinite,
-                    child: Text(_itemIndex.toString(),
-                        style: const YrkTextStyle(fontSize: 16.0))),
+                    child: QuillEditor(
+                      focusNode: FocusNode(),
+                      scrollable: true,
+                      readOnly: true,
+                      autoFocus: false,
+                      expands: false,
+                      showCursor: false,
+                      scrollController: ScrollController(),
+                      padding: EdgeInsets.all(0),
+                      controller: _quillController,
+                    )),
                 Container(
                     // Bottom Like/UnLike Widget Bar
                     width: double.maxFinite,
@@ -188,7 +226,9 @@ class _PostState extends State<Post> {
                               color: const Color(0xffeaeaea), width: 8)),
                       color: const Color(0xffffffff)),
                   child: Column(children: <Widget>[
-                    _itemIndex > 0 ? _getPostNavigatorWidget(false) : Container(),
+                    _itemIndex > 0
+                        ? _getPostNavigatorWidget(false)
+                        : Container(),
                     _getPostNavigatorWidget(true),
                   ]),
                 ),
@@ -303,7 +343,10 @@ class _PostState extends State<Post> {
                     child: Text(isNext ? "다음" : "이전",
                         style: const YrkTextStyle(
                             color: const Color(0x99000000)))),
-                Text(isNext ? testLongString[_itemIndex + 1] : testLongString[_itemIndex - 1],
+                Text(
+                    isNext
+                        ? testLongString[_itemIndex + 1]
+                        : testLongString[_itemIndex - 1],
                     style: const YrkTextStyle(fontSize: 16.0)),
                 Spacer(),
                 SvgPicture.asset(
