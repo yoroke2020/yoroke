@@ -1,28 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-import '../YrkButton.dart';
 import '../YrkTextStyle.dart';
 
-class YrkMbsImageList extends StatelessWidget {
-  YrkMbsImageList({
+class YrkMbsTextList extends StatelessWidget {
+  YrkMbsTextList({
     required this.labelList,
-    required this.imageList,
     required this.onTap,
   });
 
   final List<String> labelList;
-  final List<String> imageList;
   final ValueChanged<int> onTap;
 
-  get yrkMbsImageList {
+  get yrkMbsTextList {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < labelList.length; i++) {
       list.add(InkWell(
         onTap: () => onTap(i),
-        child: _YrkMbsImageListItem(
-          imageAsset: imageList[i],
+        child: _YrkMbsTextListItem(
           title: labelList[i],
           isBorder: i < labelList.length - 1 ? true : false,
         ),
@@ -36,33 +31,14 @@ class YrkMbsImageList extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        yrkMbsImageList,
-        Container(
-            width: double.maxFinite,
-            height: 48.0,
-            child: YrkButton(
-              width: 328.0 / 360 * MediaQuery.of(context).size.width,
-              height: 48.0,
-              buttonType: ButtonType.outline,
-              fillColor: const Color(0xffffffff),
-              borderColor: const Color(0xfff5df4d),
-              label: "닫기",
-              textStyle: YrkTextStyle(
-                color: const Color(0xe6000000),
-              ),
-              onPressed: () => Navigator.of(context).pop(),
-            ))
-      ],
+      children: <Widget>[yrkMbsTextList],
     );
   }
 }
 
-class _YrkMbsImageListItem extends StatelessWidget {
-  _YrkMbsImageListItem(
-      {required this.imageAsset, required this.title, this.isBorder = true});
+class _YrkMbsTextListItem extends StatelessWidget {
+  _YrkMbsTextListItem({required this.title, this.isBorder = true});
 
-  final String imageAsset;
   final String title;
   final bool isBorder;
 
@@ -70,16 +46,12 @@ class _YrkMbsImageListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
+        margin: EdgeInsets.only(left: 16.0, right: 16.0),
         height: 49.0,
         width: double.maxFinite,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: SvgPicture.asset(imageAsset, width: 24.0, height: 24.0),
-            ),
             Expanded(
                 child: Container(
                     height: 49.0,

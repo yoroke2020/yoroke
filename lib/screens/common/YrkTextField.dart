@@ -5,8 +5,7 @@ import 'YrkTextStyle.dart';
 
 enum TextFieldType { solid, search, comment, rect, board }
 
-// ignore: must_be_immutable
-class YrkTextField extends StatefulWidget {
+class YrkTextField extends StatelessWidget {
   final TextFieldType textFieldType;
 
   final double? width;
@@ -22,12 +21,14 @@ class YrkTextField extends StatefulWidget {
   final Color? fillColor;
   final Color? borderColor;
 
-  bool? isPrivate;
+  final bool? isPrivate;
+  final bool? isMultiline;
 
   final TextInputAction? textInputAction;
   final void Function(String)? handleSubmission;
   final void Function(String)? handleChange;
-  final TextEditingController? textEditingController;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
 
   YrkTextField({
     Key? key,
@@ -42,36 +43,17 @@ class YrkTextField extends StatefulWidget {
     this.textInputAction,
     this.handleSubmission,
     this.handleChange,
-    this.textEditingController,
-    this.style,
-    this.textAlign = TextAlign.start,
-
+    this.controller,
+    this.focusNode,
     // Comment
     this.isPrivate = false,
+    this.isMultiline = false,
+    //
+    this.textAlign = TextAlign.start,
+    this.style,
   }) : super(key: key);
 
-  @override
-  _YrkTextFieldState createState() => _YrkTextFieldState();
-}
-
-class _YrkTextFieldState extends State<YrkTextField> {
-  Widget getChild() {
-    return TextField(
-      key: widget.key,
-      obscureText: widget.obscureText ?? false,
-      cursorColor: Color(0xfff5df4d),
-      cursorWidth: 2,
-      decoration: getDeco(),
-      style: widget.style,
-      textAlign: widget.textAlign,
-      textInputAction: widget.textInputAction,
-      onSubmitted: widget.handleSubmission,
-      onChanged: widget.handleChange,
-      controller: widget.textEditingController,
-    );
-  }
-
-  InputDecoration getDeco() {
+  get getInputDecoration {
     Icon _suffixIconClear = Icon(Icons.cancel, color: Colors.grey);
     BorderRadius _borderRound = const BorderRadius.all(Radius.circular(100));
     BorderRadius _borderRect = const BorderRadius.all(Radius.circular(8));
@@ -92,7 +74,7 @@ class _YrkTextFieldState extends State<YrkTextField> {
     Widget? _suffixIcon;
     Color? _fillColor;
 
-    switch (widget.textFieldType) {
+    switch (textFieldType) {
       case TextFieldType.solid:
         _border = OutlineInputBorder(
           borderSide: BorderSide(color: Color(0x4d000000), width: 1),
@@ -103,7 +85,7 @@ class _YrkTextFieldState extends State<YrkTextField> {
           borderRadius: _borderRound,
         );
         _suffixIcon = _suffixIconClear;
-        _fillColor = widget.fillColor ?? Color(0xfff0f0f0);
+        _fillColor = fillColor ?? Color(0xfff0f0f0);
         break;
 
       case TextFieldType.rect:
@@ -116,13 +98,13 @@ class _YrkTextFieldState extends State<YrkTextField> {
           borderRadius: _borderRect,
         );
 
-        _fillColor = widget.fillColor ?? Color(0xfff0f0f0);
+        _fillColor = fillColor ?? Color(0xfff0f0f0);
         _suffixIcon = _suffixIconClear;
 
         break;
 
       case TextFieldType.search:
-        _fillColor = widget.fillColor ?? Color(0xfff0f0f0);
+        _fillColor = fillColor ?? Color(0xfff0f0f0);
         _border = _noBorder;
         _focusedBorder = _noBorder;
         _enabledBorder = _noBorder;
@@ -131,14 +113,14 @@ class _YrkTextFieldState extends State<YrkTextField> {
         break;
 
       case TextFieldType.comment:
-        _fillColor = widget.fillColor ?? Color(0x000000);
+        _fillColor = fillColor ?? Color(0x000000);
         _border = _noBorder;
         _focusedBorder = _noBorder;
         _enabledBorder = _noBorder;
         break;
 
       case TextFieldType.board:
-        _fillColor = widget.fillColor ?? Color(0x000000);
+        _fillColor = fillColor ?? Color(0x000000);
         _border = _noBorder;
         _focusedBorder = _noBorder;
         _enabledBorder = _noBorder;
@@ -146,8 +128,8 @@ class _YrkTextFieldState extends State<YrkTextField> {
 
       default:
         return InputDecoration(
-          hintText: widget.label,
-          errorText: widget.errorText,
+          hintText: label,
+          errorText: errorText,
           suffixIcon: Icon(Icons.cancel, color: Colors.black),
         );
     }
@@ -161,17 +143,34 @@ class _YrkTextFieldState extends State<YrkTextField> {
       suffixIcon: _suffixIcon,
       fillColor: _fillColor,
       hintStyle: _hintStyle,
-      hintText: widget.label,
-      errorText: widget.errorText,
+      hintText: label,
+      errorText: errorText,
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final selectionTheme = TextSelectionTheme.of(context);
+
     return Container(
-      width: widget.width,
-      height: widget.height,
-      child: getChild(),
+      width: width,
+      height: height,
+      child: TextField(
+        focusNode: focusNode,
+        key: key,
+        obscureText: obscureText ?? false,
+        cursorColor: selectionTheme.cursorColor,
+        cursorRadius: const Radius.circular(2),
+        decoration: getInputDecoration,
+        textInputAction: textInputAction,
+        onSubmitted: handleSubmission,
+        onChanged: handleChange,
+        controller: controller,
+        keyboardType:
+            isMultiline! ? TextInputType.multiline : TextInputType.text,
+        minLines: 1,
+        maxLines: isMultiline! ? null : 1,
+      ),
     );
   }
 }

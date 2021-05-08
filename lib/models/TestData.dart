@@ -245,3 +245,14 @@ List<String> infoShareHospitalTitle = [
   "병원7",
   "병원8",
 ];
+
+class PostData {
+  PostData(this.title, this.body);
+  late String title;
+  late String body;
+}
+
+PostData tempPostData = PostData("","");
+
+List<PostData> testPostData = <PostData>[];
+
