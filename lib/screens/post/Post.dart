@@ -34,6 +34,7 @@ class _PostState extends State<Post> {
   int _dislikeCount = 64;
   bool _isLiked = false;
   bool _isDisliked = false;
+  bool _isMyPost = false;
 
   late int _itemIndex;
   late String _postTitle;
@@ -42,24 +43,6 @@ class _PostState extends State<Post> {
   TextEditingController _textEditingController = TextEditingController();
   late QuillController _quillController;
   late Document _document;
-
-  final List<String> imageAssetList = [
-    "assets/icons/icon_share_24_px.svg",
-    "assets/icons/icon_save_black_24_px.svg",
-    "assets/icons/icon_share_24_px.svg",
-    "assets/icons/icon_save_black_24_px.svg",
-    "assets/icons/icon_share_24_px.svg",
-    "assets/icons/icon_save_black_24_px.svg",
-  ];
-
-  final List<String> titleList = [
-    "공유하기",
-    "저장하기",
-    "글 복사하기",
-    "게시물 숨기기",
-    "사용자 차단하기",
-    "신고하기"
-  ];
 
   @override
   void initState() {
@@ -74,13 +57,16 @@ class _PostState extends State<Post> {
         _postTitle = testPostData[_itemIndex].title;
         _document =
             Document.fromJson(jsonDecode(testPostData[_itemIndex].body));
+        _isMyPost = true;
       } else {
         _postTitle = "샘플 제목 #" + _itemIndex.toString();
         _document = Document();
+        _isMyPost = false;
       }
     } else {
       _postTitle = "샘플 제목 #" + _itemIndex.toString();
       _document = Document();
+      _isMyPost = false;
     }
 
     setState(() {
@@ -238,10 +224,9 @@ class _PostState extends State<Post> {
                           child: InkWell(
                             onTap: () => showYrkModalBottomSheet(
                               context: context,
-                              type: YrkModelBottomSheetType.post,
-                              labelList: titleList,
-                              imageList: imageAssetList,
-                              listHeight: 400.0,
+                              type: _isMyPost
+                                  ? YrkModelBottomSheetType.myPost
+                                  : YrkModelBottomSheetType.otherPost,
                               onTap: (index) => Navigator.of(context).pop(),
                             ),
                             child: Center(

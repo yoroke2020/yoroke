@@ -20,12 +20,6 @@ import 'package:yoroke/screens/common/YrkTextField.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:path/path.dart';
 
-enum PostCreateType {
-  boardReview,
-  boardQna,
-  boardJobFinding,
-}
-
 class PostCreate extends StatefulWidget {
   PostCreate({required this.data});
 
@@ -53,11 +47,10 @@ class _PostCreateState extends State<PostCreate> {
   bool _isTitleEmpty = true;
   bool _isBodyEmpty = true;
 
-  final List<String> labelList = ["요양병원", "요양원", "복지관", "경로당", "노인교실", "보호센터"];
-
   @override
   void initState() {
     super.initState();
+    print("postData = " + widget.data!.prevPageItem.toString());
     _loadFromAssets();
     _titleController.addListener(() {
       setRegisterButtonColor();
@@ -240,20 +233,19 @@ class _PostCreateState extends State<PostCreate> {
 
   Widget _getCreatePostCategory(BuildContext context) {
     // ignore: missing_enum_constant_in_switch
-    switch (widget.data!.postCreateType) {
-      case PostCreateType.boardReview:
-        return Container();
-      case PostCreateType.boardQna:
-        return Container();
-      case PostCreateType.boardJobFinding:
-        return Container();
-    }
+    // switch (widget.data!.postCreateType) {
+    //   case PostCreateType.boardReview:
+    //     return Container();
+    //   case PostCreateType.boardQna:
+    //     return Container();
+    //   case PostCreateType.boardJobFinding:
+    //     return Container();
+    // }
     return InkWell(
       onTap: () => showYrkModalBottomSheet(
           context: context,
           type: YrkModelBottomSheetType.createPost,
           title: "후기게시판",
-          labelList: labelList,
           listHeight: 452.0,
           defaultRadioGroupIndex: selectedCategoryIndex,
           onTap: (index) => _onTapModelBottomSheetRadioButton(index)),
@@ -277,7 +269,8 @@ class _PostCreateState extends State<PostCreate> {
               : Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    labelList[selectedCategoryIndex] + " 후기",
+                    "후기",
+                    // labelList[selectedCategoryIndex] + " 후기",
                     style: const YrkTextStyle(),
                   ),
                 )),

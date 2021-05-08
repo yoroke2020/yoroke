@@ -5,11 +5,12 @@ class YrkIconButton extends InkWell {
   YrkIconButton({
     Key? key,
     required String icon,
-    required Function() onTap,
+    Function()? onTap,
     double width = 24.0,
     double height = 24.0,
     EdgeInsets padding = const EdgeInsets.symmetric(horizontal: 4.0),
     Color? color,
+    bool clickable = true,
   }) : super(
             key: key,
             child: Container(
@@ -27,5 +28,5 @@ class YrkIconButton extends InkWell {
                 ),
               ),
             ),
-            onTap: onTap);
+            onTap: clickable ? onTap : null);
 }

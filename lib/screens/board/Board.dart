@@ -50,7 +50,7 @@ class Board extends StatelessWidget {
       list.add(YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
-        onPushNavigator: onPushNavigator,
+        onPushNavigator: (index) => onPushNavigator,
         subPageItem: subPageItem,
       ));
     }

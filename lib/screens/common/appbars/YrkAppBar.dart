@@ -82,7 +82,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
         break;
     }
 
-    List<Widget> ret = [];
+    List<Widget> ret = <Widget>[];
     if (searchButton)
       ret.add(
         YrkIconButton(

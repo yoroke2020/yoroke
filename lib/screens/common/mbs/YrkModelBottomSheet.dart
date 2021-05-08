@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/models/YrkMbsListData.dart';
 
 import '../YrkIconButton.dart';
 import 'YrkMbsImageList.dart';
@@ -7,7 +8,8 @@ import 'YrkMbsRadioButtonList.dart';
 import 'YrkMbsTextList.dart';
 
 enum YrkModelBottomSheetType {
-  post,
+  myPost,
+  otherPost,
   createPost,
   search,
 }
@@ -16,7 +18,7 @@ Future<T?> showYrkModalBottomSheet<T>({
   required BuildContext context,
   required YrkModelBottomSheetType type,
   String? title,
-  required List<String> labelList,
+  List<String>? labelList,
   List<String>? imageList,
   double? listHeight,
   ValueChanged<int>? onTap,
@@ -40,10 +42,10 @@ Future<T?> showYrkModalBottomSheet<T>({
 }
 
 class _YrkModelBottomSheet extends StatelessWidget {
-  const _YrkModelBottomSheet(
+  _YrkModelBottomSheet(
       {required this.type,
       this.title = "Default",
-      required this.labelList,
+      this.labelList,
       this.imageList,
       this.listHeight,
       this.onTap,
@@ -51,7 +53,7 @@ class _YrkModelBottomSheet extends StatelessWidget {
 
   final YrkModelBottomSheetType type;
   final String? title;
-  final List<String> labelList;
+  final List<String>? labelList;
   final List<String>? imageList;
   final double? listHeight;
   final ValueChanged<int>? onTap;
@@ -60,31 +62,50 @@ class _YrkModelBottomSheet extends StatelessWidget {
 
   get _getModalWidget {
     switch (type) {
-      case YrkModelBottomSheetType.post:
+      case YrkModelBottomSheetType.myPost:
         return YrkMbsImageList(
-            labelList: labelList, imageList: imageList!, onTap: onTap!);
+                labelList: YrkPostMbsListData.myPostLabelList,
+                imageList: YrkPostMbsListData.myPostImageList,
+                onTap: onTap!);
+      case YrkModelBottomSheetType.otherPost:
+        return YrkMbsImageList(
+            labelList: YrkPostMbsListData.otherPostLabelList,
+            imageList: YrkPostMbsListData.otherPostImageList,
+            onTap: onTap!);
       case YrkModelBottomSheetType.createPost:
         return YrkMbsRadioButtonList(
             title: title!,
-            labelList: labelList,
+            labelList: labelList!,
             onTap: onTap!,
             defaultRadioGroupIndex: defaultRadioGroupIndex!);
       case YrkModelBottomSheetType.search:
-        return YrkMbsTextList(labelList: labelList, onTap: onTap!);
+        return YrkMbsTextList(labelList: labelList!, onTap: onTap!);
+
     }
+  }
+
+  get _getListHeight {
+    switch(type) {
+      case YrkModelBottomSheetType.myPost:
+        return 49.0 * YrkPostMbsListData.myPostLabelList.length + 65.0;
+      case YrkModelBottomSheetType.otherPost:
+        return 49.0 * YrkPostMbsListData.otherPostLabelList.length + 65.0;
+      case YrkModelBottomSheetType.createPost:
+        // TODO: Handle this case.
+        break;
+      case YrkModelBottomSheetType.search:
+        // TODO: Handle this case.
+        break;
+
+    }
+
+    return listHeight;
   }
 
   @override
   Widget build(BuildContext context) {
-    print(listHeight);
-    double heightFactor = listHeight != null
-        ? listHeight! / MediaQuery.of(context).size.height
-        : 1;
-
-    print("heightFactor = " + heightFactor.toString());
-
     return FractionallySizedBox(
-      heightFactor: heightFactor,
+      heightFactor: (44.0 + _getListHeight) /  MediaQuery.of(context).size.height,
       child: Container(
           width: double.maxFinite,
           color: const Color(0xFF737373),
