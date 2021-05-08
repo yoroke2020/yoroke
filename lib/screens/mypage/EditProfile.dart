@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextField.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
 class EditProfile extends StatefulWidget {
@@ -14,7 +16,7 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: YrkAppBar(label: "프로필 편집", type: YrkAppBarType.arrowBackOnly),
+      appBar: YrkAppBar(label: "프로필 편집", type: YrkAppBarType.arrowBackMidTitle),
       body: Container(
         padding: const EdgeInsets.all(16),
         width: MediaQuery.of(context).size.width,
@@ -30,24 +32,27 @@ class _EditProfileState extends State<EditProfile> {
                   children: <Widget>[
                     InkWell(
                         onTap: () {},
-                        child: Container(
+                        child: YrkIconButton(
                           padding: EdgeInsets.zero,
                           width: 188,
                           height: 188,
-                          child: Image.asset(
-                            "assets/icons/account_circle_default_24_px.png",
-                            fit: BoxFit.fill,
-                          ),
+                          icon: "assets/icons/account_circle_default_36_px.svg",
+                          onTap: () {},
                         )),
                     YrkButton(
-                      width: 98,
-                      height: 24,
-                      buttonType: ButtonType.solid,
+                      buttonType: ButtonType.chip,
                       label: '사진 변경하기',
+                      textStyle: YrkTextStyle(fontWeight: FontWeight.bold),
                       onPressed: () {},
                     ),
-                    YrkTextField(
-                      textFieldType: TextFieldType.board,
+                    Container(
+                      padding: EdgeInsets.all(16),
+                      child: YrkTextField(
+                        textFieldType: TextFieldType.board,
+                        style: YrkTextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 32),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     Container(
                       child: Text("요로케에 표시되는 사용자 이름입니다."),
@@ -57,7 +62,11 @@ class _EditProfileState extends State<EditProfile> {
                 ),
               ),
               YrkButton(
-                  buttonType: ButtonType.solid, label: "저장", onPressed: () {}),
+                textStyle: YrkTextStyle(fontWeight: FontWeight.bold),
+                buttonType: ButtonType.solid,
+                label: "저장",
+                onPressed: () {},
+              ),
             ],
           ),
         ),

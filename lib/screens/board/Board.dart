@@ -65,7 +65,10 @@ class Board extends StatelessWidget {
           onPushNavigator: onPushNavigator,
           curPageItem: RootPageItem.board,
         ),
-        drawer: YrkDrawer(),
+        drawer: YrkDrawer(
+          onPushNavigator: onPushNavigator,
+          context: context,
+        ),
         body: ListView(
           children: <Widget>[
             YrkTabHeaderView(
