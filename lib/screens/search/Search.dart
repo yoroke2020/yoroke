@@ -249,7 +249,8 @@ class _SearchState extends State<Search> {
         pageIndex: pageIndex,
         listIndex: i,
         onPushNavigator: onPushNavigator,
-        subPageItem: subPageItem,
+        pageType: subPageItem,
+        nextPageItem: SubPageItem.post,
       ));
     }
     return list;

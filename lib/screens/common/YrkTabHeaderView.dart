@@ -29,7 +29,7 @@ class YrkTabHeaderView extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: clickable
-            ? () => onPushNavigator!(new YrkData(nextSubPageItem))
+            ? () => onPushNavigator!(new YrkData(nextPageItem: nextSubPageItem))
             : null,
         child: Container(
             width: this.width,

@@ -215,7 +215,7 @@ class _HomeState extends State<Home> {
                                   textAlign: TextAlign.left),
                               onPressed: () {
                                 widget.onPushNavigator!(
-                                    new YrkData(SubPageItem.homeHistory));
+                                    new YrkData(nextPageItem: SubPageItem.homeHistory));
                               }),
                         ),
                         Expanded(flex: 16, child: Container())

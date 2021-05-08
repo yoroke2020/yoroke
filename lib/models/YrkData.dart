@@ -1,7 +1,8 @@
 import 'package:yoroke/navigator/PageItem.dart';
 
 class YrkData {
-  YrkData(this.nextPageItem, {
+  YrkData({
+    required this.nextPageItem,
     this.prevPageItem,
     this.str0,
     this.str1,

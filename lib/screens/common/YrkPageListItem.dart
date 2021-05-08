@@ -10,13 +10,15 @@ class YrkPageListItem extends StatelessWidget {
   YrkPageListItem({
     required this.pageIndex,
     required this.listIndex,
-    required this.subPageItem,
+    required this.pageType,
+    required this.nextPageItem,
     required this.onPushNavigator,
   });
 
   final int pageIndex;
   final int listIndex;
-  final SubPageItem subPageItem;
+  final pageType;
+  final nextPageItem;
   final ValueChanged<YrkData>? onPushNavigator;
 
   @override
@@ -26,7 +28,7 @@ class YrkPageListItem extends StatelessWidget {
     bool isBestIcon = false; // Best Icon appears next to a title
     bool isRating =
         false; // Rating appears next to a comment icon on the second line
-    switch (subPageItem) {
+    switch (pageType) {
       // Add case here when new kinds of pageListItem is defined
       case SubPageItem.boardJobFinding:
         isText = false;
@@ -39,8 +41,8 @@ class YrkPageListItem extends StatelessWidget {
         break;
     }
     return InkWell(
-      onTap: () => onPushNavigator!(
-          new YrkData(subPageItem, i1: listIndex + pageIndex * 10)),
+      onTap: () => onPushNavigator!(new YrkData(nextPageItem: nextPageItem,
+          prevPageItem: pageType, i1: listIndex + pageIndex * 10)),
       //TODO: YrkData -> API Call
       child: Container(
           width: double.maxFinite,

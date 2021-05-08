@@ -14,7 +14,7 @@ class HomePopularListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () => onPushNavigator!(new YrkData(
-              SubPageItem.boardReview,
+          nextPageItem: SubPageItem.boardReview,
             )),
         child: Container(
             width: double.maxFinite,

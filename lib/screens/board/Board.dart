@@ -16,14 +16,14 @@ class Board extends StatelessWidget {
 
   final ValueChanged<YrkData>? onPushNavigator;
 
-  final bardCardListItemCount = 12;
+  final int _boardCardListItemCount = 12;
 
-  final qnaPageController = PageController();
-  final findJobPageController = PageController();
+  final PageController _qnaPageController = PageController();
+  final PageController _jobFindingPageController = PageController();
 
   get _getBoardReviewCardList {
     List<Widget> list = <Widget>[];
-    for (int i = 0; i < bardCardListItemCount; i++) {
+    for (int i = 0; i < _boardCardListItemCount; i++) {
       list.add(BoardCardListItem(
         width: 64.0,
         height: 76.0,
@@ -38,20 +38,20 @@ class Board extends StatelessWidget {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkListView(
-          itemCount: 4, item: _buildList(i, subPageItem, onPushNavigator!)));
+          itemCount: 4, item: _buildList(i, subPageItem)));
     }
     return list;
   }
 
-  List<Widget> _buildList(int pageIndex, SubPageItem subPageItem,
-      ValueChanged<YrkData> onPushNavigator) {
+  List<Widget> _buildList(int pageIndex, SubPageItem subPageItem) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
-        onPushNavigator: (index) => onPushNavigator,
-        subPageItem: subPageItem,
+        pageType: subPageItem,
+        nextPageItem: SubPageItem.post,
+        onPushNavigator: onPushNavigator,
       ));
     }
     return list;
@@ -79,7 +79,7 @@ class Board extends StatelessWidget {
               scrollable: true,
               scrollDirection: Axis.horizontal,
               item: _getBoardReviewCardList,
-              itemCount: bardCardListItemCount,
+              itemCount: _boardCardListItemCount,
             ),
             YrkTabHeaderView(
               title: "고민/질문",
@@ -88,8 +88,8 @@ class Board extends StatelessWidget {
               nextSubPageItem: SubPageItem.boardQna,
             ),
             YrkPageView(
-              page: _buildBoardYrkListView(SubPageItem.post),
-              controller: qnaPageController,
+              page: _buildBoardYrkListView(SubPageItem.boardQna),
+              controller: _qnaPageController,
               isIndicatorEnabled: true,
             ),
             YrkTabHeaderView(
@@ -99,8 +99,8 @@ class Board extends StatelessWidget {
               nextSubPageItem: SubPageItem.boardJobFinding,
             ),
             YrkPageView(
-                page: _buildBoardYrkListView(SubPageItem.post),
-                controller: findJobPageController,
+                page: _buildBoardYrkListView(SubPageItem.boardJobFinding),
+                controller: _jobFindingPageController,
                 isIndicatorEnabled: true)
           ],
         ));

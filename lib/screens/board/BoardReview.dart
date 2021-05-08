@@ -179,7 +179,8 @@ class _BoardReviewState extends State<BoardReview>
       _reviewFeedList[pageIndex].add(new YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
-        subPageItem: SubPageItem.post,
+        pageType: SubPageItem.boardReview,
+        nextPageItem: SubPageItem.post,
         onPushNavigator: widget.onPushNavigator,
       ));
     }

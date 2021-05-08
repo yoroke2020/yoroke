@@ -20,7 +20,7 @@ class HomeCardListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () => onPushNavigator!(new YrkData(
-              SubPageItem.boardReview,
+          nextPageItem: SubPageItem.boardReview,
             )),
         child: Card(
             shape:

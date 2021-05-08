@@ -146,7 +146,8 @@ class _BoardJobFindingState extends State<BoardJobFinding>
       _boardJobFindingItemList[pageIndex].add(new YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
-        subPageItem: SubPageItem.post,
+        pageType: SubPageItem.boardJobFinding,
+        nextPageItem: SubPageItem.post,
         onPushNavigator: widget.onPushNavigator,
       ));
     }

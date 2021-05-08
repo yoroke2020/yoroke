@@ -88,7 +88,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
         YrkIconButton(
           icon: "assets/icons/icon_search_24_px.svg",
           onTap: () {
-            onPushNavigator!(new YrkData(SubPageItem.search));
+            onPushNavigator!(new YrkData(nextPageItem: SubPageItem.search));
           },
         ),
       );
@@ -96,7 +96,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       ret.add(YrkIconButton(
         icon: "assets/icons/icon_create_24_px.svg",
         onTap: () {
-          onPushNavigator!(new YrkData(SubPageItem.postCreate));
+          onPushNavigator!(new YrkData(nextPageItem: SubPageItem.postCreate));
         },
         // color: Colors.yellow,
       ));
@@ -106,7 +106,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: "assets/icons/icon_notifications_none_24_px.svg",
           padding: EdgeInsets.only(left: 4.0),
           onTap: () {
-            onPushNavigator!(new YrkData(SubPageItem.notice));
+            onPushNavigator!(new YrkData(nextPageItem: SubPageItem.notice));
           },
         ),
       );
