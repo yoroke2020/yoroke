@@ -6,6 +6,7 @@ import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/mypage/NotiSetting.dart';
 import 'package:yoroke/screens/mypage/Rule.dart';
+import 'package:yoroke/screens/mypage/SignOut.dart';
 
 class SettingList extends StatefulWidget {
   SettingList({Key? key, required this.onPushNavigator}) : super(key: key);
@@ -121,7 +122,12 @@ class _SettingListState extends State<SettingList>
                     textStyle: YrkTextStyle(
                         fontWeight: FontWeight.normal,
                         color: Color(0x4d000000)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return SignOut(onPushNavigator: widget.onPushNavigator);
+                      }));
+                    },
                   ),
                 ),
                 Container(
