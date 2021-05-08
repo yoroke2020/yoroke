@@ -117,15 +117,19 @@ class _PostCreateState extends State<PostCreate> {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(147.0),
           child: Column(children: <Widget>[
+            // [1] 1st AppBar - Clear & Save
             Container(
                 width: double.maxFinite,
                 height: 49.0,
                 margin:
-                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                EdgeInsets.only(top: MediaQuery
+                    .of(context)
+                    .padding
+                    .top),
                 decoration: BoxDecoration(
                   border: Border(
                       bottom:
-                          BorderSide(width: 1, color: const Color(0xffe5e5e5))),
+                      BorderSide(width: 1, color: const Color(0xffe5e5e5))),
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -156,22 +160,60 @@ class _PostCreateState extends State<PostCreate> {
                     ],
                   ),
                 )),
-            Container(
-                width: double.maxFinite,
-                height: 49.0,
-                decoration: BoxDecoration(
-                  border: Border(
-                      bottom:
-                          BorderSide(width: 1, color: const Color(0xffe5e5e5))),
-                ),
-                child: _getCreatePostCategory(context)),
+            // [2] 2nd AppBar - Select Category
+            InkWell(
+                onTap: () =>
+                    showYrkModalBottomSheet(
+                        context: context,
+                        pageType: widget.data!.prevPageItem,
+                        title: "후기게시판",
+                        listHeight: 452.0,
+                        defaultRadioGroupIndex: selectedCategoryIndex,
+                        onTap: (index) =>
+                            _onTapModelBottomSheetRadioButton(index)),
+                child: Container(
+                  width: double.maxFinite,
+                  height: 49.0,
+                  decoration: BoxDecoration(
+                    border: Border(
+                        bottom:
+                        BorderSide(width: 1, color: const Color(0xffe5e5e5))),
+                  ),
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: selectedCategoryIndex == -1
+                          ? Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text("게시글의 카테고리를 선택해주세요",
+                              style: const YrkTextStyle(),
+                              textAlign: TextAlign.left),
+                          Spacer(),
+                          SvgPicture.asset(
+                            "assets/icons/icon_navigate_next_24_px.svg",
+                            width: 24.0,
+                            height: 24.0,
+                          )
+                        ],
+                      )
+                          : Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "후기",
+                          // labelList[selectedCategoryIndex] + " 후기",
+                          style: const YrkTextStyle(),
+                        ),
+                      )),
+                )),
+            // [3] 3rd AppBar - Title
             Container(
               width: double.maxFinite,
               height: 49.0,
               decoration: BoxDecoration(
                 border: Border(
                     bottom:
-                        BorderSide(width: 1, color: const Color(0xffe5e5e5))),
+                    BorderSide(width: 1, color: const Color(0xffe5e5e5))),
               ),
               alignment: Alignment.center,
               child: YrkTextField(
@@ -182,9 +224,10 @@ class _PostCreateState extends State<PostCreate> {
                   label: "제목을 입력하세요 (필수)"),
             ),
           ])),
+      // [4] Body - TextField
       body: Padding(
           padding:
-              EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0, bottom: 40.0),
+          EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0, bottom: 40.0),
           child: QuillEditor(
             controller: _bodyController,
             readOnly: false,
@@ -195,8 +238,12 @@ class _PostCreateState extends State<PostCreate> {
             padding: EdgeInsets.all(0),
             expands: false,
           )),
+      // [5] Bottom - Get photo & temp save
       bottomNavigationBar: Transform.translate(
-        offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
+        offset: Offset(0.0, -1 * MediaQuery
+            .of(context)
+            .viewInsets
+            .bottom),
         child: BottomAppBar(
           notchMargin: 0.0,
           child: Container(
@@ -231,52 +278,6 @@ class _PostCreateState extends State<PostCreate> {
     );
   }
 
-  Widget _getCreatePostCategory(BuildContext context) {
-    // ignore: missing_enum_constant_in_switch
-    // switch (widget.data!.postCreateType) {
-    //   case PostCreateType.boardReview:
-    //     return Container();
-    //   case PostCreateType.boardQna:
-    //     return Container();
-    //   case PostCreateType.boardJobFinding:
-    //     return Container();
-    // }
-    return InkWell(
-      onTap: () => showYrkModalBottomSheet(
-          context: context,
-          type: YrkModelBottomSheetType.createPost,
-          title: "후기게시판",
-          listHeight: 452.0,
-          defaultRadioGroupIndex: selectedCategoryIndex,
-          onTap: (index) => _onTapModelBottomSheetRadioButton(index)),
-      child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: selectedCategoryIndex == -1
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text("게시글의 카테고리를 선택해주세요",
-                        style: const YrkTextStyle(), textAlign: TextAlign.left),
-                    Spacer(),
-                    SvgPicture.asset(
-                      "assets/icons/icon_navigate_next_24_px.svg",
-                      width: 24.0,
-                      height: 24.0,
-                    )
-                  ],
-                )
-              : Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "후기",
-                    // labelList[selectedCategoryIndex] + " 후기",
-                    style: const YrkTextStyle(),
-                  ),
-                )),
-    );
-  }
-
   void _onTapModelBottomSheetRadioButton(int index) {
     _isCategorySelected = true;
     selectedCategoryIndex = index;
@@ -286,7 +287,7 @@ class _PostCreateState extends State<PostCreate> {
   Future<String> _onImagePickCallback(File file) async {
     final appDocDir = await getApplicationDocumentsDirectory();
     final copiedFile =
-        await file.copy('${appDocDir.path}/${basename(file.path)}');
+    await file.copy('${appDocDir.path}/${basename(file.path)}');
     return copiedFile.path.toString();
   }
 

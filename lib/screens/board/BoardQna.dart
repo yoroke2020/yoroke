@@ -68,6 +68,7 @@ class _BoardQnaState extends State<BoardQna> {
       appBar: YrkAppBar(
         type: YrkAppBarType.arrowBackAll,
         onPushNavigator: widget.onPushNavigator!,
+        curPageItem: SubPageItem.boardQna,
         isStatusBar: false,
       ),
       body: Column(

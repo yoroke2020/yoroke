@@ -1,22 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkMbsListData.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 
 import '../YrkIconButton.dart';
 import 'YrkMbsImageList.dart';
 import 'YrkMbsRadioButtonList.dart';
 import 'YrkMbsTextList.dart';
 
-enum YrkModelBottomSheetType {
-  myPost,
-  otherPost,
-  createPost,
-  search,
-}
-
 Future<T?> showYrkModalBottomSheet<T>({
   required BuildContext context,
-  required YrkModelBottomSheetType type,
+  required pageType,
   String? title,
   List<String>? labelList,
   List<String>? imageList,
@@ -30,7 +24,7 @@ Future<T?> showYrkModalBottomSheet<T>({
       isScrollControlled: true,
       builder: (BuildContext context) {
         return _YrkModelBottomSheet(
-          type: type,
+          pageType: pageType,
           title: title,
           labelList: labelList,
           imageList: imageList,
@@ -43,7 +37,7 @@ Future<T?> showYrkModalBottomSheet<T>({
 
 class _YrkModelBottomSheet extends StatelessWidget {
   _YrkModelBottomSheet(
-      {required this.type,
+      {required this.pageType,
       this.title = "Default",
       this.labelList,
       this.imageList,
@@ -51,7 +45,7 @@ class _YrkModelBottomSheet extends StatelessWidget {
       this.onTap,
       this.defaultRadioGroupIndex = -1});
 
-  final YrkModelBottomSheetType type;
+  final pageType;
   final String? title;
   final List<String>? labelList;
   final List<String>? imageList;
@@ -60,43 +54,65 @@ class _YrkModelBottomSheet extends StatelessWidget {
 
   final int? defaultRadioGroupIndex;
 
+  final double _yrkMbsImageListOffset = 104.0;
+  final double _yrkMbsRadioButtonListOffset = 158.0;
+
   get _getModalWidget {
-    switch (type) {
-      case YrkModelBottomSheetType.myPost:
-        return YrkMbsImageList(
-                labelList: YrkPostMbsListData.myPostLabelList,
-                imageList: YrkPostMbsListData.myPostImageList,
-                onTap: onTap!);
-      case YrkModelBottomSheetType.otherPost:
+    switch (pageType) {
+      // case SubPageItem.post:
+      //   return YrkMbsImageList(
+      //           labelList: YrkPostMbsListData.myPostLabelList,
+      //           imageList: YrkPostMbsListData.myPostImageList,
+      //           onTap: onTap!);
+      case SubPageItem.post:
         return YrkMbsImageList(
             labelList: YrkPostMbsListData.otherPostLabelList,
             imageList: YrkPostMbsListData.otherPostImageList,
             onTap: onTap!);
-      case YrkModelBottomSheetType.createPost:
+      case SubPageItem.boardReview:
         return YrkMbsRadioButtonList(
             title: title!,
-            labelList: labelList!,
+            labelList: YrkPostCreateMbsListData.boardReviewLabelList,
             onTap: onTap!,
             defaultRadioGroupIndex: defaultRadioGroupIndex!);
-      case YrkModelBottomSheetType.search:
+      case SubPageItem.boardQna:
+        return YrkMbsRadioButtonList(
+            title: title!,
+            labelList: YrkPostCreateMbsListData.boardQnaLabelList,
+            onTap: onTap!,
+            defaultRadioGroupIndex: defaultRadioGroupIndex!);
+      case SubPageItem.boardJobFinding:
+        return YrkMbsRadioButtonList(
+            title: title!,
+            labelList: YrkPostCreateMbsListData.boardJobFindingLabelList,
+            onTap: onTap!,
+            defaultRadioGroupIndex: defaultRadioGroupIndex!);
+      case SubPageItem.search:
         return YrkMbsTextList(labelList: labelList!, onTap: onTap!);
-
+      default:
+        return null;
     }
   }
 
   get _getListHeight {
-    switch(type) {
-      case YrkModelBottomSheetType.myPost:
-        return 49.0 * YrkPostMbsListData.myPostLabelList.length + 65.0;
-      case YrkModelBottomSheetType.otherPost:
-        return 49.0 * YrkPostMbsListData.otherPostLabelList.length + 65.0;
-      case YrkModelBottomSheetType.createPost:
+    switch (pageType) {
+      // case SubPageItem.post:
+      //   return 49.0 * YrkPostMbsListData.myPostLabelList.length + 65.0;
+      case SubPageItem.post:
+        return 49.0 * YrkPostMbsListData.otherPostLabelList.length +
+            _yrkMbsImageListOffset;
+      case SubPageItem.boardReview:
+        return 49.0 * YrkPostCreateMbsListData.boardReviewLabelList.length +
+            _yrkMbsRadioButtonListOffset;
+      case SubPageItem.boardQna:
+        return 49.0 * YrkPostCreateMbsListData.boardQnaLabelList.length +
+            _yrkMbsRadioButtonListOffset;
+      case SubPageItem.boardJobFinding:
+        return 49.0 * YrkPostCreateMbsListData.boardJobFindingLabelList.length +
+            _yrkMbsRadioButtonListOffset;
+      case SubPageItem.search:
         // TODO: Handle this case.
         break;
-      case YrkModelBottomSheetType.search:
-        // TODO: Handle this case.
-        break;
-
     }
 
     return listHeight;
@@ -105,7 +121,7 @@ class _YrkModelBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
-      heightFactor: (44.0 + _getListHeight) /  MediaQuery.of(context).size.height,
+      heightFactor: _getListHeight / MediaQuery.of(context).size.height,
       child: Container(
           width: double.maxFinite,
           color: const Color(0xFF737373),

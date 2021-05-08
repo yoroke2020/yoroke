@@ -115,7 +115,7 @@ class _SearchState extends State<Search> {
       widgetList.add(InkWell(
           onTap: () => showYrkModalBottomSheet(
               context: context,
-              type: YrkModelBottomSheetType.search,
+              pageType: SubPageItem.search,
               labelList: categoryList,
               listHeight: 284.0,
               onTap: (index) {

@@ -17,6 +17,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
   YrkAppBar(
       {Key? key,
       this.onPushNavigator,
+      this.curPageItem,
       this.label = "",
       this.type = YrkAppBarType.accountCircleAll,
       this.isStatusBar = true})
@@ -25,6 +26,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
         );
 
   final ValueChanged<YrkData>? onPushNavigator;
+  final curPageItem;
   final String? label;
   final YrkAppBarType type;
   final bool isStatusBar;
@@ -96,7 +98,8 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       ret.add(YrkIconButton(
         icon: "assets/icons/icon_create_24_px.svg",
         onTap: () {
-          onPushNavigator!(new YrkData(nextPageItem: SubPageItem.postCreate));
+          onPushNavigator!(new YrkData(
+              nextPageItem: SubPageItem.postCreate, prevPageItem: curPageItem));
         },
         // color: Colors.yellow,
       ));

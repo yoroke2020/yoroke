@@ -8,6 +8,7 @@ import 'package:flutter_quill/widgets/editor.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
@@ -224,9 +225,9 @@ class _PostState extends State<Post> {
                           child: InkWell(
                             onTap: () => showYrkModalBottomSheet(
                               context: context,
-                              type: _isMyPost
-                                  ? YrkModelBottomSheetType.myPost
-                                  : YrkModelBottomSheetType.otherPost,
+                              pageType: _isMyPost
+                                  ? SubPageItem.post
+                                  : SubPageItem.post,
                               onTap: (index) => Navigator.of(context).pop(),
                             ),
                             child: Center(
