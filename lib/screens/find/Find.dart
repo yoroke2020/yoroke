@@ -26,6 +26,9 @@ class _FindState extends State<Find> {
         appBar: YrkAppBar(
             // onPushNavigator: widget.onPushNavigator,
             ),
-        drawer: YrkDrawer());
+        drawer: YrkDrawer(
+          onPushNavigator: widget.onPushNavigator,
+          context: context,
+        ));
   }
 }

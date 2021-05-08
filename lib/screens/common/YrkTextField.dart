@@ -11,6 +11,9 @@ class YrkTextField extends StatelessWidget {
   final double? width;
   final double? height;
 
+  final TextStyle? style;
+  final TextAlign textAlign;
+
   final String? label;
   final String? errorText;
   final bool? obscureText;
@@ -27,25 +30,28 @@ class YrkTextField extends StatelessWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;
 
-  YrkTextField(
-      {Key? key,
-      this.textFieldType = TextFieldType.solid,
-      this.width,
-      this.height,
-      this.label,
-      this.errorText,
-      this.obscureText,
-      this.fillColor,
-      this.borderColor,
-      this.textInputAction,
-      this.handleSubmission,
-      this.handleChange,
-      this.controller,
-      this.focusNode,
-      // Comment
-      this.isPrivate = false,
-      this.isMultiline = false})
-      : super(key: key);
+  YrkTextField({
+    Key? key,
+    this.textFieldType = TextFieldType.solid,
+    this.width,
+    this.height,
+    this.label,
+    this.errorText,
+    this.obscureText,
+    this.fillColor,
+    this.borderColor,
+    this.textInputAction,
+    this.handleSubmission,
+    this.handleChange,
+    this.controller,
+    this.focusNode,
+    // Comment
+    this.isPrivate = false,
+    this.isMultiline = false,
+    //
+    this.textAlign = TextAlign.start,
+    this.style,
+  }) : super(key: key);
 
   get getInputDecoration {
     Icon _suffixIconClear = Icon(Icons.cancel, color: Colors.grey);
@@ -150,20 +156,21 @@ class YrkTextField extends StatelessWidget {
       width: width,
       height: height,
       child: TextField(
-      focusNode: focusNode,
-      key: key,
-      obscureText: obscureText ?? false,
-      cursorColor: selectionTheme.cursorColor,
-      cursorRadius: const Radius.circular(2),
-      decoration: getInputDecoration,
-      textInputAction: textInputAction,
-      onSubmitted: handleSubmission,
-      onChanged: handleChange,
-      controller: controller,
-      keyboardType: isMultiline! ? TextInputType.multiline : TextInputType.text,
-      minLines: 1,
-      maxLines: isMultiline! ? null : 1,
-    ),
+        focusNode: focusNode,
+        key: key,
+        obscureText: obscureText ?? false,
+        cursorColor: selectionTheme.cursorColor,
+        cursorRadius: const Radius.circular(2),
+        decoration: getInputDecoration,
+        textInputAction: textInputAction,
+        onSubmitted: handleSubmission,
+        onChanged: handleChange,
+        controller: controller,
+        keyboardType:
+            isMultiline! ? TextInputType.multiline : TextInputType.text,
+        minLines: 1,
+        maxLines: isMultiline! ? null : 1,
+      ),
     );
   }
 }
