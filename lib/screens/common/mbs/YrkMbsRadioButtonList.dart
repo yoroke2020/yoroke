@@ -34,7 +34,10 @@ class _YrkMbsRadioButtonListState extends State<YrkMbsRadioButtonList> {
     print("length = " + widget.labelList.length.toString());
     for (int i = 0; i < widget.titleList.length; i++) {
       endIndex += widget.labelCountPerTitleList[i];
-      print("startIndex = " + startIndex.toString() + " endIndex = " + endIndex.toString());
+      print("startIndex = " +
+          startIndex.toString() +
+          " endIndex = " +
+          endIndex.toString());
       list.add(
         Container(
             padding: EdgeInsets.only(left: 8.0, bottom: 11.0),

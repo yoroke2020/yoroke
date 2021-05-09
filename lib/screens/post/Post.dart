@@ -105,7 +105,7 @@ class _PostState extends State<Post> {
         : YrkMbsListData.getImageList(SubPageItem.post);
   }
 
-    @override
+  @override
   void dispose() {
     _scrollController.dispose();
     _textEditingController.dispose();

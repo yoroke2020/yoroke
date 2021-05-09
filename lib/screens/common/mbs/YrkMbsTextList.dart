@@ -45,31 +45,31 @@ class _YrkMbsTextListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 49.0,
-        width: double.maxFinite,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-                child: Container(
-                    height: 49.0,
-                    decoration: BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(
-                                width: 1.0,
-                                color: isBorder
-                                    ? const Color(0xffeaeaea)
-                                    : const Color(0xffffffff)))),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(title,
-                            style: const YrkTextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.normal,
-                                fontSize: 16.0),
-                            textAlign: TextAlign.left))))
-          ],
-        ),
+      height: 49.0,
+      width: double.maxFinite,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+              child: Container(
+                  height: 49.0,
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                              width: 1.0,
+                              color: isBorder
+                                  ? const Color(0xffeaeaea)
+                                  : const Color(0xffffffff)))),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(title,
+                          style: const YrkTextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 16.0),
+                          textAlign: TextAlign.left))))
+        ],
+      ),
     );
   }
 }
