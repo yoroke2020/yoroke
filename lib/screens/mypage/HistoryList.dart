@@ -33,13 +33,14 @@ class _HistoryListState extends State<HistoryList>
     super.dispose();
   }
 
-  List<Widget> _infoShareCardListItem(int pageIndex) {
+  List<Widget> _infoShareCardListItem(int pageIndex, SubPageItem pageType) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 8; i++) {
       list.add(new YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
-        subPageItem: SubPageItem.post,
+        pageType: pageType,
+        nextPageItem: SubPageItem.post,
         onPushNavigator: widget.onPushNavigator,
       ));
     }
@@ -66,19 +67,19 @@ class _HistoryListState extends State<HistoryList>
               pageIndex: 0,
               itemCount: 8,
               scrollable: true,
-              item: _infoShareCardListItem(0),
+              item: _infoShareCardListItem(0, SubPageItem.boardReview),
             ),
             YrkListView(
               pageIndex: 1,
               itemCount: 8,
               scrollable: true,
-              item: _infoShareCardListItem(1),
+              item: _infoShareCardListItem(1, SubPageItem.boardQna),
             ),
             YrkListView(
               pageIndex: 2,
               itemCount: 4,
               scrollable: true,
-              item: _infoShareCardListItem(2),
+              item: _infoShareCardListItem(2, SubPageItem.boardJobFinding),
             ),
           ],
         ),

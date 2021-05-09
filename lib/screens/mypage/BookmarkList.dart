@@ -40,7 +40,9 @@ class _BookmarkListState extends State<BookmarkList>
       list.add(new YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
-        subPageItem: SubPageItem.post,
+        // TODO: 아이템별로  페이지 타입 정의
+        pageType: SubPageItem.boardReview,
+        nextPageItem: SubPageItem.post,
         onPushNavigator: widget.onPushNavigator,
       ));
     }
