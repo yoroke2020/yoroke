@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/YrkStarRating.dart';
 
 class HomeHistoryCardListItem extends StatelessWidget {
   HomeHistoryCardListItem(
@@ -87,61 +88,24 @@ class HomeHistoryCardListItem extends StatelessWidget {
                             flex: 17,
                             child: Container(
                                 margin: const EdgeInsets.only(left: 16),
-                                child: Row(
-                                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Container(
-                                        width: 12,
-                                        height: 11,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0x00000000)),
-                                        child: Image.asset(
-                                            "assets/icons/icon_grade_fill_24_px.png"),
-                                      ),
-                                      Container(
-                                        width: 12,
-                                        height: 11,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0x00000000)),
-                                        child: Image.asset(
-                                            "assets/icons/icon_grade_fill_24_px.png"),
-                                      ),
-                                      Container(
-                                        width: 12,
-                                        height: 11,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0x00000000)),
-                                        child: Image.asset(
-                                            "assets/icons/icon_grade_fill_24_px.png"),
-                                      ),
-                                      Container(
-                                        width: 12,
-                                        height: 11,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0x00000000)),
-                                        child: Image.asset(
-                                            "assets/icons/icon_grade_fill_24_px.png"),
-                                      ),
-                                      Container(
-                                          width: 12,
-                                          height: 11,
-                                          decoration: BoxDecoration(
-                                              color: const Color(0x00000000)),
-                                          child: Image.asset(
-                                              "assets/icons/icon_grade_24_px.png")),
-                                      Container(
-                                        margin: const EdgeInsets.only(left: 6),
-                                        alignment: Alignment.bottomLeft,
-                                        child: Text("4.8 (12)",
-                                            style: const TextStyle(
-                                                color: const Color(0x99000000),
-                                                fontWeight: FontWeight.w700,
-                                                fontFamily: "OpenSans",
-                                                fontStyle: FontStyle.normal,
-                                                fontSize: 12.0),
-                                            textAlign: TextAlign.left),
-                                      )
-                                    ]))),
+                                child: Row(children: <Widget>[
+                                  YrkStarRating(
+                                      rating: 4.8,
+                                      eachWidth: 12,
+                                      eachHeight: 11),
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 6),
+                                    alignment: Alignment.bottomLeft,
+                                    child: Text("4.8 (12)",
+                                        style: const TextStyle(
+                                            color: const Color(0x99000000),
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "OpenSans",
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 12.0),
+                                        textAlign: TextAlign.left),
+                                  )
+                                ]))),
                         Expanded(
                           flex: 4,
                           child: Container(),
