@@ -28,7 +28,7 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   YrkData? data;
   ValueChanged<YrkData>? onPushNavigator;
-  final TextEditingController searchTextController = TextEditingController();
+  late TextEditingController searchTextController;
   String? searchKeyword;
   final List<String> labelList = ["요양병원", "요양원", "복지관", "경로당", "노인교실", "보호센터"];
   final List<String> categoryList = [
@@ -44,10 +44,18 @@ class _SearchState extends State<Search> {
   final List<String> sortList = ["정확도순", "최신순"];
   int selectedSortIndex = 0;
 
+  void _setState(String selectedKeyword) {
+    setState(() {
+      this.searchKeyword = selectedKeyword;
+      this.searchTextController = TextEditingController(text: selectedKeyword);
+    });
+  }
+
   @override
   initState() {
     data = widget.data;
     onPushNavigator = widget.onPushNavigator;
+    searchTextController = TextEditingController();
     super.initState();
   }
 
@@ -63,7 +71,8 @@ class _SearchState extends State<Search> {
           width: MediaQuery.of(context).size.width,
           height: 44,
           index: i,
-          inputText: inputText == '' ? '' : inputText + tempText[i]));
+          inputText: inputText == '' ? '' : inputText + tempText[i],
+          callback: _setState));
     }
     return list;
   }
@@ -138,9 +147,8 @@ class _SearchState extends State<Search> {
                           style: const YrkTextStyle(),
                           textAlign: TextAlign.left),
                       Spacer(),
-                      // fixme: fix icon
                       SvgPicture.asset(
-                        "assets/icons/icon_navigate_next_24_px.svg",
+                        "assets/icons/icon_arrow_down_24_px.svg",
                         width: 24.0,
                         height: 24.0,
                       )
@@ -408,22 +416,21 @@ class _SearchState extends State<Search> {
         ),
         body: ListView(children: <Widget>[
           Container(
-            width: MediaQuery.of(context).size.width,
-            height: 64,
-            decoration: BoxDecoration(color: const Color(0xffffffff)),
-            child: Container(
-                margin: const EdgeInsets.only(
-                    left: 16, right: 16, top: 8, bottom: 8),
-                child: YrkTextField(
-                  textFieldType: TextFieldType.search,
-                  fillColor: const Color(0xfff8f8f8),
-                  borderColor: const Color(0xfff8f8f8),
-                  textInputAction: TextInputAction.search,
-                  handleSubmission: _handleSubmission,
-                  handleChange: _handleChange,
-                  controller: searchTextController,
-                )),
-          ),
+              width: MediaQuery.of(context).size.width,
+              height: 64,
+              decoration: BoxDecoration(color: const Color(0xffffffff)),
+              child: Container(
+                  margin: const EdgeInsets.only(
+                      left: 16, right: 16, top: 8, bottom: 8),
+                  child: YrkTextField(
+                    textFieldType: TextFieldType.search,
+                    fillColor: const Color(0xfff8f8f8),
+                    borderColor: const Color(0xfff8f8f8),
+                    textInputAction: TextInputAction.search,
+                    handleSubmission: _handleSubmission,
+                    handleChange: _handleChange,
+                    controller: searchTextController,
+                  ))),
           ..._buildSearchBody(),
         ]),
         bottomNavigationBar:
