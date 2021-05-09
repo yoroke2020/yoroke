@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/YrkStarRating.dart';
 
 class HomePopularCardListItem extends StatelessWidget {
   HomePopularCardListItem(
@@ -86,49 +87,10 @@ class HomePopularCardListItem extends StatelessWidget {
                             Expanded(flex: 4, child: Container()),
                             Expanded(
                                 flex: 95,
-                                child: Row(
-                                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Container(
-                                        width: 16,
-                                        height: 16,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0x00000000)),
-                                        child: Image.asset(
-                                            "assets/icons/icon_grade_fill_24_px.png"),
-                                      ),
-                                      Container(
-                                        width: 16,
-                                        height: 16,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0x00000000)),
-                                        child: Image.asset(
-                                            "assets/icons/icon_grade_fill_24_px.png"),
-                                      ),
-                                      Container(
-                                        width: 16,
-                                        height: 16,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0x00000000)),
-                                        child: Image.asset(
-                                            "assets/icons/icon_grade_fill_24_px.png"),
-                                      ),
-                                      Container(
-                                        width: 16,
-                                        height: 16,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0x00000000)),
-                                        child: Image.asset(
-                                            "assets/icons/icon_grade_fill_24_px.png"),
-                                      ),
-                                      Container(
-                                          width: 16,
-                                          height: 16,
-                                          decoration: BoxDecoration(
-                                              color: const Color(0x00000000)),
-                                          child: Image.asset(
-                                              "assets/icons/icon_grade_24_px.png"))
-                                    ])),
+                                child: YrkStarRating(
+                                    rating: 4.8,
+                                    eachWidth: 16,
+                                    eachHeight: 16)),
                             Expanded(
                                 flex: 16,
                                 child: Image.asset(

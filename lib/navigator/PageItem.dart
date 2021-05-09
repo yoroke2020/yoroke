@@ -52,7 +52,7 @@ extension SubPageItemExt on SubPageItem {
       case SubPageItem.homePopular:
         return Post(data: data);
       case SubPageItem.homeHistory:
-        return HomeHistory(data: data);
+        return HomeHistory(data: data, onPushNavigator: onPushNavigator);
       case SubPageItem.boardReview:
         return BoardReview(data: data, onPushNavigator: onPushNavigator);
       case SubPageItem.boardQna:
