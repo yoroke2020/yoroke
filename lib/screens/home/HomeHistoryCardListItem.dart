@@ -53,7 +53,8 @@ class HomeHistoryCardListItem extends StatelessWidget {
                         Expanded(
                             flex: 27,
                             child: Container(
-                              margin: const EdgeInsets.only(left: 16),
+                              margin:
+                                  const EdgeInsets.only(left: 16, bottom: 4),
                               alignment: Alignment.bottomLeft,
                               child: Text("조문기네 요양원",
                                   style: const TextStyle(
@@ -64,10 +65,6 @@ class HomeHistoryCardListItem extends StatelessWidget {
                                       fontSize: 18.0),
                                   textAlign: TextAlign.left),
                             )),
-                        Expanded(
-                          flex: 27,
-                          child: Container(),
-                        ),
                         Expanded(
                             flex: 20,
                             child: Container(
@@ -89,17 +86,62 @@ class HomeHistoryCardListItem extends StatelessWidget {
                         Expanded(
                             flex: 17,
                             child: Container(
-                              margin: const EdgeInsets.only(left: 16),
-                              alignment: Alignment.bottomLeft,
-                              child: Text("4.8 (12)",
-                                  style: const TextStyle(
-                                      color: const Color(0x99000000),
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: "OpenSans",
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 12.0),
-                                  textAlign: TextAlign.left),
-                            )),
+                                margin: const EdgeInsets.only(left: 16),
+                                child: Row(
+                                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      Container(
+                                        width: 12,
+                                        height: 11,
+                                        decoration: BoxDecoration(
+                                            color: const Color(0x00000000)),
+                                        child: Image.asset(
+                                            "assets/icons/icon_grade_fill_24_px.png"),
+                                      ),
+                                      Container(
+                                        width: 12,
+                                        height: 11,
+                                        decoration: BoxDecoration(
+                                            color: const Color(0x00000000)),
+                                        child: Image.asset(
+                                            "assets/icons/icon_grade_fill_24_px.png"),
+                                      ),
+                                      Container(
+                                        width: 12,
+                                        height: 11,
+                                        decoration: BoxDecoration(
+                                            color: const Color(0x00000000)),
+                                        child: Image.asset(
+                                            "assets/icons/icon_grade_fill_24_px.png"),
+                                      ),
+                                      Container(
+                                        width: 12,
+                                        height: 11,
+                                        decoration: BoxDecoration(
+                                            color: const Color(0x00000000)),
+                                        child: Image.asset(
+                                            "assets/icons/icon_grade_fill_24_px.png"),
+                                      ),
+                                      Container(
+                                          width: 12,
+                                          height: 11,
+                                          decoration: BoxDecoration(
+                                              color: const Color(0x00000000)),
+                                          child: Image.asset(
+                                              "assets/icons/icon_grade_24_px.png")),
+                                      Container(
+                                        margin: const EdgeInsets.only(left: 6),
+                                        alignment: Alignment.bottomLeft,
+                                        child: Text("4.8 (12)",
+                                            style: const TextStyle(
+                                                color: const Color(0x99000000),
+                                                fontWeight: FontWeight.w700,
+                                                fontFamily: "OpenSans",
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 12.0),
+                                            textAlign: TextAlign.left),
+                                      )
+                                    ]))),
                         Expanded(
                           flex: 4,
                           child: Container(),
@@ -123,16 +165,41 @@ class HomeHistoryCardListItem extends StatelessWidget {
                           child: Container(),
                         ),
                         Expanded(
-                          flex: 27,
-                          child: Text("722,390",
-                              style: const TextStyle(
-                                  color: const Color(0xe6000000),
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: "OpenSans",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 20.0),
-                              textAlign: TextAlign.left),
-                        ),
+                            flex: 27,
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  Container(
+                                      margin: const EdgeInsets.only(right: 4),
+                                      child: Text("월 평균",
+                                          style: const TextStyle(
+                                              color: const Color(0xe6000000),
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: "NotoSansCJKKR",
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 12.0),
+                                          textAlign: TextAlign.left)),
+                                  Container(
+                                      margin: const EdgeInsets.only(right: 4),
+                                      child: Text("722,390",
+                                          style: const TextStyle(
+                                              color: const Color(0xe6000000),
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: "OpenSans",
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 20.0),
+                                          textAlign: TextAlign.left)),
+                                  Container(
+                                      margin: const EdgeInsets.only(right: 16),
+                                      child: Text("원",
+                                          style: const TextStyle(
+                                              color: const Color(0xe6000000),
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: "NotoSansCJKKR",
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 12.0),
+                                          textAlign: TextAlign.left)),
+                                ])),
                       ],
                     ),
                   )
