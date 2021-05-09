@@ -56,9 +56,7 @@ extension SubPageItemExt on SubPageItem {
       case SubPageItem.boardReview:
         return BoardReview(data: data, onPushNavigator: onPushNavigator);
       case SubPageItem.boardQna:
-        return BoardQna(
-          onPushNavigator: onPushNavigator,
-        );
+        return BoardQna(onPushNavigator: onPushNavigator);
       case SubPageItem.boardJobFinding:
         return BoardJobFinding(onPushNavigator: onPushNavigator);
       case SubPageItem.infoShareDetail:

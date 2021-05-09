@@ -24,7 +24,7 @@ class HomeHistoryCardListItem extends StatelessWidget {
         margin: const EdgeInsets.only(top: 12, bottom: 10),
         child: InkWell(
             onTap: () => onPushNavigator!(new YrkData(
-                  SubPageItem.infoShareDetail,
+                  nextPageItem: SubPageItem.infoShareDetail,
                   str0: infoShareHospitalTitle.elementAt(index),
                   str1: testDate.elementAt(index),
                 )),

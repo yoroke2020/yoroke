@@ -70,10 +70,12 @@ class _HomeState extends State<Home> {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkPageListItem(
-          pageIndex: pageIndex,
-          listIndex: i,
-          onPushNavigator: onPushNavigator,
-          subPageItem: subPageItem));
+        pageIndex: pageIndex,
+        listIndex: i,
+        onPushNavigator: onPushNavigator,
+        pageType: subPageItem,
+        nextPageItem: SubPageItem.post,
+      ));
     }
     return list;
   }
@@ -162,26 +164,24 @@ class _HomeState extends State<Home> {
                               textAlign: TextAlign.left),
                         ),
                         Expanded(
-                          flex: 16,
-                          child: Container(
+                            flex: 16,
+                            child: Container(
                               width: 16,
                               height: 16,
                               decoration:
                                   BoxDecoration(color: const Color(0x00000000)),
                               child: Container(
-                                width: 10.0029296875,
-                                height: 10,
-                                decoration: BoxDecoration(
-                                    color: const Color(0x00000000)),
-                                child: YrkIconButton(
-                                  icon: "assets/icons/icon_create_24_px.svg",
-                                  onTap: () {
-                                    onPushNavigator!(
-                                        new YrkData(SubPageItem.postCreate));
-                                  },
-                                ),
-                              )),
-                        ),
+                                  width: 10.0029296875,
+                                  height: 10,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0x00000000)),
+                                  child: YrkIconButton(
+                                    icon: "assets/icons/icon_create_24_px.svg",
+                                    onTap: () => onPushNavigator!(new YrkData(
+                                        nextPageItem: SubPageItem.postCreate,
+                                        prevPageItem: RootPageItem.home)),
+                                  )),
+                            )),
                         Expanded(
                             flex: 40,
                             child: TextButton(
@@ -193,10 +193,9 @@ class _HomeState extends State<Home> {
                                         fontStyle: FontStyle.normal,
                                         fontSize: 14.0),
                                     textAlign: TextAlign.left),
-                                onPressed: () {
-                                  widget.onPushNavigator!(
-                                      new YrkData(SubPageItem.postCreate));
-                                })),
+                                onPressed: () => onPushNavigator!(new YrkData(
+                                    nextPageItem: SubPageItem.postCreate,
+                                    prevPageItem: RootPageItem.home)))),
                         Expanded(flex: 16, child: Container())
                       ]))),
           YrkPageView(
@@ -235,8 +234,8 @@ class _HomeState extends State<Home> {
                                       fontSize: 14.0),
                                   textAlign: TextAlign.left),
                               onPressed: () {
-                                widget.onPushNavigator!(
-                                    new YrkData(nextPageItem: SubPageItem.homeHistory));
+                                widget.onPushNavigator!(new YrkData(
+                                    nextPageItem: SubPageItem.homeHistory));
                               }),
                         ),
                         Expanded(flex: 16, child: Container())
