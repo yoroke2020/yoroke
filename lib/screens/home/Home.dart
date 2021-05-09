@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkDrawer.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkPageView.dart';
@@ -171,20 +172,30 @@ class _HomeState extends State<Home> {
                                 height: 10,
                                 decoration: BoxDecoration(
                                     color: const Color(0x00000000)),
-                                child: Image.asset(
-                                    "assets/icons/icon_create_24_px.png"),
+                                child: YrkIconButton(
+                                  icon: "assets/icons/icon_create_24_px.svg",
+                                  onTap: () {
+                                    onPushNavigator!(
+                                        new YrkData(SubPageItem.postCreate));
+                                  },
+                                ),
                               )),
                         ),
                         Expanded(
                             flex: 40,
-                            child: Text("글 작성",
-                                style: const TextStyle(
-                                    color: const Color(0x99000000),
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: "NotoSansCJKKR",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 14.0),
-                                textAlign: TextAlign.left)),
+                            child: TextButton(
+                                child: Text("글 작성",
+                                    style: const TextStyle(
+                                        color: const Color(0x99000000),
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "NotoSansCJKKR",
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 14.0),
+                                    textAlign: TextAlign.left),
+                                onPressed: () {
+                                  widget.onPushNavigator!(
+                                      new YrkData(SubPageItem.postCreate));
+                                })),
                         Expanded(flex: 16, child: Container())
                       ]))),
           YrkPageView(
