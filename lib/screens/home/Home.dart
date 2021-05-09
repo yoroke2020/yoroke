@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkDrawer.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
+import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkPageView.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
 import 'HomeCardListItem.dart';
 import 'HomePopularCardListItem.dart';
-import 'HomePopularListItem.dart';
 
 class Home extends StatefulWidget {
   Home({required this.onPushNavigator});
@@ -54,19 +55,25 @@ class _HomeState extends State<Home> {
     return list;
   }
 
-  List<Widget> _yrkListView() {
+  List<Widget> _yrkListView(SubPageItem subPageItem) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
-      list.add(
-          YrkListView(pageIndex: i, itemCount: 4, item: _homePopularList()));
+      list.add(YrkListView(
+          itemCount: 4,
+          item: _homePopularList(i, subPageItem, onPushNavigator!)));
     }
     return list;
   }
 
-  List<Widget> _homePopularList() {
+  List<Widget> _homePopularList(int pageIndex, SubPageItem subPageItem,
+      ValueChanged<YrkData> onPushNavigator) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
-      list.add(HomePopularListItem(index: i, onPushNavigator: onPushNavigator));
+      list.add(YrkPageListItem(
+          pageIndex: pageIndex,
+          listIndex: i,
+          onPushNavigator: onPushNavigator,
+          subPageItem: subPageItem));
     }
     return list;
   }
@@ -166,24 +173,34 @@ class _HomeState extends State<Home> {
                                 height: 10,
                                 decoration: BoxDecoration(
                                     color: const Color(0x00000000)),
-                                child: Image.asset(
-                                    "assets/icons/icon_create_24_px.png"),
+                                child: YrkIconButton(
+                                  icon: "assets/icons/icon_create_24_px.svg",
+                                  onTap: () {
+                                    onPushNavigator!(
+                                        new YrkData(SubPageItem.postCreate));
+                                  },
+                                ),
                               )),
                         ),
                         Expanded(
                             flex: 40,
-                            child: Text("글 작성",
-                                style: const TextStyle(
-                                    color: const Color(0x99000000),
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: "NotoSansCJKKR",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 14.0),
-                                textAlign: TextAlign.left)),
+                            child: TextButton(
+                                child: Text("글 작성",
+                                    style: const TextStyle(
+                                        color: const Color(0x99000000),
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "NotoSansCJKKR",
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 14.0),
+                                    textAlign: TextAlign.left),
+                                onPressed: () {
+                                  widget.onPushNavigator!(
+                                      new YrkData(SubPageItem.postCreate));
+                                })),
                         Expanded(flex: 16, child: Container())
                       ]))),
           YrkPageView(
-            page: _yrkListView(),
+            page: _yrkListView(SubPageItem.post),
             controller: popularPageController,
             isIndicatorEnabled: true,
           ),
