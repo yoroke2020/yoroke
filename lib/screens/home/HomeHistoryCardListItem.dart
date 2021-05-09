@@ -1,23 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
+import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 
 class HomeHistoryCardListItem extends StatelessWidget {
   HomeHistoryCardListItem(
-      {required this.width, required this.height, required this.index});
+      {required this.width,
+      required this.height,
+      required this.index,
+      this.onPushNavigator});
 
   final double width;
   final double height;
   final int index;
+  final ValueChanged<YrkData>? onPushNavigator;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-        // shape: RoundedRectangleBorder(
-        //     borderRadius: BorderRadius.circular(16)),
         elevation: 0.0,
         margin: const EdgeInsets.only(top: 12, bottom: 10),
         child: InkWell(
+            onTap: () => onPushNavigator!(new YrkData(
+                  SubPageItem.infoShareDetail,
+                  str0: infoShareHospitalTitle.elementAt(index),
+                  str1: testDate.elementAt(index),
+                )),
             borderRadius: BorderRadius.circular(16),
             child: Container(
               width: width,
