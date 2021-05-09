@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/models/YrkMbsListData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageListItem.dart';
@@ -31,13 +32,7 @@ class _SearchState extends State<Search> {
   final TextEditingController searchTextController = TextEditingController();
   String? searchKeyword;
   final List<String> labelList = ["요양병원", "요양원", "복지관", "경로당", "노인교실", "보호센터"];
-  final List<String> categoryList = [
-    "전체 게시판",
-    "고민/질문 게시판",
-    "구인구직 게시판",
-    "시설찾기",
-    "정보공유"
-  ];
+
   int selectedCategoryIndex = 0;
   final List<String> filterList = ["제목+내용", "제목", "작성자"];
   int selectedFilterIndex = 0;
@@ -115,9 +110,8 @@ class _SearchState extends State<Search> {
       widgetList.add(InkWell(
           onTap: () => showYrkModalBottomSheet(
               context: context,
-              pageType: SubPageItem.search,
-              labelList: categoryList,
-              listHeight: 284.0,
+              type: YrkMbsType.text,
+              labelList: YrkMbsListData.getLabelList(SubPageItem.search),
               onTap: (index) {
                 Navigator.of(context).pop();
                 _handleCategorySelection(index);
@@ -134,7 +128,7 @@ class _SearchState extends State<Search> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(categoryList[selectedCategoryIndex],
+                      Text(YrkMbsListData.getLabelList(SubPageItem.search)[selectedCategoryIndex],
                           style: const YrkTextStyle(),
                           textAlign: TextAlign.left),
                       Spacer(),

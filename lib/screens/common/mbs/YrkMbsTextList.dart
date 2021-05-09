@@ -23,7 +23,7 @@ class YrkMbsTextList extends StatelessWidget {
         ),
       ));
     }
-    return Wrap(children: list);
+    return list;
   }
 
   @override
@@ -31,7 +31,7 @@ class YrkMbsTextList extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[yrkMbsTextList],
+      children: yrkMbsTextList,
     );
   }
 }
@@ -44,9 +44,7 @@ class _YrkMbsTextListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: Container(
-        margin: EdgeInsets.only(left: 16.0, right: 16.0),
+    return Container(
         height: 49.0,
         width: double.maxFinite,
         child: Row(
@@ -72,7 +70,6 @@ class _YrkMbsTextListItem extends StatelessWidget {
                             textAlign: TextAlign.left))))
           ],
         ),
-      ),
     );
   }
 }

@@ -12,6 +12,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/models/YrkMbsListData.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkQuillIconButton.dart';
@@ -39,6 +41,8 @@ class _PostCreateState extends State<PostCreate> {
 
   FocusNode _focusNode = FocusNode();
 
+  late SubPageItem pageType = widget.data!.prevPageItem;
+
   Color _registerButtonFillColor = const Color(0xfff4f4f4);
   Color _registerButtonTextColor = const Color(0xffaaaaaa);
   bool _isRegisterButtonClickable = false;
@@ -50,22 +54,19 @@ class _PostCreateState extends State<PostCreate> {
   @override
   void initState() {
     super.initState();
-    print("postData = " + widget.data!.prevPageItem.toString());
     _loadFromAssets();
     _titleController.addListener(() {
-      setRegisterButtonColor();
+      _setRegisterButtonColor();
     });
 
     _bodyController.addListener(() {
-      setRegisterButtonColor();
+      _setRegisterButtonColor();
     });
-    print("isCategorySelected = " + _isCategorySelected.toString());
   }
 
-  void setRegisterButtonColor() {
+  void _setRegisterButtonColor() {
     _isTitleEmpty = _titleController.text.isEmpty;
     _isBodyEmpty = _bodyController.document.isEmpty();
-    print("isCategorySelected = " + _isCategorySelected.toString());
     if (_isTitleEmpty || _isBodyEmpty || !_isCategorySelected) {
       setState(() {
         _registerButtonFillColor = const Color(0xfff4f4f4);
@@ -99,11 +100,11 @@ class _PostCreateState extends State<PostCreate> {
   @override
   void dispose() {
     _titleController.removeListener(() {
-      setRegisterButtonColor();
+      _setRegisterButtonColor();
     });
     _titleController.dispose();
     _bodyController.removeListener(() {
-      setRegisterButtonColor();
+      _setRegisterButtonColor();
     });
     _bodyController.dispose();
     _scrollController.dispose();
@@ -165,9 +166,9 @@ class _PostCreateState extends State<PostCreate> {
                 onTap: () =>
                     showYrkModalBottomSheet(
                         context: context,
-                        pageType: widget.data!.prevPageItem,
-                        title: "후기게시판",
-                        listHeight: 452.0,
+                        title: YrkMbsListData.getTitleList(pageType),
+                        labelList: YrkMbsListData.getLabelList(pageType),
+                        type: YrkMbsType.radioButton,
                         defaultRadioGroupIndex: selectedCategoryIndex,
                         onTap: (index) =>
                             _onTapModelBottomSheetRadioButton(index)),
@@ -200,8 +201,7 @@ class _PostCreateState extends State<PostCreate> {
                           : Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "후기",
-                          // labelList[selectedCategoryIndex] + " 후기",
+                          YrkMbsListData.getLabelList(pageType)[selectedCategoryIndex],
                           style: const YrkTextStyle(),
                         ),
                       )),
@@ -281,7 +281,7 @@ class _PostCreateState extends State<PostCreate> {
   void _onTapModelBottomSheetRadioButton(int index) {
     _isCategorySelected = true;
     selectedCategoryIndex = index;
-    setRegisterButtonColor();
+    _setRegisterButtonColor();
   }
 
   Future<String> _onImagePickCallback(File file) async {

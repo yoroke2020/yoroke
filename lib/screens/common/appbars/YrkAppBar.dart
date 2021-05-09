@@ -96,7 +96,8 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
         YrkIconButton(
           icon: "assets/icons/icon_search_24_px.svg",
           onTap: () {
-            onPushNavigator!(new YrkData(nextPageItem: SubPageItem.search));
+            onPushNavigator!(new YrkData(
+                nextPageItem: SubPageItem.search, prevPageItem: curPageItem));
           },
         ),
       );
@@ -115,7 +116,8 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: "assets/icons/icon_notifications_none_24_px.svg",
           padding: EdgeInsets.only(left: 4.0),
           onTap: () {
-            onPushNavigator!(new YrkData(nextPageItem: SubPageItem.notice));
+            onPushNavigator!(new YrkData(
+                nextPageItem: SubPageItem.notice, prevPageItem: curPageItem));
           },
         ),
       );

@@ -99,6 +99,7 @@ class _BoardReviewState extends State<BoardReview>
       appBar: YrkAppBar(
         type: YrkAppBarType.arrowBackAll,
         onPushNavigator: widget.onPushNavigator!,
+        curPageItem: SubPageItem.boardReview,
         isStatusBar: false,
       ),
       flexibleSpaceHeight: 196.0,

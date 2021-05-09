@@ -8,6 +8,7 @@ import 'package:flutter_quill/widgets/editor.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/models/YrkMbsListData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
@@ -27,23 +28,37 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
+  // ScrollController for the Current Post Page
+  ScrollController _scrollController = ScrollController();
+
+  // Keyboard FocusNode for the Current Post Page
   FocusNode _focusNode = new FocusNode();
+
+  // Post Title Controller & Document
+  TextEditingController _textEditingController = TextEditingController();
+  late String _postTitle;
+
+  // Post Body Controller & Document
+  late QuillController _quillController;
+  late Document _document;
+
+  // CommentList & Count for the Current Post
   List<Widget> _commentList = <Widget>[];
   int _commentCount = 0;
 
+  // Like & Dislike Count for the Current Post
   int _likeCount = 154;
   int _dislikeCount = 64;
   bool _isLiked = false;
   bool _isDisliked = false;
   bool _isMyPost = false;
 
+  // Current Index of Post
   late int _itemIndex;
-  late String _postTitle;
 
-  ScrollController _scrollController = ScrollController();
-  TextEditingController _textEditingController = TextEditingController();
-  late QuillController _quillController;
-  late Document _document;
+  // ModalBottomSheet LabelList & ImageList
+  late List<String> _mbsLabelList;
+  late List<String> _mbsImageList;
 
   @override
   void initState() {
@@ -69,6 +84,14 @@ class _PostState extends State<Post> {
       _document = Document();
       _isMyPost = false;
     }
+
+    _mbsLabelList = _isMyPost
+        ? YrkMbsListData.getLabelList(SubPageItem.post).sublist(3)
+        : YrkMbsListData.getLabelList(SubPageItem.post);
+
+    _mbsImageList = _isMyPost
+        ? YrkMbsListData.getImageList(SubPageItem.post).sublist(3)
+        : YrkMbsListData.getImageList(SubPageItem.post);
 
     setState(() {
       _quillController = QuillController(
@@ -225,9 +248,9 @@ class _PostState extends State<Post> {
                           child: InkWell(
                             onTap: () => showYrkModalBottomSheet(
                               context: context,
-                              pageType: _isMyPost
-                                  ? SubPageItem.post
-                                  : SubPageItem.post,
+                              type: YrkMbsType.image,
+                              labelList: _mbsLabelList,
+                              imageList: _mbsImageList,
                               onTap: (index) => Navigator.of(context).pop(),
                             ),
                             child: Center(
@@ -404,20 +427,16 @@ class _PostState extends State<Post> {
     print("previous page tapped");
     //TODO: When Min hits, not to navigate
     if (_itemIndex > 0) {
-      setState(() {
-        _itemIndex--;
-        _loadFromAssets();
-      });
+      _itemIndex--;
+      _loadFromAssets();
     } else {}
   }
 
   void _onTapNavigatorNext() {
     print("next page tapped");
     //TODO: When Max hits, not to navigate
-    setState(() {
-      _itemIndex++;
-      _loadFromAssets();
-    });
+    _itemIndex++;
+    _loadFromAssets();
   }
 
   void _onTapRegisterButton(String comment) {

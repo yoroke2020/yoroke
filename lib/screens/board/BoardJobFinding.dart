@@ -78,6 +78,7 @@ class _BoardJobFindingState extends State<BoardJobFinding>
       appBar: YrkAppBar(
         type: YrkAppBarType.arrowBackAll,
         onPushNavigator: widget.onPushNavigator!,
+        curPageItem: SubPageItem.boardJobFinding,
         isStatusBar: false,
       ),
       flexibleSpaceHeight: 96.0,

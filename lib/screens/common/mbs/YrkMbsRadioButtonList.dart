@@ -23,7 +23,7 @@ class YrkMbsRadioButtonList extends StatefulWidget {
 class _YrkMbsRadioButtonListState extends State<YrkMbsRadioButtonList> {
   late int groupValue = widget.defaultRadioGroupIndex;
 
-  get _getYrkMbsRadioButtonList {
+  get yrkMbsRadioButtonList {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < widget.labelList.length; i++) {
       list.add(_YrkMbsRadioButtonListItem(
@@ -45,7 +45,7 @@ class _YrkMbsRadioButtonListState extends State<YrkMbsRadioButtonList> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Container(
-            margin: EdgeInsets.only(left: 8.0, bottom: 4.0),
+            padding: EdgeInsets.only(left: 8.0, bottom: 4.0),
             width: double.maxFinite,
             height: 40,
             child: Align(
@@ -57,7 +57,7 @@ class _YrkMbsRadioButtonListState extends State<YrkMbsRadioButtonList> {
                     ),
                     textAlign: TextAlign.left))),
         Container(
-            margin: EdgeInsets.only(left: 8.0, bottom: 11.0),
+            padding: EdgeInsets.only(left: 8.0, bottom: 11.0),
             width: double.maxFinite,
             height: 48.0,
             child: Align(
@@ -65,7 +65,7 @@ class _YrkMbsRadioButtonListState extends State<YrkMbsRadioButtonList> {
                 child: Text(widget.title,
                     style: const YrkTextStyle(
                         fontWeight: FontWeight.w700, fontSize: 18.0)))),
-        _getYrkMbsRadioButtonList,
+        yrkMbsRadioButtonList,
       ],
     );
   }
