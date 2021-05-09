@@ -15,9 +15,10 @@ Future<T?> showYrkModalBottomSheet<T>({
   required BuildContext context,
   required YrkMbsType type,
   ValueChanged<int>? onTap,
-  String? title,
+  List<String>? titleList,
   required List<String> labelList,
   List<String>? imageList,
+  List<int>? labelCountPerTitleList,
   int? defaultRadioGroupIndex,
 }) async {
   FocusScope.of(context).unfocus();
@@ -28,9 +29,10 @@ Future<T?> showYrkModalBottomSheet<T>({
         return _YrkModelBottomSheet(
           mbsType: type,
           onTap: onTap,
-          title: title,
+          titleList: titleList,
           labelList: labelList,
           imageList: imageList,
+          labelCountPerTitleList: labelCountPerTitleList,
           defaultRadioGroupIndex: defaultRadioGroupIndex,
         );
       });
@@ -38,20 +40,22 @@ Future<T?> showYrkModalBottomSheet<T>({
 
 class _YrkModelBottomSheet extends StatelessWidget {
   _YrkModelBottomSheet(
-      {
-      required this.mbsType,
+      {required this.mbsType,
       this.onTap,
-      this.title,
+      this.titleList,
       required this.labelList,
       this.imageList,
+      this.labelCountPerTitleList,
       this.defaultRadioGroupIndex = -1});
 
   final YrkMbsType mbsType;
   final ValueChanged<int>? onTap;
 
-  final String? title;
+  final List<String>? titleList;
   final List<String> labelList;
   final List<String>? imageList;
+
+  final List<int>? labelCountPerTitleList;
 
   final int? defaultRadioGroupIndex;
 
@@ -72,8 +76,9 @@ class _YrkModelBottomSheet extends StatelessWidget {
         break;
       case YrkMbsType.radioButton:
         modalWidget = YrkMbsRadioButtonList(
-            title: title!,
+            titleList: titleList!,
             labelList: labelList,
+            labelCountPerTitleList: labelCountPerTitleList!,
             onTap: onTap!,
             defaultRadioGroupIndex: defaultRadioGroupIndex!);
         modalHeight = 49.0 * labelList.length + 158.0;
@@ -100,11 +105,11 @@ class _YrkModelBottomSheet extends StatelessWidget {
                         padding: EdgeInsets.only(top: 16.0),
                         alignment: Alignment.centerLeft,
                         child: YrkIconButton(
-                        onTap: () => Navigator.of(context).pop(),
-                        icon: "assets/icons/icon_clear_24_px.svg",
-                        padding: EdgeInsets.zero,
-                        width: 24.0,
-                        height: 24.0),
+                            onTap: () => Navigator.of(context).pop(),
+                            icon: "assets/icons/icon_clear_24_px.svg",
+                            padding: EdgeInsets.zero,
+                            width: 24.0,
+                            height: 24.0),
                       )),
                   body: SingleChildScrollView(child: modalWidget)),
             )));

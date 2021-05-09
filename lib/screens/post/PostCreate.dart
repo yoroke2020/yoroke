@@ -33,23 +33,30 @@ class PostCreate extends StatefulWidget {
 
 class _PostCreateState extends State<PostCreate> {
   // Keyboard FocusNode for the Current PostCreate Page
-  FocusNode _focusNode = FocusNode();
+  final FocusNode _focusNode = FocusNode();
 
   // PostCreate Title Controller & Document
-  TextEditingController _titleController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
 
   // PostCreate Body Controller & Document
   late QuillController _bodyController;
   late Document _document;
 
   // ScrollController for the Current PostCreate Body
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   // PageType to notice which PageItem called PostCreate
-  late SubPageItem pageType = widget.data!.prevPageItem;
+  late final _pageType = widget.data!.prevPageItem;
 
-  // Selected Category Index from ModalBottomSheet
-  int selectedCategoryIndex = -1;
+  // ModalBottomSheet type, TitleList, LabelList, LabelCountPerTitleList
+  late YrkMbsType _mbsType;
+  late List<String> _mbsTitleList;
+  late List<String> _mbsLabelList;
+  late List<int> _mbsLabelCountPerTitleList;
+
+  // Selected Category Index & Text from ModalBottomSheet
+  int _selectedCategoryIndex = -1;
+  late String _selectedCategoryText;
 
   // Changes due to RegisterButton Activation
   Color _registerButtonFillColor = const Color(0xfff4f4f4);
@@ -105,6 +112,39 @@ class _PostCreateState extends State<PostCreate> {
           document: _document,
           selection: const TextSelection.collapsed(offset: 0));
     });
+
+    _setMbsList();
+  }
+
+  void _setMbsList() {
+    _mbsType = YrkMbsType.radioButton;
+    if (_pageType == RootPageItem.home || _pageType == RootPageItem.board) {
+      _mbsTitleList = [
+        YrkMbsListData.getTitleList(SubPageItem.boardReview),
+        YrkMbsListData.getTitleList(SubPageItem.boardQna),
+        YrkMbsListData.getTitleList(SubPageItem.boardJobFinding),
+      ];
+      _mbsLabelList = [
+        YrkMbsListData.getLabelList(SubPageItem.boardReview),
+        YrkMbsListData.getLabelList(SubPageItem.boardQna),
+        YrkMbsListData.getLabelList(SubPageItem.boardJobFinding)
+      ].expand((element) => element).toList();
+      _mbsLabelCountPerTitleList = [
+        YrkMbsListData.getLabelList(SubPageItem.boardReview).length,
+        YrkMbsListData.getLabelList(SubPageItem.boardQna).length,
+        YrkMbsListData.getLabelList(SubPageItem.boardJobFinding).length,
+      ];
+    } else {
+      _mbsLabelList = YrkMbsListData.getLabelList(_pageType);
+      _mbsTitleList = [YrkMbsListData.getTitleList(_pageType)];
+      _mbsLabelCountPerTitleList = [
+        YrkMbsListData.getLabelList(_pageType).length
+      ];
+    }
+    print("pageType = " +
+        _pageType.toString() +
+        " mbsType = " +
+        _mbsType.toString());
   }
 
   @override
@@ -133,14 +173,11 @@ class _PostCreateState extends State<PostCreate> {
                 width: double.maxFinite,
                 height: 49.0,
                 margin:
-                EdgeInsets.only(top: MediaQuery
-                    .of(context)
-                    .padding
-                    .top),
+                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                 decoration: BoxDecoration(
                   border: Border(
                       bottom:
-                      BorderSide(width: 1, color: const Color(0xffe5e5e5))),
+                          BorderSide(width: 1, color: const Color(0xffe5e5e5))),
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -149,7 +186,7 @@ class _PostCreateState extends State<PostCreate> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       YrkIconButton(
-                        onTap: () => Navigator.pop(context),
+                        onTap: () => _onTapClearButton(context),
                         icon: "assets/icons/icon_clear_24_px.svg",
                         width: 24.0,
                         height: 24.0,
@@ -173,48 +210,47 @@ class _PostCreateState extends State<PostCreate> {
                 )),
             // [2] 2nd AppBar - Select Category
             InkWell(
-                onTap: () =>
-                    showYrkModalBottomSheet(
-                        context: context,
-                        title: YrkMbsListData.getTitleList(pageType),
-                        labelList: YrkMbsListData.getLabelList(pageType),
-                        type: YrkMbsType.radioButton,
-                        defaultRadioGroupIndex: selectedCategoryIndex,
-                        onTap: (index) =>
-                            _onTapModelBottomSheetRadioButton(index)),
+                onTap: () => showYrkModalBottomSheet(
+                    context: context,
+                    titleList: _mbsTitleList,
+                    labelList: _mbsLabelList,
+                    labelCountPerTitleList: _mbsLabelCountPerTitleList,
+                    type: _mbsType,
+                    defaultRadioGroupIndex: _selectedCategoryIndex,
+                    onTap: (index) => _onTapModelBottomSheetRadioButton(index)),
                 child: Container(
                   width: double.maxFinite,
                   height: 49.0,
                   decoration: BoxDecoration(
                     border: Border(
-                        bottom:
-                        BorderSide(width: 1, color: const Color(0xffe5e5e5))),
+                        bottom: BorderSide(
+                            width: 1, color: const Color(0xffe5e5e5))),
                   ),
                   child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: selectedCategoryIndex == -1
+                      child: _selectedCategoryIndex == -1
                           ? Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text("게시글의 카테고리를 선택해주세요",
-                              style: const YrkTextStyle(),
-                              textAlign: TextAlign.left),
-                          Spacer(),
-                          SvgPicture.asset(
-                            "assets/icons/icon_navigate_next_24_px.svg",
-                            width: 24.0,
-                            height: 24.0,
-                          )
-                        ],
-                      )
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Text("게시글의 카테고리를 선택해주세요",
+                                    style: const YrkTextStyle(),
+                                    textAlign: TextAlign.left),
+                                Spacer(),
+                                SvgPicture.asset(
+                                  "assets/icons/icon_navigate_next_24_px.svg",
+                                  width: 24.0,
+                                  height: 24.0,
+                                )
+                              ],
+                            )
                           : Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          YrkMbsListData.getLabelList(pageType)[selectedCategoryIndex],
-                          style: const YrkTextStyle(),
-                        ),
-                      )),
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                _selectedCategoryText,
+                                style: const YrkTextStyle(),
+                              ),
+                            )),
                 )),
             // [3] 3rd AppBar - Title
             Container(
@@ -223,7 +259,7 @@ class _PostCreateState extends State<PostCreate> {
               decoration: BoxDecoration(
                 border: Border(
                     bottom:
-                    BorderSide(width: 1, color: const Color(0xffe5e5e5))),
+                        BorderSide(width: 1, color: const Color(0xffe5e5e5))),
               ),
               alignment: Alignment.center,
               child: YrkTextField(
@@ -237,7 +273,7 @@ class _PostCreateState extends State<PostCreate> {
       // [4] Body - TextField
       body: Padding(
           padding:
-          EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0, bottom: 40.0),
+              EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0, bottom: 40.0),
           child: QuillEditor(
             controller: _bodyController,
             readOnly: false,
@@ -250,10 +286,7 @@ class _PostCreateState extends State<PostCreate> {
           )),
       // [5] Bottom - Get photo & temp save
       bottomNavigationBar: Transform.translate(
-        offset: Offset(0.0, -1 * MediaQuery
-            .of(context)
-            .viewInsets
-            .bottom),
+        offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
         child: BottomAppBar(
           notchMargin: 0.0,
           child: Container(
@@ -289,15 +322,25 @@ class _PostCreateState extends State<PostCreate> {
   }
 
   void _onTapModelBottomSheetRadioButton(int index) {
-    _isCategorySelected = true;
-    selectedCategoryIndex = index;
+    _setSelectedCategory(index);
     _setRegisterButtonColor();
+  }
+
+  void _setSelectedCategory(int index) {
+    _isCategorySelected = true;
+    _selectedCategoryIndex = index;
+    if (_pageType == SubPageItem.boardReview ||
+        ((_pageType == RootPageItem.home || _pageType == RootPageItem.board) &&
+            index < _mbsLabelCountPerTitleList[0])) {
+      _selectedCategoryText = _mbsLabelList[index] + " 후기";
+    } else
+      _selectedCategoryText = _mbsLabelList[index];
   }
 
   Future<String> _onImagePickCallback(File file) async {
     final appDocDir = await getApplicationDocumentsDirectory();
     final copiedFile =
-    await file.copy('${appDocDir.path}/${basename(file.path)}');
+        await file.copy('${appDocDir.path}/${basename(file.path)}');
     return copiedFile.path.toString();
   }
 
@@ -334,5 +377,66 @@ class _PostCreateState extends State<PostCreate> {
         fontSize: 14.0,
       );
     }
+  }
+
+  void _onTapClearButton(BuildContext context) {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext dialogContext) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(16))),
+            title: Container(
+              height: 40.0,
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(top: 21.0, left: 21.0),
+              child: YrkIconButton(
+                  onTap: () => Navigator.of(dialogContext).pop(),
+                  icon: "assets/icons/icon_clear_24_px.svg",
+                  padding: EdgeInsets.zero,
+                  width: 24.0,
+                  height: 24.0),
+            ),
+            titlePadding: EdgeInsets.zero,
+            content: Text("글쓰기를 취소하시겠습니까?\n이 기기에 임시보관하면\n나중에 이어서 작성할 수 있습니다.",
+                style: const YrkTextStyle(), textAlign: TextAlign.center),
+            contentPadding: EdgeInsets.zero,
+            actions: <Widget>[
+              YrkButton(
+                width: 256.0 / 288.0 * MediaQuery.of(context).size.width,
+                height: 40.0,
+                buttonType: ButtonType.solid,
+                fillColor: const Color(0xffffec6a),
+                label: "이 기기에 임시보관",
+                textStyle: YrkTextStyle(
+                  color: const Color(0xcc000000),
+                  fontWeight: FontWeight.w500,
+                ),
+                onPressed: () {
+                  Navigator.of(dialogContext).pop();
+                  _onPressedTempSave();
+                },
+              ),
+              YrkButton(
+                width: 256.0 / 288.0 * MediaQuery.of(context).size.width,
+                height: 40.0,
+                buttonType: ButtonType.solid,
+                fillColor: const Color(0xffe5e5e5),
+                label: "글쓰기 취소",
+                textStyle: YrkTextStyle(
+                  color: const Color(0x99000000),
+                  fontWeight: FontWeight.w500,
+                ),
+                onPressed: () {
+                  Navigator.of(dialogContext).pop();
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+            actionsPadding: EdgeInsets.all(16.0),
+            actionsOverflowButtonSpacing: 4.0,
+          );
+        });
   }
 }

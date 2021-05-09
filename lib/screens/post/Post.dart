@@ -56,7 +56,8 @@ class _PostState extends State<Post> {
   // Current Index of Post
   late int _itemIndex;
 
-  // ModalBottomSheet LabelList & ImageList
+  // ModalBottomSheet Type, LabelList & ImageList
+  final YrkMbsType _mbsType = YrkMbsType.image;
   late List<String> _mbsLabelList;
   late List<String> _mbsImageList;
 
@@ -85,6 +86,16 @@ class _PostState extends State<Post> {
       _isMyPost = false;
     }
 
+    setState(() {
+      _quillController = QuillController(
+          document: _document,
+          selection: const TextSelection.collapsed(offset: 0));
+    });
+
+    _setMbsList();
+  }
+
+  void _setMbsList() {
     _mbsLabelList = _isMyPost
         ? YrkMbsListData.getLabelList(SubPageItem.post).sublist(3)
         : YrkMbsListData.getLabelList(SubPageItem.post);
@@ -92,15 +103,9 @@ class _PostState extends State<Post> {
     _mbsImageList = _isMyPost
         ? YrkMbsListData.getImageList(SubPageItem.post).sublist(3)
         : YrkMbsListData.getImageList(SubPageItem.post);
-
-    setState(() {
-      _quillController = QuillController(
-          document: _document,
-          selection: const TextSelection.collapsed(offset: 0));
-    });
   }
 
-  @override
+    @override
   void dispose() {
     _scrollController.dispose();
     _textEditingController.dispose();
@@ -248,7 +253,7 @@ class _PostState extends State<Post> {
                           child: InkWell(
                             onTap: () => showYrkModalBottomSheet(
                               context: context,
-                              type: YrkMbsType.image,
+                              type: _mbsType,
                               labelList: _mbsLabelList,
                               imageList: _mbsImageList,
                               onTap: (index) => Navigator.of(context).pop(),

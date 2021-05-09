@@ -120,6 +120,7 @@ class _HomeState extends State<Home> {
         appBar: YrkAppBar(
           type: YrkAppBarType.accountCircleAll,
           onPushNavigator: widget.onPushNavigator,
+          curPageItem: RootPageItem.home,
         ),
         drawer: YrkDrawer(
           onPushNavigator: widget.onPushNavigator,
