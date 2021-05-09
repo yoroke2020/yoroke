@@ -32,21 +32,31 @@ class PostCreate extends StatefulWidget {
 }
 
 class _PostCreateState extends State<PostCreate> {
-  int selectedCategoryIndex = -1;
+  // Keyboard FocusNode for the Current PostCreate Page
+  FocusNode _focusNode = FocusNode();
 
-  ScrollController _scrollController = ScrollController();
+  // PostCreate Title Controller & Document
   TextEditingController _titleController = TextEditingController();
+
+  // PostCreate Body Controller & Document
   late QuillController _bodyController;
   late Document _document;
 
-  FocusNode _focusNode = FocusNode();
+  // ScrollController for the Current PostCreate Body
+  ScrollController _scrollController = ScrollController();
 
+  // PageType to notice which PageItem called PostCreate
   late SubPageItem pageType = widget.data!.prevPageItem;
 
+  // Selected Category Index from ModalBottomSheet
+  int selectedCategoryIndex = -1;
+
+  // Changes due to RegisterButton Activation
   Color _registerButtonFillColor = const Color(0xfff4f4f4);
   Color _registerButtonTextColor = const Color(0xffaaaaaa);
   bool _isRegisterButtonClickable = false;
 
+  // Three checking fields to activate RegisterButton
   bool _isCategorySelected = false;
   bool _isTitleEmpty = true;
   bool _isBodyEmpty = true;
