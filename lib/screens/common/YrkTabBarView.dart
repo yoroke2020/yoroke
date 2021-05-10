@@ -11,6 +11,7 @@ class YrkTabBar extends StatelessWidget {
     this.height = 40.0,
     this.tabWidth = 100,
     this.following,
+    this.tabScrollable = false,
   });
 
   final List<String> textList;
@@ -19,6 +20,7 @@ class YrkTabBar extends StatelessWidget {
   final double? height;
   final double? tabWidth;
   final Widget? following;
+  final bool? tabScrollable;
 
   get _tabList {
     List<Tab> tabList = <Tab>[];
@@ -34,34 +36,48 @@ class YrkTabBar extends StatelessWidget {
     return tabList;
   }
 
+  get _getTabBarWidgetList {
+    List<Widget> list = <Widget>[];
+    list.add(
+      Container(
+          width: tabWidth! * textList.length.toDouble(),
+          height: height,
+          child: TabBar(
+            controller: controller,
+            tabs: _tabList,
+            indicatorColor: const Color(0xfff5df4d),
+            labelPadding: EdgeInsets.zero,
+            labelStyle:
+                YrkTextStyle(fontSize: 16.0, fontWeight: FontWeight.w700),
+            unselectedLabelStyle:
+                YrkTextStyle(fontSize: 16.0, fontWeight: FontWeight.w400),
+          )),
+    );
+
+    if (!tabScrollable!)
+      list.add(Spacer());
+
+    list.add(Container(
+        margin: this.following != null
+            ? EdgeInsets.all(0)
+            : EdgeInsets.only(right: 16.0),
+        child: this.following != null ? this.following! : null));
+
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-          height: height,
-          width: width,
-          alignment: Alignment.centerLeft,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              Container(
-                  width: tabWidth! * textList.length.toDouble(),
-                  height: height,
-                  child: TabBar(
-                    controller: controller,
-                    tabs: _tabList,
-                    indicatorColor: const Color(0xfff5df4d),
-                    labelPadding: EdgeInsets.zero,
-                    labelStyle:
-                        YrkTextStyle(fontSize: 16.0, fontWeight: FontWeight.w700),
-                    unselectedLabelStyle:
-                        YrkTextStyle(fontSize: 16.0, fontWeight: FontWeight.w400),
-                  )),
-              Spacer(),
-              Container(
-                  margin: this.following != null ? EdgeInsets.all(0) : EdgeInsets.only(right: 16.0),
-                  child: this.following != null ? this.following! : null)
-            ]),
-          );
+        height: height,
+        alignment: Alignment.centerLeft,
+        child: tabScrollable!
+            ? ListView(
+                scrollDirection: Axis.horizontal,
+                children: _getTabBarWidgetList)
+            : Row(
+                children: _getTabBarWidgetList,
+              ));
   }
 }
 
@@ -104,6 +120,7 @@ class YrkTabBarView extends StatelessWidget {
     this.tabBarWidth = double.maxFinite,
     this.tabBarHeight = 40.0,
     this.tabWidth = 100,
+    this.tabScrollable = false,
     this.tabViewWidth = double.maxFinite,
     this.tabViewHeight = 100.0,
     this.tabBarFollowing,
@@ -116,6 +133,7 @@ class YrkTabBarView extends StatelessWidget {
   final double? tabBarWidth;
   final double? tabBarHeight;
   final double? tabWidth;
+  final bool? tabScrollable;
   final double? tabViewWidth;
   final double? tabViewHeight;
   final Widget? tabBarFollowing;
@@ -131,6 +149,7 @@ class YrkTabBarView extends StatelessWidget {
             width: tabBarWidth,
             height: tabBarHeight,
             tabWidth: tabWidth,
+            tabScrollable: tabScrollable,
             following: tabBarFollowing),
         YrkTabView(
           viewList: tabViewList,
