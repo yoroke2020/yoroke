@@ -11,6 +11,7 @@ enum YrkAppBarType {
   arrowBackAll,
   arrowBackOnly,
   arrowBackMidTitle,
+  TextSearch,
   TextSearchNotification
 }
 
@@ -85,6 +86,9 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       case YrkAppBarType.TextSearchNotification:
         searchButton = true;
         notificationButton = true;
+        break;
+      case YrkAppBarType.TextSearch:
+        searchButton = true;
         break;
       default:
         break;
