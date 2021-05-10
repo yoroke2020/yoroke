@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 
 import 'YrkTextStyle.dart';
 
@@ -15,6 +16,8 @@ class YrkTabHeaderView extends StatelessWidget {
     this.onPushNavigator,
     this.nextSubPageItem,
     this.title = "",
+    this.titleStyle = const YrkTextStyle(fontSize: 16.0),
+    this.customIcon,
   });
 
   final double width;
@@ -24,6 +27,8 @@ class YrkTabHeaderView extends StatelessWidget {
   final ValueChanged<YrkData>? onPushNavigator;
   final SubPageItem? nextSubPageItem;
   final String title;
+  final YrkTextStyle titleStyle;
+  final Widget? customIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +46,19 @@ class YrkTabHeaderView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(this.title,
-                      style: const YrkTextStyle(fontSize: 16.0),
+                      style: titleStyle,
                       textAlign: TextAlign.left),
                   Spacer(),
-                  SvgPicture.asset(
-                    "assets/icons/icon_navigate_next_24_px.svg",
-                    width: 24.0,
-                    height: 24.0,
-                  )
+                  Container(
+                      child: customIcon != null
+                          ? customIcon
+                          : YrkIconButton(
+                              icon: "assets/icons/icon_navigate_next_24_px.svg",
+                              padding: EdgeInsets.zero,
+                              clickable: false,
+                              width: 24.0,
+                              height: 24.0,
+                            ))
                 ])));
   }
 }
