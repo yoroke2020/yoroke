@@ -28,7 +28,7 @@ class _InfoShareCardListItemState extends State<InfoShareCardListItem> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => widget.onPushNavigator!(new YrkData(
-        SubPageItem.infoShareDetail,
+        nextPageItem: SubPageItem.infoShareDetail,
         str0: infoShareHospitalTitle.elementAt(widget.index),
         str1: testDate.elementAt(widget.index),
       )),

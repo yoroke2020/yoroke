@@ -68,6 +68,7 @@ class _BoardQnaState extends State<BoardQna> {
       appBar: YrkAppBar(
         type: YrkAppBarType.arrowBackAll,
         onPushNavigator: widget.onPushNavigator!,
+        curPageItem: SubPageItem.boardQna,
         isStatusBar: false,
       ),
       body: Column(
@@ -130,7 +131,8 @@ class _BoardQnaState extends State<BoardQna> {
       _boardQnaItemList.add(new YrkPageListItem(
         pageIndex: 0,
         listIndex: i,
-        subPageItem: SubPageItem.post,
+        pageType: SubPageItem.boardQna,
+        nextPageItem: SubPageItem.post,
         onPushNavigator: widget.onPushNavigator,
       ));
     }

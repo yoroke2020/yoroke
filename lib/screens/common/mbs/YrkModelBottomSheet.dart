@@ -1,25 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../YrkIconButton.dart';
 import 'YrkMbsImageList.dart';
 import 'YrkMbsRadioButtonList.dart';
 import 'YrkMbsTextList.dart';
 
-enum YrkModelBottomSheetType {
-  post,
-  createPost,
-  search,
+enum YrkMbsType {
+  text,
+  image,
+  radioButton,
 }
 
 Future<T?> showYrkModalBottomSheet<T>({
   required BuildContext context,
-  required YrkModelBottomSheetType type,
-  String? title,
+  required YrkMbsType type,
+  ValueChanged<int>? onTap,
+  List<String>? titleList,
   required List<String> labelList,
   List<String>? imageList,
-  double? listHeight,
-  ValueChanged<int>? onTap,
+  List<int>? labelCountPerTitleList,
   int? defaultRadioGroupIndex,
 }) async {
   FocusScope.of(context).unfocus();
@@ -28,67 +27,70 @@ Future<T?> showYrkModalBottomSheet<T>({
       isScrollControlled: true,
       builder: (BuildContext context) {
         return _YrkModelBottomSheet(
-          type: type,
-          title: title,
+          mbsType: type,
+          onTap: onTap,
+          titleList: titleList,
           labelList: labelList,
           imageList: imageList,
-          listHeight: listHeight,
-          onTap: onTap,
+          labelCountPerTitleList: labelCountPerTitleList,
           defaultRadioGroupIndex: defaultRadioGroupIndex,
         );
       });
 }
 
 class _YrkModelBottomSheet extends StatelessWidget {
-  const _YrkModelBottomSheet(
-      {required this.type,
-      this.title = "Default",
+  _YrkModelBottomSheet(
+      {required this.mbsType,
+      this.onTap,
+      this.titleList,
       required this.labelList,
       this.imageList,
-      this.listHeight,
-      this.onTap,
+      this.labelCountPerTitleList,
       this.defaultRadioGroupIndex = -1});
 
-  final YrkModelBottomSheetType type;
-  final String? title;
+  final YrkMbsType mbsType;
+  final ValueChanged<int>? onTap;
+
+  final List<String>? titleList;
   final List<String> labelList;
   final List<String>? imageList;
-  final double? listHeight;
-  final ValueChanged<int>? onTap;
+
+  final List<int>? labelCountPerTitleList;
 
   final int? defaultRadioGroupIndex;
 
-  get _getModalWidget {
-    switch (type) {
-      case YrkModelBottomSheetType.post:
-        return YrkMbsImageList(
-            labelList: labelList, imageList: imageList!, onTap: onTap!);
-      case YrkModelBottomSheetType.createPost:
-        return YrkMbsRadioButtonList(
-            title: title!,
-            labelList: labelList,
-            onTap: onTap!,
-            defaultRadioGroupIndex: defaultRadioGroupIndex!);
-      case YrkModelBottomSheetType.search:
-        return YrkMbsTextList(labelList: labelList, onTap: onTap!);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    print(listHeight);
-    double heightFactor = listHeight != null
-        ? listHeight! / MediaQuery.of(context).size.height
-        : 1;
+    Widget modalWidget;
+    double modalHeight;
 
-    print("heightFactor = " + heightFactor.toString());
+    switch (mbsType) {
+      case YrkMbsType.text:
+        modalWidget = YrkMbsTextList(labelList: labelList, onTap: onTap!);
+        modalHeight = 49.0 * labelList.length + 79.0;
+        break;
+      case YrkMbsType.image:
+        modalWidget = YrkMbsImageList(
+            labelList: labelList, imageList: imageList!, onTap: onTap!);
+        modalHeight = 49.0 * labelList.length + 120.0;
+        break;
+      case YrkMbsType.radioButton:
+        modalWidget = YrkMbsRadioButtonList(
+            titleList: titleList!,
+            labelList: labelList,
+            labelCountPerTitleList: labelCountPerTitleList!,
+            onTap: onTap!,
+            defaultRadioGroupIndex: defaultRadioGroupIndex!);
+        modalHeight = 49.0 * labelList.length + 158.0;
+        break;
+    }
 
     return FractionallySizedBox(
-      heightFactor: heightFactor,
-      child: Container(
-          width: double.maxFinite,
-          color: const Color(0xFF737373),
-          child: Container(
+        heightFactor: modalHeight / MediaQuery.of(context).size.height,
+        child: Container(
+            width: double.maxFinite,
+            color: const Color(0xFF737373),
+            child: Container(
               padding: EdgeInsets.only(
                   left: 16.0, right: 16.0, top: 12.0, bottom: 8.0),
               decoration: new BoxDecoration(
@@ -96,19 +98,20 @@ class _YrkModelBottomSheet extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16.0),
                       topRight: Radius.circular(16.0))),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  YrkIconButton(
-                      onTap: () => Navigator.of(context).pop(),
-                      icon: "assets/icons/icon_clear_24_px.svg",
-                      width: 24.0,
-                      height: 24.0),
-                  Spacer(),
-                  _getModalWidget
-                ],
-              ))),
-    );
+              child: Scaffold(
+                  appBar: PreferredSize(
+                      preferredSize: Size.fromHeight(44.0),
+                      child: Container(
+                        padding: EdgeInsets.only(top: 16.0),
+                        alignment: Alignment.centerLeft,
+                        child: YrkIconButton(
+                            onTap: () => Navigator.of(context).pop(),
+                            icon: "assets/icons/icon_clear_24_px.svg",
+                            padding: EdgeInsets.zero,
+                            width: 24.0,
+                            height: 24.0),
+                      )),
+                  body: SingleChildScrollView(child: modalWidget)),
+            )));
   }
 }

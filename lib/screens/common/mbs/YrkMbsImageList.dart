@@ -35,24 +35,21 @@ class YrkMbsImageList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         yrkMbsImageList,
-        Container(
-            width: double.maxFinite,
-            height: 48.0,
-            child: YrkButton(
-              width: 328.0 / 360 * MediaQuery.of(context).size.width,
-              height: 48.0,
-              buttonType: ButtonType.outline,
-              fillColor: const Color(0xffffffff),
-              borderColor: const Color(0xfff5df4d),
-              label: "닫기",
-              textStyle: YrkTextStyle(
-                color: const Color(0xe6000000),
-              ),
-              onPressed: () => Navigator.of(context).pop(),
-            ))
+        YrkButton(
+          width: 328.0 / 360 * MediaQuery.of(context).size.width,
+          height: 48.0,
+          buttonType: ButtonType.outline,
+          fillColor: const Color(0xffffffff),
+          borderColor: const Color(0xfff5df4d),
+          label: "닫기",
+          textStyle: YrkTextStyle(
+            color: const Color(0xe6000000),
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        )
       ],
     );
   }
@@ -82,7 +79,6 @@ class _YrkMbsImageListItem extends StatelessWidget {
             ),
             Expanded(
                 child: Container(
-                    height: 49.0,
                     decoration: BoxDecoration(
                         border: Border(
                             bottom: BorderSide(

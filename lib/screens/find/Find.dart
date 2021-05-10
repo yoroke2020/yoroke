@@ -21,7 +21,7 @@ class _FindState extends State<Find> {
         body: Text('find page'),
         floatingActionButton: FloatingActionButton(
           onPressed: () =>
-              widget.onPushNavigator!(new YrkData(SubPageItem.testPage)),
+              widget.onPushNavigator!(new YrkData(nextPageItem: SubPageItem.testPage)),
         ),
         appBar: YrkAppBar(
             // onPushNavigator: widget.onPushNavigator,

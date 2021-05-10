@@ -23,7 +23,7 @@ class BoardCardListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () => onPushNavigator!(new YrkData(
-              SubPageItem.boardReview,
+              nextPageItem: SubPageItem.boardReview,
               i1: index,
             )),
         child: Container(
@@ -48,12 +48,12 @@ class BoardCardListItem extends StatelessWidget {
                             : null),
                   ),
                   Text(
-                      testShortString.elementAt(index),
-                      style: const YrkTextStyle(
-                          color: const Color(0x99000000),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.0),
-                    ),
+                    testShortString.elementAt(index),
+                    style: const YrkTextStyle(
+                        color: const Color(0x99000000),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14.0),
+                  ),
                 ])));
   }
 }

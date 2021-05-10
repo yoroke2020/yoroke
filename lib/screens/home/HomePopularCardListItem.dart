@@ -26,7 +26,7 @@ class HomePopularCardListItem extends StatelessWidget {
         margin: const EdgeInsets.only(right: 8),
         child: InkWell(
             onTap: () => onPushNavigator!(new YrkData(
-                  SubPageItem.boardReview,
+              nextPageItem: SubPageItem.boardReview,
                 )),
             borderRadius: BorderRadius.circular(16),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start,
