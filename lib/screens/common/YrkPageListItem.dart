@@ -23,13 +23,16 @@ class YrkPageListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isText =
-        true; // Text or Button appears before a title. If it is true, a text appears. If it is false, a button appears
-    bool isBestIcon = false; // Best Icon appears next to a title
-    bool isRating =
-        false; // Rating appears next to a comment icon on the second line
+    // Text or Button appears before a title. If it is true, a text appears.
+    // If it is false, a button appears
+    bool isText = true;
+    // Best Icon appears next to a title
+    bool isBestIcon = false;
+    // Rating appears next to a comment icon on the second line
+    bool isRating = false;
+
+    // Add case here when new kinds of pageListItem is defined
     switch (pageType) {
-      // Add case here when new kinds of pageListItem is defined
       case SubPageItem.boardJobFinding:
         isText = false;
         break;
@@ -40,9 +43,12 @@ class YrkPageListItem extends StatelessWidget {
       default:
         break;
     }
+
     return InkWell(
-      onTap: () => onPushNavigator!(new YrkData(nextPageItem: nextPageItem,
-          prevPageItem: pageType, i1: listIndex + pageIndex * 10)),
+      onTap: () => onPushNavigator!(new YrkData(
+          nextPageItem: nextPageItem,
+          prevPageItem: pageType,
+          i1: listIndex + pageIndex * 10)),
       //TODO: YrkData -> API Call
       child: Container(
           width: double.maxFinite,
