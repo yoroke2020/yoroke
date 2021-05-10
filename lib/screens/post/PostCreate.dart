@@ -416,6 +416,7 @@ class _PostCreateState extends State<PostCreate> {
                 onPressed: () {
                   Navigator.of(dialogContext).pop();
                   _onPressedTempSave();
+                  Navigator.of(context).pop();
                 },
               ),
               YrkButton(
