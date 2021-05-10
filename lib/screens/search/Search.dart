@@ -9,7 +9,6 @@ import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkTextField.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
-import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/common/mbs/YrkModelBottomSheet.dart';
 import 'package:yoroke/screens/info/InfoShareCardListItem.dart';
 
@@ -137,7 +136,9 @@ class _SearchState extends State<Search> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(YrkMbsListData.getLabelList(SubPageItem.search)[selectedCategoryIndex],
+                      Text(
+                          YrkMbsListData.getLabelList(
+                              SubPageItem.search)[selectedCategoryIndex],
                           style: const YrkTextStyle(),
                           textAlign: TextAlign.left),
                       Spacer(),
@@ -427,9 +428,7 @@ class _SearchState extends State<Search> {
                     controller: searchTextController,
                   ))),
           ..._buildSearchBody(),
-        ]),
-        bottomNavigationBar:
-            BottomBarNavigation.getInstance(RootPageItem.board));
+        ]));
     // result of search page
   }
 }
