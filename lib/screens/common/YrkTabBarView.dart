@@ -37,28 +37,31 @@ class YrkTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: height,
-        width: width,
-        alignment: Alignment.centerLeft,
-        child: Row(children: <Widget>[
-          Container(
-              width: tabWidth! * textList.length.toDouble(),
-              height: height,
-              child: TabBar(
-                labelPadding: EdgeInsets.zero,
-                controller: controller,
-                tabs: _tabList,
-                indicatorColor: const Color(0xfff5df4d),
-                labelStyle:
-                    YrkTextStyle(fontSize: 16.0, fontWeight: FontWeight.w700),
-                unselectedLabelStyle:
-                    YrkTextStyle(fontSize: 16.0, fontWeight: FontWeight.w400),
-              )),
-          Spacer(),
-          Container(
-              margin: this.following != null ? EdgeInsets.all(0) : EdgeInsets.only(right: 16.0),
-              child: this.following != null ? this.following! : null)
-        ]));
+          height: height,
+          width: width,
+          alignment: Alignment.centerLeft,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+              Container(
+                  width: tabWidth! * textList.length.toDouble(),
+                  height: height,
+                  child: TabBar(
+                    controller: controller,
+                    tabs: _tabList,
+                    indicatorColor: const Color(0xfff5df4d),
+                    labelPadding: EdgeInsets.zero,
+                    labelStyle:
+                        YrkTextStyle(fontSize: 16.0, fontWeight: FontWeight.w700),
+                    unselectedLabelStyle:
+                        YrkTextStyle(fontSize: 16.0, fontWeight: FontWeight.w400),
+                  )),
+              Spacer(),
+              Container(
+                  margin: this.following != null ? EdgeInsets.all(0) : EdgeInsets.only(right: 16.0),
+                  child: this.following != null ? this.following! : null)
+            ]),
+          );
   }
 }
 
