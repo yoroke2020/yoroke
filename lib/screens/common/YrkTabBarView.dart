@@ -45,6 +45,7 @@ class YrkTabBar extends StatelessWidget {
               width: tabWidth! * textList.length.toDouble(),
               height: height,
               child: TabBar(
+                labelPadding: EdgeInsets.zero,
                 controller: controller,
                 tabs: _tabList,
                 indicatorColor: const Color(0xfff5df4d),
