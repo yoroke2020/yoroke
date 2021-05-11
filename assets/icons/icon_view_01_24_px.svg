@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="icon_view_01_24px" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <style>
+            .cls-1{fill:none}
+        </style>
+    </defs>
+    <path id="패스_112" d="M0 0h24v24H0z" class="cls-1"/>
+    <g id="그룹_681" transform="translate(-50 -240)">
+        <path id="사각형_16763" d="M0 0H24V24H0z" class="cls-1" transform="translate(50 240)"/>
+        <path id="패스_219" d="M70.5 246.5a.5.5 0 0 0 .5-.5v-3h-8v8h8v-2a.5.5 0 0 0-1 0v1h-6v-6h6v2a.5.5 0 0 0 .5.5z"/>
+        <g id="그룹_678">
+            <path id="패스_220" d="M61 261h-8v-8h8zm-7-1h6v-6h-6z"/>
+        </g>
+        <g id="그룹_679">
+            <path id="패스_221" d="M71 261h-8v-8h8zm-7-1h6v-6h-6z"/>
+        </g>
+        <g id="그룹_680">
+            <path id="패스_222" d="M61 251h-8v-8h8zm-7-1h6v-6h-6z"/>
+        </g>
+    </g>
+</svg>

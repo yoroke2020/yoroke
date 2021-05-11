@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="icon_unlock_32px" width="32" height="32" viewBox="0 0 32 32">
+    <defs>
+        <style>
+            .cls-2{fill:none}.cls-3{fill:#b2b2b2}
+        </style>
+    </defs>
+    <g id="그룹_262">
+        <g id="사각형_37" fill="none" stroke="#b2b2b2">
+            <rect width="32" height="32" stroke="none" rx="16"/>
+            <rect width="31" height="31" x=".5" y=".5" class="cls-2" rx="15.5"/>
+        </g>
+    </g>
+    <g id="icon_lock_open_24px" transform="translate(6 6)">
+        <path id="패스_73" d="M0 0h20v20H0z" class="cls-2"/>
+        <g id="그룹_718" transform="translate(-63 -5)">
+            <path id="패스_269" d="M77 13v-2a4 4 0 0 0-8 0 .5.5 0 0 0 1 0 3 3 0 0 1 6 0v2h-9v10h12V13zm1 9H68v-8h10z" class="cls-3"/>
+            <path id="패스_270" d="M73 16a2 2 0 1 0 2 2 2 2 0 0 0-2-2zm0 3a1 1 0 1 1 1-1 1 1 0 0 1-1 1z" class="cls-3"/>
+        </g>
+    </g>
+</svg>
