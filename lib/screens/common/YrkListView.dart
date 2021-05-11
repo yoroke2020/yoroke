@@ -13,13 +13,9 @@ class YrkListView extends StatelessWidget {
       this.padding = const EdgeInsets.all(0),
       this.scrollable = false,
       this.scrollDirection = Axis.vertical,
-      @Deprecated("deprecated") this.clickable = false,
-      @Deprecated("deprecated") this.data,
-      @Deprecated("deprecated") this.onPushNavigator,
       this.pageIndex = 0,
-      @Deprecated("deprecated") this.nextSubPageItem,
       required this.item,
-      this.itemCount = 1,
+      required this.itemCount,
       this.itemMargin = const EdgeInsets.all(0),
       this.itemPadding = const EdgeInsets.all(0),
       this.isIndicator = false});
@@ -29,13 +25,9 @@ class YrkListView extends StatelessWidget {
   final EdgeInsets? padding;
   final EdgeInsets? itemMargin;
   final EdgeInsets? itemPadding;
-  final YrkData? data;
-  final ValueChanged<YrkData>? onPushNavigator;
-  final SubPageItem? nextSubPageItem;
   final int itemCount;
   final double width;
   final double height;
-  final bool clickable;
   final bool scrollable;
   final bool? isIndicator;
   final List<Widget> item;

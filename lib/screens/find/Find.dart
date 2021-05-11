@@ -10,6 +10,8 @@ import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
+import 'FindRecommendListItem.dart';
+
 class Find extends StatefulWidget {
   Find({required this.onPushNavigator});
 
@@ -41,16 +43,19 @@ class _FindState extends State<Find> with TickerProviderStateMixin {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(
-        YrkButton(
-          width: i != 2 ? 80.0 : 66.0,
-          height: 32.0,
-          buttonType: ButtonType.outline,
-          borderWidth: 1,
-          borderColor: const Color(0x4d000000),
-          label: tabViewOptionList[i],
-          textStyle: const YrkTextStyle(
-              color: const Color(0x99000000), fontSize: 13.0),
-          onPressed: () {},
+        Padding(
+          padding: EdgeInsets.only(right: 7.0),
+          child: YrkButton(
+            width: i != 2 ? 80.0 : 66.0,
+            height: 32.0,
+            buttonType: ButtonType.outline,
+            borderWidth: 1,
+            borderColor: const Color(0x4d000000),
+            label: tabViewOptionList[i],
+            textStyle: const YrkTextStyle(
+                color: const Color(0x99000000), fontSize: 13.0),
+            onPressed: () {},
+          ),
         ),
       );
     }
@@ -60,27 +65,45 @@ class _FindState extends State<Find> with TickerProviderStateMixin {
   get _getTabViewList {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < tabLength; i++) {
-      list.add(YrkListView(
-          pageIndex: i, itemCount: 1, isIndicator: true, item: [Container()]));
+      list.add(Column(
+        children: [
+          YrkListView(
+            height: 264.0 * 20,
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              pageIndex: i,
+              itemCount: 20,
+              item: _buildTabViewListItem(i, 0, 20))
+        ],
+      ));
     }
 
+    return list;
+  }
+
+  List<Widget> _buildTabViewListItem(int pageIndex, int start, int end) {
+    List<Widget> list = <Widget>[];
+    for (int i = start; i < end; i++) {
+      list.add(FindRecommendListItem(
+        pageIndex: pageIndex,
+        listIndex: i,
+        onPushNavigator: widget.onPushNavigator,
+      ));
+    }
     return list;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //  [1] - AppBar
-        appBar: YrkAppBar(
-          onPushNavigator: widget.onPushNavigator,
-          type: YrkAppBarType.TextSearch,
-          label: "시설찾기",
-        ),
-        body: SingleChildScrollView(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(192.0),
+          child: Column(children: [
+            //  [1] - AppBar
+            YrkAppBar(
+              onPushNavigator: widget.onPushNavigator,
+              type: YrkAppBarType.TextSearch,
+              label: "시설찾기",
+            ),
             // [2] - Select Location
             InkWell(
               child: Container(
@@ -129,12 +152,30 @@ class _FindState extends State<Find> with TickerProviderStateMixin {
                 height: 56.0,
                 padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: _getTabViewOptionList,
                 )),
+          ]),
+        ),
+        body: SingleChildScrollView(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+                width: double.maxFinite,
+                height: 48.0,
+                padding: EdgeInsets.only(left: 16.0, bottom: 16.0, top: 8.0),
+                child: Text("추천 시설",
+                    style: const YrkTextStyle(
+                        fontWeight: FontWeight.w700, fontSize: 16.0),
+                    textAlign: TextAlign.left)),
             // [5] - TabView
-            // YrkTabView(viewList: _getTabViewList, controller: _tabController)
+            YrkTabView(
+                height: 264.0 * 20,
+                viewList: _getTabViewList,
+                controller: _tabController)
           ],
         )),
         floatingActionButton: FloatingActionButton(
