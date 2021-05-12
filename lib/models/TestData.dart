@@ -1,3 +1,5 @@
+import 'package:yoroke/navigator/PageItem.dart';
+
 List<String> testCardImage = [
   "assets/icons/sample_image.png",
   "assets/icons/sample_image.png",
@@ -247,12 +249,14 @@ List<String> infoShareHospitalTitle = [
 ];
 
 class PostData {
-  PostData(this.title, this.body);
+  PostData(this.title, this.body, this.category, this.categoryIndex);
+
   late String title;
   late String body;
+  late SubPageItem category;
+  late int categoryIndex;
 }
 
-PostData tempPostData = PostData("","");
+PostData tempPostData = PostData("", "", SubPageItem.testPage, -1);
 
 List<PostData> testPostData = <PostData>[];
-
