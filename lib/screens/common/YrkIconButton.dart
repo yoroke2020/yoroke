@@ -30,5 +30,7 @@ class YrkIconButton extends InkWell {
               ),
             ),
             splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            hoverColor: Colors.transparent,
             onTap: clickable ? onTap : null);
 }
