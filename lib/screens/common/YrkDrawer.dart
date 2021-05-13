@@ -7,13 +7,6 @@ import 'package:yoroke/screens/mypage/EditProfile.dart';
 import 'package:yoroke/screens/mypage/HistoryList.dart';
 import 'package:yoroke/screens/mypage/SettingList.dart';
 
-var tiles = [
-  {"text": "프로필 편집", "icon": "assets/icons/icon_naver.png"},
-  {"text": "북마크", "icon": "assets/icons/icon_kakao.png"},
-  {"text": "히스토리", "icon": "assets/icons/icon_apple.png"},
-  {"text": "임시보관함", "icon": "assets/icons/icon_apple.png"},
-];
-
 var textlist = [
   "프로필 편집",
   "북마크",
