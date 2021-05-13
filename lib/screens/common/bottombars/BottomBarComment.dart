@@ -88,13 +88,11 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                             ? YrkIconButton(
                                 icon: "assets/icons/icon_lock_24_px.svg",
                                 color: const Color(0x4d000000),
-                                width: 20.0,
-                                height: 20.0)
+                                iconSize: 20.0)
                             : YrkIconButton(
                                 icon: "assets/icons/icon_lock_open_24_px.svg",
                                 color: const Color(0x4d000000),
-                                width: 20.0,
-                                height: 20.0),
+                                iconSize: 20.0),
                       ),
                     ),
                   ),

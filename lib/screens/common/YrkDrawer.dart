@@ -41,12 +41,11 @@ class YrkDrawer extends Drawer {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             YrkIconButton(
-                                icon:
-                                    "assets/icons/account_circle_default_36_px.svg",
-                                width: 44,
-                                height: 44,
-                                padding: EdgeInsets.all(0),
-                                onTap: () {}),
+                              icon:
+                                  "assets/icons/account_circle_default_36_px.svg",
+                              iconSize: 44,
+                              padding: EdgeInsets.all(0),
+                            ),
                             Text("비회원",
                                 style: YrkTextStyle(
                                   fontSize: 18,
@@ -73,9 +72,7 @@ class YrkDrawer extends Drawer {
                                       padding: EdgeInsets.zero,
                                       child: YrkIconButton(
                                         icon: imagelist[index],
-                                        width: 22,
-                                        height: 22,
-                                        onTap: () {},
+                                        iconSize: 22,
                                       )),
                                   title: Container(
                                       padding: EdgeInsets.zero,

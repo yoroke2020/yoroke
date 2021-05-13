@@ -74,8 +74,7 @@ class _InfoShareCardListItemState extends State<InfoShareCardListItem> {
                                     icon: _isBookmarked
                                         ? "assets/icons/icon_bookmark_ofn_24_px.svg"
                                         : "assets/icons/icon_bookmark_off_24_px.svg",
-                                    width: 24,
-                                    height: 24,
+                                    iconSize: 24,
                                   ),
                                 ]),
                           ),
