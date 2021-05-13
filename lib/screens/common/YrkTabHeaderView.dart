@@ -46,8 +46,7 @@ class YrkTabHeaderView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(this.title,
-                      style: titleStyle,
-                      textAlign: TextAlign.left),
+                      style: titleStyle, textAlign: TextAlign.left),
                   Spacer(),
                   Container(
                       child: customIcon != null
@@ -56,8 +55,7 @@ class YrkTabHeaderView extends StatelessWidget {
                               icon: "assets/icons/icon_navigate_next_24_px.svg",
                               padding: EdgeInsets.zero,
                               clickable: false,
-                              width: 24.0,
-                              height: 24.0,
+                              iconSize: 24.0,
                             ))
                 ])));
   }

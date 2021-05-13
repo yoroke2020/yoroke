@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 
 class HomePopularListItem extends StatelessWidget {
   HomePopularListItem({required this.index, this.onPushNavigator});
@@ -14,7 +15,7 @@ class HomePopularListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () => onPushNavigator!(new YrkData(
-          nextPageItem: SubPageItem.boardReview,
+              nextPageItem: SubPageItem.boardReview,
             )),
         child: Container(
             width: double.maxFinite,
@@ -85,8 +86,9 @@ class HomePopularListItem extends StatelessWidget {
                                         textAlign: TextAlign.left)),
                                 Expanded(
                                     flex: 14,
-                                    child: Image.asset(
-                                        "assets/icons/thumb_up_16_px.png")),
+                                    child: YrkIconButton(
+                                        icon:
+                                            "assets/icons/icon_thumb_up_16_px.svg")),
                                 Expanded(flex: 5, child: Container()),
                                 Expanded(
                                     flex: 21,
@@ -100,8 +102,9 @@ class HomePopularListItem extends StatelessWidget {
                                         textAlign: TextAlign.left)),
                                 Expanded(
                                     flex: 14,
-                                    child: Image.asset(
-                                        "assets/icons/icon_mode_comment_16_px.png")),
+                                    child: YrkIconButton(
+                                        icon:
+                                            "assets/icons/icon_mode_comment_16_px.svg")),
                                 Expanded(flex: 5, child: Container()),
                                 Expanded(
                                     flex: 120,
@@ -124,8 +127,8 @@ class HomePopularListItem extends StatelessWidget {
                           children: <Widget>[
                         Expanded(
                           flex: 14,
-                          child: Image.asset(
-                              "assets/icons/mode_comment_16_px.png"),
+                          child: YrkIconButton(
+                              icon: "assets/icons/icon_mode_comment_16_px.svg"),
                         ),
                         Expanded(
                             flex: 51,

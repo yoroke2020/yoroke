@@ -224,8 +224,7 @@ class _PostCreateState extends State<PostCreate> {
                       YrkIconButton(
                         onTap: () => _onTapClearButton(context),
                         icon: "assets/icons/icon_clear_24_px.svg",
-                        width: 24.0,
-                        height: 24.0,
+                        iconSize: 24.0,
                       ),
                       Spacer(),
                       YrkButton(
@@ -453,11 +452,11 @@ class _PostCreateState extends State<PostCreate> {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(top: 21.0, left: 21.0),
               child: YrkIconButton(
-                  onTap: () => Navigator.of(dialogContext).pop(),
-                  icon: "assets/icons/icon_clear_24_px.svg",
-                  padding: EdgeInsets.zero,
-                  width: 24.0,
-                  height: 24.0),
+                onTap: () => Navigator.of(dialogContext).pop(),
+                icon: "assets/icons/icon_clear_24_px.svg",
+                padding: EdgeInsets.zero,
+                iconSize: 24.0,
+              ),
             ),
             titlePadding: EdgeInsets.zero,
             content: Text("글쓰기를 취소하시겠습니까?\n이 기기에 임시보관하면\n나중에 이어서 작성할 수 있습니다.",

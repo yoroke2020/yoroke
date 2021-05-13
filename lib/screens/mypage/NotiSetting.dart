@@ -67,7 +67,6 @@ class _NotiSettingState extends State<NotiSetting> {
                           ),
                           YrkIconButton(
                             icon: 'assets/icons/icon_arrow_back_24_px.svg',
-                            onTap: () {},
                           ),
                         ],
                       ),

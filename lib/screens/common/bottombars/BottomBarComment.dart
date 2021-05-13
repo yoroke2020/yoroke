@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 import '../YrkButton.dart';
 import '../YrkTextField.dart';
 
 class BottomBarComment extends StatefulWidget {
-  BottomBarComment({required this.focusNode,
-    required this.controller,
-    required this.onTapRegister});
+  BottomBarComment(
+      {required this.focusNode,
+      required this.controller,
+      required this.onTapRegister});
 
   final FocusNode focusNode;
   final TextEditingController controller;
@@ -44,16 +46,10 @@ class _BottomBarCommentState extends State<BottomBarComment> {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery
-        .of(context)
-        .size
-        .height);
+    print(MediaQuery.of(context).size.height);
 
     return Transform.translate(
-        offset: Offset(0.0, -1 * MediaQuery
-            .of(context)
-            .viewInsets
-            .bottom),
+        offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
         child: BottomAppBar(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -73,10 +69,9 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                     ),
                   ),
                   InkWell(
-                    onTap: () =>
-                        setState(() {
-                          isPrivate = isPrivate ? false : true;
-                        }),
+                    onTap: () => setState(() {
+                      isPrivate = isPrivate ? false : true;
+                    }),
                     child: Container(
                       width: 32.0,
                       height: 32.0,
@@ -90,15 +85,14 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                           )),
                       child: Center(
                         child: isPrivate
-                            ? Image.asset("assets/icons/icon_lock_24_px.png",
-                            color: const Color(0x4d000000),
-                            width: 20.0,
-                            height: 20.0)
-                            : Image.asset(
-                            "assets/icons/icon_lock_open_24_px.png",
-                            color: const Color(0x4d000000),
-                            width: 20.0,
-                            height: 20.0),
+                            ? YrkIconButton(
+                                icon: "assets/icons/icon_lock_24_px.svg",
+                                color: const Color(0x4d000000),
+                                iconSize: 20.0)
+                            : YrkIconButton(
+                                icon: "assets/icons/icon_lock_open_24_px.svg",
+                                color: const Color(0x4d000000),
+                                iconSize: 20.0),
                       ),
                     ),
                   ),
@@ -139,6 +133,6 @@ class _BottomBarCommentState extends State<BottomBarComment> {
 
   void _onTextChanged() {
     isClickable =
-    widget.controller.text.length > initCommentText.length ? true : false;
+        widget.controller.text.length > initCommentText.length ? true : false;
   }
 }

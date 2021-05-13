@@ -146,10 +146,7 @@ class _YrkButtonState extends State<YrkButton> {
             height: widget.height! - 16,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: YrkIconButton(
-                icon: widget.image!,
-                onTap: () {},
-              ),
+              child: YrkIconButton(icon: widget.image!),
             ),
             decoration: BoxDecoration(
               color: Colors.white,

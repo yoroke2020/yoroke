@@ -1,15 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="icon_view_agenda_24px" width="24.001" height="24" viewBox="0 0 24.001 24">
-    <defs>
-        <style>
-            .cls-1{fill:none}.cls-2{fill:#b2b2b2}
-        </style>
-    </defs>
     <path id="패스_110" d="M0 0h24v24H0z" fill="none" transform="translate(.001)"/>
     <g id="그룹_696" transform="translate(-141.052 -257)">
         <path id="사각형_16768" d="M0 0H24V24H0z" fill="none" transform="translate(141.052 257)"/>
         <g id="그룹_695">
-            <path id="패스_239" d="M161.552 263.5a.5.5 0 0 0 .5-.5v-2h-18v7h18v-2a.5.5 0 0 0-1 0v1h-16v-5h16v1a.5.5 0 0 0 .5.5z" class="cls-2"/>
-            <path id="패스_240" d="M161.052 271v5h-16v-5h16m1-1h-18v7h18v-7z" class="cls-2"/>
+            <path id="패스_239" d="M161.552 263.5a.5.5 0 0 0 .5-.5v-2h-18v7h18v-2a.5.5 0 0 0-1 0v1h-16v-5h16v1a.5.5 0 0 0 .5.5z" fill="#b2b2b2"/>
+            <path id="패스_240" d="M161.052 271v5h-16v-5h16m1-1h-18v7h18v-7z" fill="#b2b2b2"/>
         </g>
     </g>
 </svg>
