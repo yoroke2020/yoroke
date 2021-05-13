@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 
 class SearchRecentKeywordListItem extends StatelessWidget {
   SearchRecentKeywordListItem(
@@ -34,7 +35,8 @@ class SearchRecentKeywordListItem extends StatelessWidget {
                           left: 3, right: 3.5, top: 3, bottom: 3.5),
                       width: 24,
                       height: 24,
-                      child: Image.asset("assets/icons/search_24_px.png"),
+                      child: YrkIconButton(
+                          icon: "assets/icons/icon_search_24_px.svg"),
                     ),
                   )),
               Container(

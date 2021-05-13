@@ -6,6 +6,7 @@ class YrkIconButton extends InkWell {
     Key? key,
     required String icon,
     Function()? onTap,
+    double? iconSize,
     double width = 24.0,
     double height = 24.0,
     EdgeInsets padding = const EdgeInsets.symmetric(horizontal: 4.0),
@@ -21,8 +22,8 @@ class YrkIconButton extends InkWell {
                   padding: padding,
                   child: SvgPicture.asset(
                     icon,
-                    width: width,
-                    height: height,
+                    width: iconSize ?? width,
+                    height: iconSize ?? height,
                     color: color,
                   ),
                 ),

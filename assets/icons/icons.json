@@ -1,9 +1,4 @@
 {
-  "logo": {
-    "currentIndex": 0,
-    "image": "assets/icons/logo_24_px.png",
-    "selectedImage": "assets/icons/logo_selected_24_px.png"
-  },
   "home": {
     "currentIndex": 0,
     "image": "assets/icons/home_24_px.png",
@@ -23,43 +18,5 @@
     "currentIndex": 3,
     "image": "assets/icons/information_24_px.png",
     "selectedImage": "assets/icons/information_selected_24_px.png"
-  },
-  "navigate": {
-    "image": "assets/icons/navigate_next_24_px.png"
-  },
-  "mode_comment": {
-    "image": "assets/icons/mode_comment_16_px.png"
-  },
-  "thumb_up": {
-    "image": "assets/icons/thumb_up_16_px.png"
-  },
-  "card": {
-    "image": "assets/icons/card_sample_image.png"
-  },
-  "back_color": {
-    "image": "assets/icons/icon_back_color_24_px.png"
-  },
-  "create_color": {
-    "image": "assets/icons/icon_create_color_24_px.png"
-  },
-  "notification_color": {
-    "image": "assets/icons/icon_notification_color_24_px.png"
-  },
-  "search_color": {
-    "image": "assets/icons/icon_search_color_24_px.png"
-  },
-  "icon_lock": {
-    "currentIndex": 4,
-    "image": "assets/icons/icon_lock_24_px.png",
-    "selectedImage": "assets/icons/icon_lock_open_24_px.png"
-  },
-  "naver": {
-    "image": "assets/icons/icon_naver.png"
-  },
-  "bookmark": {
-    "image": "assets/icons/icon_bookmark_24_px.png"
-  },
-  "bookmarked": {
-    "image": "assets/icons/icon_bookmarked_24_px.png"
   }
 }

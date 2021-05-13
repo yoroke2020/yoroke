@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/login/SingInNickname.dart';
@@ -43,7 +44,8 @@ class _SignInDialogState extends State<SignInDialog> {
                         children: [
                           Container(
                             width: 40,
-                            child: Image.asset('assets/icons/icon_naver.png'),
+                            child: YrkIconButton(
+                                icon: 'assets/icons/icon_naver_logo.svg'),
                           ),
                           Container(
                             padding: const EdgeInsets.only(

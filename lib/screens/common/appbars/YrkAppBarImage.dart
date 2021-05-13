@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 
 import 'package:yoroke/models/TestData.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class YrkAppBarImage extends StatefulWidget implements PreferredSizeWidget {
@@ -15,7 +16,6 @@ class YrkAppBarImage extends StatefulWidget implements PreferredSizeWidget {
   final String titleText;
   final String date;
   final double? height;
-
 
   @override
   _YrkAppBarImageState createState() => _YrkAppBarImageState();
@@ -53,21 +53,12 @@ class _YrkAppBarImageState extends State<YrkAppBarImage> {
         ),
         backgroundColor: Colors.transparent,
         actions: [
-          IconButton(
-            splashColor: Colors.transparent,
-            icon: Image.asset(
-              _isBookmarked
-                  ? "assets/icons/icon_bookmarked_24_px.png"
-                  : "assets/icons/icon_bookmark_24_px.png",
-              width: 24,
-              height: 24,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              setState(() {
-                _isBookmarked = !_isBookmarked;
-              });
-            },
+          YrkIconButton(
+            icon: _isBookmarked
+                ? "assets/icons/icon_bookmark_ofn_24_px.svg"
+                : "assets/icons/icon_bookmark_off_24_px.svg",
+            width: 24,
+            height: 24,
           ),
         ],
         flexibleSpace: AnimatedOpacity(

@@ -81,10 +81,10 @@ class _HomeState extends State<Home> {
   }
 
   List<String> reviewCardImageList = [
-    "assets/icons/sample_image.png",
-    "assets/icons/sample_image.png",
-    "assets/icons/sample_image.png",
-    "assets/icons/sample_image.png"
+    "assets/images/sample_image.png",
+    "assets/images/sample_image.png",
+    "assets/images/sample_image.png",
+    "assets/images/sample_image.png"
   ];
   List<String> reviewCardNameList = [
     "조문기의 요양병원",

@@ -1,15 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="icon_facility01_on_48px" width="48" height="48" viewBox="0 0 48 48">
-    <defs>
-        <style>
-            .cls-2{fill:#fff}.cls-3{fill:#f4d425}.cls-4{fill:none}
-        </style>
-    </defs>
     <rect id="사각형_16876" width="48" height="48" fill="#fff6b7" rx="16"/>
     <g id="그룹_756" transform="translate(174 236)">
-        <path id="사각형_16855" d="M0 0H18V19H0z" class="cls-2" transform="translate(-159 -220)"/>
-        <path id="사각형_16856" d="M0 0H18V2H0z" class="cls-3" transform="translate(-159 -203)"/>
-        <path id="사각형_16857" d="M0 0H6V22H0z" class="cls-2" transform="translate(-166 -223)"/>
-        <path id="사각형_16858" d="M0 0H6V22H0z" class="cls-2" transform="translate(-140 -223)"/>
+        <path id="사각형_16855" d="M0 0H18V19H0z" fill="#f4d425" transform="translate(-159 -220)"/>
+        <path id="사각형_16856" d="M0 0H18V2H0z" fill="#f4d425" transform="translate(-159 -203)"/>
+        <path id="사각형_16857" d="M0 0H6V22H0z" fill="#f4d425" transform="translate(-166 -223)"/>
+        <path id="사각형_16858" d="M0 0H6V22H0z" fill="#f4d425" transform="translate(-140 -223)"/>
         <path id="사각형_16859" d="M0 0H48V48H0z" class="cls-4" transform="translate(-174 -236)"/>
         <path id="사각형_16860" d="M0 0H38V38H0z" class="cls-4" transform="translate(-169 -231)"/>
         <g id="그룹_755">
@@ -27,20 +22,20 @@
             <path id="패스_392" d="M-139-205h4v-4h-4zm1-3h2v2h-2z"/>
             <path id="패스_393" d="M-133.5-213a.5.5 0 0 0 .5-.5V-224h-8v3h-18v-3h-8v24h34v-10.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v7.5h-6v-20h6v9.5a.5.5 0 0 0 .5.5zm-32.5-10h6v20h-6zm6 22h-6v-1h6zm1 0v-2h6v2zm7 0v-5h4v5zm18-1v1h-6v-1zm-7 1h-6v-2h6zm-6-3v-3h-6v3h-6v-16h18v16z"/>
         </g>
-        <path id="사각형_16861" d="M0 0H4V5H0z" class="cls-2" transform="translate(-152 -206)"/>
-        <path id="사각형_16862" d="M0 0H6V1H0z" class="cls-3" transform="translate(-166 -202)"/>
-        <path id="사각형_16863" d="M0 0H6V1H0z" class="cls-3" transform="translate(-140 -202)"/>
-        <path id="사각형_16864" d="M0 0H2V2H0z" class="cls-3" transform="translate(-138 -208)"/>
-        <path id="사각형_16865" d="M0 0H2V2H0z" class="cls-3" transform="translate(-138 -214)"/>
-        <path id="사각형_16866" d="M0 0H2V2H0z" class="cls-3" transform="translate(-138 -220)"/>
-        <path id="사각형_16867" d="M0 0H2V2H0z" class="cls-3" transform="translate(-145 -217)"/>
-        <path id="사각형_16868" d="M0 0H2V2H0z" class="cls-3" transform="translate(-145 -211)"/>
-        <path id="사각형_16869" d="M0 0H2V2H0z" class="cls-3" transform="translate(-151 -211)"/>
-        <path id="사각형_16870" d="M0 0H2V2H0z" class="cls-3" transform="translate(-151 -217)"/>
-        <path id="사각형_16871" d="M0 0H2V2H0z" class="cls-3" transform="translate(-157 -217)"/>
-        <path id="사각형_16872" d="M0 0H2V2H0z" class="cls-3" transform="translate(-157 -211)"/>
-        <path id="사각형_16873" d="M0 0H2V2H0z" class="cls-3" transform="translate(-164 -208)"/>
-        <path id="사각형_16874" d="M0 0H2V2H0z" class="cls-3" transform="translate(-164 -214)"/>
-        <path id="사각형_16875" d="M0 0H2V2H0z" class="cls-3" transform="translate(-164 -220)"/>
+        <path id="사각형_16861" d="M0 0H4V5H0z" fill="#f4d425" transform="translate(-152 -206)"/>
+        <path id="사각형_16862" d="M0 0H6V1H0z" fill="#f4d425" transform="translate(-166 -202)"/>
+        <path id="사각형_16863" d="M0 0H6V1H0z" fill="#f4d425" transform="translate(-140 -202)"/>
+        <path id="사각형_16864" d="M0 0H2V2H0z" fill="#f4d425" transform="translate(-138 -208)"/>
+        <path id="사각형_16865" d="M0 0H2V2H0z" fill="#f4d425" transform="translate(-138 -214)"/>
+        <path id="사각형_16866" d="M0 0H2V2H0z" fill="#f4d425" transform="translate(-138 -220)"/>
+        <path id="사각형_16867" d="M0 0H2V2H0z" fill="#f4d425" transform="translate(-145 -217)"/>
+        <path id="사각형_16868" d="M0 0H2V2H0z" fill="#f4d425" transform="translate(-145 -211)"/>
+        <path id="사각형_16869" d="M0 0H2V2H0z" fill="#f4d425" transform="translate(-151 -211)"/>
+        <path id="사각형_16870" d="M0 0H2V2H0z" fill="#f4d425" transform="translate(-151 -217)"/>
+        <path id="사각형_16871" d="M0 0H2V2H0z" fill="#f4d425" transform="translate(-157 -217)"/>
+        <path id="사각형_16872" d="M0 0H2V2H0z" fill="#f4d425" transform="translate(-157 -211)"/>
+        <path id="사각형_16873" d="M0 0H2V2H0z" fill="#f4d425" transform="translate(-164 -208)"/>
+        <path id="사각형_16874" d="M0 0H2V2H0z" fill="#f4d425" transform="translate(-164 -214)"/>
+        <path id="사각형_16875" d="M0 0H2V2H0z" fill="#f4d425" transform="translate(-164 -220)"/>
     </g>
 </svg>

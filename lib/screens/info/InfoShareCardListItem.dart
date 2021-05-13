@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 
 class InfoShareCardListItem extends StatefulWidget {
   InfoShareCardListItem(
@@ -15,7 +16,6 @@ class InfoShareCardListItem extends StatefulWidget {
   final double? height;
   final int index;
   final ValueChanged<YrkData>? onPushNavigator;
-
 
   @override
   _InfoShareCardListItemState createState() => _InfoShareCardListItemState();
@@ -70,22 +70,12 @@ class _InfoShareCardListItemState extends State<InfoShareCardListItem> {
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  IconButton(
-                                    splashColor: Colors.transparent,
-                                    icon: Image.asset(
-                                      _isBookmarked
-                                          ? "assets/icons/icon_bookmarked_24_px.png"
-                                          : "assets/icons/icon_bookmark_24_px.png",
-                                      width: 24,
-                                      height: 24,
-                                      color: Colors.white,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        _isBookmarked =
-                                            !_isBookmarked;
-                                      });
-                                    },
+                                  YrkIconButton(
+                                    icon: _isBookmarked
+                                        ? "assets/icons/icon_bookmark_ofn_24_px.svg"
+                                        : "assets/icons/icon_bookmark_off_24_px.svg",
+                                    width: 24,
+                                    height: 24,
                                   ),
                                 ]),
                           ),

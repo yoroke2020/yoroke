@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkStarRating.dart';
 
 class HomePopularCardListItem extends StatelessWidget {
@@ -26,7 +27,7 @@ class HomePopularCardListItem extends StatelessWidget {
         margin: const EdgeInsets.only(right: 8),
         child: InkWell(
             onTap: () => onPushNavigator!(new YrkData(
-              nextPageItem: SubPageItem.boardReview,
+                  nextPageItem: SubPageItem.boardReview,
                 )),
             borderRadius: BorderRadius.circular(16),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,8 +94,9 @@ class HomePopularCardListItem extends StatelessWidget {
                                     eachHeight: 16)),
                             Expanded(
                                 flex: 16,
-                                child: Image.asset(
-                                    "assets/icons/icon_save_black_24_px.png")),
+                                child: YrkIconButton(
+                                    icon:
+                                        "assets/icons/icon_save_black_24_px.svg")),
                             Expanded(
                                 flex: 23,
                                 child: Text("246",
