@@ -21,7 +21,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.onPushNavigator,
       this.curPageItem,
       this.label = "",
-      this.type = YrkAppBarType.accountCircleAll,
+      required this.type,
       this.isStatusBar = true})
       : super(
           key: key,

@@ -9,61 +9,50 @@ class YrkTabBar extends StatelessWidget {
     required this.controller,
     this.width = double.maxFinite,
     this.height = 40.0,
-    this.tabWidth = 100,
+    this.tabWidth,
     this.following,
     this.tabScrollable = false,
   });
 
   final List<String> textList;
   final TabController controller;
-  final double? width;
-  final double? height;
+  final double width;
+  final double height;
   final double? tabWidth;
   final Widget? following;
-  final bool? tabScrollable;
+  final bool tabScrollable;
 
-  get _tabList {
+  get _getTabBar {
+    return TabBar(
+      isScrollable: tabScrollable,
+      controller: controller,
+      tabs: _getTabs,
+      indicatorColor: const Color(0xfff5df4d),
+      labelPadding: EdgeInsets.zero,
+      labelStyle: YrkTextStyle(fontSize: 16.0, fontWeight: FontWeight.w700),
+      unselectedLabelStyle:
+          YrkTextStyle(fontSize: 16.0, fontWeight: FontWeight.w400),
+    );
+  }
+
+  get _getTabs {
     List<Tab> tabList = <Tab>[];
     for (int i = 0; i < textList.length; i++) {
       tabList.add(Tab(
-          child: Text(
-        textList.elementAt(i),
-        style: TextStyle(
-          color: const Color(0xe6000000),
-        ),
-      )));
+          child: Container(
+            width: tabWidth != null
+                ? tabWidth!
+                : textList.elementAt(i).length * 16 + 30,
+            child: Text(
+              textList.elementAt(i),
+              style: TextStyle(
+                color: const Color(0xe6000000),
+              ),
+              textAlign: TextAlign.center,
+            ),
+          )));
     }
     return tabList;
-  }
-
-  get _getTabBarWidgetList {
-    List<Widget> list = <Widget>[];
-    list.add(
-      Container(
-          width: tabWidth! * textList.length.toDouble(),
-          height: height,
-          child: TabBar(
-            controller: controller,
-            tabs: _tabList,
-            indicatorColor: const Color(0xfff5df4d),
-            labelPadding: EdgeInsets.zero,
-            labelStyle:
-                YrkTextStyle(fontSize: 16.0, fontWeight: FontWeight.w700),
-            unselectedLabelStyle:
-                YrkTextStyle(fontSize: 16.0, fontWeight: FontWeight.w400),
-          )),
-    );
-
-    if (!tabScrollable!)
-      list.add(Spacer());
-
-    list.add(Container(
-        margin: this.following != null
-            ? EdgeInsets.all(0)
-            : EdgeInsets.only(right: 16.0),
-        child: this.following != null ? this.following! : null));
-
-    return list;
   }
 
   @override
@@ -71,13 +60,23 @@ class YrkTabBar extends StatelessWidget {
     return Container(
         height: height,
         alignment: Alignment.centerLeft,
-        child: tabScrollable!
-            ? ListView(
-                scrollDirection: Axis.horizontal,
-                children: _getTabBarWidgetList)
-            : Row(
-                children: _getTabBarWidgetList,
-              ));
+        child: tabScrollable
+            ? _getTabBar
+            : Row(children: <Widget>[
+                Container(
+                  width: tabWidth != null
+                      ? tabWidth! * textList.length.toDouble()
+                      : double.maxFinite,
+                  height: height,
+                  child: _getTabBar,
+                ),
+                Spacer(),
+                Container(
+                    margin: this.following != null
+                        ? EdgeInsets.all(0)
+                        : EdgeInsets.only(right: 16.0),
+                    child: this.following != null ? this.following! : null)
+              ]));
   }
 }
 
@@ -119,7 +118,7 @@ class YrkTabBarView extends StatelessWidget {
     required this.controller,
     this.tabBarWidth = double.maxFinite,
     this.tabBarHeight = 40.0,
-    this.tabWidth = 100,
+    this.tabWidth,
     this.tabScrollable = false,
     this.tabViewWidth = double.maxFinite,
     this.tabViewHeight = 100.0,
@@ -130,10 +129,10 @@ class YrkTabBarView extends StatelessWidget {
   final List<Widget> tabViewList;
   final List<String> tabTextList;
   final TabController? controller;
-  final double? tabBarWidth;
-  final double? tabBarHeight;
+  final double tabBarWidth;
+  final double tabBarHeight;
   final double? tabWidth;
-  final bool? tabScrollable;
+  final bool tabScrollable;
   final double? tabViewWidth;
   final double? tabViewHeight;
   final Widget? tabBarFollowing;
@@ -143,7 +142,7 @@ class YrkTabBarView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        YrkTabBar(
+        new YrkTabBar(
             textList: tabTextList,
             controller: controller!,
             width: tabBarWidth,
@@ -151,7 +150,7 @@ class YrkTabBarView extends StatelessWidget {
             tabWidth: tabWidth,
             tabScrollable: tabScrollable,
             following: tabBarFollowing),
-        YrkTabView(
+        new YrkTabView(
           viewList: tabViewList,
           controller: controller!,
           width: tabViewWidth,
