@@ -138,6 +138,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
     return PreferredSize(
       preferredSize: preferredSize,
       child: Container(
+          color: Colors.transparent,
           height: isStatusBar ? 48.0 + statusBarHeight : 48.0,
           padding: isStatusBar
               ? EdgeInsets.only(top: statusBarHeight)

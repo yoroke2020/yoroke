@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkIconButton.dart';
@@ -21,7 +20,7 @@ class FindRecommendListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () =>
-          onPushNavigator!(new YrkData(nextPageItem: SubPageItem.testPage)),
+          onPushNavigator!(new YrkData(nextPageItem: SubPageItem.findFacility)),
       child: Container(
           width: double.maxFinite,
           height: 264.0,

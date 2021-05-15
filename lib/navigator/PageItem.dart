@@ -11,6 +11,7 @@ import 'package:yoroke/screens/notice/Notice.dart';
 import 'package:yoroke/screens/post/Post.dart';
 import 'package:yoroke/screens/post/PostCreate.dart';
 import 'package:yoroke/screens/search/Search.dart';
+import 'package:yoroke/screens/find/FindFacility.dart';
 
 enum RootPageItem { home, board, find, info }
 
@@ -22,6 +23,7 @@ enum SubPageItem {
   boardReview,
   boardQna,
   boardJobFinding,
+  findFacility,
   infoShareDetail,
   post,
   postCreate,
@@ -67,6 +69,8 @@ extension SubPageItemExt on SubPageItem {
         return TestPage();
       case SubPageItem.post:
         return Post(data: data);
+      case SubPageItem.findFacility:
+        return FindFacility(data: data, onPushNavigator: onPushNavigator);
     }
   }
 }

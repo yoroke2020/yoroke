@@ -166,7 +166,7 @@ class _FindState extends State<Find> with TickerProviderStateMixin {
                   )),
             ),
             // [3] - TabBar
-            new YrkTabBar(
+            YrkTabBar(
               textList: ["요양원", "요양병원", "복지관", "경로당", "노인교실"],
               controller: _tabController,
               height: 40.0,
@@ -206,10 +206,6 @@ class _FindState extends State<Find> with TickerProviderStateMixin {
                 controller: _tabController)
           ],
         )),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => widget.onPushNavigator!(
-              new YrkData(nextPageItem: SubPageItem.testPage)),
-        ),
         drawer: YrkDrawer(
           onPushNavigator: widget.onPushNavigator,
           context: context,
