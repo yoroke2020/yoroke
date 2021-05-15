@@ -34,12 +34,15 @@ class _FindState extends State<Find> with TickerProviderStateMixin {
     "가까운 순",
     "후기 많은 순"
   ];
+  static final int unselectedOptionAll = -1;
 
   final ScrollController _scrollController = ScrollController();
   late TabController _tabController;
   late String locationText = "지역 선택";
 
   FindLocationData locationData = new FindLocationData();
+
+  int clickedOptionButtonIndex = unselectedOptionAll;
 
   @override
   void initState() {
@@ -52,17 +55,26 @@ class _FindState extends State<Find> with TickerProviderStateMixin {
     for (int i = 0; i < 4; i++) {
       list.add(
         Padding(
-          padding: EdgeInsets.only(right: 7.0),
+          padding: EdgeInsets.only(
+              left: i == 0 ? 16.0 : 3.5, right: i == 3 ? 16.0 : 3.0),
           child: YrkButton(
-            width: i != 2 ? 80.0 : 66.0,
+            // width: i != 2 ? 80.0 : 66.0,
             height: 32.0,
-            buttonType: ButtonType.outline,
+            buttonType: ButtonType.outlinechip,
             borderWidth: 1,
-            borderColor: const Color(0x4d000000),
+            fillColor: i == clickedOptionButtonIndex
+                ? const Color(0xfff5df4d)
+                : const Color(0xffffffff),
+            borderColor: i == clickedOptionButtonIndex
+                ? const Color(0xfff5df4d)
+                : const Color(0x4d000000),
             label: tabViewOptionList[i],
-            textStyle: const YrkTextStyle(
-                color: const Color(0x99000000), fontSize: 13.0),
-            onPressed: () {},
+            textStyle: YrkTextStyle(
+                color: i == clickedOptionButtonIndex
+                    ? const Color(0xe6000000)
+                    : const Color(0x99000000),
+                fontSize: 13.0),
+            onPressed: () => _onPressedOptionButton(i),
           ),
         ),
       );
@@ -116,10 +128,7 @@ class _FindState extends State<Find> with TickerProviderStateMixin {
               onTap: () {
                 showFindLocationSetting(
                     context: context,
-                    statusBarHeight: MediaQuery
-                        .of(context)
-                        .padding
-                        .top,
+                    statusBarHeight: MediaQuery.of(context).padding.top,
                     locationData: locationData,
                     onPressedSaveButton: (data) =>
                         _onPressedLocationSaveButton(data));
@@ -167,12 +176,11 @@ class _FindState extends State<Find> with TickerProviderStateMixin {
             Container(
                 width: double.maxFinite,
                 height: 56.0,
-                padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: _getTabViewOptionList,
                   ),
                 )),
@@ -180,29 +188,27 @@ class _FindState extends State<Find> with TickerProviderStateMixin {
         ),
         body: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                    width: double.maxFinite,
-                    height: 48.0,
-                    padding: EdgeInsets.only(
-                        left: 16.0, bottom: 16.0, top: 8.0),
-                    child: Text("추천 시설",
-                        style: const YrkTextStyle(
-                            fontWeight: FontWeight.w700, fontSize: 16.0),
-                        textAlign: TextAlign.left)),
-                // [5] - TabView
-                YrkTabView(
-                    height: 264.0 * 20,
-                    viewList: _getTabViewList,
-                    controller: _tabController)
-              ],
-            )),
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+                width: double.maxFinite,
+                height: 48.0,
+                padding: EdgeInsets.only(left: 16.0, bottom: 16.0, top: 8.0),
+                child: Text("추천 시설",
+                    style: const YrkTextStyle(
+                        fontWeight: FontWeight.w700, fontSize: 16.0),
+                    textAlign: TextAlign.left)),
+            // [5] - TabView
+            YrkTabView(
+                height: 264.0 * 20,
+                viewList: _getTabViewList,
+                controller: _tabController)
+          ],
+        )),
         floatingActionButton: FloatingActionButton(
-          onPressed: () =>
-              widget.onPushNavigator!(
-                  new YrkData(nextPageItem: SubPageItem.testPage)),
+          onPressed: () => widget.onPushNavigator!(
+              new YrkData(nextPageItem: SubPageItem.testPage)),
         ),
         drawer: YrkDrawer(
           onPushNavigator: widget.onPushNavigator,
@@ -239,6 +245,14 @@ class _FindState extends State<Find> with TickerProviderStateMixin {
         }
       } else
         locationText = "지역 선택";
+    });
+  }
+
+  void _onPressedOptionButton(int index) {
+    setState(() {
+      clickedOptionButtonIndex =
+          clickedOptionButtonIndex == index ? unselectedOptionAll : index;
+      //TODO: LoadData
     });
   }
 }

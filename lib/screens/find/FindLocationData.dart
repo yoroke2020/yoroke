@@ -1,9 +1,5 @@
 import 'dart:collection';
 
-import 'dart:convert';
-
-import 'package:yoroke/screens/find/Find.dart';
-
 class FindLocationData {
   FindLocationData() {
     regionListLength = LocationName.regionNameList.length;

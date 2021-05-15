@@ -36,7 +36,7 @@ class FindRecommendListItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Image.asset("assets/icons/sample_image.png",
+                    Image.asset("assets/images/sample_image.png",
                         width:
                             264 / 360 * MediaQuery.of(context).size.width - 20,
                         height: 160.0,
@@ -47,7 +47,7 @@ class FindRecommendListItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Image.asset("assets/icons/sample_image.png",
+                          Image.asset("assets/images/sample_image.png",
                               width:
                                   96 / 360 * MediaQuery.of(context).size.width -
                                       16,
@@ -55,7 +55,7 @@ class FindRecommendListItem extends StatelessWidget {
                               fit: BoxFit.fill),
                           Padding(
                             padding: EdgeInsets.only(top: 4.0),
-                            child: Image.asset("assets/icons/sample_image.png",
+                            child: Image.asset("assets/images/sample_image.png",
                                 width: 96 /
                                         360 *
                                         MediaQuery.of(context).size.width -
