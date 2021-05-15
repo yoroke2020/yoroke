@@ -71,19 +71,15 @@ class _SettingListState extends State<SettingList>
                   var traillist = [
                     YrkIconButton(
                       icon: 'assets/icons/icon_naver_logo.svg',
-                      onTap: () {},
                     ),
                     YrkIconButton(
                       icon: 'assets/icons/icon_arrow_back_24_px.svg',
-                      onTap: () {},
                     ),
                     YrkIconButton(
                       icon: 'assets/icons/icon_arrow_back_24_px.svg',
-                      onTap: () {},
                     ),
                     YrkIconButton(
                       icon: 'assets/icons/icon_arrow_back_24_px.svg',
-                      onTap: () {},
                     ),
                     Text("v.0.0.0")
                   ];

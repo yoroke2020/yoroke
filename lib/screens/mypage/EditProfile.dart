@@ -34,10 +34,8 @@ class _EditProfileState extends State<EditProfile> {
                         onTap: () {},
                         child: YrkIconButton(
                           padding: EdgeInsets.zero,
-                          width: 188,
-                          height: 188,
+                          iconSize: 188,
                           icon: "assets/icons/account_circle_default_36_px.svg",
-                          onTap: () {},
                         )),
                     YrkButton(
                       buttonType: ButtonType.chip,

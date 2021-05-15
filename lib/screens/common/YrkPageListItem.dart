@@ -4,6 +4,7 @@ import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class YrkPageListItem extends StatelessWidget {
@@ -134,8 +135,8 @@ class YrkPageListItem extends StatelessWidget {
                         width: 14.0,
                         height: 12.0,
                         child: Center(
-                            child: Image.asset(
-                                "assets/icons/thumb_up_16_px.png"))),
+                            child: YrkIconButton(
+                                icon: "assets/icons/icon_thumb_up_16_px.svg"))),
                     Container(
                         margin: EdgeInsets.only(right: 8.0),
                         child: Text(testNumberString[listIndex],
@@ -151,8 +152,8 @@ class YrkPageListItem extends StatelessWidget {
                         width: 12.0,
                         height: 12.0,
                         child: Center(
-                            child: Image.asset(
-                                "assets/icons/mode_comment_16_px.png"))),
+                            child: YrkIconButton(
+                                icon: "assets/icons/icon_comment_16_px.svg"))),
                     Container(
                         margin: EdgeInsets.only(right: 8.0),
                         child: Text(testNumberString[listIndex],

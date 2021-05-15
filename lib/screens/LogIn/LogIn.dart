@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/LogIn/SiginInDialog.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
 class LogIn extends StatefulWidget {
@@ -34,7 +35,8 @@ class _LogInState extends State<LogIn> {
                   Container(
                     // Todo: logo
                     // padding: const EdgeInsets.all(80),
-                    child: Image.asset('assets/icons/icon_naver.png'),
+                    child:
+                        YrkIconButton(icon: 'assets/icons/icon_naver_logo.svg'),
                   ),
                   Spacer(),
                   Container(

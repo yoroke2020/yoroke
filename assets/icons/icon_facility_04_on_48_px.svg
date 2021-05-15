@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="icon_facility04_on_48px" width="48" height="48" viewBox="0 0 48 48">
+    <rect id="사각형_16893" width="48" height="48" fill="#fff6b7" rx="16"/>
+    <g id="그룹_762" transform="translate(82 283)">
+        <path id="사각형_16909" d="M0 0H22V15H0z" fill="#fff" transform="translate(-63 -266)"/>
+        <path id="패스_415" d="M-64-269h-11v17h3v3h5v-3h3z" fill="#fff"/>
+        <path id="사각형_16910" d="M0 0H48V48H0z" fill="none" transform="translate(-82 -283)"/>
+        <path id="사각형_16911" d="M0 0H38V38H0z" fill="none" transform="translate(-77 -278)"/>
+        <g id="그룹_761">
+            <path id="패스_416" d="M-55-264h-4v4h4zm-1 3h-2v-2h2z"/>
+            <path id="패스_417" d="M-49-264h-4v4h4zm-1 3h-2v-2h2z"/>
+            <path id="패스_418" d="M-43-264h-4v4h4zm-1 3h-2v-2h2z"/>
+            <path id="패스_419" d="M-59-254h4v-4h-4zm1-3h2v2h-2z"/>
+            <path id="패스_420" d="M-53-254h4v-4h-4zm1-3h2v2h-2z"/>
+            <path id="패스_421" d="M-73-258h3v-3h-3zm1-2h1v1h-1z"/>
+            <path id="패스_422" d="M-69-258h3v-3h-3zm1-2h1v1h-1z"/>
+            <path id="패스_423" d="M-73-263h3v-3h-3zm1-2h1v1h-1z"/>
+            <path id="패스_424" d="M-69-263h3v-3h-3zm1-2h1v1h-1z"/>
+            <path id="패스_425" d="M-47-254h4v-4h-4zm1-3h2v2h-2z"/>
+            <path id="패스_426" d="M-40.5-260a.5.5 0 0 0 .5-.5v-6.5h-23v-3h-13v22h36v-9.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v6.5h-22v-3h2v-4h-2v-2h2v-4h-2v-2h22v5.5a.5.5 0 0 0 .5.5zM-75-249v-2h2v2zm3 0v-5h2v5zm3 0v-5h2v5zm28-1v1h-22v-1zm-23 1h-2v-2h2zm2-8v2h-1v-2zm0-6v2h-1v-2zm-2 3v8h-2v-3h-7v3h-2v-17h11v9z"/>
+        </g>
+        <path id="사각형_16912" d="M0 0H2V1.997H0z" fill="#f4d425" transform="translate(-52 -262.997)"/>
+        <path id="사각형_16913" d="M0 0H2V1.997H0z" fill="#f4d425" transform="translate(-58 -262.997)"/>
+        <path id="사각형_16914" d="M0 0H1V1.997H0z" fill="#f4d425" transform="translate(-63 -262.997)"/>
+        <path id="사각형_16915" d="M0 0H1V1H0z" fill="#f4d425" transform="translate(-68 -265)"/>
+        <path id="사각형_16916" d="M0 0H1V1H0z" fill="#f4d425" transform="translate(-72 -265)"/>
+        <path id="사각형_16917" d="M0 0H2V1.997H0z" fill="#f4d425" transform="translate(-46 -262.997)"/>
+        <path id="사각형_16918" d="M0 0H2V1.997H0z" fill="#f4d425" transform="translate(-52 -256.997)"/>
+        <path id="사각형_16919" d="M0 0H2V1.997H0z" fill="#f4d425" transform="translate(-58 -256.997)"/>
+        <path id="사각형_16920" d="M0 0H2V1.997H0z" fill="#f4d425" transform="translate(-66 -250.997)"/>
+        <path id="사각형_16921" d="M0 0H2V1.997H0z" fill="#f4d425" transform="translate(-75 -250.997)"/>
+        <path id="사각형_16922" d="M0 0H1V1.997H0z" fill="#f4d425" transform="translate(-63 -256.997)"/>
+        <path id="사각형_16923" d="M0 0H1V1H0z" fill="#f4d425" transform="translate(-68 -260)"/>
+        <path id="사각형_16924" d="M0 0H22V1H0z" fill="#f4d425" transform="translate(-63 -250)"/>
+        <path id="사각형_16925" d="M0 0H1V1H0z" fill="#f4d425" transform="translate(-72 -260)"/>
+        <path id="사각형_16926" d="M0 0H2V1.997H0z" fill="#f4d425" transform="translate(-46 -256.997)"/>
+    </g>
+</svg>

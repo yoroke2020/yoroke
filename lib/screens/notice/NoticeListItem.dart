@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 
 class NoticeListItem extends StatelessWidget {
   NoticeListItem(
@@ -22,8 +23,8 @@ class NoticeListItem extends StatelessWidget {
               width: 32,
               height: 32,
               child: Center(
-                child: Image.asset(
-                    "assets/icons/account_circle_default_24_px.png"),
+                child: YrkIconButton(
+                    icon: "assets/icons/account_circle_default_36_px.svg"),
               )),
           Container(
               child: Column(

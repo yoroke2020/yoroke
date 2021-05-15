@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
@@ -114,10 +115,14 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
             child: IconButton(
               splashColor: Colors.transparent,
               icon: isGrid
-                  ? Image.asset("assets/icons/icon_widgets_24_px.png",
-                      width: 19, height: 19, color: Color(0xff939597))
-                  : Image.asset("assets/icons/icon_view_agenda_24_px.png",
-                      width: 19, height: 19, color: Color(0xff939597)),
+                  ? YrkIconButton(
+                      icon: "assets/icons/icon_widgets_24_px.svg",
+                      iconSize: 19,
+                      color: Color(0xff939597))
+                  : YrkIconButton(
+                      icon: "assets/icons/icon_view_agenda_24_px.svg",
+                      iconSize: 19,
+                      color: Color(0xff939597)),
               onPressed: () {
                 setState(() {
                   isGrid = !isGrid;

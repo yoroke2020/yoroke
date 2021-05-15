@@ -7,13 +7,6 @@ import 'package:yoroke/screens/mypage/EditProfile.dart';
 import 'package:yoroke/screens/mypage/HistoryList.dart';
 import 'package:yoroke/screens/mypage/SettingList.dart';
 
-var tiles = [
-  {"text": "프로필 편집", "icon": "assets/icons/icon_naver.png"},
-  {"text": "북마크", "icon": "assets/icons/icon_kakao.png"},
-  {"text": "히스토리", "icon": "assets/icons/icon_apple.png"},
-  {"text": "임시보관함", "icon": "assets/icons/icon_apple.png"},
-];
-
 var textlist = [
   "프로필 편집",
   "북마크",
@@ -48,12 +41,11 @@ class YrkDrawer extends Drawer {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             YrkIconButton(
-                                icon:
-                                    "assets/icons/account_circle_default_36_px.svg",
-                                width: 44,
-                                height: 44,
-                                padding: EdgeInsets.all(0),
-                                onTap: () {}),
+                              icon:
+                                  "assets/icons/account_circle_default_36_px.svg",
+                              iconSize: 44,
+                              padding: EdgeInsets.all(0),
+                            ),
                             Text("비회원",
                                 style: YrkTextStyle(
                                   fontSize: 18,
@@ -80,9 +72,7 @@ class YrkDrawer extends Drawer {
                                       padding: EdgeInsets.zero,
                                       child: YrkIconButton(
                                         icon: imagelist[index],
-                                        width: 22,
-                                        height: 22,
-                                        onTap: () {},
+                                        iconSize: 22,
                                       )),
                                   title: Container(
                                       padding: EdgeInsets.zero,
