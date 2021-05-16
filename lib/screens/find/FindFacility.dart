@@ -6,10 +6,12 @@ import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
+import 'package:yoroke/controllers/YrkSizeController.dart';
 
 import 'FindFacilityImageListView.dart';
 import 'FindFacilityHome.dart';
 import 'FindFacilityInfo.dart';
+import 'FindFacilityReview.dart';
 
 class FindFacility extends StatefulWidget {
   FindFacility({required this.data, required this.onPushNavigator});
@@ -33,6 +35,7 @@ class _FindFacilityState extends State<FindFacility>
   ];
 
   final ScrollController _scrollController = ScrollController();
+  final YrkSizeController _sizeController = YrkSizeController();
   late TabController _tabController;
 
   String _facilityName = "조문기네 요양원";
@@ -124,20 +127,21 @@ class _FindFacilityState extends State<FindFacility>
       ),
       body: YrkTabView(
         controller: _tabController,
+        sizeController: _sizeController,
         swipeable: true,
         viewList: [
           FindFacilityHome(
-                name: _facilityName,
-                location: "서울시 서초구 양재대로 39",
-                rating: "4.8 (12)",
-                distance: 2,
-                hours: "08:00 ~ 22:00",
-                introduction: "시설소개 시설소개 시설소개 시설소개" +
-                    "시설소개 시설소개 시설소개 시설소개" +
-                    "시설소개 시설소개 시설소개 시설소개" +
-                    "시설소개 시설소개 시설소개 시설소개" +
-                    "시설소개 시설소개 시설소개 시설소개" +
-                    "시설소개 시설소개 시설소개 시설소개"),
+              name: _facilityName,
+              location: "서울시 서초구 양재대로 39",
+              rating: "4.8 (12)",
+              distance: 2,
+              hours: "08:00 ~ 22:00",
+              introduction: "시설소개 시설소개 시설소개 시설소개" +
+                  "시설소개 시설소개 시설소개 시설소개" +
+                  "시설소개 시설소개 시설소개 시설소개" +
+                  "시설소개 시설소개 시설소개 시설소개" +
+                  "시설소개 시설소개 시설소개 시설소개" +
+                  "시설소개 시설소개 시설소개 시설소개"),
           FindFacilityInfo(
             grade: "A",
             medicalStaffNum: 42,
@@ -147,7 +151,9 @@ class _FindFacilityState extends State<FindFacility>
             minMonthlyCost: 100,
             maxMonthlyCost: 200,
           ),
-          Container(height: 408, color: Colors.red),
+          FindFacilityReview(
+            sizeController: _sizeController,
+          ),
         ],
       ),
       bottomNavigatorBar: PreferredSize(

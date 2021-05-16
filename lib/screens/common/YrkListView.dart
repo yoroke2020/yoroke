@@ -1,11 +1,10 @@
 import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/controllers/YrkSizeController.dart';
+import 'YrkWidgetSize.dart';
 
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
-
-class YrkListView extends StatelessWidget {
+class YrkListView extends StatefulWidget {
   YrkListView(
       {this.width = double.maxFinite,
       this.height = 120.0,
@@ -13,18 +12,20 @@ class YrkListView extends StatelessWidget {
       this.padding = const EdgeInsets.all(0),
       this.scrollable = false,
       this.scrollDirection = Axis.vertical,
-      this.pageIndex = 0,
+      @Deprecated("") this.pageIndex = 0,
       required this.item,
-      required this.itemCount,
-      this.itemMargin = const EdgeInsets.all(0),
-      this.itemPadding = const EdgeInsets.all(0),
-      this.isIndicator = false});
+      @Deprecated("") this.itemCount = 0,
+      @Deprecated("") this.itemMargin = const EdgeInsets.all(0),
+      @Deprecated("") this.itemPadding = const EdgeInsets.all(0),
+      this.isIndicator = false,
+      this.sizeController});
 
   final Axis scrollDirection;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
   final EdgeInsets? itemMargin;
   final EdgeInsets? itemPadding;
+
   final int itemCount;
   final double width;
   final double height;
@@ -32,6 +33,25 @@ class YrkListView extends StatelessWidget {
   final bool? isIndicator;
   final List<Widget> item;
   final int pageIndex;
+
+  final YrkSizeController? sizeController;
+
+  @override
+  _YrkListViewState createState() => _YrkListViewState();
+}
+
+class _YrkListViewState extends State<YrkListView> {
+  Size _childSize = Size(0, 0);
+
+  late YrkSizeController _sizeController;
+
+  @override
+  void initState() {
+    super.initState();
+    _sizeController = widget.sizeController != null
+        ? widget.sizeController!
+        : YrkSizeController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,25 +62,37 @@ class YrkListView extends StatelessWidget {
         removeLeft: true,
         removeRight: true,
         child: Container(
-            width: width,
-            height: height,
-            margin: margin,
-            padding: padding,
+            width: widget.width,
+            height: widget.scrollDirection != Axis.vertical
+                ? widget.height
+                : _childSize.height * widget.item.length,
+            margin: widget.margin,
+            padding: widget.padding,
             child: ListView.builder(
-              scrollDirection: scrollDirection,
-              physics: scrollable
+              scrollDirection: widget.scrollDirection,
+              physics: widget.scrollable
                   ? new AlwaysScrollableScrollPhysics()
                   : new NeverScrollableScrollPhysics(),
-              itemCount: isIndicator! ? itemCount + 1 : itemCount,
+              itemCount: widget.isIndicator!
+                  ? widget.item.length + 1
+                  : widget.item.length,
               itemBuilder: (BuildContext context, int index) {
-                if (isIndicator! && index == itemCount) {
+                if (widget.isIndicator! && index == widget.item.length) {
                   print("CircularProgressIndicator appears");
                   return CircularProgressIndicator();
                 }
-                return Container(
-                    margin: itemMargin,
-                    padding: itemPadding,
-                    child: item[index]);
+                return YrkWidgetSize(
+                    onChanged: (Size size) {
+                      setState(() {
+                        _childSize = size;
+                        print("size = " + (size.height * widget.item.length).toString());
+                        _sizeController.size = widget.scrollDirection ==
+                                Axis.vertical
+                            ? Size(size.width, size.height * widget.item.length)
+                            : size;
+                      });
+                    },
+                    child: widget.item[index]);
               },
             )));
   }

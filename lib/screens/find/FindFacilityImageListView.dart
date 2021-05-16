@@ -19,6 +19,7 @@ class FindFacilityImageListView extends StatelessWidget {
         children: <Widget>[
           PageView.builder(
             controller: controller,
+            itemCount: 4,
             itemBuilder: (BuildContext context, int index) {
               return Image.asset(list[index],
                   height: 236.0,

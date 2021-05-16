@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/controllers/YrkSizeController.dart';
 
 import 'YrkTextStyle.dart';
 
@@ -40,17 +41,17 @@ class YrkTabBar extends StatelessWidget {
     for (int i = 0; i < textList.length; i++) {
       tabList.add(Tab(
           child: Container(
-            width: tabWidth != null
-                ? tabWidth!
-                : textList.elementAt(i).length * 16 + 30,
-            child: Text(
-              textList.elementAt(i),
-              style: TextStyle(
-                color: const Color(0xe6000000),
-              ),
-              textAlign: TextAlign.center,
-            ),
-          )));
+        width: tabWidth != null
+            ? tabWidth!
+            : textList.elementAt(i).length * 16 + 30,
+        child: Text(
+          textList.elementAt(i),
+          style: TextStyle(
+            color: const Color(0xe6000000),
+          ),
+          textAlign: TextAlign.center,
+        ),
+      )));
     }
     return tabList;
   }
@@ -80,14 +81,14 @@ class YrkTabBar extends StatelessWidget {
   }
 }
 
-class YrkTabView extends StatelessWidget {
-  YrkTabView({
-    required this.viewList,
-    required this.controller,
-    this.width = double.maxFinite,
-    this.height = 650.0,
-    this.swipeable = false,
-  });
+class YrkTabView extends StatefulWidget {
+  YrkTabView(
+      {required this.viewList,
+      required this.controller,
+      this.width = double.maxFinite,
+      this.height = 650,
+      this.swipeable = false,
+      this.sizeController});
 
   final List<Widget> viewList;
   final TabController controller;
@@ -95,19 +96,60 @@ class YrkTabView extends StatelessWidget {
   final double? height;
   final bool? swipeable;
 
+  final YrkSizeController? sizeController;
+
+  @override
+  _YrkTabViewState createState() => _YrkTabViewState();
+}
+
+class _YrkTabViewState extends State<YrkTabView> {
+  late YrkSizeController _sizeController;
+  late double _width;
+  late double _height;
+
+  @override
+  void initState() {
+    super.initState();
+    _width = widget.width!;
+    _height = widget.height!;
+    _sizeController = widget.sizeController != null
+        ? widget.sizeController!
+        : YrkSizeController();
+    _sizeController.addListener(() {
+      _onChangeChildSize();
+    });
+  }
+
+  @override
+  void dispose() {
+    _sizeController.removeListener(() {
+      _onChangeChildSize();
+    });
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      height: height,
+      width: _width,
+      height: _height,
       child: TabBarView(
-        physics: swipeable!
+        physics: widget.swipeable!
             ? AlwaysScrollableScrollPhysics()
             : NeverScrollableScrollPhysics(),
-        children: viewList,
-        controller: controller,
+        children: widget.viewList,
+        controller: widget.controller,
       ),
     );
+  }
+
+  void _onChangeChildSize() {
+    if (_sizeController.sizeIsChanging) {
+      setState(() {
+        _width = _sizeController.size.width;
+        _height = _sizeController.size.height;
+      });
+    }
   }
 }
 
@@ -124,6 +166,7 @@ class YrkTabBarView extends StatelessWidget {
     this.tabViewHeight = 100.0,
     this.tabBarFollowing,
     this.tabViewSwipable = false,
+    this.tabViewSizeController
   });
 
   final List<Widget> tabViewList;
@@ -137,6 +180,7 @@ class YrkTabBarView extends StatelessWidget {
   final double? tabViewHeight;
   final Widget? tabBarFollowing;
   final bool? tabViewSwipable;
+  final YrkSizeController? tabViewSizeController;
 
   @override
   Widget build(BuildContext context) {
@@ -156,6 +200,7 @@ class YrkTabBarView extends StatelessWidget {
           width: tabViewWidth,
           height: tabViewHeight,
           swipeable: tabViewSwipable,
+          sizeController: tabViewSizeController,
         )
       ],
     );
