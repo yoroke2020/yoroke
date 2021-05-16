@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
+import 'package:yoroke/controllers/YrkSelectFilterController.dart';
 
 class YrkSelectFilter extends StatefulWidget {
   YrkSelectFilter(
@@ -48,7 +49,12 @@ class _YrkSelectFilterState extends State<YrkSelectFilter> {
 
   Widget _getColoredFilterButton(int index) {
     return InkWell(
-        onTap: () => _handleFilterSelection(index),
+        onTap: () {
+          if (widget.controller.index != index)
+            setState(() {
+              widget.controller.index = index;
+            });
+        },
         child: AnimatedContainer(
             width: _width / widget.controller.length,
             decoration: BoxDecoration(
@@ -67,18 +73,6 @@ class _YrkSelectFilterState extends State<YrkSelectFilter> {
                 style: widget.controller.index == index
                     ? widget.selectedTextStyle
                     : widget.unselectedTextStyle)));
-  }
-
-  void _handleFilterSelection(int index) {
-    if (widget.controller.index != index) {
-      setState(() {
-        // _boxColor[widget.controller.index] = const Color(0xfff4f4f4);
-        // _textColor[widget.controller.index] = const Color(0xff939597);
-        widget.controller.index = index;
-        // _boxColor[index] = const Color(0xfff5df4d);
-        // _textColor[index] = const Color(0xe6000000);
-      });
-    }
   }
 
   @override
@@ -101,42 +95,5 @@ class _YrkSelectFilterState extends State<YrkSelectFilter> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[..._buildFilterButtons()],
         ));
-  }
-}
-
-class YrkSelectFilterController extends ChangeNotifier {
-  YrkSelectFilterController({int initialIndex = 0, required this.length})
-      : assert(length >= 0),
-        assert(initialIndex >= 0 && (length == 0 || initialIndex < length)),
-        _index = initialIndex,
-        _previousIndex = initialIndex;
-
-  final int length;
-
-  int get index => _index;
-  int _index;
-
-  set index(int value) {
-    _changeIndex(value);
-  }
-
-  int get previousIndex => _previousIndex;
-  int _previousIndex;
-
-  bool get indexIsChanging => _indexIsChangingCount != 0;
-  int _indexIsChangingCount = 0;
-
-  void _changeIndex(int value) {
-    assert(value >= 0 && (value < length || length == 0));
-    assert(_indexIsChangingCount >= 0);
-    if (value == _index || length < 2) return;
-    _index = value;
-    if (_previousIndex != _index) {
-      _indexIsChangingCount += 1;
-      notifyListeners();
-      _previousIndex = _index;
-      _indexIsChangingCount -= 1;
-      notifyListeners();
-    }
   }
 }
