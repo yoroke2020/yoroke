@@ -46,8 +46,6 @@ class _BottomBarCommentState extends State<BottomBarComment> {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.height);
-
     return Transform.translate(
         offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
         child: BottomAppBar(
