@@ -239,7 +239,9 @@ class _SearchState extends State<Search> {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkListView(
-          itemCount: 4, item: _buildList(i, subPageItem, onPushNavigator!)));
+          height: 64,
+          itemCount: 4,
+          item: _buildList(i, subPageItem, onPushNavigator!)));
     }
     return list;
   }
