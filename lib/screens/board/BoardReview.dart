@@ -7,6 +7,7 @@ import 'package:yoroke/screens/common/YrkScrollFadedWidget.dart';
 import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
+import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'BoardCardListItem.dart';
 
@@ -102,8 +103,8 @@ class _BoardReviewState extends State<BoardReview> with TickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: CustomScrollView(controller: _scrollController, slivers: <Widget>[
+    return Scaffold(
+      body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
         SliverAppBar(
             automaticallyImplyLeading: false,
             snap: false,
@@ -187,6 +188,7 @@ class _BoardReviewState extends State<BoardReview> with TickerProviderStateMixin
           ),
         )
       ]),
+      bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.board),
     );
   }
 
