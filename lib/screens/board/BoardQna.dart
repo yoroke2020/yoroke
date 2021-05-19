@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageListItem.dart';
+import 'package:yoroke/screens/common/YrkScrollFadedWidget.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
-import 'package:yoroke/screens/common/YrkCustomScrollView.dart';
 
 import 'BoardQnaCardListItem.dart';
+
 
 class BoardQna extends StatefulWidget {
   BoardQna({required this.onPushNavigator});
@@ -24,23 +24,12 @@ class _BoardQnaState extends State<BoardQna> {
   static final int _loadPageCount = 20;
   static final int _boardQnaCardListItemCount = 10;
 
-  late List<Widget> _boardQnaItemList;
   late int _boardQnaItemListCount;
-
   late ScrollController _scrollController;
-
-  get _buildBoardQnaCardList {
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < _boardQnaCardListItemCount; i++) {
-      list.add(BoardQnaCardListItem());
-    }
-    return list;
-  }
 
   @override
   void initState() {
     super.initState();
-    _boardQnaItemList = <Widget>[];
     _boardQnaItemListCount = 0;
     _initBoardQnaState();
     _scrollController = new ScrollController();
@@ -60,87 +49,75 @@ class _BoardQnaState extends State<BoardQna> {
 
   @override
   Widget build(BuildContext context) {
-    return YrkCustomScrollView(
-      controller: _scrollController,
-      appBarHeight: 48.0,
-      isFadedTitle: true,
-      fadedTitle: "고민/질문",
-      appBar: YrkAppBar(
-        type: YrkAppBarType.arrowBackAll,
-        onPushNavigator: widget.onPushNavigator!,
-        curPageItem: SubPageItem.boardQna,
-        isStatusBar: false,
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            width: double.maxFinite,
-            height: 48.0,
-            margin: EdgeInsets.symmetric(horizontal: 16.0),
-            color: const Color(0xffffffff),
-            child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text("고민/질문",
-                    style: const YrkTextStyle(
-                        fontWeight: FontWeight.w700, fontSize: 22.0))),
+    return Scaffold(
+      body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
+        SliverAppBar(
+          automaticallyImplyLeading: false,
+          snap: false,
+          pinned: true,
+          floating: false,
+          centerTitle: false,
+          titleSpacing: 0.0,
+          shadowColor: const Color(0xffffffff),
+          elevation: 0.0,
+          toolbarHeight: 48.0,
+          backgroundColor: const Color(0xffffffff),
+          title: Stack(
+            children: <Widget>[
+              YrkAppBar(
+                type: YrkAppBarType.arrowBackAll,
+                onPushNavigator: widget.onPushNavigator!,
+                curPageItem: SubPageItem.boardQna,
+                isStatusBar: false,
+              ),
+              YrkScrollFadedWidget(
+                  scrollController: _scrollController,
+                  child: Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(left: 48.0),
+                      height: 48.0,
+                      child: Text("고민/질문",
+                          style:
+                          const YrkTextStyle(fontWeight: FontWeight.w700),
+                          textAlign: TextAlign.left)))
+            ],
           ),
-          Container(
-            width: double.maxFinite,
-            height: 32.0,
-            margin: EdgeInsets.symmetric(horizontal: 16.0),
-            color: const Color(0xffffffff),
-            child: Align(
-                alignment: Alignment.centerLeft,
-                child: // 고민/질문
-                    Text(
-                  "최신 인기글",
-                  style: const YrkTextStyle(
-                    color: const Color(0x99000000),
-                    fontWeight: FontWeight.w500,
-                  ),
-                )),
-          ),
-          YrkListView(
+        ),
+        SliverToBoxAdapter(
+            child: Container(
               height: 232.0,
-              padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
-              scrollable: true,
-              scrollDirection: Axis.horizontal,
-              item: _buildBoardQnaCardList,
-              itemCount: _boardQnaCardListItemCount),
-          YrkListView(
-            item: _boardQnaItemList,
-            itemCount: _boardQnaItemListCount,
-            isIndicator: true,
-            height: 65.0 * _boardQnaItemListCount,
-          )
-        ],
-      ),
-      bottomNavigatorBar: BottomBarNavigation.getInstance(RootPageItem.board),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  return BoardQnaCardListItem();
+                },
+                itemCount: _boardQnaCardListItemCount,
+              ),
+            )),
+        SliverList(
+          delegate:
+          SliverChildBuilderDelegate((BuildContext context, int index) {
+            return YrkPageListItem(
+              pageIndex: 0,
+              listIndex: 0,
+              //TODO: Change it to index when data is fully implemented
+              pageType: SubPageItem.boardQna,
+              nextPageItem: SubPageItem.post,
+              onPushNavigator: widget.onPushNavigator,
+            );
+          }, childCount: _boardQnaItemListCount),
+        )
+      ]),
+      bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.board),
     );
   }
 
   void _initBoardQnaState() {
-    _buildBoardQnaListItem(0, _loadPageCount);
     _boardQnaItemListCount = _loadPageCount;
-  }
-
-  void _buildBoardQnaListItem(int start, int end) {
-    for (int i = start; i < end; i++) {
-      _boardQnaItemList.add(new YrkPageListItem(
-        pageIndex: 0,
-        listIndex: i,
-        pageType: SubPageItem.boardQna,
-        nextPageItem: SubPageItem.post,
-        onPushNavigator: widget.onPushNavigator,
-      ));
-    }
   }
 
   void _loadMoreData() {
     setState(() {
-      _buildBoardQnaListItem(0, _loadPageCount);
       _boardQnaItemListCount += _loadPageCount;
     });
   }
