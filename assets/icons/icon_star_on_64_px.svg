@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-    <g>
-        <path fill="none" d="M0 0H64V64H0z" transform="translate(-219 -142) translate(219 142)"/>
-        <g>
-            <path fill="#f5df4d" d="M267.669 199L248 187.767 228.331 199l5.61-22.423L220 162.646l19.569-2.795 8.4-16.851 8.461 16.851 19.57 2.795-13.941 13.931z" transform="translate(-219 -142) translate(3 3)"/>
-        </g>
-    </g>
-</svg>
