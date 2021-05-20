@@ -98,6 +98,9 @@ class _InfoShareCardListItemState extends State<InfoShareCardListItem> {
                           ),
                         ])),
               ]))),
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
     );
   }
 }
