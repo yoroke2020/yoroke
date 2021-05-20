@@ -6,6 +6,8 @@ import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkPageView.dart';
+import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
 import 'HomeCardListItem.dart';
@@ -144,102 +146,68 @@ class _HomeState extends State<Home> {
             item: _noticeCardList(),
             itemCount: 4,
           ),
-          Container(
-              decoration: BoxDecoration(color: const Color(0xffffffff)),
-              child: new AspectRatio(
-                  aspectRatio: 360 / 40,
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Expanded(flex: 16, child: Container()),
-                        Expanded(
-                          flex: 272,
-                          child: Text("인기 게시글",
-                              style: const TextStyle(
-                                  color: const Color(0xe6000000),
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: "NotoSansCJKKR",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 16.0),
-                              textAlign: TextAlign.left),
-                        ),
-                        Expanded(
-                            flex: 16,
-                            child: Container(
-                              width: 16,
-                              height: 16,
-                              decoration:
-                                  BoxDecoration(color: const Color(0x00000000)),
-                              child: Container(
-                                  width: 10.0029296875,
-                                  height: 10,
-                                  decoration: BoxDecoration(
-                                      color: const Color(0x00000000)),
-                                  child: YrkIconButton(
-                                    icon: "assets/icons/icon_create.svg",
-                                    onTap: () => onPushNavigator!(new YrkData(
-                                        nextPageItem: SubPageItem.postCreate,
-                                        prevPageItem: RootPageItem.home)),
-                                  )),
-                            )),
-                        Expanded(
-                            flex: 40,
-                            child: TextButton(
-                                child: Text("글 작성",
-                                    style: const TextStyle(
-                                        color: const Color(0x99000000),
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: "NotoSansCJKKR",
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 14.0),
-                                    textAlign: TextAlign.left),
-                                onPressed: () => onPushNavigator!(new YrkData(
-                                    nextPageItem: SubPageItem.postCreate,
-                                    prevPageItem: RootPageItem.home)))),
-                        Expanded(flex: 16, child: Container())
-                      ]))),
+          YrkTabHeaderView(
+              title: "인기 게시글",
+              titleStyle: YrkTextStyle(
+                  color: const Color(0xe6000000),
+                  fontWeight: FontWeight.w700,
+                  fontFamily: "NotoSansCJKKR",
+                  fontStyle: FontStyle.normal,
+                  fontSize: 16.0),
+              clickable: true,
+              onPushNavigator: onPushNavigator,
+              nextSubPageItem: SubPageItem.boardQna,
+              customIcon: Row(
+                children: [
+                  YrkIconButton(
+                    icon: "assets/icons/icon_create_24_px.svg",
+                    onTap: () => onPushNavigator!(new YrkData(
+                        nextPageItem: SubPageItem.postCreate,
+                        prevPageItem: RootPageItem.home)),
+                  ),
+                  TextButton(
+                      child: Text("글 작성",
+                          style: const TextStyle(
+                              color: const Color(0x99000000),
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "NotoSansCJKKR",
+                              fontStyle: FontStyle.normal,
+                              fontSize: 14.0),
+                          textAlign: TextAlign.left),
+                      onPressed: () => onPushNavigator!(new YrkData(
+                          nextPageItem: SubPageItem.postCreate,
+                          prevPageItem: RootPageItem.home)))
+                ],
+              )),
           YrkPageView(
             page: _yrkListView(SubPageItem.post),
             controller: popularPageController,
             isIndicatorEnabled: true,
           ),
-          Container(
-              decoration: BoxDecoration(color: const Color(0xffffffff)),
-              child: new AspectRatio(
-                  aspectRatio: 360 / 40,
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Expanded(flex: 16, child: Container()),
-                        Expanded(
-                          flex: 277,
-                          child: Text("인기 의료시설",
-                              style: const TextStyle(
-                                  color: const Color(0xe6000000),
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: "NotoSansCJKKR",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 16.0),
-                              textAlign: TextAlign.left),
-                        ),
-                        Expanded(
-                          flex: 51,
-                          child: TextButton(
-                              child: Text("전체보기",
-                                  style: const TextStyle(
-                                      color: const Color(0x99000000),
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "NotoSansCJKKR",
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 14.0),
-                                  textAlign: TextAlign.left),
-                              onPressed: () {
-                                widget.onPushNavigator!(new YrkData(
-                                    nextPageItem: SubPageItem.homeHistory));
-                              }),
-                        ),
-                        Expanded(flex: 16, child: Container())
-                      ]))),
+          YrkTabHeaderView(
+              title: "인기 의료시설",
+              titleStyle: YrkTextStyle(
+                  color: const Color(0xe6000000),
+                  fontWeight: FontWeight.w700,
+                  fontFamily: "NotoSansCJKKR",
+                  fontStyle: FontStyle.normal,
+                  fontSize: 16.0),
+              clickable: true,
+              onPushNavigator: onPushNavigator,
+              nextSubPageItem: SubPageItem.boardQna,
+              customIcon: TextButton(
+                  child: Text("전체보기",
+                      style: const TextStyle(
+                          color: const Color(0x99000000),
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "NotoSansCJKKR",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 14.0),
+                      textAlign: TextAlign.left),
+                  onPressed: () {
+                    widget.onPushNavigator!(
+                        new YrkData(nextPageItem: SubPageItem.homeHistory));
+                  })),
           YrkListView(
             height: 200.0,
             margin: EdgeInsets.only(top: 8.0, bottom: 8.0),

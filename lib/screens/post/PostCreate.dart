@@ -14,6 +14,7 @@ import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/models/YrkMbsListData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/navigator/SubPage.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkQuillIconButton.dart';
@@ -46,7 +47,7 @@ class _PostCreateState extends State<PostCreate> {
   final ScrollController _scrollController = ScrollController();
 
   // PageType to notice which PageItem called PostCreate
-  late final _pageType = widget.data!.prevPageItem;
+  late var _pageType;
 
   // ModalBottomSheet type, TitleList, LabelList, LabelCountPerTitleList
   late YrkMbsType _mbsType;
@@ -55,12 +56,13 @@ class _PostCreateState extends State<PostCreate> {
   late List<int> _mbsLabelCountPerTitleList;
 
   // Selected Category Index & Text from ModalBottomSheet
+  SubPageItem _selectedCategory = SubPageItem.testPage;
   int _selectedCategoryIndex = -1;
   late String _selectedCategoryText;
 
   // Changes due to RegisterButton Activation
-  Color _registerButtonFillColor = const Color(0xfff4f4f4);
-  Color _registerButtonTextColor = const Color(0xffaaaaaa);
+  late Color _registerButtonFillColor;
+  late Color _registerButtonTextColor;
   bool _isRegisterButtonClickable = false;
 
   // Three checking fields to activate RegisterButton
@@ -71,7 +73,24 @@ class _PostCreateState extends State<PostCreate> {
   @override
   void initState() {
     super.initState();
+    _pageType = widget.data!.prevPageItem;
     _loadFromAssets();
+
+    print(_isTitleEmpty.toString() +
+        " " +
+        _isBodyEmpty.toString() +
+        " " +
+        _isCategorySelected.toString());
+    if (_isTitleEmpty || _isBodyEmpty || !_isCategorySelected) {
+      _registerButtonFillColor = const Color(0xfff4f4f4);
+      _registerButtonTextColor = const Color(0xffaaaaaa);
+      _isRegisterButtonClickable = false;
+    } else {
+      _registerButtonFillColor = const Color(0xffffec6a);
+      _registerButtonTextColor = const Color(0x99000000);
+      _isRegisterButtonClickable = true;
+    }
+
     _titleController.addListener(() {
       _setRegisterButtonColor();
     });
@@ -100,12 +119,29 @@ class _PostCreateState extends State<PostCreate> {
   }
 
   Future<void> _loadFromAssets() async {
-    _titleController.text = tempPostData.title;
+    _selectedCategory = tempPostData.category;
+    _selectedCategoryIndex = tempPostData.categoryIndex;
+    _isCategorySelected = _selectedCategory != SubPageItem.testPage;
+    if (_isCategorySelected) {
+      _pageType = _selectedCategory;
+      _selectedCategoryText = _selectedCategory != SubPageItem.boardReview
+          ? YrkMbsListData.getLabelList(
+              _selectedCategory)[_selectedCategoryIndex]
+          : YrkMbsListData.getLabelList(
+                  _selectedCategory)[_selectedCategoryIndex] +
+              "후기";
+    }
 
-    if (tempPostData.body != "")
+    _titleController.text = tempPostData.title;
+    _isTitleEmpty = _titleController.text.isEmpty;
+
+    if (tempPostData.body != "") {
       _document = Document.fromJson(jsonDecode(tempPostData.body));
-    else
+      _isBodyEmpty = false;
+    } else {
       _document = Document();
+      _isBodyEmpty = true;
+    }
 
     setState(() {
       _bodyController = QuillController(
@@ -187,7 +223,11 @@ class _PostCreateState extends State<PostCreate> {
                     children: <Widget>[
                       YrkIconButton(
                         onTap: () => _onTapClearButton(context),
+<<<<<<< HEAD
                         icon: "assets/icons/icon_clear.svg",
+=======
+                        icon: "assets/icons/icon_clear_24_px.svg",
+>>>>>>> develop
                         iconSize: 24.0,
                       ),
                       Spacer(),
@@ -227,8 +267,15 @@ class _PostCreateState extends State<PostCreate> {
                   ),
                   child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: _selectedCategoryIndex == -1
-                          ? Row(
+                      child: _isCategorySelected
+                          ? Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                _selectedCategoryText,
+                                style: const YrkTextStyle(),
+                              ),
+                            )
+                          : Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
@@ -242,13 +289,6 @@ class _PostCreateState extends State<PostCreate> {
                                   height: 24.0,
                                 )
                               ],
-                            )
-                          : Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                _selectedCategoryText,
-                                style: const YrkTextStyle(),
-                              ),
                             )),
                 )),
             // [3] 3rd AppBar - Title
@@ -327,13 +367,32 @@ class _PostCreateState extends State<PostCreate> {
 
   void _setSelectedCategory(int index) {
     _isCategorySelected = true;
-    _selectedCategoryIndex = index;
-    if (_pageType == SubPageItem.boardReview ||
-        ((_pageType == RootPageItem.home || _pageType == RootPageItem.board) &&
-            index < _mbsLabelCountPerTitleList[0])) {
-      _selectedCategoryText = _mbsLabelList[index] + " 후기";
-    } else
-      _selectedCategoryText = _mbsLabelList[index];
+    if (_pageType == RootPageItem.home || _pageType == RootPageItem.board) {
+      if (index < _mbsLabelCountPerTitleList[0]) {
+        _selectedCategoryIndex = index;
+        _selectedCategory = SubPageItem.boardReview;
+        _selectedCategoryText = _mbsLabelList[index] + " 후기";
+      } else if (index >= _mbsLabelCountPerTitleList[0] &&
+          index <
+              _mbsLabelCountPerTitleList[0] + _mbsLabelCountPerTitleList[1]) {
+        _selectedCategoryIndex = index - _mbsLabelCountPerTitleList[0];
+        _selectedCategory = SubPageItem.boardQna;
+        _selectedCategoryText = _mbsLabelList[index];
+      } else {
+        _selectedCategoryIndex = index -
+            _mbsLabelCountPerTitleList[0] -
+            _mbsLabelCountPerTitleList[1];
+        _selectedCategory = SubPageItem.boardJobFinding;
+        _selectedCategoryText = _mbsLabelList[index];
+      }
+    } else {
+      _selectedCategoryIndex = index;
+      _selectedCategory = _pageType;
+      if (_pageType == SubPageItem.boardReview)
+        _selectedCategoryText = _mbsLabelList[index] + " 후기";
+      else
+        _selectedCategoryText = _mbsLabelList[index];
+    }
   }
 
   Future<String> _onImagePickCallback(File file) async {
@@ -344,9 +403,13 @@ class _PostCreateState extends State<PostCreate> {
   }
 
   void _onPressedRegister(BuildContext context) {
-    PostData data = PostData(_titleController.text,
-        jsonEncode(_bodyController.document.toDelta().toJson()));
+    PostData data = PostData(
+        _titleController.text,
+        jsonEncode(_bodyController.document.toDelta().toJson()),
+        _selectedCategory,
+        _selectedCategoryIndex);
     testPostData.add(data);
+    tempPostData = PostData("", "", SubPageItem.testPage, -1);
     Navigator.pop(context);
   }
 
@@ -356,6 +419,8 @@ class _PostCreateState extends State<PostCreate> {
       String body = jsonEncode(_bodyController.document.toDelta().toJson());
       tempPostData.title = title;
       tempPostData.body = body;
+      tempPostData.category = _selectedCategory;
+      tempPostData.categoryIndex = _selectedCategoryIndex;
       Fluttertoast.showToast(
         msg: "글이 임시저장 되었습니다",
         toastLength: Toast.LENGTH_LONG,
@@ -392,7 +457,11 @@ class _PostCreateState extends State<PostCreate> {
               padding: EdgeInsets.only(top: 21.0, left: 21.0),
               child: YrkIconButton(
                 onTap: () => Navigator.of(dialogContext).pop(),
+<<<<<<< HEAD
                 icon: "assets/icons/icon_clear.svg",
+=======
+                icon: "assets/icons/icon_clear_24_px.svg",
+>>>>>>> develop
                 padding: EdgeInsets.zero,
                 iconSize: 24.0,
               ),
