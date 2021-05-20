@@ -116,11 +116,11 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
               splashColor: Colors.transparent,
               icon: isGrid
                   ? YrkIconButton(
-                      icon: "assets/icons/icon_widgets_24_px.svg",
+                      icon: "assets/icons/icon_widgets.svg",
                       iconSize: 19,
                       color: Color(0xff939597))
                   : YrkIconButton(
-                      icon: "assets/icons/icon_view_agenda_24_px.svg",
+                      icon: "assets/icons/icon_view_agenda.svg",
                       iconSize: 19,
                       color: Color(0xff939597)),
               onPressed: () {

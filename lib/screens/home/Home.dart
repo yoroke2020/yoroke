@@ -176,7 +176,7 @@ class _HomeState extends State<Home> {
                                   decoration: BoxDecoration(
                                       color: const Color(0x00000000)),
                                   child: YrkIconButton(
-                                    icon: "assets/icons/icon_create_24_px.svg",
+                                    icon: "assets/icons/icon_create.svg",
                                     onTap: () => onPushNavigator!(new YrkData(
                                         nextPageItem: SubPageItem.postCreate,
                                         prevPageItem: RootPageItem.home)),

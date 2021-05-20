@@ -49,7 +49,7 @@ class _PostCommentState extends State<PostComment> {
                   Padding(
                     padding: EdgeInsets.only(right: 6.0),
                     child: SvgPicture.asset(
-                        "assets/icons/account_circle_default_36_px.svg",
+                        "assets/icons/account_circle_default.svg",
                         width: 32.0,
                         height: 32.0),
                   ),
@@ -101,7 +101,7 @@ class _PostCommentState extends State<PostComment> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   YrkIconButton(
-                    icon: "assets/icons/icon_tumbs_up_60_16_px.svg",
+                    icon: "assets/icons/icon_tumbs_up_60.svg",
                     onTap: _onTapLikeCount,
                     padding: EdgeInsets.only(right: 5.0),
                     width: 14.0,
@@ -117,7 +117,7 @@ class _PostCommentState extends State<PostComment> {
                             color: const Color(0x4d000000))),
                   ),
                   YrkIconButton(
-                    icon: "assets/icons/icon_thumbs_down_60_16_px.svg",
+                    icon: "assets/icons/icon_thumbs_down_60.svg",
                     onTap: _onTapDislikeCount,
                     padding: EdgeInsets.only(right: 5.0),
                     width: 14.0,

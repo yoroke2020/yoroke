@@ -95,8 +95,7 @@ class HomePopularCardListItem extends StatelessWidget {
                             Expanded(
                                 flex: 16,
                                 child: YrkIconButton(
-                                    icon:
-                                        "assets/icons/icon_save_black_24_px.svg")),
+                                    icon: "assets/icons/icon_save_black.svg")),
                             Expanded(
                                 flex: 23,
                                 child: Text("246",
