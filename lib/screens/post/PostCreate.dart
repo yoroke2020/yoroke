@@ -223,11 +223,7 @@ class _PostCreateState extends State<PostCreate> {
                     children: <Widget>[
                       YrkIconButton(
                         onTap: () => _onTapClearButton(context),
-<<<<<<< HEAD
                         icon: "assets/icons/icon_clear.svg",
-=======
-                        icon: "assets/icons/icon_clear_24_px.svg",
->>>>>>> develop
                         iconSize: 24.0,
                       ),
                       Spacer(),
@@ -457,11 +453,7 @@ class _PostCreateState extends State<PostCreate> {
               padding: EdgeInsets.only(top: 21.0, left: 21.0),
               child: YrkIconButton(
                 onTap: () => Navigator.of(dialogContext).pop(),
-<<<<<<< HEAD
                 icon: "assets/icons/icon_clear.svg",
-=======
-                icon: "assets/icons/icon_clear_24_px.svg",
->>>>>>> develop
                 padding: EdgeInsets.zero,
                 iconSize: 24.0,
               ),
