@@ -66,15 +66,21 @@ class _InfoShareCardListItemState extends State<InfoShareCardListItem> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Container(
-                            // padding: EdgeInsets.only(left: 16, bottom: 16),
+                            padding: EdgeInsets.all(4),
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   YrkIconButton(
                                     icon: _isBookmarked
-                                        ? "assets/icons/icon_bookmark_ofn.svg"
+                                        ? "assets/icons/icon_bookmark_on.svg"
                                         : "assets/icons/icon_bookmark_off.svg",
                                     iconSize: 24,
+                                    color: Colors.white,
+                                    onTap: () {
+                                      setState(() {
+                                        _isBookmarked = !_isBookmarked;
+                                      });
+                                    },
                                   ),
                                 ]),
                           ),
