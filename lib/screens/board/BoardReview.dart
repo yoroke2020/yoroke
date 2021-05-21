@@ -36,7 +36,7 @@ class _BoardReviewState extends State<BoardReview> {
 
   @override
   void initState() {
-    _curCardIndex = widget.data!.i1! != null ? widget.data!.i1! : 0;
+    _curCardIndex = widget.data!.i1!;
     super.initState();
   }
 

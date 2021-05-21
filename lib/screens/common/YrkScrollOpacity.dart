@@ -1,11 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class YrkScrollFadedWidget extends StatefulWidget {
-  YrkScrollFadedWidget(
-      {Key? key,
-      required this.scrollController,
-      required this.child,
-      this.temp})
+  YrkScrollFadedWidget({Key? key,
+    required this.scrollController,
+    required this.child,
+    this.temp})
       : super(key: key);
 
   final ScrollController scrollController;
@@ -35,7 +36,9 @@ class _YrkScrollFadedWidgetState extends State<YrkScrollFadedWidget> {
   }
 
   void _setOffset() {
-    _fullOpacityOffset = widget.scrollController.position.maxScrollExtent;
+    if (_fullOpacityOffset == double.maxFinite)
+      _fullOpacityOffset = widget.scrollController.position.maxScrollExtent;
+
     setState(() {
       _currentOpacityOffset = widget.scrollController.offset;
     });
@@ -45,8 +48,6 @@ class _YrkScrollFadedWidgetState extends State<YrkScrollFadedWidget> {
     if (_fullOpacityOffset == zeroOpacityOffset)
       return 1;
     else if (_fullOpacityOffset > zeroOpacityOffset) {
-      print(
-          "full = $_fullOpacityOffset zero = $zeroOpacityOffset current = $_currentOpacityOffset");
       if (_currentOpacityOffset <= zeroOpacityOffset)
         return 0;
       else if (_currentOpacityOffset >= _fullOpacityOffset)
@@ -55,8 +56,6 @@ class _YrkScrollFadedWidgetState extends State<YrkScrollFadedWidget> {
         return (_currentOpacityOffset - zeroOpacityOffset) /
             (_fullOpacityOffset - zeroOpacityOffset);
     } else {
-      print(
-          "full = $_fullOpacityOffset zero = $zeroOpacityOffset current = $_currentOpacityOffset");
       if (_currentOpacityOffset <= _fullOpacityOffset)
         return 1;
       else if (_currentOpacityOffset >= zeroOpacityOffset)
