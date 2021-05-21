@@ -4,7 +4,7 @@ import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class YrkPageListItem extends StatelessWidget {

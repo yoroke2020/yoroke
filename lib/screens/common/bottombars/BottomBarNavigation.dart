@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 
 var navIconsOff = [
   "assets/icons/icon_nav_home.svg",

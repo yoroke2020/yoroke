@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 
 class NoticeListItem extends StatelessWidget {
   NoticeListItem(

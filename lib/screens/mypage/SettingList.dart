@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/screens/common/YrkButton.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/mypage/NotiSetting.dart';
