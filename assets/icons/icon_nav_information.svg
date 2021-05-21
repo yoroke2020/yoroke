@@ -1,14 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="icon_information_24px" width="24" height="24" viewBox="0 0 24 24">
     <path id="사각형_730" fill="none" d="M0 0H24V24H0z"/>
     <g id="그룹_643" transform="translate(-193 -249.5)">
-<<<<<<< HEAD:assets/icons/icon_nav_information.svg
         <path id="패스_187" d="M212.5 258a.5.5 0 0 0 .5-.5v-4h-16v14h4.97l.505.5 2.525 2.5 2.525-2.5.505-.5H213v-7a.5.5 0 0 0-1 0v6h-4.381l-.293.289-.505.5-1.821 1.8-1.821-1.8-.505-.5-.293-.289H198v-12h14v3a.5.5 0 0 0 .5.5z" fill="#b2b2b2"/>
         <path id="사각형_16747" d="M0 0H2V5H0z" fill="#b2b2b2" transform="translate(204 259.5)"/>
         <path id="사각형_16748" d="M0 0H2V2H0z" fill="#b2b2b2" transform="translate(204 256.5)"/>
-=======
-        <path id="패스_187" d="M212.5 258a.5.5 0 0 0 .5-.5v-4h-16v14h4.97l.505.5 2.525 2.5 2.525-2.5.505-.5H213v-7a.5.5 0 0 0-1 0v6h-4.381l-.293.289-.505.5-1.821 1.8-1.821-1.8-.505-.5-.293-.289H198v-12h14v3a.5.5 0 0 0 .5.5z" fill="#939597"/>
-        <path id="사각형_16747" d="M0 0H2V5H0z" fill="#939597" transform="translate(204 259.5)"/>
-        <path id="사각형_16748" d="M0 0H2V2H0z" fill="#939597" transform="translate(204 256.5)"/>
->>>>>>> develop:assets/icons/icon_information_24_px.svg
     </g>
 </svg>
