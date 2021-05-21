@@ -5,6 +5,7 @@ import 'package:flutter_quill/widgets/editor.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
@@ -33,6 +34,7 @@ class _InfoShareDetailState extends State<InfoShareDetail> {
   ];
 
   bool isScrolled = false;
+  bool _isBookmarked = false;
 
   late QuillController _quillController;
 
@@ -64,7 +66,23 @@ class _InfoShareDetailState extends State<InfoShareDetail> {
           toolbarHeight: 48.0,
           expandedHeight: 460.0,
           backgroundColor: const Color(0xffffffff),
-          title: YrkAppBar(type: YrkAppBarType.arrowBackOnly),
+          title: Stack(alignment: Alignment.centerRight, children: [
+            YrkAppBar(type: YrkAppBarType.arrowBackOnly),
+            Padding(
+              padding: EdgeInsets.only(right: 16.0),
+              child: YrkIconButton(
+                icon: _isBookmarked
+                    ? "assets/icons/icon_bookmark_on.svg"
+                    : "assets/icons/icon_bookmark_off.svg",
+                iconSize: 24,
+                onTap: () {
+                  setState(() {
+                    _isBookmarked = !_isBookmarked;
+                  });
+                },
+              ),
+            ),
+          ]),
           flexibleSpace: FlexibleSpaceBar(
               background: Container(
                   height: 460.0,
