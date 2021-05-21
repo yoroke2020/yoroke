@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
-import '../YrkButton.dart';
+import '../buttons/YrkButton.dart';
 import '../YrkTextField.dart';
 
 class BottomBarComment extends StatefulWidget {
