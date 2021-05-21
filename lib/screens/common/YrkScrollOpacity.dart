@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 
 class YrkScrollFadedWidget extends StatefulWidget {
   YrkScrollFadedWidget(
-      {Key? key, required this.scrollController, required this.child})
+      {Key? key,
+      required this.scrollController,
+      required this.child,
+      this.temp})
       : super(key: key);
 
   final ScrollController scrollController;
   final Widget child;
+  final double? temp;
 
   @override
   _YrkScrollFadedWidgetState createState() => _YrkScrollFadedWidgetState();
@@ -14,7 +18,7 @@ class YrkScrollFadedWidget extends StatefulWidget {
 
 class _YrkScrollFadedWidgetState extends State<YrkScrollFadedWidget> {
   late double _currentOpacityOffset;
-  final double _fullOpacityOffset = 180.0;
+  late double _fullOpacityOffset = double.maxFinite;
   final double zeroOpacityOffset = 0;
 
   @override
@@ -31,6 +35,7 @@ class _YrkScrollFadedWidgetState extends State<YrkScrollFadedWidget> {
   }
 
   void _setOffset() {
+    _fullOpacityOffset = widget.scrollController.position.maxScrollExtent;
     setState(() {
       _currentOpacityOffset = widget.scrollController.offset;
     });
@@ -40,6 +45,8 @@ class _YrkScrollFadedWidgetState extends State<YrkScrollFadedWidget> {
     if (_fullOpacityOffset == zeroOpacityOffset)
       return 1;
     else if (_fullOpacityOffset > zeroOpacityOffset) {
+      print(
+          "full = $_fullOpacityOffset zero = $zeroOpacityOffset current = $_currentOpacityOffset");
       if (_currentOpacityOffset <= zeroOpacityOffset)
         return 0;
       else if (_currentOpacityOffset >= _fullOpacityOffset)
@@ -48,6 +55,8 @@ class _YrkScrollFadedWidgetState extends State<YrkScrollFadedWidget> {
         return (_currentOpacityOffset - zeroOpacityOffset) /
             (_fullOpacityOffset - zeroOpacityOffset);
     } else {
+      print(
+          "full = $_fullOpacityOffset zero = $zeroOpacityOffset current = $_currentOpacityOffset");
       if (_currentOpacityOffset <= _fullOpacityOffset)
         return 1;
       else if (_currentOpacityOffset >= zeroOpacityOffset)

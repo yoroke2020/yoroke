@@ -5,7 +5,7 @@ import 'package:tuple/tuple.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkPageListItem.dart';
-import 'package:yoroke/screens/common/YrkScrollFadedWidget.dart';
+import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
@@ -24,7 +24,7 @@ class BoardReview extends StatefulWidget {
 class _BoardReviewState extends State<BoardReview> {
   static final int boardCardListItemCount = 12;
 
-  late int _curCardIndex = 0;
+  late int _curCardIndex;
   final ScrollController _scrollController = ScrollController();
   final List<Tuple2<String, int>> _tabs = <Tuple2<String, int>>[
     Tuple2('최신글', 0),
@@ -35,8 +35,14 @@ class _BoardReviewState extends State<BoardReview> {
 
   @override
   void initState() {
-    _curCardIndex = widget.data!.i1!;
+    _curCardIndex = widget.data!.i1! != null ? widget.data!.i1! : 0;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   Widget build(BuildContext context) {
@@ -209,6 +215,7 @@ class CustomTapBar extends StatelessWidget implements PreferredSizeWidget {
       alignment: Alignment.centerLeft,
       child: Container(
         width: tabWidth! * tabs.length.toDouble(),
+        height: 40.0,
         child: TabBar(
           indicatorColor: const Color(0xfff5df4d),
           labelPadding: EdgeInsets.zero,
