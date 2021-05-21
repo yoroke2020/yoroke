@@ -191,7 +191,7 @@ class _PostState extends State<Post> {
                               Padding(
                                   padding: EdgeInsets.only(right: 6.0),
                                   child: SvgPicture.asset(
-                                      "assets/icons/account_circle_default_36_px.svg",
+                                      "assets/icons/account_circle_default.svg",
                                       width: 32.0,
                                       height: 32.0)),
                               Column(
@@ -357,8 +357,8 @@ class _PostState extends State<Post> {
                     padding: EdgeInsets.only(right: 5.0),
                     child: SvgPicture.asset(
                       isLike
-                          ? "assets/icons/icon_tumbs_up_60_16_px.svg"
-                          : "assets/icons/icon_thumbs_down_60_16_px.svg",
+                          ? "assets/icons/icon_tumbs_up_60.svg"
+                          : "assets/icons/icon_thumbs_down_60.svg",
                       width: 14.0,
                       height: 12.0,
                       color: const Color(0x4d000000),

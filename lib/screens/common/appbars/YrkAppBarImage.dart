@@ -55,8 +55,8 @@ class _YrkAppBarImageState extends State<YrkAppBarImage> {
         actions: [
           YrkIconButton(
             icon: _isBookmarked
-                ? "assets/icons/icon_bookmark_ofn_24_px.svg"
-                : "assets/icons/icon_bookmark_off_24_px.svg",
+                ? "assets/icons/icon_bookmark_on.svg"
+                : "assets/icons/icon_bookmark_off.svg",
             iconSize: 24,
           ),
         ],

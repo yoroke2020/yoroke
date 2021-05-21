@@ -1,10 +1,22 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/YrkIconButton.dart';
+
+var navIconsOff = [
+  "assets/icons/icon_nav_home.svg",
+  "assets/icons/icon_nav_board.svg",
+  "assets/icons/icon_nav_find_facility.svg",
+  "assets/icons/icon_nav_information.svg",
+];
+
+var navIconsOn = [
+  "assets/icons/icon_nav_home_on.svg",
+  "assets/icons/icon_nav_board_on.svg",
+  "assets/icons/icon_nav_find_facility_on.svg",
+  "assets/icons/icon_nav_information_on.svg",
+];
 
 // ignore: must_be_immutable
 class BottomBarNavigation extends StatefulWidget {
@@ -31,55 +43,44 @@ class BottomBarNavigation extends StatefulWidget {
 
 class _BottomBarNavigationState extends State<BottomBarNavigation> {
   RootPageItem? _curRootPageItem;
-  Map? _iconMap;
 
   BottomNavigationBarItem _buildItem(RootPageItem rootPageItem) {
     return BottomNavigationBarItem(
-        icon: _getIcon(rootPageItem), label: rootPageTabLabelInfo[rootPageItem]);
+        icon: _getIcon(rootPageItem),
+        label: rootPageTabLabelInfo[rootPageItem]);
   }
 
   void _onTap(int index) {
     widget._onSelectRootPageItem(RootPageItem.values[index]);
   }
 
-  Image _getIcon(RootPageItem rootPageItem) {
+  YrkIconButton _getIcon(RootPageItem rootPageItem) {
     return _curRootPageItem == rootPageItem
-        ? Image.asset(_iconMap![rootPageTabIconInfo[rootPageItem]]['selectedImage'])
-        : Image.asset(_iconMap![rootPageTabIconInfo[rootPageItem]]['image']);
-  }
-
-  // TODO _memorizer 캐시 적용
-  Future<String> _loadAsset(String target) async {
-    return await rootBundle.loadString(target);
+        ? YrkIconButton(
+            icon: navIconsOn[rootPageItem.index],
+            color: Color(0xffe2bf00),
+          )
+        : YrkIconButton(icon: navIconsOff[rootPageItem.index]);
   }
 
   @override
   Widget build(BuildContext context) {
     if (_curRootPageItem == null) _curRootPageItem = widget._curRootPageItem;
 
-    return FutureBuilder(
-        future: _loadAsset('assets/icons/icons.json'),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData == false || snapshot.hasError) {
-            return CircularProgressIndicator();
-          } else {
-            _iconMap = json.decode(snapshot.data);
-            return BottomNavigationBar(
-            backgroundColor: const Color(0xffffffff),
-              type: BottomNavigationBarType.fixed,
-              currentIndex: _curRootPageItem!.index,
-              items: [
-                _buildItem(RootPageItem.home),
-                _buildItem(RootPageItem.board),
-                _buildItem(RootPageItem.find),
-                _buildItem(RootPageItem.info),
-              ],
-              onTap: _onTap,
-              selectedItemColor: const Color(0xffe2bf00),
-              selectedFontSize: 12.0,
-              unselectedFontSize: 12.0,
-            );
-          }
-        });
+    return BottomNavigationBar(
+      backgroundColor: Colors.white,
+      type: BottomNavigationBarType.fixed,
+      currentIndex: _curRootPageItem!.index,
+      items: [
+        _buildItem(RootPageItem.home),
+        _buildItem(RootPageItem.board),
+        _buildItem(RootPageItem.find),
+        _buildItem(RootPageItem.info),
+      ],
+      onTap: _onTap,
+      selectedItemColor: const Color(0xffe2bf00),
+      selectedFontSize: 12.0,
+      unselectedFontSize: 12.0,
+    );
   }
 }

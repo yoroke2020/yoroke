@@ -223,7 +223,7 @@ class _PostCreateState extends State<PostCreate> {
                     children: <Widget>[
                       YrkIconButton(
                         onTap: () => _onTapClearButton(context),
-                        icon: "assets/icons/icon_clear_24_px.svg",
+                        icon: "assets/icons/icon_clear.svg",
                         iconSize: 24.0,
                       ),
                       Spacer(),
@@ -280,7 +280,7 @@ class _PostCreateState extends State<PostCreate> {
                                     textAlign: TextAlign.left),
                                 Spacer(),
                                 SvgPicture.asset(
-                                  "assets/icons/icon_navigate_next_24_px.svg",
+                                  "assets/icons/icon_navigate_next.svg",
                                   width: 24.0,
                                   height: 24.0,
                                 )
@@ -334,7 +334,7 @@ class _PostCreateState extends State<PostCreate> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     YrkQuillImageButton(
-                      icon: "assets/icons/icon_photo_library_24_px.svg",
+                      icon: "assets/icons/icon_photo_library.svg",
                       imageSource: ImageSource.gallery,
                       controller: _bodyController,
                       onImagePickCallback: _onImagePickCallback,
@@ -453,7 +453,7 @@ class _PostCreateState extends State<PostCreate> {
               padding: EdgeInsets.only(top: 21.0, left: 21.0),
               child: YrkIconButton(
                 onTap: () => Navigator.of(dialogContext).pop(),
-                icon: "assets/icons/icon_clear_24_px.svg",
+                icon: "assets/icons/icon_clear.svg",
                 padding: EdgeInsets.zero,
                 iconSize: 24.0,
               ),

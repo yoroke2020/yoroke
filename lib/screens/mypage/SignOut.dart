@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
-import 'package:yoroke/screens/common/YrkTextField.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
@@ -207,7 +206,7 @@ class _YrkRadioButton extends StatelessWidget {
   final int index;
   final int groupValue;
   final ValueChanged<int> onSelected;
-  MainAxisAlignment align;
+  final MainAxisAlignment align;
 
   @override
   Widget build(BuildContext context) {

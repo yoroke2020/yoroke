@@ -73,13 +73,13 @@ class _SettingListState extends State<SettingList>
                       icon: 'assets/icons/icon_naver_logo.svg',
                     ),
                     YrkIconButton(
-                      icon: 'assets/icons/icon_arrow_back_24_px.svg',
+                      icon: 'assets/icons/icon_arrow_back.svg',
                     ),
                     YrkIconButton(
-                      icon: 'assets/icons/icon_arrow_back_24_px.svg',
+                      icon: 'assets/icons/icon_arrow_back.svg',
                     ),
                     YrkIconButton(
-                      icon: 'assets/icons/icon_arrow_back_24_px.svg',
+                      icon: 'assets/icons/icon_arrow_back.svg',
                     ),
                     Text("v.0.0.0")
                   ];

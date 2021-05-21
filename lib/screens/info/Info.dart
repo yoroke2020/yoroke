@@ -111,25 +111,19 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
               itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             ),
           ],
-          tabBarFollowing: Center(
-            child: IconButton(
-              splashColor: Colors.transparent,
-              icon: isGrid
-                  ? YrkIconButton(
-                      icon: "assets/icons/icon_widgets_24_px.svg",
-                      iconSize: 19,
-                      color: Color(0xff939597))
-                  : YrkIconButton(
-                      icon: "assets/icons/icon_view_agenda_24_px.svg",
-                      iconSize: 19,
-                      color: Color(0xff939597)),
-              onPressed: () {
-                setState(() {
-                  isGrid = !isGrid;
-                });
-              },
-            ),
-          ),
+          tabBarFollowing: Container(
+              padding: EdgeInsets.all(4),
+              child: YrkIconButton(
+                  icon: isGrid
+                      ? "assets/icons/icon_widgets.svg"
+                      : "assets/icons/icon_view_agenda.svg",
+                  iconSize: 19,
+                  color: Color(0xff939597),
+                  onTap: () {
+                    setState(() {
+                      isGrid = !isGrid;
+                    });
+                  })),
         ),
       ),
     );

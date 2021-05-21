@@ -66,7 +66,7 @@ class _NotiSettingState extends State<NotiSetting> {
                             style: YrkTextStyle(fontFamily: 'OpenSans'),
                           ),
                           YrkIconButton(
-                            icon: 'assets/icons/icon_arrow_back_24_px.svg',
+                            icon: 'assets/icons/icon_arrow_back.svg',
                           ),
                         ],
                       ),

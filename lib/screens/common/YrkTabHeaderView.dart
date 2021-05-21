@@ -52,7 +52,7 @@ class YrkTabHeaderView extends StatelessWidget {
                       child: customIcon != null
                           ? customIcon
                           : YrkIconButton(
-                              icon: "assets/icons/icon_navigate_next_24_px.svg",
+                              icon: "assets/icons/icon_navigate_next.svg",
                               padding: EdgeInsets.zero,
                               clickable: false,
                               iconSize: 24.0,
