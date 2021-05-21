@@ -55,7 +55,7 @@ class FindFacilityHome extends StatelessWidget {
                                   child: Row(children: [
                                     YrkIconButton(
                                       icon:
-                                          "assets/icons/icon_review_star_on_24_px.svg",
+                                          "assets/icons/icon_star_on.svg",
                                       width: 12.0,
                                       height: 12.0,
                                       padding: EdgeInsets.only(right: 2.0),

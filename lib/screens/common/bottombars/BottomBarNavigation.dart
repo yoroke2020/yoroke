@@ -58,9 +58,15 @@ class _BottomBarNavigationState extends State<BottomBarNavigation> {
     return _curRootPageItem == rootPageItem
         ? YrkIconButton(
             icon: navIconsOn[rootPageItem.index],
+            width: 24.0,
+            height: 24.0,
             color: Color(0xffe2bf00),
           )
-        : YrkIconButton(icon: navIconsOff[rootPageItem.index]);
+        : YrkIconButton(
+            icon: navIconsOff[rootPageItem.index],
+            width: 24.0,
+            height: 24.0,
+          );
   }
 
   @override

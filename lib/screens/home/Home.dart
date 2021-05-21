@@ -100,10 +100,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => widget
-              .onPushNavigator!(YrkData(nextPageItem: SubPageItem.testPage)),
-        ),
         appBar: YrkAppBar(
           type: YrkAppBarType.accountCircleAll,
           onPushNavigator: widget.onPushNavigator,
@@ -144,7 +140,7 @@ class _HomeState extends State<Home> {
               customIcon: Row(
                 children: [
                   YrkIconButton(
-                    icon: "assets/icons/icon_create_24_px.svg",
+                    icon: "assets/icons/icon_create.svg",
                     onTap: () => onPushNavigator!(new YrkData(
                         nextPageItem: SubPageItem.postCreate,
                         prevPageItem: RootPageItem.home)),

@@ -154,7 +154,7 @@ class _FindState extends State<Find> {
                                         children: <Widget>[
                                           YrkIconButton(
                                             icon:
-                                            "assets/icons/icon_find_facility_24_px.svg",
+                                            "assets/icons/icon_location.svg",
                                             width: 24.0,
                                             height: 24.0,
                                             padding:
@@ -170,7 +170,7 @@ class _FindState extends State<Find> {
                                           ),
                                           YrkIconButton(
                                             icon:
-                                            "assets/icons/icon_navigate_next_24_px.svg",
+                                            "assets/icons/icon_navigate_next.svg",
                                             width: 24.0,
                                             height: 24.0,
                                             padding: EdgeInsets.only(left: 6.0),

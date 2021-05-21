@@ -358,8 +358,8 @@ class _PostState extends State<Post> {
                   Spacer(),
                   SvgPicture.asset(
                       isNext
-                          ? "assets/icons/icon_navigate_next_24px.svg"
-                          : "assets/icons/icon_navigate_next_24px.svg",
+                          ? "assets/icons/icon_navigate_next.svg"
+                          : "assets/icons/icon_navigate_next.svg",
                       width: 24.0,
                       height: 24.0)
                 ])));

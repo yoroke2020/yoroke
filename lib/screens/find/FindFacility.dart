@@ -35,10 +35,10 @@ class _BoardReviewState extends State<FindFacility> {
 
   static final List<String> _bottomButtonTextList = ["북마크", "위치", "전화", "공유"];
   static final List<String> _bottomButtonImageList = [
-    "assets/icons/icon_bookmark_color_on_24_px.svg",
-    "assets/icons/icon_location_24_px.svg",
-    "assets/icons/icon_phone_24_px.svg",
-    "assets/icons/icon_share_color_24_px.svg"
+    "assets/icons/icon_bookmark_on.svg",
+    "assets/icons/icon_location.svg",
+    "assets/icons/icon_phone.svg",
+    "assets/icons/icon_share_color.svg"
   ];
 
   final YrkSelectFilterController controller =
@@ -170,7 +170,7 @@ class _BoardReviewState extends State<FindFacility> {
                 icon: _isBookmarked
                     ? _bottomButtonImageList[i]
                     : i == 0
-                        ? "assets/icons/icon_bookmark_color_off_24_px.svg"
+                        ? "assets/icons/icon_bookmark_off.svg"
                         : _bottomButtonImageList[i],
                 width: 24.0,
                 height: 24.0,
