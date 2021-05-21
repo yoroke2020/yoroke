@@ -12,10 +12,10 @@ import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'BoardCardListItem.dart';
 
 class BoardReview extends StatefulWidget {
-  BoardReview({required this.onPushNavigator, required this.data});
+  BoardReview({required this.data, required this.onPushNavigator});
 
-  final ValueChanged<YrkData>? onPushNavigator;
   final YrkData? data;
+  final ValueChanged<YrkData>? onPushNavigator;
 
   @override
   _BoardReviewState createState() => _BoardReviewState();
@@ -24,7 +24,7 @@ class BoardReview extends StatefulWidget {
 class _BoardReviewState extends State<BoardReview> {
   static final int boardCardListItemCount = 12;
 
-  late int _curCardIndex;
+  late int _curCardIndex = 0;
   final ScrollController _scrollController = ScrollController();
   final List<Tuple2<String, int>> _tabs = <Tuple2<String, int>>[
     Tuple2('최신글', 0),
@@ -35,7 +35,7 @@ class _BoardReviewState extends State<BoardReview> {
 
   @override
   void initState() {
-    _curCardIndex = widget.data!.i1! != null ? widget.data!.i1! : 0;
+    _curCardIndex = widget.data!.i1!;
     super.initState();
   }
 
@@ -174,10 +174,6 @@ class _BoardReviewState extends State<BoardReview> {
                                 ]));
                       }));
                 }).toList()))));
-  }
-
-  void _initBoardReviewState() {
-    _curCardIndex = 0;
   }
 
   void _onPushChangeReviewCard(BuildContext context, YrkData data) {
