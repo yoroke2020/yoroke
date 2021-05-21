@@ -10,11 +10,13 @@ class InfoShareCardListItem extends StatefulWidget {
       {required this.width,
       required this.height,
       required this.index,
+       this.tabIndex,
       this.onPushNavigator});
 
   final double? width;
   final double? height;
   final int index;
+  final int? tabIndex;
   final ValueChanged<YrkData>? onPushNavigator;
 
   @override
