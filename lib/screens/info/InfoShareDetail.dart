@@ -69,7 +69,10 @@ class _InfoShareDetailState extends State<InfoShareDetail> {
             expandedHeight: 460.0,
             backgroundColor: const Color(0xffffffff),
             title: Stack(alignment: Alignment.centerRight, children: [
-              YrkAppBar(type: YrkAppBarType.arrowBackOnly),
+              YrkAppBar(
+                type: YrkAppBarType.arrowBackOnly,
+                isStatusBar: false,
+              ),
               Padding(
                 padding: EdgeInsets.only(right: 16.0),
                 child: YrkIconButton(
@@ -152,10 +155,10 @@ class _InfoShareDetailState extends State<InfoShareDetail> {
                 delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                   return InfoShareCardListItem(
-                          width: 158.0,
-                          height: 158.0,
-                          index: index,
-                          onPushNavigator: widget.onPushNavigator);
+                      width: 158.0,
+                      height: 158.0,
+                      index: index,
+                      onPushNavigator: widget.onPushNavigator);
                 }, childCount: 6)))
       ]),
     );
