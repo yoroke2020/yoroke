@@ -79,7 +79,7 @@ class _BoardReviewState extends State<BoardReview> {
                                     curPageItem: SubPageItem.boardReview,
                                     isStatusBar: false,
                                   ),
-                                  YrkScrollFadedWidget(
+                                  YrkScrollOpacity(
                                       scrollController: _scrollController,
                                       child: Container(
                                           alignment: Alignment.centerLeft,
@@ -90,64 +90,72 @@ class _BoardReviewState extends State<BoardReview> {
                                                   fontWeight: FontWeight.w700),
                                               textAlign: TextAlign.left)))
                                 ]),
-                                flexibleSpace: FlexibleSpaceBar(
-                                    background: Container(
-                                        color: const Color(0xffffffff),
-                                        child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              SizedBox(
-                                                height: 48.0 +
-                                                    MediaQuery.of(context)
-                                                        .padding
-                                                        .top,
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: 16.0,
-                                                    top: 8.0,
-                                                    bottom: 8.0),
-                                                child: Text("후기",
-                                                    style: const YrkTextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize: 22.0),
-                                                    textAlign: TextAlign.left),
-                                              ),
-                                              Container(
-                                                  height: 100.0,
-                                                  child: ListView.separated(
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      itemCount:
-                                                          boardCardListItemCount,
-                                                      separatorBuilder:
-                                                          (BuildContext context,
-                                                              int index) {
-                                                        return SizedBox(
-                                                            width: 16.0);
-                                                      },
-                                                      itemBuilder:
-                                                          (BuildContext context,
-                                                              int index) {
-                                                        return BoardCardListItem(
-                                                          index: index,
-                                                          listLength:
-                                                              boardCardListItemCount,
-                                                          isBorder: index ==
-                                                                  _curCardIndex
-                                                              ? true
-                                                              : false,
-                                                          onPushNavigator: (data) =>
-                                                              _onPushChangeReviewCard(
-                                                                  context,
-                                                                  data),
-                                                        );
-                                                      }))
-                                            ]))),
+                                flexibleSpace: YrkScrollOpacity(
+                                  scrollController: _scrollController,
+                                  reversed: true,
+                                  child: FlexibleSpaceBar(
+                                      background: Container(
+                                          color: const Color(0xffffffff),
+                                          child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                SizedBox(
+                                                  height: 48.0 +
+                                                      MediaQuery.of(context)
+                                                          .padding
+                                                          .top,
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 16.0,
+                                                      top: 8.0,
+                                                      bottom: 8.0),
+                                                  child: Text("후기",
+                                                      style: const YrkTextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 22.0),
+                                                      textAlign:
+                                                          TextAlign.left),
+                                                ),
+                                                Container(
+                                                    height: 100.0,
+                                                    child: ListView.separated(
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        itemCount:
+                                                            boardCardListItemCount,
+                                                        separatorBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          return SizedBox(
+                                                              width: 16.0);
+                                                        },
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          return BoardCardListItem(
+                                                            index: index,
+                                                            listLength:
+                                                                boardCardListItemCount,
+                                                            isBorder: index ==
+                                                                    _curCardIndex
+                                                                ? true
+                                                                : false,
+                                                            onPushNavigator:
+                                                                (data) =>
+                                                                    _onPushChangeReviewCard(
+                                                                        context,
+                                                                        data),
+                                                          );
+                                                        }))
+                                              ]))),
+                                ),
                                 forceElevated: innerBoxIsScrolled,
                                 bottom:
                                     CustomTapBar(tabs: _tabs, tabWidth: 72.0)))
@@ -214,19 +222,33 @@ class _BoardReviewState extends State<BoardReview> {
 }
 
 class CustomTapBar extends StatelessWidget implements PreferredSizeWidget {
-  CustomTapBar({required this.tabs, this.tabWidth});
+  CustomTapBar(
+      {required this.tabs, this.tabWidth = -1, this.isScrollable = false});
+
+  static final int undefined = -1;
 
   final List<Tuple2<String, int>> tabs;
-  final double? tabWidth;
+  final double tabWidth;
+  final bool isScrollable;
 
   @override
   Widget build(BuildContext context) {
+    double getTabWidth() {
+      double result = 0;
+      for (int i = 0; i < tabs.length; i++)
+        result += tabs[i].item1.length * 16 + 30;
+      return result;
+    }
+
+    double _tabWidth = tabWidth != undefined ? tabWidth * tabs.length : getTabWidth();
+
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
-        width: tabWidth! * tabs.length.toDouble(),
+        width: _tabWidth,
         height: 40.0,
         child: TabBar(
+          isScrollable: isScrollable,
           indicatorColor: const Color(0xfff5df4d),
           labelPadding: EdgeInsets.zero,
           labelStyle: YrkTextStyle(fontSize: 16.0, fontWeight: FontWeight.w700),

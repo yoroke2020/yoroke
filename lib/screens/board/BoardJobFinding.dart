@@ -74,7 +74,7 @@ class _BoardJobFindingState extends State<BoardJobFinding> {
                                     curPageItem: SubPageItem.boardJobFinding,
                                     isStatusBar: false,
                                   ),
-                                  YrkScrollFadedWidget(
+                                  YrkScrollOpacity(
                                       scrollController: _scrollController,
                                       child: Container(
                                           height: 48.0,

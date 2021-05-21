@@ -1,15 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:tuple/tuple.dart';
+import 'package:yoroke/controllers/YrkSelectFilterController.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/screens/common/YrkCustomScrollView.dart';
+import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/YrkIconButton.dart';
-import 'package:yoroke/screens/common/YrkTabBarView.dart';
+import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
-import 'package:yoroke/controllers/YrkSizeController.dart';
 
-import 'FindFacilityImageListView.dart';
 import 'FindFacilityHome.dart';
+import 'FindFacilityImageListView.dart';
 import 'FindFacilityInfo.dart';
 import 'FindFacilityReview.dart';
 
@@ -20,12 +22,17 @@ class FindFacility extends StatefulWidget {
   final ValueChanged<YrkData>? onPushNavigator;
 
   @override
-  _FindFacilityState createState() => _FindFacilityState();
+  _BoardReviewState createState() => _BoardReviewState();
 }
 
-class _FindFacilityState extends State<FindFacility>
-    with TickerProviderStateMixin {
-  static final int tabLength = 3;
+class _BoardReviewState extends State<FindFacility> {
+  final ScrollController _scrollController = ScrollController();
+  final List<Tuple2<String, int>> _tabs = <Tuple2<String, int>>[
+    Tuple2('홈', 0),
+    Tuple2('정보', 1),
+    Tuple2('후기', 2)
+  ];
+
   static final List<String> _bottomButtonTextList = ["북마크", "위치", "전화", "공유"];
   static final List<String> _bottomButtonImageList = [
     "assets/icons/icon_bookmark_color_on_24_px.svg",
@@ -34,24 +41,119 @@ class _FindFacilityState extends State<FindFacility>
     "assets/icons/icon_share_color_24_px.svg"
   ];
 
-  final ScrollController _scrollController = ScrollController();
-  final YrkSizeController _sizeController = YrkSizeController();
-  late TabController _tabController;
-
+  final YrkSelectFilterController controller =
+      YrkSelectFilterController(length: 3);
   String _facilityName = "조문기네 요양원";
-  bool _isScrollable = false;
   bool _isBookmarked = false;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: tabLength, vsync: this);
-    _tabController.addListener(() {
-      setState(() {
-        _isScrollable = _tabController.index == 2;
-      });
-      print(_isScrollable);
-    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: DefaultTabController(
+            length: _tabs.length,
+            child: Scaffold(
+                body: NestedScrollView(
+                    controller: _scrollController,
+                    headerSliverBuilder:
+                        (BuildContext context, bool innerBoxIsScrolled) {
+                      return <Widget>[
+                        SliverOverlapAbsorber(
+                            handle:
+                                NestedScrollView.sliverOverlapAbsorberHandleFor(
+                                    context),
+                            sliver: SliverAppBar(
+                                automaticallyImplyLeading: false,
+                                snap: false,
+                                pinned: true,
+                                floating: false,
+                                centerTitle: false,
+                                titleSpacing: 0.0,
+                                shadowColor: const Color(0xffffffff),
+                                elevation: 0.0,
+                                toolbarHeight: 48.0,
+                                expandedHeight: 236.0,
+                                backgroundColor: const Color(0xffffffff),
+                                title: Stack(children: <Widget>[
+                                  YrkAppBar(
+                                    type: YrkAppBarType.arrowBackOnly,
+                                    isStatusBar: false,
+                                  ),
+                                ]),
+                                flexibleSpace: YrkScrollOpacity(
+                                  scrollController: _scrollController,
+                                  child: FindFacilityImageListView(),
+                                  reversed: true,
+                                ),
+                                forceElevated: innerBoxIsScrolled,
+                                bottom: PreferredSize(
+                                    preferredSize: Size.fromHeight(48.0),
+                                    child: Container(
+                                        height: 48.0,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(16.0),
+                                                topRight:
+                                                    Radius.circular(16.0)),
+                                            color: const Color(0xffffffff)),
+                                        alignment: Alignment.bottomLeft,
+                                        child: CustomTapBar(
+                                            tabs: _tabs, tabWidth: 48.0)))))
+                      ];
+                    },
+                    body: TabBarView(children: [
+                      FindFacilityHome(
+                          name: _facilityName,
+                          location: "서울시 서초구 양재대로 39",
+                          rating: "4.8 (12)",
+                          distance: 2,
+                          hours: "08:00 ~ 22:00",
+                          introduction: "시설소개 시설소개 시설소개 시설소개" +
+                              "시설소개 시설소개 시설소개 시설소개" +
+                              "시설소개 시설소개 시설소개 시설소개" +
+                              "시설소개 시설소개 시설소개 시설소개" +
+                              "시설소개 시설소개 시설소개 시설소개" +
+                              "시설소개 시설소개 시설소개 시설소개"),
+                      FindFacilityInfo(
+                        grade: "A",
+                        medicalStaffNum: 42,
+                        nursingStaffNum: 135,
+                        cookNum: 35,
+                        userNum: 1322,
+                        minMonthlyCost: 100,
+                        maxMonthlyCost: 200,
+                      ),
+                      FindFacilityReview()
+                    ])),
+                bottomNavigationBar: PreferredSize(
+                    preferredSize: Size.fromHeight(72),
+                    child: Container(
+                        height: 72.0,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: getBottomBarButtonList,
+                        ))))));
+  }
+
+  void _onTapBottomBarButton(int index) {
+    switch (index) {
+      case 0:
+        setState(() {
+          _isBookmarked = !_isBookmarked;
+        });
+        break;
+      default:
+        return;
+    }
   }
 
   get getBottomBarButtonList {
@@ -91,91 +193,5 @@ class _FindFacilityState extends State<FindFacility>
       }
     }
     return list;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return YrkCustomScrollView(
-      controller: _scrollController,
-      appBarHeight: 48.0,
-      expandedHeight: 236.0,
-      flexibleSpaceHeight: 236.0,
-      bottomHeight: 48.0,
-      bottomNavigationHeight: 72.0,
-      isScrollable: _isScrollable,
-      isFadedTitle: true,
-      fadedTitle: _facilityName,
-      isCenteredFadedTitle: true,
-      appBar: YrkAppBar(
-        type: YrkAppBarType.arrowBackOnly,
-        isStatusBar: false,
-      ),
-      flexibleSpace: FindFacilityImageListView(),
-      bottom: Container(
-        height: 48,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16.0),
-                topRight: Radius.circular(16.0)),
-            color: const Color(0xffffffff)),
-        alignment: Alignment.bottomLeft,
-        child: YrkTabBar(
-          textList: ["홈", "정보", "후기"],
-          controller: _tabController,
-          tabWidth: 48.0,
-        ),
-      ),
-      body: YrkTabView(
-        controller: _tabController,
-        sizeController: _sizeController,
-        swipeable: true,
-        viewList: [
-          FindFacilityHome(
-              name: _facilityName,
-              location: "서울시 서초구 양재대로 39",
-              rating: "4.8 (12)",
-              distance: 2,
-              hours: "08:00 ~ 22:00",
-              introduction: "시설소개 시설소개 시설소개 시설소개" +
-                  "시설소개 시설소개 시설소개 시설소개" +
-                  "시설소개 시설소개 시설소개 시설소개" +
-                  "시설소개 시설소개 시설소개 시설소개" +
-                  "시설소개 시설소개 시설소개 시설소개" +
-                  "시설소개 시설소개 시설소개 시설소개"),
-          FindFacilityInfo(
-            grade: "A",
-            medicalStaffNum: 42,
-            nursingStaffNum: 135,
-            cookNum: 35,
-            userNum: 1322,
-            minMonthlyCost: 100,
-            maxMonthlyCost: 200,
-          ),
-          FindFacilityReview(
-            sizeController: _sizeController,
-          ),
-        ],
-      ),
-      bottomNavigatorBar: PreferredSize(
-          preferredSize: Size.fromHeight(72),
-          child: Container(
-              height: 72.0,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: getBottomBarButtonList,
-              ))),
-    );
-  }
-
-  void _onTapBottomBarButton(int index) {
-    switch (index) {
-      case 0:
-        setState(() {
-          _isBookmarked = !_isBookmarked;
-        });
-        break;
-      default:
-        return;
-    }
   }
 }

@@ -18,48 +18,45 @@ class FindRecommendListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double _widthRatio =
+        (MediaQuery.of(context).size.width - 32.0) / 328.0;
+    final double _heightRatio = MediaQuery.of(context).size.width / 360.0;
     return InkWell(
       onTap: () =>
           onPushNavigator!(new YrkData(nextPageItem: SubPageItem.findFacility)),
       child: Container(
           width: double.maxFinite,
-          height: 264.0,
+          height: 160.0 * _heightRatio + 104.0,
+          margin: EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                width: double.maxFinite,
-                height: 160.0,
+                height: 160.0 * _heightRatio,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Image.asset("assets/images/sample_image.png",
-                        width:
-                            264 / 360 * MediaQuery.of(context).size.width - 20,
-                        height: 160.0,
+                        width: 244.0 * _widthRatio,
+                        height: 160.0 * _heightRatio,
                         fit: BoxFit.fill),
                     Padding(
-                      padding: EdgeInsets.only(left: 4.0),
+                      padding: EdgeInsets.only(left: 4.0 * _widthRatio),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Image.asset("assets/images/sample_image.png",
-                              width:
-                                  96 / 360 * MediaQuery.of(context).size.width -
-                                      16,
-                              height: 78.0,
+                              width: 80.0 * _widthRatio,
+                              height: 78.0 * _heightRatio,
                               fit: BoxFit.fill),
                           Padding(
-                            padding: EdgeInsets.only(top: 4.0),
+                            padding: EdgeInsets.only(top: 4.0 * _heightRatio),
                             child: Image.asset("assets/images/sample_image.png",
-                                width: 96 /
-                                        360 *
-                                        MediaQuery.of(context).size.width -
-                                    16,
-                                height: 78.0,
+                                width: 80.0 * _widthRatio,
+                                height: 78.0 * _heightRatio,
                                 fit: BoxFit.fill),
                           ),
                         ],
@@ -131,8 +128,8 @@ class FindRecommendListItem extends StatelessWidget {
                           decoration:
                               BoxDecoration(color: const Color(0x4d000000))),
                       Text("시설등급",
-                          style: const TextStyle(
-                              color: const Color(0x4d000000))),
+                          style:
+                              const TextStyle(color: const Color(0x4d000000))),
                       Padding(
                         padding: EdgeInsets.only(left: 4.0),
                         child: Text("A",

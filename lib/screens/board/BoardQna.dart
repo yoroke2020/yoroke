@@ -70,7 +70,7 @@ class _BoardQnaState extends State<BoardQna> {
                 curPageItem: SubPageItem.boardQna,
                 isStatusBar: false,
               ),
-              YrkScrollFadedWidget(
+              YrkScrollOpacity(
                   scrollController: _scrollController,
                   child: Container(
                       alignment: Alignment.centerLeft,
