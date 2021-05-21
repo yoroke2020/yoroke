@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tuple/tuple.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/common/YrkListView.dart';
+import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/YrkPageListItem.dart';
-import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
+import 'package:yoroke/screens/home/HomeHistoryCardListItem.dart';
 import 'package:yoroke/screens/info/InfoShareCardListItem.dart';
 
 class BookmarkList extends StatefulWidget {
@@ -22,10 +23,65 @@ class _BookmarkListState extends State<BookmarkList>
 
   late final TabController _tabController;
 
+  late List<Tuple2<String, int>> _tabs = [
+    Tuple2("게시물", 0),
+    Tuple2("시설", 1),
+    Tuple2("정보", 2)
+  ];
+
+  late List<Widget> _bookmarkLists;
+
+  get _getBookmarkLists {
+    List<Widget> list = <Widget>[];
+    list.add(ListView.builder(
+        itemCount: 8,
+        itemBuilder: (BuildContext context, int index) {
+          return YrkPageListItem(
+              pageIndex: 0,
+              listIndex: index,
+              pageType: SubPageItem.boardReview,
+              // TODO: 아이템별로  페이지 타입 정의
+
+              nextPageItem: SubPageItem.post,
+              onPushNavigator: widget.onPushNavigator);
+        }));
+    list.add(ListView.builder(
+        itemCount: 8,
+        itemBuilder: (BuildContext context, int index) {
+          return HomeHistoryCardListItem(
+              index: index, width: double.maxFinite, height: 161.0);
+        }));
+    list.add(GridView.count(
+        crossAxisCount: 2,
+        padding: EdgeInsets.all(16.0),
+        crossAxisSpacing: 12.0,
+        mainAxisSpacing: 12.0,
+        childAspectRatio: 158.0 / 172.0,
+        children: _infoShareCards));
+    return list;
+  }
+
+  get _infoShareCards {
+    List<Widget> list = <Widget>[];
+    for (int i = 0; i < 8; i++) {
+      list.add(AnimatedContainer(
+          duration: Duration(milliseconds: 500),
+          curve: Curves.easeOut,
+          child: InfoShareCardListItem(
+            width: 158.0,
+            height: 172.0,
+            index: i,
+            onPushNavigator: widget.onPushNavigator,
+          )));
+    }
+    return list;
+  }
+
   @override
   void initState() {
     super.initState();
     _tabController = new TabController(vsync: this, length: tabLength);
+    _bookmarkLists = _getBookmarkLists;
   }
 
   @override
@@ -34,101 +90,22 @@ class _BookmarkListState extends State<BookmarkList>
     super.dispose();
   }
 
-  List<Widget> _postListItem(int pageIndex) {
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < 8; i++) {
-      list.add(new YrkPageListItem(
-        pageIndex: pageIndex,
-        listIndex: i,
-        // TODO: 아이템별로  페이지 타입 정의
-        pageType: SubPageItem.boardReview,
-        nextPageItem: SubPageItem.post,
-        onPushNavigator: widget.onPushNavigator,
-      ));
-    }
-    return list;
-  }
-
-  List<Widget> _findCardListItem(int pageIndex) {
-    double _expandWidth = MediaQuery.of(context).size.width - 32 - 16;
-
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < 8; i++) {
-      list.add(new InfoShareCardListItem(
-        width: _expandWidth,
-        height: 104,
-        index: i,
-        onPushNavigator: widget.onPushNavigator,
-      ));
-    }
-    return list;
-  }
-
-  List<Widget> _infoShareCardListItem(int pageIndex) {
-    double _expandWidth = MediaQuery.of(context).size.width - 32 - 16;
-
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < 8; i++) {
-      list.add(Container(
-          width: _expandWidth,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InfoShareCardListItem(
-                width: (_expandWidth - 24) / 2,
-                height: (_expandWidth - 24) / 2,
-                index: i,
-                onPushNavigator: widget.onPushNavigator,
-              ),
-              InfoShareCardListItem(
-                width: (_expandWidth - 24) / 2,
-                height: (_expandWidth - 24) / 2,
-                index: i + 1,
-                onPushNavigator: widget.onPushNavigator,
-              ),
-            ],
-          )));
-    }
-
-    return list;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: YrkAppBar(
-        type: YrkAppBarType.arrowBackMidTitle,
-        label: "북마크",
-      ),
-      body: SingleChildScrollView(
-        child: YrkTabBarView(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(96.0),
+            child: Column(children: [
+              YrkAppBar(
+                type: YrkAppBarType.arrowBackMidTitle,
+                label: "히스토리",
+              ),
+              CustomTapBar(
+                  tabs: _tabs, height: 48.0, controller: _tabController)
+            ])),
+        body: TabBarView(
           controller: _tabController,
-          tabWidth: 99,
-          tabViewHeight:
-              MediaQuery.of(context).size.height - kToolbarHeight - 40.0 - 48.0,
-          tabTextList: ["게시물", "시설", "정보"],
-          tabViewList: [
-            YrkListView(
-              pageIndex: 0,
-              itemCount: 8,
-              scrollable: true,
-              item: _postListItem(0),
-            ),
-            YrkListView(
-              pageIndex: 1,
-              itemCount: 8,
-              scrollable: true,
-              item: _findCardListItem(1),
-            ),
-            YrkListView(
-              pageIndex: 2,
-              itemCount: 4,
-              scrollable: true,
-              item: _infoShareCardListItem(2),
-            ),
-          ],
-        ),
-      ),
-    );
+          children: _bookmarkLists,
+        ));
   }
 }

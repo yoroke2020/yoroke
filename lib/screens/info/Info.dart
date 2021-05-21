@@ -18,6 +18,8 @@ class Info extends StatefulWidget {
 }
 
 class _InfoState extends State<Info> with TickerProviderStateMixin {
+  static final int tabLength = 3;
+
   bool _isTwo = false;
 
   late TabController _tabController;
@@ -26,22 +28,9 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
     Tuple2("복지시설", 1),
     Tuple2("돌봄서비스", 2)
   ];
+
   late List<Widget> _cardGrids;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = new TabController(length: 3, vsync: this);
-    _cardGrids = _getCardGrids();
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  List<Widget> _getCardGrids() {
+  get _getCardGrids {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < _tabs.length; i++) {
       list.add(
@@ -55,6 +44,19 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
       );
     }
     return list;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = new TabController(length: tabLength, vsync: this);
+    _cardGrids = _getCardGrids;
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   List<Widget> _infoShareCards(int tabIndex) {
@@ -104,7 +106,7 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
                         onTap: () {
                           setState(() {
                             _isTwo = !_isTwo;
-                            _cardGrids = _getCardGrids();
+                            _cardGrids = _getCardGrids;
                           });
                         }),
                   ],

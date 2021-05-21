@@ -246,7 +246,6 @@ class _FindState extends State<Find> {
   }
 
   bool _onScrollNotification(ScrollNotification notification, int index) {
-    print("onTap");
     if (notification is! ScrollEndNotification) return false;
 
     if (notification.metrics.extentBefore ==

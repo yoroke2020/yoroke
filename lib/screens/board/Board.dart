@@ -25,24 +25,9 @@ class _BoardState extends State<Board> {
   final PageController _qnaPageController = PageController();
   final PageController _jobFindingPageController = PageController();
 
-  late List<Widget> _reviewCardList;
-
   @override
   void initState() {
     super.initState();
-    _reviewCardList = _getReviewCardList;
-  }
-
-  get _getReviewCardList {
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < _boardCardListItemCount; i++) {
-      list.add(BoardCardListItem(
-        index: i,
-        listLength: _boardCardListItemCount,
-        onPushNavigator: widget.onPushNavigator,
-      ));
-    }
-    return list;
   }
 
   List<Widget> _buildBoardYrkListView(SubPageItem subPageItem) {
@@ -94,9 +79,13 @@ class _BoardState extends State<Board> {
             alignment: Alignment.centerLeft,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemCount: _reviewCardList.length,
+              itemCount: _boardCardListItemCount,
               itemBuilder: (BuildContext context, int index) {
-                return _reviewCardList[index];
+                return BoardCardListItem(
+                  index: index,
+                  listLength: _boardCardListItemCount,
+                  onPushNavigator: widget.onPushNavigator,
+                );
               },
               separatorBuilder: (BuildContext context, int index) {
                 return SizedBox(width: 18.0);

@@ -14,7 +14,6 @@ import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/models/YrkMbsListData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/navigator/SubPage.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkQuillIconButton.dart';
@@ -413,6 +412,7 @@ class _PostCreateState extends State<PostCreate> {
     try {
       String title = _titleController.text;
       String body = jsonEncode(_bodyController.document.toDelta().toJson());
+      print(body);
       tempPostData.title = title;
       tempPostData.body = body;
       tempPostData.category = _selectedCategory;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tuple/tuple.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/common/YrkListView.dart';
+import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/YrkPageListItem.dart';
-import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
 class HistoryList extends StatefulWidget {
@@ -21,10 +21,43 @@ class _HistoryListState extends State<HistoryList>
 
   late final TabController _tabController;
 
+  late List<Tuple2<String, int>> _tabs = [
+    Tuple2("후기", 0),
+    Tuple2("고민/질문", 1),
+    Tuple2("구인구직", 2)
+  ];
+
+  late List<SubPageItem> _tabItemTypes = [
+    SubPageItem.boardReview,
+    SubPageItem.boardQna,
+    SubPageItem.boardJobFinding
+  ];
+
+  late List<Widget> _historyLists;
+  get _getHistoryLists {
+    List<Widget> list = <Widget>[];
+    for (int i = 0; i < tabLength; i++) {
+      list.add(ListView.builder(
+          itemCount: 8,
+          itemBuilder: (BuildContext context, int index) {
+            return YrkPageListItem(
+                pageIndex: i,
+                listIndex: index,
+                pageType: _tabItemTypes[i],
+                //TODO: Make History at SubPageItem
+                nextPageItem: SubPageItem.post,
+                onPushNavigator: widget.onPushNavigator);
+          }));
+    }
+
+    return list;
+  }
+
   @override
   void initState() {
     super.initState();
     _tabController = new TabController(vsync: this, length: tabLength);
+    _historyLists = _getHistoryLists;
   }
 
   @override
@@ -33,57 +66,22 @@ class _HistoryListState extends State<HistoryList>
     super.dispose();
   }
 
-  List<Widget> _infoShareCardListItem(int pageIndex, SubPageItem pageType) {
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < 8; i++) {
-      list.add(new YrkPageListItem(
-        pageIndex: pageIndex,
-        listIndex: i,
-        pageType: pageType,
-        nextPageItem: SubPageItem.post,
-        onPushNavigator: widget.onPushNavigator,
-      ));
-    }
-
-    return list;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: YrkAppBar(
-        type: YrkAppBarType.arrowBackMidTitle,
-        label: "북마크",
-      ),
-      body: SingleChildScrollView(
-        child: YrkTabBarView(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(96.0),
+            child: Column(children: [
+              YrkAppBar(
+                type: YrkAppBarType.arrowBackMidTitle,
+                label: "히스토리",
+              ),
+              CustomTapBar(
+                  tabs: _tabs, height: 48.0, controller: _tabController)
+            ])),
+        body: TabBarView(
           controller: _tabController,
-          tabWidth: 99,
-          tabViewHeight:
-              MediaQuery.of(context).size.height - kToolbarHeight - 40.0 - 48.0,
-          tabTextList: ["후기", "고민/질문", "구인구직"],
-          tabViewList: [
-            YrkListView(
-              pageIndex: 0,
-              itemCount: 8,
-              scrollable: true,
-              item: _infoShareCardListItem(0, SubPageItem.boardReview),
-            ),
-            YrkListView(
-              pageIndex: 1,
-              itemCount: 8,
-              scrollable: true,
-              item: _infoShareCardListItem(1, SubPageItem.boardQna),
-            ),
-            YrkListView(
-              pageIndex: 2,
-              itemCount: 4,
-              scrollable: true,
-              item: _infoShareCardListItem(2, SubPageItem.boardJobFinding),
-            ),
-          ],
-        ),
-      ),
-    );
+          children: _historyLists,
+        ));
   }
 }

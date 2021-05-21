@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tuple/tuple.dart';
+import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
-import 'package:yoroke/screens/common/YrkTabBarView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
@@ -47,6 +46,7 @@ class _FindLocationSettingState extends State<FindLocationSetting>
   late TabController _tabController;
 
   late FindLocationData locationData;
+  late List<Tuple2<String, int>> _tabs = <Tuple2<String, int>>[];
 
   @override
   void initState() {
@@ -54,6 +54,10 @@ class _FindLocationSettingState extends State<FindLocationSetting>
 
     //TODO: Change to JSON
     locationData = widget.locationData;
+
+    for (int i = 0; i < LocationName.regionNameList.length; i++) {
+      _tabs.add(Tuple2(LocationName.regionNameList[i], i));
+    }
 
     _tabController =
         TabController(length: locationData.regionListLength, vsync: this);
@@ -82,17 +86,16 @@ class _FindLocationSettingState extends State<FindLocationSetting>
               label: "지역설정",
               isStatusBar: false,
             ),
-            YrkTabBar(
-              textList: LocationName.regionNameList,
+            CustomTapBar(
               controller: _tabController,
-              height: 40.0,
-              tabScrollable: true,
+              isScrollable: true,
+              tabs: _tabs,
             )
           ],
         ),
       ),
-      body: YrkTabView(
-        viewList: _getTabViewButtonGrids,
+      body: TabBarView(
+        children: _getTabViewButtonGrids,
         controller: _tabController,
       ),
       bottomNavigationBar: PreferredSize(
@@ -129,7 +132,7 @@ class _FindLocationSettingState extends State<FindLocationSetting>
           padding: EdgeInsets.all(16.0),
           crossAxisSpacing: 16.0,
           mainAxisSpacing: 16.0,
-          childAspectRatio: 156 / 44,
+          childAspectRatio: 156.0 / 44.0,
           children: _getCityButtons(i)));
     }
     return list;
