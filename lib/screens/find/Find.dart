@@ -5,13 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
-import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
+import 'package:yoroke/screens/common/YrkTabBar.dart';
 
 import 'FindLocationData.dart';
 import 'FindLocationSetting.dart';

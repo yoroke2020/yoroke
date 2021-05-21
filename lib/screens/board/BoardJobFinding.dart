@@ -9,8 +9,7 @@ import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
-
-import 'BoardReview.dart';
+import 'package:yoroke/screens/common/YrkTabBar.dart';
 
 class BoardJobFinding extends StatefulWidget {
   BoardJobFinding({required this.onPushNavigator});

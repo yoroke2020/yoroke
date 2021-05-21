@@ -4,11 +4,11 @@ import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
 import 'package:yoroke/controllers/YrkSelectFilterController.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
+import 'package:yoroke/screens/common/YrkTabBar.dart';
 
 import 'FindFacilityHome.dart';
 import 'FindFacilityImageListView.dart';
