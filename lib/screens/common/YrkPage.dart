@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'YrkDotsIndicator.dart';
 
-class YrkPageView extends StatelessWidget {
-  YrkPageView({
+class YrkPage extends StatelessWidget {
+  YrkPage({
     required this.page,
     required this.controller,
     this.viewWidth = double.maxFinite,

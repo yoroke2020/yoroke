@@ -3,8 +3,8 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkDrawer.dart';
 import 'package:yoroke/screens/common/YrkIconButton.dart';
-import 'package:yoroke/screens/common/YrkPageListItem.dart';
-import 'package:yoroke/screens/common/YrkPageView.dart';
+import 'package:yoroke/screens/common/YrkListItem.dart';
+import 'package:yoroke/screens/common/YrkPage.dart';
 import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
@@ -159,7 +159,7 @@ class _HomeState extends State<Home> {
                           prevPageItem: RootPageItem.home)))
                 ],
               )),
-          YrkPageView(
+          YrkPage(
             page: _yrkListView(SubPageItem.post),
             controller: popularPageController,
             isIndicatorEnabled: true,

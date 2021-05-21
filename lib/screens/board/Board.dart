@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkDrawer.dart';
-import 'package:yoroke/screens/common/YrkPageListItem.dart';
-import 'package:yoroke/screens/common/YrkPageView.dart';
+import 'package:yoroke/screens/common/YrkListItem.dart';
+import 'package:yoroke/screens/common/YrkPage.dart';
 import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
@@ -98,7 +98,7 @@ class _BoardState extends State<Board> {
             onPushNavigator: widget.onPushNavigator,
             nextSubPageItem: SubPageItem.boardQna,
           ),
-          YrkPageView(
+          YrkPage(
             page: _buildBoardYrkListView(SubPageItem.boardQna),
             controller: _qnaPageController,
             isIndicatorEnabled: true,
@@ -109,7 +109,7 @@ class _BoardState extends State<Board> {
             onPushNavigator: widget.onPushNavigator,
             nextSubPageItem: SubPageItem.boardJobFinding,
           ),
-          YrkPageView(
+          YrkPage(
               page: _buildBoardYrkListView(SubPageItem.boardJobFinding),
               controller: _jobFindingPageController,
               isIndicatorEnabled: true)

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/common/YrkPageListItem.dart';
+import 'package:yoroke/screens/common/YrkListItem.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
