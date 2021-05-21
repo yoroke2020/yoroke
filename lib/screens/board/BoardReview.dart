@@ -8,6 +8,7 @@ import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
+import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'BoardCardListItem.dart';
 
@@ -46,140 +47,149 @@ class _BoardReviewState extends State<BoardReview> {
   }
 
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: _tabs.length,
-        child: Scaffold(
-            body: NestedScrollView(
-                controller: _scrollController,
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
-                  return <Widget>[
-                    SliverOverlapAbsorber(
-                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                            context),
-                        sliver: SliverAppBar(
-                            automaticallyImplyLeading: false,
-                            snap: false,
-                            pinned: true,
-                            floating: false,
-                            centerTitle: false,
-                            titleSpacing: 0.0,
-                            shadowColor: const Color(0xffffffff),
-                            elevation: 0.0,
-                            toolbarHeight: 48.0,
-                            expandedHeight: 236.0,
-                            backgroundColor: const Color(0xffffffff),
-                            title: Stack(children: <Widget>[
-                              YrkAppBar(
-                                type: YrkAppBarType.arrowBackAll,
-                                onPushNavigator: widget.onPushNavigator!,
-                                curPageItem: SubPageItem.boardReview,
-                                isStatusBar: false,
-                              ),
-                              YrkScrollFadedWidget(
-                                  scrollController: _scrollController,
-                                  child: Container(
-                                      alignment: Alignment.centerLeft,
-                                      margin: EdgeInsets.only(left: 48.0),
-                                      height: 48.0,
-                                      child: Text("요양병원 후기",
-                                          style: const YrkTextStyle(
-                                              fontWeight: FontWeight.w700),
-                                          textAlign: TextAlign.left)))
-                            ]),
-                            flexibleSpace: FlexibleSpaceBar(
-                                background: Container(
-                                    color: const Color(0xffffffff),
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          SizedBox(
-                                            height: 48.0 +
-                                                MediaQuery.of(context)
-                                                    .padding
-                                                    .top,
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 16.0,
-                                                top: 8.0,
-                                                bottom: 8.0),
-                                            child: Text("후기",
-                                                style: const YrkTextStyle(
-                                                    fontWeight: FontWeight.w700,
-                                                    fontSize: 22.0),
-                                                textAlign: TextAlign.left),
-                                          ),
-                                          Container(
-                                              height: 100.0,
-                                              child: ListView.separated(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  itemCount:
-                                                      boardCardListItemCount,
-                                                  separatorBuilder:
-                                                      (BuildContext context,
-                                                          int index) {
-                                                    return SizedBox(
-                                                        width: 16.0);
-                                                  },
-                                                  itemBuilder:
-                                                      (BuildContext context,
-                                                          int index) {
-                                                    return BoardCardListItem(
-                                                      index: index,
-                                                      listLength:
+    return Scaffold(
+        body: DefaultTabController(
+            length: _tabs.length,
+            child: Scaffold(
+                body: NestedScrollView(
+                    controller: _scrollController,
+                    headerSliverBuilder:
+                        (BuildContext context, bool innerBoxIsScrolled) {
+                      return <Widget>[
+                        SliverOverlapAbsorber(
+                            handle:
+                                NestedScrollView.sliverOverlapAbsorberHandleFor(
+                                    context),
+                            sliver: SliverAppBar(
+                                automaticallyImplyLeading: false,
+                                snap: false,
+                                pinned: true,
+                                floating: false,
+                                centerTitle: false,
+                                titleSpacing: 0.0,
+                                shadowColor: const Color(0xffffffff),
+                                elevation: 0.0,
+                                toolbarHeight: 48.0,
+                                expandedHeight: 236.0,
+                                backgroundColor: const Color(0xffffffff),
+                                title: Stack(children: <Widget>[
+                                  YrkAppBar(
+                                    type: YrkAppBarType.arrowBackAll,
+                                    onPushNavigator: widget.onPushNavigator!,
+                                    curPageItem: SubPageItem.boardReview,
+                                    isStatusBar: false,
+                                  ),
+                                  YrkScrollFadedWidget(
+                                      scrollController: _scrollController,
+                                      child: Container(
+                                          alignment: Alignment.centerLeft,
+                                          margin: EdgeInsets.only(left: 48.0),
+                                          height: 48.0,
+                                          child: Text("요양병원 후기",
+                                              style: const YrkTextStyle(
+                                                  fontWeight: FontWeight.w700),
+                                              textAlign: TextAlign.left)))
+                                ]),
+                                flexibleSpace: FlexibleSpaceBar(
+                                    background: Container(
+                                        color: const Color(0xffffffff),
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              SizedBox(
+                                                height: 48.0 +
+                                                    MediaQuery.of(context)
+                                                        .padding
+                                                        .top,
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 16.0,
+                                                    top: 8.0,
+                                                    bottom: 8.0),
+                                                child: Text("후기",
+                                                    style: const YrkTextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 22.0),
+                                                    textAlign: TextAlign.left),
+                                              ),
+                                              Container(
+                                                  height: 100.0,
+                                                  child: ListView.separated(
+                                                      scrollDirection:
+                                                          Axis.horizontal,
+                                                      itemCount:
                                                           boardCardListItemCount,
-                                                      isBorder:
-                                                          index == _curCardIndex
+                                                      separatorBuilder:
+                                                          (BuildContext context,
+                                                              int index) {
+                                                        return SizedBox(
+                                                            width: 16.0);
+                                                      },
+                                                      itemBuilder:
+                                                          (BuildContext context,
+                                                              int index) {
+                                                        return BoardCardListItem(
+                                                          index: index,
+                                                          listLength:
+                                                              boardCardListItemCount,
+                                                          isBorder: index ==
+                                                                  _curCardIndex
                                                               ? true
                                                               : false,
-                                                      onPushNavigator: (data) =>
-                                                          _onPushChangeReviewCard(
-                                                              context, data),
-                                                    );
-                                                  }))
-                                        ]))),
-                            forceElevated: innerBoxIsScrolled,
-                            bottom: CustomTapBar(tabs: _tabs, tabWidth: 72.0)))
-                  ];
-                },
-                body: TabBarView(
-                    children: _tabs.map((Tuple2 tab) {
-                  return SafeArea(
-                      top: false,
-                      bottom: false,
-                      child: Builder(builder: (BuildContext context) {
-                        return NotificationListener<ScrollNotification>(
-                            onNotification: (notification) =>
-                                _onScrollNotification(notification, tab.item2),
-                            child: CustomScrollView(
-                                key: PageStorageKey<String>(tab.item1),
-                                slivers: <Widget>[
-                                  SliverOverlapInjector(
-                                    handle: NestedScrollView
-                                        .sliverOverlapAbsorberHandleFor(
-                                            context),
-                                  ),
-                                  SliverList(
-                                      delegate: SliverChildBuilderDelegate(
-                                    (BuildContext context, int index) {
-                                      return YrkPageListItem(
-                                        pageIndex: tab.item2,
-                                        listIndex: index,
-                                        pageType: SubPageItem.boardReview,
-                                        nextPageItem: SubPageItem.post,
-                                        onPushNavigator: widget.onPushNavigator,
-                                      );
-                                    },
-                                    childCount: _childCount[tab.item2],
-                                  ))
-                                ]));
-                      }));
-                }).toList()))));
+                                                          onPushNavigator: (data) =>
+                                                              _onPushChangeReviewCard(
+                                                                  context,
+                                                                  data),
+                                                        );
+                                                      }))
+                                            ]))),
+                                forceElevated: innerBoxIsScrolled,
+                                bottom:
+                                    CustomTapBar(tabs: _tabs, tabWidth: 72.0)))
+                      ];
+                    },
+                    body: TabBarView(
+                        children: _tabs.map((Tuple2 tab) {
+                      return SafeArea(
+                          top: false,
+                          bottom: false,
+                          child: Builder(builder: (BuildContext context) {
+                            return NotificationListener<ScrollNotification>(
+                                onNotification: (notification) =>
+                                    _onScrollNotification(
+                                        notification, tab.item2),
+                                child: CustomScrollView(
+                                    key: PageStorageKey<String>(tab.item1),
+                                    slivers: <Widget>[
+                                      SliverOverlapInjector(
+                                        handle: NestedScrollView
+                                            .sliverOverlapAbsorberHandleFor(
+                                                context),
+                                      ),
+                                      SliverList(
+                                          delegate: SliverChildBuilderDelegate(
+                                        (BuildContext context, int index) {
+                                          return YrkPageListItem(
+                                            pageIndex: tab.item2,
+                                            listIndex: index,
+                                            pageType: SubPageItem.boardReview,
+                                            nextPageItem: SubPageItem.post,
+                                            onPushNavigator:
+                                                widget.onPushNavigator,
+                                          );
+                                        },
+                                        childCount: _childCount[tab.item2],
+                                      ))
+                                    ]));
+                          }));
+                    }).toList())))),
+        bottomNavigationBar:
+            BottomBarNavigation.getInstance(RootPageItem.board));
   }
 
   void _onPushChangeReviewCard(BuildContext context, YrkData data) {

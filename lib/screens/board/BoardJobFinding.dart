@@ -8,6 +8,7 @@ import 'package:yoroke/screens/common/YrkPageListItem.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
+import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'BoardReview.dart';
 
@@ -41,102 +42,115 @@ class _BoardJobFindingState extends State<BoardJobFinding> {
   }
 
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: _tabs.length,
-        child: Scaffold(
-            body: NestedScrollView(
-                controller: _scrollController,
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
-                  return <Widget>[
-                    SliverOverlapAbsorber(
-                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                            context),
-                        sliver: SliverAppBar(
-                            automaticallyImplyLeading: false,
-                            snap: false,
-                            pinned: true,
-                            floating: false,
-                            centerTitle: false,
-                            titleSpacing: 0.0,
-                            shadowColor: const Color(0xffffffff),
-                            elevation: 0.0,
-                            toolbarHeight: 48.0,
-                            expandedHeight: 144.0,
-                            backgroundColor: const Color(0xffffffff),
-                            title: Stack(children: <Widget>[
-                              YrkAppBar(
-                                type: YrkAppBarType.arrowBackAll,
-                                onPushNavigator: widget.onPushNavigator!,
-                                curPageItem: SubPageItem.boardJobFinding,
-                                isStatusBar: false,
-                              ),
-                              YrkScrollFadedWidget(
-                                  scrollController: _scrollController,
-                                  child: Container(
-                                      height: 48.0,
-                                      alignment: Alignment.centerLeft,
-                                      margin: EdgeInsets.only(left: 48.0),
-                                      child: Text("구인구직",
-                                          style: const YrkTextStyle(
-                                              color: const Color(0xe6000000),
-                                              fontWeight: FontWeight.w700),
-                                          textAlign: TextAlign.left)))
-                            ]),
-                            flexibleSpace: FlexibleSpaceBar(
-                                background: Container(
-                                    color: const Color(0xffffffff),
-                                    child: Column(children: <Widget>[
-                                      Container(
-                                        width: double.maxFinite,
-                                        height: 48.0 +
-                                            MediaQuery.of(context).padding.top,
-                                      ),
-                                      Container(
-                                          width: double.maxFinite,
+    return Scaffold(
+        body: DefaultTabController(
+            length: _tabs.length,
+            child: Scaffold(
+                body: NestedScrollView(
+                    controller: _scrollController,
+                    headerSliverBuilder:
+                        (BuildContext context, bool innerBoxIsScrolled) {
+                      return <Widget>[
+                        SliverOverlapAbsorber(
+                            handle:
+                                NestedScrollView.sliverOverlapAbsorberHandleFor(
+                                    context),
+                            sliver: SliverAppBar(
+                                automaticallyImplyLeading: false,
+                                snap: false,
+                                pinned: true,
+                                floating: false,
+                                centerTitle: false,
+                                titleSpacing: 0.0,
+                                shadowColor: const Color(0xffffffff),
+                                elevation: 0.0,
+                                toolbarHeight: 48.0,
+                                expandedHeight: 144.0,
+                                backgroundColor: const Color(0xffffffff),
+                                title: Stack(children: <Widget>[
+                                  YrkAppBar(
+                                    type: YrkAppBarType.arrowBackAll,
+                                    onPushNavigator: widget.onPushNavigator!,
+                                    curPageItem: SubPageItem.boardJobFinding,
+                                    isStatusBar: false,
+                                  ),
+                                  YrkScrollFadedWidget(
+                                      scrollController: _scrollController,
+                                      child: Container(
                                           height: 48.0,
-                                          margin: EdgeInsets.only(left: 16.0),
+                                          alignment: Alignment.centerLeft,
+                                          margin: EdgeInsets.only(left: 48.0),
                                           child: Text("구인구직",
                                               style: const YrkTextStyle(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 22.0),
-                                              textAlign: TextAlign.left)),
-                                    ]))),
-                            forceElevated: innerBoxIsScrolled,
-                            bottom: CustomTapBar(tabs: _tabs, tabWidth: 72.0)))
-                  ];
-                },
-                body: TabBarView(
-                    children: _tabs.map((Tuple2 tab) {
-                  return SafeArea(
-                      top: false,
-                      bottom: false,
-                      child: Builder(builder: (BuildContext context) {
-                        return NotificationListener<ScrollNotification>(
-                            onNotification: (notification) =>
-                                _onScrollNotification(notification, tab.item2),
-                            child: CustomScrollView(
-                                key: PageStorageKey<String>(tab.item1),
-                                slivers: <Widget>[
-                                  SliverOverlapInjector(
-                                    handle: NestedScrollView
-                                        .sliverOverlapAbsorberHandleFor(
-                                            context),
-                                  ),
-                                  SliverList(
-                                      delegate: SliverChildBuilderDelegate(
-                                          (BuildContext context, int index) {
-                                    return YrkPageListItem(
-                                      pageIndex: tab.item2,
-                                      listIndex: index,
-                                      pageType: SubPageItem.boardJobFinding,
-                                      nextPageItem: SubPageItem.post,
-                                      onPushNavigator: widget.onPushNavigator,
-                                    );
-                                  }, childCount: _childCount[tab.item2]))
-                                ]));
-                      }));
-                }).toList()))));
+                                                  color:
+                                                      const Color(0xe6000000),
+                                                  fontWeight: FontWeight.w700),
+                                              textAlign: TextAlign.left)))
+                                ]),
+                                flexibleSpace: FlexibleSpaceBar(
+                                    background: Container(
+                                        color: const Color(0xffffffff),
+                                        child: Column(children: <Widget>[
+                                          Container(
+                                            width: double.maxFinite,
+                                            height: 48.0 +
+                                                MediaQuery.of(context)
+                                                    .padding
+                                                    .top,
+                                          ),
+                                          Container(
+                                              width: double.maxFinite,
+                                              height: 48.0,
+                                              margin:
+                                                  EdgeInsets.only(left: 16.0),
+                                              child: Text("구인구직",
+                                                  style: const YrkTextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 22.0),
+                                                  textAlign: TextAlign.left)),
+                                        ]))),
+                                forceElevated: innerBoxIsScrolled,
+                                bottom:
+                                    CustomTapBar(tabs: _tabs, tabWidth: 72.0)))
+                      ];
+                    },
+                    body: TabBarView(
+                        children: _tabs.map((Tuple2 tab) {
+                      return SafeArea(
+                          top: false,
+                          bottom: false,
+                          child: Builder(builder: (BuildContext context) {
+                            return NotificationListener<ScrollNotification>(
+                                onNotification: (notification) =>
+                                    _onScrollNotification(
+                                        notification, tab.item2),
+                                child: CustomScrollView(
+                                    key: PageStorageKey<String>(tab.item1),
+                                    slivers: <Widget>[
+                                      SliverOverlapInjector(
+                                        handle: NestedScrollView
+                                            .sliverOverlapAbsorberHandleFor(
+                                                context),
+                                      ),
+                                      SliverList(
+                                          delegate: SliverChildBuilderDelegate(
+                                              (BuildContext context,
+                                                  int index) {
+                                        return YrkPageListItem(
+                                          pageIndex: tab.item2,
+                                          listIndex: index,
+                                          pageType: SubPageItem.boardJobFinding,
+                                          nextPageItem: SubPageItem.post,
+                                          onPushNavigator:
+                                              widget.onPushNavigator,
+                                        );
+                                      }, childCount: _childCount[tab.item2]))
+                                    ]));
+                          }));
+                    }).toList())))),
+        bottomNavigationBar:
+            BottomBarNavigation.getInstance(RootPageItem.board));
   }
 
   bool _onScrollNotification(ScrollNotification notification, int index) {
