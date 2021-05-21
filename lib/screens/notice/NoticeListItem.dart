@@ -24,7 +24,7 @@ class NoticeListItem extends StatelessWidget {
               height: 32,
               child: Center(
                 child: YrkIconButton(
-                    icon: "assets/icons/account_circle_default_36_px.svg"),
+                    icon: "assets/icons/account_circle_default.svg"),
               )),
           Container(
               child: Column(

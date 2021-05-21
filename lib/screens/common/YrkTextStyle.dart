@@ -9,7 +9,7 @@ class YrkTextStyle extends TextStyle {
     double? fontSize = 14.0,
     FontWeight? fontWeight = FontWeight.w400,
     FontStyle? fontStyle = FontStyle.normal,
-    double? letterSpacing = -0.002,
+    double? letterSpacing = 0,
     double? wordSpacing,
     TextBaseline? textBaseline,
     double? height = 1,

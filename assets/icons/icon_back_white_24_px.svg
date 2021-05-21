@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="icon_back_white_24px" width="24" height="24" viewBox="0 0 24 24">
-
-    <path id="패스_34" d="M0 0h24v24H0z" fill="none"/>
-    <g id="그룹_646" transform="translate(-255 -412)">
-        <path id="사각형_16753" d="M0 0H24V24H0z" fill="none" transform="rotate(180 139.5 218)"/>
-        <path id="패스_195" fill="#fff" d="M262.646 424.354l8 8a.5.5 0 0 0 .708-.708L263.707 424l7.647-7.646a.5.5 0 0 0-.708-.708l-8 8a.5.5 0 0 0 0 .708z" transform="translate(-7.5)"/>
-    </g>
-</svg>

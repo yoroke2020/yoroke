@@ -84,11 +84,11 @@ class _BottomBarCommentState extends State<BottomBarComment> {
                       child: Center(
                         child: isPrivate
                             ? YrkIconButton(
-                                icon: "assets/icons/icon_lock_24_px.svg",
+                                icon: "assets/icons/icon_lock.svg",
                                 color: const Color(0x4d000000),
                                 iconSize: 20.0)
                             : YrkIconButton(
-                                icon: "assets/icons/icon_lock_open_24_px.svg",
+                                icon: "assets/icons/icon_lock_open.svg",
                                 color: const Color(0x4d000000),
                                 iconSize: 20.0),
                       ),

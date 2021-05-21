@@ -37,7 +37,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
     switch (type) {
       case YrkAppBarType.accountCircleAll:
         return YrkIconButton(
-          icon: "assets/icons/account_circle_default_36_px.svg",
+          icon: "assets/icons/account_circle_default.svg",
           iconSize: 32.0,
           padding: EdgeInsets.all(0),
           onTap: Scaffold.of(context).openDrawer,
@@ -46,7 +46,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       case YrkAppBarType.arrowBackOnly:
       case YrkAppBarType.arrowBackMidTitle:
         return YrkIconButton(
-          icon: "assets/icons/icon_arrow_back_24_px.svg",
+          icon: "assets/icons/icon_arrow_back.svg",
           iconSize: 24.0,
           onTap: Navigator.of(context).pop,
         );
@@ -96,7 +96,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
     if (searchButton)
       ret.add(
         YrkIconButton(
-          icon: "assets/icons/icon_search_24_px.svg",
+          icon: "assets/icons/icon_search.svg",
           onTap: () {
             onPushNavigator!(new YrkData(
                 nextPageItem: SubPageItem.search, prevPageItem: curPageItem));
@@ -105,7 +105,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       );
     if (createButton)
       ret.add(YrkIconButton(
-        icon: "assets/icons/icon_create_24_px.svg",
+        icon: "assets/icons/icon_create.svg",
         onTap: () {
           onPushNavigator!(new YrkData(
               nextPageItem: SubPageItem.postCreate, prevPageItem: curPageItem));
@@ -115,7 +115,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
     if (notificationButton)
       ret.add(
         YrkIconButton(
-          icon: "assets/icons/icon_notifications_none_24_px.svg",
+          icon: "assets/icons/icon_notifications_none.svg",
           padding: EdgeInsets.only(left: 4.0),
           onTap: () {
             onPushNavigator!(new YrkData(

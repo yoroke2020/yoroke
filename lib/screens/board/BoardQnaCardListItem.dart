@@ -35,7 +35,7 @@ class BoardQnaCardListItem extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(right: 4.0),
                       child: SvgPicture.asset(
-                          "assets/icons/account_circle_default_36_px.svg",
+                          "assets/icons/account_circle_default.svg",
                           width: 32.0,
                           height: 32.0),
                     ),
@@ -88,7 +88,7 @@ class BoardQnaCardListItem extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(right: 5.0),
                       child: SvgPicture.asset(
-                        "assets/icons/icon_tumbs_up_60_16_px.svg",
+                        "assets/icons/icon_tumbs_up_60.svg",
                         width: 14.0,
                         height: 12.0,
                         color: const Color(0x4d000000),
@@ -108,7 +108,7 @@ class BoardQnaCardListItem extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(right: 5.0),
                       child: SvgPicture.asset(
-                        "assets/icons/icon_thumbs_down_60_16_px.svg",
+                        "assets/icons/icon_thumbs_down_60.svg",
                         width: 14.0,
                         height: 12.0,
                         color: const Color(0x4d000000),
@@ -128,7 +128,7 @@ class BoardQnaCardListItem extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(right: 5.0),
                       child: SvgPicture.asset(
-                        "assets/icons/icon_mode_comment_16_px.svg",
+                        "assets/icons/icon_mode_comment.svg",
                         width: 12.0,
                         height: 12.0,
                         color: const Color(0x4d000000),
@@ -153,7 +153,7 @@ class BoardQnaCardListItem extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               SvgPicture.asset(
-                                "assets/icons/icon_share_24_px.svg",
+                                "assets/icons/icon_share.svg",
                                 width: 24.0,
                                 height: 24.0,
                                 color: const Color(0x4d000000),

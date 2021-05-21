@@ -106,7 +106,7 @@ class _YrkModelBottomSheet extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: YrkIconButton(
                             onTap: () => Navigator.of(context).pop(),
-                            icon: "assets/icons/icon_clear_24_px.svg",
+                            icon: "assets/icons/icon_clear.svg",
                             padding: EdgeInsets.zero,
                             iconSize: 24.0),
                       )),

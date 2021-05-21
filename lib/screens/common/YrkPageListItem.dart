@@ -136,7 +136,7 @@ class YrkPageListItem extends StatelessWidget {
                         height: 12.0,
                         child: Center(
                             child: YrkIconButton(
-                                icon: "assets/icons/icon_thumb_up_16_px.svg"))),
+                                icon: "assets/icons/icon_thumb_up.svg"))),
                     Container(
                         margin: EdgeInsets.only(right: 8.0),
                         child: Text(testNumberString[listIndex],
@@ -153,7 +153,7 @@ class YrkPageListItem extends StatelessWidget {
                         height: 12.0,
                         child: Center(
                             child: YrkIconButton(
-                                icon: "assets/icons/icon_comment_16_px.svg"))),
+                                icon: "assets/icons/icon_comment.svg"))),
                     Container(
                         margin: EdgeInsets.only(right: 8.0),
                         child: Text(testNumberString[listIndex],
