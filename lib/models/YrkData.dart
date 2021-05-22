@@ -10,7 +10,7 @@ class YrkData {
     this.str3,
     this.str4,
     this.i0,
-    this.i1,
+    this.i1 = 0,
     this.i2,
     this.i3,
     this.i4,

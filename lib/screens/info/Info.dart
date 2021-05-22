@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tuple/tuple.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
-import 'package:yoroke/screens/common/YrkListView.dart';
-import 'package:yoroke/screens/common/YrkTabBarView.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
+import 'package:yoroke/screens/common/YrkTabBar.dart';
+
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/info/InfoShareCardListItem.dart';
 
@@ -17,14 +18,39 @@ class Info extends StatefulWidget {
 }
 
 class _InfoState extends State<Info> with TickerProviderStateMixin {
-  bool isGrid = false;
+  static final int tabLength = 3;
+
+  bool _isTwo = false;
 
   late TabController _tabController;
+  late List<Tuple2<String, int>> _tabs = [
+    Tuple2("의료시설", 0),
+    Tuple2("복지시설", 1),
+    Tuple2("돌봄서비스", 2)
+  ];
+
+  late List<Widget> _cardGrids;
+  get _getCardGrids {
+    List<Widget> list = <Widget>[];
+    for (int i = 0; i < _tabs.length; i++) {
+      list.add(
+        GridView.count(
+            crossAxisCount: _isTwo ? 2 : 1,
+            padding: EdgeInsets.all(16.0),
+            crossAxisSpacing: _isTwo ? 12.0 : 16.0,
+            mainAxisSpacing: _isTwo ? 12.0 : 16.0,
+            childAspectRatio: _isTwo ? 158.0 / 172.0 : 328.0 / 104.0,
+            children: _infoShareCards(i)),
+      );
+    }
+    return list;
+  }
 
   @override
   void initState() {
     super.initState();
-    _tabController = new TabController(length: 3, vsync: this);
+    _tabController = new TabController(length: tabLength, vsync: this);
+    _cardGrids = _getCardGrids;
   }
 
   @override
@@ -33,99 +59,60 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  List<Widget> _infoShareCardListItem(int pageIndex) {
-    double _expandWidth = MediaQuery.of(context).size.width - 32 - 16;
-
+  List<Widget> _infoShareCards(int tabIndex) {
     List<Widget> list = <Widget>[];
-    if (isGrid) {
-      for (int i = 0; i < 10; i++) {
-        list.add(InfoShareCardListItem(
-          width: _expandWidth,
-          height: 104,
-          index: i,
-          onPushNavigator: widget.onPushNavigator,
-        ));
-      }
-    } else {
-      for (int i = 0; i < 10; i += 2) {
-        list.add(Container(
-            width: _expandWidth,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                InfoShareCardListItem(
-                  width: (_expandWidth - 24) / 2,
-                  height: 172,
-                  index: i,
-                  onPushNavigator: widget.onPushNavigator,
-                ),
-                InfoShareCardListItem(
-                  width: (_expandWidth - 24) / 2,
-                  height: 172,
-                  index: i + 1,
-                  onPushNavigator: widget.onPushNavigator,
-                ),
-              ],
-            )));
-      }
+    for (int i = 0; i < 8; i++) {
+      list.add(AnimatedContainer(
+          duration: Duration(milliseconds: 500),
+          curve: Curves.easeOut,
+          child: InfoShareCardListItem(
+            width: _isTwo ? 158.0 : 328.0,
+            height: _isTwo ? 172.0 : 104.0,
+            index: i,
+            tabIndex: tabIndex,
+            onPushNavigator: widget.onPushNavigator,
+          )));
     }
-
     return list;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: YrkAppBar(
-        type: YrkAppBarType.TextSearchNotification,
-        label: "정보공유",
-        onPushNavigator: widget.onPushNavigator,
-      ),
-      body: SingleChildScrollView(
-        child: YrkTabBarView(
-          controller: _tabController,
-          tabWidth: 99,
-          tabViewHeight:
-              MediaQuery.of(context).size.height - kToolbarHeight - 40.0 - 48.0,
-          tabTextList: ["의료시설", "복지시설", "돌봄서비스"],
-          tabViewList: [
-            YrkListView(
-              pageIndex: 0,
-              itemCount: 4,
-              scrollable: true,
-              item: _infoShareCardListItem(0),
-              itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(96.0),
+          child: Column(children: <Widget>[
+            YrkAppBar(
+              type: YrkAppBarType.TextSearchNotification,
+              label: "정보공유",
+              onPushNavigator: widget.onPushNavigator,
             ),
-            YrkListView(
-              pageIndex: 1,
-              itemCount: 4,
-              item: _infoShareCardListItem(1),
-              scrollable: true,
-              itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            ),
-            YrkListView(
-              pageIndex: 2,
-              itemCount: 4,
-              item: _infoShareCardListItem(2),
-              scrollable: true,
-              itemPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            ),
-          ],
-          tabBarFollowing: Container(
-              padding: EdgeInsets.all(4),
-              child: YrkIconButton(
-                  icon: isGrid
-                      ? "assets/icons/icon_widgets.svg"
-                      : "assets/icons/icon_view_agenda.svg",
-                  iconSize: 19,
-                  color: Color(0xff939597),
-                  onTap: () {
-                    setState(() {
-                      isGrid = !isGrid;
-                    });
-                  })),
-        ),
-      ),
+            Container(
+                height: 48.0,
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.only(left: 8.0, right: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    CustomTapBar(tabs: _tabs, controller: _tabController),
+                    Spacer(),
+                    YrkIconButton(
+                        icon: _isTwo
+                            ? "assets/icons/icon_widgets.svg"
+                            : "assets/icons/icon_view_agenda.svg",
+                        iconSize: 19,
+                        color: Color(0xff939597),
+                        onTap: () {
+                          setState(() {
+                            _isTwo = !_isTwo;
+                            _cardGrids = _getCardGrids;
+                          });
+                        }),
+                  ],
+                ))
+          ])),
+      body: TabBarView(controller: _tabController, children: _cardGrids),
     );
   }
 }

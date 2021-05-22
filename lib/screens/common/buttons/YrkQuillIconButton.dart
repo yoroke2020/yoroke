@@ -10,7 +10,7 @@ import 'package:flutter_quill/widgets/controller.dart';
 import 'package:flutter_quill/widgets/toolbar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 
 class YrkQuillImageButton extends StatelessWidget {
   const YrkQuillImageButton({

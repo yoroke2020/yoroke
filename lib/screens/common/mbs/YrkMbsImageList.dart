@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../YrkButton.dart';
+import '../buttons/YrkButton.dart';
 import '../YrkTextStyle.dart';
 
 class YrkMbsImageList extends StatelessWidget {

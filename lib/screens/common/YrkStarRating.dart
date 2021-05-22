@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 
-import 'YrkIconButton.dart';
+import 'buttons/YrkIconButton.dart';
 
 class YrkStarRating extends StatelessWidget {
   const YrkStarRating(

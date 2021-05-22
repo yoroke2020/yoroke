@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/common/YrkButton.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class YrkPageListItem extends StatelessWidget {
@@ -24,13 +24,16 @@ class YrkPageListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isText =
-        true; // Text or Button appears before a title. If it is true, a text appears. If it is false, a button appears
-    bool isBestIcon = false; // Best Icon appears next to a title
-    bool isRating =
-        false; // Rating appears next to a comment icon on the second line
+    // Text or Button appears before a title. If it is true, a text appears.
+    // If it is false, a button appears
+    bool isText = true;
+    // Best Icon appears next to a title
+    bool isBestIcon = false;
+    // Rating appears next to a comment icon on the second line
+    bool isRating = false;
+
+    // Add case here when new kinds of pageListItem is defined
     switch (pageType) {
-      // Add case here when new kinds of pageListItem is defined
       case SubPageItem.boardJobFinding:
         isText = false;
         break;
@@ -41,6 +44,7 @@ class YrkPageListItem extends StatelessWidget {
       default:
         break;
     }
+
     return InkWell(
       onTap: () => onPushNavigator!(new YrkData(
           nextPageItem: nextPageItem,

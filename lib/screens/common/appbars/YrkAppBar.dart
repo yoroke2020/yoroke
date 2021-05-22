@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 
 import '../YrkTextStyle.dart';
 
@@ -11,6 +11,7 @@ enum YrkAppBarType {
   arrowBackAll,
   arrowBackOnly,
   arrowBackMidTitle,
+  TextSearch,
   TextSearchNotification
 }
 
@@ -20,7 +21,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.onPushNavigator,
       this.curPageItem,
       this.label = "",
-      this.type = YrkAppBarType.accountCircleAll,
+      required this.type,
       this.isStatusBar = true})
       : super(
           key: key,
@@ -84,6 +85,9 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
         searchButton = true;
         notificationButton = true;
         break;
+      case YrkAppBarType.TextSearch:
+        searchButton = true;
+        break;
       default:
         break;
     }
@@ -134,6 +138,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
     return PreferredSize(
       preferredSize: preferredSize,
       child: Container(
+          color: Colors.transparent,
           height: isStatusBar ? 48.0 + statusBarHeight : 48.0,
           padding: isStatusBar
               ? EdgeInsets.only(top: statusBarHeight)

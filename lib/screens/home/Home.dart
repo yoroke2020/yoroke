@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkDrawer.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
-import 'package:yoroke/screens/common/YrkListView.dart';
-import 'package:yoroke/screens/common/YrkPageListItem.dart';
-import 'package:yoroke/screens/common/YrkPageView.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
+import 'package:yoroke/screens/common/YrkListItem.dart';
+import 'package:yoroke/screens/common/YrkPage.dart';
 import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
@@ -31,38 +30,11 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  List<Widget> _noticeCardList() {
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < 4; i++) {
-      list.add(HomeCardListItem(
-          width: 320.0,
-          height: 120.0,
-          index: i,
-          onPushNavigator: onPushNavigator));
-    }
-
-    return list;
-  }
-
-  List<Widget> _popularCardList() {
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < 4; i++) {
-      list.add(HomePopularCardListItem(
-          width: 144.0,
-          height: 106.0,
-          index: i,
-          onPushNavigator: onPushNavigator));
-    }
-
-    return list;
-  }
-
   List<Widget> _yrkListView(SubPageItem subPageItem) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
-      list.add(YrkListView(
-          itemCount: 4,
-          item: _homePopularList(i, subPageItem, onPushNavigator!)));
+      list.add(ListView(
+          children: _homePopularList(i, subPageItem, onPushNavigator!)));
     }
     return list;
   }
@@ -138,14 +110,22 @@ class _HomeState extends State<Home> {
           context: context,
         ),
         body: ListView(children: <Widget>[
-          YrkListView(
-            height: 120.0,
-            margin: EdgeInsets.only(top: 8.0, right: 8.0),
-            scrollable: true,
-            scrollDirection: Axis.horizontal,
-            item: _noticeCardList(),
-            itemCount: 4,
-          ),
+          Container(
+              height: 120.0,
+              alignment: Alignment.centerLeft,
+              child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    return HomeCardListItem(
+                        width: 320.0,
+                        height: 120.0,
+                        index: index,
+                        onPushNavigator: onPushNavigator);
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(width: 8.0);
+                  },
+                  itemCount: 4)),
           YrkTabHeaderView(
               title: "인기 게시글",
               titleStyle: YrkTextStyle(
@@ -160,7 +140,7 @@ class _HomeState extends State<Home> {
               customIcon: Row(
                 children: [
                   YrkIconButton(
-                    icon: "assets/icons/icon_create_24_px.svg",
+                    icon: "assets/icons/icon_create.svg",
                     onTap: () => onPushNavigator!(new YrkData(
                         nextPageItem: SubPageItem.postCreate,
                         prevPageItem: RootPageItem.home)),
@@ -179,7 +159,7 @@ class _HomeState extends State<Home> {
                           prevPageItem: RootPageItem.home)))
                 ],
               )),
-          YrkPageView(
+          YrkPage(
             page: _yrkListView(SubPageItem.post),
             controller: popularPageController,
             isIndicatorEnabled: true,
@@ -208,14 +188,22 @@ class _HomeState extends State<Home> {
                     widget.onPushNavigator!(
                         new YrkData(nextPageItem: SubPageItem.homeHistory));
                   })),
-          YrkListView(
-            height: 200.0,
-            margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
-            scrollable: true,
-            scrollDirection: Axis.horizontal,
-            item: _popularCardList(),
-            itemCount: 4,
-          ),
+          Container(
+              height: 200.0,
+              alignment: Alignment.centerLeft,
+              child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    return HomePopularCardListItem(
+                        width: 144.0,
+                        height: 106.0,
+                        index: index,
+                        onPushNavigator: onPushNavigator);
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(width: 8.0);
+                  },
+                  itemCount: 4)),
         ]));
   }
 }

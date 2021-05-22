@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 
 class InfoShareCardListItem extends StatefulWidget {
   InfoShareCardListItem(
       {required this.width,
       required this.height,
       required this.index,
+       this.tabIndex,
       this.onPushNavigator});
 
   final double? width;
   final double? height;
   final int index;
+  final int? tabIndex;
   final ValueChanged<YrkData>? onPushNavigator;
 
   @override

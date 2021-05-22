@@ -4,8 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/models/YrkMbsListData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/common/YrkListView.dart';
-import 'package:yoroke/screens/common/YrkPageListItem.dart';
+import 'package:yoroke/screens/common/YrkListItem.dart';
 import 'package:yoroke/screens/common/YrkTextField.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
@@ -238,10 +237,12 @@ class _SearchState extends State<Search> {
   List<Widget> _buildBoardYrkListView(SubPageItem subPageItem) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
-      list.add(YrkListView(
-          height: 64,
-          itemCount: 4,
-          item: _buildList(i, subPageItem, onPushNavigator!)));
+      list.add(Container(
+        height: 64 * 4,
+        child: ListView(
+          physics: NeverScrollableScrollPhysics(),
+            children: _buildList(i, subPageItem, onPushNavigator!)),
+      ));
     }
     return list;
   }

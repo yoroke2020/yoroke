@@ -7,15 +7,13 @@ import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class BoardCardListItem extends StatelessWidget {
   BoardCardListItem(
-      {required this.width,
-      required this.height,
-      required this.index,
+      {required this.index,
+      required this.listLength,
       this.onPushNavigator,
       this.isBorder = false});
 
-  final double width;
-  final double height;
   final int index;
+  final int listLength;
   final ValueChanged<YrkData>? onPushNavigator;
   final bool isBorder;
 
@@ -27,15 +25,19 @@ class BoardCardListItem extends StatelessWidget {
               i1: index,
             )),
         child: Container(
-            width: width,
-            height: height,
+            margin: index == 0
+                ? EdgeInsets.only(left: 17.0)
+                : index == listLength - 1
+                    ? EdgeInsets.only(right: 17.0)
+                    : EdgeInsets.zero,
             child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Container(
                     width: 48.0,
                     height: 48.0,
+                    margin: EdgeInsets.only(bottom: 8.0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                         image: new DecorationImage(

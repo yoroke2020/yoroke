@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/screens/common/YrkListView.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
 import 'HomeHistoryCardListItem.dart';
@@ -34,28 +33,14 @@ class _HomeHistoryState extends State<HomeHistory> {
         appBar: YrkAppBar(
           type: YrkAppBarType.arrowBackOnly,
         ),
-        body: (ListView(children: <Widget>[
-          YrkListView(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            margin: EdgeInsets.only(left: 16),
-            scrollable: true,
-            scrollDirection: Axis.vertical,
-            item: _popularCardList(),
+        body: ListView.builder(
             itemCount: 12,
-          ),
-        ])));
-  }
-
-  List<Widget> _popularCardList() {
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < 12; i++) {
-      list.add(HomeHistoryCardListItem(
-          width: 344,
-          height: 136,
-          index: i,
-          onPushNavigator: widget.onPushNavigator));
-    }
-    return list;
+            itemBuilder: (BuildContext context, int index) {
+              return HomeHistoryCardListItem(
+                  width: 344,
+                  height: 136,
+                  index: index,
+                  onPushNavigator: widget.onPushNavigator);
+            }));
   }
 }

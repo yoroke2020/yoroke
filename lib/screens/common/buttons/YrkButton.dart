@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 enum ButtonType { solid, outline, text, chip, outlinechip, rect, image }

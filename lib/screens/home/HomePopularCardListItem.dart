@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkStarRating.dart';
 
 class HomePopularCardListItem extends StatelessWidget {
@@ -92,7 +92,7 @@ class HomePopularCardListItem extends StatelessWidget {
                       width: 16,
                       height: 16,
                       child: YrkIconButton(
-                          icon: "assets/icons/icon_save_black_24_px.svg"),
+                          icon: "assets/icons/icon_save_black.svg"),
                     ),
                     Container(
                         width: 25,

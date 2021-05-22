@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/screens/common/YrkIconButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
-import '../YrkButton.dart';
+import '../buttons/YrkButton.dart';
 import '../YrkTextField.dart';
 
 class BottomBarComment extends StatefulWidget {
@@ -46,8 +46,6 @@ class _BottomBarCommentState extends State<BottomBarComment> {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.height);
-
     return Transform.translate(
         offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
         child: BottomAppBar(
