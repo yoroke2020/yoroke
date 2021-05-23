@@ -26,10 +26,10 @@ class FindFacilityReviewComment extends StatelessWidget {
             height: 33.0,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SvgPicture.asset(
-                  "assets/icons/account_circle_default_36_px.svg",
+                  "assets/icons/account_circle_default.svg",
                   width: 32.0,
                   height: 32.0,
                 ),
@@ -55,7 +55,7 @@ class FindFacilityReviewComment extends StatelessWidget {
             child: RatingBarIndicator(
               rating: rating,
               itemBuilder: (context, index) =>
-                  SvgPicture.asset("assets/icons/icon_star_on_24_px.svg"),
+                  SvgPicture.asset("assets/icons/icon_star_on.svg"),
               itemCount: 5,
               itemSize: 12.0,
               direction: Axis.horizontal,

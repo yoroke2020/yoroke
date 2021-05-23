@@ -1,15 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:share/share.dart';
 import 'package:tuple/tuple.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:yoroke/controllers/YrkSelectFilterController.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/YrkTabBar.dart';
 
+import 'FindFacilityBottomBar.dart';
 import 'FindFacilityHome.dart';
 import 'FindFacilityImageListView.dart';
 import 'FindFacilityInfo.dart';
@@ -33,18 +37,9 @@ class _BoardReviewState extends State<FindFacility> {
     Tuple2('후기', 2)
   ];
 
-  static final List<String> _bottomButtonTextList = ["북마크", "위치", "전화", "공유"];
-  static final List<String> _bottomButtonImageList = [
-    "assets/icons/icon_bookmark_on.svg",
-    "assets/icons/icon_location.svg",
-    "assets/icons/icon_phone.svg",
-    "assets/icons/icon_share_color.svg"
-  ];
-
   final YrkSelectFilterController controller =
       YrkSelectFilterController(length: 3);
   String _facilityName = "조문기네 요양원";
-  bool _isBookmarked = false;
 
   @override
   void initState() {
@@ -62,6 +57,9 @@ class _BoardReviewState extends State<FindFacility> {
         body: DefaultTabController(
             length: _tabs.length,
             child: Scaffold(
+                floatingActionButton: FloatingActionButton(
+                    onPressed: () => widget.onPushNavigator!(
+                        YrkData(nextPageItem: SubPageItem.testPage))),
                 body: NestedScrollView(
                     controller: _scrollController,
                     headerSliverBuilder:
@@ -132,66 +130,10 @@ class _BoardReviewState extends State<FindFacility> {
                         minMonthlyCost: 100,
                         maxMonthlyCost: 200,
                       ),
-                      FindFacilityReview()
+                      FindFacilityReview(
+                        onPushNavigator: widget.onPushNavigator!,
+                      )
                     ])),
-                bottomNavigationBar: PreferredSize(
-                    preferredSize: Size.fromHeight(72),
-                    child: Container(
-                        height: 72.0,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: getBottomBarButtonList,
-                        ))))));
-  }
-
-  void _onTapBottomBarButton(int index) {
-    switch (index) {
-      case 0:
-        setState(() {
-          _isBookmarked = !_isBookmarked;
-        });
-        break;
-      default:
-        return;
-    }
-  }
-
-  get getBottomBarButtonList {
-    List<Widget> list = [];
-    for (int i = 0; i < 4; i++) {
-      list.add(Expanded(
-        child: InkWell(
-          onTap: () => _onTapBottomBarButton(i),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              YrkIconButton(
-                icon: _isBookmarked
-                    ? _bottomButtonImageList[i]
-                    : i == 0
-                        ? "assets/icons/icon_bookmark_off.svg"
-                        : _bottomButtonImageList[i],
-                width: 24.0,
-                height: 24.0,
-                padding: EdgeInsets.all(2.0),
-                clickable: false,
-              ),
-              Text(
-                _bottomButtonTextList[i],
-                style: const YrkTextStyle(),
-              )
-            ],
-          ),
-        ),
-      ));
-      if (i < 3) {
-        list.add(Container(
-            width: 1,
-            height: 24,
-            decoration: BoxDecoration(color: const Color(0xffe5e5e5))));
-      }
-    }
-    return list;
+                bottomNavigationBar: FindFacilityBottomBar())));
   }
 }
