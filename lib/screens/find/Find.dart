@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
@@ -122,6 +123,8 @@ class _FindState extends State<Find> {
                           //  [1] - AppBar
                           type: YrkAppBarType.TextSearch,
                           isStatusBar: false,
+                          curPageItem: RootPageItem.find,
+                          onPushNavigator: widget.onPushNavigator,
                           label: "시설찾기"),
                       bottom: PreferredSize(
                           preferredSize: Size.fromHeight(144.0),
