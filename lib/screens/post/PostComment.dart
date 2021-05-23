@@ -148,7 +148,6 @@ class _PostCommentState extends State<PostComment> {
   }
 
   void _onTapLikeCount() {
-    print("likeCount pressed");
     setState(() {
       this.likeCount = this.isLiked ? this.likeCount - 1 : this.likeCount + 1;
       this.isLiked = this.isLiked ? false : true;
@@ -156,7 +155,6 @@ class _PostCommentState extends State<PostComment> {
   }
 
   void _onTapDislikeCount() {
-    print("dislikeCount pressed");
     setState(() {
       this.dislikeCount =
           this.isDisliked ? this.dislikeCount - 1 : this.dislikeCount + 1;
@@ -165,7 +163,6 @@ class _PostCommentState extends State<PostComment> {
   }
 
   void _onTapAddComment() {
-    print("add comment button clicked");
     FocusScopeNode currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus) currentFocus.unfocus();
     currentFocus.requestFocus(widget.focusNode);

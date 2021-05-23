@@ -75,11 +75,6 @@ class _PostCreateState extends State<PostCreate> {
     _pageType = widget.data!.prevPageItem;
     _loadFromAssets();
 
-    print(_isTitleEmpty.toString() +
-        " " +
-        _isBodyEmpty.toString() +
-        " " +
-        _isCategorySelected.toString());
     if (_isTitleEmpty || _isBodyEmpty || !_isCategorySelected) {
       _registerButtonFillColor = const Color(0xfff4f4f4);
       _registerButtonTextColor = const Color(0xffaaaaaa);
@@ -176,10 +171,6 @@ class _PostCreateState extends State<PostCreate> {
         YrkMbsListData.getLabelList(_pageType).length
       ];
     }
-    print("pageType = " +
-        _pageType.toString() +
-        " mbsType = " +
-        _mbsType.toString());
   }
 
   @override
@@ -412,7 +403,6 @@ class _PostCreateState extends State<PostCreate> {
     try {
       String title = _titleController.text;
       String body = jsonEncode(_bodyController.document.toDelta().toJson());
-      print(body);
       tempPostData.title = title;
       tempPostData.body = body;
       tempPostData.category = _selectedCategory;

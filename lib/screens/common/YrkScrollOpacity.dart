@@ -68,7 +68,6 @@ class _YrkScrollOpacityState extends State<YrkScrollOpacity> {
 
   double _calculateOpacity() {
     double result = widget.reversed ? 1 - _calculate() : _calculate();
-    print(result);
     _child = result != 0 ? widget.child : Container();
     return result;
   }

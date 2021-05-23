@@ -403,7 +403,6 @@ class _PostState extends State<Post> {
   }
 
   void _onTapBodyLike() {
-    print("_onTapBodyLike clicked");
     setState(() {
       this._likeCount =
           this._isLiked ? this._likeCount - 1 : this._likeCount + 1;
@@ -412,7 +411,6 @@ class _PostState extends State<Post> {
   }
 
   void _onTapBodyDislike() {
-    print("_onTapBodyDislike clicked");
     setState(() {
       this._dislikeCount =
           this._isDisliked ? this._dislikeCount - 1 : this._dislikeCount + 1;
@@ -421,7 +419,6 @@ class _PostState extends State<Post> {
   }
 
   void _onTapNavigatorPrev() {
-    print("previous page tapped");
     //TODO: When Min hits, not to navigate
     if (_itemIndex > 0) {
       _itemIndex--;
@@ -430,7 +427,6 @@ class _PostState extends State<Post> {
   }
 
   void _onTapNavigatorNext() {
-    print("next page tapped");
     //TODO: When Max hits, not to navigate
     _itemIndex++;
     _loadFromAssets();
