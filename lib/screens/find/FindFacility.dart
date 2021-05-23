@@ -57,9 +57,6 @@ class _BoardReviewState extends State<FindFacility> {
         body: DefaultTabController(
             length: _tabs.length,
             child: Scaffold(
-                floatingActionButton: FloatingActionButton(
-                    onPressed: () => widget.onPushNavigator!(
-                        YrkData(nextPageItem: SubPageItem.testPage))),
                 body: NestedScrollView(
                     controller: _scrollController,
                     headerSliverBuilder:

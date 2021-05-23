@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 
+import 'FindFacilityNaverMap.dart';
+
 class FindFacilityMap extends StatefulWidget {
   @override
   _FindFacilityMapState createState() => _FindFacilityMapState();
@@ -21,11 +23,9 @@ class _FindFacilityMapState extends State<FindFacilityMap> {
         alignment: Alignment.topLeft,
         children: <Widget>[
           Container(
-            color: Colors.grey,
-            height: 521 / 640 * MediaQuery.of(context).size.height,
-            width: double.maxFinite,
-            child: Text("map loading"),
-          ),
+              height: 510 / 640 * MediaQuery.of(context).size.height,
+              width: double.maxFinite,
+              child: FindFacilityNaverMap()),
           YrkAppBar(type: YrkAppBarType.arrowBackOnly),
           Align(
               alignment: Alignment.bottomCenter,
