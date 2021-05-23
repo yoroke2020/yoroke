@@ -1,10 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:naver_map_plugin/naver_map_plugin.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
-
-import 'FindFacilityNaverMap.dart';
 
 class FindFacilityMap extends StatefulWidget {
   @override
@@ -12,6 +13,21 @@ class FindFacilityMap extends StatefulWidget {
 }
 
 class _FindFacilityMapState extends State<FindFacilityMap> {
+  Completer<NaverMapController> _controller = Completer();
+  List<Marker> _markers = <Marker>[];
+
+  @override
+  void initState() {
+    super.initState();
+    _markers.add(Marker(
+      position: LatLng(37.55438, 126.90926),
+      markerId: '',
+      anchor: AnchorPoint(0.5, 1),
+      width: 36,
+      height: 48,
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +41,18 @@ class _FindFacilityMapState extends State<FindFacilityMap> {
           Container(
               height: 510 / 640 * MediaQuery.of(context).size.height,
               width: double.maxFinite,
-              child: FindFacilityNaverMap()),
+              child: NaverMap(
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(37.55438, 126.90926),
+                  zoom: 17,
+                ),
+                onMapCreated: _onMapCreated,
+                initLocationTrackingMode: LocationTrackingMode.NoFollow,
+                locationButtonEnable: true,
+                indoorEnable: true,
+                onCameraIdle: _onCameraIdle,
+                markers: _markers,
+              )),
           YrkAppBar(type: YrkAppBarType.arrowBackOnly),
           Align(
               alignment: Alignment.bottomCenter,
@@ -71,5 +98,13 @@ class _FindFacilityMapState extends State<FindFacilityMap> {
         ],
       ),
     );
+  }
+
+  void _onMapCreated(NaverMapController controller) {
+    _controller.complete(controller);
+  }
+
+  void _onCameraIdle() {
+    print('카메라 움직임 멈춤');
   }
 }
