@@ -4,6 +4,7 @@ import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
+import 'package:yoroke/screens/find/FindFacilityMap.dart';
 
 class FindFacilityBottomBar extends StatefulWidget
     implements PreferredSizeWidget {
@@ -39,8 +40,8 @@ class _FindFacilityBottomBarState extends State<FindFacilityBottomBar> {
                 icon: _isBookmarked
                     ? _bottomButtonImageList[i]
                     : i == 0
-                    ? "assets/icons/icon_bookmark_off.svg"
-                    : _bottomButtonImageList[i],
+                        ? "assets/icons/icon_bookmark_off.svg"
+                        : _bottomButtonImageList[i],
                 width: 24.0,
                 height: 24.0,
                 padding: EdgeInsets.all(2.0),
@@ -67,7 +68,7 @@ class _FindFacilityBottomBarState extends State<FindFacilityBottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
         height: 72.0,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,6 +80,9 @@ class _FindFacilityBottomBarState extends State<FindFacilityBottomBar> {
     switch (index) {
       case 0:
         _onBookmark();
+        break;
+      case 1:
+        _onMap(context);
         break;
       case 2:
         _onPhone("01025276198");
@@ -104,5 +108,10 @@ class _FindFacilityBottomBarState extends State<FindFacilityBottomBar> {
 
   void _onPhone(String digits) {
     launch("tel://$digits");
+  }
+
+  void _onMap(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => FindFacilityMap()));
   }
 }
