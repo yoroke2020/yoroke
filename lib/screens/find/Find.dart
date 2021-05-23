@@ -26,13 +26,12 @@ class Find extends StatefulWidget {
 }
 
 class _FindState extends State<Find> {
-  static final List<String> _optionStrings = [
+  static final List<String> _options = [
     "별점 높은 순",
     "시설 등급 순",
     "가까운 순",
     "후기 많은 순"
   ];
-  static final int unselectedOptionAll = -1;
 
   final List<Tuple2<String, int>> _tabs = <Tuple2<String, int>>[
     Tuple2('요양원', 0),
@@ -46,48 +45,45 @@ class _FindState extends State<Find> {
 
   final ScrollController _scrollController = ScrollController();
 
-  FindLocationData locationData = new FindLocationData();
-  late String _locationText = "지역 선택";
+  StringBuffer _locBuffer = StringBuffer("지역 선택");
+  List<List<bool>> _locSelects = [];
+  int _locCount = 0;
 
-  late List<Widget> _tabViewOptions;
-  late int _tabViewOptionIndex = unselectedOptionAll;
+  int _optionIndex = -1;
 
-  get tabViewOptions {
+  get _optionButtons {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
-      list.add(
-        Padding(
+      list.add(Padding(
           padding: EdgeInsets.only(
               left: i == 0 ? 16.0 : 3.5, right: i == 3 ? 16.0 : 3.0),
           child: YrkButton(
-            width: i != 2 ? 80.0 : 66.0,
-            height: 32.0,
-            buttonType: ButtonType.outlinechip,
-            borderWidth: 1,
-            fillColor: i == _tabViewOptionIndex
-                ? const Color(0xfff5df4d)
-                : const Color(0xffffffff),
-            borderColor: i == _tabViewOptionIndex
-                ? const Color(0xfff5df4d)
-                : const Color(0x4d000000),
-            label: _optionStrings[i],
-            textStyle: YrkTextStyle(
-                color: i == _tabViewOptionIndex
-                    ? const Color(0xe6000000)
-                    : const Color(0x99000000),
-                fontSize: 13.0),
-            onPressed: () => _onPressedOptionButton(i),
-          ),
-        ),
-      );
+              width: i != 2 ? 80.0 : 66.0,
+              height: 32.0,
+              buttonType: ButtonType.outlinechip,
+              borderWidth: 1,
+              fillColor: i == _optionIndex
+                  ? const Color(0xfff5df4d)
+                  : const Color(0xffffffff),
+              borderColor: i == _optionIndex
+                  ? const Color(0xfff5df4d)
+                  : const Color(0x4d000000),
+              label: _options[i],
+              textStyle: YrkTextStyle(
+                  color: i == _optionIndex
+                      ? const Color(0xe6000000)
+                      : const Color(0x99000000),
+                  fontSize: 13.0),
+              onPressed: () => _onPressedOptionButton(i))));
     }
     return list;
   }
 
   @override
   void initState() {
-    _tabViewOptions = tabViewOptions;
     super.initState();
+    for (int i = 0; i < LocName.cities.length; i++)
+      _locSelects.add(List<bool>.filled(LocName.cities[i].length, false));
   }
 
   @override
@@ -134,18 +130,7 @@ class _FindState extends State<Find> {
                               children: [
                                 // [2] - Select Location
                                 InkWell(
-                                    onTap: () {
-                                      showFindLocationSetting(
-                                          context: context,
-                                          statusBarHeight:
-                                              MediaQuery.of(context)
-                                                  .padding
-                                                  .top,
-                                          locationData: locationData,
-                                          onPressedSaveButton: (data) =>
-                                              _onPressedLocationSaveButton(
-                                                  data));
-                                    },
+                                    onTap: () => _onTapSelectLocation(),
                                     child: Container(
                                         width: double.maxFinite,
                                         height: 48.0,
@@ -169,7 +154,7 @@ class _FindState extends State<Find> {
                                                 clickable: false,
                                               ),
                                               Text(
-                                                _locationText,
+                                                _locBuffer.toString(),
                                                 style: const YrkTextStyle(
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 18.0),
@@ -196,7 +181,7 @@ class _FindState extends State<Find> {
                                                 MainAxisAlignment.start,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
-                                            children: _tabViewOptions)))
+                                            children: _optionButtons)))
                               ]))))
             ];
           },
@@ -255,43 +240,49 @@ class _FindState extends State<Find> {
     return true;
   }
 
-  void _onPressedLocationSaveButton(FindLocationData data) {
-    locationData = data;
+  void _onPressedLocationSaveButton() {
     setState(() {
-      int totalCityCount = 0;
-      _locationText = "";
-      if (locationData.selectedCityCount > 0) {
-        for (int i = 0; i < locationData.regionListLength; i++) {
-          RegionData regionData = locationData.regionList[i];
-          if (regionData.isSelected) {
-            totalCityCount++;
-            if (_locationText.isEmpty)
-              _locationText = LocationName.regionNameList[i];
-          } else {
-            SplayTreeSet<int> selectedCity = regionData.selectedCity;
-            if (selectedCity.isNotEmpty) {
-              if (_locationText.isEmpty)
-                _locationText = LocationName.regionNameList[i] +
-                    " " +
-                    LocationName.cityNameList[i][selectedCity.first];
-              totalCityCount += selectedCity.length;
-            }
+      int cityCount = 0;
+      _locBuffer.clear();
+      for (int i = 0; i < _locSelects.length; i++) {
+        if (_locSelects[i][0]) {
+          cityCount += 1;
+          _locBuffer.write(_locBuffer.isEmpty ? LocName.cities[i][0] : "");
+          continue;
+        }
+        for (int j = 1; j < _locSelects[i].length; j++) {
+          if (_locSelects[i][j]) {
+            cityCount++;
+            _locBuffer.write(_locBuffer.isEmpty ? LocName.cities[i][0] : "");
           }
         }
+      }
 
-        if (totalCityCount > 1) {
-          _locationText += " 외 " + (totalCityCount - 1).toString() + "곳";
-        }
-      } else
-        _locationText = "지역 선택";
+      _locBuffer.write(cityCount > 1
+          ? ' 외 ${(cityCount - 1)} 곳'
+          : _locBuffer.isEmpty
+              ? "지역 선택"
+              : "");
     });
   }
 
   void _onPressedOptionButton(int index) {
     setState(() {
-      _tabViewOptionIndex =
-          _tabViewOptionIndex == index ? unselectedOptionAll : index;
+      _optionIndex = _optionIndex == index ? -1 : index;
       //TODO: LoadData
     });
+  }
+
+  void _onTapSelectLocation() async {
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => FindLocationSetting(
+                locSelects: _locSelects, locCount: _locCount)));
+    if (result != null) {
+      _locSelects = result;
+      print(_locSelects);
+      _onPressedLocationSaveButton();
+    }
   }
 }
