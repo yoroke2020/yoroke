@@ -117,7 +117,7 @@ class _FindFacilityReviewState extends State<FindFacilityReview> {
                                 Padding(
                                     padding:
                                         EdgeInsets.only(left: 4.0, right: 2.0),
-                                    child: Text("_reviewCount",
+                                    child: Text("$_reviewCount",
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w700,
                                             fontFamily: "OpenSans",
