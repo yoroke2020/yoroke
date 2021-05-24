@@ -186,6 +186,18 @@ class _YrkButtonState extends State<YrkButton> {
     setTextStyle();
     setHeight();
 
+    if(widget.buttonType == ButtonType.text) {
+      return Material(
+        child: InkWell(
+          onTap: widget.clickable ? widget.onPressed : null,
+          child: Text(
+            widget.label ?? "",
+            style: widget.textStyle,
+          ),
+        ),
+      );
+    }
+
     return SizedBox(
       width: widget.width,
       height: widget.height,

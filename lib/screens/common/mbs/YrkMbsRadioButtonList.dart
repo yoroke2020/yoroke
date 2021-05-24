@@ -30,14 +30,8 @@ class _YrkMbsRadioButtonListState extends State<YrkMbsRadioButtonList> {
     List<Widget> list = <Widget>[];
     int startIndex = 0;
     int endIndex = 0;
-    print("count = " + widget.labelCountPerTitleList.toString());
-    print("length = " + widget.labelList.length.toString());
     for (int i = 0; i < widget.titleList.length; i++) {
       endIndex += widget.labelCountPerTitleList[i];
-      print("startIndex = " +
-          startIndex.toString() +
-          " endIndex = " +
-          endIndex.toString());
       list.add(
         Container(
             padding: EdgeInsets.only(left: 8.0, bottom: 11.0),
@@ -55,7 +49,6 @@ class _YrkMbsRadioButtonListState extends State<YrkMbsRadioButtonList> {
             index: j,
             groupValue: groupValue,
             onSelected: (index) => setState(() {
-                  print("index = " + index.toString());
                   groupValue = index;
                   widget.onTap(groupValue);
                 })));

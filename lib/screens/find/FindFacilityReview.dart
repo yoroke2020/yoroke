@@ -1,12 +1,21 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkSelectFilter.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/controllers/YrkSelectFilterController.dart';
+import 'package:yoroke/screens/find/FindFacilityReviewPostCreate.dart';
+import 'package:yoroke/screens/find/FindFacilityReviewRating.dart';
 
 import 'FindFacilityReviewComment.dart';
 
 class FindFacilityReview extends StatefulWidget {
+  FindFacilityReview({required this.onPushNavigator});
+
+  final ValueChanged<YrkData> onPushNavigator;
+
   @override
   _FindFacilityReviewState createState() => _FindFacilityReviewState();
 }
@@ -108,7 +117,7 @@ class _FindFacilityReviewState extends State<FindFacilityReview> {
                                 Padding(
                                     padding:
                                         EdgeInsets.only(left: 4.0, right: 2.0),
-                                    child: Text("_reviewCount",
+                                    child: Text("$_reviewCount",
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w700,
                                             fontFamily: "OpenSans",
@@ -123,7 +132,7 @@ class _FindFacilityReviewState extends State<FindFacilityReview> {
                                     label: "리뷰쓰기",
                                     width: 72.0,
                                     height: 24.0,
-                                    onPressed: () => {})
+                                    onPressed: () => _onPressedPostCreate())
                               ],
                             ),
                             YrkSelectFilter(
@@ -148,12 +157,25 @@ class _FindFacilityReviewState extends State<FindFacilityReview> {
   bool _onScrollNotification(ScrollNotification notification) {
     if (notification is! ScrollEndNotification) return false;
 
-    if (notification.metrics.extentBefore ==
+    if (notification.metrics.extentBefore + 50.0 >
         notification.metrics.maxScrollExtent) {
       setState(() {
         _reviewCount += 10;
       });
     }
     return true;
+  }
+
+  void _onPressedPostCreate() async {
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                FindFacilityReviewCreatePost()));
+    if(result != null) {
+      setState(() {
+        _commentExamples.add(result);
+      });
+    }
   }
 }

@@ -120,7 +120,6 @@ class _BottomBarCommentState extends State<BottomBarComment> {
 
   void _onPressedRegisterComment() {
     String comment = widget.controller.text;
-    print(comment);
     if (comment != "") {
       widget.onTapRegister(comment);
       widget.controller.text = "";
