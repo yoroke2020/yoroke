@@ -5,8 +5,6 @@ import 'package:yoroke/screens/TestPage.dart';
 import 'package:yoroke/screens/board/BoardJobFinding.dart';
 import 'package:yoroke/screens/board/BoardQna.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
-import 'package:yoroke/screens/home/HomeHistory.dart';
-import 'package:yoroke/screens/info/InfoShareDetail.dart';
 import 'package:yoroke/screens/notice/Notice.dart';
 import 'package:yoroke/screens/post/Post.dart';
 import 'package:yoroke/screens/post/PostCreate.dart';
@@ -18,12 +16,12 @@ enum RootPageItem { home, board, find, info }
 enum SubPageItem {
   search,
   notice,
-  homePopular,
+  // homePopular,
   // homeHistory,
   boardReview,
   boardQna,
   boardJobFinding,
-  findFacility,
+  // findFacility,
   // infoShareDetail,
   post,
   postCreate,
@@ -51,8 +49,8 @@ extension SubPageItemExt on SubPageItem {
         return Search(data: data, onPushNavigator: onPushNavigator);
       case SubPageItem.notice:
         return Notice(data: data);
-      case SubPageItem.homePopular:
-        return Post(data: data);
+      // case SubPageItem.homePopular:
+      //   return Post(data: data);
       // case SubPageItem.homeHistory:
       //   return HomeHistory(data: data, onPushNavigator: onPushNavigator);
       case SubPageItem.boardReview:
@@ -69,8 +67,8 @@ extension SubPageItemExt on SubPageItem {
         return TestPage();
       case SubPageItem.post:
         return Post(data: data);
-      case SubPageItem.findFacility:
-        return FindFacility(data: data, onPushNavigator: onPushNavigator);
+      // case SubPageItem.findFacility:
+      //   return FindFacility(data: data, onPushNavigator: onPushNavigator);
     }
   }
 }

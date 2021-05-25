@@ -4,6 +4,7 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
+import 'package:yoroke/screens/find/FindFacility.dart';
 
 class FindRecommendListItem extends StatelessWidget {
   FindRecommendListItem({
@@ -16,14 +17,24 @@ class FindRecommendListItem extends StatelessWidget {
   final int listIndex;
   final ValueChanged<YrkData>? onPushNavigator;
 
+  void _onFindFacilityClicked(BuildContext context) async {
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => FindFacility(
+                    data: YrkData(),
+                  )));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final double _widthRatio =
         (MediaQuery.of(context).size.width - 32.0) / 328.0;
     final double _heightRatio = MediaQuery.of(context).size.width / 360.0;
     return InkWell(
-      onTap: () =>
-          onPushNavigator!(new YrkData(nextPageItem: SubPageItem.findFacility)),
+      onTap: () => _onFindFacilityClicked(context),
       child: Container(
           width: double.maxFinite,
           height: 160.0 * _heightRatio + 104.0,

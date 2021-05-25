@@ -20,10 +20,11 @@ import 'FindFacilityInfo.dart';
 import 'FindFacilityReview.dart';
 
 class FindFacility extends StatefulWidget {
-  FindFacility({required this.data, required this.onPushNavigator});
+  FindFacility({
+    required this.data,
+  });
 
   final YrkData? data;
-  final ValueChanged<YrkData>? onPushNavigator;
 
   @override
   _BoardReviewState createState() => _BoardReviewState();
@@ -127,9 +128,7 @@ class _BoardReviewState extends State<FindFacility> {
                         minMonthlyCost: 100,
                         maxMonthlyCost: 200,
                       ),
-                      FindFacilityReview(
-                        onPushNavigator: widget.onPushNavigator!,
-                      )
+                      FindFacilityReview()
                     ])),
                 bottomNavigationBar: FindFacilityBottomBar())));
   }
