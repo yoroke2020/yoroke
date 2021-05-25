@@ -11,6 +11,7 @@ import 'package:flutter_quill/widgets/toolbar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
+import 'package:yoroke/screens/post/PostCreateImageUpload.dart';
 
 class YrkQuillImageButton extends StatelessWidget {
   const YrkQuillImageButton({
@@ -64,7 +65,7 @@ class YrkQuillImageButton extends StatelessWidget {
       if (kIsWeb) {
         imageUrl = await _pickImageWeb();
       } else if (Platform.isAndroid || Platform.isIOS) {
-        imageUrl = await _pickImage(imageSource);
+        imageUrl = await _pickImage(context, imageSource);
       } else {
         imageUrl = await _pickImageDesktop(context);
       }
@@ -89,8 +90,14 @@ class YrkQuillImageButton extends StatelessWidget {
     return onImagePickCallback!(file);
   }
 
-  Future<String?> _pickImage(ImageSource source) async {
-    final pickedFile = await ImagePicker().getImage(source: source);
+  Future<String?> _pickImage(BuildContext context, ImageSource source) async {
+
+    // final pickedFile = await ImagePicker().getImage(source: source);
+    final pickedFile = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                PostCreateImageUpload()));
     if (pickedFile == null) {
       return null;
     }
