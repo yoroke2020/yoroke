@@ -19,7 +19,7 @@ enum SubPageItem {
   search,
   notice,
   homePopular,
-  homeHistory,
+  // homeHistory,
   boardReview,
   boardQna,
   boardJobFinding,
@@ -53,8 +53,8 @@ extension SubPageItemExt on SubPageItem {
         return Notice(data: data);
       case SubPageItem.homePopular:
         return Post(data: data);
-      case SubPageItem.homeHistory:
-        return HomeHistory(data: data, onPushNavigator: onPushNavigator);
+      // case SubPageItem.homeHistory:
+      //   return HomeHistory(data: data, onPushNavigator: onPushNavigator);
       case SubPageItem.boardReview:
         return BoardReview(data: data, onPushNavigator: onPushNavigator);
       case SubPageItem.boardQna:

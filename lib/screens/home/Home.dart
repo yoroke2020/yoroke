@@ -8,6 +8,7 @@ import 'package:yoroke/screens/common/YrkPage.dart';
 import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
+import 'package:yoroke/screens/home/HomeHistory.dart';
 
 import 'HomeCardListItem.dart';
 import 'HomePopularCardListItem.dart';
@@ -184,10 +185,7 @@ class _HomeState extends State<Home> {
                           fontStyle: FontStyle.normal,
                           fontSize: 14.0),
                       textAlign: TextAlign.left),
-                  onPressed: () {
-                    widget.onPushNavigator!(
-                        new YrkData(nextPageItem: SubPageItem.homeHistory));
-                  })),
+                  onPressed: () => _onHomeHistoryClicked(context))),
           Container(
               height: 200.0,
               alignment: Alignment.centerLeft,
@@ -205,5 +203,14 @@ class _HomeState extends State<Home> {
                   },
                   itemCount: 4)),
         ]));
+  }
+
+  void _onHomeHistoryClicked(BuildContext context) async {
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomeHistory(data: new YrkData())));
+    });
   }
 }

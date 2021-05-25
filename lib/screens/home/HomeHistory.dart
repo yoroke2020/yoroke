@@ -5,11 +5,12 @@ import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'HomeHistoryCardListItem.dart';
 
 class HomeHistory extends StatefulWidget {
-  HomeHistory({Key? key, required this.data, required this.onPushNavigator})
-      : super(key: key);
+  HomeHistory({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   final YrkData? data;
-  final ValueChanged<YrkData>? onPushNavigator;
 
   @override
   _HomeHistoryState createState() => _HomeHistoryState();
