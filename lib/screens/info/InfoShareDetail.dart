@@ -12,10 +12,9 @@ import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'InfoShareCardListItem.dart';
 
 class InfoShareDetail extends StatefulWidget {
-  InfoShareDetail({required this.data, required this.onPushNavigator});
+  InfoShareDetail({required this.data});
 
   final YrkData? data;
-  final ValueChanged<YrkData>? onPushNavigator;
 
   @override
   _InfoShareDetailState createState() => _InfoShareDetailState();
@@ -155,10 +154,10 @@ class _InfoShareDetailState extends State<InfoShareDetail> {
                 delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                   return InfoShareCardListItem(
-                      width: 158.0,
-                      height: 158.0,
-                      index: index,
-                      onPushNavigator: widget.onPushNavigator);
+                    width: 158.0,
+                    height: 158.0,
+                    index: index,
+                  );
                 }, childCount: 6)))
       ]),
     );

@@ -37,10 +37,7 @@ class _HomeHistoryState extends State<HomeHistory> {
             itemCount: 12,
             itemBuilder: (BuildContext context, int index) {
               return HomeHistoryCardListItem(
-                  width: 344,
-                  height: 136,
-                  index: index,
-                  onPushNavigator: widget.onPushNavigator);
+                  width: 344, height: 136, index: index);
             }));
   }
 }

@@ -240,7 +240,7 @@ class _SearchState extends State<Search> {
       list.add(Container(
         height: 64 * 4,
         child: ListView(
-          physics: NeverScrollableScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             children: _buildList(i, subPageItem, onPushNavigator!)),
       ));
     }
@@ -286,7 +286,6 @@ class _SearchState extends State<Search> {
         width: MediaQuery.of(context).size.width - 32 - 16,
         height: 104,
         index: i,
-        onPushNavigator: onPushNavigator,
       ));
     }
     return list;

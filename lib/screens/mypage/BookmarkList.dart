@@ -71,7 +71,6 @@ class _BookmarkListState extends State<BookmarkList>
             width: 158.0,
             height: 172.0,
             index: i,
-            onPushNavigator: widget.onPushNavigator,
           )));
     }
     return list;

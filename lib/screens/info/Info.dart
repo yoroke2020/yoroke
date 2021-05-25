@@ -70,7 +70,6 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
             height: _isTwo ? 172.0 : 104.0,
             index: i,
             tabIndex: tabIndex,
-            onPushNavigator: widget.onPushNavigator,
           )));
     }
     return list;

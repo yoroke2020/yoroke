@@ -2,7 +2,7 @@ import 'package:yoroke/navigator/PageItem.dart';
 
 class YrkData {
   YrkData({
-    required this.nextPageItem,
+    this.nextPageItem,
     this.prevPageItem,
     this.str0,
     this.str1,
@@ -20,7 +20,8 @@ class YrkData {
   final prevPageItem;
 
   //TODO: 추후 API 관련 parameter로 변경
-  String? str0; // String to be printed whether the correct item is selected/tapped
+  // str0: String to be printed whether the correct item is selected/tapped
+  String? str0;
   String? str1;
   String? str2;
   String? str3;

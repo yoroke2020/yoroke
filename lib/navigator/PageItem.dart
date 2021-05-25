@@ -24,7 +24,7 @@ enum SubPageItem {
   boardQna,
   boardJobFinding,
   findFacility,
-  infoShareDetail,
+  // infoShareDetail,
   post,
   postCreate,
   testPage,
@@ -61,8 +61,8 @@ extension SubPageItemExt on SubPageItem {
         return BoardQna(onPushNavigator: onPushNavigator);
       case SubPageItem.boardJobFinding:
         return BoardJobFinding(onPushNavigator: onPushNavigator);
-      case SubPageItem.infoShareDetail:
-        return InfoShareDetail(data: data, onPushNavigator: onPushNavigator);
+      // case SubPageItem.infoShareDetail:
+      //   return InfoShareDetail(data: data, onPushNavigator: onPushNavigator);
       case SubPageItem.postCreate:
         return PostCreate(data: data);
       case SubPageItem.testPage:
