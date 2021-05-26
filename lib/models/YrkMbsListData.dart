@@ -60,7 +60,7 @@ class YrkMbsListData {
         return _boardQnaLabelList;
       case SubPageItem.boardJobFinding:
         return _boardJobFindingLabelList;
-      case SubPageItem.search:
+      case "search":
         return _searchLabelList;
       default:
         return <String>[];

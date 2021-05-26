@@ -118,7 +118,7 @@ class _SearchState extends State<Search> {
           onTap: () => showYrkModalBottomSheet(
               context: context,
               type: YrkMbsType.text,
-              labelList: YrkMbsListData.getLabelList(SubPageItem.search),
+              labelList: YrkMbsListData.getLabelList("search"),
               onTap: (index) {
                 Navigator.of(context).pop();
                 _handleCategorySelection(index);
@@ -137,7 +137,7 @@ class _SearchState extends State<Search> {
                     children: <Widget>[
                       Text(
                           YrkMbsListData.getLabelList(
-                              SubPageItem.search)[selectedCategoryIndex],
+                              "search")[selectedCategoryIndex],
                           style: const YrkTextStyle(),
                           textAlign: TextAlign.left),
                       Spacer(),

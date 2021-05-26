@@ -142,22 +142,24 @@ class _HomeState extends State<Home> {
                 children: [
                   YrkIconButton(
                     icon: "assets/icons/icon_create.svg",
-                    onTap: () => onPushNavigator!(new YrkData(
-                        nextPageItem: SubPageItem.postCreate,
-                        prevPageItem: RootPageItem.home)),
+                    // onTap: () => onPushNavigator!(new YrkData(
+                    //     nextPageItem: SubPageItem.postCreate,
+                    //     prevPageItem: RootPageItem.home)),
                   ),
                   TextButton(
-                      child: Text("글 작성",
-                          style: const TextStyle(
-                              color: const Color(0x99000000),
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "NotoSansCJKKR",
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14.0),
-                          textAlign: TextAlign.left),
-                      onPressed: () => onPushNavigator!(new YrkData(
-                          nextPageItem: SubPageItem.postCreate,
-                          prevPageItem: RootPageItem.home)))
+                    child: Text("글 작성",
+                        style: const TextStyle(
+                            color: const Color(0x99000000),
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "NotoSansCJKKR",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 14.0),
+                        textAlign: TextAlign.left),
+                    onPressed: null,
+                    // onPushNavigator!(new YrkData(
+                    //     nextPageItem: SubPageItem.postCreate,
+                    //     prevPageItem: RootPageItem.home)),
+                  )
                 ],
               )),
           YrkPage(
