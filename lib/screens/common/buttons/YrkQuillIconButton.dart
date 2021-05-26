@@ -11,6 +11,7 @@ import 'package:flutter_quill/widgets/toolbar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
+import 'package:yoroke/screens/post/PostCreateImageUpload.dart';
 
 class YrkQuillImageButton extends StatelessWidget {
   const YrkQuillImageButton({
@@ -25,7 +26,6 @@ class YrkQuillImageButton extends StatelessWidget {
     this.color = const Color(0xff000000),
     Key? key,
   }) : super(key: key);
-
 
   final QuillController controller;
 
@@ -58,21 +58,28 @@ class YrkQuillImageButton extends StatelessWidget {
     final length = controller.selection.extentOffset - index;
 
     String? imageUrl;
+    List<String>? imageUrls;
     if (imagePickImpl != null) {
       imageUrl = await imagePickImpl!(imageSource);
     } else {
       if (kIsWeb) {
         imageUrl = await _pickImageWeb();
       } else if (Platform.isAndroid || Platform.isIOS) {
-        imageUrl = await _pickImage(imageSource);
+        imageUrls = await _pickImage(context, imageSource);
       } else {
         imageUrl = await _pickImageDesktop(context);
       }
     }
 
-    if (imageUrl != null) {
-      controller
-          .replaceText(index, length, BlockEmbed.image(imageUrl), null);
+    if ((Platform.isAndroid || Platform.isIOS) && imageUrls != null) {
+      for (int i = imageUrls.length - 1; i >= 0; i--) {
+        controller.replaceText(
+            index, length, BlockEmbed.image(imageUrls[i]), null);
+      }
+    } else {
+      if (imageUrl != null) {
+        controller.replaceText(index, length, BlockEmbed.image(imageUrl), null);
+      }
     }
   }
 
@@ -89,13 +96,23 @@ class YrkQuillImageButton extends StatelessWidget {
     return onImagePickCallback!(file);
   }
 
-  Future<String?> _pickImage(ImageSource source) async {
-    final pickedFile = await ImagePicker().getImage(source: source);
-    if (pickedFile == null) {
-      return null;
-    }
+  Future<List<String>?> _pickImage(
+      BuildContext context, ImageSource source) async {
+    final pickedFiles = await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => PostCreateImageUpload()));
+    if (pickedFiles == null) return null;
 
-    return onImagePickCallback!(File(pickedFile.path));
+    List<File> files = pickedFiles as List<File>;
+    List<String> imageUrls = [];
+    if (files[0].path == "camera") {
+      final cameraFile =
+          await ImagePicker().getImage(source: ImageSource.camera);
+      imageUrls.add(await onImagePickCallback!(File(cameraFile!.path)));
+    } else {
+      for (int i = 0; i < files.length; i++)
+        imageUrls.add(await onImagePickCallback!(File(files[i].path)));
+    }
+    return imageUrls;
   }
 
   Future<String?> _pickImageDesktop(BuildContext context) async {
