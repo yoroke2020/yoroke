@@ -144,8 +144,7 @@ class _FindState extends State<Find> {
                                                 CrossAxisAlignment.center,
                                             children: <Widget>[
                                               YrkIconButton(
-                                                icon:
-                                                    "assets/icons/icon_location.svg",
+                                                icon: "icon_location.svg",
                                                 width: 24.0,
                                                 height: 24.0,
                                                 padding:
@@ -161,7 +160,7 @@ class _FindState extends State<Find> {
                                               ),
                                               YrkIconButton(
                                                   icon:
-                                                      "assets/icons/icon_navigate_next.svg",
+                                                      "icon_navigate_next.svg",
                                                   width: 24.0,
                                                   height: 24.0,
                                                   padding: EdgeInsets.only(

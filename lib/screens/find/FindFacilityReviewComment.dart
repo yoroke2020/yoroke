@@ -15,10 +15,8 @@ class FindFacilityReviewComment extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           border: Border(
-              top:
-              BorderSide(color: const Color(0xffe5e5e5), width: 1))),
-      padding:
-          EdgeInsets.only(top: 14.0, bottom: 19.0),
+              top: BorderSide(color: const Color(0xffe5e5e5), width: 1))),
+      padding: EdgeInsets.only(top: 14.0, bottom: 19.0),
       margin: EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         children: <Widget>[
@@ -29,7 +27,7 @@ class FindFacilityReviewComment extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SvgPicture.asset(
-                  "assets/icons/account_circle_default.svg",
+                  "account_circle_default.svg",
                   width: 32.0,
                   height: 32.0,
                 ),
@@ -55,7 +53,7 @@ class FindFacilityReviewComment extends StatelessWidget {
             child: RatingBarIndicator(
               rating: rating,
               itemBuilder: (context, index) =>
-                  SvgPicture.asset("assets/icons/icon_star_on.svg"),
+                  SvgPicture.asset("icon_star_on.svg"),
               itemCount: 5,
               itemSize: 12.0,
               direction: Axis.horizontal,

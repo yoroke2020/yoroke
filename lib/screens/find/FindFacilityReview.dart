@@ -12,9 +12,7 @@ import 'package:yoroke/screens/find/FindFacilityReviewRating.dart';
 import 'FindFacilityReviewComment.dart';
 
 class FindFacilityReview extends StatefulWidget {
-  FindFacilityReview({required this.onPushNavigator});
-
-  final ValueChanged<YrkData> onPushNavigator;
+  FindFacilityReview();
 
   @override
   _FindFacilityReviewState createState() => _FindFacilityReviewState();
@@ -170,9 +168,8 @@ class _FindFacilityReviewState extends State<FindFacilityReview> {
     final result = await Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                FindFacilityReviewCreatePost()));
-    if(result != null) {
+            builder: (context) => FindFacilityReviewCreatePost()));
+    if (result != null) {
       setState(() {
         _commentExamples.add(result);
       });

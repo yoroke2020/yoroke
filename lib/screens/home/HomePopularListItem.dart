@@ -87,8 +87,7 @@ class HomePopularListItem extends StatelessWidget {
                                 Expanded(
                                     flex: 14,
                                     child: YrkIconButton(
-                                        icon:
-                                            "assets/icons/icon_thumb_up.svg")),
+                                        icon: "icon_thumb_up.svg")),
                                 Expanded(flex: 5, child: Container()),
                                 Expanded(
                                     flex: 21,
@@ -103,8 +102,7 @@ class HomePopularListItem extends StatelessWidget {
                                 Expanded(
                                     flex: 14,
                                     child: YrkIconButton(
-                                        icon:
-                                            "assets/icons/icon_mode_comment.svg")),
+                                        icon: "icon_mode_comment.svg")),
                                 Expanded(flex: 5, child: Container()),
                                 Expanded(
                                     flex: 120,
@@ -127,8 +125,7 @@ class HomePopularListItem extends StatelessWidget {
                           children: <Widget>[
                         Expanded(
                           flex: 14,
-                          child: YrkIconButton(
-                              icon: "assets/icons/icon_mode_comment.svg"),
+                          child: YrkIconButton(icon: "icon_mode_comment.svg"),
                         ),
                         Expanded(
                             flex: 51,

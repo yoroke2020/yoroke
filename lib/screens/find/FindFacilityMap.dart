@@ -79,10 +79,8 @@ class _FindFacilityMapState extends State<FindFacilityMap> {
                           children: <Widget>[
                             Padding(
                               padding: EdgeInsets.only(right: 8.0),
-                              child: SvgPicture.asset(
-                                  "assets/icons/icon_location.svg",
-                                  width: 24.0,
-                                  height: 24.0),
+                              child: SvgPicture.asset("icon_location.svg",
+                                  width: 24.0, height: 24.0),
                             ),
                             Text("서울 마포구 동교동 159-5",
                                 style: const YrkTextStyle())

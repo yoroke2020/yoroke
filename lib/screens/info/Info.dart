@@ -70,7 +70,6 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
             height: _isTwo ? 172.0 : 104.0,
             index: i,
             tabIndex: tabIndex,
-            onPushNavigator: widget.onPushNavigator,
           )));
     }
     return list;
@@ -99,8 +98,8 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
                     Spacer(),
                     YrkIconButton(
                         icon: _isTwo
-                            ? "assets/icons/icon_widgets.svg"
-                            : "assets/icons/icon_view_agenda.svg",
+                            ? "icon_widgets.svg"
+                            : "icon_view_agenda.svg",
                         iconSize: 19,
                         color: Color(0xff939597),
                         onTap: () {

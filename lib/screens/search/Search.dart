@@ -118,7 +118,7 @@ class _SearchState extends State<Search> {
           onTap: () => showYrkModalBottomSheet(
               context: context,
               type: YrkMbsType.text,
-              labelList: YrkMbsListData.getLabelList(SubPageItem.search),
+              labelList: YrkMbsListData.getLabelList("search"),
               onTap: (index) {
                 Navigator.of(context).pop();
                 _handleCategorySelection(index);
@@ -137,12 +137,12 @@ class _SearchState extends State<Search> {
                     children: <Widget>[
                       Text(
                           YrkMbsListData.getLabelList(
-                              SubPageItem.search)[selectedCategoryIndex],
+                              "search")[selectedCategoryIndex],
                           style: const YrkTextStyle(),
                           textAlign: TextAlign.left),
                       Spacer(),
                       SvgPicture.asset(
-                        "assets/icons/icon_arrow_down.svg",
+                        "icon_arrow_down.svg",
                         width: 24.0,
                         height: 24.0,
                       )
@@ -240,7 +240,7 @@ class _SearchState extends State<Search> {
       list.add(Container(
         height: 64 * 4,
         child: ListView(
-          physics: NeverScrollableScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             children: _buildList(i, subPageItem, onPushNavigator!)),
       ));
     }
@@ -286,7 +286,6 @@ class _SearchState extends State<Search> {
         width: MediaQuery.of(context).size.width - 32 - 16,
         height: 104,
         index: i,
-        onPushNavigator: onPushNavigator,
       ));
     }
     return list;

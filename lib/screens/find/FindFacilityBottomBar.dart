@@ -18,10 +18,10 @@ class FindFacilityBottomBar extends StatefulWidget
 class _FindFacilityBottomBarState extends State<FindFacilityBottomBar> {
   static final List<String> _bottomButtonTextList = ["북마크", "위치", "전화", "공유"];
   static final List<String> _bottomButtonImageList = [
-    "assets/icons/icon_bookmark_on.svg",
-    "assets/icons/icon_location.svg",
-    "assets/icons/icon_phone.svg",
-    "assets/icons/icon_share_color.svg"
+    "icon_bookmark_on.svg",
+    "icon_location.svg",
+    "icon_phone.svg",
+    "icon_share_color.svg"
   ];
 
   bool _isBookmarked = false;
@@ -40,7 +40,7 @@ class _FindFacilityBottomBarState extends State<FindFacilityBottomBar> {
                 icon: _isBookmarked
                     ? _bottomButtonImageList[i]
                     : i == 0
-                        ? "assets/icons/icon_bookmark_off.svg"
+                        ? "icon_bookmark_off.svg"
                         : _bottomButtonImageList[i],
                 width: 24.0,
                 height: 24.0,

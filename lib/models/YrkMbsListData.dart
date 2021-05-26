@@ -11,12 +11,12 @@ class YrkMbsListData {
   ];
 
   static final List<String> _postImageList = [
-    "assets/icons/icon_share.svg",
-    "assets/icons/icon_save_black.svg",
-    "assets/icons/icon_share.svg",
-    "assets/icons/icon_save_black.svg",
-    "assets/icons/icon_share.svg",
-    "assets/icons/icon_save_black.svg",
+    "icon_share.svg",
+    "icon_save_black.svg",
+    "icon_share.svg",
+    "icon_save_black.svg",
+    "icon_share.svg",
+    "icon_save_black.svg",
   ];
 
   static final String _boardReviewTitle = "후기 게시판";
@@ -60,7 +60,7 @@ class YrkMbsListData {
         return _boardQnaLabelList;
       case SubPageItem.boardJobFinding:
         return _boardJobFindingLabelList;
-      case SubPageItem.search:
+      case "search":
         return _searchLabelList;
       default:
         return <String>[];

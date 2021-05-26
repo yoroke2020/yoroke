@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
+import 'package:yoroke/screens/notice/Notice.dart';
+import 'package:yoroke/screens/post/PostCreate.dart';
+import 'package:yoroke/screens/search/Search.dart';
 
 import '../YrkTextStyle.dart';
 
@@ -37,7 +40,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
     switch (type) {
       case YrkAppBarType.accountCircleAll:
         return YrkIconButton(
-          icon: "assets/icons/account_circle_default.svg",
+          icon: "account_circle_default.svg",
           iconSize: 32.0,
           padding: EdgeInsets.all(0),
           onTap: Scaffold.of(context).openDrawer,
@@ -46,7 +49,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       case YrkAppBarType.arrowBackOnly:
       case YrkAppBarType.arrowBackMidTitle:
         return YrkIconButton(
-          icon: "assets/icons/icon_arrow_back.svg",
+          icon: "icon_arrow_back.svg",
           iconSize: 24.0,
           onTap: Navigator.of(context).pop,
         );
@@ -69,7 +72,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       return Spacer();
   }
 
-  get getActions {
+  Widget getActions(BuildContext context) {
     bool searchButton = false;
     bool createButton = false;
     bool notificationButton = false;
@@ -96,37 +99,58 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
     if (searchButton)
       ret.add(
         YrkIconButton(
-          icon: "assets/icons/icon_search.svg",
-          onTap: () {
-            onPushNavigator!(new YrkData(
-                nextPageItem: SubPageItem.search, prevPageItem: curPageItem));
-          },
+          icon: "icon_search.svg",
+          onTap: () => _onSearchClicked(context),
         ),
       );
     if (createButton)
       ret.add(YrkIconButton(
-        icon: "assets/icons/icon_create.svg",
-        onTap: () {
-          onPushNavigator!(new YrkData(
-              nextPageItem: SubPageItem.postCreate, prevPageItem: curPageItem));
-        },
-        // color: Colors.yellow,
+        icon: "icon_create.svg",
+        onTap: () => _onCreateClicked(context),
       ));
     if (notificationButton)
       ret.add(
         YrkIconButton(
-          icon: "assets/icons/icon_notifications_none.svg",
+          icon: "icon_notifications_none.svg",
           padding: EdgeInsets.only(left: 4.0),
-          onTap: () {
-            onPushNavigator!(new YrkData(
-                nextPageItem: SubPageItem.notice, prevPageItem: curPageItem));
-          },
+          onTap: () => _onNoticeClicked(context),
         ),
       );
     if (ret.length == 0) {
       ret.add(SizedBox(width: 32));
     }
     return Wrap(children: ret);
+  }
+
+  void _onSearchClicked(BuildContext context) async {
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Search(
+                  data: new YrkData(prevPageItem: curPageItem),
+                  onPushNavigator: onPushNavigator)));
+    });
+  }
+
+  void _onCreateClicked(BuildContext context) async {
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  PostCreate(data: new YrkData(prevPageItem: curPageItem))));
+    });
+  }
+
+  void _onNoticeClicked(BuildContext context) async {
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  Notice(data: new YrkData(prevPageItem: curPageItem))));
+    });
   }
 
   @override
@@ -152,7 +176,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
               if (type == YrkAppBarType.arrowBackMidTitle) Spacer(),
               getTitle,
               Spacer(),
-              getActions,
+              getActions(context),
             ],
           )),
     );

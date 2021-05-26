@@ -51,9 +51,9 @@ class FindFacilityReviewRating extends StatelessWidget {
                   allowHalfRating: false,
                   itemCount: 5,
                   ratingWidget: RatingWidget(
-                    full: SvgPicture.asset("assets/icons/icon_star_on.svg"),
-                    half: SvgPicture.asset("assets/icons/icon_star_on.svg"),
-                    empty: SvgPicture.asset("assets/icons/icon_star_off.svg"),
+                    full: SvgPicture.asset("icon_star_on.svg"),
+                    half: SvgPicture.asset("icon_star_on.svg"),
+                    empty: SvgPicture.asset("icon_star_off.svg"),
                   ),
                   itemPadding: EdgeInsets.symmetric(
                       horizontal:

@@ -10,7 +10,7 @@ class TestPage extends StatefulWidget {
 }
 
 var btns = {
-  {"text": "image", "icon": "assets/icons/icon_naver_logo.svg"},
+  {"text": "image", "icon": "icon_naver_logo.svg"},
 };
 
 class _TestPageState extends State<TestPage> {

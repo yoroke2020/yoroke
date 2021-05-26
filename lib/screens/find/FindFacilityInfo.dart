@@ -29,10 +29,10 @@ class FindFacilityInfo extends StatelessWidget {
   ];
 
   static final List<String> imageList = [
-    "assets/icons/icon_medical_services_16_px.svg",
-    "assets/icons/icon_medical_services_16_px.svg",
-    "assets/icons/icon_dining_16_px.svg",
-    "assets/icons/icon_medical_services_16_px.svg",
+    "icon_medical_services_16_px.svg",
+    "icon_medical_services_16_px.svg",
+    "icon_dining_16_px.svg",
+    "icon_medical_services_16_px.svg",
   ];
 
   @override

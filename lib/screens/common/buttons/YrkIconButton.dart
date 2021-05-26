@@ -19,7 +19,7 @@ class YrkIconButton extends InkWell {
               height: (iconSize ?? height) + padding.top + padding.bottom,
               child: Center(
                 child: SvgPicture.asset(
-                  icon,
+                  "assets/icons/" + icon,
                   width: iconSize ?? width,
                   height: iconSize ?? height,
                   color: color,

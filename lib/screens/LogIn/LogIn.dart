@@ -11,9 +11,9 @@ class LogIn extends StatefulWidget {
 }
 
 var btns = {
-  {"text": "네이버로 계속하기", "icon": "assets/icons/icon_naver_logo.svg"},
-  {"text": "카카오로 계속하기", "icon": "assets/icons/icon_kakao_logo.svg"},
-  {"text": "Apple로 계속하기", "icon": "assets/icons/icon_apple_logo.svg"},
+  {"text": "네이버로 계속하기", "icon": "icon_naver_logo.svg"},
+  {"text": "카카오로 계속하기", "icon": "icon_kakao_logo.svg"},
+  {"text": "Apple로 계속하기", "icon": "icon_apple_logo.svg"},
 };
 
 class _LogInState extends State<LogIn> {

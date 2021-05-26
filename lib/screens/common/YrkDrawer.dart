@@ -15,10 +15,10 @@ var textlist = [
 ];
 
 var imagelist = [
-  "assets/icons/icon_account_box.svg",
-  "assets/icons/icon_save_black.svg",
-  "assets/icons/icon_history.svg",
-  "assets/icons/icon_inventory_2.svg",
+  "icon_account_box.svg",
+  "icon_save_black.svg",
+  "icon_history.svg",
+  "icon_inventory_2.svg",
 ];
 
 class YrkDrawer extends Drawer {
@@ -41,7 +41,7 @@ class YrkDrawer extends Drawer {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             YrkIconButton(
-                              icon: "assets/icons/account_circle_default.svg",
+                              icon: "account_circle_default.svg",
                               iconSize: 44,
                               padding: EdgeInsets.all(0),
                             ),
@@ -104,7 +104,7 @@ class YrkDrawer extends Drawer {
                     leading: Container(
                         padding: EdgeInsets.zero,
                         child: YrkIconButton(
-                          icon: "assets/icons/icon_settings.svg",
+                          icon: "icon_settings.svg",
                           width: 22,
                           height: 22,
                           onTap: () {},
