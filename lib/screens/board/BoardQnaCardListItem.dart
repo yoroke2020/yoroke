@@ -86,7 +86,7 @@ class BoardQnaCardListItem extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(right: 5.0),
                       child: SvgPicture.asset(
-                        "icon_tumbs_up_60.svg",
+                        "icon_thumb_up.svg",
                         width: 14.0,
                         height: 12.0,
                         color: const Color(0x4d000000),
@@ -106,7 +106,7 @@ class BoardQnaCardListItem extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(right: 5.0),
                       child: SvgPicture.asset(
-                        "icon_thumbs_down_60.svg",
+                        "icon_thumb_down.svg",
                         width: 14.0,
                         height: 12.0,
                         color: const Color(0x4d000000),

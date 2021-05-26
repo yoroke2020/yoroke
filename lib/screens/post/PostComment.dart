@@ -99,7 +99,7 @@ class _PostCommentState extends State<PostComment> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   YrkIconButton(
-                    icon: "icon_tumbs_up_60.svg",
+                    icon: "icon_thumb_up.svg",
                     onTap: _onTapLikeCount,
                     padding: EdgeInsets.only(right: 5.0),
                     width: 14.0,
@@ -115,7 +115,7 @@ class _PostCommentState extends State<PostComment> {
                             color: const Color(0x4d000000))),
                   ),
                   YrkIconButton(
-                    icon: "icon_thumbs_down_60.svg",
+                    icon: "icon_thumb_down.svg",
                     onTap: _onTapDislikeCount,
                     padding: EdgeInsets.only(right: 5.0),
                     width: 14.0,

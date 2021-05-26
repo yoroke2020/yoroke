@@ -14,6 +14,7 @@ import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarComment.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/mbs/YrkModelBottomSheet.dart';
 
 import 'PostComment.dart';
@@ -119,10 +120,9 @@ class _PostState extends State<Post> {
                       children: <Widget>[
                         Padding(
                             padding: EdgeInsets.only(right: 6.0),
-                            child: SvgPicture.asset(
-                                "account_circle_default.svg",
-                                width: 32.0,
-                                height: 32.0)),
+                            child: YrkIconButton(
+                                icon: "account_circle_default.svg",
+                                iconSize: 32.0)),
                         Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -313,10 +313,9 @@ class _PostState extends State<Post> {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.only(right: 5.0),
-                    child: SvgPicture.asset(
-                      isLike
-                          ? "icon_tumbs_up_60.svg"
-                          : "icon_thumbs_down_60.svg",
+                    child: YrkIconButton(
+                      icon:
+                          isLike ? "icon_thumb_up.svg" : "icon_thumb_down.svg",
                       width: 14.0,
                       height: 12.0,
                       color: const Color(0x4d000000),
@@ -356,12 +355,11 @@ class _PostState extends State<Post> {
                           : testLongString[_itemIndex - 1],
                       style: const YrkTextStyle(fontSize: 16.0)),
                   Spacer(),
-                  SvgPicture.asset(
-                      isNext
+                  YrkIconButton(
+                      icon: isNext
                           ? "icon_navigate_next.svg"
                           : "icon_navigate_next.svg",
-                      width: 24.0,
-                      height: 24.0)
+                      iconSize: 24.0)
                 ])));
   }
 
