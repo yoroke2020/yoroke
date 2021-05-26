@@ -91,8 +91,7 @@ class HomePopularCardListItem extends StatelessWidget {
                       margin: const EdgeInsets.only(left: 39),
                       width: 16,
                       height: 16,
-                      child: YrkIconButton(
-                          icon: "assets/icons/icon_save_black.svg"),
+                      child: YrkIconButton(icon: "icon_save_black.svg"),
                     ),
                     Container(
                         width: 25,

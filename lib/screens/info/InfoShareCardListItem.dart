@@ -66,8 +66,8 @@ class _InfoShareCardListItemState extends State<InfoShareCardListItem> {
                                     children: [
                                       YrkIconButton(
                                           icon: _isBookmarked
-                                              ? "assets/icons/icon_bookmark_on.svg"
-                                              : "assets/icons/icon_bookmark_off.svg",
+                                              ? "icon_bookmark_on.svg"
+                                              : "icon_bookmark_off.svg",
                                           iconSize: 24,
                                           color: Colors.white,
                                           onTap: () {

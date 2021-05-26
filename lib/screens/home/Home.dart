@@ -141,7 +141,7 @@ class _HomeState extends State<Home> {
               customIcon: Row(
                 children: [
                   YrkIconButton(
-                    icon: "assets/icons/icon_create.svg",
+                    icon: "icon_create.svg",
                     // onTap: () => onPushNavigator!(new YrkData(
                     //     nextPageItem: SubPageItem.postCreate,
                     //     prevPageItem: RootPageItem.home)),

@@ -23,14 +23,14 @@ class YrkStarRating extends StatelessWidget {
           padding: const EdgeInsets.all(0),
           width: eachWidth,
           height: eachHeight,
-          icon: "assets/icons/icon_grade_fill.svg"));
+          icon: "icon_grade_fill.svg"));
     }
     for (int i = 0; i < 5 - filledStarCount; i++) {
       list.add(YrkIconButton(
           padding: const EdgeInsets.all(0),
           width: eachWidth,
           height: eachHeight,
-          icon: "assets/icons/icon_grade.svg"));
+          icon: "icon_grade.svg"));
     }
     return list;
   }

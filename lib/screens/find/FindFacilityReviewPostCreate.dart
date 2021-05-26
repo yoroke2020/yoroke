@@ -75,8 +75,7 @@ class _FindFacilityReviewCreatePostState
 
   @override
   Widget build(BuildContext context) {
-    if(_rating == -1)
-      _onPressedChangeRating(context);
+    if (_rating == -1) _onPressedChangeRating(context);
 
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
@@ -104,7 +103,7 @@ class _FindFacilityReviewCreatePostState
                           int result = -1;
                           Navigator.pop(context, result);
                         },
-                        icon: "assets/icons/icon_clear.svg",
+                        icon: "icon_clear.svg",
                         iconSize: 24.0,
                       ),
                       Spacer(),
@@ -140,8 +139,8 @@ class _FindFacilityReviewCreatePostState
                           children: <Widget>[
                             RatingBarIndicator(
                               rating: _rating,
-                              itemBuilder: (context, index) => SvgPicture.asset(
-                                  "assets/icons/icon_star_on.svg"),
+                              itemBuilder: (context, index) =>
+                                  SvgPicture.asset("icon_star_on.svg"),
                               itemCount: 5,
                               itemSize: 20.0,
                               direction: Axis.horizontal,
@@ -181,11 +180,9 @@ class _FindFacilityReviewCreatePostState
   }
 
   void _onPressedChangeRating(BuildContext context) async {
-    WidgetsBinding.instance!.addPostFrameCallback ((_) async {
-      final result = await Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => FindFacilityReviewRating()));
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      final result = await Navigator.push(context,
+          MaterialPageRoute(builder: (context) => FindFacilityReviewRating()));
       if (result == null && _rating == -1) {
         Navigator.pop(context);
       } else {

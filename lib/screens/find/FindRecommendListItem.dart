@@ -120,7 +120,7 @@ class FindRecommendListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       YrkIconButton(
-                        icon: "assets/icons/icon_review_star_on.svg",
+                        icon: "icon_review_star_on.svg",
                         width: 16.0,
                         height: 16.0,
                         padding: EdgeInsets.only(right: 2.0),

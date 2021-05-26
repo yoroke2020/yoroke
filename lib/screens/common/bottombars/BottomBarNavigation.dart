@@ -5,17 +5,17 @@ import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 
 var navIconsOff = [
-  "assets/icons/icon_nav_home.svg",
-  "assets/icons/icon_nav_board.svg",
-  "assets/icons/icon_nav_find_facility.svg",
-  "assets/icons/icon_nav_information.svg",
+  "icon_nav_home.svg",
+  "icon_nav_board.svg",
+  "icon_nav_find_facility.svg",
+  "icon_nav_information.svg",
 ];
 
 var navIconsOn = [
-  "assets/icons/icon_nav_home_on.svg",
-  "assets/icons/icon_nav_board_on.svg",
-  "assets/icons/icon_nav_find_facility_on.svg",
-  "assets/icons/icon_nav_information_on.svg",
+  "icon_nav_home_on.svg",
+  "icon_nav_board_on.svg",
+  "icon_nav_find_facility_on.svg",
+  "icon_nav_information_on.svg",
 ];
 
 // ignore: must_be_immutable

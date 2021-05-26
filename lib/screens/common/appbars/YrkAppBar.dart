@@ -40,7 +40,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
     switch (type) {
       case YrkAppBarType.accountCircleAll:
         return YrkIconButton(
-          icon: "assets/icons/account_circle_default.svg",
+          icon: "account_circle_default.svg",
           iconSize: 32.0,
           padding: EdgeInsets.all(0),
           onTap: Scaffold.of(context).openDrawer,
@@ -49,7 +49,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       case YrkAppBarType.arrowBackOnly:
       case YrkAppBarType.arrowBackMidTitle:
         return YrkIconButton(
-          icon: "assets/icons/icon_arrow_back.svg",
+          icon: "icon_arrow_back.svg",
           iconSize: 24.0,
           onTap: Navigator.of(context).pop,
         );
@@ -99,19 +99,19 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
     if (searchButton)
       ret.add(
         YrkIconButton(
-          icon: "assets/icons/icon_search.svg",
+          icon: "icon_search.svg",
           onTap: () => _onSearchClicked(context),
         ),
       );
     if (createButton)
       ret.add(YrkIconButton(
-        icon: "assets/icons/icon_create.svg",
+        icon: "icon_create.svg",
         onTap: () => _onCreateClicked(context),
       ));
     if (notificationButton)
       ret.add(
         YrkIconButton(
-          icon: "assets/icons/icon_notifications_none.svg",
+          icon: "icon_notifications_none.svg",
           padding: EdgeInsets.only(left: 4.0),
           onTap: () => _onNoticeClicked(context),
         ),

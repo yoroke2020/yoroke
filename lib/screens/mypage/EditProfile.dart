@@ -35,7 +35,7 @@ class _EditProfileState extends State<EditProfile> {
                         child: YrkIconButton(
                           padding: EdgeInsets.zero,
                           iconSize: 188,
-                          icon: "assets/icons/account_circle_default.svg",
+                          icon: "account_circle_default.svg",
                         )),
                     YrkButton(
                       buttonType: ButtonType.chip,

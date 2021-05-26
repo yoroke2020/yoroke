@@ -76,8 +76,8 @@ class _InfoShareDetailState extends State<InfoShareDetail> {
                 padding: EdgeInsets.only(right: 16.0),
                 child: YrkIconButton(
                   icon: _isBookmarked
-                      ? "assets/icons/icon_bookmark_on.svg"
-                      : "assets/icons/icon_bookmark_off.svg",
+                      ? "icon_bookmark_on.svg"
+                      : "icon_bookmark_off.svg",
                   iconSize: 24,
                   onTap: () {
                     setState(() {
