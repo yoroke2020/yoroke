@@ -12,6 +12,7 @@ import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/home/HomeHistory.dart';
 
+import '../../main.dart';
 import 'HomeCardListItem.dart';
 import 'HomePopularCardListItem.dart';
 
@@ -111,9 +112,7 @@ class _HomeState extends State<Home> {
           onPushNavigator: widget.onPushNavigator,
           curPageItem: RootPageItem.home,
         ),
-        drawer: YrkDrawer(
-          onPushNavigator: widget.onPushNavigator,
-        ),
+        drawer: yrkDrawer,
         bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.home),
         body: ListView(children: <Widget>[
           Container(

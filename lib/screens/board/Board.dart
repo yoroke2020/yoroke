@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/main.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkDrawer.dart';
@@ -63,9 +64,7 @@ class _BoardState extends State<Board> {
         onPushNavigator: widget.onPushNavigator,
         curPageItem: RootPageItem.board,
       ),
-      drawer: YrkDrawer(
-        onPushNavigator: widget.onPushNavigator,
-      ),
+      drawer: yrkDrawer,
       bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.board),
       body: ListView(
         children: <Widget>[

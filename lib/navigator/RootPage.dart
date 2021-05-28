@@ -14,8 +14,6 @@ class RootPage extends StatelessWidget {
   final ValueChanged<YrkData>? onPushNavigator;
   @override
   Widget build(BuildContext context) {
-    BottomBarNavigation? bottomBarNavigation =
-        BottomBarNavigation.getInstance(RootPageItem.values[currentIndex!]);
     final List<Widget> children = [
       Home(onPushNavigator: onPushNavigator),
       Board(onPushNavigator: onPushNavigator),

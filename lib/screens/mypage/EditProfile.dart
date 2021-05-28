@@ -2,14 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:yoroke/screens/common/imagepickers/YrkImagePicker.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkTextField.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
-import 'package:yoroke/screens/post/PostCreateImageUpload.dart';
-import 'package:path/path.dart';
 
 import '../../main.dart';
 
@@ -22,12 +19,14 @@ class _EditProfileState extends State<EditProfile> {
   late String _nickname;
   late ImageProvider _image;
   TextEditingController _textEditingController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     _image = profileController.accountImage;
     _nickname = profileController.accountNickname;
     _textEditingController.text = _nickname;
+    // _textEditingController..selection = TextSelection.fromPosition(TextPosition(offset: _textEditingController.text.length));
   }
 
   @override
@@ -51,12 +50,17 @@ class _EditProfileState extends State<EditProfile> {
               Padding(
                   padding: EdgeInsets.all(
                       8.0 / 592 * MediaQuery.of(context).size.height),
-                  child: YrkButton(
-                      height: 24.0 / 592 * MediaQuery.of(context).size.height,
-                      buttonType: ButtonType.chip,
-                      label: '사진 변경하기',
-                      textStyle: YrkTextStyle(fontWeight: FontWeight.bold),
-                      onPressed: () => onPressedChangePhoto(context))),
+                  child: YrkImagePicker(
+                      icon: YrkButton(
+                        height: 24.0 / 592 * MediaQuery.of(context).size.height,
+                        buttonType: ButtonType.chip,
+                        label: '사진 변경하기',
+                        clickable: false,
+                        textStyle: YrkTextStyle(fontWeight: FontWeight.bold),
+                        onPressed: () {},
+                      ),
+                      numPicks: 1,
+                      onImagePickCallback: _onImagePickCallback)),
               Container(
                   margin: EdgeInsets.only(
                       top: 24.0 / 592 * MediaQuery.of(context).size.height,
@@ -83,39 +87,17 @@ class _EditProfileState extends State<EditProfile> {
                   textStyle: YrkTextStyle(fontWeight: FontWeight.bold),
                   buttonType: ButtonType.solid,
                   label: "저장",
-                  onPressed: () => _onPressedSave(context))
+                  onPressed: () => _onPressedSaveButton(context))
             ])));
   }
 
-  void onPressedChangePhoto(BuildContext context) async {
-    final pickedFiles = await Navigator.push(context,
-        MaterialPageRoute(builder: (context) => PostCreateImageUpload()));
-    if (pickedFiles == null) return;
-    print(pickedFiles);
-    List<File> files = pickedFiles as List<File>;
-    List<String> imageUrls = [];
-    if (files[0].path == "camera") {
-      final cameraFile =
-          await ImagePicker().getImage(source: ImageSource.camera);
-      imageUrls.add(await _onImagePickCallback(File(cameraFile!.path)));
-    } else {
-      for (int i = 0; i < files.length; i++)
-        imageUrls.add(await _onImagePickCallback(File(files[i].path)));
-    }
-
+  Future<void> _onImagePickCallback(List<File> imageFiles) async {
     setState(() {
-      _image = FileImage(File(imageUrls[0]));
+      _image = FileImage(imageFiles[0]);
     });
   }
 
-  Future<String> _onImagePickCallback(File file) async {
-    final appDocDir = await getApplicationDocumentsDirectory();
-    final copiedFile =
-        await file.copy('${appDocDir.path}/${basename(file.path)}');
-    return copiedFile.path.toString();
-  }
-
-  void _onPressedSave(BuildContext context) {
+  void _onPressedSaveButton(BuildContext context) {
     profileController.accountImage = _image;
     profileController.accountNickname = _textEditingController.text;
     Navigator.pop(context, true);

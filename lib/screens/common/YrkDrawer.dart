@@ -14,7 +14,7 @@ import '../../main.dart';
 class YrkDrawer extends StatefulWidget {
   YrkDrawer({
     Key? key,
-    required this.onPushNavigator,
+    this.onPushNavigator,
   });
 
   final ValueChanged<YrkData>? onPushNavigator;
@@ -109,6 +109,7 @@ class _YrkDrawerState extends State<YrkDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    print("build completed");
     return Drawer(
         child: Column(children: [
       Container(height: MediaQuery.of(context).padding.top),

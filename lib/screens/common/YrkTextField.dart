@@ -51,6 +51,7 @@ class YrkTextField extends StatelessWidget {
     //
     this.textAlign = TextAlign.start,
     this.style,
+
   }) : super(key: key);
 
   get getInputDecoration {
@@ -156,6 +157,7 @@ class YrkTextField extends StatelessWidget {
       width: width,
       height: height,
       child: TextField(
+        textAlign: textAlign,
         focusNode: focusNode,
         key: key,
         obscureText: obscureText ?? false,
