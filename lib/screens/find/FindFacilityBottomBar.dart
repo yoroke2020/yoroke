@@ -102,7 +102,7 @@ class _FindFacilityBottomBarState extends State<FindFacilityBottomBar> {
   }
 
   void _onShare(BuildContext context) async {
-    final RenderBox box = context.findRenderObject() as RenderBox;
+    context.findRenderObject() as RenderBox;
     await Share.share("URL");
   }
 

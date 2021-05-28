@@ -6,7 +6,6 @@ import 'package:yoroke/screens/board/BoardJobFinding.dart';
 import 'package:yoroke/screens/board/BoardQna.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/post/Post.dart';
-import 'package:yoroke/screens/post/PostCreate.dart';
 
 enum RootPageItem { home, board, find, info }
 

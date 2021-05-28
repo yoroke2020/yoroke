@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/main.dart';
-import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/notice/Notice.dart';
 import 'package:yoroke/screens/post/PostCreate.dart';
@@ -181,7 +179,6 @@ class _YrkAppBarState extends State<YrkAppBar> {
     });
   }
 
-  @override
   Size get preferredSize => Size.fromHeight(48.0);
 
   @override
@@ -209,6 +206,4 @@ class _YrkAppBarState extends State<YrkAppBar> {
           )),
     );
   }
-
-  _onTapAccountImage(BuildContext context) async {}
 }
