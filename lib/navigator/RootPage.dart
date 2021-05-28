@@ -22,9 +22,6 @@ class RootPage extends StatelessWidget {
       Find(onPushNavigator: onPushNavigator),
       Info(onPushNavigator: onPushNavigator)
     ];
-    return Scaffold(
-        backgroundColor: const Color(0xffffffff),
-        body: children[currentIndex!],
-        bottomNavigationBar: bottomBarNavigation);
+    return children[currentIndex!];
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/TestPage.dart';
 import 'package:yoroke/screens/common/YrkDrawer.dart';
+import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkListItem.dart';
 import 'package:yoroke/screens/common/YrkPage.dart';
@@ -101,6 +103,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+            onPressed: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => TestPage()))),
         appBar: YrkAppBar(
           type: YrkAppBarType.accountCircleAll,
           onPushNavigator: widget.onPushNavigator,
@@ -108,8 +113,8 @@ class _HomeState extends State<Home> {
         ),
         drawer: YrkDrawer(
           onPushNavigator: widget.onPushNavigator,
-          context: context,
         ),
+        bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.home),
         body: ListView(children: <Widget>[
           Container(
               height: 120.0,

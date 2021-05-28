@@ -33,12 +33,13 @@ class _PostCreateImageUploadState extends State<PostCreateImageUpload> {
   bool _onScroll(ScrollNotification scroll) {
     if (scroll.metrics.pixels / scroll.metrics.maxScrollExtent > 0.33 &&
         currentPage != lastPage) {
-      return _loadNewAssets() as bool;
+      _loadNewAssets();
+      return true;
     }
     return false;
   }
 
-  Future<bool?> _loadNewAssets() async {
+  Future<void> _loadNewAssets() async {
     lastPage = currentPage;
     var result = await PhotoManager.requestPermission();
     if (result) {
@@ -74,9 +75,7 @@ class _PostCreateImageUploadState extends State<PostCreateImageUpload> {
         _assetSelects.addAll(List<bool>.filled(assetFiles.length, false));
         currentPage++;
       });
-      return true;
-    } else
-      return false;
+    }
   }
 
   @override

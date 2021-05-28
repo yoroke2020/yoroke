@@ -89,7 +89,6 @@ class YrkQuillImageButton extends StatelessWidget {
       return null;
     }
 
-    // Take first, because we don't allow picking multiple files.
     final fileName = result.files.first.name!;
     final file = File(fileName);
 

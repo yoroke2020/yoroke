@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yoroke/controllers/ProfileController.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'navigator/PageItem.dart';
@@ -7,6 +8,8 @@ import 'navigator/TabNavigator.dart';
 void main() {
   runApp(MyApp());
 }
+
+final ProfileController profileController = ProfileController();
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
