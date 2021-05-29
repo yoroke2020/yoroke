@@ -392,12 +392,12 @@ class _PostState extends State<Post> {
 
   void _setMbsList() {
     _mbsLabelList = _isMyPost
-        ? YrkMbsListData.getLabelList(SubPageItem.post).sublist(3)
-        : YrkMbsListData.getLabelList(SubPageItem.post);
+        ? YrkMbsListData.getLabelList("post").sublist(3)
+        : YrkMbsListData.getLabelList("post");
 
     _mbsImageList = _isMyPost
-        ? YrkMbsListData.getImageList(SubPageItem.post).sublist(3)
-        : YrkMbsListData.getImageList(SubPageItem.post);
+        ? YrkMbsListData.getImageList("post").sublist(3)
+        : YrkMbsListData.getImageList("post");
   }
 
   void _onTapBodyLike() {

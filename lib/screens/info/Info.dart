@@ -84,7 +84,6 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
             YrkAppBar(
               type: YrkAppBarType.TextSearchNotification,
               label: "정보공유",
-              onPushNavigator: widget.onPushNavigator,
             ),
             Container(
                 height: 48.0,

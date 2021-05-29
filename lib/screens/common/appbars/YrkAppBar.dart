@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/notice/Notice.dart';
 import 'package:yoroke/screens/post/PostCreate.dart';
@@ -21,7 +20,6 @@ enum YrkAppBarType {
 class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
   YrkAppBar(
       {Key? key,
-      this.onPushNavigator,
       this.curPageItem,
       this.label = "",
       required this.type,
@@ -30,7 +28,6 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
           key: key,
         );
 
-  final ValueChanged<YrkData>? onPushNavigator;
   final curPageItem;
   final String? label;
   final YrkAppBarType type;
@@ -128,8 +125,8 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
           context,
           MaterialPageRoute(
               builder: (context) => Search(
-                  data: new YrkData(prevPageItem: curPageItem),
-                  onPushNavigator: onPushNavigator)));
+                    data: new YrkData(prevPageItem: curPageItem),
+                  )));
     });
   }
 

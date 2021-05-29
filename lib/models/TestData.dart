@@ -1,5 +1,3 @@
-import 'package:yoroke/navigator/PageItem.dart';
-
 List<String> testCardImage = [
   "assets/images/sample_image.png",
   "assets/images/sample_image.png",
@@ -253,10 +251,10 @@ class PostData {
 
   late String title;
   late String body;
-  late SubPageItem category;
+  late String category;
   late int categoryIndex;
 }
 
-PostData tempPostData = PostData("", "", SubPageItem.testPage, -1);
+PostData tempPostData = PostData("", "", "testPage", -1);
 
 List<PostData> testPostData = <PostData>[];

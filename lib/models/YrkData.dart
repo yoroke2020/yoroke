@@ -1,5 +1,3 @@
-import 'package:yoroke/navigator/PageItem.dart';
-
 class YrkData {
   YrkData({
     this.nextPageItem,
@@ -16,7 +14,7 @@ class YrkData {
     this.i4,
   });
 
-  final SubPageItem? nextPageItem; //SubItem
+  final String? nextPageItem; //SubItem
   final prevPageItem;
 
   //TODO: 추후 API 관련 parameter로 변경

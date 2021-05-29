@@ -14,11 +14,9 @@ import 'package:yoroke/screens/info/InfoShareCardListItem.dart';
 import 'SearchRecentKeywordListItem.dart';
 
 class Search extends StatefulWidget {
-  Search({Key? key, required this.data, this.onPushNavigator})
-      : super(key: key);
+  Search({Key? key, required this.data}) : super(key: key);
 
   final YrkData? data;
-  final ValueChanged<YrkData>? onPushNavigator;
 
   @override
   _SearchState createState() => _SearchState();
@@ -47,7 +45,6 @@ class _SearchState extends State<Search> {
   @override
   initState() {
     data = widget.data;
-    onPushNavigator = widget.onPushNavigator;
     searchTextController = TextEditingController();
     super.initState();
   }
@@ -234,7 +231,7 @@ class _SearchState extends State<Search> {
     }
   }
 
-  List<Widget> _buildBoardYrkListView(SubPageItem subPageItem) {
+  List<Widget> _buildBoardYrkListView(subPageItem) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(Container(
@@ -247,16 +244,16 @@ class _SearchState extends State<Search> {
     return list;
   }
 
-  List<Widget> _buildList(int pageIndex, SubPageItem subPageItem,
-      ValueChanged<YrkData> onPushNavigator) {
+  List<Widget> _buildList(
+      int pageIndex, subPageItem, ValueChanged<YrkData> onPushNavigator) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
-        onPushNavigator: onPushNavigator,
+        // onPushNavigator: onPushNavigator,
         pageType: subPageItem,
-        nextPageItem: SubPageItem.post,
+        nextPageItem: "post",
       ));
     }
     return list;
@@ -265,13 +262,13 @@ class _SearchState extends State<Search> {
   List<Widget> _buildSearchResults() {
     if (this.selectedCategoryIndex == 0) {
       return [
-        ..._buildBoardYrkListView(SubPageItem.boardJobFinding),
-        ..._buildBoardYrkListView(SubPageItem.boardQna)
+        ..._buildBoardYrkListView("boardJobFinding"),
+        ..._buildBoardYrkListView("boardQna")
       ];
     } else if (this.selectedCategoryIndex == 1) {
-      return _buildBoardYrkListView(SubPageItem.boardQna);
+      return _buildBoardYrkListView("boardQna");
     } else if (this.selectedCategoryIndex == 2) {
-      return _buildBoardYrkListView(SubPageItem.boardJobFinding);
+      return _buildBoardYrkListView("boardJobFinding");
     } else if (this.selectedCategoryIndex == 3) {
       return <Widget>[];
     } else {

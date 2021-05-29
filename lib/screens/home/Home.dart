@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  List<Widget> _yrkListView(SubPageItem subPageItem) {
+  List<Widget> _yrkListView(subPageItem) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(ListView(
@@ -40,16 +40,16 @@ class _HomeState extends State<Home> {
     return list;
   }
 
-  List<Widget> _homePopularList(int pageIndex, SubPageItem subPageItem,
-      ValueChanged<YrkData> onPushNavigator) {
+  List<Widget> _homePopularList(
+      int pageIndex, subPageItem, ValueChanged<YrkData> onPushNavigator) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
-        onPushNavigator: onPushNavigator,
+        // onPushNavigator: onPushNavigator,
         pageType: subPageItem,
-        nextPageItem: SubPageItem.post,
+        nextPageItem: "post",
       ));
     }
     return list;
@@ -103,7 +103,6 @@ class _HomeState extends State<Home> {
     return Scaffold(
         appBar: YrkAppBar(
           type: YrkAppBarType.accountCircleAll,
-          onPushNavigator: widget.onPushNavigator,
           curPageItem: RootPageItem.home,
         ),
         drawer: YrkDrawer(
@@ -137,7 +136,7 @@ class _HomeState extends State<Home> {
                   fontSize: 16.0),
               clickable: true,
               onPushNavigator: onPushNavigator,
-              nextSubPageItem: SubPageItem.boardQna,
+              // nextSubPageItem: SubPageItem.boardQna,
               customIcon: Row(
                 children: [
                   YrkIconButton(
@@ -163,7 +162,7 @@ class _HomeState extends State<Home> {
                 ],
               )),
           YrkPage(
-            page: _yrkListView(SubPageItem.post),
+            page: _yrkListView("post"),
             controller: popularPageController,
             isIndicatorEnabled: true,
           ),
@@ -177,7 +176,7 @@ class _HomeState extends State<Home> {
                   fontSize: 16.0),
               clickable: true,
               onPushNavigator: onPushNavigator,
-              nextSubPageItem: SubPageItem.boardQna,
+              // nextSubPageItem: "boardQna",
               customIcon: TextButton(
                   child: Text("전체보기",
                       style: const TextStyle(

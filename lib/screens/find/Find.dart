@@ -120,7 +120,6 @@ class _FindState extends State<Find> {
                           type: YrkAppBarType.TextSearch,
                           isStatusBar: false,
                           curPageItem: RootPageItem.find,
-                          onPushNavigator: widget.onPushNavigator,
                           label: "시설찾기"),
                       bottom: PreferredSize(
                           preferredSize: Size.fromHeight(144.0),

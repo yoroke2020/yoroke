@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class BoardCardListItem extends StatelessWidget {
@@ -17,13 +18,22 @@ class BoardCardListItem extends StatelessWidget {
   final ValueChanged<YrkData>? onPushNavigator;
   final bool isBorder;
 
+  void _onCardClicked(BuildContext context) async {
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => BoardReview(
+                      data: new YrkData(
+                    i1: index,
+                  ))));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () => onPushNavigator!(new YrkData(
-              nextPageItem: SubPageItem.boardReview,
-              i1: index,
-            )),
+        onTap: () => _onCardClicked(context),
         child: Container(
             margin: index == 0
                 ? EdgeInsets.only(left: 17.0)

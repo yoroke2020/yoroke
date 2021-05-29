@@ -10,11 +10,8 @@ import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'BoardQnaCardListItem.dart';
 
-
 class BoardQna extends StatefulWidget {
-  BoardQna({required this.onPushNavigator});
-
-  final ValueChanged<YrkData>? onPushNavigator;
+  BoardQna();
 
   @override
   _BoardQnaState createState() => _BoardQnaState();
@@ -66,8 +63,7 @@ class _BoardQnaState extends State<BoardQna> {
             children: <Widget>[
               YrkAppBar(
                 type: YrkAppBarType.arrowBackAll,
-                onPushNavigator: widget.onPushNavigator!,
-                curPageItem: SubPageItem.boardQna,
+                curPageItem: "boardQna",
                 isStatusBar: false,
               ),
               YrkScrollOpacity(
@@ -78,32 +74,31 @@ class _BoardQnaState extends State<BoardQna> {
                       height: 48.0,
                       child: Text("고민/질문",
                           style:
-                          const YrkTextStyle(fontWeight: FontWeight.w700),
+                              const YrkTextStyle(fontWeight: FontWeight.w700),
                           textAlign: TextAlign.left)))
             ],
           ),
         ),
         SliverToBoxAdapter(
             child: Container(
-              height: 232.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  return BoardQnaCardListItem();
-                },
-                itemCount: _boardQnaCardListItemCount,
-              ),
-            )),
+          height: 232.0,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext context, int index) {
+              return BoardQnaCardListItem();
+            },
+            itemCount: _boardQnaCardListItemCount,
+          ),
+        )),
         SliverList(
           delegate:
-          SliverChildBuilderDelegate((BuildContext context, int index) {
+              SliverChildBuilderDelegate((BuildContext context, int index) {
             return YrkPageListItem(
               pageIndex: 0,
               listIndex: 0,
               //TODO: Change it to index when data is fully implemented
-              pageType: SubPageItem.boardQna,
-              nextPageItem: SubPageItem.post,
-              onPushNavigator: widget.onPushNavigator,
+              pageType: "boardQna",
+              nextPageItem: "post",
             );
           }, childCount: _boardQnaItemListCount),
         )

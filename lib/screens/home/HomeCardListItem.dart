@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/board/BoardReview.dart';
 
 class HomeCardListItem extends StatelessWidget {
   HomeCardListItem(
@@ -16,12 +16,19 @@ class HomeCardListItem extends StatelessWidget {
   final int index;
   final ValueChanged<YrkData>? onPushNavigator;
 
+  void _onCardItemClicked(BuildContext context) async {
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => BoardReview(data: new YrkData())));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () => onPushNavigator!(new YrkData(
-          nextPageItem: SubPageItem.boardReview,
-            )),
+        onTap: () => _onCardItemClicked(context),
         child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

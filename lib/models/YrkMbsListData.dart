@@ -52,13 +52,13 @@ class YrkMbsListData {
 
   static List<String> getLabelList(pageType) {
     switch (pageType) {
-      case SubPageItem.post:
+      case "post":
         return _postLabelList;
-      case SubPageItem.boardReview:
+      case "boardReview":
         return _boardReviewLabelList;
-      case SubPageItem.boardQna:
+      case "boardQna":
         return _boardQnaLabelList;
-      case SubPageItem.boardJobFinding:
+      case "boardJobFinding":
         return _boardJobFindingLabelList;
       case "search":
         return _searchLabelList;
@@ -69,7 +69,7 @@ class YrkMbsListData {
 
   static List<String> getImageList(pageType) {
     switch (pageType) {
-      case SubPageItem.post:
+      case "post":
         return _postImageList;
       default:
         return <String>[];
@@ -78,11 +78,11 @@ class YrkMbsListData {
 
   static String getTitleList(pageType) {
     switch (pageType) {
-      case SubPageItem.boardReview:
+      case "boardReview":
         return _boardReviewTitle;
-      case SubPageItem.boardQna:
+      case "boardQna":
         return _boardQnaTitle;
-      case SubPageItem.boardJobFinding:
+      case "boardJobFinding":
         return _boardJobFindingTitle;
       default:
         return "";

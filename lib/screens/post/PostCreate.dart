@@ -55,7 +55,7 @@ class _PostCreateState extends State<PostCreate> {
   late List<int> _mbsLabelCountPerTitleList;
 
   // Selected Category Index & Text from ModalBottomSheet
-  SubPageItem _selectedCategory = SubPageItem.testPage;
+  String _selectedCategory = "testPage";
   int _selectedCategoryIndex = -1;
   late String _selectedCategoryText;
 
@@ -115,10 +115,10 @@ class _PostCreateState extends State<PostCreate> {
   Future<void> _loadFromAssets() async {
     _selectedCategory = tempPostData.category;
     _selectedCategoryIndex = tempPostData.categoryIndex;
-    _isCategorySelected = _selectedCategory != SubPageItem.testPage;
+    _isCategorySelected = _selectedCategory != "testPage";
     if (_isCategorySelected) {
       _pageType = _selectedCategory;
-      _selectedCategoryText = _selectedCategory != SubPageItem.boardReview
+      _selectedCategoryText = _selectedCategory != "boardReview"
           ? YrkMbsListData.getLabelList(
               _selectedCategory)[_selectedCategoryIndex]
           : YrkMbsListData.getLabelList(
@@ -150,19 +150,19 @@ class _PostCreateState extends State<PostCreate> {
     _mbsType = YrkMbsType.radioButton;
     if (_pageType == RootPageItem.home || _pageType == RootPageItem.board) {
       _mbsTitleList = [
-        YrkMbsListData.getTitleList(SubPageItem.boardReview),
-        YrkMbsListData.getTitleList(SubPageItem.boardQna),
-        YrkMbsListData.getTitleList(SubPageItem.boardJobFinding),
+        YrkMbsListData.getTitleList("boardReview"),
+        YrkMbsListData.getTitleList("boardQna"),
+        YrkMbsListData.getTitleList("boardJobFinding"),
       ];
       _mbsLabelList = [
-        YrkMbsListData.getLabelList(SubPageItem.boardReview),
-        YrkMbsListData.getLabelList(SubPageItem.boardQna),
-        YrkMbsListData.getLabelList(SubPageItem.boardJobFinding)
+        YrkMbsListData.getLabelList("boardReview"),
+        YrkMbsListData.getLabelList("boardQna"),
+        YrkMbsListData.getLabelList("boardJobFinding")
       ].expand((element) => element).toList();
       _mbsLabelCountPerTitleList = [
-        YrkMbsListData.getLabelList(SubPageItem.boardReview).length,
-        YrkMbsListData.getLabelList(SubPageItem.boardQna).length,
-        YrkMbsListData.getLabelList(SubPageItem.boardJobFinding).length,
+        YrkMbsListData.getLabelList("boardReview").length,
+        YrkMbsListData.getLabelList("boardQna").length,
+        YrkMbsListData.getLabelList("boardJobFinding").length,
       ];
     } else {
       _mbsLabelList = YrkMbsListData.getLabelList(_pageType);
@@ -356,25 +356,25 @@ class _PostCreateState extends State<PostCreate> {
     if (_pageType == RootPageItem.home || _pageType == RootPageItem.board) {
       if (index < _mbsLabelCountPerTitleList[0]) {
         _selectedCategoryIndex = index;
-        _selectedCategory = SubPageItem.boardReview;
+        _selectedCategory = "boardReview";
         _selectedCategoryText = _mbsLabelList[index] + " 후기";
       } else if (index >= _mbsLabelCountPerTitleList[0] &&
           index <
               _mbsLabelCountPerTitleList[0] + _mbsLabelCountPerTitleList[1]) {
         _selectedCategoryIndex = index - _mbsLabelCountPerTitleList[0];
-        _selectedCategory = SubPageItem.boardQna;
+        _selectedCategory = "boardQna";
         _selectedCategoryText = _mbsLabelList[index];
       } else {
         _selectedCategoryIndex = index -
             _mbsLabelCountPerTitleList[0] -
             _mbsLabelCountPerTitleList[1];
-        _selectedCategory = SubPageItem.boardJobFinding;
+        _selectedCategory = "boardJobFinding";
         _selectedCategoryText = _mbsLabelList[index];
       }
     } else {
       _selectedCategoryIndex = index;
       _selectedCategory = _pageType;
-      if (_pageType == SubPageItem.boardReview)
+      if (_pageType == "boardReview")
         _selectedCategoryText = _mbsLabelList[index] + " 후기";
       else
         _selectedCategoryText = _mbsLabelList[index];
@@ -395,7 +395,7 @@ class _PostCreateState extends State<PostCreate> {
         _selectedCategory,
         _selectedCategoryIndex);
     testPostData.add(data);
-    tempPostData = PostData("", "", SubPageItem.testPage, -1);
+    tempPostData = PostData("", "", "testPage", -1);
     Navigator.pop(context);
   }
 

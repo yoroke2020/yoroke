@@ -30,7 +30,7 @@ class _BoardState extends State<Board> {
     super.initState();
   }
 
-  List<Widget> _buildBoardYrkListView(SubPageItem subPageItem) {
+  List<Widget> _buildBoardYrkListView(subPageItem) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(ListView(
@@ -40,15 +40,15 @@ class _BoardState extends State<Board> {
     return list;
   }
 
-  List<Widget> _buildList(int pageIndex, SubPageItem subPageItem) {
+  List<Widget> _buildList(int pageIndex, subPageItem) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
         pageType: subPageItem,
-        nextPageItem: SubPageItem.post,
-        onPushNavigator: widget.onPushNavigator,
+        nextPageItem: "post",
+        // onPushNavigator: widget.onPushNavigator,
       ));
     }
     return list;
@@ -59,7 +59,6 @@ class _BoardState extends State<Board> {
     return Scaffold(
       appBar: YrkAppBar(
         type: YrkAppBarType.accountCircleAll,
-        onPushNavigator: widget.onPushNavigator,
         curPageItem: RootPageItem.board,
       ),
       drawer: YrkDrawer(
@@ -72,7 +71,7 @@ class _BoardState extends State<Board> {
             title: "후기",
             clickable: true,
             onPushNavigator: widget.onPushNavigator,
-            nextSubPageItem: SubPageItem.boardReview,
+            // nextSubPageItem: SubPageItem.boardReview,
           ),
           Container(
             height: 100.0,
@@ -96,10 +95,10 @@ class _BoardState extends State<Board> {
             title: "고민/질문",
             clickable: true,
             onPushNavigator: widget.onPushNavigator,
-            nextSubPageItem: SubPageItem.boardQna,
+            // nextSubPageItem: SubPageItem.boardQna,
           ),
           YrkPage(
-            page: _buildBoardYrkListView(SubPageItem.boardQna),
+            page: _buildBoardYrkListView("boardQna"),
             controller: _qnaPageController,
             isIndicatorEnabled: true,
           ),
@@ -107,10 +106,10 @@ class _BoardState extends State<Board> {
             title: "구인구직",
             clickable: true,
             onPushNavigator: widget.onPushNavigator,
-            nextSubPageItem: SubPageItem.boardJobFinding,
+            // nextSubPageItem: SubPageItem.boardJobFinding,
           ),
           YrkPage(
-              page: _buildBoardYrkListView(SubPageItem.boardJobFinding),
+              page: _buildBoardYrkListView("boardJobFinding"),
               controller: _jobFindingPageController,
               isIndicatorEnabled: true)
         ],
