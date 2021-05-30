@@ -257,6 +257,5 @@ class PostData {
   late int categoryIndex;
 }
 
-PostData tempPostData = PostData("", "", SubPageItem.testPage, -1);
-
+List<PostData> tempPostData = [];
 List<PostData> testPostData = <PostData>[];
