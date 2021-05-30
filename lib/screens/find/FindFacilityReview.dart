@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkSelectFilter.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/controllers/YrkSelectFilterController.dart';
 import 'package:yoroke/screens/find/FindFacilityReviewPostCreate.dart';
-import 'package:yoroke/screens/find/FindFacilityReviewRating.dart';
 
 import 'FindFacilityReviewComment.dart';
 

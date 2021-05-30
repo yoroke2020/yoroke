@@ -22,7 +22,7 @@ class YrkTextField extends StatelessWidget {
   final Color? borderColor;
 
   final bool? isPrivate;
-  final bool? isMultiline;
+  final bool isMultiline;
 
   final TextInputAction? textInputAction;
   final void Function(String)? handleSubmission;
@@ -51,6 +51,7 @@ class YrkTextField extends StatelessWidget {
     //
     this.textAlign = TextAlign.start,
     this.style,
+
   }) : super(key: key);
 
   get getInputDecoration {
@@ -156,6 +157,7 @@ class YrkTextField extends StatelessWidget {
       width: width,
       height: height,
       child: TextField(
+        textAlign: textAlign,
         focusNode: focusNode,
         key: key,
         obscureText: obscureText ?? false,
@@ -167,9 +169,10 @@ class YrkTextField extends StatelessWidget {
         onChanged: handleChange,
         controller: controller,
         keyboardType:
-            isMultiline! ? TextInputType.multiline : TextInputType.text,
+            isMultiline ? TextInputType.multiline : TextInputType.text,
         minLines: 1,
-        maxLines: isMultiline! ? null : 1,
+        maxLines: isMultiline ? null : 1,
+        style: style,
       ),
     );
   }

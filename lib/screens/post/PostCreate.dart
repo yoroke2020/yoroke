@@ -4,23 +4,21 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/models/documents/document.dart';
+import 'package:flutter_quill/models/documents/nodes/embed.dart';
 import 'package:flutter_quill/widgets/controller.dart';
 import 'package:flutter_quill/widgets/editor.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/models/YrkMbsListData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/imagepickers/YrkImagePicker.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
-import 'package:yoroke/screens/common/buttons/YrkQuillIconButton.dart';
 import 'package:yoroke/screens/common/mbs/YrkModelBottomSheet.dart';
 import 'package:yoroke/screens/common/YrkTextField.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
-import 'package:path/path.dart';
 
 class PostCreate extends StatefulWidget {
   PostCreate({required this.data});
@@ -323,12 +321,12 @@ class _PostCreateState extends State<PostCreate> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    YrkQuillImageButton(
-                      icon: "icon_photo_library.svg",
-                      imageSource: ImageSource.gallery,
-                      controller: _bodyController,
-                      onImagePickCallback: _onImagePickCallback,
-                    ),
+                    YrkImagePicker(
+                        icon: YrkIconButton(
+                            icon: 'icon_photo_library.svg',
+                            width: 24.0,
+                            height: 24.0),
+                        onImagePickCallback: _onImagePickCallback),
                     Spacer(),
                     YrkButton(
                       buttonType: ButtonType.text,
@@ -379,13 +377,6 @@ class _PostCreateState extends State<PostCreate> {
       else
         _selectedCategoryText = _mbsLabelList[index];
     }
-  }
-
-  Future<String> _onImagePickCallback(File file) async {
-    final appDocDir = await getApplicationDocumentsDirectory();
-    final copiedFile =
-        await file.copy('${appDocDir.path}/${basename(file.path)}');
-    return copiedFile.path.toString();
   }
 
   void _onPressedRegister(BuildContext context) {
@@ -489,5 +480,20 @@ class _PostCreateState extends State<PostCreate> {
             actionsOverflowButtonSpacing: 4.0,
           );
         });
+  }
+
+  Future<void> _onImagePickCallback(List<File> imageFiles) async {
+    final index = _bodyController.selection.baseOffset;
+    final length = _bodyController.selection.extentOffset - index;
+
+    if (Platform.isAndroid || Platform.isIOS) {
+      for (int i = imageFiles.length - 1; i >= 0; i--) {
+        _bodyController.replaceText(
+            index, length, BlockEmbed.image(imageFiles[i].path), null);
+      }
+    } else {
+      _bodyController.replaceText(
+          index, length, BlockEmbed.image(imageFiles[0].path), null);
+    }
   }
 }

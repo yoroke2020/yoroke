@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/main.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
-import 'package:yoroke/screens/common/YrkDrawer.dart';
 import 'package:yoroke/screens/common/YrkListItem.dart';
 import 'package:yoroke/screens/common/YrkPage.dart';
 import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
+import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
 import 'BoardCardListItem.dart';
 
@@ -62,10 +63,8 @@ class _BoardState extends State<Board> {
         onPushNavigator: widget.onPushNavigator,
         curPageItem: RootPageItem.board,
       ),
-      drawer: YrkDrawer(
-        onPushNavigator: widget.onPushNavigator,
-        context: context,
-      ),
+      drawer: yrkDrawer,
+      bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.board),
       body: ListView(
         children: <Widget>[
           YrkTabHeaderView(

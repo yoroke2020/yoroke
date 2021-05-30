@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTabBar.dart';
 
@@ -112,6 +114,7 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
                 ))
           ])),
       body: TabBarView(controller: _tabController, children: _cardGrids),
+      bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.info),
     );
   }
 }
