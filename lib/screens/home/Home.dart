@@ -1,35 +1,76 @@
 import 'package:flutter/material.dart';
+import 'package:quiver/iterables.dart';
+import 'package:yoroke/core/model/YrkBlock.dart';
+import 'package:yoroke/core/model/YrkModel.dart';
+import 'package:yoroke/core/model/YrkRequestContext.dart';
+import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/TestPage.dart';
-import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
-import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkListItem.dart';
+import 'package:yoroke/screens/common/YrkListItemV2.dart';
 import 'package:yoroke/screens/common/YrkPage.dart';
 import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
+import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/home/HomeHistory.dart';
+import 'package:yoroke/screens/home/model/HomeBlock.dart';
+import 'package:yoroke/screens/home/model/PopularPostApiResponse.dart';
+import 'package:yoroke/screens/home/model/PopularPostBlock.dart';
 
 import '../../main.dart';
 import 'HomeCardListItem.dart';
 import 'HomePopularCardListItem.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatefulWidget implements Screen<HomeBlock> {
   Home({required this.onPushNavigator});
 
   final ValueChanged<YrkData>? onPushNavigator;
+  // FIXME get reqCtx from previous screen
+  final YrkRequestContext reqCtx = YrkRequestContext();
 
   @override
   _HomeState createState() => _HomeState();
+
+  @override
+  HomeBlock makeBlock(reqCtx) {
+    // TODO use request context to make block..
+    // reqCtx.userCtx.name...
+
+    HomeBlock homeBlock = HomeBlock();
+    homeBlock.blocks = <YrkBlock>[];
+    PopularPostBlock popularPostBlock = PopularPostBlock();
+
+    // (example) data from API
+    Map<String, dynamic> jsonResponse = TestPopularPostData().jsonResponse;
+    // deserialize api response: from json to class
+    PopularPostApiResponse apiResponse =
+        PopularPostApiResponse.fromJson(jsonResponse);
+    // make a model list
+    List<YrkListItemV2Model> items = apiResponse.popularPost;
+    // make a widget block
+    popularPostBlock.items = items;
+    popularPostBlock.title = "인기 게시글";
+    // make a top block
+    homeBlock.blocks!.add(popularPostBlock);
+
+    return homeBlock;
+  }
+
+  @override
+  HomeBlock get block => this.block;
 }
 
 class _HomeState extends State<Home> {
   ValueChanged<YrkData>? onPushNavigator;
+  HomeBlock? homeBlock;
 
   @override
   initState() {
     onPushNavigator = widget.onPushNavigator;
+    homeBlock = widget.makeBlock(widget.reqCtx);
     super.initState();
   }
 
@@ -42,7 +83,47 @@ class _HomeState extends State<Home> {
     return list;
   }
 
+  List<Widget> _buildPopularPost(
+      SubPageItem subPageItem, PopularPostBlock block) {
+    final int pageItemLimit = 4;
+
+    List<YrkModel> items = block.items!;
+    List<Widget> pageListItems = items
+        .cast<YrkListItemV2Model>()
+        .map((e) => _buildPageListItem(subPageItem, onPushNavigator!, e))
+        .toList();
+
+    return partition(pageListItems, pageItemLimit)
+        .map((list) => ListView(children: [...list]))
+        .toList();
+  }
+
+  Widget _buildPageListItem(SubPageItem subPageItem,
+      ValueChanged<YrkData> onPushNavigator, YrkListItemV2Model item) {
+    return YrkPageListItemV2(
+      onPushNavigator: onPushNavigator,
+      pageType: subPageItem,
+      nextPageItem: SubPageItem.post,
+      model: item,
+    );
+  }
+
   List<Widget> _homePopularList(int pageIndex, SubPageItem subPageItem,
+      ValueChanged<YrkData> onPushNavigator) {
+    List<Widget> list = <Widget>[];
+    for (int i = 0; i < 4; i++) {
+      list.add(YrkPageListItem(
+        pageIndex: pageIndex,
+        listIndex: i,
+        onPushNavigator: onPushNavigator,
+        pageType: subPageItem,
+        nextPageItem: SubPageItem.post,
+      ));
+    }
+    return list;
+  }
+
+  List<Widget> _homePopularListV2(int pageIndex, SubPageItem subPageItem,
       ValueChanged<YrkData> onPushNavigator) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
@@ -165,8 +246,16 @@ class _HomeState extends State<Home> {
                   )
                 ],
               )),
+          // YrkPage(
+          //   page: _yrkListView(SubPageItem.post),
+          //   controller: popularPageController,
+          //   isIndicatorEnabled: true,
+          // ),
           YrkPage(
-            page: _yrkListView(SubPageItem.post),
+            page: _buildPopularPost(
+                SubPageItem.post,
+                homeBlock!.findFirstBlockWhere('PopularPostBlock')
+                    as PopularPostBlock),
             controller: popularPageController,
             isIndicatorEnabled: true,
           ),
