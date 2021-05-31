@@ -1,6 +1,7 @@
 import UIKit
 import Flutter
 import CoreLocation
+import Firebase
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -19,7 +20,7 @@ import CoreLocation
                   break
               }
           }
-
+          FirebaseApp.configure()
           GeneratedPluginRegistrant.register(with: self)
           return super.application(application, didFinishLaunchingWithOptions: launchOptions)
       }
