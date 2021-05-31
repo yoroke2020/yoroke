@@ -5,17 +5,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 
-class PostCreateImageUpload extends StatefulWidget {
+class YrkMobileImageGrids extends StatefulWidget {
+  YrkMobileImageGrids({this.numPicks = 10});
+
+  final int numPicks;
+
   @override
-  _PostCreateImageUploadState createState() => _PostCreateImageUploadState();
+  _YrkMobileImageGridsState createState() => _YrkMobileImageGridsState();
 }
 
-class _PostCreateImageUploadState extends State<PostCreateImageUpload> {
+class _YrkMobileImageGridsState extends State<YrkMobileImageGrids> {
   List<Widget> _assetWidgets = [];
   List<File> _assetFiles = [];
   List<bool> _assetSelects = [];
@@ -33,12 +38,13 @@ class _PostCreateImageUploadState extends State<PostCreateImageUpload> {
   bool _onScroll(ScrollNotification scroll) {
     if (scroll.metrics.pixels / scroll.metrics.maxScrollExtent > 0.33 &&
         currentPage != lastPage) {
-      return _loadNewAssets() as bool;
+      _loadNewAssets();
+      return true;
     }
     return false;
   }
 
-  Future<bool?> _loadNewAssets() async {
+  Future<void> _loadNewAssets() async {
     lastPage = currentPage;
     var result = await PhotoManager.requestPermission();
     if (result) {
@@ -74,9 +80,7 @@ class _PostCreateImageUploadState extends State<PostCreateImageUpload> {
         _assetSelects.addAll(List<bool>.filled(assetFiles.length, false));
         currentPage++;
       });
-      return true;
-    } else
-      return false;
+    }
   }
 
   @override
@@ -133,7 +137,7 @@ class _PostCreateImageUploadState extends State<PostCreateImageUpload> {
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                       onTap: () =>
-                          index == 0 ? _onTapCamera() : _onTapPhotos(index - 1),
+                          index == 0 ? _onTapCamera() : _onTapImages(index - 1),
                       child: index == 0
                           ? Container(
                               width: MediaQuery.of(context).size.width / 3,
@@ -182,19 +186,20 @@ class _PostCreateImageUploadState extends State<PostCreateImageUpload> {
     }
   }
 
-  void _onTapCamera() {
+  Future<void> _onTapCamera() async {
+    final cameraFile = await ImagePicker().getImage(source: ImageSource.camera);
     _assetSelectedFiles.clear();
-    _assetSelectedFiles.add(File('camera'));
+    _assetSelectedFiles.add(File(cameraFile!.path));
     Navigator.pop(context, _assetSelectedFiles);
   }
 
-  void _onTapPhotos(int index) {
+  void _onTapImages(int index) {
     setState(() {
       if (_assetSelects[index]) {
         _assetSelects[index] = !_assetSelects[index];
         _assetSelectedFiles.remove(_assetFiles[index]);
       } else {
-        if (_assetSelectedFiles.length < 10) {
+        if (_assetSelectedFiles.length < widget.numPicks) {
           _assetSelects[index] = !_assetSelects[index];
           _assetSelectedFiles.add(_assetFiles[index]);
         } else {

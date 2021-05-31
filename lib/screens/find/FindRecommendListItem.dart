@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/find/FindFacility.dart';
@@ -10,12 +9,10 @@ class FindRecommendListItem extends StatelessWidget {
   FindRecommendListItem({
     required this.pageIndex,
     required this.listIndex,
-    required this.onPushNavigator,
   });
 
   final int pageIndex;
   final int listIndex;
-  final ValueChanged<YrkData>? onPushNavigator;
 
   void _onFindFacilityClicked(BuildContext context) async {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {

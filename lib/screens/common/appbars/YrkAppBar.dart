@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/main.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/notice/Notice.dart';
@@ -17,7 +18,7 @@ enum YrkAppBarType {
   TextSearchNotification
 }
 
-class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
+class YrkAppBar extends StatefulWidget implements PreferredSizeWidget {
   YrkAppBar(
       {Key? key,
       this.curPageItem,
@@ -33,14 +34,40 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
   final YrkAppBarType type;
   final bool isStatusBar;
 
+  @override
+  _YrkAppBarState createState() => _YrkAppBarState();
+
+  @override
+  Size get preferredSize => Size.fromHeight(48.0);
+}
+
+class _YrkAppBarState extends State<YrkAppBar> {
+  @override
+  initState() {
+    super.initState();
+    profileController.addListener(() {
+      if (profileController.isImageChanging) setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    profileController.removeListener(() {
+      if (profileController.isImageChanging) setState(() {});
+    });
+    super.dispose();
+  }
+
   Widget getLeading(BuildContext context) {
-    switch (type) {
+    switch (widget.type) {
       case YrkAppBarType.accountCircleAll:
-        return YrkIconButton(
-          icon: "account_circle_default.svg",
-          iconSize: 32.0,
-          padding: EdgeInsets.all(0),
+        return GestureDetector(
           onTap: Scaffold.of(context).openDrawer,
+          child: CircleAvatar(
+            radius: 16.0,
+            backgroundImage: profileController.accountImage,
+            backgroundColor: const Color(0xffffffff),
+          ),
         );
       case YrkAppBarType.arrowBackAll:
       case YrkAppBarType.arrowBackOnly:
@@ -56,12 +83,12 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   get getTitle {
-    if (label != "") if (type == YrkAppBarType.arrowBackMidTitle)
-      return Text(label!,
+    if (widget.label != "") if (widget.type == YrkAppBarType.arrowBackMidTitle)
+      return Text(widget.label!,
           style: const YrkTextStyle(fontWeight: FontWeight.w700),
           textAlign: TextAlign.left);
     else
-      return Text(label!,
+      return Text(widget.label!,
           style:
               const YrkTextStyle(fontWeight: FontWeight.w700, fontSize: 22.0),
           textAlign: TextAlign.left);
@@ -74,7 +101,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
     bool createButton = false;
     bool notificationButton = false;
 
-    switch (type) {
+    switch (widget.type) {
       case YrkAppBarType.accountCircleAll:
       case YrkAppBarType.arrowBackAll:
         searchButton = true;
@@ -125,7 +152,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
           context,
           MaterialPageRoute(
               builder: (context) => Search(
-                    data: new YrkData(prevPageItem: curPageItem),
+                    data: new YrkData(prevPageItem: widget.curPageItem),
                   )));
     });
   }
@@ -135,8 +162,8 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       await Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  PostCreate(data: new YrkData(prevPageItem: curPageItem))));
+              builder: (context) => PostCreate(
+                  data: new YrkData(prevPageItem: widget.curPageItem))));
     });
   }
 
@@ -146,11 +173,10 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  Notice(data: new YrkData(prevPageItem: curPageItem))));
+                  Notice(data: new YrkData(prevPageItem: widget.curPageItem))));
     });
   }
 
-  @override
   Size get preferredSize => Size.fromHeight(48.0);
 
   @override
@@ -160,8 +186,8 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
       preferredSize: preferredSize,
       child: Container(
           color: Colors.transparent,
-          height: isStatusBar ? 48.0 + statusBarHeight : 48.0,
-          padding: isStatusBar
+          height: widget.isStatusBar ? 48.0 + statusBarHeight : 48.0,
+          padding: widget.isStatusBar
               ? EdgeInsets.only(top: statusBarHeight)
               : EdgeInsets.all(0),
           margin: EdgeInsets.symmetric(horizontal: 16.0),
@@ -170,7 +196,7 @@ class YrkAppBar extends StatelessWidget implements PreferredSizeWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               getLeading(context),
-              if (type == YrkAppBarType.arrowBackMidTitle) Spacer(),
+              if (widget.type == YrkAppBarType.arrowBackMidTitle) Spacer(),
               getTitle,
               Spacer(),
               getActions(context),

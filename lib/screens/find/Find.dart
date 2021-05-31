@@ -1,11 +1,10 @@
-import 'dart:collection';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
@@ -92,137 +91,143 @@ class _FindState extends State<Find> {
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: _tabs.length,
-      child: NestedScrollView(
-          controller: _scrollController,
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverOverlapAbsorber(
-                  handle:
-                      NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                  sliver: SliverAppBar(
-                      automaticallyImplyLeading: false,
-                      leadingWidth: 0,
-                      snap: false,
-                      pinned: true,
-                      floating: false,
-                      centerTitle: false,
-                      titleSpacing: 0.0,
-                      shadowColor: const Color(0xffffffff),
-                      elevation: 0.0,
-                      toolbarHeight: 48.0,
-                      backgroundColor: const Color(0xffffffff),
-                      forceElevated: innerBoxIsScrolled,
-                      title: YrkAppBar(
-                          //  [1] - AppBar
-                          type: YrkAppBarType.TextSearch,
-                          isStatusBar: false,
-                          curPageItem: RootPageItem.find,
-                          label: "시설찾기"),
-                      bottom: PreferredSize(
-                          preferredSize: Size.fromHeight(144.0),
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // [2] - Select Location
-                                InkWell(
-                                    onTap: () => _onTapSelectLocation(),
-                                    child: Container(
-                                        width: double.maxFinite,
-                                        height: 48.0,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 16.0),
-                                        alignment: Alignment.centerLeft,
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: <Widget>[
-                                              YrkIconButton(
-                                                icon: "icon_location.svg",
-                                                width: 24.0,
-                                                height: 24.0,
-                                                padding:
-                                                    EdgeInsets.only(right: 8.0),
-                                                color: const Color(0xfff5df4d),
-                                                clickable: false,
-                                              ),
-                                              Text(
-                                                _locBuffer.toString(),
-                                                style: const YrkTextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 18.0),
-                                              ),
-                                              YrkIconButton(
-                                                  icon:
-                                                      "icon_navigate_next.svg",
+    return Scaffold(
+      bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.find),
+      body: DefaultTabController(
+        length: _tabs.length,
+        child: NestedScrollView(
+            controller: _scrollController,
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverOverlapAbsorber(
+                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                        context),
+                    sliver: SliverAppBar(
+                        automaticallyImplyLeading: false,
+                        leadingWidth: 0,
+                        snap: false,
+                        pinned: true,
+                        floating: false,
+                        centerTitle: false,
+                        titleSpacing: 0.0,
+                        shadowColor: const Color(0xffffffff),
+                        elevation: 0.0,
+                        toolbarHeight: 48.0,
+                        backgroundColor: const Color(0xffffffff),
+                        forceElevated: innerBoxIsScrolled,
+                        title: YrkAppBar(
+                            //  [1] - AppBar
+                            type: YrkAppBarType.TextSearch,
+                            isStatusBar: false,
+                            curPageItem: RootPageItem.find,
+                            label: "시설찾기"),
+                        bottom: PreferredSize(
+                            preferredSize: Size.fromHeight(144.0),
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // [2] - Select Location
+                                  InkWell(
+                                      onTap: () => _onTapSelectLocation(),
+                                      child: Container(
+                                          width: double.maxFinite,
+                                          height: 48.0,
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 16.0),
+                                          alignment: Alignment.centerLeft,
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                YrkIconButton(
+                                                  icon: "icon_location.svg",
                                                   width: 24.0,
                                                   height: 24.0,
                                                   padding: EdgeInsets.only(
-                                                      left: 6.0),
-                                                  clickable: false)
-                                            ]))),
-                                // [3] - TabBar
-                                CustomTapBar(tabs: _tabs, isScrollable: true),
-                                // [4] - Options for TabView
-                                Container(
+                                                      right: 8.0),
+                                                  color:
+                                                      const Color(0xfff5df4d),
+                                                  clickable: false,
+                                                ),
+                                                Text(
+                                                  _locBuffer.toString(),
+                                                  style: const YrkTextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 18.0),
+                                                ),
+                                                YrkIconButton(
+                                                    icon:
+                                                        "icon_navigate_next.svg",
+                                                    width: 24.0,
+                                                    height: 24.0,
+                                                    padding: EdgeInsets.only(
+                                                        left: 6.0),
+                                                    clickable: false)
+                                              ]))),
+                                  // [3] - TabBar
+                                  CustomTapBar(tabs: _tabs, isScrollable: true),
+                                  // [4] - Options for TabView
+                                  Container(
+                                      width: double.maxFinite,
+                                      height: 56.0,
+                                      child: SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: _optionButtons)))
+                                ]))))
+              ];
+            },
+            body: TabBarView(
+                children: _tabs.map((Tuple2 tab) {
+              return SafeArea(
+                  top: false,
+                  bottom: false,
+                  child: Builder(builder: (BuildContext context) {
+                    return NotificationListener<ScrollNotification>(
+                        onNotification: (notification) =>
+                            _onScrollNotification(notification, tab.item2),
+                        child: CustomScrollView(
+                            key: PageStorageKey<String>(tab.item1),
+                            slivers: <Widget>[
+                              SliverOverlapInjector(
+                                handle: NestedScrollView
+                                    .sliverOverlapAbsorberHandleFor(context),
+                              ),
+                              SliverToBoxAdapter(
+                                child: Container(
                                     width: double.maxFinite,
-                                    height: 56.0,
-                                    child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: _optionButtons)))
-                              ]))))
-            ];
-          },
-          body: TabBarView(
-              children: _tabs.map((Tuple2 tab) {
-            return SafeArea(
-                top: false,
-                bottom: false,
-                child: Builder(builder: (BuildContext context) {
-                  return NotificationListener<ScrollNotification>(
-                      onNotification: (notification) =>
-                          _onScrollNotification(notification, tab.item2),
-                      child: CustomScrollView(
-                          key: PageStorageKey<String>(tab.item1),
-                          slivers: <Widget>[
-                            SliverOverlapInjector(
-                              handle: NestedScrollView
-                                  .sliverOverlapAbsorberHandleFor(context),
-                            ),
-                            SliverToBoxAdapter(
-                              child: Container(
-                                  width: double.maxFinite,
-                                  height: 48.0,
-                                  padding: EdgeInsets.only(
-                                      left: 16.0, bottom: 16.0, top: 8.0),
-                                  child: Text("추천 시설",
-                                      style: const YrkTextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 16.0),
-                                      textAlign: TextAlign.left)),
-                            ),
-                            SliverList(
-                                delegate: SliverChildBuilderDelegate(
-                                    (BuildContext context, int index) {
-                              return FindRecommendListItem(
-                                pageIndex: tab.item2,
-                                listIndex: index,
-                                onPushNavigator: widget.onPushNavigator,
-                              );
-                            }, childCount: _childCount[tab.item2]))
-                          ]));
-                }));
-          }).toList())),
+                                    height: 48.0,
+                                    padding: EdgeInsets.only(
+                                        left: 16.0, bottom: 16.0, top: 8.0),
+                                    child: Text("추천 시설",
+                                        style: const YrkTextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 16.0),
+                                        textAlign: TextAlign.left)),
+                              ),
+                              SliverList(
+                                  delegate: SliverChildBuilderDelegate(
+                                      (BuildContext context, int index) {
+                                return FindRecommendListItem(
+                                  pageIndex: tab.item2,
+                                  listIndex: index,
+                                );
+                              }, childCount: _childCount[tab.item2]))
+                            ]));
+                  }));
+            }).toList())),
+      ),
     );
   }
 
