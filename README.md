@@ -1,22 +1,34 @@
 # YOROKE
 Convalenscence & Welfare Community Platform for Elderly <br>
-Platform design is based on flutter, 2020 Yoroke
-## INSTALL
-1. To Get Start & Install Flutter Library <br>
-* https://flutter.dev/docs/get-started/install
-2. Prerequites <br>
-The project is depends on [naver_map_plugin][navermapplugin]
 
-[navermapplugin]: https://pub.dev/packages/naver_map_plugin
-* git-lfs should be pre-installed for iOS
-  * ```brew install git-lfs```
-  * ```git lfs install```
-3. Get & Upgrade Dependecies for Plug-ins
-* ```flutter pub get```
-* ```flutter pub upgrade```
-4. Set JSON and Serialization <br>
-https://flutter.dev/docs/development/data-and-backend/json
-* One-time code generation
-  * ```flutter pub run build_runner build```
-* Generating code continuously
-  * ```flutter pub run build_runner watch```
+## flutter 설치 가이드
+- Windows: https://flutter.dev/docs/get-started/install/windows
+- Mac: https://flutter.dev/docs/get-started/install/macos
+
+## Development Tools
+- Android Studio
+- VS code
+
+## Hot Reload
+- https://flutter-ko.dev/docs/get-started/test-drive
+
+## Root of Application
+- lib/main.dart
+
+## Install
+ [navermapplugin]: https://pub.dev/packages/naver_map_plugin
+
+- git-lfs should be pre-installed for using [naver_map_plugin][navermapplugin] in iOS
+  - ```brew install git-lfs```
+  - ```git lfs install```
+<br></br>
+- Get & Upgrade Dependecies for Plug-ins
+  - ```flutter pub get```
+  - ```flutter pub upgrade```
+<br></br>
+- Set JSON and Serialization
+  - https://flutter.dev/docs/development/data-and-backend/json
+  - One-time code generation
+    - ```flutter pub run build_runner build```
+  - Generating code continuously
+    - ```flutter pub run build_runner watch```
