@@ -99,11 +99,12 @@ class _FindState extends State<Find> {
         length: _tabs.length,
         child: NestedScrollView(
             controller: _scrollController,
-            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverOverlapAbsorber(
-                    handle:
-                        NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                        context),
                     sliver: SliverAppBar(
                         automaticallyImplyLeading: false,
                         leadingWidth: 0,
@@ -122,7 +123,6 @@ class _FindState extends State<Find> {
                             type: YrkAppBarType.TextSearch,
                             isStatusBar: false,
                             curPageItem: RootPageItem.find,
-                            onPushNavigator: widget.onPushNavigator,
                             label: "시설찾기"),
                         bottom: PreferredSize(
                             preferredSize: Size.fromHeight(144.0),
@@ -149,15 +149,17 @@ class _FindState extends State<Find> {
                                                   icon: "icon_location.svg",
                                                   width: 24.0,
                                                   height: 24.0,
-                                                  padding:
-                                                      EdgeInsets.only(right: 8.0),
-                                                  color: const Color(0xfff5df4d),
+                                                  padding: EdgeInsets.only(
+                                                      right: 8.0),
+                                                  color:
+                                                      const Color(0xfff5df4d),
                                                   clickable: false,
                                                 ),
                                                 Text(
                                                   _locBuffer.toString(),
                                                   style: const YrkTextStyle(
-                                                      fontWeight: FontWeight.w500,
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                       fontSize: 18.0),
                                                 ),
                                                 YrkIconButton(
@@ -220,7 +222,6 @@ class _FindState extends State<Find> {
                                 return FindRecommendListItem(
                                   pageIndex: tab.item2,
                                   listIndex: index,
-                                  onPushNavigator: widget.onPushNavigator,
                                 );
                               }, childCount: _childCount[tab.item2]))
                             ]));

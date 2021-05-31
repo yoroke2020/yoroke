@@ -12,9 +12,7 @@ import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/common/YrkTabBar.dart';
 
 class BoardJobFinding extends StatefulWidget {
-  BoardJobFinding({required this.onPushNavigator});
-
-  final ValueChanged<YrkData>? onPushNavigator;
+  BoardJobFinding();
 
   @override
   _BoardJobFindingState createState() => _BoardJobFindingState();
@@ -69,8 +67,7 @@ class _BoardJobFindingState extends State<BoardJobFinding> {
                                 title: Stack(children: <Widget>[
                                   YrkAppBar(
                                     type: YrkAppBarType.arrowBackAll,
-                                    onPushNavigator: widget.onPushNavigator!,
-                                    curPageItem: SubPageItem.boardJobFinding,
+                                    curPageItem: "boardJobFinding",
                                     isStatusBar: false,
                                   ),
                                   YrkScrollOpacity(
@@ -139,10 +136,8 @@ class _BoardJobFindingState extends State<BoardJobFinding> {
                                         return YrkPageListItem(
                                           pageIndex: tab.item2,
                                           listIndex: index,
-                                          pageType: SubPageItem.boardJobFinding,
-                                          nextPageItem: SubPageItem.post,
-                                          onPushNavigator:
-                                              widget.onPushNavigator,
+                                          pageType: "boardJobFinding",
+                                          nextPageItem: "post",
                                         );
                                       }, childCount: _childCount[tab.item2]))
                                     ]));

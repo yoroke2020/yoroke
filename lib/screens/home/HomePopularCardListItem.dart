@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkStarRating.dart';
 
@@ -18,6 +19,15 @@ class HomePopularCardListItem extends StatelessWidget {
   final int index;
   final ValueChanged<YrkData>? onPushNavigator;
 
+  void _onCardItemClicked(BuildContext context) async {
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => BoardReview(data: new YrkData())));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -26,9 +36,7 @@ class HomePopularCardListItem extends StatelessWidget {
         elevation: 0.0,
         margin: const EdgeInsets.only(right: 8),
         child: InkWell(
-            onTap: () => onPushNavigator!(new YrkData(
-                  nextPageItem: SubPageItem.boardReview,
-                )),
+            onTap: () => _onCardItemClicked(context),
             borderRadius: BorderRadius.circular(16),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: <

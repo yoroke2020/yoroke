@@ -13,6 +13,7 @@ class SubPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return data!.nextPageItem!.widget(data, onPushNavigator);
+    return Container();
+    // return data!.nextPageItem!.widget(data, onPushNavigator);
   }
 }

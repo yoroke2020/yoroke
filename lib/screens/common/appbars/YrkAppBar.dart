@@ -21,7 +21,6 @@ enum YrkAppBarType {
 class YrkAppBar extends StatefulWidget implements PreferredSizeWidget {
   YrkAppBar(
       {Key? key,
-      this.onPushNavigator,
       this.curPageItem,
       this.label = "",
       required this.type,
@@ -30,7 +29,6 @@ class YrkAppBar extends StatefulWidget implements PreferredSizeWidget {
           key: key,
         );
 
-  final ValueChanged<YrkData>? onPushNavigator;
   final curPageItem;
   final String? label;
   final YrkAppBarType type;
@@ -154,8 +152,8 @@ class _YrkAppBarState extends State<YrkAppBar> {
           context,
           MaterialPageRoute(
               builder: (context) => Search(
-                  data: new YrkData(prevPageItem: widget.curPageItem),
-                  onPushNavigator: widget.onPushNavigator)));
+                    data: new YrkData(prevPageItem: widget.curPageItem),
+                  )));
     });
   }
 

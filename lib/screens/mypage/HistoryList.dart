@@ -27,10 +27,10 @@ class _HistoryListState extends State<HistoryList>
     Tuple2("구인구직", 2)
   ];
 
-  late List<SubPageItem> _tabItemTypes = [
-    SubPageItem.boardReview,
-    SubPageItem.boardQna,
-    SubPageItem.boardJobFinding
+  late List<String> _tabItemTypes = [
+    "boardReview",
+    "boardQna",
+    "boardJobFinding"
   ];
 
   late List<Widget> _historyLists;
@@ -41,12 +41,12 @@ class _HistoryListState extends State<HistoryList>
           itemCount: 8,
           itemBuilder: (BuildContext context, int index) {
             return YrkPageListItem(
-                pageIndex: i,
-                listIndex: index,
-                pageType: _tabItemTypes[i],
-                //TODO: Make History at SubPageItem
-                nextPageItem: SubPageItem.post,
-                onPushNavigator: widget.onPushNavigator);
+              pageIndex: i,
+              listIndex: index,
+              pageType: _tabItemTypes[i],
+              //TODO: Make History at SubPageItem
+              nextPageItem: "post",
+            );
           }));
     }
 

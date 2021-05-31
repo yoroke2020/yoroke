@@ -14,10 +14,9 @@ import 'package:yoroke/screens/common/YrkTabBar.dart';
 import 'BoardCardListItem.dart';
 
 class BoardReview extends StatefulWidget {
-  BoardReview({required this.data, required this.onPushNavigator});
+  BoardReview({required this.data});
 
   final YrkData? data;
-  final ValueChanged<YrkData>? onPushNavigator;
 
   @override
   _BoardReviewState createState() => _BoardReviewState();
@@ -76,8 +75,7 @@ class _BoardReviewState extends State<BoardReview> {
                                 title: Stack(children: <Widget>[
                                   YrkAppBar(
                                     type: YrkAppBarType.arrowBackAll,
-                                    onPushNavigator: widget.onPushNavigator!,
-                                    curPageItem: SubPageItem.boardReview,
+                                    curPageItem: "boardReview",
                                     isStatusBar: false,
                                   ),
                                   YrkScrollOpacity(
@@ -186,10 +184,8 @@ class _BoardReviewState extends State<BoardReview> {
                                           return YrkPageListItem(
                                             pageIndex: tab.item2,
                                             listIndex: index,
-                                            pageType: SubPageItem.boardReview,
-                                            nextPageItem: SubPageItem.post,
-                                            onPushNavigator:
-                                                widget.onPushNavigator,
+                                            pageType: "boardReview",
+                                            nextPageItem: "post",
                                           );
                                         },
                                         childCount: _childCount[tab.item2],

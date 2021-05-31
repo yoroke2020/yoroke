@@ -37,13 +37,14 @@ class _BookmarkListState extends State<BookmarkList>
         itemCount: 8,
         itemBuilder: (BuildContext context, int index) {
           return YrkPageListItem(
-              pageIndex: 0,
-              listIndex: index,
-              pageType: SubPageItem.boardReview,
-              // TODO: 아이템별로  페이지 타입 정의
+            pageIndex: 0,
+            listIndex: index,
+            pageType: "boardReview",
+            // TODO: 아이템별로  페이지 타입 정의
 
-              nextPageItem: SubPageItem.post,
-              onPushNavigator: widget.onPushNavigator);
+            nextPageItem: "post",
+            // onPushNavigator: widget.onPushNavigator,
+          );
         }));
     list.add(ListView.builder(
         itemCount: 8,

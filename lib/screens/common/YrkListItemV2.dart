@@ -4,9 +4,15 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/screens/board/BoardJobFinding.dart';
+import 'package:yoroke/screens/board/BoardQna.dart';
+import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
+import 'package:yoroke/screens/post/Post.dart';
+
+import '../TestPage.dart';
 
 part 'YrkListItemV2.g.dart';
 
@@ -14,13 +20,30 @@ class YrkPageListItemV2 extends StatelessWidget {
   YrkPageListItemV2(
       {required this.pageType,
       required this.nextPageItem,
-      required this.onPushNavigator,
       required this.model});
 
   final pageType;
   final nextPageItem;
-  final ValueChanged<YrkData>? onPushNavigator;
   final YrkListItemV2Model model;
+
+  void _onItemClicked(BuildContext context, nextPageItem) async {
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await Navigator.push(context, MaterialPageRoute(builder: (context) {
+        switch (nextPageItem) {
+          case "boardReview":
+            return BoardReview(data: new YrkData());
+          case "boardQna":
+            return BoardQna();
+          case "boardJobFinding":
+            return BoardJobFinding();
+          case "post":
+            return Post(data: new YrkData());
+          default:
+            return TestPage();
+        }
+      }));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +57,10 @@ class YrkPageListItemV2 extends StatelessWidget {
 
     // Add case here when new kinds of pageListItem is defined
     switch (pageType) {
-      case SubPageItem.boardJobFinding:
+      case "boardJobFinding":
         isText = false;
         break;
-      case SubPageItem.post:
+      case "post":
         isRating = true;
         isBestIcon = true;
         break;
@@ -46,8 +69,7 @@ class YrkPageListItemV2 extends StatelessWidget {
     }
 
     return InkWell(
-      onTap: () => onPushNavigator!(new YrkData(
-          nextPageItem: nextPageItem, prevPageItem: pageType, i1: 0)),
+      onTap: () => _onItemClicked(context, nextPageItem),
       //TODO: YrkData -> API Call
       child: Container(
           width: double.maxFinite,

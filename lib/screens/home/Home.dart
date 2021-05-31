@@ -74,7 +74,7 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  List<Widget> _yrkListView(SubPageItem subPageItem) {
+  List<Widget> _yrkListView(subPageItem) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(ListView(
@@ -83,8 +83,7 @@ class _HomeState extends State<Home> {
     return list;
   }
 
-  List<Widget> _buildPopularPost(
-      SubPageItem subPageItem, PopularPostBlock block) {
+  List<Widget> _buildPopularPost(subPageItem, PopularPostBlock block) {
     final int pageItemLimit = 4;
 
     List<YrkModel> items = block.items!;
@@ -98,41 +97,40 @@ class _HomeState extends State<Home> {
         .toList();
   }
 
-  Widget _buildPageListItem(SubPageItem subPageItem,
-      ValueChanged<YrkData> onPushNavigator, YrkListItemV2Model item) {
+  Widget _buildPageListItem(subPageItem, ValueChanged<YrkData> onPushNavigator,
+      YrkListItemV2Model item) {
     return YrkPageListItemV2(
-      onPushNavigator: onPushNavigator,
+      // onPushNavigator: onPushNavigator,
       pageType: subPageItem,
-      nextPageItem: SubPageItem.post,
+      nextPageItem: "post",
       model: item,
     );
   }
 
-  List<Widget> _homePopularList(int pageIndex, SubPageItem subPageItem,
-      ValueChanged<YrkData> onPushNavigator) {
+  List<Widget> _homePopularList(
+      int pageIndex, subPageItem, ValueChanged<YrkData> onPushNavigator) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
-        onPushNavigator: onPushNavigator,
+        // onPushNavigator: onPushNavigator,
         pageType: subPageItem,
-        nextPageItem: SubPageItem.post,
+        nextPageItem: "post",
       ));
     }
     return list;
   }
 
-  List<Widget> _homePopularListV2(int pageIndex, SubPageItem subPageItem,
-      ValueChanged<YrkData> onPushNavigator) {
+  List<Widget> _homePopularListV2(
+      int pageIndex, subPageItem, ValueChanged<YrkData> onPushNavigator) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
-        onPushNavigator: onPushNavigator,
         pageType: subPageItem,
-        nextPageItem: SubPageItem.post,
+        nextPageItem: "post",
       ));
     }
     return list;
@@ -189,7 +187,6 @@ class _HomeState extends State<Home> {
                 context, MaterialPageRoute(builder: (context) => TestPage()))),
         appBar: YrkAppBar(
           type: YrkAppBarType.accountCircleAll,
-          onPushNavigator: widget.onPushNavigator,
           curPageItem: RootPageItem.home,
         ),
         drawer: yrkDrawer,
@@ -221,7 +218,7 @@ class _HomeState extends State<Home> {
                   fontSize: 16.0),
               clickable: true,
               onPushNavigator: onPushNavigator,
-              nextSubPageItem: SubPageItem.boardQna,
+              // nextSubPageItem: SubPageItem.boardQna,
               customIcon: Row(
                 children: [
                   YrkIconButton(
@@ -253,7 +250,7 @@ class _HomeState extends State<Home> {
           // ),
           YrkPage(
             page: _buildPopularPost(
-                SubPageItem.post,
+                "post",
                 homeBlock!.findFirstBlockWhere('PopularPostBlock')
                     as PopularPostBlock),
             controller: popularPageController,
@@ -269,7 +266,7 @@ class _HomeState extends State<Home> {
                   fontSize: 16.0),
               clickable: true,
               onPushNavigator: onPushNavigator,
-              nextSubPageItem: SubPageItem.boardQna,
+              // nextSubPageItem: "boardQna",
               customIcon: TextButton(
                   child: Text("전체보기",
                       style: const TextStyle(

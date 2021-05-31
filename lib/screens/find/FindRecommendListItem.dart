@@ -9,12 +9,10 @@ class FindRecommendListItem extends StatelessWidget {
   FindRecommendListItem({
     required this.pageIndex,
     required this.listIndex,
-    required this.onPushNavigator,
   });
 
   final int pageIndex;
   final int listIndex;
-  final ValueChanged<YrkData>? onPushNavigator;
 
   void _onFindFacilityClicked(BuildContext context) async {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
