@@ -21,8 +21,9 @@ import 'package:yoroke/screens/common/YrkTextField.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class PostCreate extends StatefulWidget {
-  PostCreate({required this.data});
+  PostCreate({this.postData, this.data});
 
+  final PostData? postData;
   final YrkData? data;
 
   @override
@@ -63,17 +64,25 @@ class _PostCreateState extends State<PostCreate> {
   bool _isRegisterButtonClickable = false;
 
   // Three checking fields to activate RegisterButton
-  bool _isCategorySelected = false;
+  bool _isCategoryEmpty = true;
   bool _isTitleEmpty = true;
   bool _isBodyEmpty = true;
+
+  String _tempTitle = "";
+  String _tempBody = "";
+  String _tempCategoryIndex = "";
+
+  late PostData _postData;
 
   @override
   void initState() {
     super.initState();
+    _postData = widget.postData ?? PostData("", "", SubPageItem.testPage, -1);
+
     _pageType = widget.data!.prevPageItem;
     _loadFromAssets();
 
-    if (_isTitleEmpty || _isBodyEmpty || !_isCategorySelected) {
+    if (_isTitleEmpty || _isBodyEmpty || _isCategoryEmpty) {
       _registerButtonFillColor = const Color(0xfff4f4f4);
       _registerButtonTextColor = const Color(0xffaaaaaa);
       _isRegisterButtonClickable = false;
@@ -95,7 +104,7 @@ class _PostCreateState extends State<PostCreate> {
   void _setRegisterButtonColor() {
     _isTitleEmpty = _titleController.text.isEmpty;
     _isBodyEmpty = _bodyController.document.isEmpty();
-    if (_isTitleEmpty || _isBodyEmpty || !_isCategorySelected) {
+    if (_isTitleEmpty || _isBodyEmpty || _isCategoryEmpty) {
       setState(() {
         _registerButtonFillColor = const Color(0xfff4f4f4);
         _registerButtonTextColor = const Color(0xffaaaaaa);
@@ -111,10 +120,10 @@ class _PostCreateState extends State<PostCreate> {
   }
 
   Future<void> _loadFromAssets() async {
-    _selectedCategory = tempPostData.category;
-    _selectedCategoryIndex = tempPostData.categoryIndex;
-    _isCategorySelected = _selectedCategory != SubPageItem.testPage;
-    if (_isCategorySelected) {
+    _selectedCategory = _postData.category;
+    _selectedCategoryIndex = _postData.categoryIndex;
+    _isCategoryEmpty = _selectedCategory == SubPageItem.testPage;
+    if (!_isCategoryEmpty) {
       _pageType = _selectedCategory;
       _selectedCategoryText = _selectedCategory != SubPageItem.boardReview
           ? YrkMbsListData.getLabelList(
@@ -124,11 +133,11 @@ class _PostCreateState extends State<PostCreate> {
               "후기";
     }
 
-    _titleController.text = tempPostData.title;
+    _titleController.text = _postData.title;
     _isTitleEmpty = _titleController.text.isEmpty;
 
-    if (tempPostData.body != "") {
-      _document = Document.fromJson(jsonDecode(tempPostData.body));
+    if (_postData.body != "") {
+      _document = Document.fromJson(jsonDecode(_postData.body));
       _isBodyEmpty = false;
     } else {
       _document = Document();
@@ -242,39 +251,36 @@ class _PostCreateState extends State<PostCreate> {
                     defaultRadioGroupIndex: _selectedCategoryIndex,
                     onTap: (index) => _onTapModelBottomSheetRadioButton(index)),
                 child: Container(
-                  width: double.maxFinite,
-                  height: 49.0,
-                  decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                            width: 1, color: const Color(0xffe5e5e5))),
-                  ),
-                  child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: _isCategorySelected
-                          ? Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                _selectedCategoryText,
-                                style: const YrkTextStyle(),
-                              ),
-                            )
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Text("게시글의 카테고리를 선택해주세요",
-                                    style: const YrkTextStyle(),
-                                    textAlign: TextAlign.left),
-                                Spacer(),
-                                SvgPicture.asset(
-                                  "icon_navigate_next.svg",
-                                  width: 24.0,
-                                  height: 24.0,
-                                )
-                              ],
-                            )),
-                )),
+                    width: double.maxFinite,
+                    height: 49.0,
+                    decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                              width: 1, color: const Color(0xffe5e5e5))),
+                    ),
+                    child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: _isCategoryEmpty
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                    Text("게시글의 카테고리를 선택해주세요",
+                                        style: const YrkTextStyle(),
+                                        textAlign: TextAlign.left),
+                                    Spacer(),
+                                    SvgPicture.asset(
+                                      "icon_navigate_next.svg",
+                                      width: 24.0,
+                                      height: 24.0,
+                                    )
+                                  ])
+                            : Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  _selectedCategoryText,
+                                  style: const YrkTextStyle(),
+                                ))))),
             // [3] 3rd AppBar - Title
             Container(
               width: double.maxFinite,
@@ -350,7 +356,7 @@ class _PostCreateState extends State<PostCreate> {
   }
 
   void _setSelectedCategory(int index) {
-    _isCategorySelected = true;
+    _isCategoryEmpty = false;
     if (_pageType == RootPageItem.home || _pageType == RootPageItem.board) {
       if (index < _mbsLabelCountPerTitleList[0]) {
         _selectedCategoryIndex = index;
@@ -386,20 +392,13 @@ class _PostCreateState extends State<PostCreate> {
         _selectedCategory,
         _selectedCategoryIndex);
     testPostData.add(data);
-    tempPostData = PostData("", "", SubPageItem.testPage, -1);
     Navigator.pop(context);
   }
 
   void _onPressedTempSave() {
-    try {
-      String title = _titleController.text;
-      String body = jsonEncode(_bodyController.document.toDelta().toJson());
-      tempPostData.title = title;
-      tempPostData.body = body;
-      tempPostData.category = _selectedCategory;
-      tempPostData.categoryIndex = _selectedCategoryIndex;
+    if (_isTitleEmpty && _isBodyEmpty && _isCategoryEmpty) {
       Fluttertoast.showToast(
-        msg: "글이 임시저장 되었습니다",
+        msg: "글 작성 후 임시저장을 해주세요",
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
@@ -407,9 +406,17 @@ class _PostCreateState extends State<PostCreate> {
         textColor: const Color(0xe6ffffff),
         fontSize: 14.0,
       );
-    } catch (error) {
+    } else {
+      String title = _titleController.text;
+      String body = jsonEncode(_bodyController.document.toDelta().toJson());
+      PostData newTempPost =
+          PostData(title, body, _selectedCategory, _selectedCategoryIndex);
+      tempPostData.add(newTempPost);
+      _tempTitle = title;
+      _tempBody = body;
+      _tempCategoryIndex = _selectedCategoryText;
       Fluttertoast.showToast(
-        msg: "FAIL",
+        msg: "글이 임시저장 되었습니다",
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
@@ -421,6 +428,18 @@ class _PostCreateState extends State<PostCreate> {
   }
 
   void _onTapClearButton(BuildContext context) {
+    print(_isTitleEmpty.toString() +
+        _isBodyEmpty.toString() +
+        _isCategoryEmpty.toString());
+    if ((_isTitleEmpty && _isBodyEmpty && _isCategoryEmpty) ||
+        (_tempTitle == _titleController.text &&
+            _tempBody ==
+                jsonEncode(_bodyController.document.toDelta().toJson()) &&
+            _tempCategoryIndex == _selectedCategoryText)) {
+      Navigator.pop(context);
+      return;
+    }
+
     showDialog(
         context: context,
         barrierDismissible: false,

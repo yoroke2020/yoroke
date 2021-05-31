@@ -8,6 +8,7 @@ import 'package:yoroke/screens/mypage/EditProfile.dart';
 import 'package:yoroke/screens/mypage/HistoryList.dart';
 import 'package:yoroke/screens/mypage/SettingList.dart';
 import 'package:tuple/tuple.dart';
+import 'package:yoroke/screens/mypage/TempPostList.dart';
 
 import '../../main.dart';
 
@@ -38,7 +39,7 @@ class _YrkDrawerState extends State<YrkDrawer> {
       Tuple3("히스토리", "icon_history.svg",
           HistoryList(onPushNavigator: widget.onPushNavigator)),
       Tuple3("임시보관함", "icon_inventory_2.svg",
-          SettingList(onPushNavigator: widget.onPushNavigator)),
+          TempPostList()),
     ];
     _myPageSettings = Tuple3("설정", "icon_settings.svg",
         SettingList(onPushNavigator: widget.onPushNavigator));
