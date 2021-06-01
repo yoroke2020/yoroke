@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkListItem.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/home/HomeHistoryCardListItem.dart';
@@ -9,9 +7,7 @@ import 'package:yoroke/screens/info/InfoShareCardListItem.dart';
 import 'package:yoroke/screens/common/YrkTabBar.dart';
 
 class BookmarkList extends StatefulWidget {
-  BookmarkList({Key? key, required this.onPushNavigator}) : super(key: key);
-
-  final ValueChanged<YrkData>? onPushNavigator;
+  BookmarkList({Key? key}) : super(key: key);
 
   @override
   _BookmarkListState createState() => _BookmarkListState();
@@ -43,7 +39,6 @@ class _BookmarkListState extends State<BookmarkList>
             // TODO: 아이템별로  페이지 타입 정의
 
             nextPageItem: "post",
-            // onPushNavigator: widget.onPushNavigator,
           );
         }));
     list.add(ListView.builder(

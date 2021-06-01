@@ -104,7 +104,7 @@ class _YrkMobileImageGridsState extends State<YrkMobileImageGrids> {
                       children: <Widget>[
                         YrkIconButton(
                             onTap: () => Navigator.pop(context),
-                            icon: "assets/icons/icon_clear.svg",
+                            icon: "icon_clear.svg",
                             padding: EdgeInsets.zero,
                             width: 24.0,
                             height: 24.0),
@@ -144,10 +144,8 @@ class _YrkMobileImageGridsState extends State<YrkMobileImageGrids> {
                               height: MediaQuery.of(context).size.height / 3,
                               color: const Color(0xffffffff),
                               alignment: Alignment.center,
-                              child: SvgPicture.asset(
-                                  "assets/icons/icon_camera.svg",
-                                  width: 24.0,
-                                  height: 24.0))
+                              child: SvgPicture.asset("icon_camera.svg",
+                                  width: 24.0, height: 24.0))
                           : Stack(alignment: Alignment.topRight, children: [
                               _assetWidgets[index - 1],
                               _getSelects(index - 1)

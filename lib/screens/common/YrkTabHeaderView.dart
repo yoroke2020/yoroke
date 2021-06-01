@@ -12,7 +12,6 @@ class YrkTabHeaderView extends StatelessWidget {
     this.height = 40,
     this.margin = const EdgeInsets.only(left: 16.0, right: 16.0),
     this.clickable = false,
-    this.onPushNavigator,
     this.nextSubPageItem,
     this.title = "",
     this.titleStyle = const YrkTextStyle(fontSize: 16.0),
@@ -23,7 +22,6 @@ class YrkTabHeaderView extends StatelessWidget {
   final double height;
   final EdgeInsets margin;
   final bool clickable;
-  final ValueChanged<YrkData>? onPushNavigator;
   final String? nextSubPageItem;
   final String title;
   final YrkTextStyle titleStyle;
@@ -32,7 +30,7 @@ class YrkTabHeaderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: clickable ? () => onPushNavigator!(new YrkData()) : null,
+        // onTap: clickable ? () => onPushNavigator!(new YrkData()) : null,
         child: Container(
             width: this.width,
             height: this.height,

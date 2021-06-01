@@ -20,9 +20,7 @@ Container _textWrapper(Text text) {
 
 // ignore: must_be_immutable
 class SignOut extends StatefulWidget {
-  SignOut({Key? key, required this.onPushNavigator}) : super(key: key);
-
-  final ValueChanged<YrkData>? onPushNavigator;
+  SignOut({Key? key}) : super(key: key);
 
   bool? mailNoti = false;
   bool? normalNoti = false;

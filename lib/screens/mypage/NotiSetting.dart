@@ -20,9 +20,7 @@ var subtextlist = [
 
 // ignore: must_be_immutable
 class NotiSetting extends StatefulWidget {
-  NotiSetting({Key? key, required this.onPushNavigator}) : super(key: key);
-
-  final ValueChanged<YrkData>? onPushNavigator;
+  NotiSetting({Key? key}) : super(key: key);
 
   bool? mailNoti = false;
   bool? normalNoti = false;
@@ -66,7 +64,7 @@ class _NotiSettingState extends State<NotiSetting> {
                             style: YrkTextStyle(fontFamily: 'OpenSans'),
                           ),
                           YrkIconButton(
-                            icon: 'assets/icons/icon_arrow_back.svg',
+                            icon: 'icon_arrow_back.svg',
                           ),
                         ],
                       ),

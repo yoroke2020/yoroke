@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
@@ -16,9 +15,7 @@ import 'FindLocationSetting.dart';
 import 'FindRecommendListItem.dart';
 
 class Find extends StatefulWidget {
-  Find({required this.onPushNavigator});
-
-  final ValueChanged<YrkData>? onPushNavigator;
+  Find();
 
   @override
   _FindState createState() => _FindState();

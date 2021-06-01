@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkListItem.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/YrkTabBar.dart';
 
 class HistoryList extends StatefulWidget {
-  HistoryList({Key? key, required this.onPushNavigator}) : super(key: key);
-
-  final ValueChanged<YrkData>? onPushNavigator;
+  HistoryList({Key? key}) : super(key: key);
 
   @override
   _HistoryListState createState() => _HistoryListState();

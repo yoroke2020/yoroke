@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/main.dart';
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/common/YrkListItem.dart';
 import 'package:yoroke/screens/common/YrkPage.dart';
 import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
@@ -12,9 +11,7 @@ import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'BoardCardListItem.dart';
 
 class Board extends StatefulWidget {
-  Board({required this.onPushNavigator});
-
-  final ValueChanged<YrkData>? onPushNavigator;
+  Board();
 
   @override
   _BoardState createState() => _BoardState();
@@ -49,7 +46,6 @@ class _BoardState extends State<Board> {
         listIndex: i,
         pageType: subPageItem,
         nextPageItem: "post",
-        // onPushNavigator: widget.onPushNavigator,
       ));
     }
     return list;
@@ -69,8 +65,7 @@ class _BoardState extends State<Board> {
           YrkTabHeaderView(
             title: "후기",
             clickable: true,
-            onPushNavigator: widget.onPushNavigator,
-            // nextSubPageItem: SubPageItem.boardReview,
+            nextSubPageItem: "boardReview",
           ),
           Container(
             height: 100.0,
@@ -82,7 +77,6 @@ class _BoardState extends State<Board> {
                 return BoardCardListItem(
                   index: index,
                   listLength: _boardCardListItemCount,
-                  onPushNavigator: widget.onPushNavigator,
                 );
               },
               separatorBuilder: (BuildContext context, int index) {
@@ -93,8 +87,7 @@ class _BoardState extends State<Board> {
           YrkTabHeaderView(
             title: "고민/질문",
             clickable: true,
-            onPushNavigator: widget.onPushNavigator,
-            // nextSubPageItem: SubPageItem.boardQna,
+            nextSubPageItem: "boardQna",
           ),
           YrkPage(
             page: _buildBoardYrkListView("boardQna"),
@@ -104,8 +97,7 @@ class _BoardState extends State<Board> {
           YrkTabHeaderView(
             title: "구인구직",
             clickable: true,
-            onPushNavigator: widget.onPushNavigator,
-            // nextSubPageItem: SubPageItem.boardJobFinding,
+            nextSubPageItem: "boardJobFinding",
           ),
           YrkPage(
               page: _buildBoardYrkListView("boardJobFinding"),
