@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/models/YrkMbsListData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/common/YrkListItem.dart';
 import 'package:yoroke/screens/common/YrkTextField.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
@@ -24,7 +23,6 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   YrkData? data;
-  ValueChanged<YrkData>? onPushNavigator;
   late TextEditingController searchTextController;
   String? searchKeyword;
   final List<String> labelList = ["요양병원", "요양원", "복지관", "경로당", "노인교실", "보호센터"];
@@ -238,20 +236,18 @@ class _SearchState extends State<Search> {
         height: 64 * 4,
         child: ListView(
             physics: NeverScrollableScrollPhysics(),
-            children: _buildList(i, subPageItem, onPushNavigator!)),
+            children: _buildList(i, subPageItem)),
       ));
     }
     return list;
   }
 
-  List<Widget> _buildList(
-      int pageIndex, subPageItem, ValueChanged<YrkData> onPushNavigator) {
+  List<Widget> _buildList(int pageIndex, subPageItem) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
-        // onPushNavigator: onPushNavigator,
         pageType: subPageItem,
         nextPageItem: "post",
       ));

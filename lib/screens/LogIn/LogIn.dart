@@ -35,8 +35,7 @@ class _LogInState extends State<LogIn> {
                   Container(
                     // Todo: logo
                     // padding: const EdgeInsets.all(80),
-                    child:
-                        YrkIconButton(icon: 'assets/icons/icon_naver_logo.svg'),
+                    child: YrkIconButton(icon: 'icon_naver_logo.svg'),
                   ),
                   Spacer(),
                   Container(

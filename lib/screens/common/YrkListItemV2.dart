@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/board/BoardJobFinding.dart';
 import 'package:yoroke/screens/board/BoardQna.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';

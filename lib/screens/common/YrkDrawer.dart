@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/mypage/BookmarkList.dart';
@@ -13,12 +12,7 @@ import 'package:yoroke/screens/mypage/TempPostList.dart';
 import '../../main.dart';
 
 class YrkDrawer extends StatefulWidget {
-  YrkDrawer({
-    Key? key,
-    this.onPushNavigator,
-  });
-
-  final ValueChanged<YrkData>? onPushNavigator;
+  YrkDrawer({Key? key});
 
   @override
   _YrkDrawerState createState() => _YrkDrawerState();
@@ -34,15 +28,11 @@ class _YrkDrawerState extends State<YrkDrawer> {
 
     _myPageOptions = [
       Tuple3("프로필 편집", "icon_account_box.svg", EditProfile()),
-      Tuple3("북마크", "icon_save_black.svg",
-          BookmarkList(onPushNavigator: widget.onPushNavigator)),
-      Tuple3("히스토리", "icon_history.svg",
-          HistoryList(onPushNavigator: widget.onPushNavigator)),
-      Tuple3("임시보관함", "icon_inventory_2.svg",
-          TempPostList()),
+      Tuple3("북마크", "icon_save_black.svg", BookmarkList()),
+      Tuple3("히스토리", "icon_history.svg", HistoryList()),
+      Tuple3("임시보관함", "icon_inventory_2.svg", TempPostList()),
     ];
-    _myPageSettings = Tuple3("설정", "icon_settings.svg",
-        SettingList(onPushNavigator: widget.onPushNavigator));
+    _myPageSettings = Tuple3("설정", "icon_settings.svg", SettingList());
     profileController.addListener(() {
       if (profileController.isChanging) setState(() {});
     });

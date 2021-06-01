@@ -44,8 +44,7 @@ class _SignInDialogState extends State<SignInDialog> {
                         children: [
                           Container(
                             width: 40,
-                            child: YrkIconButton(
-                                icon: 'assets/icons/icon_naver_logo.svg'),
+                            child: YrkIconButton(icon: 'icon_naver_logo.svg'),
                           ),
                           Container(
                             padding: const EdgeInsets.only(
