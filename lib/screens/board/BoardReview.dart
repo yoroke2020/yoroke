@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/common/YrkListItem.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
@@ -146,11 +146,6 @@ class _BoardReviewState extends State<BoardReview> {
                                                                     _curCardIndex
                                                                 ? true
                                                                 : false,
-                                                            onPushNavigator:
-                                                                (data) =>
-                                                                    _onPushChangeReviewCard(
-                                                                        context,
-                                                                        data),
                                                           );
                                                         }))
                                               ]))),

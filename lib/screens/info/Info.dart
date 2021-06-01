@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTabBar.dart';
@@ -11,9 +10,7 @@ import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/info/InfoShareCardListItem.dart';
 
 class Info extends StatefulWidget {
-  Info({required this.onPushNavigator});
-
-  final ValueChanged<YrkData>? onPushNavigator;
+  Info();
 
   @override
   _InfoState createState() => _InfoState();

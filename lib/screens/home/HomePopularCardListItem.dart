@@ -2,22 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkStarRating.dart';
 
 class HomePopularCardListItem extends StatelessWidget {
-  HomePopularCardListItem(
-      {required this.width,
-      required this.height,
-      required this.index,
-      this.onPushNavigator});
+  HomePopularCardListItem({
+    required this.width,
+    required this.height,
+    required this.index,
+  });
 
   final double width;
   final double height;
   final int index;
-  final ValueChanged<YrkData>? onPushNavigator;
 
   void _onCardItemClicked(BuildContext context) async {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {

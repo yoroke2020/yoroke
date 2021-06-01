@@ -2,15 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 
 class HomePopularListItem extends StatelessWidget {
-  HomePopularListItem({required this.index, this.onPushNavigator});
+  HomePopularListItem({required this.index});
 
   final int index;
-  final ValueChanged<YrkData>? onPushNavigator;
 
   void _onItemClicked(BuildContext context) async {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {

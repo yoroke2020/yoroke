@@ -5,7 +5,7 @@ import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
 import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/TestPage.dart';
 import 'package:yoroke/screens/common/YrkListItem.dart';
 import 'package:yoroke/screens/common/YrkListItemV2.dart';
@@ -25,9 +25,8 @@ import 'HomeCardListItem.dart';
 import 'HomePopularCardListItem.dart';
 
 class Home extends StatefulWidget implements Screen<HomeBlock> {
-  Home({required this.onPushNavigator});
+  Home();
 
-  final ValueChanged<YrkData>? onPushNavigator;
   // FIXME get reqCtx from previous screen
   final YrkRequestContext reqCtx = YrkRequestContext();
 
@@ -64,12 +63,10 @@ class Home extends StatefulWidget implements Screen<HomeBlock> {
 }
 
 class _HomeState extends State<Home> {
-  ValueChanged<YrkData>? onPushNavigator;
   HomeBlock? homeBlock;
 
   @override
   initState() {
-    onPushNavigator = widget.onPushNavigator;
     homeBlock = widget.makeBlock(widget.reqCtx);
     super.initState();
   }
@@ -77,8 +74,7 @@ class _HomeState extends State<Home> {
   List<Widget> _yrkListView(subPageItem) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
-      list.add(ListView(
-          children: _homePopularList(i, subPageItem, onPushNavigator!)));
+      list.add(ListView(children: _homePopularList(i, subPageItem)));
     }
     return list;
   }
@@ -89,7 +85,7 @@ class _HomeState extends State<Home> {
     List<YrkModel> items = block.items!;
     List<Widget> pageListItems = items
         .cast<YrkListItemV2Model>()
-        .map((e) => _buildPageListItem(subPageItem, onPushNavigator!, e))
+        .map((e) => _buildPageListItem(subPageItem, e))
         .toList();
 
     return partition(pageListItems, pageItemLimit)
@@ -97,24 +93,20 @@ class _HomeState extends State<Home> {
         .toList();
   }
 
-  Widget _buildPageListItem(subPageItem, ValueChanged<YrkData> onPushNavigator,
-      YrkListItemV2Model item) {
+  Widget _buildPageListItem(subPageItem, YrkListItemV2Model item) {
     return YrkPageListItemV2(
-      // onPushNavigator: onPushNavigator,
       pageType: subPageItem,
       nextPageItem: "post",
       model: item,
     );
   }
 
-  List<Widget> _homePopularList(
-      int pageIndex, subPageItem, ValueChanged<YrkData> onPushNavigator) {
+  List<Widget> _homePopularList(int pageIndex, subPageItem) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkPageListItem(
         pageIndex: pageIndex,
         listIndex: i,
-        // onPushNavigator: onPushNavigator,
         pageType: subPageItem,
         nextPageItem: "post",
       ));
@@ -122,8 +114,7 @@ class _HomeState extends State<Home> {
     return list;
   }
 
-  List<Widget> _homePopularListV2(
-      int pageIndex, subPageItem, ValueChanged<YrkData> onPushNavigator) {
+  List<Widget> _homePopularListV2(int pageIndex, subPageItem) {
     List<Widget> list = <Widget>[];
     for (int i = 0; i < 4; i++) {
       list.add(YrkPageListItem(
@@ -199,10 +190,7 @@ class _HomeState extends State<Home> {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     return HomeCardListItem(
-                        width: 320.0,
-                        height: 120.0,
-                        index: index,
-                        onPushNavigator: onPushNavigator);
+                        width: 320.0, height: 120.0, index: index);
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return SizedBox(width: 8.0);
@@ -217,15 +205,11 @@ class _HomeState extends State<Home> {
                   fontStyle: FontStyle.normal,
                   fontSize: 16.0),
               clickable: true,
-              onPushNavigator: onPushNavigator,
-              // nextSubPageItem: SubPageItem.boardQna,
+              nextSubPageItem: "boardQna",
               customIcon: Row(
                 children: [
                   YrkIconButton(
                     icon: "icon_create.svg",
-                    // onTap: () => onPushNavigator!(new YrkData(
-                    //     nextPageItem: SubPageItem.postCreate,
-                    //     prevPageItem: RootPageItem.home)),
                   ),
                   TextButton(
                     child: Text("글 작성",
@@ -237,9 +221,6 @@ class _HomeState extends State<Home> {
                             fontSize: 14.0),
                         textAlign: TextAlign.left),
                     onPressed: null,
-                    // onPushNavigator!(new YrkData(
-                    //     nextPageItem: SubPageItem.postCreate,
-                    //     prevPageItem: RootPageItem.home)),
                   )
                 ],
               )),
@@ -265,8 +246,7 @@ class _HomeState extends State<Home> {
                   fontStyle: FontStyle.normal,
                   fontSize: 16.0),
               clickable: true,
-              onPushNavigator: onPushNavigator,
-              // nextSubPageItem: "boardQna",
+              nextSubPageItem: "boardQna",
               customIcon: TextButton(
                   child: Text("전체보기",
                       style: const TextStyle(
@@ -284,10 +264,10 @@ class _HomeState extends State<Home> {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     return HomePopularCardListItem(
-                        width: 144.0,
-                        height: 106.0,
-                        index: index,
-                        onPushNavigator: onPushNavigator);
+                      width: 144.0,
+                      height: 106.0,
+                      index: index,
+                    );
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return SizedBox(width: 8.0);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
@@ -9,9 +8,7 @@ import 'package:yoroke/screens/mypage/Rule.dart';
 import 'package:yoroke/screens/mypage/SignOut.dart';
 
 class SettingList extends StatefulWidget {
-  SettingList({Key? key, required this.onPushNavigator}) : super(key: key);
-
-  final ValueChanged<YrkData>? onPushNavigator;
+  SettingList({Key? key}) : super(key: key);
 
   @override
   _SettingListState createState() => _SettingListState();
@@ -70,16 +67,16 @@ class _SettingListState extends State<SettingList>
 
                   var traillist = [
                     YrkIconButton(
-                      icon: 'assets/icons/icon_naver_logo.svg',
+                      icon: 'icon_naver_logo.svg',
                     ),
                     YrkIconButton(
-                      icon: 'assets/icons/icon_arrow_back.svg',
+                      icon: 'icon_arrow_back.svg',
                     ),
                     YrkIconButton(
-                      icon: 'assets/icons/icon_arrow_back.svg',
+                      icon: 'icon_arrow_back.svg',
                     ),
                     YrkIconButton(
-                      icon: 'assets/icons/icon_arrow_back.svg',
+                      icon: 'icon_arrow_back.svg',
                     ),
                     Text("v.0.0.0")
                   ];
@@ -96,7 +93,7 @@ class _SettingListState extends State<SettingList>
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         var tablist = [
-                          NotiSetting(onPushNavigator: widget.onPushNavigator),
+                          NotiSetting(),
                           Rule(type: 0),
                           Rule(type: 1),
                         ];
@@ -121,7 +118,7 @@ class _SettingListState extends State<SettingList>
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return SignOut(onPushNavigator: widget.onPushNavigator);
+                        return SignOut();
                       }));
                     },
                   ),

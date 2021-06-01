@@ -2,20 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class BoardCardListItem extends StatelessWidget {
   BoardCardListItem(
-      {required this.index,
-      required this.listLength,
-      this.onPushNavigator,
-      this.isBorder = false});
+      {required this.index, required this.listLength, this.isBorder = false});
 
   final int index;
   final int listLength;
-  final ValueChanged<YrkData>? onPushNavigator;
   final bool isBorder;
 
   void _onCardClicked(BuildContext context) async {

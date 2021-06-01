@@ -5,16 +5,15 @@ import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 
 class HomeCardListItem extends StatelessWidget {
-  HomeCardListItem(
-      {required this.width,
-      required this.height,
-      required this.index,
-      this.onPushNavigator});
+  HomeCardListItem({
+    required this.width,
+    required this.height,
+    required this.index,
+  });
 
   final double width;
   final double height;
   final int index;
-  final ValueChanged<YrkData>? onPushNavigator;
 
   void _onCardItemClicked(BuildContext context) async {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {

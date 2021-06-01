@@ -12,7 +12,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/models/YrkMbsListData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
+import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/common/imagepickers/YrkImagePicker.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';

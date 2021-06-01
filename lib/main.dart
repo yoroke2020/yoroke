@@ -3,7 +3,6 @@ import 'package:yoroke/controllers/ProfileController.dart';
 import 'package:yoroke/screens/common/YrkDrawer.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
-import 'navigator/PageItem.dart';
 import 'navigator/TabNavigator.dart';
 
 void main() {
