@@ -1,5 +1,3 @@
-import 'package:yoroke/navigator/PageItem.dart';
-
 class YrkMbsListData {
   static final List<String> _postLabelList = [
     "공유하기",

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/navigator/PageItem.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
