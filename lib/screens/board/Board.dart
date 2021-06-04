@@ -8,7 +8,7 @@ import 'package:yoroke/core/model/YrkRequestContext.dart';
 import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/main.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
-import 'package:yoroke/screens/board/BoardCardListItem.dart';
+import 'package:yoroke/screens/board/BoardReviewCard.dart';
 import 'package:yoroke/screens/board/BoardJobFinding.dart';
 import 'package:yoroke/screens/board/BoardQna.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
@@ -17,6 +17,8 @@ import 'package:yoroke/screens/board/model/QnaPostApiResponse.dart';
 import 'package:yoroke/screens/board/model/QnaPostBlock.dart';
 import 'package:yoroke/screens/board/model/JobFindingPostApiResponse.dart';
 import 'package:yoroke/screens/board/model/JobFindingPostBlock.dart';
+import 'package:yoroke/screens/board/model/ReviewCardApiResponse.dart';
+import 'package:yoroke/screens/board/model/ReviewPostBlock.dart';
 import 'package:yoroke/screens/common/YrkListItemV2.dart';
 import 'package:yoroke/screens/common/YrkPage.dart';
 import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
@@ -32,8 +34,7 @@ class _BoardState extends State<Board> implements Screen<BoardBlock> {
   late BoardBlock boardBlock;
   late QnaPostBlock qnaPostBlock;
   late JobFindingPostBlock jobFindingPostBlock;
-
-  final int _boardCardListItemCount = 12;
+  late ReviewPostBlock reviewPostBlock;
 
   final PageController _qnaPageController = PageController();
   final PageController _jobFindingPageController = PageController();
@@ -66,6 +67,14 @@ class _BoardState extends State<Board> implements Screen<BoardBlock> {
     (block as JobFindingPostBlock).title = apiResponse.title;
     boardBlock.blocks!.add(block);
 
+    block = ReviewPostBlock();
+    jsonResponse = TestReviewCardData().jsonResponse;
+    apiResponse = ReviewCardApiResponse.fromJson(jsonResponse);
+    List<BoardReviewCardModel> cardItems =
+        (apiResponse as ReviewCardApiResponse).reviewCards;
+    block.items = cardItems;
+    boardBlock.blocks!.add(block);
+
     return boardBlock;
   }
 
@@ -75,6 +84,8 @@ class _BoardState extends State<Board> implements Screen<BoardBlock> {
     qnaPostBlock = boardBlock.findFirstBlockWhere('QnaPost') as QnaPostBlock;
     jobFindingPostBlock =
         boardBlock.findFirstBlockWhere('JobFindingPost') as JobFindingPostBlock;
+    reviewPostBlock =
+        boardBlock.findFirstBlockWhere('ReviewPost') as ReviewPostBlock;
     super.initState();
   }
 
@@ -106,25 +117,13 @@ class _BoardState extends State<Board> implements Screen<BoardBlock> {
             BottomBarNavigation.getInstance(RootPageItem.board),
         body: ListView(children: <Widget>[
           YrkTabHeaderView(title: "후기"),
-          Container(
-              height: 100.0,
-              alignment: Alignment.centerLeft,
-              child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: _boardCardListItemCount,
-                  itemBuilder: (BuildContext context, int index) {
-                    return BoardCardListItem(
-                      index: index,
-                      listLength: _boardCardListItemCount,
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BoardReview(index: index))),
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return SizedBox(width: 18.0);
-                  })),
+          BoardReviewCard(
+            models: reviewPostBlock.items as List<BoardReviewCardModel>,
+            onTap: (index) => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => BoardReview(index: index))),
+          ),
           YrkTabHeaderView(
             title: qnaPostBlock.title,
             clickable: true,

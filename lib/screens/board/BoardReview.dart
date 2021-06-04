@@ -19,7 +19,8 @@ import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/common/YrkTabBar.dart';
 
-import 'BoardCardListItem.dart';
+import 'BoardReviewCard.dart';
+import 'model/ReviewCardApiResponse.dart';
 
 class BoardReview extends StatefulWidget {
   BoardReview({@deprecated this.data, this.index = 0});
@@ -33,11 +34,11 @@ class BoardReview extends StatefulWidget {
 
 class _BoardReviewState extends State<BoardReview>
     implements Screen<BoardReviewBlock> {
-  static final int boardCardListItemCount = 12;
   final ScrollController _scrollController = ScrollController();
 
   late int _curIndex;
   late BoardReviewBlock _boardReviewBlock;
+  late ReviewPostBlock _reviewCardBlock;
 
   List<Tuple2<String, int>> _tabs = [];
   List<List<Widget>> _postItems = [];
@@ -72,12 +73,24 @@ class _BoardReviewState extends State<BoardReview>
     block.items = items;
     block.title = "인기글";
     boardReviewBlock.blocks!.add(block);
+
+    //TODO: ReqCtx로 받아서 하는 방법으로 변경
+    block = ReviewPostBlock();
+    jsonResponse = TestReviewCardData().jsonResponse;
+    apiResponse = ReviewCardApiResponse.fromJson(jsonResponse);
+    List<BoardReviewCardModel> cardItems =
+        (apiResponse as ReviewCardApiResponse).reviewCards;
+    block.items = cardItems;
+    boardReviewBlock.blocks!.add(block);
+
     return boardReviewBlock;
   }
 
   void _loadItems() {
     _boardReviewBlock = makeBlock(reqCtx);
-    for (int i = 0; i < _boardReviewBlock.blocks!.length; i++) {
+    //TODO: ReqCtx로 받아서 하는 방법으로 변경 후 주석처리 해제
+    // for (int i = 0; i < _boardReviewBlock.blocks!.length; i++) {
+    for (int i = 0; i < 2; i++) {
       ReviewPostBlock block = _boardReviewBlock.blocks![i] as ReviewPostBlock;
       List<Widget> items = _buildItems(block.type, block.items!);
       _tabs.add(Tuple2(block.title, i));
@@ -102,6 +115,7 @@ class _BoardReviewState extends State<BoardReview>
     super.initState();
     _curIndex = widget.index;
     _loadItems();
+    _reviewCardBlock = _boardReviewBlock.blocks![2] as ReviewPostBlock;
   }
 
   @override
@@ -154,70 +168,48 @@ class _BoardReviewState extends State<BoardReview>
                                               textAlign: TextAlign.left)))
                                 ]),
                                 flexibleSpace: YrkScrollOpacity(
-                                  scrollController: _scrollController,
-                                  reversed: true,
-                                  child: FlexibleSpaceBar(
-                                      background: Container(
-                                          color: const Color(0xffffffff),
-                                          child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                SizedBox(
-                                                  height: 48.0 +
-                                                      MediaQuery.of(context)
-                                                          .padding
-                                                          .top,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 16.0,
-                                                      top: 8.0,
-                                                      bottom: 8.0),
-                                                  child: Text("후기",
-                                                      style: const YrkTextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 22.0),
-                                                      textAlign:
-                                                          TextAlign.left),
-                                                ),
-                                                Container(
-                                                    height: 100.0,
-                                                    child: ListView.separated(
-                                                        scrollDirection:
-                                                            Axis.horizontal,
-                                                        itemCount:
-                                                            boardCardListItemCount,
-                                                        separatorBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return SizedBox(
-                                                              width: 16.0);
-                                                        },
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return BoardCardListItem(
-                                                            index: index,
-                                                            listLength:
-                                                                boardCardListItemCount,
-                                                            isBorder: index ==
-                                                                    _curIndex
-                                                                ? true
-                                                                : false,
-                                                            onTap: () =>
-                                                                _onTapReviewCard(
-                                                                    context,
-                                                                    index),
-                                                          );
-                                                        }))
-                                              ]))),
-                                ),
+                                    scrollController: _scrollController,
+                                    reversed: true,
+                                    child: FlexibleSpaceBar(
+                                        background: Container(
+                                            color: const Color(0xffffffff),
+                                            child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  SizedBox(
+                                                    height: 48.0 +
+                                                        MediaQuery.of(context)
+                                                            .padding
+                                                            .top,
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 16.0,
+                                                        top: 8.0,
+                                                        bottom: 8.0),
+                                                    child: Text("후기",
+                                                        style:
+                                                            const YrkTextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                                fontSize: 22.0),
+                                                        textAlign:
+                                                            TextAlign.left),
+                                                  ),
+                                                  BoardReviewCards(
+                                                      index: _curIndex,
+                                                      onTap: (index) =>
+                                                          _onTapReviewCard(
+                                                              context, index),
+                                                      models: _reviewCardBlock
+                                                              .items
+                                                          as List<
+                                                              BoardReviewCardModel>)
+                                                ])))),
                                 forceElevated: innerBoxIsScrolled,
                                 bottom:
                                     CustomTapBar(tabs: _tabs, tabWidth: 72.0)))
@@ -281,6 +273,7 @@ class _BoardReviewState extends State<BoardReview>
         DefaultTabController.of(context)!.animateTo(0);
         _postItems.removeRange(0, _postItems.length);
         _postItemCounts.removeRange(0, _postItemCounts.length);
+        _tabs.removeRange(0, _tabs.length);
         _loadItems();
       });
   }
