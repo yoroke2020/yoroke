@@ -117,7 +117,7 @@ class _BoardState extends State<Board> implements Screen<BoardBlock> {
             BottomBarNavigation.getInstance(RootPageItem.board),
         body: ListView(children: <Widget>[
           YrkTabHeaderView(title: "후기"),
-          BoardReviewCard(
+          BoardReviewCards(
             models: reviewPostBlock.items as List<BoardReviewCardModel>,
             onTap: (index) => Navigator.push(
                 context,
