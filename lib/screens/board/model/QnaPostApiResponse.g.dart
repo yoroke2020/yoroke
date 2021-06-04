@@ -10,6 +10,7 @@ QnaPostApiResponse _$QnaPostApiResponseFromJson(Map<String, dynamic> json) {
   return QnaPostApiResponse()
     ..status = json['status'] as String?
     ..message = json['message'] as String?
+    ..title = json['title'] as String
     ..qnaPosts = (json['qnaPosts'] as List<dynamic>)
         .map((e) => YrkListItemV2Model.fromJson(e as Map<String, dynamic>))
         .toList();
@@ -19,5 +20,6 @@ Map<String, dynamic> _$QnaPostApiResponseToJson(QnaPostApiResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
+      'title': instance.title,
       'qnaPosts': instance.qnaPosts.map((e) => e.toJson()).toList(),
     };

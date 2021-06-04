@@ -48,26 +48,23 @@ class _BoardQnaState extends State<BoardQna> implements Screen<BoardQnaBlock> {
   @override
   BoardQnaBlock makeBlock(YrkRequestContext reqCtx) {
     BoardQnaBlock boardQnaBlock = BoardQnaBlock();
+    boardQnaBlock.title = "고민/질문";
     boardQnaBlock.blocks = <YrkBlock>[];
-    QnaPostBlock block = QnaPostBlock();
 
+    QnaPostBlock block = QnaPostBlock();
     Map<String, dynamic> jsonResponse = TestQnaPostData().jsonResponse;
     YrkApiResponse apiResponse = QnaPostApiResponse.fromJson(jsonResponse);
     List<YrkModel> items =
         (apiResponse as QnaPostApiResponse).qnaPosts;
     block.items = items as List<YrkListItemV2Model>;
-
+    block.title = apiResponse.title;
     boardQnaBlock.blocks!.add(block);
 
     block = QnaPostBlock();
     block.type = "QnaCard";
-
     jsonResponse = TestQnaCardData().jsonResponse;
-    print(jsonResponse);
     apiResponse = QnaCardApiResponse.fromJson(jsonResponse);
-    print(apiResponse);
     items = (apiResponse as QnaCardApiResponse).qnaCards;
-
     block.items = items as List<BoardQnaCardModel>;
     boardQnaBlock.blocks!.add(block);
 
@@ -143,7 +140,7 @@ class _BoardQnaState extends State<BoardQna> implements Screen<BoardQnaBlock> {
                       alignment: Alignment.centerLeft,
                       margin: EdgeInsets.only(left: 48.0),
                       height: 48.0,
-                      child: Text(qnaPostBlock.title,
+                      child: Text(boardQnaBlock.title,
                           style:
                               const YrkTextStyle(fontWeight: FontWeight.w700),
                           textAlign: TextAlign.left)))
@@ -152,7 +149,7 @@ class _BoardQnaState extends State<BoardQna> implements Screen<BoardQnaBlock> {
           SliverToBoxAdapter(
               child: Padding(
             padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
-            child: Text(qnaPostBlock.title,
+            child: Text(boardQnaBlock.title,
                 style: const YrkTextStyle(
                     fontWeight: FontWeight.w700, fontSize: 22.0),
                 textAlign: TextAlign.left),

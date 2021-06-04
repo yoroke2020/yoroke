@@ -8,6 +8,8 @@ part 'BoardQnaBlock.g.dart';
 class BoardQnaBlock extends YrkBlock {
   BoardQnaBlock() : super('BoardQna');
 
+  late String title;
+
   factory BoardQnaBlock.fromJson(Map<String, dynamic> json) =>
       _$BoardQnaBlockFromJson(json);
   Map<String, dynamic> toJson() => _$BoardQnaBlockToJson(this);

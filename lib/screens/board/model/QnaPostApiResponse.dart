@@ -11,6 +11,7 @@ part 'QnaPostApiResponse.g.dart';
 class QnaPostApiResponse extends YrkApiResponse {
   QnaPostApiResponse();
 
+  late String title;
   late List<YrkListItemV2Model> qnaPosts;
 
   factory QnaPostApiResponse.fromJson(Map<String, dynamic> json) =>
@@ -23,6 +24,7 @@ class TestQnaPostData {
   Map<String, dynamic> jsonResponse = {
     "status": "200",
     "message": "success",
+    "title": "고민/질문",
     "qnaPosts": [
       {
         "pageType": "qnaPost",

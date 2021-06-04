@@ -23,6 +23,7 @@ class TestQnaCardData {
   Map<String, dynamic> jsonResponse = {
     "status": "200",
     "message": "success",
+    "type": "QnaCard",
     "qnaCards": [
       {
         "pageType": "qnaPost",

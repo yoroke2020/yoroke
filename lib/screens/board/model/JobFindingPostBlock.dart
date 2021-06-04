@@ -9,7 +9,7 @@ class JobFindingPostBlock extends YrkBlock {
   // TODO map 'PopularPostBlock' to static string
   JobFindingPostBlock() : super('JobFindingPost');
 
-  late String title = "구인구직";
+  late String title;
 
   factory JobFindingPostBlock.fromJson(Map<String, dynamic> json) =>
       _$JobFindingPostBlockFromJson(json);

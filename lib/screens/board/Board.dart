@@ -51,20 +51,18 @@ class _BoardState extends State<Board> implements Screen<BoardBlock>  {
 
     Map<String, dynamic> jsonResponse = TestQnaPostData().jsonResponse;
     YrkApiResponse apiResponse = QnaPostApiResponse.fromJson(jsonResponse);
-
     List<YrkListItemV2Model> items =
         (apiResponse as QnaPostApiResponse).qnaPosts;
     block.items = items;
-
+    (block as QnaPostBlock).title = apiResponse.title;
     boardBlock.blocks!.add(block);
 
+    block = JobFindingPostBlock();
     jsonResponse = TestJobFindingPostData().jsonResponse;
     apiResponse = JobFindingPostApiResponse.fromJson(jsonResponse);
-
-    block = JobFindingPostBlock();
     items = (apiResponse as JobFindingPostApiResponse).jobFindingPosts;
     block.items = items;
-
+    (block as JobFindingPostBlock).title = apiResponse.title;
     boardBlock.blocks!.add(block);
 
     return boardBlock;
