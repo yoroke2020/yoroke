@@ -49,9 +49,8 @@ class _BoardJobFindingState extends State<BoardJobFinding>
     BoardJobFindingBlock boardJobFindingBlock = BoardJobFindingBlock();
     boardJobFindingBlock.blocks = <YrkBlock>[];
     boardJobFindingBlock.title = "구인구직";
-    print(boardJobFindingBlock.type);
-    JobFindingPostBlock block = JobFindingPostBlock();
 
+    JobFindingPostBlock block = JobFindingPostBlock();
     Map<String, dynamic> jsonResponse = TestJobFindingInternalPostData().jsonResponse;
     YrkApiResponse apiResponse =
         JobFindingPostApiResponse.fromJson(jsonResponse);
@@ -202,12 +201,6 @@ class _BoardJobFindingState extends State<BoardJobFinding>
                                               (BuildContext context,
                                                   int index) {
                                         return postItems[tab.item2][index];
-                                        // return YrkPageListItem(
-                                        //   pageIndex: tab.item2,
-                                        //   listIndex: index,
-                                        //   pageType: "boardJobFinding",
-                                        //   nextPageItem: "post",
-                                        // );
                                       }, childCount: postItemCounts[tab.item2]))
                                     ]));
                           }));

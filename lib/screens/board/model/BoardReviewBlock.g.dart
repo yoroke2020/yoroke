@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'BoardJobFindingBlock.dart';
+part of 'BoardReviewBlock.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-BoardJobFindingBlock _$BoardJobFindingBlockFromJson(Map<String, dynamic> json) {
-  return BoardJobFindingBlock()
+BoardReviewBlock _$BoardReviewBlockFromJson(Map<String, dynamic> json) {
+  return BoardReviewBlock()
     ..type = json['type'] as String
     ..blocks = (json['blocks'] as List<dynamic>?)
         ?.map((e) => YrkBlock.fromJson(e as Map<String, dynamic>))
@@ -18,8 +18,7 @@ BoardJobFindingBlock _$BoardJobFindingBlockFromJson(Map<String, dynamic> json) {
     ..title = json['title'] as String;
 }
 
-Map<String, dynamic> _$BoardJobFindingBlockToJson(
-        BoardJobFindingBlock instance) =>
+Map<String, dynamic> _$BoardReviewBlockToJson(BoardReviewBlock instance) =>
     <String, dynamic>{
       'type': instance.type,
       'blocks': instance.blocks?.map((e) => e.toJson()).toList(),

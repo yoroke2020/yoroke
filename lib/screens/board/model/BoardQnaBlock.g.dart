@@ -14,7 +14,8 @@ BoardQnaBlock _$BoardQnaBlockFromJson(Map<String, dynamic> json) {
         .toList()
     ..items = (json['items'] as List<dynamic>?)
         ?.map((e) => YrkModel.fromJson(e as Map<String, dynamic>))
-        .toList();
+        .toList()
+    ..title = json['title'] as String;
 }
 
 Map<String, dynamic> _$BoardQnaBlockToJson(BoardQnaBlock instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$BoardQnaBlockToJson(BoardQnaBlock instance) =>
       'type': instance.type,
       'blocks': instance.blocks?.map((e) => e.toJson()).toList(),
       'items': instance.items?.map((e) => e.toJson()).toList(),
+      'title': instance.title,
     };

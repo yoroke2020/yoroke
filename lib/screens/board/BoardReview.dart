@@ -2,9 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
+import 'package:yoroke/core/model/YrkApiResponse.dart';
+import 'package:yoroke/core/model/YrkBlock.dart';
+import 'package:yoroke/core/model/YrkModel.dart';
+import 'package:yoroke/core/model/YrkRequestContext.dart';
+import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
-import 'package:yoroke/screens/common/YrkListItem.dart';
+import 'package:yoroke/screens/board/model/BoardReviewBlock.dart';
+import 'package:yoroke/screens/board/model/ReviewPostApiResponse.dart';
+import 'package:yoroke/screens/board/model/ReviewPostBlock.dart';
+import 'package:yoroke/screens/common/YrkListItemV2.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
@@ -14,30 +22,86 @@ import 'package:yoroke/screens/common/YrkTabBar.dart';
 import 'BoardCardListItem.dart';
 
 class BoardReview extends StatefulWidget {
-  BoardReview({required this.data});
+  BoardReview({@deprecated this.data, this.index = 0});
 
   final YrkData? data;
+  final int index;
 
   @override
   _BoardReviewState createState() => _BoardReviewState();
 }
 
-class _BoardReviewState extends State<BoardReview> {
+class _BoardReviewState extends State<BoardReview>
+    implements Screen<BoardReviewBlock> {
   static final int boardCardListItemCount = 12;
-
-  late int _curCardIndex;
   final ScrollController _scrollController = ScrollController();
-  final List<Tuple2<String, int>> _tabs = <Tuple2<String, int>>[
-    Tuple2('최신글', 0),
-    Tuple2('인기글', 1)
-  ];
 
-  List<int> _childCount = [10, 10];
+  late int _curIndex;
+  late BoardReviewBlock _boardReviewBlock;
+
+  List<Tuple2<String, int>> _tabs = [];
+  List<List<Widget>> _postItems = [];
+  List<int> _postItemCounts = [];
+
+  @override
+  // TODO: implement block
+  BoardReviewBlock get block => this.block;
+
+  @override
+  // TODO: implement reqCtx
+  YrkRequestContext get reqCtx => YrkRequestContext();
+
+  @override
+  BoardReviewBlock makeBlock(YrkRequestContext reqCtx) {
+    BoardReviewBlock boardReviewBlock = BoardReviewBlock();
+    boardReviewBlock.blocks = <YrkBlock>[];
+    boardReviewBlock.title = "후기";
+
+    ReviewPostBlock block = ReviewPostBlock();
+    Map<String, dynamic> jsonResponse = TestReviewPostData().jsonResponse;
+    YrkApiResponse apiResponse = ReviewPostApiResponse.fromJson(jsonResponse);
+    List<YrkModel> items = (apiResponse as ReviewPostApiResponse).reviewPosts;
+    block.items = items as List<YrkListItemV2Model>;
+    block.title = "최신글";
+    boardReviewBlock.blocks!.add(block);
+
+    block = ReviewPostBlock();
+    jsonResponse = TestReviewPostData().jsonResponse;
+    apiResponse = ReviewPostApiResponse.fromJson(jsonResponse);
+    items = apiResponse.reviewPosts;
+    block.items = items;
+    block.title = "인기글";
+    boardReviewBlock.blocks!.add(block);
+    return boardReviewBlock;
+  }
+
+  void _loadItems() {
+    _boardReviewBlock = makeBlock(reqCtx);
+    for (int i = 0; i < _boardReviewBlock.blocks!.length; i++) {
+      ReviewPostBlock block = _boardReviewBlock.blocks![i] as ReviewPostBlock;
+      List<Widget> items = _buildItems(block.type, block.items!);
+      _tabs.add(Tuple2(block.title, i));
+      _postItems.add(items);
+      _postItemCounts.add(items.length);
+    }
+  }
+
+  void _loadMoreItems(int index) {
+    setState(() {
+      Map<String, dynamic> jsonResponse = TestReviewPostData().jsonResponse;
+      YrkApiResponse apiResponse = ReviewPostApiResponse.fromJson(jsonResponse);
+      List<YrkModel> items = (apiResponse as ReviewPostApiResponse).reviewPosts;
+      _postItems[index]
+          .addAll(_buildItems(_boardReviewBlock.blocks![index].type, items));
+      _postItemCounts[index] = _postItems[index].length;
+    });
+  }
 
   @override
   void initState() {
-    _curCardIndex = widget.data!.i1!;
     super.initState();
+    _curIndex = widget.index;
+    _loadItems();
   }
 
   @override
@@ -143,9 +207,13 @@ class _BoardReviewState extends State<BoardReview> {
                                                             listLength:
                                                                 boardCardListItemCount,
                                                             isBorder: index ==
-                                                                    _curCardIndex
+                                                                    _curIndex
                                                                 ? true
                                                                 : false,
+                                                            onTap: () =>
+                                                                _onTapReviewCard(
+                                                                    context,
+                                                                    index),
                                                           );
                                                         }))
                                               ]))),
@@ -176,14 +244,9 @@ class _BoardReviewState extends State<BoardReview> {
                                       SliverList(
                                           delegate: SliverChildBuilderDelegate(
                                         (BuildContext context, int index) {
-                                          return YrkPageListItem(
-                                            pageIndex: tab.item2,
-                                            listIndex: index,
-                                            pageType: "boardReview",
-                                            nextPageItem: "post",
-                                          );
+                                          return _postItems[tab.item2][index];
                                         },
-                                        childCount: _childCount[tab.item2],
+                                        childCount: _postItemCounts[tab.item2],
                                       ))
                                     ]));
                           }));
@@ -192,12 +255,11 @@ class _BoardReviewState extends State<BoardReview> {
             BottomBarNavigation.getInstance(RootPageItem.board));
   }
 
-  void _onPushChangeReviewCard(BuildContext context, YrkData data) {
-    setState(() {
-      _curCardIndex = data.i1!;
-      _childCount.fillRange(0, _childCount.length - 1, 10);
-      DefaultTabController.of(context)!.animateTo(0);
-    });
+  List<Widget> _buildItems(String type, List<YrkModel> items) {
+    return items
+        .cast<YrkListItemV2Model>()
+        .map((model) => YrkPageListItemV2(type: type, model: model))
+        .toList();
   }
 
   bool _onScrollNotification(ScrollNotification notification, int index) {
@@ -206,9 +268,20 @@ class _BoardReviewState extends State<BoardReview> {
     if (notification.metrics.extentBefore ==
         notification.metrics.maxScrollExtent) {
       setState(() {
-        _childCount[index] += 10;
+        _loadMoreItems(index);
       });
     }
     return true;
+  }
+
+  void _onTapReviewCard(BuildContext context, int index) {
+    if (_curIndex != index)
+      setState(() {
+        _curIndex = index;
+        DefaultTabController.of(context)!.animateTo(0);
+        _postItems.removeRange(0, _postItems.length);
+        _postItemCounts.removeRange(0, _postItemCounts.length);
+        _loadItems();
+      });
   }
 }

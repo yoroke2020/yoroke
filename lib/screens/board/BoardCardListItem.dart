@@ -7,28 +7,17 @@ import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class BoardCardListItem extends StatelessWidget {
   BoardCardListItem(
-      {required this.index, required this.listLength, this.isBorder = false});
+      {required this.index, required this.listLength, this.isBorder = false, required this.onTap});
 
   final int index;
   final int listLength;
   final bool isBorder;
-
-  void _onCardClicked(BuildContext context) async {
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      await Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => BoardReview(
-                      data: new YrkData(
-                    i1: index,
-                  ))));
-    });
-  }
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () => _onCardClicked(context),
+        onTap: onTap,
         child: Container(
             margin: index == 0
                 ? EdgeInsets.only(left: 17.0)

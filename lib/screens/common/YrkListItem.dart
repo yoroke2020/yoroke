@@ -28,12 +28,6 @@ class YrkPageListItem extends StatelessWidget {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       await Navigator.push(context, MaterialPageRoute(builder: (context) {
         switch (nextPageItem) {
-          case "boardReview":
-            return BoardReview(data: new YrkData());
-          case "boardQna":
-            return BoardQna();
-          case "boardJobFinding":
-            return BoardJobFinding();
           case "post":
             return Post(data: new YrkData());
           default:

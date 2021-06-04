@@ -11,6 +11,7 @@ import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/board/BoardCardListItem.dart';
 import 'package:yoroke/screens/board/BoardJobFinding.dart';
 import 'package:yoroke/screens/board/BoardQna.dart';
+import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/board/model/BoardBlock.dart';
 import 'package:yoroke/screens/board/model/QnaPostApiResponse.dart';
 import 'package:yoroke/screens/board/model/QnaPostBlock.dart';
@@ -22,12 +23,12 @@ import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
-class Board extends StatefulWidget{
+class Board extends StatefulWidget {
   @override
   _BoardState createState() => _BoardState();
 }
 
-class _BoardState extends State<Board> implements Screen<BoardBlock>  {
+class _BoardState extends State<Board> implements Screen<BoardBlock> {
   late BoardBlock boardBlock;
   late QnaPostBlock qnaPostBlock;
   late JobFindingPostBlock jobFindingPostBlock;
@@ -71,10 +72,9 @@ class _BoardState extends State<Board> implements Screen<BoardBlock>  {
   @override
   void initState() {
     boardBlock = makeBlock(reqCtx);
-    qnaPostBlock =
-        boardBlock.findFirstBlockWhere('QnaPost') as QnaPostBlock;
-    jobFindingPostBlock = boardBlock.findFirstBlockWhere('JobFindingPost')
-        as JobFindingPostBlock;
+    qnaPostBlock = boardBlock.findFirstBlockWhere('QnaPost') as QnaPostBlock;
+    jobFindingPostBlock =
+        boardBlock.findFirstBlockWhere('JobFindingPost') as JobFindingPostBlock;
     super.initState();
   }
 
@@ -114,7 +114,13 @@ class _BoardState extends State<Board> implements Screen<BoardBlock>  {
                   itemCount: _boardCardListItemCount,
                   itemBuilder: (BuildContext context, int index) {
                     return BoardCardListItem(
-                        index: index, listLength: _boardCardListItemCount);
+                      index: index,
+                      listLength: _boardCardListItemCount,
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BoardReview(index: index))),
+                    );
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return SizedBox(width: 18.0);
