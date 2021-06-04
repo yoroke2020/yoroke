@@ -7,9 +7,9 @@ part 'QnaPostBlock.g.dart';
 @JsonSerializable(explicitToJson: true)
 class QnaPostBlock extends YrkBlock {
   // TODO map 'PopularPostBlock' to static string
-  QnaPostBlock() : super('QnaPostBlock');
+  QnaPostBlock() : super('QnaPost');
 
-  late String title = "구인/구직";
+  late String title = "고민/질문";
 
   factory QnaPostBlock.fromJson(Map<String, dynamic> json) =>
       _$QnaPostBlockFromJson(json);

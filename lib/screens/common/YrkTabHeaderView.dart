@@ -10,6 +10,7 @@ class YrkTabHeaderView extends StatelessWidget {
     this.height = 40,
     this.margin = const EdgeInsets.only(left: 16.0, right: 16.0),
     this.clickable = false,
+    @deprecated
     this.nextSubPageItem,
     this.title = "",
     this.titleStyle = const YrkTextStyle(fontSize: 16.0),

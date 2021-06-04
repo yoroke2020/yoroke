@@ -6,7 +6,7 @@ part 'BoardBlock.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class BoardBlock extends YrkBlock {
-  BoardBlock() : super('BoardBlock');
+  BoardBlock() : super('Board');
 
   factory BoardBlock.fromJson(Map<String, dynamic> json) =>
       _$BoardBlockFromJson(json);

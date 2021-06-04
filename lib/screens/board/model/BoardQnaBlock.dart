@@ -6,7 +6,7 @@ part 'BoardQnaBlock.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class BoardQnaBlock extends YrkBlock {
-  BoardQnaBlock() : super('BoardQnaBlock');
+  BoardQnaBlock() : super('BoardQna');
 
   factory BoardQnaBlock.fromJson(Map<String, dynamic> json) =>
       _$BoardQnaBlockFromJson(json);

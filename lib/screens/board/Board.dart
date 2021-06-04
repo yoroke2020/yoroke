@@ -22,9 +22,20 @@ import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
-class Board extends StatefulWidget implements Screen<BoardBlock> {
+class Board extends StatefulWidget{
   @override
   _BoardState createState() => _BoardState();
+}
+
+class _BoardState extends State<Board> implements Screen<BoardBlock>  {
+  late BoardBlock boardBlock;
+  late QnaPostBlock qnaPostBlock;
+  late JobFindingPostBlock jobFindingPostBlock;
+
+  final int _boardCardListItemCount = 12;
+
+  final PageController _qnaPageController = PageController();
+  final PageController _jobFindingPageController = PageController();
 
   @override
   YrkRequestContext get reqCtx => YrkRequestContext();
@@ -36,52 +47,40 @@ class Board extends StatefulWidget implements Screen<BoardBlock> {
   BoardBlock makeBlock(YrkRequestContext reqCtx) {
     BoardBlock boardBlock = BoardBlock();
     boardBlock.blocks = <YrkBlock>[];
-    QnaPostBlock qnaPostBlock = QnaPostBlock();
-    JobFindingPostBlock jobFindingPostBlock = JobFindingPostBlock();
+    YrkBlock block = QnaPostBlock();
 
     Map<String, dynamic> jsonResponse = TestQnaPostData().jsonResponse;
     YrkApiResponse apiResponse = QnaPostApiResponse.fromJson(jsonResponse);
 
     List<YrkListItemV2Model> items =
         (apiResponse as QnaPostApiResponse).qnaPosts;
-    qnaPostBlock.items = items;
+    block.items = items;
 
-    boardBlock.blocks!.add(qnaPostBlock);
+    boardBlock.blocks!.add(block);
 
     jsonResponse = TestJobFindingPostData().jsonResponse;
     apiResponse = JobFindingPostApiResponse.fromJson(jsonResponse);
 
+    block = JobFindingPostBlock();
     items = (apiResponse as JobFindingPostApiResponse).jobFindingPosts;
-    jobFindingPostBlock.items = items;
-    jobFindingPostBlock.title = "구인구직";
+    block.items = items;
 
-    boardBlock.blocks!.add(jobFindingPostBlock);
+    boardBlock.blocks!.add(block);
 
     return boardBlock;
   }
-}
-
-class _BoardState extends State<Board> {
-  late BoardBlock boardBlock;
-  late QnaPostBlock qnaPostBlock;
-  late JobFindingPostBlock jobFindingPostBlock;
-
-  final int _boardCardListItemCount = 12;
-
-  final PageController _qnaPageController = PageController();
-  final PageController _jobFindingPageController = PageController();
 
   @override
   void initState() {
-    boardBlock = widget.makeBlock(widget.reqCtx);
+    boardBlock = makeBlock(reqCtx);
     qnaPostBlock =
-        boardBlock.findFirstBlockWhere('QnaPostBlock') as QnaPostBlock;
-    jobFindingPostBlock = boardBlock.findFirstBlockWhere('JobFindingPostBlock')
+        boardBlock.findFirstBlockWhere('QnaPost') as QnaPostBlock;
+    jobFindingPostBlock = boardBlock.findFirstBlockWhere('JobFindingPost')
         as JobFindingPostBlock;
     super.initState();
   }
 
-  List<Widget> _buildList(YrkBlock block) {
+  List<Widget> _buildItems(YrkBlock block) {
     final int pageItemLimit = 4;
 
     List<YrkModel> items = block.items!;
@@ -108,7 +107,7 @@ class _BoardState extends State<Board> {
         bottomNavigationBar:
             BottomBarNavigation.getInstance(RootPageItem.board),
         body: ListView(children: <Widget>[
-          YrkTabHeaderView(title: "후기", nextSubPageItem: "boardReview"),
+          YrkTabHeaderView(title: "후기"),
           Container(
               height: 100.0,
               alignment: Alignment.centerLeft,
@@ -125,22 +124,20 @@ class _BoardState extends State<Board> {
           YrkTabHeaderView(
             title: qnaPostBlock.title,
             clickable: true,
-            nextSubPageItem: "boardQna",
             onTap: () => Navigator.push(
                 context, MaterialPageRoute(builder: (context) => BoardQna())),
           ),
           YrkPage(
-              page: _buildList(qnaPostBlock),
+              page: _buildItems(qnaPostBlock),
               controller: _qnaPageController,
               isIndicatorEnabled: true),
           YrkTabHeaderView(
               title: jobFindingPostBlock.title,
               clickable: true,
-              nextSubPageItem: "boardJobFinding",
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => BoardJobFinding()))),
           YrkPage(
-              page: _buildList(jobFindingPostBlock),
+              page: _buildItems(jobFindingPostBlock),
               controller: _jobFindingPageController,
               isIndicatorEnabled: true)
         ]));

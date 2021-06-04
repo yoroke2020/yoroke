@@ -3,30 +3,30 @@ import 'dart:math';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yoroke/core/model/YrkApiResponse.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
-import 'package:yoroke/screens/common/YrkListItemV2.dart';
+import 'package:yoroke/screens/board/BoardQnaCard.dart';
 
-part 'QnaPostApiResponse.g.dart';
+part 'QnaCardApiResponse.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class QnaPostApiResponse extends YrkApiResponse {
-  QnaPostApiResponse();
+class QnaCardApiResponse extends YrkApiResponse {
+  QnaCardApiResponse();
 
-  late List<YrkListItemV2Model> qnaPosts;
+  late List<BoardQnaCardModel> qnaCards;
 
-  factory QnaPostApiResponse.fromJson(Map<String, dynamic> json) =>
-      _$QnaPostApiResponseFromJson(json);
+  factory QnaCardApiResponse.fromJson(Map<String, dynamic> json) =>
+      _$QnaCardApiResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$QnaPostApiResponseToJson(this);
+  Map<String, dynamic> toJson() => _$QnaCardApiResponseToJson(this);
 }
 
-class TestQnaPostData {
+class TestQnaCardData {
   Map<String, dynamic> jsonResponse = {
     "status": "200",
     "message": "success",
-    "qnaPosts": [
+    "qnaCards": [
       {
         "pageType": "qnaPost",
-        "facilityType": "요양병원",
+        "type": "요양병원",
         "title": "첫번째 요양병원 질문",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -38,7 +38,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양",
+        "type": "요양",
         "title": "인기 요양원",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -50,7 +50,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양",
+        "type": "요양",
         "title": "인기 요양원",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -62,7 +62,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양",
+        "type": "요양",
         "title": "인기 요양원",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -74,7 +74,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양병원",
+        "type": "요양병원",
         "title": "요양병원 질문",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -86,7 +86,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양",
+        "type": "요양",
         "title": "인기 요양원",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -98,7 +98,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양",
+        "type": "요양",
         "title": "인기 요양원",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -110,7 +110,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양",
+        "type": "요양",
         "title": "인기 요양원",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -122,7 +122,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양병원",
+        "type": "요양병원",
         "title": "요양병원 질문",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -134,7 +134,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양",
+        "type": "요양",
         "title": "인기 요양원",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -146,7 +146,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양",
+        "type": "요양",
         "title": "인기 요양원",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -158,7 +158,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양",
+        "type": "요양",
         "title": "인기 요양원",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -170,7 +170,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양병원",
+        "type": "요양병원",
         "title": "요양병원 질문",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -182,7 +182,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양",
+        "type": "요양",
         "title": "인기 요양원",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -194,7 +194,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양",
+        "type": "요양",
         "title": "인기 요양원",
         "isBest": Random().nextBool(),
         "author": "유저1",
@@ -206,7 +206,7 @@ class TestQnaPostData {
       },
       {
         "pageType": "qnaPost",
-        "facilityType": "요양",
+        "type": "요양",
         "title": "마지막 인기 요양원",
         "isBest": Random().nextBool(),
         "author": "유저1",

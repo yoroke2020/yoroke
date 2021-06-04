@@ -47,12 +47,12 @@ class YrkPageListItemV2 extends StatelessWidget {
     bool isRating = false;
 
     switch (type ?? "") {
-      case "JobFindingPostBlock":
+      case "JobFindingPost":
         isText = false;
         break;
       case "PopularPostBlock":
       case "reviewPost":
-      case "QnaPostBlock":
+      case "QnaPost":
         isRating = true;
         isBestIcon = model.isBest ?? false;
         break;
@@ -128,15 +128,16 @@ class YrkPageListItemV2 extends StatelessWidget {
                     Container(
                         margin: EdgeInsets.only(right: 8.0),
                         child: Text(model.author ?? "",
-                            style: const TextStyle(
+                            style: const YrkTextStyle(
                                 color: const Color(0x4d000000),
                                 fontWeight: FontWeight.w500,
+                                height: 0.9,
                                 fontSize: 12.0),
                             textAlign: TextAlign.left)),
                     Container(
                         margin: EdgeInsets.only(right: 9.0),
                         child: Text(model.timestamp ?? "",
-                            style: const TextStyle(
+                            style: const YrkTextStyle(
                               color: const Color(0x4d000000),
                               fontSize: 12.0,
                               fontFamily: "OpenSans",
@@ -151,7 +152,7 @@ class YrkPageListItemV2 extends StatelessWidget {
                     Container(
                         margin: EdgeInsets.only(right: 8.0),
                         child: Text('${model.likeCount ?? -1}',
-                            style: const TextStyle(
+                            style: const YrkTextStyle(
                               color: const Color(0x4d000000),
                               fontWeight: FontWeight.w600,
                               fontSize: 12.0,
@@ -167,7 +168,7 @@ class YrkPageListItemV2 extends StatelessWidget {
                     Container(
                         margin: EdgeInsets.only(right: 8.0),
                         child: Text('${model.commentCount ?? -1}',
-                            style: const TextStyle(
+                            style: const YrkTextStyle(
                               color: const Color(0x4d000000),
                               fontWeight: FontWeight.w600,
                               fontSize: 12.0,
@@ -188,7 +189,7 @@ class YrkPageListItemV2 extends StatelessWidget {
                                 )),
                             Container(
                                 child: Text('${model.rating ?? -1}',
-                                    style: const TextStyle(
+                                    style: const YrkTextStyle(
                                       color: const Color(0x4d000000),
                                       fontWeight: FontWeight.w600,
                                       fontSize: 12.0,
