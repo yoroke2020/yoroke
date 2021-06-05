@@ -24,7 +24,7 @@ import '../../main.dart';
 import 'HomeCardListItem.dart';
 import 'HomePopularCardListItem.dart';
 
-class Home extends StatefulWidget implements Screen<HomeBlock> {
+class Home extends StatefulWidget {
   Home();
 
   // FIXME get reqCtx from previous screen
@@ -32,42 +32,15 @@ class Home extends StatefulWidget implements Screen<HomeBlock> {
 
   @override
   _HomeState createState() => _HomeState();
-
-  @override
-  HomeBlock makeBlock(reqCtx) {
-    // TODO use request context to make block..
-    // reqCtx.userCtx.name...
-
-    HomeBlock homeBlock = HomeBlock();
-    homeBlock.blocks = <YrkBlock>[];
-    PopularPostBlock popularPostBlock = PopularPostBlock();
-
-    // (example) data from API
-    Map<String, dynamic> jsonResponse = TestPopularPostData().jsonResponse;
-    // deserialize api response: from json to class
-    PopularPostApiResponse apiResponse =
-        PopularPostApiResponse.fromJson(jsonResponse);
-    // make a model list
-    List<YrkListItemV2Model> items = apiResponse.popularPost;
-    // make a widget block
-    popularPostBlock.items = items;
-    popularPostBlock.title = "인기 게시글";
-    // make a top block
-    homeBlock.blocks!.add(popularPostBlock);
-
-    return homeBlock;
-  }
-
-  @override
-  HomeBlock get block => this.block;
 }
 
-class _HomeState extends State<Home> {
-  HomeBlock? homeBlock;
+class _HomeState extends State<Home> with ScreenState<HomeBlock> {
+  late YrkRequestContext reqCtx;
 
   @override
   initState() {
-    homeBlock = widget.makeBlock(widget.reqCtx);
+    reqCtx = widget.reqCtx;
+    initBlock();
     super.initState();
   }
 
@@ -172,6 +145,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    PopularPostBlock popularPostBlock =
+        block.findFirstBlockWhere("PopularPostBlock") as PopularPostBlock;
     return Scaffold(
         floatingActionButton: FloatingActionButton(
             onPressed: () => Navigator.push(
@@ -197,7 +172,7 @@ class _HomeState extends State<Home> {
                   },
                   itemCount: 4)),
           YrkTabHeaderView(
-              title: "인기 게시글",
+              title: popularPostBlock.title,
               titleStyle: YrkTextStyle(
                   color: const Color(0xe6000000),
                   fontWeight: FontWeight.w700,
@@ -230,10 +205,7 @@ class _HomeState extends State<Home> {
           //   isIndicatorEnabled: true,
           // ),
           YrkPage(
-            page: _buildPopularPost(
-                "post",
-                homeBlock!.findFirstBlockWhere('PopularPostBlock')
-                    as PopularPostBlock),
+            page: _buildPopularPost("post", popularPostBlock),
             controller: popularPageController,
             isIndicatorEnabled: true,
           ),
@@ -282,6 +254,58 @@ class _HomeState extends State<Home> {
           context,
           MaterialPageRoute(
               builder: (context) => HomeHistory(data: new YrkData())));
+    });
+  }
+
+  @override
+  void initBlock() {
+    // TODO: use request context to make a block..
+    // reqCtx.userCtx.name...
+
+    // (example) data from API
+    Map<String, dynamic> jsonResponse = TestPopularPostData().jsonResponse;
+    // deserialize api response: from json to class
+    PopularPostApiResponse apiResponse =
+        PopularPostApiResponse.fromJson(jsonResponse);
+    // make a model list
+    List<YrkListItemV2Model> items = apiResponse.popularPost;
+
+    HomeBlock homeBlock = HomeBlock()
+      ..type = "HomeBlock"
+      ..blocks = (<YrkBlock>[
+        PopularPostBlock()
+          ..type = "PopularPostBlock"
+          ..items = items
+          ..title = "인기 게시글"
+      ]);
+
+    setBlock(homeBlock);
+  }
+
+  @override
+  void updateBlockOn(String action) {
+    switch (action) {
+      case "tabTouched":
+        PopularPostBlock postBlock =
+            block.findFirstBlockWhere("PopularPostBlock") as PopularPostBlock;
+        block.blocks!.remove(postBlock);
+        postBlock
+          ..title =
+              "인기 게시글 " + DateTime.now().millisecondsSinceEpoch.toString();
+        block.blocks!.add(postBlock);
+        break;
+      case "tabSwiped":
+        //...
+        break;
+      default:
+        break;
+    }
+  }
+
+  // sample code
+  void _onTabTouched() {
+    setState(() {
+      updateBlockOn("tabTouched");
     });
   }
 }
