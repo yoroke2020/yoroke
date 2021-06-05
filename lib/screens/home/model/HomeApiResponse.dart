@@ -1,22 +1,24 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yoroke/core/model/YrkApiResponse.dart';
 import 'package:yoroke/screens/common/YrkListItemV2.dart';
+import 'package:yoroke/screens/home/HomePopularCardListItem.dart';
 
-part 'PopularPostApiResponse.g.dart';
+part 'HomeApiResponse.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class PopularPostApiResponse extends YrkApiResponse {
-  PopularPostApiResponse();
+class HomeApiResponse extends YrkApiResponse {
+  HomeApiResponse();
 
   late List<YrkListItemV2Model> popularPost;
+  late List<HomePopularCardListItemModel> popularFacility;
 
-  factory PopularPostApiResponse.fromJson(Map<String, dynamic> json) =>
-      _$PopularPostApiResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$PopularPostApiResponseToJson(this);
+  factory HomeApiResponse.fromJson(Map<String, dynamic> json) =>
+      _$HomeApiResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$HomeApiResponseToJson(this);
 }
 
 // (example) data from API
-class TestPopularPostData {
+class TestHomeData {
   Map<String, dynamic> jsonResponse = {
     "status": "200",
     "message": "success",
@@ -181,6 +183,64 @@ class TestPopularPostData {
         "commentCount": 2,
         "rating": 3.5
       }
+    ],
+    "popularFacility": [
+      {
+        "facilityName": "조문기의 요양 병원",
+        "imageUrl":
+            "https://cdn.monews.co.kr/news/photo/202002/208006_59509_2352.png",
+        "address": "서울시 용산구",
+        "bookmarkCount": 123,
+        "rating": 4.8
+      },
+      {
+        "facilityName": "진호의 요양 병원",
+        "imageUrl":
+            "https://cdn.monews.co.kr/news/photo/202002/208006_59509_2352.png",
+        "address": "서울시 용산구",
+        "bookmarkCount": 321,
+        "rating": 3.0
+      },
+      {
+        "facilityName": "승규의 요양 병원",
+        "imageUrl":
+            "https://cdn.monews.co.kr/news/photo/202002/208006_59509_2352.png",
+        "address": "서울시 용산구",
+        "bookmarkCount": 221,
+        "rating": 4.2
+      },
+      {
+        "facilityName": "홍의 요양 병원",
+        "imageUrl":
+            "https://cdn.monews.co.kr/news/photo/202002/208006_59509_2352.png",
+        "address": "서울시 용산구",
+        "bookmarkCount": 123,
+        "rating": 1.1
+      },
+      {
+        "facilityName": "조문기의 요양 병원",
+        "imageUrl":
+            "https://cdn.monews.co.kr/news/photo/202002/208006_59509_2352.png",
+        "address": "서울시 용산구",
+        "bookmarkCount": 11,
+        "rating": 4.8
+      },
+      {
+        "facilityName": "조문기의 요양 병원",
+        "imageUrl":
+            "https://cdn.monews.co.kr/news/photo/202002/208006_59509_2352.png",
+        "address": "서울시 용산구",
+        "bookmarkCount": 0,
+        "rating": 4.8
+      },
+      {
+        "facilityName": "조문기의 요양 병원",
+        "imageUrl":
+            "https://cdn.monews.co.kr/news/photo/202002/208006_59509_2352.png",
+        "address": "서울시 용산구",
+        "bookmarkCount": 1,
+        "rating": 4.8
+      },
     ]
   };
 }
