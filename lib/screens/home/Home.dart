@@ -16,15 +16,16 @@ import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/home/HomeHistory.dart';
+import 'package:yoroke/screens/home/model/HomeApiResponse.dart';
 import 'package:yoroke/screens/home/model/HomeBlock.dart';
-import 'package:yoroke/screens/home/model/PopularPostApiResponse.dart';
+import 'package:yoroke/screens/home/model/PopularFacilityBlock.dart';
 import 'package:yoroke/screens/home/model/PopularPostBlock.dart';
 
 import '../../main.dart';
 import 'HomeCardListItem.dart';
 import 'HomePopularCardListItem.dart';
 
-class Home extends StatefulWidget implements Screen<HomeBlock> {
+class Home extends StatefulWidget {
   Home();
 
   // FIXME get reqCtx from previous screen
@@ -32,42 +33,15 @@ class Home extends StatefulWidget implements Screen<HomeBlock> {
 
   @override
   _HomeState createState() => _HomeState();
-
-  @override
-  HomeBlock makeBlock(reqCtx) {
-    // TODO use request context to make block..
-    // reqCtx.userCtx.name...
-
-    HomeBlock homeBlock = HomeBlock();
-    homeBlock.blocks = <YrkBlock>[];
-    PopularPostBlock popularPostBlock = PopularPostBlock();
-
-    // (example) data from API
-    Map<String, dynamic> jsonResponse = TestPopularPostData().jsonResponse;
-    // deserialize api response: from json to class
-    PopularPostApiResponse apiResponse =
-        PopularPostApiResponse.fromJson(jsonResponse);
-    // make a model list
-    List<YrkListItemV2Model> items = apiResponse.popularPost;
-    // make a widget block
-    popularPostBlock.items = items;
-    popularPostBlock.title = "인기 게시글";
-    // make a top block
-    homeBlock.blocks!.add(popularPostBlock);
-
-    return homeBlock;
-  }
-
-  @override
-  HomeBlock get block => this.block;
 }
 
-class _HomeState extends State<Home> {
-  HomeBlock? homeBlock;
+class _HomeState extends State<Home> with ScreenState<HomeBlock> {
+  late YrkRequestContext reqCtx;
 
   @override
   initState() {
-    homeBlock = widget.makeBlock(widget.reqCtx);
+    reqCtx = widget.reqCtx;
+    initBlock();
     super.initState();
   }
 
@@ -172,108 +146,122 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        floatingActionButton: FloatingActionButton(
-            onPressed: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => TestPage()))),
-        appBar: YrkAppBar(
-          type: YrkAppBarType.accountCircleAll,
-          curPageItem: RootPageItem.home,
-        ),
-        drawer: yrkDrawer,
-        bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.home),
-        body: ListView(children: <Widget>[
-          Container(
-              height: 120.0,
-              alignment: Alignment.centerLeft,
-              child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) {
-                    return HomeCardListItem(
-                        width: 320.0, height: 120.0, index: index);
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return SizedBox(width: 8.0);
-                  },
-                  itemCount: 4)),
-          YrkTabHeaderView(
-              title: "인기 게시글",
-              titleStyle: YrkTextStyle(
-                  color: const Color(0xe6000000),
-                  fontWeight: FontWeight.w700,
-                  fontFamily: "NotoSansCJKKR",
-                  fontStyle: FontStyle.normal,
-                  fontSize: 16.0),
-              clickable: true,
-              nextSubPageItem: "boardQna",
-              customIcon: Row(
-                children: [
-                  YrkIconButton(
-                    icon: "icon_create.svg",
-                  ),
-                  TextButton(
-                    child: Text("글 작성",
-                        style: const TextStyle(
-                            color: const Color(0x99000000),
-                            fontWeight: FontWeight.w500,
-                            fontFamily: "NotoSansCJKKR",
-                            fontStyle: FontStyle.normal,
-                            fontSize: 14.0),
-                        textAlign: TextAlign.left),
-                    onPressed: null,
-                  )
-                ],
-              )),
-          // YrkPage(
-          //   page: _yrkListView(SubPageItem.post),
-          //   controller: popularPageController,
-          //   isIndicatorEnabled: true,
-          // ),
-          YrkPage(
-            page: _buildPopularPost(
-                "post",
-                homeBlock!.findFirstBlockWhere('PopularPostBlock')
-                    as PopularPostBlock),
-            controller: popularPageController,
-            isIndicatorEnabled: true,
-          ),
-          YrkTabHeaderView(
-              title: "인기 의료시설",
-              titleStyle: YrkTextStyle(
-                  color: const Color(0xe6000000),
-                  fontWeight: FontWeight.w700,
-                  fontFamily: "NotoSansCJKKR",
-                  fontStyle: FontStyle.normal,
-                  fontSize: 16.0),
-              clickable: true,
-              nextSubPageItem: "boardQna",
-              customIcon: TextButton(
-                  child: Text("전체보기",
-                      style: const TextStyle(
-                          color: const Color(0x99000000),
-                          fontWeight: FontWeight.w500,
-                          fontFamily: "NotoSansCJKKR",
-                          fontStyle: FontStyle.normal,
-                          fontSize: 14.0),
-                      textAlign: TextAlign.left),
-                  onPressed: () => _onHomeHistoryClicked(context))),
-          Container(
-              height: 200.0,
-              alignment: Alignment.centerLeft,
-              child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) {
-                    return HomePopularCardListItem(
-                      width: 144.0,
-                      height: 106.0,
-                      index: index,
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return SizedBox(width: 8.0);
-                  },
-                  itemCount: 4)),
-        ]));
+    PopularPostBlock popularPostBlock =
+        block.findFirstBlockWhere("PopularPostBlock") as PopularPostBlock;
+    PopularFacilityBlock popularFacilityBlock = block
+        .findFirstBlockWhere("PopularFacilityBlock") as PopularFacilityBlock;
+    return RefreshIndicator(
+        onRefresh: () {
+          return Future.delayed(
+            Duration(seconds: 1),
+            () {
+              setState(() {
+                updateBlockOn("pullToRefresh");
+              });
+            },
+          );
+        },
+        child: Scaffold(
+            floatingActionButton: FloatingActionButton(
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TestPage()))),
+            appBar: YrkAppBar(
+              type: YrkAppBarType.accountCircleAll,
+              curPageItem: RootPageItem.home,
+            ),
+            drawer: yrkDrawer,
+            bottomNavigationBar:
+                BottomBarNavigation.getInstance(RootPageItem.home),
+            body: ListView(children: <Widget>[
+              Container(
+                  height: 120.0,
+                  alignment: Alignment.centerLeft,
+                  child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, int index) {
+                        return HomeCardListItem(
+                            width: 320.0, height: 120.0, index: index);
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(width: 8.0);
+                      },
+                      itemCount: 4)),
+              YrkTabHeaderView(
+                  title: popularPostBlock.title,
+                  titleStyle: YrkTextStyle(
+                      color: const Color(0xe6000000),
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "NotoSansCJKKR",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 16.0),
+                  clickable: true,
+                  nextSubPageItem: "boardQna",
+                  customIcon: Row(
+                    children: [
+                      YrkIconButton(
+                        icon: "icon_create.svg",
+                      ),
+                      TextButton(
+                        child: Text("글 작성",
+                            style: const TextStyle(
+                                color: const Color(0x99000000),
+                                fontWeight: FontWeight.w500,
+                                fontFamily: "NotoSansCJKKR",
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.0),
+                            textAlign: TextAlign.left),
+                        onPressed: null,
+                      )
+                    ],
+                  )),
+              // YrkPage(
+              //   page: _yrkListView(SubPageItem.post),
+              //   controller: popularPageController,
+              //   isIndicatorEnabled: true,
+              // ),
+              YrkPage(
+                page: _buildPopularPost("post", popularPostBlock),
+                controller: popularPageController,
+                isIndicatorEnabled: true,
+              ),
+              YrkTabHeaderView(
+                  title: popularFacilityBlock.title,
+                  titleStyle: YrkTextStyle(
+                      color: const Color(0xe6000000),
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "NotoSansCJKKR",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 16.0),
+                  clickable: true,
+                  nextSubPageItem: "boardQna",
+                  customIcon: TextButton(
+                      child: Text("전체보기",
+                          style: const TextStyle(
+                              color: const Color(0x99000000),
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "NotoSansCJKKR",
+                              fontStyle: FontStyle.normal,
+                              fontSize: 14.0),
+                          textAlign: TextAlign.left),
+                      onPressed: () => _onHomeHistoryClicked(context))),
+              Container(
+                  height: 200.0,
+                  alignment: Alignment.centerLeft,
+                  child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, int index) {
+                        return HomePopularCardListItem(
+                          width: 144.0,
+                          height: 106.0,
+                          model: popularFacilityBlock.items!.elementAt(index)
+                              as HomePopularCardListItemModel,
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(width: 8.0);
+                      },
+                      itemCount: popularFacilityBlock.items!.length)),
+            ])));
   }
 
   void _onHomeHistoryClicked(BuildContext context) async {
@@ -283,5 +271,55 @@ class _HomeState extends State<Home> {
           MaterialPageRoute(
               builder: (context) => HomeHistory(data: new YrkData())));
     });
+  }
+
+  @override
+  void initBlock() {
+    // TODO: use request context to make a block..
+    // reqCtx.userCtx.name...
+
+    // (example) data from API
+    Map<String, dynamic> jsonResponse = TestHomeData().jsonResponse;
+    // deserialize api response: from json to class
+    HomeApiResponse apiResponse = HomeApiResponse.fromJson(jsonResponse);
+    // make a model list
+    List<YrkListItemV2Model> items = apiResponse.popularPost;
+    List<HomePopularCardListItemModel> popularFacilities =
+        apiResponse.popularFacility;
+
+    HomeBlock homeBlock = HomeBlock()
+      ..type = "HomeBlock"
+      ..blocks = (<YrkBlock>[
+        PopularPostBlock()
+          ..type = "PopularPostBlock"
+          ..items = items
+          ..title = "인기 게시글",
+        PopularFacilityBlock()
+          ..type = "PopularFacilityBlock"
+          ..items = popularFacilities
+          ..title = "인기 의료시설",
+      ]);
+
+    setBlock(homeBlock);
+  }
+
+  @override
+  void updateBlockOn(String action) {
+    switch (action) {
+      case "pullToRefresh":
+        PopularPostBlock postBlock =
+            block.findFirstBlockWhere("PopularPostBlock") as PopularPostBlock;
+        block.blocks!.remove(postBlock);
+        postBlock
+          ..title =
+              "인기 게시글 " + DateTime.now().millisecondsSinceEpoch.toString();
+        block.blocks!.add(postBlock);
+        break;
+      case "tabSwiped":
+        //...
+        break;
+      default:
+        break;
+    }
   }
 }
