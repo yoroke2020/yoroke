@@ -16,8 +16,9 @@ import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/home/HomeHistory.dart';
+import 'package:yoroke/screens/home/model/HomeApiResponse.dart';
 import 'package:yoroke/screens/home/model/HomeBlock.dart';
-import 'package:yoroke/screens/home/model/PopularPostApiResponse.dart';
+import 'package:yoroke/screens/home/model/PopularFacilityBlock.dart';
 import 'package:yoroke/screens/home/model/PopularPostBlock.dart';
 
 import '../../main.dart';
@@ -147,6 +148,8 @@ class _HomeState extends State<Home> with ScreenState<HomeBlock> {
   Widget build(BuildContext context) {
     PopularPostBlock popularPostBlock =
         block.findFirstBlockWhere("PopularPostBlock") as PopularPostBlock;
+    PopularFacilityBlock popularFacilityBlock = block
+        .findFirstBlockWhere("PopularFacilityBlock") as PopularFacilityBlock;
     return RefreshIndicator(
         onRefresh: () {
           return Future.delayed(
@@ -222,7 +225,7 @@ class _HomeState extends State<Home> with ScreenState<HomeBlock> {
                 isIndicatorEnabled: true,
               ),
               YrkTabHeaderView(
-                  title: "인기 의료시설",
+                  title: popularFacilityBlock.title,
                   titleStyle: YrkTextStyle(
                       color: const Color(0xe6000000),
                       fontWeight: FontWeight.w700,
@@ -250,13 +253,14 @@ class _HomeState extends State<Home> with ScreenState<HomeBlock> {
                         return HomePopularCardListItem(
                           width: 144.0,
                           height: 106.0,
-                          index: index,
+                          model: popularFacilityBlock.items!.elementAt(index)
+                              as HomePopularCardListItemModel,
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {
                         return SizedBox(width: 8.0);
                       },
-                      itemCount: 4)),
+                      itemCount: popularFacilityBlock.items!.length)),
             ])));
   }
 
@@ -275,12 +279,13 @@ class _HomeState extends State<Home> with ScreenState<HomeBlock> {
     // reqCtx.userCtx.name...
 
     // (example) data from API
-    Map<String, dynamic> jsonResponse = TestPopularPostData().jsonResponse;
+    Map<String, dynamic> jsonResponse = TestHomeData().jsonResponse;
     // deserialize api response: from json to class
-    PopularPostApiResponse apiResponse =
-        PopularPostApiResponse.fromJson(jsonResponse);
+    HomeApiResponse apiResponse = HomeApiResponse.fromJson(jsonResponse);
     // make a model list
     List<YrkListItemV2Model> items = apiResponse.popularPost;
+    List<HomePopularCardListItemModel> popularFacilities =
+        apiResponse.popularFacility;
 
     HomeBlock homeBlock = HomeBlock()
       ..type = "HomeBlock"
@@ -288,7 +293,11 @@ class _HomeState extends State<Home> with ScreenState<HomeBlock> {
         PopularPostBlock()
           ..type = "PopularPostBlock"
           ..items = items
-          ..title = "인기 게시글"
+          ..title = "인기 게시글",
+        PopularFacilityBlock()
+          ..type = "PopularFacilityBlock"
+          ..items = popularFacilities
+          ..title = "인기 의료시설",
       ]);
 
     setBlock(homeBlock);
