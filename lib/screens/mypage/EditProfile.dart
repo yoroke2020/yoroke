@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:yoroke/screens/common/imagepickers/YrkImagePicker.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/YrkTextField.dart';
@@ -92,9 +93,31 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   Future<void> _onImagePickCallback(List<File> imageFiles) async {
-    setState(() {
-      _image = FileImage(imageFiles[0]);
-    });
+    _cropImage(imageFiles[0].path);
+  }
+
+  Future<Null> _cropImage(filePath) async {
+    File? croppedImage = (await ImageCropper.cropImage(
+        sourcePath: filePath,
+        aspectRatioPresets: [CropAspectRatioPreset.square],
+        androidUiSettings: AndroidUiSettings(
+          toolbarTitle: '',
+          toolbarColor: const Color(0xfff5df4d),
+          toolbarWidgetColor: const Color(0xfff5df4d),
+          activeControlsWidgetColor: const Color(0xfff5df4d),
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: true,
+          hideBottomControls: true,
+        ),
+        iosUiSettings: IOSUiSettings(
+          title: '',
+        )));
+    if (croppedImage != null) {
+      setState(() {
+        _image = FileImage(croppedImage);
+        // _image = FileImage(imageFiles[0]);
+      });
+    }
   }
 
   void _onPressedSaveButton(BuildContext context) {
