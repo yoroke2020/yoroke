@@ -115,7 +115,6 @@ class _EditProfileState extends State<EditProfile> {
     if (croppedImage != null) {
       setState(() {
         _image = FileImage(croppedImage);
-        // _image = FileImage(imageFiles[0]);
       });
     }
   }
