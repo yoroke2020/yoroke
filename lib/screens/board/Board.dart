@@ -7,11 +7,13 @@ import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
 import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/main.dart';
+import 'package:yoroke/models/CardModel.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/board/BoardReviewCard.dart';
 import 'package:yoroke/screens/board/BoardJobFinding.dart';
 import 'package:yoroke/screens/board/BoardQna.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
+import 'package:yoroke/screens/board/model/BoardApiResponse.dart';
 import 'package:yoroke/screens/board/model/BoardBlock.dart';
 import 'package:yoroke/screens/board/model/QnaPostApiResponse.dart';
 import 'package:yoroke/screens/board/model/QnaPostBlock.dart';
@@ -25,16 +27,18 @@ import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 
+import 'model/YrkBlockJson.dart';
+
 class Board extends StatefulWidget {
   @override
   _BoardState createState() => _BoardState();
 }
 
-class _BoardState extends State<Board> implements Screen<BoardBlock> {
-  late BoardBlock boardBlock;
-  late QnaPostBlock qnaPostBlock;
-  late JobFindingPostBlock jobFindingPostBlock;
-  late ReviewPostBlock reviewPostBlock;
+class _BoardState extends State<Board> with ScreenState<BoardBlock> {
+  // late BoardBlock boardBlock;
+  // late QnaPostBlock qnaPostBlock;
+  // late JobFindingPostBlock jobFindingPostBlock;
+  // late ReviewPostBlock reviewPostBlock;
 
   final PageController _qnaPageController = PageController();
   final PageController _jobFindingPageController = PageController();
@@ -43,49 +47,67 @@ class _BoardState extends State<Board> implements Screen<BoardBlock> {
   YrkRequestContext get reqCtx => YrkRequestContext();
 
   @override
-  BoardBlock get block => this.block;
+  void initBlock() {
+    Map<String, dynamic> jsonResponse = TestBoardData().jsonResponse;
+    BoardApiResponse apiResponse = BoardApiResponse.fromJson(jsonResponse);
+    List<YrkBlockJson> blocks = apiResponse.body as List<YrkBlockJson>;
+    print(blocks.length);
+    BoardBlock boardBlock = BoardBlock();
+    // print(boardBlock.toString());
+    boardBlock.blocks = blocks;
+    this.block = boardBlock;
+    // print((this.block.blocks![0].items![0] as CardModel).imagePath);
+    YrkModel cardModel = this.block.blocks![0].items![0];
+    // print(cardModel.toJson());
+    // YrkBlock temp = this.block;
+    // print(temp.blocks!.length);
+    // print(temp.blocks![0].type as YrkBlockJson);
+    // print(this.block.blocks![0].type);
+    // BoardBlock boardBlock = BoardBlock();
+    // boardBlock.blocks = <YrkBlock>[];
+    // YrkBlock block = QnaPostBlock();
+
+    // Map<String, dynamic> jsonResponse = TestQnaPostData().jsonResponse;
+    // YrkApiResponse apiResponse = QnaPostApiResponse.fromJson(jsonResponse);
+    // List<YrkListItemV2Model> items =
+    //     (apiResponse as QnaPostApiResponse).qnaPosts;
+    // block.items = items;
+    // (block as QnaPostBlock).title = apiResponse.title;
+    // boardBlock.blocks!.add(block);
+    //
+    // block = JobFindingPostBlock();
+    // jsonResponse = TestJobFindingPostData().jsonResponse;
+    // apiResponse = JobFindingPostApiResponse.fromJson(jsonResponse);
+    // items = (apiResponse as JobFindingPostApiResponse).jobFindingPosts;
+    // block.items = items;
+    // (block as JobFindingPostBlock).title = apiResponse.title;
+    // boardBlock.blocks!.add(block);
+    //
+    // block = ReviewPostBlock();
+    // jsonResponse = TestReviewCardData().jsonResponse;
+    // apiResponse = ReviewCardApiResponse.fromJson(jsonResponse);
+    // List<BoardReviewCardModel> cardItems =
+    //     (apiResponse as ReviewCardApiResponse).reviewCards;
+    // block.items = cardItems;
+    // boardBlock.blocks!.add(block);
+
+    // return boardBlock;
+  }
 
   @override
-  BoardBlock makeBlock(YrkRequestContext reqCtx) {
-    BoardBlock boardBlock = BoardBlock();
-    boardBlock.blocks = <YrkBlock>[];
-    YrkBlock block = QnaPostBlock();
-
-    Map<String, dynamic> jsonResponse = TestQnaPostData().jsonResponse;
-    YrkApiResponse apiResponse = QnaPostApiResponse.fromJson(jsonResponse);
-    List<YrkListItemV2Model> items =
-        (apiResponse as QnaPostApiResponse).qnaPosts;
-    block.items = items;
-    (block as QnaPostBlock).title = apiResponse.title;
-    boardBlock.blocks!.add(block);
-
-    block = JobFindingPostBlock();
-    jsonResponse = TestJobFindingPostData().jsonResponse;
-    apiResponse = JobFindingPostApiResponse.fromJson(jsonResponse);
-    items = (apiResponse as JobFindingPostApiResponse).jobFindingPosts;
-    block.items = items;
-    (block as JobFindingPostBlock).title = apiResponse.title;
-    boardBlock.blocks!.add(block);
-
-    block = ReviewPostBlock();
-    jsonResponse = TestReviewCardData().jsonResponse;
-    apiResponse = ReviewCardApiResponse.fromJson(jsonResponse);
-    List<BoardReviewCardModel> cardItems =
-        (apiResponse as ReviewCardApiResponse).reviewCards;
-    block.items = cardItems;
-    boardBlock.blocks!.add(block);
-
-    return boardBlock;
+  void updateBlockOn(String action) {
+    // TODO: implement updateBlockOn
   }
 
   @override
   void initState() {
-    boardBlock = makeBlock(reqCtx);
-    qnaPostBlock = boardBlock.findFirstBlockWhere('QnaPost') as QnaPostBlock;
-    jobFindingPostBlock =
-        boardBlock.findFirstBlockWhere('JobFindingPost') as JobFindingPostBlock;
-    reviewPostBlock =
-        boardBlock.findFirstBlockWhere('ReviewPost') as ReviewPostBlock;
+    initBlock();
+    // boardBlock = makeBlock(reqCtx);
+    // qnaPostBlock = boardBlock.findFirstBlockWhere('QnaPost') as QnaPostBlock;
+    // jobFindingPostBlock =
+    //     boardBlock.findFirstBlockWhere('JobFindingPost') as JobFindingPostBlock;
+    // reviewPostBlock =
+    //     boardBlock.findFirstBlockWhere('ReviewPost') as ReviewPostBlock;
     super.initState();
   }
 
@@ -118,31 +140,31 @@ class _BoardState extends State<Board> implements Screen<BoardBlock> {
         body: ListView(children: <Widget>[
           YrkTabHeaderView(title: "후기"),
           BoardReviewCards(
-            models: reviewPostBlock.items as List<BoardReviewCardModel>,
+            models: this.block.blocks![0].items as List<CardModel>,
             onTap: (index) => Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => BoardReview(index: index))),
           ),
-          YrkTabHeaderView(
-            title: qnaPostBlock.title,
-            clickable: true,
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => BoardQna())),
-          ),
-          YrkPage(
-              page: _buildItems(qnaPostBlock),
-              controller: _qnaPageController,
-              isIndicatorEnabled: true),
-          YrkTabHeaderView(
-              title: jobFindingPostBlock.title,
-              clickable: true,
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => BoardJobFinding()))),
-          YrkPage(
-              page: _buildItems(jobFindingPostBlock),
-              controller: _jobFindingPageController,
-              isIndicatorEnabled: true)
+          // YrkTabHeaderView(
+          //   title: qnaPostBlock.title,
+          //   clickable: true,
+          //   onTap: () => Navigator.push(
+          //       context, MaterialPageRoute(builder: (context) => BoardQna())),
+          // ),
+          // YrkPage(
+          //     page: _buildItems(qnaPostBlock),
+          //     controller: _qnaPageController,
+          //     isIndicatorEnabled: true),
+          // YrkTabHeaderView(
+          //     title: jobFindingPostBlock.title,
+          //     clickable: true,
+          //     onTap: () => Navigator.push(context,
+          //         MaterialPageRoute(builder: (context) => BoardJobFinding()))),
+          // YrkPage(
+          //     page: _buildItems(jobFindingPostBlock),
+          //     controller: _jobFindingPageController,
+          //     isIndicatorEnabled: true)
         ]));
   }
 }

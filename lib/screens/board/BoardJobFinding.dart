@@ -27,7 +27,7 @@ class BoardJobFinding extends StatefulWidget {
 }
 
 class _BoardJobFindingState extends State<BoardJobFinding>
-    implements Screen<BoardJobFindingBlock> {
+    {
   final ScrollController _scrollController = ScrollController();
 
   late BoardJobFindingBlock boardJobFindingBlock;

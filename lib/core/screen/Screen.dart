@@ -11,9 +11,9 @@ abstract class ScreenState<T extends YrkBlock> {
     this._block = block;
   }
 
-  void setBlock(T block) {
-    this._block = block;
-  }
+  // void setBlock(T block) {
+  //   this._block = block;
+  // }
 
   void initBlock();
   void updateBlockOn(String action);

@@ -25,7 +25,7 @@ class BoardQna extends StatefulWidget {
   _BoardQnaState createState() => _BoardQnaState();
 }
 
-class _BoardQnaState extends State<BoardQna> implements Screen<BoardQnaBlock> {
+class _BoardQnaState extends State<BoardQna>  {
   static final int _boardQnaCardListItemCount = 10;
 
   late BoardQnaBlock boardQnaBlock;

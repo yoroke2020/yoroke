@@ -68,11 +68,7 @@ class _HomeState extends State<Home> with ScreenState<HomeBlock> {
   }
 
   Widget _buildPageListItem(subPageItem, YrkListItemV2Model item) {
-    return YrkPageListItemV2(
-      pageType: subPageItem,
-      nextPageItem: "post",
-      model: item,
-    );
+    return YrkPageListItemV2(model: item);
   }
 
   List<Widget> _homePopularList(int pageIndex, subPageItem) {
@@ -300,7 +296,7 @@ class _HomeState extends State<Home> with ScreenState<HomeBlock> {
           ..title = "인기 의료시설",
       ]);
 
-    setBlock(homeBlock);
+    this.block = homeBlock;
   }
 
   @override

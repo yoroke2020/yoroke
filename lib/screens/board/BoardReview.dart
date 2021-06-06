@@ -32,8 +32,7 @@ class BoardReview extends StatefulWidget {
   _BoardReviewState createState() => _BoardReviewState();
 }
 
-class _BoardReviewState extends State<BoardReview>
-    implements Screen<BoardReviewBlock> {
+class _BoardReviewState extends State<BoardReview> {
   final ScrollController _scrollController = ScrollController();
 
   late int _curIndex;
@@ -200,15 +199,15 @@ class _BoardReviewState extends State<BoardReview>
                                                         textAlign:
                                                             TextAlign.left),
                                                   ),
-                                                  BoardReviewCards(
-                                                      index: _curIndex,
-                                                      onTap: (index) =>
-                                                          _onTapReviewCard(
-                                                              context, index),
-                                                      models: _reviewCardBlock
-                                                              .items
-                                                          as List<
-                                                              BoardReviewCardModel>)
+                                                  // BoardReviewCards(
+                                                  //     index: _curIndex,
+                                                  //     onTap: (index) =>
+                                                  //         _onTapReviewCard(
+                                                  //             context, index),
+                                                  //     models: _reviewCardBlock
+                                                  //             .items
+                                                  //         as List<
+                                                  //             BoardReviewCardModel>)
                                                 ])))),
                                 forceElevated: innerBoxIsScrolled,
                                 bottom:

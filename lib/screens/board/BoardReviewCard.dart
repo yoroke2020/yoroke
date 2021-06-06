@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
+import 'package:yoroke/models/CardModel.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 part 'BoardReviewCard.g.dart';
@@ -10,7 +11,7 @@ class BoardReviewCards extends StatefulWidget {
   BoardReviewCards({this.index = -1, required this.models, required this.onTap});
 
   final int index;
-  final List<BoardReviewCardModel> models;
+  final List<CardModel> models;
   final ValueChanged<int> onTap;
 
   @override
@@ -53,7 +54,7 @@ class _BoardReviewCard extends StatelessWidget {
 
   final bool isBorder;
   final VoidCallback onTap;
-  final BoardReviewCardModel? model;
+  final CardModel? model;
 
   @override
   Widget build(BuildContext context) {

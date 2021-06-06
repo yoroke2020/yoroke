@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'BoardBlock.dart';
+part of 'YrkBlockJson.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-BoardBlock _$BoardBlockFromJson(Map<String, dynamic> json) {
-  return BoardBlock()
+YrkBlockJson _$YrkBlockJsonFromJson(Map<String, dynamic> json) {
+  return YrkBlockJson()
     ..type = json['type'] as String
     ..blocks = (json['blocks'] as List<dynamic>?)
         ?.map((e) => YrkBlock.fromJson(e as Map<String, dynamic>))
@@ -19,11 +19,11 @@ BoardBlock _$BoardBlockFromJson(Map<String, dynamic> json) {
     ..title = json['title'] as String;
 }
 
-Map<String, dynamic> _$BoardBlockToJson(BoardBlock instance) =>
+Map<String, dynamic> _$YrkBlockJsonToJson(YrkBlockJson instance) =>
     <String, dynamic>{
       'type': instance.type,
-      'blocks': instance.blocks?.map((e) => e.toJson()).toList(),
-      'items': instance.items?.map((e) => e.toJson()).toList(),
+      'blocks': instance.blocks,
+      'items': instance.items,
       'category': instance.category,
       'title': instance.title,
     };
