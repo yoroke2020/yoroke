@@ -8,22 +8,18 @@ part of 'BoardBlock.dart';
 
 BoardBlock _$BoardBlockFromJson(Map<String, dynamic> json) {
   return BoardBlock()
-    ..type = json['type'] as String
-    ..blocks = (json['blocks'] as List<dynamic>?)
-        ?.map((e) => YrkBlock.fromJson(e as Map<String, dynamic>))
-        .toList()
-    ..items = (json['items'] as List<dynamic>?)
-        ?.map((e) => YrkModel.fromJson(e as Map<String, dynamic>))
-        .toList()
-    ..category = json['category'] as String
-    ..title = json['title'] as String;
+    ..type = json['@type'] as String
+    ..category = json['@category'] as String
+    ..title = json['title'] as String
+    ..blocks = json['blocks'] as List<dynamic>?
+    ..items = json['items'] as List<dynamic>?;
 }
 
 Map<String, dynamic> _$BoardBlockToJson(BoardBlock instance) =>
     <String, dynamic>{
-      'type': instance.type,
-      'blocks': instance.blocks?.map((e) => e.toJson()).toList(),
-      'items': instance.items?.map((e) => e.toJson()).toList(),
-      'category': instance.category,
+      '@type': instance.type,
+      '@category': instance.category,
       'title': instance.title,
+      'blocks': instance.blocks,
+      'items': instance.items,
     };

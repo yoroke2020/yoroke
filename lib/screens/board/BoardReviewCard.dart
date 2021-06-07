@@ -8,7 +8,8 @@ import 'package:yoroke/screens/common/YrkTextStyle.dart';
 part 'BoardReviewCard.g.dart';
 
 class BoardReviewCards extends StatefulWidget {
-  BoardReviewCards({this.index = -1, required this.models, required this.onTap});
+  BoardReviewCards(
+      {this.index = -1, required this.models, required this.onTap});
 
   final int index;
   final List<CardModel> models;
@@ -37,7 +38,7 @@ class _BoardReviewCardsState extends State<BoardReviewCards> {
             itemCount: widget.models.length,
             itemBuilder: (BuildContext context, int index) {
               return _BoardReviewCard(
-                model: widget.models[index],
+                model: widget.models[index] as CardModel,
                 isBorder: curIndex == index,
                 onTap: () {
                   curIndex = index;

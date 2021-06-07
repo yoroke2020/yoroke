@@ -8,20 +8,18 @@ part of 'BoardReviewBlock.dart';
 
 BoardReviewBlock _$BoardReviewBlockFromJson(Map<String, dynamic> json) {
   return BoardReviewBlock()
-    ..type = json['type'] as String
-    ..blocks = (json['blocks'] as List<dynamic>?)
-        ?.map((e) => YrkBlock.fromJson(e as Map<String, dynamic>))
-        .toList()
-    ..items = (json['items'] as List<dynamic>?)
-        ?.map((e) => YrkModel.fromJson(e as Map<String, dynamic>))
-        .toList()
+    ..type = json['@type'] as String
+    ..category = json['@category'] as String
+    ..blocks = json['blocks'] as List<dynamic>?
+    ..items = json['items'] as List<dynamic>?
     ..title = json['title'] as String;
 }
 
 Map<String, dynamic> _$BoardReviewBlockToJson(BoardReviewBlock instance) =>
     <String, dynamic>{
-      'type': instance.type,
-      'blocks': instance.blocks?.map((e) => e.toJson()).toList(),
-      'items': instance.items?.map((e) => e.toJson()).toList(),
+      '@type': instance.type,
+      '@category': instance.category,
+      'blocks': instance.blocks,
+      'items': instance.items,
       'title': instance.title,
     };

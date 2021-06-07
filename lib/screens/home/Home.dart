@@ -3,7 +3,6 @@ import 'package:quiver/iterables.dart';
 import 'package:yoroke/core/model/YrkBlock.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
-import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/TestPage.dart';
@@ -35,8 +34,9 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with ScreenState<HomeBlock> {
+class _HomeState extends State<Home> {
   late YrkRequestContext reqCtx;
+  late YrkBlock block;
 
   @override
   initState() {

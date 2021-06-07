@@ -1,14 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:yoroke/core/model/YrkBlock.dart';
-import 'package:yoroke/core/model/YrkModel.dart';
-import 'package:yoroke/screens/board/Board.dart';
-
-import 'YrkBlockJson.dart';
+import 'package:yoroke/core/model/YrkBlock2.dart';
+import 'package:yoroke/core/model/YrkModel2.dart';
 
 part 'BoardBlock.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class BoardBlock extends YrkBlockJson {
+class BoardBlock extends YrkBlock2 {
   // BoardBlock() : super('Board');
   BoardBlock();
   factory BoardBlock.fromJson(Map<String, dynamic> json) =>

@@ -8,6 +8,7 @@ part of 'PostModel.dart';
 
 PostModel _$PostModelFromJson(Map<String, dynamic> json) {
   return PostModel()
+    ..type = json['@type'] as String
     ..postId = json['postId'] as int?
     ..category = json['category'] as String?
     ..title = json['title'] as String?
@@ -21,6 +22,7 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$PostModelToJson(PostModel instance) => <String, dynamic>{
+      '@type': instance.type,
       'postId': instance.postId,
       'category': instance.category,
       'title': instance.title,

@@ -2,11 +2,12 @@ import 'dart:math';
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
+import 'package:yoroke/core/model/YrkModel2.dart';
 
 part 'PostModel.g.dart';
 
 @JsonSerializable()
-class PostModel extends YrkModel {
+class PostModel extends YrkModel2{
   int? postId;
   String? category;
   String? title;

@@ -6,7 +6,6 @@ import 'package:yoroke/core/model/YrkApiResponse.dart';
 import 'package:yoroke/core/model/YrkBlock.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
-import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/board/model/BoardQnaBlock.dart';
 import 'package:yoroke/screens/board/model/QnaCardApiResponse.dart';
@@ -25,7 +24,7 @@ class BoardQna extends StatefulWidget {
   _BoardQnaState createState() => _BoardQnaState();
 }
 
-class _BoardQnaState extends State<BoardQna>  {
+class _BoardQnaState extends State<BoardQna> {
   static final int _boardQnaCardListItemCount = 10;
 
   late BoardQnaBlock boardQnaBlock;
@@ -54,8 +53,7 @@ class _BoardQnaState extends State<BoardQna>  {
     QnaPostBlock block = QnaPostBlock();
     Map<String, dynamic> jsonResponse = TestQnaPostData().jsonResponse;
     YrkApiResponse apiResponse = QnaPostApiResponse.fromJson(jsonResponse);
-    List<YrkModel> items =
-        (apiResponse as QnaPostApiResponse).qnaPosts;
+    List<YrkModel> items = (apiResponse as QnaPostApiResponse).qnaPosts;
     block.items = items as List<YrkListItemV2Model>;
     block.title = apiResponse.title;
     boardQnaBlock.blocks!.add(block);
@@ -75,8 +73,7 @@ class _BoardQnaState extends State<BoardQna>  {
     setState(() {
       Map<String, dynamic> jsonResponse = TestQnaPostData().jsonResponse;
       YrkApiResponse apiResponse = QnaPostApiResponse.fromJson(jsonResponse);
-      List<YrkModel> items =
-          (apiResponse as QnaPostApiResponse).qnaPosts;
+      List<YrkModel> items = (apiResponse as QnaPostApiResponse).qnaPosts;
 
       qnaPostBlock.items!.addAll(items as List<YrkListItemV2Model>);
       postItems.addAll(_buildItems(qnaPostBlock.type, items));
@@ -88,10 +85,10 @@ class _BoardQnaState extends State<BoardQna>  {
   void initState() {
     super.initState();
     boardQnaBlock = makeBlock(reqCtx);
-    qnaPostBlock =
-        boardQnaBlock.findFirstBlockWhere('QnaPost') as QnaPostBlock;
-    qnaCardBlock =
-        boardQnaBlock.findFirstBlockWhere('QnaCard') as QnaPostBlock;
+    // qnaPostBlock =
+    // boardQnaBlock.findFirstBlockWhere('QnaPost') as QnaPostBlock;
+    // qnaCardBlock =
+    //     boardQnaBlock.findFirstBlockWhere('QnaCard') as QnaPostBlock;
 
     postItems = _buildItems(qnaPostBlock.type, qnaPostBlock.items!);
     postItemCount = postItems.length;
@@ -102,7 +99,7 @@ class _BoardQnaState extends State<BoardQna>  {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-         _loadMoreItems();
+        _loadMoreItems();
       }
     });
   }

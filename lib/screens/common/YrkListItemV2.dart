@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
+import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/screens/board/BoardJobFinding.dart';
-import 'package:yoroke/screens/board/BoardQna.dart';
-import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
@@ -19,7 +17,8 @@ class YrkPageListItemV2 extends StatelessWidget {
   YrkPageListItemV2({this.type, required this.model});
 
   final String? type;
-  final YrkListItemV2Model model;
+  late PostModel model2;
+  late YrkListItemV2Model model;
 
   void _onItemClicked(BuildContext context, nextPageItem) async {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {

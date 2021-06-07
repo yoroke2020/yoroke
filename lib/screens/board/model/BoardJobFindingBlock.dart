@@ -1,12 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:yoroke/core/model/YrkBlock.dart';
-import 'package:yoroke/core/model/YrkModel.dart';
+import 'package:yoroke/core/model/YrkBlock2.dart';
+import 'package:yoroke/core/model/YrkModel2.dart';
 
 part 'BoardJobFindingBlock.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class BoardJobFindingBlock extends YrkBlock {
-  BoardJobFindingBlock() : super('BoardJobFinding');
+class BoardJobFindingBlock extends YrkBlock2 {
+  BoardJobFindingBlock();
 
   late String title;
 

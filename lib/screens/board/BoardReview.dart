@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
 import 'package:yoroke/core/model/YrkApiResponse.dart';
-import 'package:yoroke/core/model/YrkBlock.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
-import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/board/model/BoardReviewBlock.dart';
@@ -14,10 +12,10 @@ import 'package:yoroke/screens/board/model/ReviewPostApiResponse.dart';
 import 'package:yoroke/screens/board/model/ReviewPostBlock.dart';
 import 'package:yoroke/screens/common/YrkListItemV2.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
+import 'package:yoroke/screens/common/YrkTabBar.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
-import 'package:yoroke/screens/common/YrkTabBar.dart';
 
 import 'BoardReviewCard.dart';
 import 'model/ReviewCardApiResponse.dart';
@@ -54,7 +52,7 @@ class _BoardReviewState extends State<BoardReview> {
   @override
   BoardReviewBlock makeBlock(YrkRequestContext reqCtx) {
     BoardReviewBlock boardReviewBlock = BoardReviewBlock();
-    boardReviewBlock.blocks = <YrkBlock>[];
+    // boardReviewBlock.blocks = <YrkBlock>[];
     boardReviewBlock.title = "후기";
 
     ReviewPostBlock block = ReviewPostBlock();
@@ -63,7 +61,7 @@ class _BoardReviewState extends State<BoardReview> {
     List<YrkModel> items = (apiResponse as ReviewPostApiResponse).reviewPosts;
     block.items = items as List<YrkListItemV2Model>;
     block.title = "최신글";
-    boardReviewBlock.blocks!.add(block);
+    // boardReviewBlock.blocks!.add(block);
 
     block = ReviewPostBlock();
     jsonResponse = TestReviewPostData().jsonResponse;
@@ -71,7 +69,7 @@ class _BoardReviewState extends State<BoardReview> {
     items = apiResponse.reviewPosts;
     block.items = items;
     block.title = "인기글";
-    boardReviewBlock.blocks!.add(block);
+    // boardReviewBlock.blocks!.add(block);
 
     //TODO: ReqCtx로 받아서 하는 방법으로 변경
     block = ReviewPostBlock();
@@ -80,7 +78,7 @@ class _BoardReviewState extends State<BoardReview> {
     List<BoardReviewCardModel> cardItems =
         (apiResponse as ReviewCardApiResponse).reviewCards;
     block.items = cardItems;
-    boardReviewBlock.blocks!.add(block);
+    // boardReviewBlock.blocks!.add(block);
 
     return boardReviewBlock;
   }

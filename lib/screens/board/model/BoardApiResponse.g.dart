@@ -6,18 +6,22 @@ part of 'BoardApiResponse.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BoardApiResponse _$BoardApiResponseFromJson(Map<String, dynamic> json) {
-  return BoardApiResponse()
+BoardApiResponse<T>
+    _$BoardApiResponseFromJson<T extends YrkBlock2<dynamic, dynamic>>(
+        Map<String, dynamic> json) {
+  return BoardApiResponse<T>()
     ..status = json['status'] as String?
     ..message = json['message'] as String?
     ..body = (json['body'] as List<dynamic>)
-        .map((e) => YrkBlockJson.fromJson(e as Map<String, dynamic>))
+        .map((e) => _BlockConverter<T>().fromJson(e as Object))
         .toList();
 }
 
-Map<String, dynamic> _$BoardApiResponseToJson(BoardApiResponse instance) =>
-    <String, dynamic>{
-      'status': instance.status,
-      'message': instance.message,
-      'body': instance.body.map((e) => e.toJson()).toList(),
-    };
+Map<String, dynamic>
+    _$BoardApiResponseToJson<T extends YrkBlock2<dynamic, dynamic>>(
+            BoardApiResponse<T> instance) =>
+        <String, dynamic>{
+          'status': instance.status,
+          'message': instance.message,
+          'body': instance.body.map(_BlockConverter<T>().toJson).toList(),
+        };
