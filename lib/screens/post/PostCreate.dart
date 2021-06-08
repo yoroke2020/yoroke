@@ -7,7 +7,6 @@ import 'package:flutter_quill/models/documents/document.dart';
 import 'package:flutter_quill/models/documents/nodes/embed.dart';
 import 'package:flutter_quill/widgets/controller.dart';
 import 'package:flutter_quill/widgets/editor.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:yoroke/temp/TestData.dart';
 import 'package:yoroke/temp/YrkData.dart';

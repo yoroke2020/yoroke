@@ -48,7 +48,6 @@ class TabNavigator extends StatelessWidget {
 
   void _push(BuildContext context, {YrkData? data}) {
     var routeBuilders = _routeBuilders(context, data: data);
-
     Navigator.push(
       context,
       MaterialPageRoute(

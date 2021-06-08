@@ -38,7 +38,7 @@ class _BoardReviewCardsState extends State<BoardReviewCards> {
             itemCount: widget.models.length,
             itemBuilder: (BuildContext context, int index) {
               return _BoardReviewCard(
-                model: widget.models[index] as CardModel,
+                model: widget.models[index],
                 isBorder: curIndex == index,
                 onTap: () {
                   curIndex = index;

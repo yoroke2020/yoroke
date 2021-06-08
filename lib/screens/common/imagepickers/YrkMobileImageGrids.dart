@@ -3,7 +3,6 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -145,7 +144,10 @@ class _YrkMobileImageGridsState extends State<YrkMobileImageGrids> {
                               color: const Color(0xffffffff),
                               alignment: Alignment.center,
                               child: YrkIconButton(
-                                  icon: "icon_camera.svg", iconSize: 24))
+                                icon: "icon_camera.svg",
+                                iconSize: 24,
+                                clickable: false,
+                              ))
                           : Stack(alignment: Alignment.topRight, children: [
                               _assetWidgets[index - 1],
                               _getSelects(index - 1)
