@@ -8,8 +8,6 @@ part 'BoardJobFindingBlock.g.dart';
 class BoardJobFindingBlock extends YrkBlock2 {
   BoardJobFindingBlock();
 
-  late String title;
-
   factory BoardJobFindingBlock.fromJson(Map<String, dynamic> json) =>
       _$BoardJobFindingBlockFromJson(json);
   Map<String, dynamic> toJson() => _$BoardJobFindingBlockToJson(this);

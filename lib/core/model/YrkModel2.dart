@@ -5,7 +5,10 @@ part 'YrkModel2.g.dart';
 @JsonSerializable(explicitToJson: true)
 class YrkModel2 {
   @JsonKey(name: "@type")
-  late String type;
+  late String? type;
+
+  @JsonKey(name: "@category")
+  late String? category;
 
   factory YrkModel2.fromJson(Map<String, dynamic> json) =>
       _$YrkModel2FromJson(json);

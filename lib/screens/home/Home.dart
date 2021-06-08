@@ -3,6 +3,7 @@ import 'package:quiver/iterables.dart';
 import 'package:yoroke/core/model/YrkBlock.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
+import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/TestPage.dart';
@@ -68,7 +69,7 @@ class _HomeState extends State<Home> {
   }
 
   Widget _buildPageListItem(subPageItem, YrkListItemV2Model item) {
-    return YrkPageListItemV2(model: item);
+    return YrkPageListItemV2(model: PostModel());
   }
 
   List<Widget> _homePopularList(int pageIndex, subPageItem) {

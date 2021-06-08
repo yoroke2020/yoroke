@@ -5,6 +5,7 @@ import 'package:tuple/tuple.dart';
 import 'package:yoroke/core/model/YrkApiResponse.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
+import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/board/model/BoardReviewBlock.dart';
@@ -247,7 +248,7 @@ class _BoardReviewState extends State<BoardReview> {
   List<Widget> _buildItems(String type, List<YrkModel> items) {
     return items
         .cast<YrkListItemV2Model>()
-        .map((model) => YrkPageListItemV2(type: type, model: model))
+        .map((model) => YrkPageListItemV2(type: type, model: PostModel()))
         .toList();
   }
 

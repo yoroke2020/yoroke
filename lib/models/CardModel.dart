@@ -15,3 +15,23 @@ class CardModel extends YrkModel2 {
 
   Map<String, dynamic> toJson() => _$CardModelToJson(this);
 }
+
+class CardDataExample {
+  Map<String, dynamic> jsonResponse = {
+    "status": "200",
+    "message": "success",
+    "body": {
+      "@type": "post",
+      "@category": "category",
+      "title": "글",
+      "items": [
+        {
+          "@type": "card",
+          "@category": "review",
+          "imagePath": "assets/images/sample_image.png",
+          "title": "요양시설"
+        },
+      ]
+    }
+  };
+}

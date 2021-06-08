@@ -8,9 +8,9 @@ part of 'YrkBlock2.dart';
 
 YrkBlock2<B, M> _$YrkBlock2FromJson<B, M>(Map<String, dynamic> json) {
   return YrkBlock2<B, M>()
-    ..type = json['@type'] as String
-    ..category = json['@category'] as String
-    ..title = json['title'] as String
+    ..type = json['@type'] as String?
+    ..category = json['@category'] as String?
+    ..title = json['title'] as String?
     ..blocks = (json['blocks'] as List<dynamic>?)
         ?.map((e) => _BlockConverter<B>().fromJson(e as Object))
         .toList()

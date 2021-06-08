@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
+import 'package:yoroke/core/model/YrkModel2.dart';
 import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
@@ -14,24 +15,11 @@ import '../TestPage.dart';
 part 'YrkListItemV2.g.dart';
 
 class YrkPageListItemV2 extends StatelessWidget {
-  YrkPageListItemV2({this.type, required this.model});
+  YrkPageListItemV2({@deprecated this.type, required this.model});
 
+  @deprecated
   final String? type;
-  late PostModel model2;
-  late YrkListItemV2Model model;
-
-  void _onItemClicked(BuildContext context, nextPageItem) async {
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      await Navigator.push(context, MaterialPageRoute(builder: (context) {
-        switch (nextPageItem) {
-          case "post":
-            return Post(data: new YrkData());
-          default:
-            return TestPage();
-        }
-      }));
-    });
-  }
+  final PostModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +27,13 @@ class YrkPageListItemV2 extends StatelessWidget {
     bool isBestIcon = false;
     bool isRating = false;
 
-    switch (type ?? "") {
-      case "JobFindingPost":
+    switch (model.category ?? "") {
+      case "job":
         isText = false;
         break;
       case "PopularPostBlock":
-      case "reviewPost":
-      case "QnaPost":
+      case "review":
+      case "qna":
         isRating = true;
         isBestIcon = model.isBest ?? false;
         break;
@@ -54,8 +42,7 @@ class YrkPageListItemV2 extends StatelessWidget {
     }
 
     return InkWell(
-      onTap: () => _onItemClicked(context, "post"),
-      //TODO: YrkData -> API Call
+      onTap: () => _onItemClicked(context),
       child: Container(
           width: double.maxFinite,
           height: 65.0,
@@ -74,14 +61,14 @@ class YrkPageListItemV2 extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(right: 8.0),
                         child: isText
-                            ? Text(model.facilityType ?? "",
+                            ? Text(model.label ?? "",
                                 style: const YrkTextStyle(
                                     color: const Color(0x99000000),
                                     fontSize: 14.0),
                                 textAlign: TextAlign.left)
                             : YrkButton(
                                 buttonType: ButtonType.solid,
-                                label: model.facilityType ?? "",
+                                label: model.label ?? "",
                                 onPressed: () {},
                                 width: 60.0,
                                 height: 24.0,
@@ -97,9 +84,7 @@ class YrkPageListItemV2 extends StatelessWidget {
                               style: const YrkTextStyle(fontSize: 16.0),
                               textAlign: TextAlign.left)),
                       isBestIcon
-                          ? Container(
-                              padding: const EdgeInsets.only(top: 4.0),
-                              child: YrkButton(
+                          ? YrkButton(
                                 buttonType: ButtonType.chip,
                                 width: 32,
                                 height: 16,
@@ -111,7 +96,7 @@ class YrkPageListItemV2 extends StatelessWidget {
                                 ),
                                 clickable: false,
                                 onPressed: () {},
-                              ))
+                              )
                           : Container()
                     ]),
                 Container(width: double.maxFinite, height: 6.0),
@@ -129,7 +114,7 @@ class YrkPageListItemV2 extends StatelessWidget {
                             textAlign: TextAlign.left)),
                     Container(
                         margin: EdgeInsets.only(right: 9.0),
-                        child: Text(model.timestamp ?? "",
+                        child: Text(model.time ?? "",
                             style: const YrkTextStyle(
                               color: const Color(0x4d000000),
                               fontSize: 12.0,
@@ -196,8 +181,22 @@ class YrkPageListItemV2 extends StatelessWidget {
               ])),
     );
   }
+
+  void _onItemClicked(BuildContext context) async {
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await Navigator.push(context, MaterialPageRoute(builder: (context) {
+        switch (model.type ?? "") {
+          case "post":
+            return Post(data: new YrkData());
+          default:
+            return TestPage();
+        }
+      }));
+    });
+  }
 }
 
+@deprecated
 @JsonSerializable()
 class YrkListItemV2Model extends YrkModel {
   String? facilityType;

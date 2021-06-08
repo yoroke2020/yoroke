@@ -9,12 +9,16 @@ part 'YrkBlock2.g.dart';
 @JsonSerializable(explicitToJson: true)
 class YrkBlock2<B, M> {
   @JsonKey(name: "@type")
-  late String type;
+  late String? type;
+
   @JsonKey(name: "@category")
-  late String category;
-  late String title;
+  late String? category;
+
+  late String? title;
+
   @_BlockConverter()
   List<B>? blocks;
+
   @_ModelConverter()
   List<M>? items;
 

@@ -6,6 +6,7 @@ import 'package:yoroke/core/model/YrkApiResponse.dart';
 import 'package:yoroke/core/model/YrkBlock.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
+import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/board/model/BoardQnaBlock.dart';
 import 'package:yoroke/screens/board/model/QnaCardApiResponse.dart';
@@ -137,7 +138,7 @@ class _BoardQnaState extends State<BoardQna> {
                       alignment: Alignment.centerLeft,
                       margin: EdgeInsets.only(left: 48.0),
                       height: 48.0,
-                      child: Text(boardQnaBlock.title,
+                      child: Text(boardQnaBlock.title!,
                           style:
                               const YrkTextStyle(fontWeight: FontWeight.w700),
                           textAlign: TextAlign.left)))
@@ -146,7 +147,7 @@ class _BoardQnaState extends State<BoardQna> {
           SliverToBoxAdapter(
               child: Padding(
             padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
-            child: Text(boardQnaBlock.title,
+            child: Text(boardQnaBlock.title!,
                 style: const YrkTextStyle(
                     fontWeight: FontWeight.w700, fontSize: 22.0),
                 textAlign: TextAlign.left),
@@ -176,7 +177,7 @@ class _BoardQnaState extends State<BoardQna> {
   List<Widget> _buildItems(String type, List<YrkModel> items) {
     return items
         .cast<YrkListItemV2Model>()
-        .map((model) => YrkPageListItemV2(type: type, model: model))
+        .map((model) => YrkPageListItemV2(type: type, model: PostModel()))
         .toList();
   }
 

@@ -7,6 +7,7 @@ import 'package:yoroke/core/model/YrkBlock.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
 import 'package:yoroke/core/screen/Screen.dart';
+import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/board/model/BoardJobFindingBlock.dart';
 import 'package:yoroke/screens/board/model/JobFindingPostApiResponse.dart';
@@ -142,7 +143,7 @@ class _BoardJobFindingState extends State<BoardJobFinding>
                                           alignment: Alignment.centerLeft,
                                           margin: EdgeInsets.only(left: 48.0),
                                           child: Text(
-                                              boardJobFindingBlock.title,
+                                              boardJobFindingBlock.title!,
                                               style: const YrkTextStyle(
                                                   color:
                                                       const Color(0xe6000000),
@@ -166,7 +167,7 @@ class _BoardJobFindingState extends State<BoardJobFinding>
                                               margin:
                                                   EdgeInsets.only(left: 16.0),
                                               child: Text(
-                                                  boardJobFindingBlock.title,
+                                                  boardJobFindingBlock.title!,
                                                   style: const YrkTextStyle(
                                                       fontWeight:
                                                           FontWeight.w700,
@@ -212,7 +213,7 @@ class _BoardJobFindingState extends State<BoardJobFinding>
   List<Widget> _buildItems(String type, List<YrkModel> items) {
     return items
         .cast<YrkListItemV2Model>()
-        .map((model) => YrkPageListItemV2(type: type, model: model))
+        .map((model) => YrkPageListItemV2(type: type, model: PostModel()))
         .toList();
   }
 

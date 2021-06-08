@@ -8,8 +8,8 @@ part of 'BoardQnaBlock.dart';
 
 BoardQnaBlock _$BoardQnaBlockFromJson(Map<String, dynamic> json) {
   return BoardQnaBlock()
-    ..type = json['@type'] as String
-    ..category = json['@category'] as String
+    ..type = json['@type'] as String?
+    ..category = json['@category'] as String?
     ..blocks = json['blocks'] as List<dynamic>?
     ..items = json['items'] as List<dynamic>?
     ..title = json['title'] as String;

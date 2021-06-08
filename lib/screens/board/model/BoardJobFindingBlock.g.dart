@@ -8,8 +8,8 @@ part of 'BoardJobFindingBlock.dart';
 
 BoardJobFindingBlock _$BoardJobFindingBlockFromJson(Map<String, dynamic> json) {
   return BoardJobFindingBlock()
-    ..type = json['@type'] as String
-    ..category = json['@category'] as String
+    ..type = json['@type'] as String?
+    ..category = json['@category'] as String?
     ..blocks = json['blocks'] as List<dynamic>?
     ..items = json['items'] as List<dynamic>?
     ..title = json['title'] as String;

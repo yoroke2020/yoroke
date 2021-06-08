@@ -8,9 +8,9 @@ part of 'BoardBlock.dart';
 
 BoardBlock _$BoardBlockFromJson(Map<String, dynamic> json) {
   return BoardBlock()
-    ..type = json['@type'] as String
-    ..category = json['@category'] as String
-    ..title = json['title'] as String
+    ..type = json['@type'] as String?
+    ..category = json['@category'] as String?
+    ..title = json['title'] as String?
     ..blocks = json['blocks'] as List<dynamic>?
     ..items = json['items'] as List<dynamic>?;
 }

@@ -8,8 +8,8 @@ part of 'BoardReviewBlock.dart';
 
 BoardReviewBlock _$BoardReviewBlockFromJson(Map<String, dynamic> json) {
   return BoardReviewBlock()
-    ..type = json['@type'] as String
-    ..category = json['@category'] as String
+    ..type = json['@type'] as String?
+    ..category = json['@category'] as String?
     ..blocks = json['blocks'] as List<dynamic>?
     ..items = json['items'] as List<dynamic>?
     ..title = json['title'] as String;

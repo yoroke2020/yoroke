@@ -2,17 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quiver/iterables.dart';
 import 'package:yoroke/core/model/YrkBlock2.dart';
+import 'package:yoroke/core/model/YrkApiResponse2.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
+import 'package:yoroke/core/model/YrkTestModelData.dart';
 import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/main.dart';
 import 'package:yoroke/models/CardModel.dart';
+import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/board/BoardJobFinding.dart';
 import 'package:yoroke/screens/board/BoardQna.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/board/BoardReviewCard.dart';
-import 'package:yoroke/screens/board/model/BoardApiResponse.dart';
-import 'package:yoroke/screens/board/model/BoardBlock.dart';
 import 'package:yoroke/screens/common/YrkListItemV2.dart';
 import 'package:yoroke/screens/common/YrkPage.dart';
 import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
@@ -24,12 +25,7 @@ class Board extends StatefulWidget {
   _BoardState createState() => _BoardState();
 }
 
-class _BoardState extends State<Board> with ScreenState<BoardBlock> {
-  // late BoardBlock boardBlock;
-  // late QnaPostBlock qnaPostBlock;
-  // late JobFindingPostBlock jobFindingPostBlock;
-  // late ReviewPostBlock reviewPostBlock;
-
+class _BoardState extends State<Board> with ScreenState<YrkBlock2> {
   final PageController _qnaPageController = PageController();
   final PageController _jobFindingPageController = PageController();
 
@@ -39,42 +35,9 @@ class _BoardState extends State<Board> with ScreenState<BoardBlock> {
   @override
   void initBlock() {
     Map<String, dynamic> jsonResponse = TestBoardData().jsonResponse;
-    print(
-        "-------------------- STEP 1. FROM \"API RESPONSE (JSON)\" TO \"BLOCK\" --------------------");
-    BoardApiResponse apiResponse = BoardApiResponse.fromJson(jsonResponse);
-    print("RESULT: " + apiResponse.body.toString());
-
-    print(
-        "-------------------- STEP 2. SET \"BOARD BLOCK\"-------------------------------------------");
+    YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
     List<YrkBlock2> blocks = apiResponse.body;
-    // (before)
-    // HomeBlock homeBlock = HomeBlock()
-    //       ..type = "HomeBlock"
-    //       ..blocks = (<YrkBlock>[
-    //         PopularPostBlock()
-    //           ..type = "PopularPostBlock"
-    //           ..items = items
-    //           ..title = "인기 게시글"
-    //       ]);
-    BoardBlock boardBlock = BoardBlock()..blocks = blocks;
-    this.block = boardBlock;
-
-    print("THIS IS BoardBlock");
-    int counter = 0;
-    boardBlock.blocks!.forEach((element) {
-      print("[block instance#" + counter.toString() + "]");
-      print("  " + element.toString());
-      if (element.items == null) {
-        print("  [blocks of block instance#" + counter.toString() + "]");
-        print("    " + element.blocks.toString());
-        element.blocks!
-            .forEach((block) => print("      " + block.items.toString()));
-      } else {
-        print("  [items of block instance#" + counter.toString() + "]");
-        print("    " + element.items.toString());
-      }
-      counter++;
-    });
+    this.block = YrkBlock2()..blocks = blocks;
   }
 
   @override
@@ -85,22 +48,16 @@ class _BoardState extends State<Board> with ScreenState<BoardBlock> {
   @override
   void initState() {
     initBlock();
-    // boardBlock = makeBlock(reqCtx);
-    // qnaPostBlock = boardBlock.findFirstBlockWhere('QnaPost') as QnaPostBlock;
-    // jobFindingPostBlock =
-    //     boardBlock.findFirstBlockWhere('JobFindingPost') as JobFindingPostBlock;
-    // reviewPostBlock =
-    //     boardBlock.findFirstBlockWhere('ReviewPost') as ReviewPostBlock;
     super.initState();
   }
 
   List<Widget> _buildItems(YrkBlock2 block) {
     final int pageItemLimit = 4;
 
-    List items = block.items!;
+    List items = block.items!.cast<PostModel>();
     List<Widget> pageListItems = items
         .map((model) =>
-            YrkPageListItemV2(type: block.type, model: YrkListItemV2Model()))
+            YrkPageListItemV2(model: model))
         .toList();
 
     return partition(pageListItems, pageItemLimit)

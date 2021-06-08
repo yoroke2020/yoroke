@@ -7,9 +7,9 @@ import 'package:yoroke/core/model/YrkModel2.dart';
 part 'PostModel.g.dart';
 
 @JsonSerializable()
-class PostModel extends YrkModel2{
+class PostModel extends YrkModel2 {
   int? postId;
-  String? category;
+  String? label;
   String? title;
   String? author;
   String? time;
@@ -27,29 +27,19 @@ class PostModel extends YrkModel2{
   Map<String, dynamic> toJson() => _$PostModelToJson(this);
 }
 
-class TestPostData {
+class PostDataExample {
   Map<String, dynamic> jsonResponse = {
     "status": "200",
     "message": "success",
     "body": {
-      "type": "post",
-      "category": "category",
+      "@type": "post",
+      "@category": "category",
       "title": "글",
       "items": [
         {
-          "category": "요양병원",
-          "title": "첫번째 요양병원 질문",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.30",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양",
+          "@type": "post",
+          "@category": "job",
+          "label": "요양",
           "title": "인기 요양원",
           "isBest": Random().nextBool(),
           "author": "유저1",
@@ -59,175 +49,7 @@ class TestPostData {
           "commentCount": Random().nextInt(100) + 1,
           "rating":
               double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양",
-          "title": "인기 요양원",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.29",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양",
-          "title": "인기 요양원",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.29",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양병원",
-          "title": "요양병원 질문",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.30",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양",
-          "title": "인기 요양원",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.29",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양",
-          "title": "인기 요양원",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.29",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양",
-          "title": "인기 요양원",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.29",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양병원",
-          "title": "요양병원 질문",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.30",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양",
-          "title": "인기 요양원",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.29",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양",
-          "title": "인기 요양원",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.29",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양",
-          "title": "인기 요양원",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.29",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양병원",
-          "title": "요양병원 질문",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.30",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양",
-          "title": "인기 요양원",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.29",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양",
-          "title": "인기 요양원",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.29",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
-        {
-          "category": "요양",
-          "title": "마지막 인기 요양원",
-          "isBest": Random().nextBool(),
-          "author": "유저1",
-          "timestamp": "2021.05.29",
-          "likeCount": Random().nextInt(100) + 1,
-          "dislikeCount": Random().nextInt(100) + 1,
-          "commentCount": Random().nextInt(100) + 1,
-          "rating":
-              double.parse((5.0 * Random().nextDouble()).toStringAsFixed(2))
-        },
+        }
       ]
     }
   };

@@ -8,8 +8,6 @@ part 'BoardReviewBlock.g.dart';
 class BoardReviewBlock extends YrkBlock2 {
   BoardReviewBlock();
 
-  late String title;
-
   factory BoardReviewBlock.fromJson(Map<String, dynamic> json) =>
       _$BoardReviewBlockFromJson(json);
   Map<String, dynamic> toJson() => _$BoardReviewBlockToJson(this);
