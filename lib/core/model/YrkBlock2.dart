@@ -57,12 +57,12 @@ class _BlockConverter<B> implements JsonConverter<B, Object> {
   @override
   B fromJson(Object json) {
     switch (getCategoryFrom(json as Map<String, dynamic>)) {
-      case "review":
-        return YrkBlock2.fromJson(json) as B;
-      case "qna":
-        return YrkBlock2.fromJson(json) as B;
+      // case "review":
+      //   return YrkBlock2.fromJson(json) as B;
+      // case "qna":
+      //   return YrkBlock2.fromJson(json) as B;
       default:
-        return json as B;
+        return YrkBlock2.fromJson(json) as B;
     }
   }
 

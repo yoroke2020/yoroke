@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
+import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
@@ -11,7 +12,7 @@ part 'BoardQnaCard.g.dart';
 class BoardQnaCard extends StatelessWidget {
   BoardQnaCard({required this.model});
 
-  final BoardQnaCardModel model;
+  final PostModel model;
 
   @override
   Widget build(BuildContext context) {

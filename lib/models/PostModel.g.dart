@@ -14,7 +14,8 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) {
     ..label = json['label'] as String?
     ..title = json['title'] as String?
     ..author = json['author'] as String?
-    ..time = json['time'] as String?
+    ..accountId = json['accountId'] as int?
+    ..timestamp = json['timestamp'] as String?
     ..likeCount = json['likeCount'] as int?
     ..dislikeCount = json['dislikeCount'] as int?
     ..commentCount = json['commentCount'] as int?
@@ -29,7 +30,8 @@ Map<String, dynamic> _$PostModelToJson(PostModel instance) => <String, dynamic>{
       'label': instance.label,
       'title': instance.title,
       'author': instance.author,
-      'time': instance.time,
+      'accountId': instance.accountId,
+      'timestamp': instance.timestamp,
       'likeCount': instance.likeCount,
       'dislikeCount': instance.dislikeCount,
       'commentCount': instance.commentCount,

@@ -2,24 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
-import 'package:yoroke/core/model/YrkApiResponse.dart';
-import 'package:yoroke/core/model/YrkModel.dart';
+import 'package:yoroke/core/model/YrkBlock2.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
+import 'package:yoroke/core/model/YrkTestModelData.dart';
+import 'package:yoroke/core/screen/Screen.dart';
+import 'package:yoroke/models/CardModel.dart';
 import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
-import 'package:yoroke/screens/board/model/BoardReviewBlock.dart';
-import 'package:yoroke/screens/board/model/ReviewPostApiResponse.dart';
-import 'package:yoroke/screens/board/model/ReviewPostBlock.dart';
 import 'package:yoroke/screens/common/YrkListItemV2.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTabBar.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
+import 'package:yoroke/core/model/YrkApiResponse2.dart';
 
-import 'BoardReviewCard.dart';
-import 'model/ReviewCardApiResponse.dart';
+import 'model/BoardReviewCard.dart';
 
 class BoardReview extends StatefulWidget {
   BoardReview({@deprecated this.data, this.index = 0});
@@ -31,89 +30,41 @@ class BoardReview extends StatefulWidget {
   _BoardReviewState createState() => _BoardReviewState();
 }
 
-class _BoardReviewState extends State<BoardReview> {
+class _BoardReviewState extends State<BoardReview> with ScreenState<YrkBlock2> {
   final ScrollController _scrollController = ScrollController();
 
   late int _curIndex;
-  late BoardReviewBlock _boardReviewBlock;
-  late ReviewPostBlock _reviewCardBlock;
-
-  List<Tuple2<String, int>> _tabs = [];
-  List<List<Widget>> _postItems = [];
-  List<int> _postItemCounts = [];
+  List<Tuple2<String, int>> tabs = [];
+  List<List<Widget>> posts = [];
 
   @override
-  // TODO: implement block
-  BoardReviewBlock get block => this.block;
-
-  @override
-  // TODO: implement reqCtx
   YrkRequestContext get reqCtx => YrkRequestContext();
 
   @override
-  BoardReviewBlock makeBlock(YrkRequestContext reqCtx) {
-    BoardReviewBlock boardReviewBlock = BoardReviewBlock();
-    // boardReviewBlock.blocks = <YrkBlock>[];
-    boardReviewBlock.title = "후기";
-
-    ReviewPostBlock block = ReviewPostBlock();
-    Map<String, dynamic> jsonResponse = TestReviewPostData().jsonResponse;
-    YrkApiResponse apiResponse = ReviewPostApiResponse.fromJson(jsonResponse);
-    List<YrkModel> items = (apiResponse as ReviewPostApiResponse).reviewPosts;
-    block.items = items as List<YrkListItemV2Model>;
-    block.title = "최신글";
-    // boardReviewBlock.blocks!.add(block);
-
-    block = ReviewPostBlock();
-    jsonResponse = TestReviewPostData().jsonResponse;
-    apiResponse = ReviewPostApiResponse.fromJson(jsonResponse);
-    items = apiResponse.reviewPosts;
-    block.items = items;
-    block.title = "인기글";
-    // boardReviewBlock.blocks!.add(block);
-
-    //TODO: ReqCtx로 받아서 하는 방법으로 변경
-    block = ReviewPostBlock();
-    jsonResponse = TestReviewCardData().jsonResponse;
-    apiResponse = ReviewCardApiResponse.fromJson(jsonResponse);
-    List<BoardReviewCardModel> cardItems =
-        (apiResponse as ReviewCardApiResponse).reviewCards;
-    block.items = cardItems;
-    // boardReviewBlock.blocks!.add(block);
-
-    return boardReviewBlock;
+  void initBlock() {
+    Map<String, dynamic> jsonResponse = TestBoardReviewData().jsonResponse;
+    YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+    List<YrkBlock2> blocks = apiResponse.body!;
+    this.block = YrkBlock2()..blocks = blocks;
   }
 
-  void _loadItems() {
-    _boardReviewBlock = makeBlock(reqCtx);
-    //TODO: ReqCtx로 받아서 하는 방법으로 변경 후 주석처리 해제
-    // for (int i = 0; i < _boardReviewBlock.blocks!.length; i++) {
-    for (int i = 0; i < 2; i++) {
-      ReviewPostBlock block = _boardReviewBlock.blocks![i] as ReviewPostBlock;
-      List<Widget> items = _buildItems(block.type, block.items!);
-      _tabs.add(Tuple2(block.title, i));
-      _postItems.add(items);
-      _postItemCounts.add(items.length);
-    }
-  }
-
-  void _loadMoreItems(int index) {
+  @override
+  void updateBlockOn(String action) {
+    int index = int.parse(action);
     setState(() {
-      Map<String, dynamic> jsonResponse = TestReviewPostData().jsonResponse;
-      YrkApiResponse apiResponse = ReviewPostApiResponse.fromJson(jsonResponse);
-      List<YrkModel> items = (apiResponse as ReviewPostApiResponse).reviewPosts;
-      _postItems[index]
-          .addAll(_buildItems(_boardReviewBlock.blocks![index].type, items));
-      _postItemCounts[index] = _postItems[index].length;
+      Map<String, dynamic> jsonResponse = TestBoardReviewData().jsonResponse;
+      YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+      YrkBlock2 block = (apiResponse.body ?? [])[1];
+      posts[index].addAll(_buildPosts(block.blocks![index]));
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _curIndex = widget.index;
+    initBlock();
     _loadItems();
-    _reviewCardBlock = _boardReviewBlock.blocks![2] as ReviewPostBlock;
+    _curIndex = widget.index;
   }
 
   @override
@@ -125,7 +76,7 @@ class _BoardReviewState extends State<BoardReview> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: DefaultTabController(
-            length: _tabs.length,
+            length: tabs.length,
             child: Scaffold(
                 body: NestedScrollView(
                     controller: _scrollController,
@@ -198,23 +149,24 @@ class _BoardReviewState extends State<BoardReview> {
                                                         textAlign:
                                                             TextAlign.left),
                                                   ),
-                                                  // BoardReviewCards(
-                                                  //     index: _curIndex,
-                                                  //     onTap: (index) =>
-                                                  //         _onTapReviewCard(
-                                                  //             context, index),
-                                                  //     models: _reviewCardBlock
-                                                  //             .items
-                                                  //         as List<
-                                                  //             BoardReviewCardModel>)
+                                                  BoardReviewCards(
+                                                      index: _curIndex,
+                                                      onTap: (index) =>
+                                                          _onTapReviewCard(
+                                                              context, index),
+                                                      models: this
+                                                          .block
+                                                          .blocks![0]
+                                                          .items
+                                                          .cast<CardModel>())
                                                 ])))),
                                 forceElevated: innerBoxIsScrolled,
                                 bottom:
-                                    CustomTapBar(tabs: _tabs, tabWidth: 72.0)))
+                                    CustomTapBar(tabs: tabs, tabWidth: 72.0)))
                       ];
                     },
                     body: TabBarView(
-                        children: _tabs.map((Tuple2 tab) {
+                        children: tabs.map((Tuple2 tab) {
                       return SafeArea(
                           top: false,
                           bottom: false,
@@ -234,9 +186,9 @@ class _BoardReviewState extends State<BoardReview> {
                                       SliverList(
                                           delegate: SliverChildBuilderDelegate(
                                         (BuildContext context, int index) {
-                                          return _postItems[tab.item2][index];
+                                          return posts[tab.item2][index];
                                         },
-                                        childCount: _postItemCounts[tab.item2],
+                                        childCount: posts[tab.item2].length,
                                       ))
                                     ]));
                           }));
@@ -245,11 +197,9 @@ class _BoardReviewState extends State<BoardReview> {
             BottomBarNavigation.getInstance(RootPageItem.board));
   }
 
-  List<Widget> _buildItems(String type, List<YrkModel> items) {
-    return items
-        .cast<YrkListItemV2Model>()
-        .map((model) => YrkPageListItemV2(type: type, model: PostModel()))
-        .toList();
+  List<Widget> _buildPosts(YrkBlock2 block) {
+    List items = block.items!.cast<PostModel>();
+    return items.map((model) => YrkPageListItemV2(model: model)).toList();
   }
 
   bool _onScrollNotification(ScrollNotification notification, int index) {
@@ -258,10 +208,20 @@ class _BoardReviewState extends State<BoardReview> {
     if (notification.metrics.extentBefore ==
         notification.metrics.maxScrollExtent) {
       setState(() {
-        _loadMoreItems(index);
+        updateBlockOn("$index");
       });
     }
     return true;
+  }
+
+  void _loadItems() {
+    YrkBlock2 tabBlock = this.block.blocks![1] as YrkBlock2;
+    print(tabBlock.blocks!.length);
+    for (int i = 0; i < tabBlock.blocks!.length; i++) {
+      List<Widget> items = _buildPosts(tabBlock.blocks![i]);
+      tabs.add(Tuple2(tabBlock.blocks![i].title, i));
+      posts.add(items);
+    }
   }
 
   void _onTapReviewCard(BuildContext context, int index) {
@@ -269,9 +229,8 @@ class _BoardReviewState extends State<BoardReview> {
       setState(() {
         _curIndex = index;
         DefaultTabController.of(context)!.animateTo(0);
-        _postItems.removeRange(0, _postItems.length);
-        _postItemCounts.removeRange(0, _postItemCounts.length);
-        _tabs.removeRange(0, _tabs.length);
+        posts.removeRange(0, posts.length);
+        tabs.removeRange(0, tabs.length);
         _loadItems();
       });
   }

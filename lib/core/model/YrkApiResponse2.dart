@@ -12,9 +12,11 @@ class YrkApiResponse2<T extends YrkBlock2> {
 
   String? status;
   String? message;
+  String? type;
+  String? title;
 
   @_BlockConverter()
-  late List<T> body;
+  late List<T>? body;
 
   factory YrkApiResponse2.fromJson(Map<String, dynamic> json) =>
       _$YrkApiResponse2FromJson(json);

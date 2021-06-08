@@ -2,99 +2,71 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
-import 'package:yoroke/core/model/YrkApiResponse.dart';
-import 'package:yoroke/core/model/YrkBlock.dart';
-import 'package:yoroke/core/model/YrkModel.dart';
+import 'package:yoroke/core/model/YrkBlock2.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
+import 'package:yoroke/core/model/YrkTestModelData.dart';
 import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
-import 'package:yoroke/screens/board/model/BoardJobFindingBlock.dart';
-import 'package:yoroke/screens/board/model/JobFindingPostApiResponse.dart';
-import 'package:yoroke/screens/board/model/JobFindingPostBlock.dart';
-import 'package:yoroke/screens/common/YrkListItem.dart';
 import 'package:yoroke/screens/common/YrkListItemV2.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/common/YrkTabBar.dart';
+import 'package:yoroke/core/model/YrkApiResponse2.dart';
 
-class BoardJobFinding extends StatefulWidget {
-  BoardJobFinding();
+class BoardJob extends StatefulWidget {
+  BoardJob();
 
   @override
-  _BoardJobFindingState createState() => _BoardJobFindingState();
+  _BoardJobState createState() => _BoardJobState();
 }
 
-class _BoardJobFindingState extends State<BoardJobFinding>
-    {
+class _BoardJobState extends State<BoardJob>
+    with ScreenState<YrkBlock2> {
   final ScrollController _scrollController = ScrollController();
 
-  late BoardJobFindingBlock boardJobFindingBlock;
-
   List<Tuple2<String, int>> tabs = [];
-  List<List<Widget>> postItems = [];
-  List<int> postItemCounts = [];
+  List<List<Widget>> posts = [];
 
   @override
-  // TODO: implement block
-  BoardJobFindingBlock get block => this.block;
-
-  @override
-  // TODO: implement reqCtx
   YrkRequestContext get reqCtx => YrkRequestContext();
 
   @override
-  BoardJobFindingBlock makeBlock(YrkRequestContext reqCtx) {
-    BoardJobFindingBlock boardJobFindingBlock = BoardJobFindingBlock();
-    boardJobFindingBlock.blocks = <YrkBlock>[];
-    boardJobFindingBlock.title = "구인구직";
-
-    JobFindingPostBlock block = JobFindingPostBlock();
-    Map<String, dynamic> jsonResponse = TestJobFindingInternalPostData().jsonResponse;
-    YrkApiResponse apiResponse =
-        JobFindingPostApiResponse.fromJson(jsonResponse);
-    List<YrkModel> items =
-        (apiResponse as JobFindingPostApiResponse).jobFindingPosts;
-    block.items = items as List<YrkListItemV2Model>;
-    block.title = "구인";
-    boardJobFindingBlock.blocks!.add(block);
-
-    block = JobFindingPostBlock();
-    jsonResponse = TestJobFindingInternalPostData().jsonResponse;
-    apiResponse = JobFindingPostApiResponse.fromJson(jsonResponse);
-    items = (apiResponse).jobFindingPosts;
-    block.items = items;
-    block.title = "구직";
-    boardJobFindingBlock.blocks!.add(block);
-
-    return boardJobFindingBlock;
+  void initBlock() {
+    Map<String, dynamic> jsonResponse = TestBoardJobData().jsonResponse;
+    YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+    String type = apiResponse.type ?? "";
+    String title = apiResponse.title ?? "";
+    List<YrkBlock2> blocks = apiResponse.body ?? [];
+    this.block = YrkBlock2()..blocks = blocks;
+    this.block.type = type;
+    this.block.title = title;
   }
 
-  void _loadMoreItems(int index) {
+  @override
+  void updateBlockOn(String action) {
+    int index = int.parse(action);
     setState(() {
-      Map<String, dynamic> jsonResponse = TestJobFindingInternalPostData().jsonResponse;
-      YrkApiResponse apiResponse =
-          JobFindingPostApiResponse.fromJson(jsonResponse);
-      List<YrkModel> items =
-          (apiResponse as JobFindingPostApiResponse).jobFindingPosts;
-      postItems[index].addAll(_buildItems(boardJobFindingBlock.blocks![index].type, items));
-      postItemCounts[index] = postItems[index].length;
+      Map<String, dynamic> jsonResponse = TestBoardJobData().jsonResponse;
+      YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+      YrkBlock2 block = (apiResponse.body ?? [])[0];
+      posts[index].addAll(_buildPosts(block.blocks![index]));
     });
   }
 
   @override
   void initState() {
     super.initState();
-    boardJobFindingBlock = makeBlock(reqCtx);
+    initBlock();
 
-    for(int i = 0; i < boardJobFindingBlock.blocks!.length; i++) {
-      JobFindingPostBlock block = boardJobFindingBlock.blocks![i] as JobFindingPostBlock;
-      List<Widget> items = _buildItems(block.type, block.items!);
-      tabs.add(Tuple2(block.title, i));
-      postItems.add(items);
-      postItemCounts.add(items.length);
+    YrkBlock2 tabBlock = this.block.blocks![0] as YrkBlock2;
+    print(tabBlock.blocks!.length);
+    for (int i = 0; i < tabBlock.blocks!.length; i++) {
+      List<Widget> items = _buildPosts(tabBlock.blocks![i]);
+      tabs.add(Tuple2(tabBlock.blocks![i].title, i));
+      posts.add(items);
     }
   }
 
@@ -142,8 +114,7 @@ class _BoardJobFindingState extends State<BoardJobFinding>
                                           height: 48.0,
                                           alignment: Alignment.centerLeft,
                                           margin: EdgeInsets.only(left: 48.0),
-                                          child: Text(
-                                              boardJobFindingBlock.title!,
+                                          child: Text(this.block.title ?? "",
                                               style: const YrkTextStyle(
                                                   color:
                                                       const Color(0xe6000000),
@@ -167,7 +138,7 @@ class _BoardJobFindingState extends State<BoardJobFinding>
                                               margin:
                                                   EdgeInsets.only(left: 16.0),
                                               child: Text(
-                                                  boardJobFindingBlock.title!,
+                                                  this.block.title ?? "",
                                                   style: const YrkTextStyle(
                                                       fontWeight:
                                                           FontWeight.w700,
@@ -201,8 +172,8 @@ class _BoardJobFindingState extends State<BoardJobFinding>
                                           delegate: SliverChildBuilderDelegate(
                                               (BuildContext context,
                                                   int index) {
-                                        return postItems[tab.item2][index];
-                                      }, childCount: postItemCounts[tab.item2]))
+                                        return posts[tab.item2][index];
+                                      }, childCount: posts[tab.item2].length))
                                     ]));
                           }));
                     }).toList())))),
@@ -210,11 +181,9 @@ class _BoardJobFindingState extends State<BoardJobFinding>
             BottomBarNavigation.getInstance(RootPageItem.board));
   }
 
-  List<Widget> _buildItems(String type, List<YrkModel> items) {
-    return items
-        .cast<YrkListItemV2Model>()
-        .map((model) => YrkPageListItemV2(type: type, model: PostModel()))
-        .toList();
+  List<Widget> _buildPosts(YrkBlock2 block) {
+    List items = block.items!.cast<PostModel>();
+    return items.map((model) => YrkPageListItemV2(model: model)).toList();
   }
 
   bool _onScrollNotification(ScrollNotification notification, int index) {
@@ -222,7 +191,7 @@ class _BoardJobFindingState extends State<BoardJobFinding>
 
     if (notification.metrics.extentBefore ==
         notification.metrics.maxScrollExtent) {
-      _loadMoreItems(index);
+      updateBlockOn("$index");
     }
     return true;
   }

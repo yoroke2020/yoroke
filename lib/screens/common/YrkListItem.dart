@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoroke/models/TestData.dart';
 import 'package:yoroke/models/YrkData.dart';
 import 'package:yoroke/screens/TestPage.dart';
-import 'package:yoroke/screens/board/BoardJobFinding.dart';
+import 'package:yoroke/screens/board/BoardJob.dart';
 import 'package:yoroke/screens/board/BoardQna.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';

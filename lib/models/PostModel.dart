@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/core/model/YrkModel2.dart';
 
 part 'PostModel.g.dart';
@@ -12,7 +11,8 @@ class PostModel extends YrkModel2 {
   String? label;
   String? title;
   String? author;
-  String? time;
+  int? accountId;
+  String? timestamp;
   int? likeCount;
   int? dislikeCount;
   int? commentCount;

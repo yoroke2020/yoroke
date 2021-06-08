@@ -12,8 +12,10 @@ YrkApiResponse2<T>
   return YrkApiResponse2<T>()
     ..status = json['status'] as String?
     ..message = json['message'] as String?
-    ..body = (json['body'] as List<dynamic>)
-        .map((e) => _BlockConverter<T>().fromJson(e as Object))
+    ..type = json['type'] as String?
+    ..title = json['title'] as String?
+    ..body = (json['body'] as List<dynamic>?)
+        ?.map((e) => _BlockConverter<T>().fromJson(e as Object))
         .toList();
 }
 
@@ -23,5 +25,7 @@ Map<String, dynamic>
         <String, dynamic>{
           'status': instance.status,
           'message': instance.message,
-          'body': instance.body.map(_BlockConverter<T>().toJson).toList(),
+          'type': instance.type,
+          'title': instance.title,
+          'body': instance.body?.map(_BlockConverter<T>().toJson).toList(),
         };

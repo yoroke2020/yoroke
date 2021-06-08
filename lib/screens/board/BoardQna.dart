@@ -1,41 +1,28 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/core/model/YrkApiResponse.dart';
-import 'package:yoroke/core/model/YrkBlock.dart';
-import 'package:yoroke/core/model/YrkModel.dart';
+import 'package:yoroke/core/model/YrkBlock2.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
+import 'package:yoroke/core/model/YrkTestModelData.dart';
+import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
-import 'package:yoroke/screens/board/model/BoardQnaBlock.dart';
-import 'package:yoroke/screens/board/model/QnaCardApiResponse.dart';
-import 'package:yoroke/screens/board/model/QnaPostApiResponse.dart';
-import 'package:yoroke/screens/board/model/QnaPostBlock.dart';
 import 'package:yoroke/screens/common/YrkListItemV2.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
+import 'package:yoroke/core/model/YrkApiResponse2.dart';
 
-import 'BoardQnaCard.dart';
+import 'model/BoardQnaCard.dart';
 
 class BoardQna extends StatefulWidget {
   @override
   _BoardQnaState createState() => _BoardQnaState();
 }
 
-class _BoardQnaState extends State<BoardQna> {
-  static final int _boardQnaCardListItemCount = 10;
-
-  late BoardQnaBlock boardQnaBlock;
-  late QnaPostBlock qnaPostBlock;
-  late QnaPostBlock qnaCardBlock;
-
-  late List<Widget> cardItems;
-
-  late List<Widget> postItems;
-  late int postItemCount;
+class _BoardQnaState extends State<BoardQna> with ScreenState<YrkBlock2> {
+  late List<Widget> cards;
+  late List<Widget> posts;
 
   late ScrollController _scrollController;
 
@@ -43,64 +30,39 @@ class _BoardQnaState extends State<BoardQna> {
   YrkRequestContext get reqCtx => YrkRequestContext();
 
   @override
-  BoardQnaBlock get block => this.block;
-
-  @override
-  BoardQnaBlock makeBlock(YrkRequestContext reqCtx) {
-    BoardQnaBlock boardQnaBlock = BoardQnaBlock();
-    boardQnaBlock.title = "고민/질문";
-    boardQnaBlock.blocks = <YrkBlock>[];
-
-    QnaPostBlock block = QnaPostBlock();
-    Map<String, dynamic> jsonResponse = TestQnaPostData().jsonResponse;
-    YrkApiResponse apiResponse = QnaPostApiResponse.fromJson(jsonResponse);
-    List<YrkModel> items = (apiResponse as QnaPostApiResponse).qnaPosts;
-    block.items = items as List<YrkListItemV2Model>;
-    block.title = apiResponse.title;
-    boardQnaBlock.blocks!.add(block);
-
-    block = QnaPostBlock();
-    block.type = "QnaCard";
-    jsonResponse = TestQnaCardData().jsonResponse;
-    apiResponse = QnaCardApiResponse.fromJson(jsonResponse);
-    items = (apiResponse as QnaCardApiResponse).qnaCards;
-    block.items = items as List<BoardQnaCardModel>;
-    boardQnaBlock.blocks!.add(block);
-
-    return boardQnaBlock;
+  void initBlock() {
+    Map<String, dynamic> jsonResponse = TestBoardQnaData().jsonResponse;
+    YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+    String type = apiResponse.type ?? "";
+    String title = apiResponse.title ?? "";
+    List<YrkBlock2> blocks = apiResponse.body ?? [];
+    this.block = YrkBlock2()..blocks = blocks;
+    this.block.type = type;
+    this.block.title = title;
   }
 
-  void _loadMoreItems() {
+  @override
+  void updateBlockOn(String action) {
     setState(() {
-      Map<String, dynamic> jsonResponse = TestQnaPostData().jsonResponse;
-      YrkApiResponse apiResponse = QnaPostApiResponse.fromJson(jsonResponse);
-      List<YrkModel> items = (apiResponse as QnaPostApiResponse).qnaPosts;
-
-      qnaPostBlock.items!.addAll(items as List<YrkListItemV2Model>);
-      postItems.addAll(_buildItems(qnaPostBlock.type, items));
-      postItemCount = postItems.length;
+      Map<String, dynamic> jsonResponse = TestBoardQnaData().jsonResponse;
+      YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+      YrkBlock2 block = (apiResponse.body ?? [])[1];
+      posts.addAll(_buildPosts(block));
     });
   }
 
   @override
   void initState() {
     super.initState();
-    boardQnaBlock = makeBlock(reqCtx);
-    // qnaPostBlock =
-    // boardQnaBlock.findFirstBlockWhere('QnaPost') as QnaPostBlock;
-    // qnaCardBlock =
-    //     boardQnaBlock.findFirstBlockWhere('QnaCard') as QnaPostBlock;
-
-    postItems = _buildItems(qnaPostBlock.type, qnaPostBlock.items!);
-    postItemCount = postItems.length;
-
-    cardItems = _buildCards(qnaCardBlock.items!);
+    initBlock();
+    cards = _buildCards(this.block.blocks![0]);
+    posts = _buildPosts(this.block.blocks![1]);
 
     _scrollController = new ScrollController();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        _loadMoreItems();
+        updateBlockOn("post");
       }
     });
   }
@@ -138,7 +100,7 @@ class _BoardQnaState extends State<BoardQna> {
                       alignment: Alignment.centerLeft,
                       margin: EdgeInsets.only(left: 48.0),
                       height: 48.0,
-                      child: Text(boardQnaBlock.title!,
+                      child: Text(block.title!,
                           style:
                               const YrkTextStyle(fontWeight: FontWeight.w700),
                           textAlign: TextAlign.left)))
@@ -147,7 +109,7 @@ class _BoardQnaState extends State<BoardQna> {
           SliverToBoxAdapter(
               child: Padding(
             padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
-            child: Text(boardQnaBlock.title!,
+            child: Text(block.title!,
                 style: const YrkTextStyle(
                     fontWeight: FontWeight.w700, fontSize: 22.0),
                 textAlign: TextAlign.left),
@@ -158,33 +120,29 @@ class _BoardQnaState extends State<BoardQna> {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
-                return cardItems[index];
+                return cards[index];
               },
-              itemCount: _boardQnaCardListItemCount,
+              itemCount: cards.length,
             ),
           )),
           SliverList(
             delegate:
                 SliverChildBuilderDelegate((BuildContext context, int index) {
-              return postItems[index];
-            }, childCount: postItemCount),
+              return posts[index];
+            }, childCount: posts.length),
           )
         ]),
         bottomNavigationBar:
             BottomBarNavigation.getInstance(RootPageItem.board));
   }
 
-  List<Widget> _buildItems(String type, List<YrkModel> items) {
-    return items
-        .cast<YrkListItemV2Model>()
-        .map((model) => YrkPageListItemV2(type: type, model: PostModel()))
-        .toList();
+  List<Widget> _buildPosts(YrkBlock2 block) {
+    List items = block.items!.cast<PostModel>();
+    return items.map((model) => YrkPageListItemV2(model: model)).toList();
   }
 
-  List<Widget> _buildCards(List<YrkModel> items) {
-    return items
-        .cast<BoardQnaCardModel>()
-        .map((model) => BoardQnaCard(model: model))
-        .toList();
+  List<Widget> _buildCards(YrkBlock2 block) {
+    List items = block.items!.cast<PostModel>();
+    return items.map((model) => BoardQnaCard(model: model)).toList();
   }
 }

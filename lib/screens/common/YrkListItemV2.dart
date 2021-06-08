@@ -114,7 +114,7 @@ class YrkPageListItemV2 extends StatelessWidget {
                             textAlign: TextAlign.left)),
                     Container(
                         margin: EdgeInsets.only(right: 9.0),
-                        child: Text(model.time ?? "",
+                        child: Text(model.timestamp ?? "",
                             style: const YrkTextStyle(
                               color: const Color(0x4d000000),
                               fontSize: 12.0,

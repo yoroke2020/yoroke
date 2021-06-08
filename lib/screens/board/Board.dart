@@ -10,10 +10,10 @@ import 'package:yoroke/main.dart';
 import 'package:yoroke/models/CardModel.dart';
 import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
-import 'package:yoroke/screens/board/BoardJobFinding.dart';
+import 'package:yoroke/screens/board/BoardJob.dart';
 import 'package:yoroke/screens/board/BoardQna.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
-import 'package:yoroke/screens/board/BoardReviewCard.dart';
+import 'package:yoroke/screens/board/model/BoardReviewCard.dart';
 import 'package:yoroke/screens/common/YrkListItemV2.dart';
 import 'package:yoroke/screens/common/YrkPage.dart';
 import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
@@ -36,7 +36,7 @@ class _BoardState extends State<Board> with ScreenState<YrkBlock2> {
   void initBlock() {
     Map<String, dynamic> jsonResponse = TestBoardData().jsonResponse;
     YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
-    List<YrkBlock2> blocks = apiResponse.body;
+    List<YrkBlock2> blocks = apiResponse.body!;
     this.block = YrkBlock2()..blocks = blocks;
   }
 
@@ -47,25 +47,9 @@ class _BoardState extends State<Board> with ScreenState<YrkBlock2> {
 
   @override
   void initState() {
-    initBlock();
     super.initState();
-  }
+    initBlock();
 
-  List<Widget> _buildItems(YrkBlock2 block) {
-    final int pageItemLimit = 4;
-
-    List items = block.items!.cast<PostModel>();
-    List<Widget> pageListItems = items
-        .map((model) =>
-            YrkPageListItemV2(model: model))
-        .toList();
-
-    return partition(pageListItems, pageItemLimit)
-        .map((list) => ListView(
-              children: [...list],
-              physics: NeverScrollableScrollPhysics(),
-            ))
-        .toList();
   }
 
   @override
@@ -93,18 +77,35 @@ class _BoardState extends State<Board> with ScreenState<YrkBlock2> {
                 context, MaterialPageRoute(builder: (context) => BoardQna())),
           ),
           YrkPage(
-              page: _buildItems(this.block.blocks![1]),
+              page: _buildPosts(this.block.blocks![1]),
               controller: _qnaPageController,
               isIndicatorEnabled: true),
           YrkTabHeaderView(
               title: this.block.blocks![2].title,
               clickable: true,
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => BoardJobFinding()))),
+                  MaterialPageRoute(builder: (context) => BoardJob()))),
           YrkPage(
-              page: _buildItems(this.block.blocks![2]),
+              page: _buildPosts(this.block.blocks![2]),
               controller: _jobFindingPageController,
               isIndicatorEnabled: true)
         ]));
+  }
+
+  List<Widget> _buildPosts(YrkBlock2 block) {
+    final int pageItemLimit = 4;
+
+    List items = block.items!.cast<PostModel>();
+    List<Widget> pageListItems = items
+        .map((model) =>
+        YrkPageListItemV2(model: model))
+        .toList();
+
+    return partition(pageListItems, pageItemLimit)
+        .map((list) => ListView(
+      children: [...list],
+      physics: NeverScrollableScrollPhysics(),
+    ))
+        .toList();
   }
 }
