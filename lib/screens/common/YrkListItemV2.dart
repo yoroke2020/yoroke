@@ -2,74 +2,46 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/screens/board/BoardJobFinding.dart';
-import 'package:yoroke/screens/board/BoardQna.dart';
-import 'package:yoroke/screens/board/BoardReview.dart';
+import 'package:yoroke/models/PostModel.dart';
+import 'package:yoroke/temp/YrkData.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/post/Post.dart';
 
-import '../TestPage.dart';
+import '../../temp/TestPage.dart';
 
 part 'YrkListItemV2.g.dart';
 
 class YrkPageListItemV2 extends StatelessWidget {
-  YrkPageListItemV2(
-      {required this.pageType,
-      required this.nextPageItem,
-      required this.model});
+  YrkPageListItemV2({@deprecated this.type, required this.model});
 
-  final pageType;
-  final nextPageItem;
-  final YrkListItemV2Model model;
-
-  void _onItemClicked(BuildContext context, nextPageItem) async {
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      await Navigator.push(context, MaterialPageRoute(builder: (context) {
-        switch (nextPageItem) {
-          case "boardReview":
-            return BoardReview(data: new YrkData());
-          case "boardQna":
-            return BoardQna();
-          case "boardJobFinding":
-            return BoardJobFinding();
-          case "post":
-            return Post(data: new YrkData());
-          default:
-            return TestPage();
-        }
-      }));
-    });
-  }
+  @deprecated
+  final String? type;
+  final PostModel model;
 
   @override
   Widget build(BuildContext context) {
-    // Text or Button appears before a title. If it is true, a text appears.
-    // If it is false, a button appears
     bool isText = true;
-    // Best Icon appears next to a title
     bool isBestIcon = false;
-    // Rating appears next to a comment icon on the second line
     bool isRating = false;
 
-    // Add case here when new kinds of pageListItem is defined
-    switch (pageType) {
-      case "boardJobFinding":
+    switch (model.category ?? "") {
+      case "job":
         isText = false;
         break;
-      case "post":
+      case "PopularPostBlock":
+      case "review":
+      case "qna":
         isRating = true;
-        isBestIcon = true;
+        isBestIcon = model.isBest ?? false;
         break;
       default:
         break;
     }
 
     return InkWell(
-      onTap: () => _onItemClicked(context, nextPageItem),
-      //TODO: YrkData -> API Call
+      onTap: () => _onItemClicked(context),
       child: Container(
           width: double.maxFinite,
           height: 65.0,
@@ -88,14 +60,14 @@ class YrkPageListItemV2 extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(right: 8.0),
                         child: isText
-                            ? Text(model.facilityType!,
+                            ? Text(model.label ?? "",
                                 style: const YrkTextStyle(
                                     color: const Color(0x99000000),
                                     fontSize: 14.0),
                                 textAlign: TextAlign.left)
                             : YrkButton(
                                 buttonType: ButtonType.solid,
-                                label: "구인중",
+                                label: model.label ?? "",
                                 onPressed: () {},
                                 width: 60.0,
                                 height: 24.0,
@@ -107,13 +79,11 @@ class YrkPageListItemV2 extends StatelessWidget {
                       ),
                       Container(
                           margin: EdgeInsets.only(right: 4.0),
-                          child: Text(model.title!,
+                          child: Text(model.title ?? "",
                               style: const YrkTextStyle(fontSize: 16.0),
                               textAlign: TextAlign.left)),
-                      model.isBest!
-                          ? Container(
-                              padding: const EdgeInsets.only(top: 4.0),
-                              child: YrkButton(
+                      isBestIcon
+                          ? YrkButton(
                                 buttonType: ButtonType.chip,
                                 width: 32,
                                 height: 16,
@@ -125,7 +95,7 @@ class YrkPageListItemV2 extends StatelessWidget {
                                 ),
                                 clickable: false,
                                 onPressed: () {},
-                              ))
+                              )
                           : Container()
                     ]),
                 Container(width: double.maxFinite, height: 6.0),
@@ -134,16 +104,17 @@ class YrkPageListItemV2 extends StatelessWidget {
                   children: <Widget>[
                     Container(
                         margin: EdgeInsets.only(right: 8.0),
-                        child: Text(model.author!,
-                            style: const TextStyle(
+                        child: Text(model.author ?? "",
+                            style: const YrkTextStyle(
                                 color: const Color(0x4d000000),
                                 fontWeight: FontWeight.w500,
+                                height: 0.9,
                                 fontSize: 12.0),
                             textAlign: TextAlign.left)),
                     Container(
                         margin: EdgeInsets.only(right: 9.0),
-                        child: Text(model.timestamp!,
-                            style: const TextStyle(
+                        child: Text(model.timestamp ?? "",
+                            style: const YrkTextStyle(
                               color: const Color(0x4d000000),
                               fontSize: 12.0,
                               fontFamily: "OpenSans",
@@ -157,8 +128,8 @@ class YrkPageListItemV2 extends StatelessWidget {
                             child: YrkIconButton(icon: "icon_thumb_up.svg"))),
                     Container(
                         margin: EdgeInsets.only(right: 8.0),
-                        child: Text(model.likeCount!.toString(),
-                            style: const TextStyle(
+                        child: Text('${model.likeCount ?? -1}',
+                            style: const YrkTextStyle(
                               color: const Color(0x4d000000),
                               fontWeight: FontWeight.w600,
                               fontSize: 12.0,
@@ -173,8 +144,8 @@ class YrkPageListItemV2 extends StatelessWidget {
                             child: YrkIconButton(icon: "icon_comment.svg"))),
                     Container(
                         margin: EdgeInsets.only(right: 8.0),
-                        child: Text(model.commentCount!.toString(),
-                            style: const TextStyle(
+                        child: Text('${model.commentCount ?? -1}',
+                            style: const YrkTextStyle(
                               color: const Color(0x4d000000),
                               fontWeight: FontWeight.w600,
                               fontSize: 12.0,
@@ -194,8 +165,8 @@ class YrkPageListItemV2 extends StatelessWidget {
                                   size: 12,
                                 )),
                             Container(
-                                child: Text(model.rating.toString(),
-                                    style: const TextStyle(
+                                child: Text('${model.rating ?? -1}',
+                                    style: const YrkTextStyle(
                                       color: const Color(0x4d000000),
                                       fontWeight: FontWeight.w600,
                                       fontSize: 12.0,
@@ -209,8 +180,22 @@ class YrkPageListItemV2 extends StatelessWidget {
               ])),
     );
   }
+
+  void _onItemClicked(BuildContext context) async {
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await Navigator.push(context, MaterialPageRoute(builder: (context) {
+        switch (model.type ?? "") {
+          case "post":
+            return Post(data: new YrkData());
+          default:
+            return TestPage();
+        }
+      }));
+    });
+  }
 }
 
+@deprecated
 @JsonSerializable()
 class YrkListItemV2Model extends YrkModel {
   String? facilityType;
@@ -226,5 +211,6 @@ class YrkListItemV2Model extends YrkModel {
 
   factory YrkListItemV2Model.fromJson(Map<String, dynamic> json) =>
       _$YrkListItemV2ModelFromJson(json);
+
   Map<String, dynamic> toJson() => _$YrkListItemV2ModelToJson(this);
 }

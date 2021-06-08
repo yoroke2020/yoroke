@@ -3,10 +3,10 @@ import 'package:quiver/iterables.dart';
 import 'package:yoroke/core/model/YrkBlock.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
-import 'package:yoroke/core/screen/Screen.dart';
-import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/models/PostModel.dart';
+import 'package:yoroke/temp/YrkData.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
-import 'package:yoroke/screens/TestPage.dart';
+import 'package:yoroke/temp/TestPage.dart';
 import 'package:yoroke/screens/common/YrkListItem.dart';
 import 'package:yoroke/screens/common/YrkListItemV2.dart';
 import 'package:yoroke/screens/common/YrkPage.dart';
@@ -35,8 +35,9 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with ScreenState<HomeBlock> {
+class _HomeState extends State<Home> {
   late YrkRequestContext reqCtx;
+  late YrkBlock block;
 
   @override
   initState() {
@@ -68,11 +69,7 @@ class _HomeState extends State<Home> with ScreenState<HomeBlock> {
   }
 
   Widget _buildPageListItem(subPageItem, YrkListItemV2Model item) {
-    return YrkPageListItemV2(
-      pageType: subPageItem,
-      nextPageItem: "post",
-      model: item,
-    );
+    return YrkPageListItemV2(model: PostModel());
   }
 
   List<Widget> _homePopularList(int pageIndex, subPageItem) {
@@ -300,7 +297,7 @@ class _HomeState extends State<Home> with ScreenState<HomeBlock> {
           ..title = "인기 의료시설",
       ]);
 
-    setBlock(homeBlock);
+    this.block = homeBlock;
   }
 
   @override

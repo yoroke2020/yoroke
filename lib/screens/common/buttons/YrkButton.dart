@@ -28,7 +28,7 @@ class YrkButton extends StatefulWidget {
     Key? key,
     required this.buttonType,
     required this.label,
-    required this.onPressed,
+    this.onPressed,
     this.width,
     this.height,
     this.textStyle,

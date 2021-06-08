@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/models/TestData.dart';
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/screens/TestPage.dart';
-import 'package:yoroke/screens/board/BoardJobFinding.dart';
-import 'package:yoroke/screens/board/BoardQna.dart';
-import 'package:yoroke/screens/board/BoardReview.dart';
+import 'package:yoroke/temp/TestData.dart';
+import 'package:yoroke/temp/YrkData.dart';
+import 'package:yoroke/temp/TestPage.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
@@ -28,12 +25,6 @@ class YrkPageListItem extends StatelessWidget {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       await Navigator.push(context, MaterialPageRoute(builder: (context) {
         switch (nextPageItem) {
-          case "boardReview":
-            return BoardReview(data: new YrkData());
-          case "boardQna":
-            return BoardQna();
-          case "boardJobFinding":
-            return BoardJobFinding();
           case "post":
             return Post(data: new YrkData());
           default:

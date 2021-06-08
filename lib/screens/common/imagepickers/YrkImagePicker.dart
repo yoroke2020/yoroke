@@ -52,7 +52,7 @@ class YrkImagePicker extends StatelessWidget {
       return null;
     }
 
-    final fileName = result.files.first.name!;
+    final fileName = result.files.first.name;
     final file = File(fileName);
 
     return _onImagePickCallback(file);

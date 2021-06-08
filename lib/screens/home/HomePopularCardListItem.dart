@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
-import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/temp/YrkData.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';
 import 'package:yoroke/screens/common/YrkStarRating.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';

@@ -2,42 +2,69 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
-import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/core/model/YrkBlock2.dart';
+import 'package:yoroke/core/model/YrkRequestContext.dart';
+import 'package:yoroke/temp/YrkTestModelData.dart';
+import 'package:yoroke/core/screen/Screen.dart';
+import 'package:yoroke/models/CardModel.dart';
+import 'package:yoroke/models/PostModel.dart';
+import 'package:yoroke/temp/YrkData.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
-import 'package:yoroke/screens/common/YrkListItem.dart';
+import 'package:yoroke/screens/common/YrkListItemV2.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
+import 'package:yoroke/screens/common/YrkTabBar.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
-import 'package:yoroke/screens/common/YrkTabBar.dart';
+import 'package:yoroke/core/model/YrkApiResponse2.dart';
 
-import 'BoardCardListItem.dart';
+import 'model/BoardReviewCard.dart';
 
 class BoardReview extends StatefulWidget {
-  BoardReview({required this.data});
+  BoardReview({@deprecated this.data, this.index = 0});
 
   final YrkData? data;
+  final int index;
 
   @override
   _BoardReviewState createState() => _BoardReviewState();
 }
 
-class _BoardReviewState extends State<BoardReview> {
-  static final int boardCardListItemCount = 12;
-
-  late int _curCardIndex;
+class _BoardReviewState extends State<BoardReview> with ScreenState<YrkBlock2> {
   final ScrollController _scrollController = ScrollController();
-  final List<Tuple2<String, int>> _tabs = <Tuple2<String, int>>[
-    Tuple2('최신글', 0),
-    Tuple2('인기글', 1)
-  ];
 
-  List<int> _childCount = [10, 10];
+  late int _curIndex;
+  List<Tuple2<String, int>> tabs = [];
+  List<List<Widget>> posts = [];
+
+  @override
+  YrkRequestContext get reqCtx => YrkRequestContext();
+
+  @override
+  void initBlock() {
+    Map<String, dynamic> jsonResponse = TestBoardReviewData().jsonResponse;
+    YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+    List<YrkBlock2> blocks = apiResponse.body!;
+    this.block = YrkBlock2()..blocks = blocks;
+  }
+
+  @override
+  void updateBlockOn(String action) {
+    int index = int.parse(action);
+    setState(() {
+      Map<String, dynamic> jsonResponse = TestBoardReviewData().jsonResponse;
+      YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+      YrkBlock2 block = (apiResponse.body ?? [])[1];
+      posts[index].addAll(_buildPosts(block.blocks![index]));
+    });
+  }
 
   @override
   void initState() {
-    _curCardIndex = widget.data!.i1!;
     super.initState();
+    initBlock();
+    _loadItems();
+    _curIndex = widget.index;
   }
 
   @override
@@ -49,7 +76,7 @@ class _BoardReviewState extends State<BoardReview> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: DefaultTabController(
-            length: _tabs.length,
+            length: tabs.length,
             child: Scaffold(
                 body: NestedScrollView(
                     controller: _scrollController,
@@ -90,73 +117,56 @@ class _BoardReviewState extends State<BoardReview> {
                                               textAlign: TextAlign.left)))
                                 ]),
                                 flexibleSpace: YrkScrollOpacity(
-                                  scrollController: _scrollController,
-                                  reversed: true,
-                                  child: FlexibleSpaceBar(
-                                      background: Container(
-                                          color: const Color(0xffffffff),
-                                          child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                SizedBox(
-                                                  height: 48.0 +
-                                                      MediaQuery.of(context)
-                                                          .padding
-                                                          .top,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 16.0,
-                                                      top: 8.0,
-                                                      bottom: 8.0),
-                                                  child: Text("후기",
-                                                      style: const YrkTextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 22.0),
-                                                      textAlign:
-                                                          TextAlign.left),
-                                                ),
-                                                Container(
-                                                    height: 100.0,
-                                                    child: ListView.separated(
-                                                        scrollDirection:
-                                                            Axis.horizontal,
-                                                        itemCount:
-                                                            boardCardListItemCount,
-                                                        separatorBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return SizedBox(
-                                                              width: 16.0);
-                                                        },
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return BoardCardListItem(
-                                                            index: index,
-                                                            listLength:
-                                                                boardCardListItemCount,
-                                                            isBorder: index ==
-                                                                    _curCardIndex
-                                                                ? true
-                                                                : false,
-                                                          );
-                                                        }))
-                                              ]))),
-                                ),
+                                    scrollController: _scrollController,
+                                    reversed: true,
+                                    child: FlexibleSpaceBar(
+                                        background: Container(
+                                            color: const Color(0xffffffff),
+                                            child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  SizedBox(
+                                                    height: 48.0 +
+                                                        MediaQuery.of(context)
+                                                            .padding
+                                                            .top,
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 16.0,
+                                                        top: 8.0,
+                                                        bottom: 8.0),
+                                                    child: Text("후기",
+                                                        style:
+                                                            const YrkTextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                                fontSize: 22.0),
+                                                        textAlign:
+                                                            TextAlign.left),
+                                                  ),
+                                                  BoardReviewCards(
+                                                      index: _curIndex,
+                                                      onTap: (index) =>
+                                                          _onTapReviewCard(
+                                                              context, index),
+                                                      models: this
+                                                          .block
+                                                          .blocks![0]
+                                                          .items
+                                                          .cast<CardModel>())
+                                                ])))),
                                 forceElevated: innerBoxIsScrolled,
                                 bottom:
-                                    CustomTapBar(tabs: _tabs, tabWidth: 72.0)))
+                                    CustomTapBar(tabs: tabs, tabWidth: 72.0)))
                       ];
                     },
                     body: TabBarView(
-                        children: _tabs.map((Tuple2 tab) {
+                        children: tabs.map((Tuple2 tab) {
                       return SafeArea(
                           top: false,
                           bottom: false,
@@ -176,14 +186,9 @@ class _BoardReviewState extends State<BoardReview> {
                                       SliverList(
                                           delegate: SliverChildBuilderDelegate(
                                         (BuildContext context, int index) {
-                                          return YrkPageListItem(
-                                            pageIndex: tab.item2,
-                                            listIndex: index,
-                                            pageType: "boardReview",
-                                            nextPageItem: "post",
-                                          );
+                                          return posts[tab.item2][index];
                                         },
-                                        childCount: _childCount[tab.item2],
+                                        childCount: posts[tab.item2].length,
                                       ))
                                     ]));
                           }));
@@ -192,12 +197,9 @@ class _BoardReviewState extends State<BoardReview> {
             BottomBarNavigation.getInstance(RootPageItem.board));
   }
 
-  void _onPushChangeReviewCard(BuildContext context, YrkData data) {
-    setState(() {
-      _curCardIndex = data.i1!;
-      _childCount.fillRange(0, _childCount.length - 1, 10);
-      DefaultTabController.of(context)!.animateTo(0);
-    });
+  List<Widget> _buildPosts(YrkBlock2 block) {
+    List items = block.items!.cast<PostModel>();
+    return items.map((model) => YrkPageListItemV2(model: model)).toList();
   }
 
   bool _onScrollNotification(ScrollNotification notification, int index) {
@@ -206,9 +208,30 @@ class _BoardReviewState extends State<BoardReview> {
     if (notification.metrics.extentBefore ==
         notification.metrics.maxScrollExtent) {
       setState(() {
-        _childCount[index] += 10;
+        updateBlockOn("$index");
       });
     }
     return true;
+  }
+
+  void _loadItems() {
+    YrkBlock2 tabBlock = this.block.blocks![1] as YrkBlock2;
+    print(tabBlock.blocks!.length);
+    for (int i = 0; i < tabBlock.blocks!.length; i++) {
+      List<Widget> items = _buildPosts(tabBlock.blocks![i]);
+      tabs.add(Tuple2(tabBlock.blocks![i].title, i));
+      posts.add(items);
+    }
+  }
+
+  void _onTapReviewCard(BuildContext context, int index) {
+    if (_curIndex != index)
+      setState(() {
+        _curIndex = index;
+        DefaultTabController.of(context)!.animateTo(0);
+        posts.removeRange(0, posts.length);
+        tabs.removeRange(0, tabs.length);
+        _loadItems();
+      });
   }
 }

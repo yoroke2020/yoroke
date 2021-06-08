@@ -10,10 +10,12 @@ class YrkTabHeaderView extends StatelessWidget {
     this.height = 40,
     this.margin = const EdgeInsets.only(left: 16.0, right: 16.0),
     this.clickable = false,
+    @deprecated
     this.nextSubPageItem,
     this.title = "",
     this.titleStyle = const YrkTextStyle(fontSize: 16.0),
     this.customIcon,
+    this.onTap
   });
 
   final double width;
@@ -24,11 +26,12 @@ class YrkTabHeaderView extends StatelessWidget {
   final String title;
   final YrkTextStyle titleStyle;
   final Widget? customIcon;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        // onTap: clickable ? () => onPushNavigator!(new YrkData()) : null,
+        onTap: clickable ? onTap ?? null : null,
         child: Container(
             width: this.width,
             height: this.height,
@@ -44,12 +47,14 @@ class YrkTabHeaderView extends StatelessWidget {
                   Container(
                       child: customIcon != null
                           ? customIcon
-                          : YrkIconButton(
-                              icon: "icon_navigate_next.svg",
-                              padding: EdgeInsets.zero,
-                              clickable: false,
-                              iconSize: 24.0,
-                            ))
+                          : clickable
+                              ? YrkIconButton(
+                                  icon: "icon_navigate_next.svg",
+                                  padding: EdgeInsets.zero,
+                                  clickable: false,
+                                  iconSize: 24.0,
+                                )
+                              : null)
                 ])));
   }
 }

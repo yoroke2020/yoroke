@@ -2,33 +2,72 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
+import 'package:yoroke/core/model/YrkBlock2.dart';
+import 'package:yoroke/core/model/YrkRequestContext.dart';
+import 'package:yoroke/temp/YrkTestModelData.dart';
+import 'package:yoroke/core/screen/Screen.dart';
+import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
-import 'package:yoroke/screens/common/YrkListItem.dart';
+import 'package:yoroke/screens/common/YrkListItemV2.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/common/YrkTabBar.dart';
+import 'package:yoroke/core/model/YrkApiResponse2.dart';
 
-class BoardJobFinding extends StatefulWidget {
-  BoardJobFinding();
+class BoardJob extends StatefulWidget {
+  BoardJob();
 
   @override
-  _BoardJobFindingState createState() => _BoardJobFindingState();
+  _BoardJobState createState() => _BoardJobState();
 }
 
-class _BoardJobFindingState extends State<BoardJobFinding> {
+class _BoardJobState extends State<BoardJob>
+    with ScreenState<YrkBlock2> {
   final ScrollController _scrollController = ScrollController();
-  final List<Tuple2<String, int>> _tabs = <Tuple2<String, int>>[
-    Tuple2('구인', 0),
-    Tuple2('구직', 1)
-  ];
 
-  List<int> _childCount = [10, 10];
+  List<Tuple2<String, int>> tabs = [];
+  List<List<Widget>> posts = [];
+
+  @override
+  YrkRequestContext get reqCtx => YrkRequestContext();
+
+  @override
+  void initBlock() {
+    Map<String, dynamic> jsonResponse = TestBoardJobData().jsonResponse;
+    YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+    String type = apiResponse.type ?? "";
+    String title = apiResponse.title ?? "";
+    List<YrkBlock2> blocks = apiResponse.body ?? [];
+    this.block = YrkBlock2()..blocks = blocks;
+    this.block.type = type;
+    this.block.title = title;
+  }
+
+  @override
+  void updateBlockOn(String action) {
+    int index = int.parse(action);
+    setState(() {
+      Map<String, dynamic> jsonResponse = TestBoardJobData().jsonResponse;
+      YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+      YrkBlock2 block = (apiResponse.body ?? [])[0];
+      posts[index].addAll(_buildPosts(block.blocks![index]));
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    initBlock();
+
+    YrkBlock2 tabBlock = this.block.blocks![0] as YrkBlock2;
+    print(tabBlock.blocks!.length);
+    for (int i = 0; i < tabBlock.blocks!.length; i++) {
+      List<Widget> items = _buildPosts(tabBlock.blocks![i]);
+      tabs.add(Tuple2(tabBlock.blocks![i].title, i));
+      posts.add(items);
+    }
   }
 
   @override
@@ -40,7 +79,7 @@ class _BoardJobFindingState extends State<BoardJobFinding> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: DefaultTabController(
-            length: _tabs.length,
+            length: tabs.length,
             child: Scaffold(
                 body: NestedScrollView(
                     controller: _scrollController,
@@ -75,7 +114,7 @@ class _BoardJobFindingState extends State<BoardJobFinding> {
                                           height: 48.0,
                                           alignment: Alignment.centerLeft,
                                           margin: EdgeInsets.only(left: 48.0),
-                                          child: Text("구인구직",
+                                          child: Text(this.block.title ?? "",
                                               style: const YrkTextStyle(
                                                   color:
                                                       const Color(0xe6000000),
@@ -98,7 +137,8 @@ class _BoardJobFindingState extends State<BoardJobFinding> {
                                               height: 48.0,
                                               margin:
                                                   EdgeInsets.only(left: 16.0),
-                                              child: Text("구인구직",
+                                              child: Text(
+                                                  this.block.title ?? "",
                                                   style: const YrkTextStyle(
                                                       fontWeight:
                                                           FontWeight.w700,
@@ -107,11 +147,11 @@ class _BoardJobFindingState extends State<BoardJobFinding> {
                                         ]))),
                                 forceElevated: innerBoxIsScrolled,
                                 bottom:
-                                    CustomTapBar(tabs: _tabs, tabWidth: 72.0)))
+                                    CustomTapBar(tabs: tabs, tabWidth: 72.0)))
                       ];
                     },
                     body: TabBarView(
-                        children: _tabs.map((Tuple2 tab) {
+                        children: tabs.map((Tuple2 tab) {
                       return SafeArea(
                           top: false,
                           bottom: false,
@@ -132,13 +172,8 @@ class _BoardJobFindingState extends State<BoardJobFinding> {
                                           delegate: SliverChildBuilderDelegate(
                                               (BuildContext context,
                                                   int index) {
-                                        return YrkPageListItem(
-                                          pageIndex: tab.item2,
-                                          listIndex: index,
-                                          pageType: "boardJobFinding",
-                                          nextPageItem: "post",
-                                        );
-                                      }, childCount: _childCount[tab.item2]))
+                                        return posts[tab.item2][index];
+                                      }, childCount: posts[tab.item2].length))
                                     ]));
                           }));
                     }).toList())))),
@@ -146,14 +181,17 @@ class _BoardJobFindingState extends State<BoardJobFinding> {
             BottomBarNavigation.getInstance(RootPageItem.board));
   }
 
+  List<Widget> _buildPosts(YrkBlock2 block) {
+    List items = block.items!.cast<PostModel>();
+    return items.map((model) => YrkPageListItemV2(model: model)).toList();
+  }
+
   bool _onScrollNotification(ScrollNotification notification, int index) {
     if (notification is! ScrollEndNotification) return false;
 
     if (notification.metrics.extentBefore ==
         notification.metrics.maxScrollExtent) {
-      setState(() {
-        _childCount[index] += 10;
-      });
+      updateBlockOn("$index");
     }
     return true;
   }

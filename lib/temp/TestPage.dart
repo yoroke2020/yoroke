@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/screens/common/YrkTextField.dart';
 
-import 'common/buttons/YrkButton.dart';
+import '../screens/common/buttons/YrkButton.dart';
 
 class TestPage extends StatefulWidget {
   @override
