@@ -2317,3 +2317,294 @@ class TestBoardJobData {
     ]
   };
 }
+
+class TestInfoData {
+  Map<String, dynamic> jsonResponse = {
+    "status": "200",
+    "message": "success",
+    "type": "BoardJob",
+    "title": "정보공유",
+    "body": [
+      {
+        "@type": "tabs",
+        "@category": "job",
+        "title": "정보공유2",
+        "blocks": [
+          {
+            "@type": "cards",
+            "@category": "job",
+            "title": "의료시설",
+            "items": [
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+            ]
+          },
+          {
+            "@type": "cards",
+            "@category": "job",
+            "title": "복지시설",
+            "items": [
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+            ]
+          },
+          {
+            "@type": "cards",
+            "@category": "job",
+            "title": "돌봄서비스",
+            "items": [
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/InfoShareSampleImage.jpg",
+                "title": "요양병원"
+              },
+              {
+                "@type": "card",
+                "@category": "review",
+                "imagePath": "assets/images/sample_image.png",
+                "title": "요양병원"
+              },
+            ]
+          },
+        ]
+      }
+    ]
+  };
+}

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/models/CardModel.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/temp/TestData.dart';
 import 'package:yoroke/temp/YrkData.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
@@ -9,14 +11,16 @@ class InfoShareCardListItem extends StatefulWidget {
   InfoShareCardListItem({
     required this.width,
     required this.height,
-    required this.index,
+    this.index,
     this.tabIndex,
+    this.model,
   });
 
   final double? width;
   final double? height;
-  final int index;
+  final int? index;
   final int? tabIndex;
+  final CardModel? model;
 
   @override
   _InfoShareCardListItemState createState() => _InfoShareCardListItemState();
@@ -40,8 +44,7 @@ class _InfoShareCardListItemState extends State<InfoShareCardListItem> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(16)),
                           image: new DecorationImage(
-                              image: new AssetImage(
-                                  testInfoShareImage.elementAt(widget.index)),
+                              image: new AssetImage(widget.model!.imagePath!),
                               fit: BoxFit.fill))),
                   Container(
                       decoration: BoxDecoration(
@@ -78,14 +81,10 @@ class _InfoShareCardListItemState extends State<InfoShareCardListItem> {
                                     ])),
                             Container(
                               padding: EdgeInsets.all(12),
-                              child: Text(
-                                  infoShareHospitalTitle
-                                      .elementAt(widget.index),
-                                  style: const TextStyle(
+                              child: Text(widget.model!.title!,
+                                  style: YrkTextStyle(
                                       color: const Color(0xffffffff),
                                       fontWeight: FontWeight.bold,
-                                      fontFamily: "NotoSansCJKKR",
-                                      fontStyle: FontStyle.normal,
                                       fontSize: 22.0),
                                   textAlign: TextAlign.left),
                             )
@@ -101,10 +100,7 @@ class _InfoShareCardListItemState extends State<InfoShareCardListItem> {
       await Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => InfoShareDetail(
-                  data: new YrkData(
-                      str0: infoShareHospitalTitle.elementAt(widget.index),
-                      str1: testDate.elementAt(widget.index)))));
+              builder: (context) => InfoShareDetail(data: new YrkData())));
     });
   }
 }
