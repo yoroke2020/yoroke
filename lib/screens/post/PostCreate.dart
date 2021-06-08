@@ -269,10 +269,9 @@ class _PostCreateState extends State<PostCreate> {
                                         style: const YrkTextStyle(),
                                         textAlign: TextAlign.left),
                                     Spacer(),
-                                    SvgPicture.asset(
-                                      "icon_navigate_next.svg",
-                                      width: 24.0,
-                                      height: 24.0,
+                                    YrkIconButton(
+                                      icon: "icon_navigate_next.svg",
+                                      iconSize: 24,
                                     )
                                   ])
                             : Align(
