@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/temp/YrkData.dart';
 import 'package:yoroke/screens/board/Board.dart';
 import 'package:yoroke/screens/find/Find.dart';
 import 'package:yoroke/screens/home/Home.dart';

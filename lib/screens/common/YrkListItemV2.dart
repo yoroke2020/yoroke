@@ -4,13 +4,13 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/core/model/YrkModel2.dart';
 import 'package:yoroke/models/PostModel.dart';
-import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/temp/YrkData.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/post/Post.dart';
 
-import '../TestPage.dart';
+import '../../temp/TestPage.dart';
 
 part 'YrkListItemV2.g.dart';
 

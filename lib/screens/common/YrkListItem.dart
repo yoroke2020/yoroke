@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/models/TestData.dart';
-import 'package:yoroke/models/YrkData.dart';
-import 'package:yoroke/screens/TestPage.dart';
+import 'package:yoroke/temp/TestData.dart';
+import 'package:yoroke/temp/YrkData.dart';
+import 'package:yoroke/temp/TestPage.dart';
 import 'package:yoroke/screens/board/BoardJob.dart';
 import 'package:yoroke/screens/board/BoardQna.dart';
 import 'package:yoroke/screens/board/BoardReview.dart';

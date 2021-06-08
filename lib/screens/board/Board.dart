@@ -4,7 +4,7 @@ import 'package:quiver/iterables.dart';
 import 'package:yoroke/core/model/YrkBlock2.dart';
 import 'package:yoroke/core/model/YrkApiResponse2.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
-import 'package:yoroke/core/model/YrkTestModelData.dart';
+import 'package:yoroke/temp/YrkTestModelData.dart';
 import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/main.dart';
 import 'package:yoroke/models/CardModel.dart';

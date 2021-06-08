@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/core/model/YrkBlock2.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
-import 'package:yoroke/core/model/YrkTestModelData.dart';
+import 'package:yoroke/temp/YrkTestModelData.dart';
 import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/models/TestData.dart';
-import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/temp/TestData.dart';
+import 'package:yoroke/temp/YrkData.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/info/InfoShareDetail.dart';
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
 import 'package:yoroke/controllers/YrkSelectFilterController.dart';
-import 'package:yoroke/models/YrkData.dart';
+import 'package:yoroke/temp/YrkData.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/YrkTabBar.dart';
