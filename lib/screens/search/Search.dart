@@ -137,7 +137,7 @@ class _SearchState extends State<Search> {
                           textAlign: TextAlign.left),
                       Spacer(),
                       SvgPicture.asset(
-                        "icon_arrow_down.svg",
+                        "assets/icons/icon_arrow_down.svg",
                         width: 24.0,
                         height: 24.0,
                       )

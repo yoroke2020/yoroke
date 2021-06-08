@@ -144,8 +144,8 @@ class _YrkMobileImageGridsState extends State<YrkMobileImageGrids> {
                               height: MediaQuery.of(context).size.height / 3,
                               color: const Color(0xffffffff),
                               alignment: Alignment.center,
-                              child: SvgPicture.asset("icon_camera.svg",
-                                  width: 24.0, height: 24.0))
+                              child: YrkIconButton(
+                                  icon: "icon_camera.svg", iconSize: 24))
                           : Stack(alignment: Alignment.topRight, children: [
                               _assetWidgets[index - 1],
                               _getSelects(index - 1)
