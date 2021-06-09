@@ -77,122 +77,115 @@ class _BoardReviewState extends State<BoardReview> with ScreenState<YrkBlock2> {
     return Scaffold(
         body: DefaultTabController(
             length: tabs.length,
-            child: Scaffold(
-                body: NestedScrollView(
-                    controller: _scrollController,
-                    headerSliverBuilder:
-                        (BuildContext context, bool innerBoxIsScrolled) {
-                      return <Widget>[
-                        SliverOverlapAbsorber(
-                            handle:
-                                NestedScrollView.sliverOverlapAbsorberHandleFor(
-                                    context),
-                            sliver: SliverAppBar(
-                                automaticallyImplyLeading: false,
-                                snap: false,
-                                pinned: true,
-                                floating: false,
-                                centerTitle: false,
-                                titleSpacing: 0.0,
-                                shadowColor: const Color(0xffffffff),
-                                elevation: 0.0,
-                                toolbarHeight: 48.0,
-                                expandedHeight: 236.0,
-                                backgroundColor: const Color(0xffffffff),
-                                title: Stack(children: <Widget>[
-                                  YrkAppBar(
-                                    type: YrkAppBarType.arrowBackAll,
-                                    curPageItem: "boardReview",
-                                    isStatusBar: false,
+            child: NestedScrollView(
+                controller: _scrollController,
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    SliverOverlapAbsorber(
+                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                            context),
+                        sliver: SliverAppBar(
+                            automaticallyImplyLeading: false,
+                            snap: false,
+                            pinned: true,
+                            floating: false,
+                            centerTitle: false,
+                            titleSpacing: 0.0,
+                            shadowColor: const Color(0xffffffff),
+                            elevation: 0.0,
+                            toolbarHeight: 48.0,
+                            expandedHeight: 236.0,
+                            backgroundColor: const Color(0xffffffff),
+                            title: Stack(children: <Widget>[
+                              YrkAppBar(
+                                type: YrkAppBarType.arrowBackAll,
+                                curPageItem: "boardReview",
+                                isStatusBar: false,
+                              ),
+                              YrkScrollOpacity(
+                                  scrollController: _scrollController,
+                                  child: Container(
+                                      alignment: Alignment.centerLeft,
+                                      margin: EdgeInsets.only(left: 48.0),
+                                      height: 48.0,
+                                      child: Text("요양병원 후기",
+                                          style: const YrkTextStyle(
+                                              fontWeight: FontWeight.w700),
+                                          textAlign: TextAlign.left)))
+                            ]),
+                            flexibleSpace: YrkScrollOpacity(
+                                scrollController: _scrollController,
+                                reversed: true,
+                                child: FlexibleSpaceBar(
+                                    background: Container(
+                                        color: const Color(0xffffffff),
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              SizedBox(
+                                                height: 48.0 +
+                                                    MediaQuery.of(context)
+                                                        .padding
+                                                        .top,
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 16.0,
+                                                    top: 8.0,
+                                                    bottom: 8.0),
+                                                child: Text("후기",
+                                                    style: const YrkTextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 22.0),
+                                                    textAlign: TextAlign.left),
+                                              ),
+                                              BoardReviewCards(
+                                                  index: _curIndex,
+                                                  onTap: (index) =>
+                                                      _onTapReviewCard(
+                                                          context, index),
+                                                  models: this
+                                                      .block
+                                                      .blocks![0]
+                                                      .items
+                                                      .cast<CardModel>())
+                                            ])))),
+                            forceElevated: innerBoxIsScrolled,
+                            bottom: CustomTapBar(tabs: tabs, tabWidth: 72.0)))
+                  ];
+                },
+                body: TabBarView(
+                    children: tabs.map((Tuple2 tab) {
+                  return SafeArea(
+                      top: false,
+                      bottom: false,
+                      child: Builder(builder: (BuildContext context) {
+                        return NotificationListener<ScrollNotification>(
+                            onNotification: (notification) =>
+                                _onScrollNotification(notification, tab.item2),
+                            child: CustomScrollView(
+                                key: PageStorageKey<String>(tab.item1),
+                                slivers: <Widget>[
+                                  SliverOverlapInjector(
+                                    handle: NestedScrollView
+                                        .sliverOverlapAbsorberHandleFor(
+                                            context),
                                   ),
-                                  YrkScrollOpacity(
-                                      scrollController: _scrollController,
-                                      child: Container(
-                                          alignment: Alignment.centerLeft,
-                                          margin: EdgeInsets.only(left: 48.0),
-                                          height: 48.0,
-                                          child: Text("요양병원 후기",
-                                              style: const YrkTextStyle(
-                                                  fontWeight: FontWeight.w700),
-                                              textAlign: TextAlign.left)))
-                                ]),
-                                flexibleSpace: YrkScrollOpacity(
-                                    scrollController: _scrollController,
-                                    reversed: true,
-                                    child: FlexibleSpaceBar(
-                                        background: Container(
-                                            color: const Color(0xffffffff),
-                                            child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  SizedBox(
-                                                    height: 48.0 +
-                                                        MediaQuery.of(context)
-                                                            .padding
-                                                            .top,
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 16.0,
-                                                        top: 8.0,
-                                                        bottom: 8.0),
-                                                    child: Text("후기",
-                                                        style:
-                                                            const YrkTextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
-                                                                fontSize: 22.0),
-                                                        textAlign:
-                                                            TextAlign.left),
-                                                  ),
-                                                  BoardReviewCards(
-                                                      index: _curIndex,
-                                                      onTap: (index) =>
-                                                          _onTapReviewCard(
-                                                              context, index),
-                                                      models: this
-                                                          .block
-                                                          .blocks![0]
-                                                          .items
-                                                          .cast<CardModel>())
-                                                ])))),
-                                forceElevated: innerBoxIsScrolled,
-                                bottom:
-                                    CustomTapBar(tabs: tabs, tabWidth: 72.0)))
-                      ];
-                    },
-                    body: TabBarView(
-                        children: tabs.map((Tuple2 tab) {
-                      return SafeArea(
-                          top: false,
-                          bottom: false,
-                          child: Builder(builder: (BuildContext context) {
-                            return NotificationListener<ScrollNotification>(
-                                onNotification: (notification) =>
-                                    _onScrollNotification(
-                                        notification, tab.item2),
-                                child: CustomScrollView(
-                                    key: PageStorageKey<String>(tab.item1),
-                                    slivers: <Widget>[
-                                      SliverOverlapInjector(
-                                        handle: NestedScrollView
-                                            .sliverOverlapAbsorberHandleFor(
-                                                context),
-                                      ),
-                                      SliverList(
-                                          delegate: SliverChildBuilderDelegate(
-                                        (BuildContext context, int index) {
-                                          return posts[tab.item2][index];
-                                        },
-                                        childCount: posts[tab.item2].length,
-                                      ))
-                                    ]));
-                          }));
-                    }).toList())))),
+                                  SliverList(
+                                      delegate: SliverChildBuilderDelegate(
+                                    (BuildContext context, int index) {
+                                      return posts[tab.item2][index];
+                                    },
+                                    childCount: posts[tab.item2].length,
+                                  ))
+                                ]));
+                      }));
+                }).toList()))),
         bottomNavigationBar:
             BottomBarNavigation.getInstance(RootPageItem.board));
   }
