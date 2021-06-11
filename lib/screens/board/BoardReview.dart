@@ -44,8 +44,10 @@ class _BoardReviewState extends State<BoardReview> with ScreenState<YrkBlock2> {
   void initBlock() {
     Map<String, dynamic> jsonResponse = TestBoardReviewData().jsonResponse;
     YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+    String title = apiResponse.title ?? "";
     List<YrkBlock2> blocks = apiResponse.body!;
     this.block = YrkBlock2()..blocks = blocks;
+    this.block.title = title;
   }
 
   @override
@@ -109,7 +111,7 @@ class _BoardReviewState extends State<BoardReview> with ScreenState<YrkBlock2> {
                                       alignment: Alignment.centerLeft,
                                       margin: EdgeInsets.only(left: 48.0),
                                       height: 48.0,
-                                      child: Text("요양병원 후기",
+                                      child: Text(this.block.title ?? "",
                                           style: const YrkTextStyle(
                                               fontWeight: FontWeight.w700),
                                           textAlign: TextAlign.left)))
@@ -137,7 +139,7 @@ class _BoardReviewState extends State<BoardReview> with ScreenState<YrkBlock2> {
                                                     left: 16.0,
                                                     top: 8.0,
                                                     bottom: 8.0),
-                                                child: Text("후기",
+                                                child: Text(this.block.title ?? "",
                                                     style: const YrkTextStyle(
                                                         fontWeight:
                                                             FontWeight.w700,

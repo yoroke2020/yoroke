@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
+import 'package:yoroke/core/model/YrkBlock2.dart';
+import 'package:yoroke/core/screen/Screen.dart';
+import 'package:yoroke/models/FacilityModel.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
@@ -9,10 +12,13 @@ import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/YrkTabBar.dart';
+import 'package:yoroke/screens/find/model/FindSortOption.dart';
+import 'package:yoroke/temp/YrkTestModelData.dart';
+import 'package:yoroke/core/model/YrkApiResponse2.dart';
 
 import 'FindLocationData.dart';
 import 'FindLocationSetting.dart';
-import 'FindRecommendListItem.dart';
+import 'model/FindFacilityPost.dart';
 
 class Find extends StatefulWidget {
   Find();
@@ -21,23 +27,9 @@ class Find extends StatefulWidget {
   _FindState createState() => _FindState();
 }
 
-class _FindState extends State<Find> {
-  static final List<String> _options = [
-    "별점 높은 순",
-    "시설 등급 순",
-    "가까운 순",
-    "후기 많은 순"
-  ];
-
-  final List<Tuple2<String, int>> _tabs = <Tuple2<String, int>>[
-    Tuple2('요양원', 0),
-    Tuple2('요양병원', 1),
-    Tuple2('요양원', 2),
-    Tuple2('요양병원', 3),
-    Tuple2('요양병원', 4),
-  ];
-
-  List<int> _childCount = [10, 10, 10, 10, 10];
+class _FindState extends State<Find> with ScreenState<YrkBlock2> {
+  List<Tuple2<String, int>> tabs = [];
+  List<List<Widget>> posts = [];
 
   final ScrollController _scrollController = ScrollController();
 
@@ -45,39 +37,34 @@ class _FindState extends State<Find> {
   List<List<bool>> _locSelects = [];
   int _locCount = 0;
 
-  int _optionIndex = -1;
+  int optionIndex = 0;
 
-  get _optionButtons {
-    List<Widget> list = <Widget>[];
-    for (int i = 0; i < 4; i++) {
-      list.add(Padding(
-          padding: EdgeInsets.only(
-              left: i == 0 ? 16.0 : 3.5, right: i == 3 ? 16.0 : 3.0),
-          child: YrkButton(
-              width: i != 2 ? 80.0 : 66.0,
-              height: 32.0,
-              buttonType: ButtonType.outlinechip,
-              borderWidth: 1,
-              fillColor: i == _optionIndex
-                  ? const Color(0xfff5df4d)
-                  : const Color(0xffffffff),
-              borderColor: i == _optionIndex
-                  ? const Color(0xfff5df4d)
-                  : const Color(0x4d000000),
-              label: _options[i],
-              textStyle: YrkTextStyle(
-                  color: i == _optionIndex
-                      ? const Color(0xe6000000)
-                      : const Color(0x99000000),
-                  fontSize: 13.0),
-              onPressed: () => _onPressedOptionButton(i))));
-    }
-    return list;
+  @override
+  void initBlock() {
+    Map<String, dynamic> jsonResponse = TestFindData().jsonResponse;
+    YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+    String title = apiResponse.title ?? "";
+    List<YrkBlock2> blocks = apiResponse.body!;
+    this.block = YrkBlock2()..blocks = blocks;
+    this.block.title = title;
+  }
+
+  @override
+  void updateBlockOn(String action) {
+    int index = int.parse(action);
+    setState(() {
+      Map<String, dynamic> jsonResponse = TestFindData().jsonResponse;
+      YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+      YrkBlock2 block = (apiResponse.body ?? [])[1];
+      posts[index].addAll(_buildPosts(block.blocks![index]));
+    });
   }
 
   @override
   void initState() {
     super.initState();
+    initBlock();
+    _loadItems();
     for (int i = 0; i < LocName.cities.length; i++)
       _locSelects.add(List<bool>.filled(LocName.cities[i].length, false));
   }
@@ -93,7 +80,7 @@ class _FindState extends State<Find> {
     return Scaffold(
       bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.find),
       body: DefaultTabController(
-        length: _tabs.length,
+        length: tabs.length,
         child: NestedScrollView(
             controller: _scrollController,
             headerSliverBuilder:
@@ -122,13 +109,13 @@ class _FindState extends State<Find> {
                             curPageItem: RootPageItem.find,
                             label: "시설찾기"),
                         bottom: PreferredSize(
-                            preferredSize: Size.fromHeight(144.0),
+                            preferredSize: Size.fromHeight(88.0),
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   // [2] - Select Location
-                                  InkWell(
+                                  GestureDetector(
                                       onTap: () => _onTapSelectLocation(),
                                       child: Container(
                                           width: double.maxFinite,
@@ -169,24 +156,13 @@ class _FindState extends State<Find> {
                                                     clickable: false)
                                               ]))),
                                   // [3] - TabBar
-                                  CustomTapBar(tabs: _tabs, isScrollable: true),
+                                  CustomTapBar(tabs: tabs, isScrollable: true),
                                   // [4] - Options for TabView
-                                  Container(
-                                      width: double.maxFinite,
-                                      height: 56.0,
-                                      child: SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: _optionButtons)))
                                 ]))))
               ];
             },
             body: TabBarView(
-                children: _tabs.map((Tuple2 tab) {
+                children: tabs.map((Tuple2 tab) {
               return SafeArea(
                   top: false,
                   bottom: false,
@@ -202,6 +178,11 @@ class _FindState extends State<Find> {
                                     .sliverOverlapAbsorberHandleFor(context),
                               ),
                               SliverToBoxAdapter(
+                                  child: FindSortOption(
+                                      block: this.block.blocks![0],
+                                      onPressed: (index) =>
+                                          _onPressedOptionButton(index))),
+                              SliverToBoxAdapter(
                                 child: Container(
                                     width: double.maxFinite,
                                     height: 48.0,
@@ -216,16 +197,27 @@ class _FindState extends State<Find> {
                               SliverList(
                                   delegate: SliverChildBuilderDelegate(
                                       (BuildContext context, int index) {
-                                return FindRecommendListItem(
-                                  pageIndex: tab.item2,
-                                  listIndex: index,
-                                );
-                              }, childCount: _childCount[tab.item2]))
+                                return posts[tab.item2][index];
+                              }, childCount: posts[tab.item2].length))
                             ]));
                   }));
             }).toList())),
       ),
     );
+  }
+
+  void _loadItems() {
+    YrkBlock2 tabBlock = this.block.blocks![1] as YrkBlock2;
+    for (int i = 0; i < tabBlock.blocks!.length; i++) {
+      List<Widget> items = _buildPosts(tabBlock.blocks![i]);
+      tabs.add(Tuple2(tabBlock.blocks![i].title, i));
+      posts.add(items);
+    }
+  }
+
+  List<Widget> _buildPosts(YrkBlock2 block) {
+    List items = block.items!.cast<FacilityModel>();
+    return items.map((model) => FindFacilityPost(model: model)).toList();
   }
 
   bool _onScrollNotification(ScrollNotification notification, int index) {
@@ -234,7 +226,7 @@ class _FindState extends State<Find> {
     if (notification.metrics.extentBefore ==
         notification.metrics.maxScrollExtent) {
       setState(() {
-        _childCount[index] += 10;
+        updateBlockOn("$index");
       });
     }
     return true;
@@ -268,7 +260,8 @@ class _FindState extends State<Find> {
 
   void _onPressedOptionButton(int index) {
     setState(() {
-      _optionIndex = _optionIndex == index ? -1 : index;
+      optionIndex = optionIndex;
+      print("hello");
       //TODO: LoadData
     });
   }

@@ -1,11 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/models/CardModel.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
-
-part 'BoardReviewCard.g.dart';
 
 class BoardReviewCards extends StatefulWidget {
   BoardReviewCards(
@@ -91,17 +87,4 @@ class _BoardReviewCard extends StatelessWidget {
                   ),
                 ])));
   }
-}
-
-@JsonSerializable()
-class BoardReviewCardModel extends YrkModel {
-  String? imagePath;
-  String? title;
-
-  BoardReviewCardModel();
-
-  factory BoardReviewCardModel.fromJson(Map<String, dynamic> json) =>
-      _$BoardReviewCardModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$BoardReviewCardModelToJson(this);
 }

@@ -2317,3 +2317,446 @@ class TestBoardJobData {
     ]
   };
 }
+
+class TestFindData {
+  Map<String, dynamic> jsonResponse = {
+    "status": "200",
+    "message": "success",
+    "type": "FindMain",
+    "title": "시설찾기",
+    "body": [
+      {
+        "@type": "sorts",
+        "@category": "find",
+        "items": [
+          {"@type": "sort", "@category": "rating", "title": "별점 높은 순"},
+          {"@type": "sort", "@category": "grade", "title": "시설 등급 순"},
+          {"@type": "sort", "@category": "distance", "title": "가까운 순"},
+          {"@type": "sort", "@category": "commentCount", "title": "후기 많은 순"},
+        ]
+      },
+      {
+        "@type": "tabs",
+        "@category": "find",
+        "title": "추천시설",
+        "blocks": [
+          {
+            "@type": "list",
+            "@category": "find",
+            "title": "요양원",
+            "items": [
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+            ]
+          },
+          {
+            "@type": "list",
+            "@category": "find",
+            "title": "요양원",
+            "items": [
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+            ]
+          },
+          {
+            "@type": "list",
+            "@category": "find",
+            "title": "요양원",
+            "items": [
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+            ]
+          },
+          {
+            "@type": "list",
+            "@category": "find",
+            "title": "요양원",
+            "items": [
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+            ]
+          },
+          {
+            "@type": "list",
+            "@category": "find",
+            "title": "요양원",
+            "items": [
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+              {
+                "@type": "facility",
+                "@category": "find",
+                "title": "조문기네 요양원",
+                "address": "서울시 마포구",
+                "distance": double.parse(
+                    (10.0 * Random().nextDouble()).toStringAsFixed(1)),
+                "rating": double.parse(
+                    (5.0 * Random().nextDouble()).toStringAsFixed(2)),
+                "commentCount": Random().nextInt(100) + 1,
+                "grade": "A",
+                "imagePaths": [
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png",
+                  "assets/images/sample_image.png"
+                ]
+              },
+            ]
+          },
+        ]
+      }
+    ]
+  };
+}

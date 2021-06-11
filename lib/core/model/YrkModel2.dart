@@ -10,6 +10,8 @@ class YrkModel2 {
   @JsonKey(name: "@category")
   late String? category;
 
+  late String? title;
+
   factory YrkModel2.fromJson(Map<String, dynamic> json) =>
       _$YrkModel2FromJson(json);
 

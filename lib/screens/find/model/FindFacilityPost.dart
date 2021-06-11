@@ -1,18 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/models/FacilityModel.dart';
 import 'package:yoroke/temp/YrkData.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/find/FindFacility.dart';
 
-class FindRecommendListItem extends StatelessWidget {
-  FindRecommendListItem({
-    required this.pageIndex,
-    required this.listIndex,
+class FindFacilityPost extends StatelessWidget {
+  FindFacilityPost({
+    required this.model
   });
 
-  final int pageIndex;
-  final int listIndex;
+  final FacilityModel model;
 
   void _onFindFacilityClicked(BuildContext context) async {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
@@ -46,7 +45,7 @@ class FindRecommendListItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Image.asset("assets/images/sample_image.png",
+                    Image.asset(model.imagePaths![0],
                         width: 244.0 * _widthRatio,
                         height: 160.0 * _heightRatio,
                         fit: BoxFit.fill),
@@ -56,13 +55,13 @@ class FindRecommendListItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Image.asset("assets/images/sample_image.png",
+                          Image.asset(model.imagePaths![1],
                               width: 80.0 * _widthRatio,
                               height: 78.0 * _heightRatio,
                               fit: BoxFit.fill),
                           Padding(
                             padding: EdgeInsets.only(top: 4.0 * _heightRatio),
-                            child: Image.asset("assets/images/sample_image.png",
+                            child: Image.asset(model.imagePaths![2],
                                 width: 80.0 * _widthRatio,
                                 height: 78.0 * _heightRatio,
                                 fit: BoxFit.fill),
@@ -77,7 +76,7 @@ class FindRecommendListItem extends StatelessWidget {
                   height: 35.0,
                   alignment: Alignment.bottomLeft,
                   child: Text(
-                    "조문기네 요양원",
+                    model.title ?? "",
                     style: const YrkTextStyle(
                         fontWeight: FontWeight.w500, fontSize: 18.0),
                   )),
@@ -89,7 +88,7 @@ class FindRecommendListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        "서울시 마포구",
+                        model.address ?? "",
                         style: const YrkTextStyle(
                           color: const Color(0x99000000),
                           fontWeight: FontWeight.w500,
@@ -101,7 +100,7 @@ class FindRecommendListItem extends StatelessWidget {
                           margin: EdgeInsets.symmetric(horizontal: 16.0),
                           decoration:
                               BoxDecoration(color: const Color(0x4d000000))),
-                      Text("2km",
+                      Text("${model.distance ?? ""} km",
                           style: const YrkTextStyle(
                               color: const Color(0x4d000000),
                               fontWeight: FontWeight.w600,
@@ -123,7 +122,7 @@ class FindRecommendListItem extends StatelessWidget {
                         padding: EdgeInsets.only(right: 2.0),
                         clickable: false,
                       ),
-                      Text("4.8 (12)",
+                      Text("${model.rating ?? ""} (${model.commentCount ?? ""})",
                           style: const YrkTextStyle(
                               color: const Color(0x99000000),
                               fontWeight: FontWeight.w600,
@@ -140,7 +139,7 @@ class FindRecommendListItem extends StatelessWidget {
                               const TextStyle(color: const Color(0x4d000000))),
                       Padding(
                         padding: EdgeInsets.only(left: 4.0),
-                        child: Text("A",
+                        child: Text(model.grade ?? "",
                             style: const TextStyle(
                                 color: const Color(0x4d000000),
                                 fontWeight: FontWeight.w600,

@@ -1,13 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:yoroke/core/model/YrkModel.dart';
 import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/buttons/YrkButton.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
-
-part 'BoardQnaCard.g.dart';
 
 class BoardQnaCard extends StatelessWidget {
   BoardQnaCard({required this.model});
@@ -181,22 +177,4 @@ class BoardQnaCard extends StatelessWidget {
           ),
         ));
   }
-}
-
-@JsonSerializable()
-class BoardQnaCardModel extends YrkModel {
-  String? type;
-  String? title;
-  String? author;
-  String? timestamp;
-  double? likeCount;
-  double? dislikeCount;
-  double? commentCount;
-
-  BoardQnaCardModel();
-
-  factory BoardQnaCardModel.fromJson(Map<String, dynamic> json) =>
-      _$BoardQnaCardModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$BoardQnaCardModelToJson(this);
 }

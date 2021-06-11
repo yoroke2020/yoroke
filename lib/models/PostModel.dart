@@ -9,7 +9,6 @@ part 'PostModel.g.dart';
 class PostModel extends YrkModel2 {
   int? postId;
   String? label;
-  String? title;
   String? author;
   int? accountId;
   String? timestamp;
