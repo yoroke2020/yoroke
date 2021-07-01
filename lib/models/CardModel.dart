@@ -5,7 +5,6 @@ part 'CardModel.g.dart';
 
 @JsonSerializable()
 class CardModel extends YrkModel2 {
-  String? title;
   String? imagePath;
 
   CardModel();

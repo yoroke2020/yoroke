@@ -10,9 +10,9 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) {
   return PostModel()
     ..type = json['@type'] as String?
     ..category = json['@category'] as String?
+    ..title = json['title'] as String?
     ..postId = json['postId'] as int?
     ..label = json['label'] as String?
-    ..title = json['title'] as String?
     ..author = json['author'] as String?
     ..accountId = json['accountId'] as int?
     ..timestamp = json['timestamp'] as String?
@@ -26,9 +26,9 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PostModelToJson(PostModel instance) => <String, dynamic>{
       '@type': instance.type,
       '@category': instance.category,
+      'title': instance.title,
       'postId': instance.postId,
       'label': instance.label,
-      'title': instance.title,
       'author': instance.author,
       'accountId': instance.accountId,
       'timestamp': instance.timestamp,
