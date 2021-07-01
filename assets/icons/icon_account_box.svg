@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="icon_account_box_24px" width="24" height="24" viewBox="0 0 24 24">
+
+    <path id="패스_125" d="M0 0h24v24H0z" fill="none"/>
+    <g id="그룹_706" transform="translate(-41 -255)">
+        <path id="사각형_16775" d="M0 0H24V24H0z" fill="none" transform="translate(41 255)"/>
+        <g id="그룹_705">
+            <path id="패스_248" d="M61.448 263.5a.5.5 0 0 0 .5-.5v-5h-18v18h18v-10a.5.5 0 0 0-1 0v9h-16v-16h16v4a.5.5 0 0 0 .5.5z"/>
+            <path id="패스_249" d="M52.948 262a2 2 0 1 1-2 2 2 2 0 0 1 2-2m0-1a3 3 0 1 0 3 3 3 3 0 0 0-3-3z"/>
+            <path id="패스_250" d="M52.948 268a5.009 5.009 0 0 1 4.9 4h-9.8a5.01 5.01 0 0 1 4.9-4m0-1a6 6 0 0 0-6 6h12a6 6 0 0 0-6-6z"/>
+        </g>
+    </g>
+</svg>

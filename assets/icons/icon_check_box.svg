@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="icon_check_box_24px" width="24" height="24" viewBox="0 0 24 24">
+    <path id="패스_133" d="M0 0h24v24H0z" fill="none"/>
+    <path id="패스_228" d="M118.354 230.146a.5.5 0 0 0-.708 0L111 236.793l-2.646-2.647a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7a.5.5 0 0 0 0-.708z" fill="#fff" transform="translate(-100.5 -222)"/>
+    <g id="그룹_685" transform="translate(-75 -223)">
+        <path id="사각형_16764" d="M0 0H24V24H0z" fill="none" transform="translate(75 223)"/>
+        <g id="그룹_684">
+            <circle id="타원_212" cx="9" cy="9" r="9" fill="#f5df4d" transform="translate(78 226)"/>
+            <path id="패스_229" d="M91.854 231.146a.5.5 0 0 0-.708 0l-5.646 5.647-2.646-2.647a.5.5 0 0 0-.708.708l3 3a.5.5 0 0 0 .708 0l6-6a.5.5 0 0 0 0-.708z" fill="#fff" transform="translate(0 1)"/>
+        </g>
+    </g>
+</svg>

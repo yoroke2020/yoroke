@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="icon_save_alt_24px" width="24" height="24" viewBox="0 0 24 24">
+
+    <path id="패스_93" d="M0 0h24v24H0z" fill="none"/>
+    <g id="그룹_667" transform="translate(-110 -297)">
+        <path id="사각형_16760" d="M0 0H24V24H0z" fill="none" transform="translate(110 297)"/>
+        <g id="그룹_666">
+            <g id="그룹_665">
+                <path id="패스_210" d="M130 317h-16v-8.5a.5.5 0 0 1 1 0v7.5h14v-7.5a.5.5 0 0 1 1 0z"/>
+            </g>
+            <path id="패스_211" d="M117.646 309.854l4 4a.518.518 0 0 0 .163.109.505.505 0 0 0 .382 0 .518.518 0 0 0 .163-.109l4-4a.5.5 0 0 0-.708-.708l-3.146 3.147V301.5a.5.5 0 0 0-1 0v10.793l-3.146-3.147a.5.5 0 1 0-.708.708z"/>
+        </g>
+    </g>
+</svg>
