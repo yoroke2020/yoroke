@@ -19,7 +19,7 @@ class FindFacilityPost extends StatelessWidget {
           context,
           MaterialPageRoute(
               builder: (context) => FindFacility(
-                    data: YrkData(),
+                    data: model,
                   )));
     });
   }

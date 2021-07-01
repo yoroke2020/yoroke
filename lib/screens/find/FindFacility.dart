@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
 import 'package:yoroke/controllers/YrkSelectFilterController.dart';
-import 'package:yoroke/temp/YrkData.dart';
+import 'package:yoroke/core/model/YrkBlock2.dart';
+import 'package:yoroke/core/screen/Screen.dart';
+import 'package:yoroke/models/FacilityModel.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/YrkTabBar.dart';
+import 'package:yoroke/temp/YrkTestModelData.dart';
+import 'package:yoroke/core/model/YrkApiResponse2.dart';
 
 import 'FindFacilityBottomBar.dart';
 import 'FindFacilityHome.dart';
@@ -19,27 +23,39 @@ class FindFacility extends StatefulWidget {
     required this.data,
   });
 
-  final YrkData? data;
+  final FacilityModel data;
 
   @override
   _BoardReviewState createState() => _BoardReviewState();
 }
 
-class _BoardReviewState extends State<FindFacility> {
+class _BoardReviewState extends State<FindFacility> with ScreenState<YrkBlock2> {
   final ScrollController _scrollController = ScrollController();
-  final List<Tuple2<String, int>> _tabs = <Tuple2<String, int>>[
-    Tuple2('홈', 0),
-    Tuple2('정보', 1),
-    Tuple2('후기', 2)
-  ];
+  List<Tuple2<String, int>> tabs = [];
 
   final YrkSelectFilterController controller =
       YrkSelectFilterController(length: 3);
-  String _facilityName = "조문기네 요양원";
+
+  @override
+  void initBlock() {
+    Map<String, dynamic> jsonResponse = TestFindFacilityData().jsonResponse;
+    YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+    List<YrkBlock2> blocks = apiResponse.body!;
+    this.block = YrkBlock2()..blocks = blocks;
+  }
+
+  @override
+  void updateBlockOn(String action) {
+  }
 
   @override
   void initState() {
     super.initState();
+    initBlock();
+
+    YrkBlock2 tabBlock = this.block.blocks![0] as YrkBlock2;
+    for (int i = 0; i < tabBlock.blocks!.length; i++)
+      tabs.add(Tuple2(tabBlock.blocks![i].title, i));
   }
 
   @override
@@ -51,7 +67,7 @@ class _BoardReviewState extends State<FindFacility> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: DefaultTabController(
-            length: _tabs.length,
+            length: tabs.length,
             child: Scaffold(
                 body: NestedScrollView(
                     controller: _scrollController,
@@ -98,31 +114,14 @@ class _BoardReviewState extends State<FindFacility> {
                                             color: const Color(0xffffffff)),
                                         alignment: Alignment.bottomLeft,
                                         child: CustomTapBar(
-                                            tabs: _tabs, tabWidth: 48.0)))))
+                                            tabs: tabs, tabWidth: 48.0)))))
                       ];
                     },
                     body: TabBarView(children: [
                       FindFacilityHome(
-                          name: _facilityName,
-                          location: "서울시 서초구 양재대로 39",
-                          rating: "4.8 (12)",
-                          distance: 2,
-                          hours: "08:00 ~ 22:00",
-                          introduction: "시설소개 시설소개 시설소개 시설소개" +
-                              "시설소개 시설소개 시설소개 시설소개" +
-                              "시설소개 시설소개 시설소개 시설소개" +
-                              "시설소개 시설소개 시설소개 시설소개" +
-                              "시설소개 시설소개 시설소개 시설소개" +
-                              "시설소개 시설소개 시설소개 시설소개"),
+                          model: widget.data),
                       FindFacilityInfo(
-                        grade: "A",
-                        medicalStaffNum: 42,
-                        nursingStaffNum: 135,
-                        cookNum: 35,
-                        userNum: 1322,
-                        minMonthlyCost: 100,
-                        maxMonthlyCost: 200,
-                      ),
+                          model: widget.data),
                       FindFacilityReview()
                     ])),
                 bottomNavigationBar: FindFacilityBottomBar())));

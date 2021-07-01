@@ -2760,3 +2760,104 @@ class TestFindData {
     ]
   };
 }
+
+class TestFindFacilityData {
+  Map<String, dynamic> jsonResponse = {
+    "status": "200",
+    "message": "success",
+    "type": "FindFacility",
+    "title": "시설찾기",
+    "body": [
+      {
+        "@type": "tabs",
+        "@category": "FindFacility",
+        "title": "시설찾기",
+        "blocks": [
+          {"@type": "tab", "@category": "FindFacilityHome", "title": "홈"},
+          {"@type": "tab", "@category": "FindFacilityInfo", "title": "정보"},
+          {"@type": "tab", "@category": "FindFacilityReview", "title": "후기"},
+        ]
+      }
+    ]
+  };
+}
+
+class TestFindFacilityInfoData {
+  Map<String, dynamic> jsonResponse = {
+    "status": "200",
+    "message": "success",
+    "type": "FindFacilityInfo",
+    "title": "시설",
+    "body": [
+          {
+            "@type": "normal",
+            "@category": "findFacilityInfoRating",
+            "title": "시설등급",
+            "items": [
+              {
+                "@type": "content",
+                "@category": "findFacilityInfoRating",
+                "title": "국가요양정보원 기준",
+                "content": "A"
+              }
+            ]
+          },
+          {
+            "@type": "normal",
+            "@category": "findFacilityInfoHr",
+            "title": "인력현황",
+            "items": [
+              {
+                "@type": "count",
+                "@category": "findFacilityInfoHrMedicalStaff",
+                "title": "의료진",
+                "imagePath": "assets/icons/icon_medic.svg",
+                "count": Random().nextInt(100) + 1,
+                "unit": "명"
+              },
+              {
+                "@type": "count",
+                "@category": "findFacilityInfoHrMedicalStaff",
+                "title": "의료진",
+                "imagePath": "assets/icons/icon_medic.svg",
+                "count": Random().nextInt(100) + 1,
+                "unit": "명"
+              },
+              {
+                "@type": "count",
+                "@category": "findFacilityInfoHrMedicalStaff",
+                "title": "의료진",
+                "imagePath": "assets/icons/icon_medic.svg",
+                "count": Random().nextInt(100) + 1,
+                "unit": "명"
+              },
+              {
+                "@type": "count",
+                "@category": "findFacilityInfoHrMedicalStaff",
+                "title": "의료진",
+                "imagePath": "assets/icons/icon_medic.svg",
+                "count": Random().nextInt(100) + 1,
+                "unit": "명"
+              },
+            ]
+          },
+          {
+            "@type": "normal",
+            "@category": "findFacilityInfoCost",
+            "title": "월 평균 금액 (만원)",
+            "items": [
+              {
+                "@type": "content",
+                "@category": "findFacilityInfoMinCost",
+                "content": "100"
+              },
+              {
+                "@type": "content",
+                "@category": "findFacilityInfoMaxCost",
+                "content": "200"
+              }
+            ]
+          },
+    ]
+  };
+}

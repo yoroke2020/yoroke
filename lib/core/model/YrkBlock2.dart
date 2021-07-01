@@ -3,6 +3,8 @@ import 'dart:core';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yoroke/core/model/YrkModel2.dart';
 import 'package:yoroke/models/CardModel.dart';
+import 'package:yoroke/models/ContentModel.dart';
+import 'package:yoroke/models/CountModel.dart';
 import 'package:yoroke/models/FacilityModel.dart';
 import 'package:yoroke/models/PostModel.dart';
 
@@ -44,6 +46,10 @@ class _ModelConverter<M> implements JsonConverter<M, Object> {
         return PostModel.fromJson(json) as M;
       case "facility":
         return FacilityModel.fromJson(json) as M;
+      case "content":
+        return ContentModel.fromJson(json) as M;
+      case "count":
+        return CountModel.fromJson(json) as M;
       default:
         return YrkModel2.fromJson(json) as M;
     }

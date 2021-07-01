@@ -1,53 +1,40 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:yoroke/core/model/YrkBlock2.dart';
+import 'package:yoroke/core/screen/Screen.dart';
+import 'package:yoroke/models/ContentModel.dart';
+import 'package:yoroke/models/CountModel.dart';
+import 'package:yoroke/models/FacilityModel.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
+import 'package:yoroke/core/model/YrkApiResponse2.dart';
+import 'package:yoroke/temp/YrkTestModelData.dart';
 
-class FindFacilityInfo extends StatelessWidget {
-  FindFacilityInfo(
-      {required this.grade,
-      required this.medicalStaffNum,
-      required this.nursingStaffNum,
-      required this.cookNum,
-      required this.userNum,
-      required this.minMonthlyCost,
-      required this.maxMonthlyCost});
+class FindFacilityInfo extends StatelessWidget with ScreenState<YrkBlock2> {
+  FindFacilityInfo({required this.model});
 
-  final String grade;
-  final int medicalStaffNum;
-  final int nursingStaffNum;
-  final int cookNum;
-  final int userNum;
-  final int minMonthlyCost;
-  final int maxMonthlyCost;
+  final FacilityModel model;
 
-  static final List<String> titleList = [
-    "의료진",
-    "요양사",
-    "조리사",
-    "시설 이용자",
-  ];
+  @override
+  void initBlock() {
+    Map<String, dynamic> jsonResponse = TestFindFacilityInfoData().jsonResponse;
+    YrkApiResponse2 apiResponse = YrkApiResponse2.fromJson(jsonResponse);
+    List<YrkBlock2> blocks = apiResponse.body!;
+    this.block = YrkBlock2()..blocks = blocks;
+  }
 
-  static final List<String> imageList = [
-    "icon_medical_services_16_px.svg",
-    "icon_medical_services_16_px.svg",
-    "icon_dining_16_px.svg",
-    "icon_medical_services_16_px.svg",
-  ];
+  @override
+  void updateBlockOn(String action) {}
 
   @override
   Widget build(BuildContext context) {
-    List<String> countList = [
-      "$medicalStaffNum",
-      "$nursingStaffNum",
-      "$cookNum",
-      "$userNum"
-    ];
+    initBlock();
 
     List<Widget> getWidgetList() {
       List<Widget> list = <Widget>[];
+      YrkBlock2 hrBlock = this.block.blocks![1] as YrkBlock2;
       list.add(
-          Text("인력현황", style: const YrkTextStyle(fontWeight: FontWeight.w500)));
+          Text(hrBlock.title ?? "", style: const YrkTextStyle(fontWeight: FontWeight.w500)));
       list.add(Spacer());
       for (int i = 0; i < 4; i++) {
         list.add(Container(
@@ -56,17 +43,17 @@ class FindFacilityInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   SvgPicture.asset(
-                    imageList[i],
+                    (hrBlock.items![i] as CountModel).imagePath!,
                     width: 16.0,
                     height: 16.0,
                   ),
                   Padding(
                       padding: EdgeInsets.only(left: 4.0),
-                      child: Text(titleList[i],
+                      child: Text((hrBlock.items![i] as CountModel).title!,
                           style: const YrkTextStyle(
                               color: const Color(0x99000000), fontSize: 12.0))),
                   Spacer(),
-                  Text(countList[i],
+                  Text('${(hrBlock.items![i] as CountModel).count}',
                       style: const YrkTextStyle(
                           fontWeight: FontWeight.w600,
                           fontFamily: "OpenSans",
@@ -75,7 +62,7 @@ class FindFacilityInfo extends StatelessWidget {
                   Padding(
                       padding: EdgeInsets.only(left: 4.0),
                       child: // 명
-                          Text("명",
+                          Text((hrBlock.items![i] as CountModel).unit!,
                               style: const YrkTextStyle(
                                   color: const Color(0x99000000),
                                   fontSize: 12.0)))
@@ -129,7 +116,11 @@ class FindFacilityInfo extends StatelessWidget {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: <Widget>[
-                                                  Text("시설등급",
+                                                  Text(
+                                                      (this.block.blocks![0]
+                                                                  as YrkBlock2)
+                                                              .title ??
+                                                          "",
                                                       style: const YrkTextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -137,14 +128,20 @@ class FindFacilityInfo extends StatelessWidget {
                                                   Padding(
                                                       padding: EdgeInsets.only(
                                                           top: 4.0),
-                                                      child: Text("국가요양정보원 기준",
+                                                      child: Text(
+                                                          ((this.block.blocks![0]
+                                                                              as YrkBlock2)
+                                                                          .items![0]
+                                                                      as ContentModel)
+                                                                  .title ??
+                                                              "",
                                                           style: const YrkTextStyle(
                                                               color: const Color(
                                                                   0x99000000),
                                                               fontSize: 10.0)))
                                                 ]),
                                             Spacer(),
-                                            Text(grade,
+                                            Text(this.model.grade ?? "",
                                                 style: const YrkTextStyle(
                                                     color:
                                                         const Color(0xfff5df4d),
@@ -181,8 +178,7 @@ class FindFacilityInfo extends StatelessWidget {
                                               fontWeight: FontWeight.w500,
                                             )),
                                         Spacer(),
-                                        Text(
-                                            "$minMonthlyCost ~ $maxMonthlyCost",
+                                        Text("0.0 ~ 1.0",
                                             style: const YrkTextStyle(
                                                 color: const Color(0xfff5df4d),
                                                 fontWeight: FontWeight.w700,
