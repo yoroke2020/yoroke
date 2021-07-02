@@ -9,9 +9,7 @@ import 'package:yoroke/screens/find/Find.dart';
 import 'package:yoroke/screens/home/Home.dart';
 import 'package:yoroke/screens/info/Info.dart';
 import 'package:yoroke/screens/notice/Notice.dart';
-import 'package:yoroke/screens/post/PostCreate.dart';
 import 'package:yoroke/screens/search/Search.dart';
-import 'package:yoroke/temp/YrkData.dart';
 
 void main() {
   runApp(MyApp());
