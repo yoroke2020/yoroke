@@ -1,11 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoroke/controllers/ProfileController.dart';
 import 'package:yoroke/screens/board/Board.dart';
 import 'package:yoroke/screens/common/YrkDrawer.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/find/Find.dart';
 import 'package:yoroke/screens/home/Home.dart';
 import 'package:yoroke/screens/info/Info.dart';
+import 'package:yoroke/screens/notice/Notice.dart';
+import 'package:yoroke/screens/post/PostCreate.dart';
+import 'package:yoroke/screens/search/Search.dart';
+import 'package:yoroke/temp/YrkData.dart';
 
 void main() {
   runApp(MyApp());
@@ -49,44 +55,78 @@ class MyMain extends StatefulWidget {
 
 class _MyMainState extends State<MyMain> {
   int selectedIndex = 0;
-  List pageItems = [Home(), Board(), Find(), Info()];
 
-  List navIconsOff = [
+  final List<String> navIconsOff = [
     "icon_nav_home.svg",
     "icon_nav_board.svg",
     "icon_nav_find_facility.svg",
     "icon_nav_information.svg",
   ];
 
-  List navIconsOn = [
+  final List<String> navIconsOn = [
     "icon_nav_home_on.svg",
     "icon_nav_board_on.svg",
     "icon_nav_find_facility_on.svg",
     "icon_nav_information_on.svg",
   ];
 
-  List navLabel = ['홈', '커뮤니티', '시설찾기', '정보공유'];
+  final List<String> navLabels = ['홈', '커뮤니티', '시설찾기', '정보공유'];
+
+  final List<Widget> mainPages = [Home(), Board(), Find(), Info()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+            backgroundColor: const Color(0xffffffff),
+            titleSpacing: 16.0,
+            automaticallyImplyLeading: false,
+            title: Text(navLabels[selectedIndex],
+                  style: const YrkTextStyle(fontWeight: FontWeight.w700)),
+            actions: [
+              YrkIconButton(
+                  icon: "icon_search.svg",
+                  onTap: () =>
+                      WidgetsBinding.instance!.addPostFrameCallback((_) async {
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Search(data: null)));
+                      })),
+              YrkIconButton(
+                  icon: "icon_notifications_none.svg",
+                  onTap: () =>
+                      WidgetsBinding.instance!.addPostFrameCallback((_) async {
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Notice(data: null)));
+                      })),
+              SizedBox(
+                width: 12.0,
+              )
+            ]),
         bottomNavigationBar: BottomNavigationBar(
             backgroundColor: Colors.white,
             type: BottomNavigationBarType.fixed,
             currentIndex: selectedIndex,
-            items: [_buildItem(0), _buildItem(1), _buildItem(2), _buildItem(3)],
+            items: [
+              BottomNavigationBarItem(
+                  icon: _getNavIcon(0), label: navLabels[0]),
+              BottomNavigationBarItem(
+                  icon: _getNavIcon(1), label: navLabels[1]),
+              BottomNavigationBarItem(
+                  icon: _getNavIcon(2), label: navLabels[2]),
+              BottomNavigationBarItem(
+                  icon: _getNavIcon(3), label: navLabels[3]),
+            ],
             onTap: (index) => setState(() {
                   selectedIndex = index;
                 }),
             selectedItemColor: const Color(0xffe2bf00),
             selectedFontSize: 12.0,
             unselectedFontSize: 12.0),
-        body: Center(child: pageItems[selectedIndex]));
-  }
-
-  BottomNavigationBarItem _buildItem(int index) {
-    return BottomNavigationBarItem(
-        icon: _getNavIcon(index), label: navLabel[index]);
+        body: Center(child: mainPages[selectedIndex]));
   }
 
   YrkIconButton _getNavIcon(int index) {

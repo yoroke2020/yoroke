@@ -76,8 +76,7 @@ class _FindState extends State<Find> with ScreenState<YrkBlock2> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: DefaultTabController(
+    return DefaultTabController(
         length: tabs.length,
         child: NestedScrollView(
             controller: _scrollController,
@@ -200,8 +199,7 @@ class _FindState extends State<Find> with ScreenState<YrkBlock2> {
                             ]));
                   }));
             }).toList())),
-      ),
-    );
+      );
   }
 
   void _loadItems() {
