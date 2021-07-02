@@ -77,7 +77,6 @@ class _FindState extends State<Find> with ScreenState<YrkBlock2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.find),
       body: DefaultTabController(
         length: tabs.length,
         child: NestedScrollView(
