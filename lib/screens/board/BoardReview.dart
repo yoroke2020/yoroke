@@ -187,9 +187,7 @@ class _BoardReviewState extends State<BoardReview> with ScreenState<YrkBlock2> {
                                   ))
                                 ]));
                       }));
-                }).toList()))),
-        bottomNavigationBar:
-            BottomBarNavigation.getInstance(RootPageItem.board));
+                }).toList()))));
   }
 
   List<Widget> _buildPosts(YrkBlock2 block) {
