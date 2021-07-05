@@ -10,6 +10,9 @@ import 'package:yoroke/screens/home/Home.dart';
 import 'package:yoroke/screens/info/Info.dart';
 import 'package:yoroke/screens/notice/Notice.dart';
 import 'package:yoroke/screens/search/Search.dart';
+import 'package:yoroke/temp/TestPage.dart';
+
+enum mainPages { home, board, find, info }
 
 void main() {
   runApp(MyApp());
@@ -70,8 +73,6 @@ class _MyMainState extends State<MyMain> {
 
   final List<String> navLabels = ['홈', '커뮤니티', '시설찾기', '정보공유'];
 
-  final List<Widget> mainPages = [Home(), Board(), Find(), Info()];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +81,7 @@ class _MyMainState extends State<MyMain> {
             titleSpacing: 16.0,
             automaticallyImplyLeading: false,
             title: Text(navLabels[selectedIndex],
-                  style: const YrkTextStyle(fontWeight: FontWeight.w700)),
+                style: const YrkTextStyle(fontWeight: FontWeight.w700)),
             actions: [
               YrkIconButton(
                   icon: "icon_search.svg",
@@ -110,13 +111,17 @@ class _MyMainState extends State<MyMain> {
             currentIndex: selectedIndex,
             items: [
               BottomNavigationBarItem(
-                  icon: _getNavIcon(0), label: navLabels[0]),
+                  icon: _getNavIcon(mainPages.home.index),
+                  label: navLabels[mainPages.home.index]),
               BottomNavigationBarItem(
-                  icon: _getNavIcon(1), label: navLabels[1]),
+                  icon: _getNavIcon(mainPages.board.index),
+                  label: navLabels[mainPages.board.index]),
               BottomNavigationBarItem(
-                  icon: _getNavIcon(2), label: navLabels[2]),
+                  icon: _getNavIcon(mainPages.find.index),
+                  label: navLabels[mainPages.find.index]),
               BottomNavigationBarItem(
-                  icon: _getNavIcon(3), label: navLabels[3]),
+                  icon: _getNavIcon(mainPages.info.index),
+                  label: navLabels[mainPages.info.index]),
             ],
             onTap: (index) => setState(() {
                   selectedIndex = index;
@@ -124,17 +129,49 @@ class _MyMainState extends State<MyMain> {
             selectedItemColor: const Color(0xffe2bf00),
             selectedFontSize: 12.0,
             unselectedFontSize: 12.0),
-        body: Center(child: mainPages[selectedIndex]));
+        body: Center(
+            child: getMain()));
   }
 
   YrkIconButton _getNavIcon(int index) {
-    return index == selectedIndex
-        ? YrkIconButton(
-            icon: navIconsOn[index],
-            width: 24.0,
-            height: 24.0,
-            color: Color(0xffe2bf00),
-          )
-        : YrkIconButton(icon: navIconsOff[index], width: 24.0, height: 24.0);
+    return YrkIconButton(
+      icon: index == selectedIndex ? navIconsOn[index] : navIconsOff[index],
+      width: 24.0,
+      height: 24.0,
+    );
+  }
+
+  //TODO: json 데이터가 제대로 넘어올 경우 페이지 로딩이 될 수 있도록 변경
+  Future<String> fetchPages() async {
+    await Future.delayed(Duration(seconds: 2));
+    return "Success";
+  }
+
+  Widget getMain() {
+    return FutureBuilder(
+        future: fetchPages(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData == false) {
+            return CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "ERROR",
+              ),
+            );
+          } else {
+            if (selectedIndex == mainPages.home.index)
+              return Home();
+            else if (selectedIndex == mainPages.board.index)
+              return Board();
+            else if (selectedIndex == mainPages.find.index)
+              return Find();
+            else if (selectedIndex == mainPages.info.index)
+              return Info();
+            else
+              return TestPage();
+          }
+        });
   }
 }
