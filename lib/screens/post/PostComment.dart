@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:yoroke/models/CommentModel.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class PostComment extends StatefulWidget {
-  PostComment(
-      {required this.focusNode,
-      required this.index,
-      required this.comment,
-      required this.controller});
+  PostComment({
+    required this.model,
+    required this.focusNode,
+    required this.controller,
+  });
 
+  final CommentModel model;
   final FocusNode focusNode;
-  final int index;
-  final String comment;
   final TextEditingController controller;
 
   @override
@@ -48,26 +48,26 @@ class _PostCommentState extends State<PostComment> {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.only(right: 6.0),
-                    child: SvgPicture.asset("account_circle_default.svg",
-                        width: 32.0, height: 32.0),
+                    child: YrkIconButton(
+                        icon: "account_circle_default.svg", iconSize: 32),
                   ),
                   Padding(
                       padding: EdgeInsets.only(right: 8.0),
-                      child: Text("사용자ID",
+                      child: Text(widget.model.author!,
                           style: YrkTextStyle(
                             fontWeight: FontWeight.w700,
                             height: 1.0,
                           ))),
                   Padding(
                       padding: EdgeInsets.only(right: 8.0),
-                      child: Text("20.10.22",
+                      child: Text(widget.model.timestamp!.split("T")[0],
                           style: YrkTextStyle(
                             color: const Color(0x4d000000),
                             fontFamily: "OpenSans",
                             height: 0.8,
                             fontSize: 12.0,
                           ))),
-                  Text("17:03",
+                  Text(widget.model.timestamp!.split("T")[1],
                       style: YrkTextStyle(
                         color: const Color(0x4d000000),
                         fontFamily: "OpenSans",
@@ -87,7 +87,7 @@ class _PostCommentState extends State<PostComment> {
                 padding: EdgeInsets.only(
                     top: 1.0, bottom: 8.0, left: 38.0, right: 40.0),
                 child: Text(
-                  widget.comment,
+                  widget.model.description!,
                   style: YrkTextStyle(
                     height: 1.0,
                   ),

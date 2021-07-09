@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:yoroke/controllers/ProfileController.dart';
 import 'package:yoroke/screens/common/YrkDrawer.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
+import 'package:yoroke/screens/post/PostCreate.dart';
+import 'package:yoroke/temp/YrkData.dart';
 
 import 'navigator/TabNavigator.dart';
+import 'screens/post/Post.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,6 +35,15 @@ class MyApp extends StatelessWidget {
             800: const Color(0xfff5df4d),
             900: const Color(0xfff5df4d),
           }),
+          textTheme: TextTheme(
+            headline4: const YrkTextStyle(color: const Color(0xff999999)),
+            headline5: const YrkTextStyle(color: const Color(0xffeaeaea)),
+            bodyText1: const YrkTextStyle(),
+            bodyText2: const YrkTextStyle(color: const Color(0xff999999)),
+            subtitle1: const YrkTextStyle(color: const Color(0x4d000000)),
+          ),
+          dividerTheme:
+              DividerThemeData(thickness: 1, color: const Color(0xffeaeaea)),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           scaffoldBackgroundColor: const Color(0xffffffff),
           textSelectionTheme: TextSelectionThemeData(

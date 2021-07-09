@@ -8,6 +8,8 @@ import 'package:flutter_quill/models/documents/nodes/embed.dart';
 import 'package:flutter_quill/widgets/controller.dart';
 import 'package:flutter_quill/widgets/editor.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:yoroke/core/model/YrkBlock2.dart';
+import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/temp/TestData.dart';
 import 'package:yoroke/temp/YrkData.dart';
 import 'package:yoroke/temp/YrkMbsListData.dart';
@@ -29,7 +31,7 @@ class PostCreate extends StatefulWidget {
   _PostCreateState createState() => _PostCreateState();
 }
 
-class _PostCreateState extends State<PostCreate> {
+class _PostCreateState extends State<PostCreate> with ScreenState<YrkBlock2> {
   // Keyboard FocusNode for the Current PostCreate Page
   final FocusNode _focusNode = FocusNode();
 
@@ -512,5 +514,15 @@ class _PostCreateState extends State<PostCreate> {
       _bodyController.replaceText(
           index, length, BlockEmbed.image(imageFiles[0].path), null);
     }
+  }
+
+  @override
+  void initBlock() {
+    // TODO: implement initBlock
+  }
+
+  @override
+  void updateBlockOn(String action) {
+    // TODO: implement updateBlockOn
   }
 }

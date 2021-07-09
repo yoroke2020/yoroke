@@ -25,7 +25,7 @@ class TestPostData {
       {
         "@type": "post",
         "@category": "category",
-        "title": "글",
+        "title": "요양병원후기",
         "items": [
           {
             "@type": "post",
@@ -85,27 +85,24 @@ class TestPostData {
         "items": [
           {
             "@type": "comment",
-            "@category": "comment",
             "author": "Wrap_author",
-            "description": "이것은 내용입니다",
+            "description": "댓글 1",
             "timestamp": "2021.05.29T09:00",
             "likeCount": Random().nextInt(100) + 1,
             "dislikeCount": Random().nextInt(100) + 1,
           },
           {
             "@type": "comment",
-            "@category": "comment",
             "author": "Wrap_author",
-            "description": "이것은 내용입니다",
+            "description": "댓글 2",
             "timestamp": "2021.05.29T09:00",
             "likeCount": Random().nextInt(100) + 1,
             "dislikeCount": Random().nextInt(100) + 1,
           },
           {
             "@type": "comment",
-            "@category": "comment",
             "author": "Wrap_author",
-            "description": "이것은 내용입니다",
+            "description": "댓글 3",
             "timestamp": "2021.05.29T09:00",
             "likeCount": Random().nextInt(100) + 1,
             "dislikeCount": Random().nextInt(100) + 1,
