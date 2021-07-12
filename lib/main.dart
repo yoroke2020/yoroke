@@ -54,7 +54,7 @@ class _MyMainState extends State<MyMain> {
   bool isFirst = true;
   final _navigatorKeys = {
     RootPageItem.home: GlobalKey<NavigatorState>(),
-    RootPageItem.board: GlobalKey<NavigatorState>(),
+    RootPageItem.community: GlobalKey<NavigatorState>(),
     RootPageItem.find: GlobalKey<NavigatorState>(),
     RootPageItem.info: GlobalKey<NavigatorState>(),
   };
@@ -94,7 +94,7 @@ class _MyMainState extends State<MyMain> {
       child: Stack(
         children: <Widget>[
           _buildOffstageNavigator(RootPageItem.home),
-          _buildOffstageNavigator(RootPageItem.board),
+          _buildOffstageNavigator(RootPageItem.community),
           _buildOffstageNavigator(RootPageItem.find),
           _buildOffstageNavigator(RootPageItem.info),
         ],

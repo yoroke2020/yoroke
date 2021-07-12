@@ -2789,75 +2789,859 @@ class TestFindFacilityInfoData {
     "type": "FindFacilityInfo",
     "title": "시설",
     "body": [
+      {
+        "@type": "normal",
+        "@category": "findFacilityInfoRating",
+        "title": "시설등급",
+        "items": [
           {
-            "@type": "normal",
+            "@type": "content",
             "@category": "findFacilityInfoRating",
-            "title": "시설등급",
-            "items": [
+            "title": "국가요양정보원 기준",
+            "content": "A"
+          }
+        ]
+      },
+      {
+        "@type": "normal",
+        "@category": "findFacilityInfoHr",
+        "title": "인력현황",
+        "items": [
+          {
+            "@type": "count",
+            "@category": "findFacilityInfoHrMedicalStaff",
+            "title": "의료진",
+            "imagePath": "assets/icons/icon_medic.svg",
+            "count": Random().nextInt(100) + 1,
+            "unit": "명"
+          },
+          {
+            "@type": "count",
+            "@category": "findFacilityInfoHrMedicalStaff",
+            "title": "의료진",
+            "imagePath": "assets/icons/icon_medic.svg",
+            "count": Random().nextInt(100) + 1,
+            "unit": "명"
+          },
+          {
+            "@type": "count",
+            "@category": "findFacilityInfoHrMedicalStaff",
+            "title": "의료진",
+            "imagePath": "assets/icons/icon_medic.svg",
+            "count": Random().nextInt(100) + 1,
+            "unit": "명"
+          },
+          {
+            "@type": "count",
+            "@category": "findFacilityInfoHrMedicalStaff",
+            "title": "의료진",
+            "imagePath": "assets/icons/icon_medic.svg",
+            "count": Random().nextInt(100) + 1,
+            "unit": "명"
+          },
+        ]
+      },
+      {
+        "@type": "normal",
+        "@category": "findFacilityInfoCost",
+        "title": "월 평균 금액 (만원)",
+        "items": [
+          {
+            "@type": "content",
+            "@category": "findFacilityInfoMinCost",
+            "content": "100"
+          },
+          {
+            "@type": "content",
+            "@category": "findFacilityInfoMaxCost",
+            "content": "200"
+          }
+        ]
+      },
+    ]
+  };
+}
+
+class TestCommunityData {
+  Map<String, dynamic> jsonResponse = {
+    "status": "200",
+    "message": "success",
+    "type": "CommunityMain",
+    "title": "커뮤니티",
+    "body": [
+      {
+        "@type": "appBarNormal",
+        "items": [
+          {
+            "@category": "community",
+            "title": "커뮤니티",
+            "search": "true",
+            "noti": "true"
+          }
+        ]
+      },
+      {
+        "@type": "tabs",
+        "items": [
+          {
+            "@category": "tabList",
+            "boards": [
               {
-                "@type": "content",
-                "@category": "findFacilityInfoRating",
-                "title": "국가요양정보원 기준",
-                "content": "A"
+                "boardType": "popular",
+                "boardLabel": "인기",
+              },
+              {
+                "boardType": "general",
+                "boardLabel": "자유",
+              },
+              {
+                "boardType": "qna",
+                "boardLabel": "Q&A",
+              },
+              {
+                "boardType": "review",
+                "boardLabel": "후기",
+              },
+              {
+                "boardType": "share",
+                "boardLabel": "나눔",
+              },
+              {
+                "boardType": "info",
+                "boardLabel": "정보",
+              },
+            ]
+          },
+        ],
+        "blocks": [
+          {
+            "@type": "tabItem",
+            "blocks": [
+              {
+                "@type": "boardType",
+                "items": [
+                  {
+                    "@category": "boardType",
+                    "boardType": "popular",
+                    "boardLabel": "인기",
+                  }
+                ]
+              },
+              {
+                "@type": "boardSection",
+                "itemCount": 6,
+                "items": [
+                  {
+                    "@category": "postPreview",
+                    "boardType": "review",
+                    "boardLabel": "후기",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "share",
+                    "boardLabel": "나눔",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "info",
+                    "boardLabel": "정보",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "review",
+                    "boardLabel": "후기",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "qna",
+                    "boardLabel": "Q&A",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "general",
+                    "boardLabel": "자유",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                ]
+              },
+            ],
+          },
+          {
+            "@type": "tabItem",
+            "blocks": [
+              {
+                "@type": "boardType",
+                "items": [
+                  {
+                    "@category": "boardType",
+                    "boardType": "general",
+                    "boardLabel": "자유",
+                  }
+                ]
+              },
+              {
+                "@type": "boardSection",
+                "title": "인기글",
+                "itemCount": 3,
+                "items": [
+                  {
+                    "@category": "postPreview",
+                    "boardType": "general",
+                    "boardLabel": "BEST",
+                    "title": "인기글 제목",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "general",
+                    "boardLabel": "BEST",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "general",
+                    "boardLabel": "BEST",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                ],
+              },
+              {
+                "@type": "boardSection",
+                "title": "전체글",
+                "itemCount": "5",
+                "items": [
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 커피",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 음료",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 에어컨",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 모니터",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                ],
               }
             ]
           },
           {
-            "@type": "normal",
-            "@category": "findFacilityInfoHr",
-            "title": "인력현황",
-            "items": [
+            "@type": "tabItem",
+            "blocks": [
               {
-                "@type": "count",
-                "@category": "findFacilityInfoHrMedicalStaff",
-                "title": "의료진",
-                "imagePath": "assets/icons/icon_medic.svg",
-                "count": Random().nextInt(100) + 1,
-                "unit": "명"
+                "@type": "boardType",
+                "items": [
+                  {
+                    "@category": "boardType",
+                    "boardType": "qna",
+                    "boardLabel": "Q&A",
+                  }
+                ]
               },
               {
-                "@type": "count",
-                "@category": "findFacilityInfoHrMedicalStaff",
-                "title": "의료진",
-                "imagePath": "assets/icons/icon_medic.svg",
-                "count": Random().nextInt(100) + 1,
-                "unit": "명"
+                "@type": "boardSection",
+                "title": "인기글",
+                "itemCount": "3",
+                "items": [
+                  {
+                    "@category": "postPreview",
+                    "boardType": "qna",
+                    "boardLabel": "BEST",
+                    "title": "인기글 제목",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "qna",
+                    "boardLabel": "BEST",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "qna",
+                    "boardLabel": "BEST",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                ],
               },
               {
-                "@type": "count",
-                "@category": "findFacilityInfoHrMedicalStaff",
-                "title": "의료진",
-                "imagePath": "assets/icons/icon_medic.svg",
-                "count": Random().nextInt(100) + 1,
-                "unit": "명"
-              },
-              {
-                "@type": "count",
-                "@category": "findFacilityInfoHrMedicalStaff",
-                "title": "의료진",
-                "imagePath": "assets/icons/icon_medic.svg",
-                "count": Random().nextInt(100) + 1,
-                "unit": "명"
-              },
-            ]
-          },
-          {
-            "@type": "normal",
-            "@category": "findFacilityInfoCost",
-            "title": "월 평균 금액 (만원)",
-            "items": [
-              {
-                "@type": "content",
-                "@category": "findFacilityInfoMinCost",
-                "content": "100"
-              },
-              {
-                "@type": "content",
-                "@category": "findFacilityInfoMaxCost",
-                "content": "200"
+                "@type": "boardSection",
+                "title": "전체글",
+                "itemCount": 5,
+                "items": [
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 커피",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 음료",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 에어컨",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 모니터",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                ],
               }
             ]
           },
+          {
+            "@type": "tabItem",
+            "blocks": [
+              {
+                "@type": "boardType",
+                "items": [
+                  {
+                    "@category": "boardType",
+                    "boardType": "review",
+                    "boardLabel": "후기",
+                  }
+                ]
+              },
+              {
+                "@type": "boardSection",
+                "title": "인기글",
+                "itemCount": "3",
+                "blocks": [
+                  {
+                    "@type": "sectionMeta",
+                    "items": [
+                      {
+                        "@category": "boardSectionMeta",
+                      }
+                    ],
+                  },
+                ],
+                "items": [
+                  {
+                    "@category": "postPreview",
+                    "boardType": "review",
+                    "boardLabel": "BEST",
+                    "title": "인기글 제목",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "review",
+                    "boardLabel": "BEST",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "review",
+                    "boardLabel": "BEST",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                ],
+              },
+              {
+                "@type": "boardSection",
+                "title": "전체글",
+                "itemCount": "5",
+                "items": [
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 커피",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 음료",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 에어컨",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 모니터",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                ],
+              }
+            ]
+          },
+          {
+            "@type": "tabItem",
+            "boardType": "share",
+            "boardLabel": "나눔",
+            "blocks": [
+              {
+                "@type": "boardType",
+                "items": [
+                  {
+                    "@category": "boardType",
+                    "boardType": "share",
+                    "boardLabel": "나눔",
+                  }
+                ]
+              },
+              {
+                "@type": "boardSection",
+                "title": "인기글",
+                "itemCount": "3",
+                "items": [
+                  {
+                    "@category": "postPreview",
+                    "boardType": "share",
+                    "boardLabel": "BEST",
+                    "title": "인기글 제목",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "share",
+                    "boardLabel": "BEST",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "share",
+                    "boardLabel": "BEST",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                ],
+              },
+              {
+                "@type": "boardSection",
+                "title": "전체글",
+                "itemCount": "5",
+                "items": [
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 커피",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 음료",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 에어컨",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 모니터",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                ],
+              }
+            ]
+          },
+          {
+            "@type": "tabItem",
+            "blocks": [
+              {
+                "@type": "boardType",
+                "items": [
+                  {
+                    "@category": "boardType",
+                    "boardType": "info",
+                    "boardLabel": "정보",
+                  }
+                ]
+              },
+              {
+                "@type": "boardSection",
+                "title": "인기글",
+                "itemCount": "3",
+                "items": [
+                  {
+                    "@category": "postPreview",
+                    "boardType": "info",
+                    "boardLabel": "BEST",
+                    "title": "인기글 제목",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "info",
+                    "boardLabel": "BEST",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "boardType": "info",
+                    "boardLabel": "BEST",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글 요양병원의 핫한 인기글",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                ],
+              },
+              {
+                "@type": "boardSection",
+                "title": "전체글",
+                "itemCount": "5",
+                "items": [
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 질문",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 커피",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 음료",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 에어컨",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                  {
+                    "@category": "postPreview",
+                    "title": "요양병원 모니터",
+                    "content":
+                        "요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문 요양병원의 가나다라마바사 질문",
+                    "profileImage": "account_circle_default.svg",
+                    "author": "사용자 ID",
+                    "likeCount": Random().nextInt(100) + 1,
+                    "viewCount": Random().nextInt(100) + 1,
+                    "commentCount": Random().nextInt(100) + 1,
+                  },
+                ],
+              }
+            ]
+          }
+        ]
+      }
     ]
   };
 }

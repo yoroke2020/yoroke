@@ -2,11 +2,14 @@ import 'dart:core';
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yoroke/core/model/YrkModel2.dart';
+import 'package:yoroke/models/BoardTabsModel.dart';
+import 'package:yoroke/models/BoardTypeModel.dart';
 import 'package:yoroke/models/CardModel.dart';
 import 'package:yoroke/models/ContentModel.dart';
 import 'package:yoroke/models/CountModel.dart';
 import 'package:yoroke/models/FacilityModel.dart';
 import 'package:yoroke/models/PostModel.dart';
+import 'package:yoroke/models/PostPreviewModel.dart';
 
 part 'YrkBlock2.g.dart';
 
@@ -19,6 +22,9 @@ class YrkBlock2<B, M> {
   late String? category;
 
   late String? title;
+
+  late int? itemCount;
+  late int? blockCount;
 
   @_BlockConverter()
   List<B>? blocks;
@@ -39,7 +45,29 @@ class _ModelConverter<M> implements JsonConverter<M, Object> {
 
   @override
   M fromJson(Object json) {
-    switch (getTypeFrom(json as Map<String, dynamic>)) {
+    if (getCategoryFrom(json as Map<String, dynamic>) == "find") {
+      switch (getTypeFrom(json as Map<String, dynamic>)) {
+        case "card":
+          return CardModel.fromJson(json) as M;
+        case "post":
+          return PostModel.fromJson(json) as M;
+        case "facility":
+          return FacilityModel.fromJson(json) as M;
+        case "content":
+          return ContentModel.fromJson(json) as M;
+        case "count":
+          return CountModel.fromJson(json) as M;
+        case "tabList":
+          return BoardTabsModel.fromJson(json) as M;
+        case "boardType":
+          return BoardTypeModel.fromJson(json) as M;
+        case "postPreview":
+          return PostPreviewModel.fromJson(json) as M;
+        default:
+          return YrkModel2.fromJson(json) as M;
+      }
+    }
+    switch (getCategoryFrom(json as Map<String, dynamic>)) {
       case "card":
         return CardModel.fromJson(json) as M;
       case "post":
@@ -50,6 +78,12 @@ class _ModelConverter<M> implements JsonConverter<M, Object> {
         return ContentModel.fromJson(json) as M;
       case "count":
         return CountModel.fromJson(json) as M;
+      case "tabList":
+        return BoardTabsModel.fromJson(json) as M;
+      case "boardType":
+        return BoardTypeModel.fromJson(json) as M;
+      case "postPreview":
+        return PostPreviewModel.fromJson(json) as M;
       default:
         return YrkModel2.fromJson(json) as M;
     }

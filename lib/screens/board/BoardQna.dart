@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoroke/core/model/YrkApiResponse2.dart';
 import 'package:yoroke/core/model/YrkBlock2.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
-import 'package:yoroke/temp/YrkTestModelData.dart';
 import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/models/PostModel.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
@@ -11,7 +11,7 @@ import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
-import 'package:yoroke/core/model/YrkApiResponse2.dart';
+import 'package:yoroke/temp/YrkTestModelData.dart';
 
 import 'model/BoardQnaCard.dart';
 
@@ -133,7 +133,7 @@ class _BoardQnaState extends State<BoardQna> with ScreenState<YrkBlock2> {
           )
         ]),
         bottomNavigationBar:
-            BottomBarNavigation.getInstance(RootPageItem.board));
+            BottomBarNavigation.getInstance(RootPageItem.community));
   }
 
   List<Widget> _buildPosts(YrkBlock2 block) {

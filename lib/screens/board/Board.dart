@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quiver/iterables.dart';
-import 'package:yoroke/core/model/YrkBlock2.dart';
 import 'package:yoroke/core/model/YrkApiResponse2.dart';
+import 'package:yoroke/core/model/YrkBlock2.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
-import 'package:yoroke/temp/YrkTestModelData.dart';
 import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/main.dart';
 import 'package:yoroke/models/CardModel.dart';
@@ -19,6 +18,7 @@ import 'package:yoroke/screens/common/YrkPage.dart';
 import 'package:yoroke/screens/common/YrkTabHeaderView.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
+import 'package:yoroke/temp/YrkTestModelData.dart';
 
 class Board extends StatefulWidget {
   @override
@@ -49,7 +49,6 @@ class _BoardState extends State<Board> with ScreenState<YrkBlock2> {
   void initState() {
     super.initState();
     initBlock();
-
   }
 
   @override
@@ -57,10 +56,10 @@ class _BoardState extends State<Board> with ScreenState<YrkBlock2> {
     return Scaffold(
         appBar: YrkAppBar(
             type: YrkAppBarType.accountCircleAll,
-            curPageItem: RootPageItem.board),
+            curPageItem: RootPageItem.community),
         drawer: yrkDrawer,
         bottomNavigationBar:
-            BottomBarNavigation.getInstance(RootPageItem.board),
+            BottomBarNavigation.getInstance(RootPageItem.community),
         body: ListView(children: <Widget>[
           YrkTabHeaderView(title: "후기"),
           BoardReviewCards(
@@ -96,16 +95,14 @@ class _BoardState extends State<Board> with ScreenState<YrkBlock2> {
     final int pageItemLimit = 4;
 
     List items = block.items!.cast<PostModel>();
-    List<Widget> pageListItems = items
-        .map((model) =>
-        YrkPageListItemV2(model: model))
-        .toList();
+    List<Widget> pageListItems =
+        items.map((model) => YrkPageListItemV2(model: model)).toList();
 
     return partition(pageListItems, pageItemLimit)
         .map((list) => ListView(
-      children: [...list],
-      physics: NeverScrollableScrollPhysics(),
-    ))
+              children: [...list],
+              physics: NeverScrollableScrollPhysics(),
+            ))
         .toList();
   }
 }

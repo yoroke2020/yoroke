@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
 
@@ -79,7 +78,7 @@ class _BottomBarNavigationState extends State<BottomBarNavigation> {
       currentIndex: _curRootPageItem!.index,
       items: [
         _buildItem(RootPageItem.home),
-        _buildItem(RootPageItem.board),
+        _buildItem(RootPageItem.community),
         _buildItem(RootPageItem.find),
         _buildItem(RootPageItem.info),
       ],

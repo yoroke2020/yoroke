@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoroke/temp/YrkData.dart';
-import 'package:yoroke/screens/board/Board.dart';
 import 'package:yoroke/screens/find/Find.dart';
 import 'package:yoroke/screens/home/Home.dart';
 import 'package:yoroke/screens/info/Info.dart';
+import 'package:yoroke/temp/YrkData.dart';
+import 'package:yoroke/views/community/Community.dart';
 
-enum RootPageItem { home, board, find, info }
+enum RootPageItem { home, community, find, info }
 
 class TabNavigatorRoutes {
   static const String root = '/';
@@ -19,7 +19,7 @@ class RootPage extends StatelessWidget {
   final ValueChanged<YrkData>? onPushNavigator;
   @override
   Widget build(BuildContext context) {
-    final List<Widget> children = [Home(), Board(), Find(), Info()];
+    final List<Widget> children = [Home(), Community(), Find(), Info()];
     return children[currentIndex!];
   }
 }
@@ -28,14 +28,14 @@ class RootPage extends StatelessWidget {
 
 const Map<RootPageItem, String> rootPageTabIconInfo = {
   RootPageItem.home: 'home',
-  RootPageItem.board: 'board',
+  RootPageItem.community: 'community',
   RootPageItem.find: 'find',
   RootPageItem.info: 'info',
 };
 
 const Map<RootPageItem, String> rootPageTabLabelInfo = {
   RootPageItem.home: '홈',
-  RootPageItem.board: '자유게시판',
+  RootPageItem.community: '커뮤니티',
   RootPageItem.find: '시설찾기',
   RootPageItem.info: '정보공유',
 };

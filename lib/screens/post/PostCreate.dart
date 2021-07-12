@@ -8,16 +8,16 @@ import 'package:flutter_quill/models/documents/nodes/embed.dart';
 import 'package:flutter_quill/widgets/controller.dart';
 import 'package:flutter_quill/widgets/editor.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:yoroke/navigator/TabNavigator.dart';
+import 'package:yoroke/screens/common/YrkTextField.dart';
+import 'package:yoroke/screens/common/YrkTextStyle.dart';
+import 'package:yoroke/screens/common/buttons/YrkButton.dart';
+import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
+import 'package:yoroke/screens/common/imagepickers/YrkImagePicker.dart';
+import 'package:yoroke/screens/common/mbs/YrkModelBottomSheet.dart';
 import 'package:yoroke/temp/TestData.dart';
 import 'package:yoroke/temp/YrkData.dart';
 import 'package:yoroke/temp/YrkMbsListData.dart';
-import 'package:yoroke/navigator/TabNavigator.dart';
-import 'package:yoroke/screens/common/imagepickers/YrkImagePicker.dart';
-import 'package:yoroke/screens/common/buttons/YrkButton.dart';
-import 'package:yoroke/screens/common/buttons/YrkIconButton.dart';
-import 'package:yoroke/screens/common/mbs/YrkModelBottomSheet.dart';
-import 'package:yoroke/screens/common/YrkTextField.dart';
-import 'package:yoroke/screens/common/YrkTextStyle.dart';
 
 class PostCreate extends StatefulWidget {
   PostCreate({this.postData, this.data});
@@ -154,7 +154,7 @@ class _PostCreateState extends State<PostCreate> {
 
   void _setMbsList() {
     _mbsType = YrkMbsType.radioButton;
-    if (_pageType == RootPageItem.home || _pageType == RootPageItem.board) {
+    if (_pageType == RootPageItem.home || _pageType == RootPageItem.community) {
       _mbsTitleList = [
         YrkMbsListData.getTitleList("boardReview"),
         YrkMbsListData.getTitleList("boardQna"),
@@ -355,7 +355,7 @@ class _PostCreateState extends State<PostCreate> {
 
   void _setSelectedCategory(int index) {
     _isCategoryEmpty = false;
-    if (_pageType == RootPageItem.home || _pageType == RootPageItem.board) {
+    if (_pageType == RootPageItem.home || _pageType == RootPageItem.community) {
       if (index < _mbsLabelCountPerTitleList[0]) {
         _selectedCategoryIndex = index;
         _selectedCategory = "boardReview";

@@ -2,13 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
+import 'package:yoroke/core/model/YrkApiResponse2.dart';
 import 'package:yoroke/core/model/YrkBlock2.dart';
 import 'package:yoroke/core/model/YrkRequestContext.dart';
-import 'package:yoroke/temp/YrkTestModelData.dart';
 import 'package:yoroke/core/screen/Screen.dart';
 import 'package:yoroke/models/CardModel.dart';
 import 'package:yoroke/models/PostModel.dart';
-import 'package:yoroke/temp/YrkData.dart';
 import 'package:yoroke/navigator/TabNavigator.dart';
 import 'package:yoroke/screens/common/YrkListItemV2.dart';
 import 'package:yoroke/screens/common/YrkScrollOpacity.dart';
@@ -16,7 +15,8 @@ import 'package:yoroke/screens/common/YrkTabBar.dart';
 import 'package:yoroke/screens/common/YrkTextStyle.dart';
 import 'package:yoroke/screens/common/appbars/YrkAppBar.dart';
 import 'package:yoroke/screens/common/bottombars/BottomBarNavigation.dart';
-import 'package:yoroke/core/model/YrkApiResponse2.dart';
+import 'package:yoroke/temp/YrkData.dart';
+import 'package:yoroke/temp/YrkTestModelData.dart';
 
 import 'model/BoardReviewCard.dart';
 
@@ -139,7 +139,8 @@ class _BoardReviewState extends State<BoardReview> with ScreenState<YrkBlock2> {
                                                     left: 16.0,
                                                     top: 8.0,
                                                     bottom: 8.0),
-                                                child: Text(this.block.title ?? "",
+                                                child: Text(
+                                                    this.block.title ?? "",
                                                     style: const YrkTextStyle(
                                                         fontWeight:
                                                             FontWeight.w700,
@@ -189,7 +190,7 @@ class _BoardReviewState extends State<BoardReview> with ScreenState<YrkBlock2> {
                       }));
                 }).toList()))),
         bottomNavigationBar:
-            BottomBarNavigation.getInstance(RootPageItem.board));
+            BottomBarNavigation.getInstance(RootPageItem.community));
   }
 
   List<Widget> _buildPosts(YrkBlock2 block) {
