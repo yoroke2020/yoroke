@@ -131,9 +131,7 @@ class _BoardQnaState extends State<BoardQna> with ScreenState<YrkBlock2> {
               return posts[index];
             }, childCount: posts.length),
           )
-        ]),
-        bottomNavigationBar:
-            BottomBarNavigation.getInstance(RootPageItem.board));
+        ]));
   }
 
   List<Widget> _buildPosts(YrkBlock2 block) {

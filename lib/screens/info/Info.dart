@@ -110,7 +110,6 @@ class _InfoState extends State<Info> with TickerProviderStateMixin {
                 ))
           ])),
       body: TabBarView(controller: _tabController, children: _cardGrids),
-      bottomNavigationBar: BottomBarNavigation.getInstance(RootPageItem.info),
     );
   }
 }

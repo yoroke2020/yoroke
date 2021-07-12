@@ -176,9 +176,7 @@ class _BoardJobState extends State<BoardJob>
                                       }, childCount: posts[tab.item2].length))
                                     ]));
                           }));
-                    }).toList())))),
-        bottomNavigationBar:
-            BottomBarNavigation.getInstance(RootPageItem.board));
+                    }).toList())))));
   }
 
   List<Widget> _buildPosts(YrkBlock2 block) {

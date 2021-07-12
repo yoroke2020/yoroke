@@ -59,8 +59,6 @@ class _BoardState extends State<Board> with ScreenState<YrkBlock2> {
             type: YrkAppBarType.accountCircleAll,
             curPageItem: RootPageItem.board),
         drawer: yrkDrawer,
-        bottomNavigationBar:
-            BottomBarNavigation.getInstance(RootPageItem.board),
         body: ListView(children: <Widget>[
           YrkTabHeaderView(title: "후기"),
           BoardReviewCards(

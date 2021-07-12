@@ -20,23 +20,8 @@ var navIconsOn = [
 
 // ignore: must_be_immutable
 class BottomBarNavigation extends StatefulWidget {
-  RootPageItem? _curRootPageItem;
-  late ValueChanged<RootPageItem> _onSelectRootPageItem;
-
-  static BottomBarNavigation? _instance;
-
-  BottomBarNavigation._internal();
-
-  static BottomBarNavigation? getInstance(RootPageItem currentRootPageItem) {
-    if (_instance == null) _instance = BottomBarNavigation._internal();
-    _instance!._curRootPageItem = currentRootPageItem;
-    return _instance;
-  }
-
-  void setOnSelectRootPageItem(ValueChanged<RootPageItem> onSelectPageTab) {
-    this._onSelectRootPageItem = onSelectPageTab;
-  }
-
+  BottomBarNavigation({required this.onTap});
+  final ValueChanged<int> onTap;
   @override
   _BottomBarNavigationState createState() => _BottomBarNavigationState();
 }
@@ -48,10 +33,6 @@ class _BottomBarNavigationState extends State<BottomBarNavigation> {
     return BottomNavigationBarItem(
         icon: _getIcon(rootPageItem),
         label: rootPageTabLabelInfo[rootPageItem]);
-  }
-
-  void _onTap(int index) {
-    widget._onSelectRootPageItem(RootPageItem.values[index]);
   }
 
   YrkIconButton _getIcon(RootPageItem rootPageItem) {
@@ -69,24 +50,32 @@ class _BottomBarNavigationState extends State<BottomBarNavigation> {
           );
   }
 
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    if (_curRootPageItem == null) _curRootPageItem = widget._curRootPageItem;
 
     return BottomNavigationBar(
       backgroundColor: Colors.white,
       type: BottomNavigationBarType.fixed,
-      currentIndex: _curRootPageItem!.index,
+      currentIndex: _selectedIndex,
       items: [
         _buildItem(RootPageItem.home),
         _buildItem(RootPageItem.board),
         _buildItem(RootPageItem.find),
         _buildItem(RootPageItem.info),
       ],
-      onTap: _onTap,
+      onTap: (index) => onTapItems(index),
       selectedItemColor: const Color(0xffe2bf00),
       selectedFontSize: 12.0,
       unselectedFontSize: 12.0,
     );
+  }
+
+  void onTapItems(int index) {
+    setState(() {
+      _selectedIndex = index;
+      widget.onTap(index);
+    });
   }
 }

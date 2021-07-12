@@ -167,8 +167,6 @@ class _HomeState extends State<Home> {
               curPageItem: RootPageItem.home,
             ),
             drawer: yrkDrawer,
-            bottomNavigationBar:
-                BottomBarNavigation.getInstance(RootPageItem.home),
             body: ListView(children: <Widget>[
               Container(
                   height: 120.0,
