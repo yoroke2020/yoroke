@@ -9,6 +9,7 @@ import 'package:yoroke/screens/find/Find.dart';
 import 'package:yoroke/screens/home/Home.dart';
 import 'package:yoroke/screens/info/Info.dart';
 import 'package:yoroke/screens/notice/Notice.dart';
+import 'package:yoroke/screens/post/Post.dart';
 import 'package:yoroke/screens/search/Search.dart';
 
 void main() {
@@ -36,10 +37,20 @@ class MyApp extends StatelessWidget {
               800: const Color(0xfff5df4d),
               900: const Color(0xfff5df4d),
             }),
+            textTheme: TextTheme(
+              headline4: const YrkTextStyle(color: const Color(0xff999999)),
+              headline5: const YrkTextStyle(color: const Color(0xffeaeaea)),
+              bodyText1: const YrkTextStyle(),
+              bodyText2: const YrkTextStyle(color: const Color(0xff999999)),
+              subtitle1: const YrkTextStyle(color: const Color(0x4d000000)),
+            ),
+            dividerTheme:
+                DividerThemeData(thickness: 1, color: const Color(0xffeaeaea)),
             visualDensity: VisualDensity.adaptivePlatformDensity,
             scaffoldBackgroundColor: const Color(0xffffffff),
-            textSelectionTheme:
-                TextSelectionThemeData(cursorColor: const Color(0xfff5df4d))),
+            textSelectionTheme: TextSelectionThemeData(
+              cursorColor: const Color(0xfff5df4d),
+            )),
         home: MyMain());
   }
 }
@@ -80,7 +91,7 @@ class _MyMainState extends State<MyMain> {
             titleSpacing: 16.0,
             automaticallyImplyLeading: false,
             title: Text(navLabels[selectedIndex],
-                  style: const YrkTextStyle(fontWeight: FontWeight.w700)),
+                style: const YrkTextStyle(fontWeight: FontWeight.w700)),
             actions: [
               YrkIconButton(
                   icon: "icon_search.svg",

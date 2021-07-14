@@ -17,7 +17,6 @@ abstract class ScreenState<T extends YrkBlock2> {
   YrkRequestContext get reqCtx => _reqCtx;
 }
 
-
 /* Example
     Map<String, dynamic> jsonResponse = TestBoardData().jsonResponse;
     print(
@@ -48,4 +47,3 @@ abstract class ScreenState<T extends YrkBlock2> {
       counter++;
     });
  */
-

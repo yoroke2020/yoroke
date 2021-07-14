@@ -7,17 +7,18 @@ part of 'CommentModel.dart';
 // **************************************************************************
 
 CommentModel _$CommentModelFromJson(Map<String, dynamic> json) {
-  return CommentModel()
+  return CommentModel(
+    commentId: json['commentId'] as int?,
+    author: json['author'] as String?,
+    accountId: json['accountId'] as int?,
+    timestamp: json['timestamp'] as String?,
+    likeCount: json['likeCount'] as int?,
+    dislikeCount: json['dislikeCount'] as int?,
+    description: json['description'] as String?,
+  )
     ..type = json['@type'] as String?
     ..category = json['@category'] as String?
-    ..title = json['title'] as String?
-    ..commentId = json['commentId'] as int?
-    ..author = json['author'] as String?
-    ..accountId = json['accountId'] as int?
-    ..timestamp = json['timestamp'] as String?
-    ..likeCount = json['likeCount'] as int?
-    ..dislikeCount = json['dislikeCount'] as int?
-    ..description = json['description'] as String?;
+    ..title = json['title'] as String?;
 }
 
 Map<String, dynamic> _$CommentModelToJson(CommentModel instance) =>
