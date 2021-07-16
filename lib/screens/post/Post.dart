@@ -107,12 +107,11 @@ class _PostState extends State<Post> with ScreenState<YrkBlock2> {
     // TODO: change to http statusCode & BODY
     if (response.status == "200") {
       // if (response.statusCode == 200) {
-      return Future<YrkBlock2>.delayed(
-        Duration(seconds: 2),
+      return await Future<YrkBlock2>.delayed(
+        const Duration(seconds: 2),
         () => this.block,
         // ..blocks = YrkApiResponse2.fromJson(jsonDecode(response.body)).body,
-      );
-      // .whenComplete(() => this.block);
+      ).whenComplete(() => this.block);
       // ..blocks = YrkApiResponse2.fromJson(jsonDecode(response.body)).body);
     } else {
       throw Exception('Failed to fetch post');
@@ -195,13 +194,14 @@ class _PostState extends State<Post> with ScreenState<YrkBlock2> {
       future: mBlocks,
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasData) {
           return buildPost(context, snapshot);
-        } else if (!snapshot.hasData) {
-          return CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text('Error: ${snapshot.error}', style: YrkTextStyle()));
+              child: Text('Error: ${snapshot.error}',
+                  style: const YrkTextStyle()));
         } else
           return buildPost(context, snapshot);
       },
